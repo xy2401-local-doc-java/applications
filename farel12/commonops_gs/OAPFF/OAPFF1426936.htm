@@ -1,0 +1,1185 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Formula Functions (Chapter 4) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Using Fast Formula" name="dcterms.title">
+      <meta content="Using Fast Formula" name="doctitle">
+      <meta content="E74171-05" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="OAPFF" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Tue Dec 19 11:49:17 PST 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="formula functions;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="OAPFF1426935.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="OAPFF1426937.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="OAPFF.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="OAPFF.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="Functions manipulate data in different ways and always return a value. They're restricted to simple data types of date, number,
+      and text. A function is specified by its name, return data type, data types, and usage behavior."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">7/13</span><a name="BEGIN" id="BEGIN"></a><div id="OAPFF1426936" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">4</span>Formula Functions
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OAPFF312503">Formula Functions: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OAPFF298096">Text Formula Functions</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OAPFF298155">Numeric Formula Functions</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OAPFF311789">Date Formula Functions</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OAPFF311949">Data Conversion Formula Functions</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OAPFF311968">Miscellaneous Formula Functions</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="OAPFF312503">
+                  <h2>Formula Functions: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Functions manipulate data in different ways
+                     and always return a value. They're restricted to simple data types
+                     of date, number, and text.  A function is specified by its name, return
+                     data type, data types, and usage behavior.
+                  </p>
+                  
+                  
+                  
+                  <p>The general form of a function is:</p>
+                  <pre><code>NAME-OF-FUNCTION(operand,operand,...)<br></code></pre>
+                  <p>Operands can be optional or mandatory. They may be
+                     repeated any number of times, such as with the <code>GREATEST</code> function. The formula compiler resolves functions
+                     by matching function calls against function specifications. You can
+                     use multiple functions with the same name within a formula provided that they have
+                     different return or data types.
+                  </p>
+                  
+                  <p>Some functions return values that are useful in specific
+                     formula types, such as absence management, benefits, or compensation.
+                     The more generic functions fall into the categories shown in the following
+                     table.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="Generic function table">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Category
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Purpose of Functions
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Text</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Manipulate text data</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Number</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Manipulate numeric data</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Date</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Manipulate dates</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p> Data Conversion</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Convert data to a different data type</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Message Handling</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Return messages</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OAPFF298096">
+                  <h2>Text Formula Functions</h2>
+                  
+                  
+                  
+                  
+                  <p>The following formula functions manipulate text
+                     data. 
+                  </p>
+                  
+                  
+                  
+                  <p class="functionName">CHR(n)</p>
+                  
+                  
+                  <p>Returns the character having the binary equivalent
+                     to a number operand n in the ASCII character set.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">GREATEST(expr, expr [,expr]....)</p>
+                  
+                  
+                  <p>Compares the values of all the text string operands.
+                     It returns the value of the last string in alphabetic order.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">INITCAP(expr)</p>
+                  
+                  
+                  <p>Returns the expression <code>expr</code> with the first letter of each word in uppercase, all other letters
+                     in lowercase. Words are delimited by white space or characters that
+                     are not alphanumeric.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">INSTR(expr1, expr2 [,n [,m]])</p>
+                  
+                  
+                  <p>Searches <code>expr1</code> beginning
+                     with its <code>n</code>th character for the <code>m</code>th occurrence of <code>expr2</code> and returns the character position in <code>expr1</code> for the first character of this occurrence. If <code>n</code> is negative, <code>INSTR</code> counts
+                     and searches backward from the end of <code>expr1</code>. The value of <code>m</code> must be positive.
+                     The default values of both <code>n</code> and m are 1, meaning <code>INSTR</code> begins
+                     searching at the first character of <code>expr1</code> for the first occurrence of <code>expr2</code>.
+                     The return value is relative to the beginning of <code>expr1</code>, regardless of the value of <code>n</code>, and is expressed in characters. If the search is unsuccessful (<code>expr1</code> does not appear <code>m</code> times after the <code>n</code>th character of <code>expr1</code>) the return value is 0.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">INSTRB(expr1, expr2 [,n [,m]])</p>
+                  
+                  
+                  <p>The same as <code>INSTR</code>, except
+                     that <code>n</code> and the return value are expressed
+                     in bytes, rather than in characters. For a single-byte character set, <code>INSTRB</code> is equivalent to <code>INSTR</code>. 
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">LEAST(expr, expr [,expr]...)</p>
+                  
+                  
+                  <p>Compares the values of all the text string operands.
+                     Returns the first string in alphabetic order from among its operands.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">LENGTH(expr)</p>
+                  
+                  
+                  <p>Returns the number of characters in the text string
+                     operand <code>expr</code>.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">LENGTHB(expr)</p>
+                  
+                  
+                  <p>Returns the length of <code>expr</code> in units of bytes.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">LOWER(expr)</p>
+                  
+                  
+                  <p>Converts a text string to lower case.</p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">LPAD(expr, n [,pad])</p>
+                  
+                  
+                  <p>Returns the text string operand <code>expr</code> left-padded to length <code>n</code> with the sequence of characters in <code>pad</code>. The default value for <code>pad</code> is a blank.
+                     If <code>expr</code> is longer than <code>n</code>, then <code>LPAD</code> returns
+                     the portion of <code>expr</code> that fits in <code>n</code>.
+                  </p>
+                  
+                  <p>Examples:</p>
+                  <pre><code>/* A is set to 'XYXYXhello' */
+A = LPAD ('hello, 10, 'XY')
+/* A is set to 'hell' */
+A = LPAD ('hello', 4 )<br></code></pre>
+                  
+                  
+                  
+                  <p class="functionName">LTRIM(expr  [,set])</p>
+                  
+                  
+                  <p>Returns the text string operand <code>expr</code> with all the left-most characters that appear in <code>set</code> removed. The default for <code>set</code> is a blank. If none of the left-most characters of <code>expr</code> appear in <code>set</code>, then <code>LTRIM</code> returns <code>expr</code>.
+                  </p>
+                  
+                  <p>Examples:</p>
+                  <pre><code>/* A is set to 'def' */
+A = LTRIM ('abcdef','abc')
+/* A is set to 'abcdef' *
+/A = LTRIM ('abcdef','bc')<br></code></pre>
+                  
+                  
+                  
+                  <p class="functionName">REPLACE(expr, search [,replacement])</p>
+                  
+                  
+                  <p>Returns the text string operand <code>expr</code> with every occurrence of <code>search</code> replaced with <code>replacement</code>. If you
+                     omit <code>replacement</code>, it removes all occurrences
+                     of <code>search</code>. Use <code>REPLACE</code> to substitute one string for another or to remove
+                     character strings.
+                  </p>
+                  
+                  <p>Example:</p>
+                  <pre><code>/* Set A to 'BLACK and BLUE'. */
+A = REPLACE('JACK and JUE', 'J', BL')<br></code></pre>
+                  
+                  
+                  
+                  <p class="functionName">RPAD(expr, n [,pad])</p>
+                  
+                  
+                  <p>Returns the text string operand <code>expr</code> right-padded to length <code>n</code> with the sequence of characters in <code>pad</code>. The default value for <code>pad</code> is a blank.
+                     If <code>expr</code> is longer than <code>n</code>, then <code>RPAD</code> returns
+                     the portion of <code>expr</code> that fits in <code>n</code>.
+                  </p>
+                  
+                  <p>Examples:</p>
+                  <pre><code>/* A is set to 'helloXYXYX' */
+A = RPAD ('hello, 10, 'XY')
+/* A is set to 'hell' */
+A = RPAD ('hello', 4 )<br></code></pre>
+                  
+                  
+                  
+                  <p class="functionName">RTRIM(expr [,set])</p>
+                  
+                  
+                  <p>Returns the text string operand <code>expr</code> with all the right-most characters that appear in <code>set</code> removed. The default value for <code>set</code> is a blank. If none of the right-most characters
+                     of <code>expr</code> appear in <code>set</code>, then <code>expr</code> is returned.
+                  </p>
+                  
+                  <p>Examples:</p>
+                  <pre><code>/* A is set to 'abc' */
+A = RTRIM ('abcdef','def')
+/* A is set to 'abcdef' */
+A = RTRIM ('abcdef','de')<br></code></pre>
+                  
+                  
+                  
+                  <p class="functionName">SUBSTR(expr, m [,n]) or SUBSTRING(expr, m [,n])</p>
+                  
+                  
+                  <p><code>SUBSTRING</code> returns a
+                     substring of the text string operand <code>expr</code> of length <code>n</code> characters beginning at
+                     the <code>m</code>th character. If <code>n</code> is negative, <code>SUBSTR</code> counts
+                     backwards from the end of <code>expr</code>. If you
+                     omit the <code>n</code>, the substring starts from <code>m</code> and finishes at the end of <code>expr</code>.
+                  </p>
+                  
+                  <p>Example:</p>
+                  <pre><code>/* Check that the tax code starts with GG */
+IF length(Tax_code) &lt;= 2 
+THEN
+(message = 'Tax code is too short'
+RETURN message
+)IF substr( Tax_code, 1, 2) = 'GG' THEN ...<br></code></pre>
+                  
+                  
+                  
+                  <p class="functionName">SUBSTRB((expr, m [,n])</p>
+                  
+                  
+                  <p>The same as <code>SUBSTR</code>,
+                     except that the arguments <code>m</code> and <code>n</code> are expressed in bytes, rather than in characters.
+                     For a single-byte database character set, <code>SUBSTRB</code> is equivalent to <code>SUBSTR</code>.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">TRANSLATE(expr,from,to)</p>
+                  
+                  
+                  <p>Returns the text string operand <code>expr</code> with all occurrences of each character in <code>from</code> replaced by its corresponding character
+                     in <code>to</code>. Characters in <code>expr</code> that are not in <code>from</code> are
+                     not replaced. The argument <code>from</code> can
+                     contain more characters than <code>to</code>. In
+                     this case, the extra characters at the end of <code>from</code> have no corresponding characters in <code>to</code>. If these extra characters appear in <code>expr</code>, they are removed from the return value.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">TRIM(expr)</p>
+                  
+                  
+                  <p>Trims leading and trailing spaces from a character
+                     string.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">UPPER(expr)</p>
+                  
+                  
+                  <p>Converts a text string to upper case.</p>
+                  
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OAPFF298155">
+                  <h2>Numeric Formula Functions</h2>
+                  
+                  
+                  
+                  
+                  <p>The following formula functions manipulate numeric
+                     data.
+                  </p>
+                  
+                  
+                  
+                  <p class="functionName">ABS(n)</p>
+                  
+                  
+                  <p>Returns the magnitude of a numeric operand <code>n</code> as a positive numeric value. If the value
+                     of the operand is positive, its value returns unchanged. If the operand
+                     is negative, then the value's sign inverts and the value returns as
+                     a positive number.
+                  </p>
+                  
+                  <p>Example:</p>
+                  <pre><code>ABS (-17)<br></code></pre>
+                  <p>It returns 17.</p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">FLOOR(n)</p>
+                  
+                  
+                  <p>Returns the integer part of a numeric operand <code>n</code>. If the value of the operand contains information
+                     after the decimal point, <code>FLOOR</code> discards
+                     that information and returns a whole number.
+                  </p>
+                  
+                  <p>Example:</p>
+                  <pre><code>FLOOR(35.455)<br></code></pre>
+                  <p>It returns 35.</p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">GREATEST(n, n [, n] ...) or GREATEST_OF(n, n [, n] ...)</p>
+                  
+                  
+                  <p>Compares all the operands and returns the largest
+                     value.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">LEAST(n, n [, n] ...) or LEAST_OF(n, n [, n] ...)</p>
+                  
+                  
+                  <p>Compares all the operands and returns the smallest
+                     value.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">MOD(m, n)</p>
+                  
+                  
+                  <p>Returns the remainder from dividing <code>m</code> by <code>n</code>.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">POWER(m, n)</p>
+                  
+                  
+                  <p>Returns <code>m</code> raised to
+                     the <code>n</code>th power.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">ROUND(m [,n])</p>
+                  
+                  
+                  <p>Rounds <code>m</code> to <code>n</code> decimal places. The default number of decimal
+                     places is 0.
+                  </p>
+                  
+                  <p>Examples:</p>
+                  <pre><code>ROUND(2.3401, 2)<br></code></pre>
+                  <p>It returns 2.34.</p>
+                  <pre><code>ROUND (2.3461, 2)<br></code></pre>
+                  <p>It returns 2.35.</p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">ROUNDUP(m [,n]) or ROUND_UP(m [,n])</p>
+                  
+                  
+                  <p>Rounds <code>m</code> up to <code>n</code> decimal places. The default number of places
+                     is 0.
+                  </p>
+                  
+                  <p>Examples:</p>
+                  <pre><code>ROUND_UP(2.3401, 2)<br></code></pre>
+                  <p>It returns 2.35.</p>
+                  <pre><code>ROUND_UP(2.3400, 2)<br></code></pre>
+                  <p>It returns 2.34.</p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">TRUNC(n [,m]) or TRUNCATE(n [,m])</p>
+                  
+                  
+                  <p>Truncates <code>m</code> down to <code>n</code> decimal places. The default number of places
+                     is 0.
+                  </p>
+                  
+                  <p>Examples:</p>
+                  <pre><code>TRUNC(2.3401, 2)<br></code></pre>
+                  <p>It returns 2.34.</p>
+                  
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OAPFF311789">
+                  <h2>Date Formula Functions</h2>
+                  
+                  
+                  
+                  
+                  <p>The following formula functions manipulate date
+                     data.
+                  </p>
+                  
+                  
+                  
+                  <p class="functionName">ADD_DAYS(date, n)</p>
+                  
+                  
+                  <p>Adds <code>n</code> whole days to <code>date</code>.
+                  </p>
+                  
+                  <p>Example:</p>
+                  <pre><code>ADD_DAYS ('30-DEC-1990' (date), 6)<br></code></pre>
+                  <p>It returns 5 JAN 1991.</p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">ADD_MONTHS(date, n)</p>
+                  
+                  
+                  <p>Adds <code>n</code> whole months
+                     to <code>date</code>.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">ADD_YEARS(date, n)</p>
+                  
+                  
+                  <p>Adds <code>n</code> whole years to <code>date</code>.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">DAYS_BETWEEN(date1, date2)</p>
+                  
+                  
+                  <p>Returns the number of days between <code>date1</code> and <code>date2</code>. If <code>date1</code> is later than <code>date2</code> then the result is a positive number. If <code>date1</code> is earlier than <code>date2</code> then the result
+                     is a negative number.
+                  </p>
+                  
+                  <p>Returns the number of days between date1 and date2.
+                     If date1 is later than date2 then the result is a positive number.
+                     If date1 is earlier than date2 then the result is a negative number.
+                     Example: DAYS_BETWEEN('1995/06/27 00:00:00' (date), '1995/07/03 00:00:00'
+                     (date)) It returns - 5.
+                  </p>
+                  
+                  <p>Example:</p>
+                  <pre><code>DAYS_BETWEEN('1995/06/27 00:00:00' (date), '1995/07/03 00:00:00' (date))<br></code></pre>
+                  <p>It returns - 5.</p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">GREATEST(date, date [, date] ...)</p>
+                  
+                  
+                  <p>Compares its operands and returns the latest date.</p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">LAST_DAY(date)</p>
+                  
+                  
+                  <p>Returns the last day of the month containing <code>date</code>.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">LEAST(date, date  [, date] ...)</p>
+                  
+                  
+                  <p>Compares the operands and returns the earliest <code>date</code>.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">MONTHS_BETWEEN(date1, date2)</p>
+                  
+                  
+                  <p>Returns the number of months between <code>date1</code> and <code>date2</code>. If <code>date1</code> is later than <code>date2</code>, the result is a positive number. If <code>date1</code> is earlier than <code>date2</code>, the result is a negative number. The return value has a numeric
+                     data type that can contain a fraction if the dates do not differ by
+                     a whole number of months.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">NEW_TIME(date, zone1, zone2)</p>
+                  
+                  
+                  <p>Returns the date and time in zone <code>zone2</code> when the date and time in zone <code>zone1</code> are date. 
+                  </p>
+                  
+                  <p>The arguments <code>zone1</code> and <code>zone2</code> can be any one of the standard text strings
+                     such as:
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="Time zones">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Time Zone
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Description
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>AST</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Atlantic Standard Time</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>BST</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Bering Standard Time</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>CST or CDT</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Central Standard or Daylight Time</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>EST or EDT</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Eastern Standard or Daylight Time</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>GMT</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Greenwich Mean Time</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>HST or HDT</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Alaska-Hawaii Standard Time or Daylight Time</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>MST or MDT</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Mountain Standard or Daylight Time</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>NST</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Newfoundland Standard Time</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>PST or PDT</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Pacific Standard or Daylight Time</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>YST</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yukon Standard Time</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">NEXT_DAY(d, expr)</p>
+                  
+                  
+                  <p>Returns the first date following <code>d</code> of the weekday named by <code>expr</code>.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">ROUND(date [,format])</p>
+                  
+                  
+                  <p>Returns the result of rounding <code>date</code> according to <code>format</code>.
+                     The default format is <code>DDD</code>, which represents
+                     the nearest day.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">TRUNC(date [,format])</p>
+                  
+                  
+                  <p>Returns the result of truncating <code>date</code> according to <code>format</code>.
+                     The default format is <code>DDD</code>, which represents
+                     a whole day.
+                  </p>
+                  
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OAPFF311949">
+                  <h2>Data Conversion Formula Functions</h2>
+                  
+                  
+                  
+                  
+                  <p>The following formula functions perform data conversions.</p>
+                  
+                  
+                  
+                  <p class="functionName">DATE_TO_TEXT(date [,format]), TO_CHAR(date [,format]),
+                     and TO_TEXT(date [,format])
+                  </p>
+                  
+                  
+                  <p>Converts <code>date</code> to a character
+                     string with format specified by <code>format</code>. The default format is the application canonical format.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">NUM_TO_CHAR(n, format)</p>
+                  
+                  
+                  <p>Converts the number <code>n</code> to a character string in the specified format. This function is
+                     equivalent to the SQL TO_CHAR function.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">TO_CHAR(n) and TO_TEXT(n)</p>
+                  
+                  
+                  <p>Converts the number <code>n</code> to a character string in canonical number format.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">TO_DATE (expr [, format])</p>
+                  
+                  
+                  <p>Converts the character string <code>expr</code> in the specified format to a date. If no format is
+                     specified then <code>expr</code> must be in canonical
+                     format. 
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">TO_NUMBER(expr) and TO_NUM(expr)</p>
+                  
+                  
+                  <p>Converts the character string <code>expr</code> to a number. The character string must be in canonical
+                     number format. A period is used for the decimal point, such as 1.234.
+                     Negative numbers are preceded with a minus, such as -1.234.
+                  </p>
+                  
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OAPFF311968">
+                  <h2>Miscellaneous Formula Functions</h2>
+                  
+                  
+                  
+                  
+                  <p>The following formula functions manipulate messaging
+                     data or retrieve values from user-defined tables.
+                  </p>
+                  
+                  
+                  
+                  <p class="functionName">GET_MESG, GET_FND_MESG</p>
+                  
+                  
+                  <p>GET_MESG(appname, msgname [, token1, value1] [, token2,
+                     value2] [, token3, value3] [, token4, value4] [, token5, value5] )
+                  </p>
+                  
+                  <p>GET_FND_MESG(appname, msgname [, token1, value1]
+                     [, token2, value2] [, token3, value3] [, token4, value4] [, token5,
+                     value5] )
+                  </p>
+                  
+                  <p>Returns an expanded version of the application message
+                     specified using <code>appname</code>, <code>msgname</code>, and up to five pairs of message tokens
+                     and their corresponding values.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">GET_RATE</p>
+                  
+                  
+                  <p>GET_RATE(from_currency, to_currency, rate_type[,default_rate])</p>
+                  
+                  <p>Returns the rate between the two currencies for a
+                     given conversion date and rate type. The return type is NUMBER.
+                  </p>
+                  
+                  <p>Contexts:  EFFECTIVE_DATE (text) is the conversion
+                     date.
+                  </p>
+                  
+                  <p>Parameters:</p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>FROM_CURRENCY (text): An example
+                           would be USD.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>TO_CURRENCY (text): An example
+                           would be GBP.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>RATE_TYPE (text): The source of
+                           a currency conversion rate, such as user defined, spot, corporate,
+                           or fixed.
+                        </p>
+                        <div class="infobox-"><span class="notep1">Note: </span>
+                           During journal entry, the conversion rate is provided
+                           automatically by the General Ledger based on the selected conversion
+                           rate type and currency, unless the rate type is user. For user rate
+                           types, you must enter the conversion rate. Define additional rate
+                           types as needed. Set your most frequently used rate type as the default.
+                           
+                        </div>
+                     </li>
+                     
+                     <li>
+                        <p>DEFAULT_RATE (number): The rate
+                           that is returned if GET_RATE can’t get a rate. A typical value for
+                           this would be 1.0.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>GET_RATE calls a General Ledger product API. The
+                     API retrieves the rate from the GL daily rates or fixed rates, where
+                     appropriate.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">GET_TABLE_VALUE</p>
+                  
+                  
+                  <p>GET_TABLE_VALUE(table_name, column_name, row_value
+                     [,default_value])
+                  </p>
+                  
+                  <p>GET_TABLE_VALUE(table_name, column_name, row_value,
+                     effective date)
+                  </p>
+                  
+                  <p>Returns the value of a cell in a user-defined table
+                     on the effective date of the session or process. The first three text
+                     operands identify the cell. An optional fourth parameter does one
+                     of the following, depending on its data type: 
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Text: Returns a text default value
+                           if no data is found.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Date: Returns the value of the
+                           cell on the specified date.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>Example: <code>GET_TABLE_VALUE('WAGE
+                        RATES', 'Wage Rate', Rate_Code, 'DEFAULT')</code> would return the
+                     row_value for Wage Rate or DEFAULT if no row was found.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p class="functionName">GET_VALUE_SET</p>
+                  
+                  
+                  <p>GET_VALUE_SET(value_set_code, bind)</p>
+                  
+                  <p>Returns the first record of the given value set for
+                     the bind passed, whereby the bind needs to be in the following format: <code>&lt;Separator character&gt; &lt;equal character&gt;&lt;first
+                        parameter name&gt;&lt;equal character&gt;&lt;value&gt;&lt;Separator character&gt;&lt;second
+                        parameter name&gt;&lt;equal character&gt;&lt;value&gt;&lt;Repeat the same for
+                        more bind parameters&gt;</code></p>
+                  
+                  <p>Example: <code>_NUMBER=GET_VALUE_SET('SAMPLE_GET_ASG_NUM'
+                        .'|=PERSON_ID= ' ' '||POSITION3||' ' ' ')</code> Passes data to
+                     a fast formula function to retrieve assignment number, person ID that
+                     is passed via the position3 variable.
+                  </p>
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     Use the GET_VALUE_SET function to retrieve information
+                     when a database item is not available. This will support Value Set
+                     with Validation Type = Table, Value Data Type = Character and no aliases.
+                     
+                  </div>
+                  
+                  
+                  
+                  
+                  <p class="functionName">HR_TRACE(expr)</p>
+                  
+                  
+                  <p>Outputs a trace message. </p>
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     It's more efficient to use an application-specific
+                     logging function than <code>HR_TRACE</code>.
+                     
+                  </div>
+                  
+                  
+                  
+                  
+                  
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

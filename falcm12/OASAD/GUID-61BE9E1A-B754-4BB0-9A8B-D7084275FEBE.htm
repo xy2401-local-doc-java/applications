@@ -1,0 +1,2085 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Troubleshoot the Oracle Fusion Applications Tier Performance</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This section discusses how to find the information needed to examine in order to tune the system. It includes how to monitor and tune the database and Oracle Fusion Applications, and troubleshooting." />
+<meta name="dcterms.created" content="2018-02-21T10:06:12Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Fusion Applications Administrator's Guide" />
+<meta name="dcterms.identifier" content="E66226-03" />
+<meta name="dcterms.isVersionOf" content="OASAD" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2011, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-78C0349D-173F-4A80-903F-58E980358727.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-AD709FDB-1C67-4C39-AAB9-8C10C0CCACD5.htm" title="Next" type="text/html" />
+<link rel="alternate" href="OASAD.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE"></a> <span id="PAGE" style="display:none;">18/27</span> <!-- End Header -->
+<a id="OASAD55655"></a><a id="OASAD55566"></a>
+<h1 id="OASAD-GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE" class="sect1"><span class="enumeration_chapter">14</span> Troubleshoot the Oracle Fusion Applications Tier Performance</h1>
+<div>
+<div><span>This section discusses how to find the information needed to examine in order to tune the system. It includes how to monitor and tune the database and Oracle Fusion Applications, and troubleshooting.</span></div>
+<p>The following topics are discussed:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-155A732E-4BB3-47D5-A8DA-9A7F92659B99">Introduction</a></p>
+</li>
+<li>
+<p><a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-BCE2F1E9-DF80-406B-8BE3-CA6020BE5B31">Monitor and Tune Oracle Fusion Applications</a></p>
+</li>
+</ul>
+</div>
+<a id="OASAD55567"></a>
+<div class="props_rev_3"><a id="GUID-155A732E-4BB3-47D5-A8DA-9A7F92659B99"></a>
+<h2 id="OASAD-GUID-155A732E-4BB3-47D5-A8DA-9A7F92659B99" class="sect2"><span class="enumeration_section">14.1</span> Introduction</h2>
+<div>
+<p>Every system of hardware and installed applications is different. Even though Oracle Fusion Applications are written and installed using industry-standard best practices, it is possible to custom tailor the system to improve how it supports the environment.</p>
+<p>But to tune the system, it is necessary to locate and examine data. This section will explain what data needs to be examined, and what tools are used to gather the data.</p>
+</div>
+</div>
+<a id="OASAD55659"></a><a id="OASAD55656"></a>
+<div class="props_rev_3"><a id="GUID-BCE2F1E9-DF80-406B-8BE3-CA6020BE5B31"></a>
+<h2 id="OASAD-GUID-BCE2F1E9-DF80-406B-8BE3-CA6020BE5B31" class="sect2"><span class="enumeration_section">14.2</span> Monitor and Tune Oracle Fusion Applications</h2>
+<div>
+<div class="section">
+<p>In general, most of the settings that come default in Oracle Fusion Applications are already tuned.</p>
+<p>The following guidelines are provided to help ensure the Oracle Fusion Applications instance runs optimally:</p>
+<p>Note that all metrics listed are from Oracle Enterprise Manager Cloud Control.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Monitor the key host metrics, shown in <a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-BCE2F1E9-DF80-406B-8BE3-CA6020BE5B31__CIHBECIG" title="Key Host Metrics">Table 14-1</a>, to ensure the underlying server hosts are healthy. Rather than constantly checking the metric values, it is possible to set up alert thresholds in Cloud Control and receive notification when thresholds are exceeded.</p>
+</li>
+<li>
+<p>Monitor the key component metrics, such as WebLogic server metrics, to ensure each component is healthy.</p>
+</li>
+<li>
+<p>Monitor the number of incidents and logs to ensure the application is configured properly and not constantly wasting resources generating error messages. Review log levels to ensure they are not set too low. See <a href="GUID-FE333592-7A78-438C-8743-FA5C36221622.htm#GUID-FE333592-7A78-438C-8743-FA5C36221622" title="This section describes how to use incidents, log settings, log files, QuickTrace output, and diagnostic tests and how they relate to help diagnose and resolve problems with Oracle Fusion Applications.">Prepare to Troubleshoot Using Incidents, Logs, QuickTrace, and Diagnostic Tests</a> for more information.</p>
+</li>
+<li>
+<p>Monitor the database to ensure it is operating optimally.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="tblformalwide" id="GUID-BCE2F1E9-DF80-406B-8BE3-CA6020BE5B31__CIHBECIG">
+<p class="titleintable">Table 14-1 Key Host Metrics</p>
+<table class="cellalignment20" title="Key Host Metrics" summary="Key Host Metrics">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment39" id="d144514e120">Metric Category</th>
+<th class="cellalignment65" id="d144514e123">Metric Name</th>
+<th class="cellalignment135" id="d144514e126">Warning Threshold</th>
+<th class="cellalignment135" id="d144514e129">Critical Threshold</th>
+<th class="cellalignment60" id="d144514e132">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment42" id="d144514e137" headers="d144514e120">
+<p>Disk Activity</p>
+</td>
+<td class="cellalignment67" headers="d144514e137 d144514e123">
+<p>Disk Device Busy</p>
+</td>
+<td class="cellalignment136" headers="d144514e137 d144514e126">
+<p>&gt;80%</p>
+</td>
+<td class="cellalignment136" headers="d144514e137 d144514e129">
+<p>&gt;95%</p>
+</td>
+<td class="cellalignment61" headers="d144514e137 d144514e132">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment42" id="d144514e153" headers="d144514e120">
+<p>Filesystems</p>
+</td>
+<td class="cellalignment67" headers="d144514e153 d144514e123">
+<p>Filesystem Space Available</p>
+</td>
+<td class="cellalignment136" headers="d144514e153 d144514e126">
+<p>&lt;20%</p>
+</td>
+<td class="cellalignment136" headers="d144514e153 d144514e129">
+<p>&lt;5%</p>
+</td>
+<td class="cellalignment61" headers="d144514e153 d144514e132">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment42" id="d144514e169" headers="d144514e120">
+<p>Load</p>
+</td>
+<td class="cellalignment67" headers="d144514e169 d144514e123">
+<p>CPU in I/O wait</p>
+</td>
+<td class="cellalignment136" headers="d144514e169 d144514e126">
+<p>&gt;60%</p>
+</td>
+<td class="cellalignment136" headers="d144514e169 d144514e129">
+<p>&gt;80%</p>
+</td>
+<td class="cellalignment61" headers="d144514e169 d144514e132">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment42" id="d144514e185" headers="d144514e120">
+<p>Load</p>
+</td>
+<td class="cellalignment67" headers="d144514e185 d144514e123">
+<p>CPU Utilization</p>
+</td>
+<td class="cellalignment136" headers="d144514e185 d144514e126">
+<p>&gt;80%</p>
+</td>
+<td class="cellalignment136" headers="d144514e185 d144514e129">
+<p>&gt;95%</p>
+</td>
+<td class="cellalignment61" headers="d144514e185 d144514e132">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment42" id="d144514e201" headers="d144514e120">
+<p>Load</p>
+</td>
+<td class="cellalignment67" headers="d144514e201 d144514e123">
+<p>Run Queue (5 min average)</p>
+</td>
+<td class="cellalignment136" headers="d144514e201 d144514e126">
+<p>&gt;2</p>
+</td>
+<td class="cellalignment136" headers="d144514e201 d144514e129">
+<p>&gt;4</p>
+</td>
+<td class="cellalignment61" headers="d144514e201 d144514e132">
+<p>The run queue is normalized by the number of CPU cores.</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment42" id="d144514e217" headers="d144514e120">
+<p>Load</p>
+</td>
+<td class="cellalignment67" headers="d144514e217 d144514e123">
+<p>Swap Utilization</p>
+</td>
+<td class="cellalignment136" headers="d144514e217 d144514e126">
+<p>&gt;75%</p>
+</td>
+<td class="cellalignment136" headers="d144514e217 d144514e129">
+<p>&gt;90%</p>
+</td>
+<td class="cellalignment61" headers="d144514e217 d144514e132">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment42" id="d144514e233" headers="d144514e120">
+<p>Load</p>
+</td>
+<td class="cellalignment67" headers="d144514e233 d144514e123">
+<p>Total Processes</p>
+</td>
+<td class="cellalignment136" headers="d144514e233 d144514e126">
+<p>&gt;15000</p>
+</td>
+<td class="cellalignment136" headers="d144514e233 d144514e129">
+<p>&gt;25000</p>
+</td>
+<td class="cellalignment61" headers="d144514e233 d144514e132">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment42" id="d144514e249" headers="d144514e120">
+<p>Load</p>
+</td>
+<td class="cellalignment67" headers="d144514e249 d144514e123">
+<p>Logical Free Memory %</p>
+</td>
+<td class="cellalignment136" headers="d144514e249 d144514e126">
+<p>&lt;20</p>
+</td>
+<td class="cellalignment136" headers="d144514e249 d144514e129">
+<p>&lt;10</p>
+</td>
+<td class="cellalignment61" headers="d144514e249 d144514e132">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment42" id="d144514e265" headers="d144514e120">
+<p>Load</p>
+</td>
+<td class="cellalignment67" headers="d144514e265 d144514e123">
+<p>CPU in System Mode</p>
+</td>
+<td class="cellalignment136" headers="d144514e265 d144514e126">
+<p>&gt;20%</p>
+</td>
+<td class="cellalignment136" headers="d144514e265 d144514e129">
+<p>&gt;40%</p>
+</td>
+<td class="cellalignment61" headers="d144514e265 d144514e132">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment42" id="d144514e281" headers="d144514e120">
+<p>Network Interfaces Summary</p>
+</td>
+<td class="cellalignment67" headers="d144514e281 d144514e123">
+<p>All Network Interfaces Combined Utilization</p>
+</td>
+<td class="cellalignment136" headers="d144514e281 d144514e126">
+<p>&gt;80%</p>
+</td>
+<td class="cellalignment136" headers="d144514e281 d144514e129">
+<p>&gt;95%</p>
+</td>
+<td class="cellalignment61" headers="d144514e281 d144514e132">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment42" id="d144514e297" headers="d144514e120">
+<p>Switch/Swap Activity</p>
+</td>
+<td class="cellalignment67" headers="d144514e297 d144514e123">
+<p>Total System Swaps</p>
+</td>
+<td class="cellalignment136" headers="d144514e297 d144514e126">
+<p>&gt;3</p>
+</td>
+<td class="cellalignment136" headers="d144514e297 d144514e129">
+<p>&gt;5</p>
+</td>
+<td class="cellalignment61" headers="d144514e297 d144514e132">
+<p>Value is per second.</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment42" id="d144514e314" headers="d144514e120">
+<p>Paging Activity</p>
+</td>
+<td class="cellalignment67" headers="d144514e314 d144514e123">
+<p>Pages Paged-in (per second)</p>
+</td>
+<td class="cellalignment136" headers="d144514e314 d144514e126">
+<p>N/A</p>
+</td>
+<td class="cellalignment136" headers="d144514e314 d144514e129">
+<p>N/A</p>
+</td>
+<td class="cellalignment61" headers="d144514e314 d144514e132">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment42" id="d144514e330" headers="d144514e120">
+<p>Paging Activity</p>
+</td>
+<td class="cellalignment67" headers="d144514e330 d144514e123">
+<p>Pages Paged-out (per second)</p>
+</td>
+<td class="cellalignment136" headers="d144514e330 d144514e126">
+<p>N/A</p>
+</td>
+<td class="cellalignment136" headers="d144514e330 d144514e129">
+<p>N/A</p>
+</td>
+<td class="cellalignment61" headers="d144514e330 d144514e132">
+<p>The combined value of Pages Paged-in and Pages Paged-out should be &lt;=1000</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+<a id="OASAD55661"></a><a id="OASAD55662"></a><a id="OASAD55663"></a><a id="OASAD55664"></a><a id="OASAD55665"></a><a id="OASAD55666"></a><a id="OASAD55667"></a><a id="OASAD55668"></a><a id="OASAD55669"></a><a id="OASAD55670"></a><a id="OASAD55722"></a>
+<div class="props_rev_3"><a id="GUID-71ADC898-2634-4F5B-8EF0-5E2E5767932F"></a>
+<h3 id="OASAD-GUID-71ADC898-2634-4F5B-8EF0-5E2E5767932F" class="sect3"><span class="enumeration_section">14.2.1</span> Analyze Host Metrics</h3>
+<div>
+<div class="section">
+<p>Administrators will find it useful to study these suggestions on further analysis to undertake when a metric value exceeds threshold. The commands provided are for the Unix OS operating system.</p>
+</div>
+<!-- class="section" -->
+<div class="section" id="GUID-71ADC898-2634-4F5B-8EF0-5E2E5767932F__CIHDDGHA">
+<p class="subhead3">When logical free memory/swap activity or paging activity is beyond threshold</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>This usually happens when memory is not sufficient to handle demands from all the running processes.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Linux: Check <code class="codeph">cat/proc/meminfo</code> and confirm total RAM is expected.</p>
+<p>AIX: Check <code class="codeph">/usr/sbin/prtconf | grep "Memory Size"</code> and confirm total RAM is expected.</p>
+<p>Solaris: Check <code class="codeph">/usr/sbin/prtconf | grep "Memory size"</code> and confirm total RAM is expected.</p>
+</li>
+<li>
+<p>Check if there are unallocated huge pages. If there are and the WebLogic Server/Oracle instances are not expected to use them, reduce the huge page pool size.</p>
+</li>
+<li>
+<p>Linux: Run <code class="codeph">top</code> and sort by resident memory (type <span class="bold">OQ</span>). Look for processes using the most resident memory and investigate those processes.</p>
+<p>Solaris: Run <code class="codeph">top -o res</code>. Look for processes using the most resident memory and investigate those processes.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">When page activity is beyond threshold</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>Follow the steps in <a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-71ADC898-2634-4F5B-8EF0-5E2E5767932F__CIHDDGHA">When logical free memory/swap activity or paging activity is beyond threshold</a> to view and analyze memory usage.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">When Network Interface Error Rates Is Beyond Threshold</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>The normal cause is misconfiguration between the host and the network switch. A bad network card or cabling also can cause this error. Run <code class="codeph">/sbin/ifconfig</code> to identify which interface is having packet errors. Contact network administrator to ensure the host and the switch are using same data rate and duplex mode.</p>
+<p>Otherwise, check if cabling or the network card is faulty and replace as appropriate.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">When Packet Loss Rate Is Beyond Threshold</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>The normal cause of this error is network saturation of bad network hardware.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>On a UNIX system:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Run <code class="codeph">lsof -Pni | grep ESTAM</code> to determine which network paths are generating the problem.</p>
+</li>
+<li>
+<p>Linux: Then run <code class="codeph">mtr &lt;target host&gt;</code> or <code class="codeph">ping &lt;target host&gt;</code> and look for packet lost on that segment.</p>
+<pre dir="ltr">
+  20 packets transmitted, 20 received, 0% packet loss, time 18997ms
+  rtt min/avg/max/mdev = 0.168/0.177/0.200/0.010 ms
+</pre>
+<p>The packet loss should be 0% and rtt should be less than .5 ms.</p>
+</li>
+<li>
+<p>Solaris: Then run <code class="codeph">/usr/sbin/ping -s &lt;target host&gt;</code> and look for packet loss on that segment.</p>
+<pre dir="ltr">
+2 packets transmitted, 2 packets received, 0% packet loss
+round-trip (ms) min/avg/max/stddev = 0.453/0.465/0.477/0.017
+</pre>
+<p>The packet loss should be 0% and round-trip should be less than .5 ms.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Ask the network monitoring staff to look for saturation or network packet loss from their side.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">When Network Utilization Is Beyond Threshold</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>The normal cause is very heavy application load.</p>
+<p>On a UNIX system:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Linux/Solaris: Run <code class="codeph">top</code> or <code class="codeph">lsof</code> to determine which processes are moving a lot of data.</p>
+</li>
+<li>
+<p>Solaris: Use <code class="codeph">/usr/sbin/snoop</code> to capture and inspect network packets.</p>
+</li>
+<li>
+<p>Linux: Use <code class="codeph">atop</code>, <code class="codeph">iftop</code>, <code class="codeph">ntop</code> or <code class="codeph">pkstat</code> to see which processes are moving data.</p>
+<p>Solaris: Use <code class="codeph">top</code> to see which processes are moving data.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">When CPU Usage or Run Queue Length Is Beyond Threshold</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>The normal cause is runaway demand, a poorly performing application, or poor capacity planning.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Linux/Solaris: Run <code class="codeph">top</code> to identify which application/process is using time.</p>
+</li>
+<li>
+<p>If top processes are WebLogic Server JVM processes, conduct a basic WebLogic Server health check. That is, review logs to see if there are configuration errors causing excessive exceptions, and review metrics to see if the load has increased. Use JVMD for a more detailed analysis.</p>
+</li>
+<li>
+<p>If top processes are Oracle processes, use Enterprise Manager to look for high load SQL.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">When System CPU Usage Is Beyond Threshold</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>High system CPU use could be due to kernel processes looking for pages to swap out during a memory shortage. Follow the steps listed in the <a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-71ADC898-2634-4F5B-8EF0-5E2E5767932F__CIHDDGHA">When logical free memory/swap activity or paging activity is beyond threshold</a> section to further diagnose the problem.</p>
+</li>
+<li>
+<p>High system CPU use is also frequently related to various device failures. Run <code class="codeph">{{dmesg | less}}</code> and look for repeated messages about errors on some particular device, and also have hardware support personnel check the hardware console to see if there are any errors reported.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">When Filesystem Usage Is Beyond Threshold</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>The normal cause is an application that is logging excessively or leaving behind temporary files.</p>
+<p>On a UNIX system:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Linux/Solaris: Run <code class="codeph">lsof -d 1-99999 | grep REG | sort -nrk 7 | less</code> to see currently open files sorted by size from largest to smallest. Investigate the large files.</p>
+</li>
+<li>
+<p>Run <code class="codeph">du -k /mount_point_running_out_of_space &gt; /tmp/sizes</code> to get space used for directories under the mount point. This may take a long time. While it is running, run <code class="codeph">sort -nr /tmp/sizes</code> and find the directories using most space and investigate those first.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">When Total Processes Is Beyond Threshold</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>The normal cause is runaway code or a stuck NFS filesystem.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Solaris: Run <code class="codeph">/usr/ucb/ps aux</code>. If many processes are in status D, run <code class="codeph">df</code> to check for stuck mounts.</p>
+<p>If there are hundreds or thousands of processes of a particular program, determine why.</p>
+</li>
+<li>
+<p>Linux: Run <code class="codeph">ps -o pid,nlwp,cmd | sort -nrk 2 | head</code> to look for processes with many threads.</p>
+<p>Solaris: Run <code class="codeph">ps -o pid,nlwp,comm,user | sort -nrk 2 | head</code> to look for processes with many threads.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">When Disk Device Busy Is Beyond Threshold</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Check for disk drive failure.</p>
+<p>UNIX: As root, check <code class="codeph">/var/log/messages*</code> and <code class="codeph">/var/log/mcelog</code> for Linux, and <code class="codeph">/var/adm/messages*</code> for Solaris, to see if there are any error messages indicating disk failure. For a RAID array, the disk controller needs to be checked. The commands will be specific to the controller manufacturer.</p>
+</li>
+<li>
+<p>Look for processes that are using the disk. From a shell window, execute <code class="codeph">ps aux | grep ' D. '</code> several consecutive times to look for processes with "stat" D.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OASAD55615"></a>
+<div class="props_rev_3"><a id="GUID-4E209E59-0836-4825-94C4-96A615EDC179"></a>
+<h3 id="OASAD-GUID-4E209E59-0836-4825-94C4-96A615EDC179" class="sect3"><span class="enumeration_section">14.2.2</span> Check for Network Connectivity Issues</h3>
+<div>
+<div class="section">
+<p>Poor performance is a major indicator of network connectivity problems.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Check for cumulative dropped packets drops for each host.</p>
+<p><span class="bold">UNIX</span></p>
+<pre dir="ltr">
+netstat -s | grep 'TCP data loss'
+  4007 segments retransmited
+  3302 TCP data loss events
+</pre>
+<p>The counts should be 0 or growing very slowly over time.</p>
+</li>
+<li>
+<p>Check for realtime dropped packets on specific network paths.</p>
+<p>Run the <code class="codeph">ping</code> command.</p>
+<pre dir="ltr">
+ping -c 20 other_host
+  20 packets transmitted, 20 received, 0% packet loss, time 18997ms
+  rtt min/avg/max/mdev = 0.168/0.177/0.200/0.010 ms
+</pre>
+<p>Packet loss should be 0%.</p>
+<p>rtt should be less than .5 ms, except that it can be higher between the browser and load balancer.</p>
+<p>Solaris: <code class="codeph">/usr/sbin/ping -s other_host &lt;data_size&gt; &lt;npackets&gt;</code></p>
+<pre dir="ltr">
+2 packets transmitted, 2 packets received, 0% packet loss
+</pre>
+<p>Packet loss should be 0%.</p>
+</li>
+<li>
+<p>Check for network interface errors.</p>
+<p><span class="bold">Linux</span></p>
+<pre dir="ltr">
+/sbin/ifconfig eth0 | grep errors
+   RX packets:842803463 errors:0 dropped:0 overruns:0 frame:0
+   TX packets:667946307 errors:0 dropped:0 overruns:0 carrier:0
+</pre>
+<p><span class="bold">Solaris</span></p>
+<pre dir="ltr">
+/sbin/ifconfig  -a // to list all the adapter names
+kstat &lt;adapter name&gt; |grep -i error
+</pre></li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OASAD55617"></a><a id="OASAD55671"></a><a id="OASAD55672"></a><a id="OASAD55673"></a><a id="OASAD55674"></a><a id="OASAD55675"></a><a id="OASAD55676"></a><a id="OASAD55677"></a><a id="OASAD55616"></a>
+<div class="props_rev_3"><a id="GUID-15DCD06C-578F-4F74-A85A-205E4C2654B6"></a>
+<h3 id="OASAD-GUID-15DCD06C-578F-4F74-A85A-205E4C2654B6" class="sect3"><span class="enumeration_section">14.2.3</span> Analyze WebLogic Server Metrics</h3>
+<div>
+<div class="section">
+<p>These metrics provide an indication of whether the WebLogic Server is in a healthy state. Performance may degrade if any of the metrics is exceeding its threshold.</p>
+<p><a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-15DCD06C-578F-4F74-A85A-205E4C2654B6__CIHFDAJA" title="WebLogic Server Metrics">Table 14-2</a> describes the WebLogic Server metrics that should be monitored in Cloud Control.</p>
+</div>
+<!-- class="section" -->
+<div class="tblformalwide" id="GUID-15DCD06C-578F-4F74-A85A-205E4C2654B6__CIHFDAJA">
+<p class="titleintable">Table 14-2 WebLogic Server Metrics</p>
+<table class="cellalignment20" title="WebLogic Server Metrics" summary="WebLogic Server Metrics">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment46" id="d144514e755">Metric Category</th>
+<th class="cellalignment72" id="d144514e758">Metric Name</th>
+<th class="cellalignment86" id="d144514e761">Warning Threshold</th>
+<th class="cellalignment135" id="d144514e764">Critical Threshold</th>
+<th class="cellalignment56" id="d144514e767">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment48" id="d144514e772" headers="d144514e755">
+<p>Datasource Metrics</p>
+</td>
+<td class="cellalignment73" headers="d144514e772 d144514e758">
+<p>Connections in Use</p>
+</td>
+<td class="cellalignment87" headers="d144514e772 d144514e761">
+<p>&gt;250</p>
+</td>
+<td class="cellalignment136" headers="d144514e772 d144514e764">
+<p>&gt;400</p>
+</td>
+<td class="cellalignment59" headers="d144514e772 d144514e767">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment48" id="d144514e788" headers="d144514e755">
+<p>Datasource Metrics</p>
+</td>
+<td class="cellalignment73" headers="d144514e788 d144514e758">
+<p>Connection Requests that Waited (%)</p>
+</td>
+<td class="cellalignment87" headers="d144514e788 d144514e761">
+<p>&gt;10%</p>
+</td>
+<td class="cellalignment136" headers="d144514e788 d144514e764">
+<p>&gt;20%</p>
+</td>
+<td class="cellalignment59" headers="d144514e788 d144514e767">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment48" id="d144514e804" headers="d144514e755">
+<p>Datasource Metrics</p>
+</td>
+<td class="cellalignment73" headers="d144514e804 d144514e758">
+<p>Connection Creation Time (ms)</p>
+</td>
+<td class="cellalignment87" headers="d144514e804 d144514e761">
+<p>N/A</p>
+</td>
+<td class="cellalignment136" headers="d144514e804 d144514e764">
+<p>N/A</p>
+</td>
+<td class="cellalignment59" headers="d144514e804 d144514e767">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment48" id="d144514e820" headers="d144514e755">
+<p>JVM Garbage Collectors</p>
+</td>
+<td class="cellalignment73" headers="d144514e820 d144514e758">
+<p>Garbage Collector - Percent Time spent (elapsed)</p>
+</td>
+<td class="cellalignment87" headers="d144514e820 d144514e761">
+<p>&gt;10%</p>
+</td>
+<td class="cellalignment136" headers="d144514e820 d144514e764">
+<p>&gt;20%</p>
+</td>
+<td class="cellalignment59" headers="d144514e820 d144514e767">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment48" id="d144514e836" headers="d144514e755">
+<p>JVM Metrics</p>
+</td>
+<td class="cellalignment73" headers="d144514e836 d144514e758">
+<p>Heap Usage</p>
+</td>
+<td class="cellalignment87" headers="d144514e836 d144514e761">
+<p>&gt;90%</p>
+</td>
+<td class="cellalignment136" headers="d144514e836 d144514e764">
+<p>&gt;98%</p>
+</td>
+<td class="cellalignment59" headers="d144514e836 d144514e767">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment48" id="d144514e852" headers="d144514e755">
+<p>Response</p>
+</td>
+<td class="cellalignment73" headers="d144514e852 d144514e758">
+<p>Status</p>
+</td>
+<td class="cellalignment87" headers="d144514e852 d144514e761">
+<p>N/A</p>
+</td>
+<td class="cellalignment136" headers="d144514e852 d144514e764">
+<p>=Down</p>
+</td>
+<td class="cellalignment59" headers="d144514e852 d144514e767">
+<p>This provides instance availability.</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment48" id="d144514e868" headers="d144514e755">
+<p>Server Servlet/JSP Metrics</p>
+</td>
+<td class="cellalignment73" headers="d144514e868 d144514e758">
+<p>Request Processing Time (ms)</p>
+</td>
+<td class="cellalignment87" headers="d144514e868 d144514e761">
+<p>&gt;10s</p>
+</td>
+<td class="cellalignment136" headers="d144514e868 d144514e764">
+<p>&gt;15s</p>
+</td>
+<td class="cellalignment59" headers="d144514e868 d144514e767">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment48" id="d144514e884" headers="d144514e755">
+<p>Server Work Manager Metrics</p>
+</td>
+<td class="cellalignment73" headers="d144514e884 d144514e758">
+<p>Work Manager Stuck Threads</p>
+</td>
+<td class="cellalignment87" headers="d144514e884 d144514e761">
+<p>&gt;5</p>
+</td>
+<td class="cellalignment136" headers="d144514e884 d144514e764">
+<p>&gt;10</p>
+</td>
+<td class="cellalignment59" headers="d144514e884 d144514e767">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment48" id="d144514e900" headers="d144514e755">
+<p>JVM Threads</p>
+</td>
+<td class="cellalignment73" headers="d144514e900 d144514e758">
+<p>Deadlocked Threads</p>
+</td>
+<td class="cellalignment87" headers="d144514e900 d144514e761">
+<p>&gt;2</p>
+</td>
+<td class="cellalignment136" headers="d144514e900 d144514e764">
+<p>&gt;5</p>
+</td>
+<td class="cellalignment59" headers="d144514e900 d144514e767">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment48" id="d144514e916" headers="d144514e755">
+<p>Module Metrics By Server</p>
+</td>
+<td class="cellalignment73" headers="d144514e916 d144514e758">
+<p>Active Sessions</p>
+</td>
+<td class="cellalignment87" headers="d144514e916 d144514e761">
+<p>N/A</p>
+</td>
+<td class="cellalignment136" headers="d144514e916 d144514e764">
+<p>N/A</p>
+</td>
+<td class="cellalignment59" headers="d144514e916 d144514e767">
+<p>N/A</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="section">
+<p class="subhead3">When CPU Usage on Host is Beyond Threshold and WebLogic Server Process is Identified as Top CPU Consumer</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Examine the % Time spent in the GC metric to see if JVM is doing excessive GC (&gt;20 percent). If so, follow the process for diagnosing WebLogic Server heap pressure as indicated in section <a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-15DCD06C-578F-4F74-A85A-205E4C2654B6__WHENPERCENTTIMESPENTINGARBAGECOLLEC-961EE7EE">When Percent Time Spent in Garbage Collector is Beyond Threshold</a>.</p>
+</li>
+<li>
+<p>Look for incident creation rate and error logs and see if something is triggering a massive amount of logging/errors.</p>
+</li>
+<li>
+<p>In JVMD, select the CPU state filter and look at top methods. Look for threads that are consistently in a CPU state.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">When There is a Spike in Active Web Sessions</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Check access logs to see if there is a spike in the number of users.</p>
+</li>
+<li>
+<p>Check if there are stuck threads, which could cause users to log in again.</p>
+</li>
+<li>
+<p>Check session distribution across WebLogic Server managed servers and see if there is a problem with the load balancer.</p>
+</li>
+<li>
+<p>Check session timeout in <code class="codeph">web.xml</code>, and see if it is too high or too low.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section" id="GUID-15DCD06C-578F-4F74-A85A-205E4C2654B6__CHDBGCEA">
+<p class="subhead3">When There are Stuck Threads on the System</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>Analyzing live stuck thread can be done using the Live Thread Analysis (LTA). For more information see sections Viewing the JVM Live Thread Analysis Page and Using Java Workload Explorer for investigating both live and past stuck thread; in the <span class="italic">Oracle Enterprise Manager Cloud Control Oracle Fusion Middleware Management Guide</span> .</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">When There are Deadlocks Detected on the System</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>In JVMD, inspect the threads that are in a blocked state.</p>
+</li>
+<li>
+<p>Deadlock threads normally also will be reported as a stuck thread in the WebLogic Server log. Use the Request Monitor to search for the ECID and expand down into JVMD to show the blocking thread.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">When Request Processing Time is Beyond Threshold</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Examine the % Time spent in GC metric to see if JVM is doing excessive garbage collection</p>
+</li>
+<li>
+<p>Look for incident create rate and error logs and see if something is triggering a massive amount of logging/errors.</p>
+</li>
+<li>
+<p>In JVMD, look at the thread states and see where most processing time is going.</p>
+</li>
+<li>
+<p>Check the metric <span class="bold">Garbage Collection - Invocation Time (ms)</span> under the <span class="bold">JVM Garbage Collectors</span> metric category.</p>
+<p>Sometimes if many managed server instances are run on the same host, it is possible to reduce time spent in garbage collection by reducing the number of garbage collector threads in each JVM. The default is based on the number of CPUs and could be too high if there are multiple active JVMs running on the same machine. In those cases, if JRockit is being used, add the <code class="codeph">-XXgcThreads=4</code> option when starting the JVM. To add the option, edit the <span class="italic"><code class="codeph">DOMAIN_HOME</code></span><code class="codeph">/bin/fusionapps_start_params.properties</code> file, look fo<code class="codeph">r -Xgc:genpar</code> and add the <code class="codeph">-XXgcThreads=4</code> option after it (for example <code class="codeph">-Xgc:genpar -XXgcThreads=4</code>). The value 4 directs the JVM to use four threads to perform garbage collection. Try different values from 4 to the number of CPU cores and observe if the % Time spent in GC metric improves.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section" id="GUID-15DCD06C-578F-4F74-A85A-205E4C2654B6__WHENPERCENTTIMESPENTINGARBAGECOLLEC-961EE7EE">
+<p class="subhead3">When Percent Time Spent in Garbage Collector is Beyond Threshold</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Check the session count. If there is a sudden surge of sessions due to user load, the JVM could be short on heap. Increase heap if possible, or add additional managed server instances.</p>
+</li>
+<li>
+<p>Look at the stuck threads count. Stuck threads could increase the number of active session, as users could be launching new sessions hoping for a faster response.</p>
+</li>
+<li>
+<p>Look at the incident creation rate and error logs and see if something is triggering a massive amount of logging/errors. The incident creation/logging operations could be causing a high amount of object creation and garbage collection stress.</p>
+</li>
+<li>
+<p>Generate a heap dump using JVMD and analyze the top retainer of memory.</p>
+</li>
+<li>
+<p>Use JRMC to connect and extract a JFR recording. Examine the Memory panel and allocation details to see what is doing a lot of allocations.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">When Percent Connection Requests Waiting is Beyond Threshold</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Examine the number of sessions and request rate, and see if there is a spike in the load that would account for an increased demand for connections.</p>
+</li>
+<li>
+<p>In JVMD, see where time is spent. For example, requests could be running longer due to slow SQLs (and retain the connection longer). In that case, identify and tune slow SQLs.</p>
+</li>
+<li>
+<p>Consider increasing the initial capacity setting of the corresponding data source.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OASAD55626"></a><a id="OASAD55678"></a><a id="OASAD55679"></a><a id="OASAD55625"></a>
+<div class="props_rev_3"><a id="GUID-C756A369-9ED1-4EF9-9B00-6F5268D9F5CA"></a>
+<h3 id="OASAD-GUID-C756A369-9ED1-4EF9-9B00-6F5268D9F5CA" class="sect3"><span class="enumeration_section">14.2.4</span> Analyze Oracle HTTP Server Metrics</h3>
+<div>
+<p>These metrics provide an indication of whether the Oracle HTTP Server is in a healthy state. Performance may degrade if any of the metrics is exceeding its threshold.</p>
+<p><a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-C756A369-9ED1-4EF9-9B00-6F5268D9F5CA__CIHBECCI" title="Oracle HTML Server Metrics">Table 14-3</a> describes the Oracle HTTP Server metrics that should be monitored in Cloud Control. See <a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-5C15A65F-4E72-46F4-B770-F2EBA65E603B">Monitor Mid-Tier Elements</a> section.</p>
+<div class="tblformalwide" id="GUID-C756A369-9ED1-4EF9-9B00-6F5268D9F5CA__CIHBECCI">
+<p class="titleintable">Table 14-3 Oracle HTTP Server Metrics</p>
+<table class="cellalignment20" title="Oracle HTTP Server Metrics" summary="Oracle HTML Server Metrics">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment56" id="d144514e1112">Metric Category</th>
+<th class="cellalignment137" id="d144514e1115">Metric Name</th>
+<th class="cellalignment138" id="d144514e1118">Warning Threshold</th>
+<th class="cellalignment78" id="d144514e1121">Critical Threshold</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1126" headers="d144514e1112">
+<p>OHS Server Metrics</p>
+</td>
+<td class="cellalignment139" headers="d144514e1126 d144514e1115">
+<p>Busy Threads (%)</p>
+</td>
+<td class="cellalignment140" headers="d144514e1126 d144514e1118">
+<p>&gt;85%</p>
+</td>
+<td class="cellalignment79" headers="d144514e1126 d144514e1121">
+<p>&gt;95%</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1139" headers="d144514e1112">
+<p>OHS Server Metrics</p>
+</td>
+<td class="cellalignment139" headers="d144514e1139 d144514e1115">
+<p>Request Throughput (requests per second)</p>
+</td>
+<td class="cellalignment140" headers="d144514e1139 d144514e1118">
+<p>N/A</p>
+</td>
+<td class="cellalignment79" headers="d144514e1139 d144514e1121">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1152" headers="d144514e1112">
+<p>OHS Response Code Metrics</p>
+</td>
+<td class="cellalignment139" headers="d144514e1152 d144514e1115">
+<p>HTTP 4xx errors</p>
+</td>
+<td class="cellalignment140" headers="d144514e1152 d144514e1118">
+<p>N/A</p>
+</td>
+<td class="cellalignment79" headers="d144514e1152 d144514e1121">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1165" headers="d144514e1112">
+<p>OHS Response Code Metrics</p>
+</td>
+<td class="cellalignment139" headers="d144514e1165 d144514e1115">
+<p>HTTP 5xx errors</p>
+</td>
+<td class="cellalignment140" headers="d144514e1165 d144514e1118">
+<p>N/A</p>
+</td>
+<td class="cellalignment79" headers="d144514e1165 d144514e1121">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1178" headers="d144514e1112">
+<p>OHS Virtual Host Metrics</p>
+</td>
+<td class="cellalignment139" headers="d144514e1178 d144514e1115">
+<p>Request Processing Time for a Virtual Host</p>
+</td>
+<td class="cellalignment140" headers="d144514e1178 d144514e1118">
+<p>&gt;10s</p>
+</td>
+<td class="cellalignment79" headers="d144514e1178 d144514e1121">
+<p>&gt;15s</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="section">
+<p class="subhead3">When Busy Threads % is Beyond Threshold</p>
+</div>
+<!-- class="section" -->
+<ul style="list-style-type: disc;">
+<li>
+<p>Check request throughput to see if load has increased. If the increased load is expected and CPU and memory resources on the OHS host has not exceeded threshold, consider increasing ServerLimit/MaxClients and ThreadsPerChild in <code class="codeph">httpd.conf</code>.</p>
+</li>
+<li>
+<p>Check request process time on both OHS and underlying WebLogic Server to see if requests are taking longer. If WebLogic Server response time is increasing, check the key metrics for the WebLogic Server.</p>
+</li>
+<li>
+<p>If possible, ensure the client browser cache is enabled to reduce number of requests submitted.</p>
+</li>
+<li>
+<p>Check OHS Response Code Metrics. If there is a sudden increase of HTTP 4xx errors or HTTP 5xx errors, check the health of the underlying WebLogic Servers.</p>
+</li>
+<li>
+<p>Check and increase the minimum and maximum spare threads for Oracle HTTP Server.</p>
+<p>In the <code class="codeph">httpd.conf</code> file located in <code class="codeph">instance_home/config/ohs/&lt;ohs_name&gt;/httpd.conf</code>:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Increase MaxSpareThreads to 800.</p>
+</li>
+<li>
+<p>Increase MinSpareThreads to 200.</p>
+</li>
+</ul>
+</li>
+</ul>
+<div class="section">
+<p class="subhead3">When Request Processing Time for a Virtual Host Exceeds Threshold</p>
+</div>
+<!-- class="section" -->
+<ul style="list-style-type: disc;">
+<li>
+<p>Check the key host metrics to ensure the OHS host is healthy.</p>
+</li>
+<li>
+<p>For each URL requested, OHS will first check DocumentRoot before passing the request to WebLogic Server. Check the utilization and health of the disk to which the DocumentRoot is pointing. If it is a NFS mount, check the health of the NFS mount point.</p>
+</li>
+<li>
+<p>Check the key metrics for the underlying WebLogic Server(s) and see if they are healthy.</p>
+</li>
+<li>
+<p>OHS accesses /tmp for each POST request, so check the performance of the /tmp filesystem.</p>
+</li>
+</ul>
+</div>
+</div>
+<a id="OASAD55723"></a><a id="OASAD55627"></a>
+<div class="props_rev_3"><a id="GUID-7ECBB8FE-4D7C-4CCD-9773-A3A4B3E4CA32"></a>
+<h3 id="OASAD-GUID-7ECBB8FE-4D7C-4CCD-9773-A3A4B3E4CA32" class="sect3"><span class="enumeration_section">14.2.5</span> Analyze Oracle Business Intelligence Server Metrics</h3>
+<div>
+<div class="section">
+<p>These metrics provide an indication of whether the Oracle Business Intelligence Server is in a healthy state.</p>
+<p>To start monitoring:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Log in to Oracle Enterprise Manager Fusion Applications Control. See <a href="GUID-8F3F9B9C-C5CD-4625-8201-EAAB5CD5B5BC.htm#GUID-8F3F9B9C-C5CD-4625-8201-EAAB5CD5B5BC" title="This section describes the administration tools provided natively with Oracle Fusion Applications, especially Fusion Applications Control. Each of these tools provide a subset of the functionality that is under one umbrella in Oracle Fusion Applications Cloud Control. The native tools do not require additional installation steps.">Use Other Oracle Fusion Applications Administration Tools</a>.</span>
+<div>
+<p>Creating a monitoring template for Oracle Business Intelligence Server metric targets is not available in Cloud Control.</p>
+</div>
+</li>
+<li class="stepexpand"><span>From the navigation pane, expand the farm, and then Business Intelligence.</span></li>
+<li class="stepexpand"><span>Click <span class="bold">coreapplication</span>.</span></li>
+<li class="stepexpand"><span>From the Business Intelligence Instance menu, choose <span class="bold">Monitoring</span>, and then <span class="bold">Performance</span>, as shown in <a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-7ECBB8FE-4D7C-4CCD-9773-A3A4B3E4CA32__GUID-792AFE86-DCE9-4467-BF8F-1CCC76EDC441">Figure 14-1</a>.</span>
+<div>
+<div class="figure" id="GUID-7ECBB8FE-4D7C-4CCD-9773-A3A4B3E4CA32__GUID-792AFE86-DCE9-4467-BF8F-1CCC76EDC441">
+<p class="titleinfigure">Figure 14-1 coreapplication Menu</p>
+<br />
+<img width="622" height="210" src="img/GUID-A8BBA58C-27D1-4F24-BA7C-22A614970B0F-default.jpg" alt="Description of Figure 14-1 follows" title="Description of Figure 14-1 follows" /><br />
+<a href="img_text/GUID-A8BBA58C-27D1-4F24-BA7C-22A614970B0F-default.htm">Description of "Figure 14-1 coreapplication Menu"</a><br /></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Use <span id="GUID-7ECBB8FE-4D7C-4CCD-9773-A3A4B3E4CA32__FAOEMFRAMESHORT">Fusion Applications Control</span> to configure parameters related to Oracle Business Intelligence Suite Enterprise Edition.</span></li>
+</ol>
+<div class="section">
+<p><span>Fusion Applications Control</span> can monitor various BI components, including:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Weblogic Analytics Application</p>
+</li>
+<li>
+<p>Oracle BI Presentation Services</p>
+</li>
+<li>
+<p>Oracle BI Server</p>
+</li>
+<li>
+<p>Oracle Weblogic Server (administration and managed servers)</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OASAD65593"></a><a id="OASAD65594"></a><a id="OASAD55682"></a>
+<div class="props_rev_3"><a id="GUID-288435C6-660F-49A7-A820-753750913B61"></a>
+<h3 id="OASAD-GUID-288435C6-660F-49A7-A820-753750913B61" class="sect3"><span class="enumeration_section">14.2.6</span> Gather Key Identity Management Server Metrics</h3>
+<div>
+<div class="section">
+<p>Oracle Access Manager and Oracle Identity Manager are both WebLogic Server instances. See <a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-15DCD06C-578F-4F74-A85A-205E4C2654B6">Analyze WebLogic Server Metrics</a> to monitor their health. See also <a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-F07EF614-DD1B-43B1-AC0E-EC895A09EF46">Tune and Troubleshoot Oracle Identity Management</a>.</p>
+<p>Use Cloud Control to monitor the Oracle Internet Directory and Oracle Identity Manager databases. See <a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-288435C6-660F-49A7-A820-753750913B61__CHDDIJFD" title="Oracle Identity Manager Metrics">Table 14-4</a> for Oracle Identity Manager metrics.</p>
+<div class="tblformal" id="GUID-288435C6-660F-49A7-A820-753750913B61__CHDDIJFD">
+<p class="titleintable">Table 14-4 Oracle Identity Manager Metrics</p>
+<table class="cellalignment32" title="Oracle Identity Manager Metrics" summary="Oracle Identity Manager Metrics">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment55" id="d144514e1380">Oracle Identity Manager Cluster or Server</th>
+<th class="cellalignment56" id="d144514e1383">Metric Category</th>
+<th class="cellalignment103" id="d144514e1386">Metric Name</th>
+<th class="cellalignment117" id="d144514e1389">Warning Threshold</th>
+<th class="cellalignment84" id="d144514e1392">Critical Threshold</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1397" headers="d144514e1380">
+<p>Oracle Identity Manager Cluster</p>
+</td>
+<td class="cellalignment59" headers="d144514e1397 d144514e1383">
+<p>Provisioning Requests</p>
+</td>
+<td class="cellalignment105" headers="d144514e1397 d144514e1386">
+<p>Completed Provisioning Requests</p>
+</td>
+<td class="cellalignment120" headers="d144514e1397 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1397 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1413" headers="d144514e1380">
+<p>Oracle Identity Manager Cluster</p>
+</td>
+<td class="cellalignment59" headers="d144514e1413 d144514e1383">
+<p>Provisioning Requests</p>
+</td>
+<td class="cellalignment105" headers="d144514e1413 d144514e1386">
+<p>Failed Provisioning Requests</p>
+</td>
+<td class="cellalignment120" headers="d144514e1413 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1413 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1429" headers="d144514e1380">
+<p>Oracle Identity Manager Cluster</p>
+</td>
+<td class="cellalignment59" headers="d144514e1429 d144514e1383">
+<p>Reconciliations (Last 24 Hours)</p>
+</td>
+<td class="cellalignment105" headers="d144514e1429 d144514e1386">
+<p>Jobs Completed</p>
+</td>
+<td class="cellalignment120" headers="d144514e1429 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1429 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1445" headers="d144514e1380">
+<p>Oracle Identity Manager Cluster</p>
+</td>
+<td class="cellalignment59" headers="d144514e1445 d144514e1383">
+<p>Response</p>
+</td>
+<td class="cellalignment105" headers="d144514e1445 d144514e1386">
+<p>Status</p>
+</td>
+<td class="cellalignment120" headers="d144514e1445 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1445 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1461" headers="d144514e1380">
+<p>Oracle Identity Manager Cluster</p>
+</td>
+<td class="cellalignment59" headers="d144514e1461 d144514e1383">
+<p>Role Grant Requests</p>
+</td>
+<td class="cellalignment105" headers="d144514e1461 d144514e1386">
+<p>Completed Role Grant Requests</p>
+</td>
+<td class="cellalignment120" headers="d144514e1461 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1461 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1477" headers="d144514e1380">
+<p>Oracle Identity Manager Cluster</p>
+</td>
+<td class="cellalignment59" headers="d144514e1477 d144514e1383">
+<p>Role Grant Requests</p>
+</td>
+<td class="cellalignment105" headers="d144514e1477 d144514e1386">
+<p>Completed Role Grant Requests Processing Time (per sec)</p>
+</td>
+<td class="cellalignment120" headers="d144514e1477 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1477 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1493" headers="d144514e1380">
+<p>Oracle Identity Manager Cluster</p>
+</td>
+<td class="cellalignment59" headers="d144514e1493 d144514e1383">
+<p>Role Grant Requests</p>
+</td>
+<td class="cellalignment105" headers="d144514e1493 d144514e1386">
+<p>Failed Role Grant Requests</p>
+</td>
+<td class="cellalignment120" headers="d144514e1493 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1493 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1509" headers="d144514e1380">
+<p>Oracle Identity Manager Cluster</p>
+</td>
+<td class="cellalignment59" headers="d144514e1509 d144514e1383">
+<p>Role Grant Requests</p>
+</td>
+<td class="cellalignment105" headers="d144514e1509 d144514e1386">
+<p>Pending Role Grant Requests</p>
+</td>
+<td class="cellalignment120" headers="d144514e1509 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1509 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1525" headers="d144514e1380">
+<p>Oracle Identity Manager Cluster</p>
+</td>
+<td class="cellalignment59" headers="d144514e1525 d144514e1383">
+<p>Self Service Requests</p>
+</td>
+<td class="cellalignment105" headers="d144514e1525 d144514e1386">
+<p>Completed Self Service Requests</p>
+</td>
+<td class="cellalignment120" headers="d144514e1525 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1525 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1541" headers="d144514e1380">
+<p>Oracle Identity Manager Cluster</p>
+</td>
+<td class="cellalignment59" headers="d144514e1541 d144514e1383">
+<p>Self Service Requests</p>
+</td>
+<td class="cellalignment105" headers="d144514e1541 d144514e1386">
+<p>Completed Self Service Requests Processing Time (per sec)</p>
+</td>
+<td class="cellalignment120" headers="d144514e1541 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1541 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1557" headers="d144514e1380">
+<p>Oracle Identity Manager Cluster</p>
+</td>
+<td class="cellalignment59" headers="d144514e1557 d144514e1383">
+<p>Self Service Requests</p>
+</td>
+<td class="cellalignment105" headers="d144514e1557 d144514e1386">
+<p>Failed Self Service Requests</p>
+</td>
+<td class="cellalignment120" headers="d144514e1557 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1557 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1574" headers="d144514e1380">
+<p>Oracle Identity Manager Cluster</p>
+</td>
+<td class="cellalignment59" headers="d144514e1574 d144514e1383">
+<p>Self Service Requests</p>
+</td>
+<td class="cellalignment105" headers="d144514e1574 d144514e1386">
+<p>Pending Self Service Requests</p>
+</td>
+<td class="cellalignment120" headers="d144514e1574 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1574 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1590" headers="d144514e1380">
+<p>Oracle Identity Manager Server</p>
+</td>
+<td class="cellalignment59" headers="d144514e1590 d144514e1383">
+<p>Response</p>
+</td>
+<td class="cellalignment105" headers="d144514e1590 d144514e1386">
+<p>Status</p>
+</td>
+<td class="cellalignment120" headers="d144514e1590 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1590 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1606" headers="d144514e1380">
+<p>Oracle Identity Manager Server</p>
+</td>
+<td class="cellalignment59" headers="d144514e1606 d144514e1383">
+<p>Resource Utilization</p>
+</td>
+<td class="cellalignment105" headers="d144514e1606 d144514e1386">
+<p>CPU Utilization (%)</p>
+</td>
+<td class="cellalignment120" headers="d144514e1606 d144514e1389">
+<p>80</p>
+</td>
+<td class="cellalignment85" headers="d144514e1606 d144514e1392">
+<p>90</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1622" headers="d144514e1380">
+<p>Oracle Identity Manager Server</p>
+</td>
+<td class="cellalignment59" headers="d144514e1622 d144514e1383">
+<p>Resource Utilization</p>
+</td>
+<td class="cellalignment105" headers="d144514e1622 d144514e1386">
+<p>Memory Utilization (%)</p>
+</td>
+<td class="cellalignment120" headers="d144514e1622 d144514e1389">
+<p>80</p>
+</td>
+<td class="cellalignment85" headers="d144514e1622 d144514e1392">
+<p>90</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1638" headers="d144514e1380">
+<p>Oracle Identity Manager Server</p>
+</td>
+<td class="cellalignment59" headers="d144514e1638 d144514e1383">
+<p>Adapters</p>
+</td>
+<td class="cellalignment105" headers="d144514e1638 d144514e1386">
+<p>Average Adapter Execution Time (ms)</p>
+</td>
+<td class="cellalignment120" headers="d144514e1638 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1638 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1654" headers="d144514e1380">
+<p>Oracle Identity Manager Server</p>
+</td>
+<td class="cellalignment59" headers="d144514e1654 d144514e1383">
+<p>Adapters</p>
+</td>
+<td class="cellalignment105" headers="d144514e1654 d144514e1386">
+<p>Completed Adapter Executions</p>
+</td>
+<td class="cellalignment120" headers="d144514e1654 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1654 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1670" headers="d144514e1380">
+<p>Oracle Identity Manager Server</p>
+</td>
+<td class="cellalignment59" headers="d144514e1670 d144514e1383">
+<p>Adapters</p>
+</td>
+<td class="cellalignment105" headers="d144514e1670 d144514e1386">
+<p>Maximum Adapter Execution Time (ms)</p>
+</td>
+<td class="cellalignment120" headers="d144514e1670 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1670 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment58" id="d144514e1686" headers="d144514e1380">
+<p>Oracle Identity Manager Server</p>
+</td>
+<td class="cellalignment59" headers="d144514e1686 d144514e1383">
+<p>Adapters</p>
+</td>
+<td class="cellalignment105" headers="d144514e1686 d144514e1386">
+<p>Minimum Adapter Execution Time (ms)</p>
+</td>
+<td class="cellalignment120" headers="d144514e1686 d144514e1389">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1686 d144514e1392">
+<p>NA</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>See <a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-288435C6-660F-49A7-A820-753750913B61__CHDBFADB" title="tbd">Table 14-5</a> for Oracle Internet Directory metrics.</p>
+<div class="tblformalwide" id="GUID-288435C6-660F-49A7-A820-753750913B61__CHDBFADB">
+<p class="titleintable">Table 14-5 Oracle Internet Directory Metrics</p>
+<table class="cellalignment20" title="Oracle Internet Directory Metrics" summary="tbd">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment56" id="d144514e1720">Metric Category</th>
+<th class="cellalignment103" id="d144514e1723">Metric Name</th>
+<th class="cellalignment117" id="d144514e1726">Warning Threshold</th>
+<th class="cellalignment84" id="d144514e1729">Critical Threshold</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1734" headers="d144514e1720">
+<p>LDAP Operation Response Time</p>
+</td>
+<td class="cellalignment105" headers="d144514e1734 d144514e1723">
+<p>Bind Operation Response Time</p>
+</td>
+<td class="cellalignment120" headers="d144514e1734 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1734 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1747" headers="d144514e1720">
+<p>LDAP Operation Response Time</p>
+</td>
+<td class="cellalignment105" headers="d144514e1747 d144514e1723">
+<p>Request Processing Time (ms)</p>
+</td>
+<td class="cellalignment120" headers="d144514e1747 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1747 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1760" headers="d144514e1720">
+<p>LDAP Server Resource Usage</p>
+</td>
+<td class="cellalignment105" headers="d144514e1760 d144514e1723">
+<p>Total CPU Usage (%)</p>
+</td>
+<td class="cellalignment120" headers="d144514e1760 d144514e1726">
+<p>80</p>
+</td>
+<td class="cellalignment85" headers="d144514e1760 d144514e1729">
+<p>90</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1773" headers="d144514e1720">
+<p>LDAP Server Resource Usage</p>
+</td>
+<td class="cellalignment105" headers="d144514e1773 d144514e1723">
+<p>Total Memory Usage (%)</p>
+</td>
+<td class="cellalignment120" headers="d144514e1773 d144514e1726">
+<p>80</p>
+</td>
+<td class="cellalignment85" headers="d144514e1773 d144514e1729">
+<p>90</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1786" headers="d144514e1720">
+<p>Response</p>
+</td>
+<td class="cellalignment105" headers="d144514e1786 d144514e1723">
+<p>Status</p>
+</td>
+<td class="cellalignment120" headers="d144514e1786 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1786 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1799" headers="d144514e1720">
+<p>(Critical Events) System Resource Events (3113 Errors)</p>
+</td>
+<td class="cellalignment105" headers="d144514e1799 d144514e1723">
+<p>Number of 3113 Error Occurrences</p>
+</td>
+<td class="cellalignment120" headers="d144514e1799 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1799 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1812" headers="d144514e1720">
+<p>(Critical Events) System Resource Events (3114 Errors)</p>
+</td>
+<td class="cellalignment105" headers="d144514e1812 d144514e1723">
+<p>Number of 3114 Error Occurrences</p>
+</td>
+<td class="cellalignment120" headers="d144514e1812 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1812 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1825" headers="d144514e1720">
+<p>LDAP Failed Bind Operations Profile</p>
+</td>
+<td class="cellalignment105" headers="d144514e1825 d144514e1723">
+<p>Failed Bind Operations</p>
+</td>
+<td class="cellalignment120" headers="d144514e1825 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1825 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1838" headers="d144514e1720">
+<p>LDAP Server Resource Usage</p>
+</td>
+<td class="cellalignment105" headers="d144514e1838 d144514e1723">
+<p>Completed Bind Operations</p>
+</td>
+<td class="cellalignment120" headers="d144514e1838 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1838 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1851" headers="d144514e1720">
+<p>LDAP Server Resource Usage</p>
+</td>
+<td class="cellalignment105" headers="d144514e1851 d144514e1723">
+<p>Completed Compare Operations</p>
+</td>
+<td class="cellalignment120" headers="d144514e1851 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1851 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1864" headers="d144514e1720">
+<p>LDAP Server Resource Usage</p>
+</td>
+<td class="cellalignment105" headers="d144514e1864 d144514e1723">
+<p>Completed Modify Operations</p>
+</td>
+<td class="cellalignment120" headers="d144514e1864 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1864 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1878" headers="d144514e1720">
+<p>LDAP Server Resource Usage</p>
+</td>
+<td class="cellalignment105" headers="d144514e1878 d144514e1723">
+<p>Completed Search Operations</p>
+</td>
+<td class="cellalignment120" headers="d144514e1878 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1878 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1891" headers="d144514e1720">
+<p>LDAP Server Resource Usage</p>
+</td>
+<td class="cellalignment105" headers="d144514e1891 d144514e1723">
+<p>Total Operations</p>
+</td>
+<td class="cellalignment120" headers="d144514e1891 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1891 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1904" headers="d144514e1720">
+<p>User LDAP Operations Statistics</p>
+</td>
+<td class="cellalignment105" headers="d144514e1904 d144514e1723">
+<p>Failed Base Search Operations</p>
+</td>
+<td class="cellalignment120" headers="d144514e1904 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1904 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1917" headers="d144514e1720">
+<p>User LDAP Operations Statistics</p>
+</td>
+<td class="cellalignment105" headers="d144514e1917 d144514e1723">
+<p>Failed Bind Operations</p>
+</td>
+<td class="cellalignment120" headers="d144514e1917 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1917 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1930" headers="d144514e1720">
+<p>User LDAP Operations Statistics</p>
+</td>
+<td class="cellalignment105" headers="d144514e1930 d144514e1723">
+<p>Failed Compare Operations</p>
+</td>
+<td class="cellalignment120" headers="d144514e1930 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1930 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1943" headers="d144514e1720">
+<p>User LDAP Operations Statistics</p>
+</td>
+<td class="cellalignment105" headers="d144514e1943 d144514e1723">
+<p>Failed Delete Operations</p>
+</td>
+<td class="cellalignment120" headers="d144514e1943 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1943 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment59" id="d144514e1956" headers="d144514e1720">
+<p>User LDAP Operations Statistics</p>
+</td>
+<td class="cellalignment105" headers="d144514e1956 d144514e1723">
+<p>Successful Base Search Operations</p>
+</td>
+<td class="cellalignment120" headers="d144514e1956 d144514e1726">
+<p>NA</p>
+</td>
+<td class="cellalignment85" headers="d144514e1956 d144514e1729">
+<p>NA</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>To enable the collection of user LDAP Operation Statistics, edit the configuration using Fusion Applications Control:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li><span>From the navigation pane, expand the farm and then the Oracle Internet Directory target.</span></li>
+<li><span>From the <span class="bold">Administration</span> menu, choose <span class="bold">Server Properties</span>.</span></li>
+<li><span>Click <span class="bold">User Statistics Collection</span> to enable this feature.</span></li>
+<li><span>Click <span class="bold">Apply</span> to save the changes.</span></li>
+<li><span>From the <span class="bold">Administration</span> menu, choose <span class="bold">Shared Properties</span>.</span></li>
+<li><span>Enter a valid domain name (for example, <code class="codeph">cn=orcladmin</code>) to enable user statistics collection for that user.</span></li>
+</ol>
+</div>
+</div>
+<a id="OASAD55684"></a><a id="OASAD55685"></a><a id="OASAD55686"></a><a id="OASAD55687"></a><a id="OASAD55683"></a>
+<div class="props_rev_3"><a id="GUID-D2C4CDFC-9529-4473-A0DF-E80BE54E6FA4"></a>
+<h3 id="OASAD-GUID-D2C4CDFC-9529-4473-A0DF-E80BE54E6FA4" class="sect3"><span class="enumeration_section">14.2.7</span> Analyze Key Enterprise Scheduler Metrics</h3>
+<div>
+<div class="section">
+<p>The metrics shown in <a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-D2C4CDFC-9529-4473-A0DF-E80BE54E6FA4__CHDHJJFA" title="Key Enterprise Scheduler Metrics">Table 14-6</a> provide an indication of whether the Enterprise Scheduler instance is performing well.</p>
+</div>
+<!-- class="section" -->
+<div class="tblformal" id="GUID-D2C4CDFC-9529-4473-A0DF-E80BE54E6FA4__CHDHJJFA">
+<p class="titleintable">Table 14-6 Key Enterprise Scheduler Metrics</p>
+<table class="cellalignment32" title="Key Enterprise Scheduler Metrics" summary="Key Enterprise Scheduler Metrics">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment72" id="d144514e2053">Metric Category</th>
+<th class="cellalignment21" id="d144514e2056">Metric Name</th>
+<th class="cellalignment135" id="d144514e2059">Warning Threshold</th>
+<th class="cellalignment135" id="d144514e2062">Critical Threshold</th>
+<th class="cellalignment56" id="d144514e2065">Comments</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment73" id="d144514e2070" headers="d144514e2053">
+<p>Completed Job Summary</p>
+</td>
+<td class="cellalignment24" headers="d144514e2070 d144514e2056">
+<p>Average Elapsed Time (ms)</p>
+</td>
+<td class="cellalignment136" headers="d144514e2070 d144514e2059">
+<p>NA</p>
+</td>
+<td class="cellalignment136" headers="d144514e2070 d144514e2062">
+<p>NA</p>
+</td>
+<td class="cellalignment59" headers="d144514e2070 d144514e2065">
+<p>Different thresholds can be defined for different job names.</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment73" id="d144514e2086" headers="d144514e2053">
+<p>Long Running Job</p>
+</td>
+<td class="cellalignment24" headers="d144514e2086 d144514e2056">
+<p>Elapsed Time (ms)</p>
+</td>
+<td class="cellalignment136" headers="d144514e2086 d144514e2059">
+<p>NA</p>
+</td>
+<td class="cellalignment136" headers="d144514e2086 d144514e2062">
+<p>NA</p>
+</td>
+<td class="cellalignment59" headers="d144514e2086 d144514e2065">
+<p>NA</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment73" id="d144514e2102" headers="d144514e2053">
+<p>WorkAssignment Metrics aggregated across Group Members</p>
+</td>
+<td class="cellalignment24" headers="d144514e2102 d144514e2056">
+<p>Average Wait Time for Requests in Ready State (seconds)</p>
+</td>
+<td class="cellalignment136" headers="d144514e2102 d144514e2059">
+<p>NA</p>
+</td>
+<td class="cellalignment136" headers="d144514e2102 d144514e2062">
+<p>NA</p>
+</td>
+<td class="cellalignment59" headers="d144514e2102 d144514e2065">
+<p>NA</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="section">
+<p class="subhead3">When the Value of Average Elapsed Time for the Completed Jobs is Higher than Expected</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Check the key host and WebLogic Server metrics and see if any component that could be involved in process batch jobs is in an unhealthy state.</p>
+</li>
+<li>
+<p>Follow the steps listed in section Using Java Workload Explorer in the <span class="italic">Oracle Enterprise Manager Cloud Control Oracle Fusion Middleware Management Guide</span>.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">When the Value of Elapsed Time Under the Long Running Job Category is Higher than Expected</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Open the Enterprise Scheduler home page in <span id="GUID-D2C4CDFC-9529-4473-A0DF-E80BE54E6FA4__FAOEMFRAME">Oracle Enterprise Manager Fusion Applications Control</span> and examine the Top 10 Long Running Jobs.</p>
+</li>
+<li>
+<p>Follow the steps listed in section Using Java Workload Explorer in the <span class="italic">Oracle Enterprise Manager Cloud Control Oracle Fusion Middleware Management Guide</span>.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">When Average Wait Time for Requests in Ready State (seconds) is Higher than Expected</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>Follow the steps listed in section Using Java Workload Explorer in the <span class="italic">Oracle Enterprise Manager Cloud Control Oracle Fusion Middleware Management Guide</span>.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OASAD65597"></a><a id="OASAD65598"></a><a id="OASAD55688"></a>
+<div class="props_rev_3"><a id="GUID-DF2A0321-5F91-4FB8-A4C6-A1D74A42EB21"></a>
+<h3 id="OASAD-GUID-DF2A0321-5F91-4FB8-A4C6-A1D74A42EB21" class="sect3"><span class="enumeration_section">14.2.8</span> Monitor Key SOA Metrics</h3>
+<div>
+<div class="section">
+<p>Monitoring SOA involves monitoring SOA Infrastructure, SOA Composite and SOA servers.</p>
+<p>Use <a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-DF2A0321-5F91-4FB8-A4C6-A1D74A42EB21__CHDFEBAC" title="TBD">Table 14-7</a> to locate the key performance metrics for SOA Composite.</p>
+</div>
+<!-- class="section" -->
+<div class="tblformal" id="GUID-DF2A0321-5F91-4FB8-A4C6-A1D74A42EB21__CHDFEBAC">
+<p class="titleintable">Table 14-7 SOA Composite Metrics</p>
+<table class="cellalignment32" title="SOA Composite Metrics" summary="TBD">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment106" id="d144514e2197">Metric Category</th>
+<th class="cellalignment107" id="d144514e2200">Metric Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment108" id="d144514e2205" headers="d144514e2197">
+<p>Mediator Case</p>
+</td>
+<td class="cellalignment109" headers="d144514e2205 d144514e2200">
+<p>Invocation count throughput in last 5 minutes</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment108" id="d144514e2212" headers="d144514e2197">
+<p>SOA Composite - Response Metrics</p>
+</td>
+<td class="cellalignment109" headers="d144514e2212 d144514e2200">
+<p>Composite Status</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment108" id="d144514e2219" headers="d144514e2197">
+<p>SOA Composite - Component Detail Metrics</p>
+</td>
+<td class="cellalignment109" headers="d144514e2219 d144514e2200">
+<p>Component: Business Faults</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment108" id="d144514e2226" headers="d144514e2197">
+<p>SOA Composite - Component Detail Metrics</p>
+</td>
+<td class="cellalignment109" headers="d144514e2226 d144514e2200">
+<p>Component: Error Rate (%)</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment108" id="d144514e2233" headers="d144514e2197">
+<p>SOA Composite - Services/References Detail Metrics</p>
+</td>
+<td class="cellalignment109" headers="d144514e2233 d144514e2200">
+<p>Service/Reference: Average Incoming Messages Processing Time (ms)</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment108" id="d144514e2240" headers="d144514e2197">
+<p>SOA Composite - Services/References Detail Metrics</p>
+</td>
+<td class="cellalignment109" headers="d144514e2240 d144514e2200">
+<p>Service/Reference: Average Outbound Messages Processing Time (ms)</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment108" id="d144514e2247" headers="d144514e2197">
+<p>SOA Composite - Services/References Detail Metrics</p>
+</td>
+<td class="cellalignment109" headers="d144514e2247 d144514e2200">
+<p>SOA Composite: Error Rate (%)</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment108" id="d144514e2254" headers="d144514e2197">
+<p>SOA Composite - Services/References Detail Metrics</p>
+</td>
+<td class="cellalignment109" headers="d144514e2254 d144514e2200">
+<p>SOA Composite: Synchronous Response Time (ms)</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment108" id="d144514e2261" headers="d144514e2197">
+<p>SOA Composite - Services/References Detail Metrics</p>
+</td>
+<td class="cellalignment109" headers="d144514e2261 d144514e2200">
+<p>SOA Composite: Total Business</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="section">
+<p>Use <a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-DF2A0321-5F91-4FB8-A4C6-A1D74A42EB21__CHDBAAJH" title="TBD">Table 14-8</a> to locate the key performance metrics for SOA Infrastructure.</p>
+</div>
+<!-- class="section" -->
+<div class="tblformal" id="GUID-DF2A0321-5F91-4FB8-A4C6-A1D74A42EB21__CHDBAAJH">
+<p class="titleintable">Table 14-8 SOA Infrastructure Metrics</p>
+<table class="cellalignment32" title="SOA Infrastructure Metrics" summary="TBD">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment62" id="d144514e2285">Metric Category</th>
+<th class="cellalignment92" id="d144514e2288">Metric Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment63" id="d144514e2293" headers="d144514e2285">
+<p>SOA Infra Response</p>
+</td>
+<td class="cellalignment93" headers="d144514e2293 d144514e2288">
+<p>Up Down Status</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment63" id="d144514e2300" headers="d144514e2285">
+<p>SOA Infrastructure - Message Detail Metrics</p>
+</td>
+<td class="cellalignment93" headers="d144514e2300 d144514e2288">
+<p>Errors (minute)</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment63" id="d144514e2307" headers="d144514e2285">
+<p>SOA Infrastructure - Service Engine Detail Metrics</p>
+</td>
+<td class="cellalignment93" headers="d144514e2307 d144514e2288">
+<p>Service Engine: Error Rate (%)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+<a id="OASAD55724"></a>
+<div class="props_rev_3"><a id="GUID-F07EF614-DD1B-43B1-AC0E-EC895A09EF46"></a>
+<h3 id="OASAD-GUID-F07EF614-DD1B-43B1-AC0E-EC895A09EF46" class="sect3"><span class="enumeration_section">14.2.9</span> Tune and Troubleshoot Oracle Identity Management</h3>
+<div>
+<p>Follow the steps in this section to tune Oracle Identity Management specifically for Oracle Fusion Applications.</p>
+<p>Most of these settings should be set by default if the environment is newly provisioned. If the environment is upgraded from a previous release, it will be necessary to manually check and adjust the settings.</p>
+</div>
+<a id="OASAD65888"></a>
+<div class="sect4"><a id="GUID-89E842AF-3652-4D7B-B066-E54AFD9E33A9"></a>
+<h4 id="OASAD-GUID-89E842AF-3652-4D7B-B066-E54AFD9E33A9" class="sect4"><span class="enumeration_section">14.2.9.1</span> Tune Two OID Configuration Parameters</h4>
+<div>
+<p>Two Oracle Internet Directory configuration parameters, <code class="codeph">orclmaxcc</code> and <code class="codeph">orclserverprocs</code>, need to be tuned.</p>
+<p>Change <code class="codeph">orclmaxcc</code> to 10 and tune the number of OID processes:</p>
+<ol>
+<li>
+<p>Name the sample script <code class="codeph">config_oid_tuning.ldif</code>. <code class="codeph">cn=oid1</code> needs to be set to the component name. In a multi-component environment, this needs to be changed accordingly. The <code class="codeph">orclserverprocs</code> will need to be set to the number of cores in the OID server that is used.</p>
+<pre dir="ltr">
+dn: cn=oid1,cn=osdldapd,cn=subconfigsubentry
+changetype: modify
+replace: orclmaxcc
+orclmaxcc: 10
+orclserverprocs: &lt;number of cores&gt;
+</pre></li>
+<li>
+<p>Apply the script by running this command:</p>
+<pre dir="ltr">
+ldapmodify -p portNum -h hostname -D cn=orcladmin -f config_oid_tuning.ldif
+</pre></li>
+</ol>
+</div>
+</div>
+<a id="OASAD65889"></a>
+<div class="sect4"><a id="GUID-BB12F1D6-E2D0-4B99-8206-B0B4E94F96BE"></a>
+<h4 id="OASAD-GUID-BB12F1D6-E2D0-4B99-8206-B0B4E94F96BE" class="sect4"><span class="enumeration_section">14.2.9.2</span> Enable Timing Logging</h4>
+<div>
+<p>Add parameters to enable timing logging for OID.</p>
+<ol>
+<li>
+<p>Add this entry to the config.xml file in <code class="codeph">./oid/user_projects/domains/oid_domain/config/</code> and the <code class="codeph">./oim/user_projects/domains/oim_domain/config/</code> directories for each WebLogic Server in the Oracle Identity Management domain:</p>
+<pre dir="ltr">
+    &lt;web-server&gt;
+      &lt;web-server-log&gt;
+        &lt;file-name&gt;logs/access.log.%yyyyMMdd%&lt;/file-name&gt;
+        &lt;rotation-type&gt;byTime&lt;/rotation-type&gt;
+        &lt;number-of-files-limited&gt;true&lt;/number-of-files-limited&gt;
+        &lt;rotate-log-on-startup&gt;true&lt;/rotate-log-on-startup&gt;
+        &lt;buffer-size-kb&gt;0&lt;/buffer-size-kb&gt;
+        &lt;logging-enabled&gt;true&lt;/logging-enabled&gt;
+        &lt;elf-fields&gt;date time time-taken bytes c-ip s-ip sc-status
+sc(X-ORACLE-DMS-ECID) cs-method cs-uri
+cs(User-Agent) cs(ECID-Context) cs(Proxy-Remote-User)
+cs(Proxy-Client-IP)&lt;/elf-fields&gt;
+        &lt;log-file-format&gt;extended&lt;/log-file-format&gt;
+        &lt;log-time-in-gmt&gt;false&lt;/log-time-in-gmt&gt;
+        &lt;log-milli-seconds&gt;true&lt;/log-milli-seconds&gt;
+      &lt;/web-server-log&gt;
+    &lt;/web-server&gt; 
+</pre></li>
+<li>
+<p>To set the access log format, add this string to the <code class="codeph">httpd.conf</code> file in the <code class="codeph">/u01/ohsauth/ohsauth_inst/config/OHS/ohs1</code> path.</p>
+<pre dir="ltr">
+LogFormat "%h %l %u %t \"%r\" %&gt;s %b %D %{X-ORACLE-DMS-ECID}o" common
+</pre></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment10">
+<tr>
+<td class="cellalignment17">
+<table class="cellalignment15">
+<tr>
+<td class="cellalignment14"><a href="GUID-78C0349D-173F-4A80-903F-58E980358727.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment14"><a href="GUID-AD709FDB-1C67-4C39-AAB9-8C10C0CCACD5.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2011, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment19">
+<table class="cellalignment13">
+<tr>
+<td class="cellalignment14"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment14"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

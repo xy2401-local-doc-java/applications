@@ -1,0 +1,2817 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Monitor an Oracle Fusion Applications Environment</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This section describes how to manage Oracle Fusion Applications using Oracle Enterprise Manager Cloud Control." />
+<meta name="keywords" content="clusters, monitoring" />
+<meta name="dcterms.created" content="2018-02-21T10:06:12Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Fusion Applications Administrator's Guide" />
+<meta name="dcterms.identifier" content="E66226-03" />
+<meta name="dcterms.isVersionOf" content="OASAD" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2011, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-68F74DBA-26E2-43D1-A4EE-02D0B810384D.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-63CDDA6B-4DAE-4C6D-8141-C48769254F17.htm" title="Next" type="text/html" />
+<link rel="alternate" href="OASAD.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80"></a> <span id="PAGE" style="display:none;">9/27</span> <!-- End Header -->
+<a id="OASAD4246"></a><a id="OASAD65783"></a><a id="OASAD65784"></a><a id="OASAD712"></a>
+<h1 id="OASAD-GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80" class="sect1"><span class="enumeration_chapter">5</span> Monitor an Oracle Fusion Applications Environment</h1>
+<div>
+<div><span>This section describes how to manage Oracle Fusion Applications using Oracle Enterprise Manager Cloud Control.</span></div>
+<p>Cloud Control monitoring functionality is built on the concept of &ldquo;monitoring by exception". A variety of metric thresholds and compliance standards are delivered with Oracle Fusion Applications, which can be adjusted by administrators as needed. Cloud Control then monitors and raises events (or &ldquo;incidents") when exception conditions occur in the IT environment, and notifications (or &ldquo;alerts") can be triggered to appropriate administrators.</p>
+<p>The Cloud Control interface also gives a range of graphical and textual information about the status, performance, configuration, and incidence history of targets.</p>
+<div class="section">
+<p class="subhead1">Monitoring vs. Troubleshooting: Where's the Dividing Line?</p>
+</div>
+<!-- class="section" -->
+<p>Any administrator in charge of a complex enterprise system knows there is no clear dividing line between monitoring and troubleshooting. We monitor systems to check for trouble and forestall incidents; when trouble appears, we review configurations, performance histories, and alerts to find solutions. The division is fluid and sometimes arbitrary.</p>
+<p>Nevertheless, Cloud Control provides a wealth of data and tools that the administrator will want to use, and &ldquo;troubleshooting" is not always the place to describe them. This section (and the associated Cloud Control online help and user guides) provide an introduction to those tools. This section includes the following topics:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-C87D330C-37D2-48FF-8FCD-1285F4DFD630">Access Fusion Applications Home Pages in Cloud Control</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-B3BC86B4-B978-41D7-B721-F8A29509D75A">Access and Use the Topology Views</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-9C1EAFA7-EAE7-4C26-A2EB-36114CA81A1B">Monitor System and Key Performance Indicators</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-42800140-9722-4C35-8048-8BD60960845E">Check Metrics and Change Metric Thresholds</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-63A7C34E-E740-4155-BC18-2BE1BC5817F9">Use Blackouts</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-4D7BFEF1-F2AA-4422-A04F-CFCCB44641A5">Set Up Notifications and Incident Rules</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-3C5EDF12-DCEB-48CC-BE6E-FDB15F4FDBD7">Implement Compliance Rules</a></p>
+</li>
+</ul>
+<p>Other Cloud Control features are discussed in more depth in different areas of this Administrator's Guide.</p>
+</div>
+<a id="OASAD65786"></a><a id="OASAD65785"></a>
+<div class="props_rev_3"><a id="GUID-C87D330C-37D2-48FF-8FCD-1285F4DFD630"></a>
+<h2 id="OASAD-GUID-C87D330C-37D2-48FF-8FCD-1285F4DFD630" class="sect2"><span class="enumeration_section">5.1</span> Access Fusion Applications Home Pages in Cloud Control</h2>
+<div>
+<p>When the Discovery process has been completed and added the Fusion Applications targets to Cloud Control, log in to Cloud Control (see <a href="GUID-68F74DBA-26E2-43D1-A4EE-02D0B810384D.htm#GUID-B9AC7CB6-013B-4A6C-A3C1-56E8BABCB292">Log In to Cloud Control</a>). Access Fusion Applications targets from the <span class="bold">Targets</span> menu, as described in the following sections.</p>
+<div class="section">
+<p class="subhead2">Use the Home Pages in Cloud Control</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>Because Oracle Fusion Applications is a large and interconnected system, and Enterprise Manager Cloud Control has the capacity to manage and monitor an enormous number and type of targets, there are multiple points of entry for most actions in the Cloud Control interface. The Home pages offer summaries that can be expanded at each level. For Oracle Fusion Applications environments, the primary levels are:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">The Fusion Instance</span></p>
+</li>
+<li>
+<p><span class="bold">The Fusion Applications Product Families</span></p>
+</li>
+<li>
+<p><span class="bold">The Fusion Applications Products</span></p>
+</li>
+<li>
+<p><span class="bold">The mid-tier and infrastructure elements</span> (Common Domain, WebLogic server, SOA server, Business Intelligence (BI) components, Identity Management, and so on)</p>
+</li>
+<li>
+<p><span class="bold">Clusters</span>, with their Admin Servers and multiple Managed Servers</p>
+</li>
+</ul>
+<p>All the levels above are accessed by choosing <span class="bold">Fusion Applications</span> from the <span class="bold">Targets</span> drop-down menu.</p>
+<p>To view the Fusion Applications Database information in Cloud Control, the access point is different. Normally <span class="bold">Database</span> is chosen from the <span class="bold">Targets</span> drop-down menu, instead of Fusion Applications. For details, see <a href="GUID-63CDDA6B-4DAE-4C6D-8141-C48769254F17.htm#GUID-63CDDA6B-4DAE-4C6D-8141-C48769254F17" title="Oracle Enterprise Manager Cloud Control 13 provides integrated functionality with Oracle Database to monitor performance, diagnose and tune problems, and test database changes on a test system before implementing them to a production system, as described in the following sections:">Manage Oracle Database for Oracle Fusion Applications</a>. (On some other Home pages, there are also links to relevant databases, but selecting <span class="bold">Targets</span> and then <span class="bold">Database</span> drop-down yields the most comprehensive approach.)</p>
+<p>Things to notice:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>The various panels on Cloud Control pages can be rearranged on the screen.</p>
+</li>
+<li>
+<p>The Instance Home page gives link-access to Product Families, Products (if the Family tab is expanded), Business Intelligence and Identity Management components, and Common Domain and other mid-tier elements.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+<a id="OASAD65787"></a>
+<div class="props_rev_3"><a id="GUID-DC7F4AC3-40E2-4FBE-BFD5-98AE7916506D"></a>
+<h3 id="OASAD-GUID-DC7F4AC3-40E2-4FBE-BFD5-98AE7916506D" class="sect3"><span class="enumeration_section">5.1.1</span> Access a Fusion Instance Home Page</h3>
+<div>
+<ol>
+<li class="stepexpand"><span>Log in to Enterprise Manager Cloud Control. (See <a href="GUID-68F74DBA-26E2-43D1-A4EE-02D0B810384D.htm#GUID-B9AC7CB6-013B-4A6C-A3C1-56E8BABCB292">Log In to Cloud Control</a> if needed.). The <span class="bold">All Targets</span> page is displayed. Note that the enterprise may manage more than just Oracle Fusion Applications targets with Cloud Control; those targets will show up here as well.</span></li>
+<li class="stepexpand"><span>If desired, refine the listing by selecting just Fusion Applications Instances under the <span class="bold">Target Types panel</span> on the left side.</span></li>
+<li class="stepexpand"><span>Select <span class="bold">Fusion Applications</span> from the <span class="bold">Targets</span> drop-down menu.</span>
+<div>
+<div class="figure" id="GUID-DC7F4AC3-40E2-4FBE-BFD5-98AE7916506D__GUID-72BE5AFB-EB60-4814-B506-E343BFDA8568">
+<p class="titleinfigure">Figure 5-1 All Targets screen in EMCC</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="1268" height="822" src="img/GUID-D29231DB-646A-4294-B3B7-4093C83EC5E7-default.jpg" alt="Screenshot of the selection of the Targets dropdown menu in the Oracle Fusion Applications page in Enterprise Manager Cloud Control" title="Screenshot of the selection of the Targets dropdown menu in the Oracle Fusion Applications page in Enterprise Manager Cloud Control" /></div>
+<br /></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>The Fusion Applications Instance(s) are displayed in the Target Name column of the resulting table. Note that in the screen shot, this enterprise has only 1 Fusion Applications instance installed and discovered by Cloud Control. (In this example, the enterprise chose to call their instance &ldquo;FA_slcag178.") Within each instance are one or more Product Families. For example, a more typical on-premise installation might start with three to five Fusion Applications instances: one for test, one for development, one for staging, and one for production.</span>
+<div>
+<div class="figure" id="GUID-DC7F4AC3-40E2-4FBE-BFD5-98AE7916506D__GUID-F5C067BC-12B4-4687-A7CD-B9FCBE591502">
+<p class="titleinfigure">Figure 5-2 Fusion Applications Instances Page</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="1415" height="491" src="img/GUID-D66C885C-800D-4DD6-8758-FBA4FF6EA346-default.jpg" alt="Screenshot of the Oracle Fusion Applications Instance(s) displayed in the Target Name column" title="Screenshot of the Oracle Fusion Applications Instance(s) displayed in the Target Name column" /></div>
+<br /></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Select an <span class="bold">Instance</span> under the <span class="bold">Target Name</span> column. The <span class="bold">Fusion Instance Home</span> page is displayed.</span>
+<div>
+<div class="figure" id="GUID-DC7F4AC3-40E2-4FBE-BFD5-98AE7916506D__GUID-BCCF3EF2-F7CA-4202-B24A-CFE4AB4E9A23">
+<p class="titleinfigure">Figure 5-3 Fusion Instance Home Screen</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="2225" height="1291" src="img/GUID-A6F98247-AA86-46F4-B539-11330CC42BBC-default.jpg" alt="Screenshot of the Fusion Instance Home Page in Enterprise Manager Cloud Control" title="Screenshot of the Fusion Instance Home Page in Enterprise Manager Cloud Control" /></div>
+<br /></div>
+<!-- class="figure" -->
+<p>The Instance Home page, like other levels of Home page, provides a snapshot for monitoring performance and incidents for all components contained within the instance. At lower levels of the hierarchy, these Monitoring sections give the relevant subset of incidents and alert histories.</p>
+<div class="figure" id="GUID-DC7F4AC3-40E2-4FBE-BFD5-98AE7916506D__GUID-65D16C96-E797-435C-AD36-5C3FE0D2E1A4">
+<p class="titleinfigure">Figure 5-4 Monitoring Sections screen</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="2204" height="759" src="img/GUID-883ECDD1-7B45-497D-ABDA-BA06F6B835B4-default.jpg" alt="Screenshot of the Monitoring and Diagnostic Sections Page. Click the Descendant Target Incidents and Support Workbench Problems to jump directly to the incident Manager/Support Workbench to resolve issues" title="Screenshot of the Monitoring and Diagnostic Sections Page. Click the Descendant Target Incidents and Support Workbench Problems to jump directly to the incident Manager/Support Workbench to resolve issues" /></div>
+<br /></div>
+<!-- class="figure" --></div>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD4250"></a><a id="OASAD4251"></a><a id="OASAD4209"></a>
+<div class="props_rev_3"><a id="GUID-963FF8FE-152A-410F-97E8-0559E601D0BF"></a>
+<h3 id="OASAD-GUID-963FF8FE-152A-410F-97E8-0559E601D0BF" class="sect3"><span class="enumeration_section">5.1.2</span> Access the Product Family and Product Home Pages</h3>
+<div>
+<div class="section">
+<p>To get to the Product Family level, various points of entry can be chosen. It is possible to access the Instance Home and click on a Product Family link, or choose &ldquo;Product Families" from the Target Types panel on the left side of the Overview page, and select from that list. An Instance link can be expanded and then, click directly on a Product Family. Cloud Control is a flexible and multi-accessible interface.</p>
+<div class="figure" id="GUID-963FF8FE-152A-410F-97E8-0559E601D0BF__GUID-B25D2A2B-C8D4-4085-B389-FA415C4446A2">
+<p class="titleinfigure">Figure 5-5 The Product Family Home Page in Cloud Control</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="1416" height="766" src="img/GUID-3A06FCFB-9B4A-4936-9175-7056AE8BA525-default.jpg" alt="Description of Figure 5-5 follows" title="Description of Figure 5-5 follows" /><br />
+<a href="img_text/GUID-3A06FCFB-9B4A-4936-9175-7056AE8BA525-default.htm">Description of "Figure 5-5 The Product Family Home Page in Cloud Control"</a></div>
+<br /></div>
+<!-- class="figure" -->
+<p>A particular product can be clicked to display the Product Home page.</p>
+<div class="figure" id="GUID-963FF8FE-152A-410F-97E8-0559E601D0BF__GUID-2F7A5D1D-E24C-48E3-848F-AA695B290568">
+<p class="titleinfigure">Figure 5-6 The Product Home Page in Cloud Control</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="1413" height="768" src="img/GUID-B45F56FF-371A-486C-A6A0-3A910B163C26-default.jpg" alt="Description of Figure 5-6 follows" title="Description of Figure 5-6 follows" /><br />
+<a href="img_text/GUID-B45F56FF-371A-486C-A6A0-3A910B163C26-default.htm">Description of "Figure 5-6 The Product Home Page in Cloud Control"</a></div>
+<br /></div>
+<!-- class="figure" -->
+<p>As the screenshots show, Home pages present similar kinds of information. The following sections describe in more detail how to use the Monitoring and Diagnostics panels, the Key Performance Indicators, the Topologies, and the various menu items such as Monitoring Templates, Compliance Standards, Alerts, and Blackouts that will be used to manage Oracle Fusion Applications.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OASAD65789"></a><a id="OASAD65788"></a>
+<div class="props_rev_3"><a id="GUID-68000A63-2FE8-4FF0-BB76-176887D9F6CA"></a>
+<h3 id="OASAD-GUID-68000A63-2FE8-4FF0-BB76-176887D9F6CA" class="sect3"><span class="enumeration_section">5.1.3</span> Access the Fusion Applications-Related Cloud Control Menu</h3>
+<div>
+<div class="section">
+<p>Whatever target type is chosen, whether Instance, Product Family, Product, or other, the drop-down menu at that level will have some similar items. These are the actions that are particularly relevant to a Fusion Applications administrator.</p>
+<div class="figure" id="GUID-68000A63-2FE8-4FF0-BB76-176887D9F6CA__GUID-F11C55B3-CF8D-4E33-AA0E-349C03338C51">
+<p class="titleinfigure">Figure 5-7 Cloud Control Menu for Fusion Applications Targets</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="907" height="745" src="img/GUID-80099FA4-71DE-453B-8282-3E641F9D496B-default.jpg" alt="Description of Figure 5-7 follows" title="Description of Figure 5-7 follows" /><br />
+<a href="img_text/GUID-80099FA4-71DE-453B-8282-3E641F9D496B-default.htm">Description of "Figure 5-7 Cloud Control Menu for Fusion Applications Targets"</a></div>
+<br /></div>
+<!-- class="figure" -->
+<p>Even within the menu, there may be multiple points of entry for a single destination. For example, opening the drop-down menu and choosing <span class="bold">Monitoring</span> then, <span class="bold">Blackouts</span> and then <span class="bold">Create</span> will result in the same functionality as opening the drop-down menu and choosing <span class="bold">Control</span> , and then <span class="bold">Create Blackout</span>.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OASAD65791"></a><a id="OASAD65790"></a>
+<div class="props_rev_3"><a id="GUID-3202317D-6112-4A02-903D-8835E629F06C"></a>
+<h3 id="OASAD-GUID-3202317D-6112-4A02-903D-8835E629F06C" class="sect3"><span class="enumeration_section">5.1.4</span> Access Cloud Control Online Help</h3>
+<div>
+<div class="section">
+<p>After logging in to Cloud Control, the Help button is located as a drop-down item under the Setup button, on the upper right side of the page.</p>
+<div class="figure" id="GUID-3202317D-6112-4A02-903D-8835E629F06C__GUID-67FA09EA-1CE2-47EC-AB81-A574D1B0FA30">
+<p class="titleinfigure">Figure 5-8 Online Help for Cloud Control</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="1415" height="361" src="img/GUID-1B05FDC4-152C-4C90-B5A2-380B55A84B8D-default.jpg" alt="Description of Figure 5-8 follows" title="Description of Figure 5-8 follows" /><br />
+<a href="img_text/GUID-1B05FDC4-152C-4C90-B5A2-380B55A84B8D-default.htm">Description of "Figure 5-8 Online Help for Cloud Control"</a></div>
+<br /></div>
+<!-- class="figure" --></div>
+<!-- class="section" --></div>
+</div>
+</div>
+<a id="OASAD65792"></a>
+<div class="props_rev_3"><a id="GUID-B3BC86B4-B978-41D7-B721-F8A29509D75A"></a>
+<h2 id="OASAD-GUID-B3BC86B4-B978-41D7-B721-F8A29509D75A" class="sect2"><span class="enumeration_section">5.2</span> Access and Use the Topology Views</h2>
+<div>
+<p>There are three types of interactive topology charts provided in Cloud Control: <span class="bold">Routing Topology</span>, <span class="bold">Product Topology</span>, and <span class="bold">Configuration Topology</span>. Each one provides a birds-eye view of the Oracle Fusion Applications installation, based on the discovered targets.</p>
+</div>
+<a id="OASAD65793"></a>
+<div class="props_rev_3"><a id="GUID-40C230BB-DF49-4316-9633-BCFD74CB0480"></a>
+<h3 id="OASAD-GUID-40C230BB-DF49-4316-9633-BCFD74CB0480" class="sect3"><span class="enumeration_section">5.2.1</span> View Options</h3>
+<div>
+<p>All three topologies can be viewed as graphs. The Configuration topology can also be viewed as tables. Hover over graphical items to get additional tool tip information. It is possible to pan and zoom a graph, and click on a node to highlight interrelationships. Also print topologies or save them to a <code class="codeph">.png</code> file. Search for targets can be done and then, filter them to show certain nodes, or a certain status (up, down, fatal incidents, etc.).</p>
+<p>On any Topology page, the Options menu makes possible to choose which annotations to display, change the layout, print, and reload the topology. (<a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-D6B46A97-0C55-4EE9-801C-BAE190E047DA__GUID-17DFB99C-F2B4-4C1D-B4D9-3C9613CD2A0F">Figure 5-9</a>)</p>
+<p>Topology views are automatically displayed on some Home Pages, and they can always be selected from the drop-down menus. The view seen will depend on the level at which Topology view was chosen. Choosing at the Instance level gives a different picture than choosing at the Product Family level, for example.</p>
+<p>It is also possible to create a custom Topology view. See section Creating a Custom Topology View in the Cloud Control online help for details.</p>
+<p>For more information on how to use topology interfaces, see section Interactive Gestures in the Cloud Control online help.</p>
+</div>
+</div>
+<a id="OASAD65840"></a><a id="OASAD65839"></a>
+<div class="props_rev_3"><a id="GUID-D6B46A97-0C55-4EE9-801C-BAE190E047DA"></a>
+<h3 id="OASAD-GUID-D6B46A97-0C55-4EE9-801C-BAE190E047DA" class="sect3"><span class="enumeration_section">5.2.2</span> Access Options</h3>
+<div>
+<div class="section">
+<p>As usual, there are multiple inroads to the Topology views. The following are the main ones:</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">From a Home Page</span> (see <a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-963FF8FE-152A-410F-97E8-0559E601D0BF__GUID-2F7A5D1D-E24C-48E3-848F-AA695B290568">Figure 5-6</a> for example)</p>
+</li>
+<li>
+<p><span class="bold">From the Instance</span> expand <span class="bold">Product Family</span>, then <span class="bold">Products Drop-Down Menu:</span> The Routing and Products Topologies are listed directly on this menu. The Configuration Topology is under <span class="bold">Configuration</span> then, <span class="bold">Topology</span> (<a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-D6B46A97-0C55-4EE9-801C-BAE190E047DA__GUID-17DFB99C-F2B4-4C1D-B4D9-3C9613CD2A0F">Figure 5-9</a>)</p>
+</li>
+<li>
+<p>From the <span class="bold">Related Topologies</span> link within any Topology view (<a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-D6B46A97-0C55-4EE9-801C-BAE190E047DA__GUID-17DFB99C-F2B4-4C1D-B4D9-3C9613CD2A0F">Figure 5-9</a>)</p>
+<div class="figure" id="GUID-D6B46A97-0C55-4EE9-801C-BAE190E047DA__GUID-17DFB99C-F2B4-4C1D-B4D9-3C9613CD2A0F">
+<p class="titleinfigure">Figure 5-9 Access Options for Topology Views</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="1430" height="810" src="img/GUID-F4BE934F-0524-45A8-871F-8E47D3826C0B-default.jpg" alt="Description of Figure 5-9 follows" title="Description of Figure 5-9 follows" /><br />
+<a href="img_text/GUID-F4BE934F-0524-45A8-871F-8E47D3826C0B-default.htm">Description of "Figure 5-9 Access Options for Topology Views"</a></div>
+<br /></div>
+<!-- class="figure" -->
+<p><span class="bold">Right-clicking a node within a topology view:</span> For example, if Product Topology is chosen at the Instance level, and then right-click a resulting Product Family node, Product Topology can again be selected from the resulting menu. Then the topology will be seen at the Product Family, rather than Instance level, with more detailed information.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OASAD65841"></a><a id="OASAD65794"></a>
+<div class="props_rev_3"><a id="GUID-E48F37BE-9BAD-4B20-A236-90F68272BBB0"></a>
+<h3 id="OASAD-GUID-E48F37BE-9BAD-4B20-A236-90F68272BBB0" class="sect3"><span class="enumeration_section">5.2.3</span> Use the Routing Topology</h3>
+<div>
+<div class="section">
+<p>The Routing Topology shows relationships between the HTTP server, the middleware and application servers, and the various databases of an Oracle Fusion Applications instance, product family, or product.</p>
+<p>To view the Routing Topology after logging in to Cloud Control:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>From the <span class="bold">Fusion Instance</span> select, <span class="bold">Product Family</span>, or <span class="bold">Product</span> menu, choose <span class="bold">Routing Topology</span>.</span>
+<div>
+<p>The Routing Topology page is displayed (<a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-E48F37BE-9BAD-4B20-A236-90F68272BBB0__GUID-48340617-C55D-4C45-937D-A7F73F44B12A">Figure 5-10</a>).</p>
+<p>Note that hovering over a node (in this image, the &ldquo;SCMDomain") highlights the lines between the node and the associated HTTP servers and database servers. Clicking the node brings up the <span class="bold">Filter</span> details, <span class="bold">Metrics</span> history, and <span class="bold">Properties</span> of that node, in the left-hand panels.</p>
+<div class="figure" id="GUID-E48F37BE-9BAD-4B20-A236-90F68272BBB0__GUID-48340617-C55D-4C45-937D-A7F73F44B12A">
+<p class="titleinfigure">Figure 5-10 Routing Topology Page</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="1414" height="819" src="img/GUID-94190C71-B9E2-47C9-A017-960E6757E60D-default.jpg" alt="Description of Figure 5-10 follows" title="Description of Figure 5-10 follows" /><br />
+<a href="img_text/GUID-94190C71-B9E2-47C9-A017-960E6757E60D-default.htm">Description of "Figure 5-10 Routing Topology Page"</a></div>
+<br /></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>From the <span class="bold">View by</span> drop-down list, choose one of the following topology views:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Routing: Group by Application:</span> Choose to view the topology of the applications as they relate to the <span id="GUID-E48F37BE-9BAD-4B20-A236-90F68272BBB0__WLS">Oracle WebLogic Server</span> domains and servers, and the Oracle Database.</p>
+</li>
+<li>
+<p><span class="bold">Routing: Group by Middleware:</span> Choose to view the topology for the middleware targets, such as Oracle WebLogic Server.</p>
+</li>
+<li>
+<p><span class="bold">Routing: Group by Host:</span> Choose to view the topology of the targets on the hosts in the enterprise.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD65842"></a><a id="OASAD65795"></a>
+<div class="props_rev_3"><a id="GUID-1B7021AF-60CA-4B8B-AB70-50547BC0552D"></a>
+<h3 id="OASAD-GUID-1B7021AF-60CA-4B8B-AB70-50547BC0552D" class="sect3"><span class="enumeration_section">5.2.4</span> Use the Products Topology</h3>
+<div>
+<p>Products Topology views give increasingly more detail about the products, their product families, and their position in the environment, as drilling down from Instance level.</p>
+<div class="figure" id="GUID-1B7021AF-60CA-4B8B-AB70-50547BC0552D__GUID-98AD24C3-8BEF-4FC2-A2A3-CDBBCDDF63E5">
+<p class="titleinfigure">Figure 5-11 Products Topology Page</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="2219" height="1279" src="img/GUID-7CB75BA3-2CB5-4FD5-9898-BB6EEFF1B688-default.jpg" alt="Description of Figure 5-11 follows" title="Description of Figure 5-11 follows" /><br />
+<a href="img_text/GUID-7CB75BA3-2CB5-4FD5-9898-BB6EEFF1B688-default.htm">Description of "Figure 5-11 Products Topology Page"</a></div>
+<br /></div>
+<!-- class="figure" --></div>
+</div>
+<a id="OASAD65843"></a><a id="OASAD65796"></a>
+<div class="props_rev_3"><a id="GUID-D5555E78-A50E-4F6A-9BE0-169D87D0B0C1"></a>
+<h3 id="OASAD-GUID-D5555E78-A50E-4F6A-9BE0-169D87D0B0C1" class="sect3"><span class="enumeration_section">5.2.5</span> Use the Configuration Topology</h3>
+<div>
+<p>The configuration topology shows the inter-relationships between targets and is used to answer questions such as the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>On what targets does this target rely?</p>
+</li>
+<li>
+<p>What targets will be affected if this target goes down?</p>
+</li>
+<li>
+<p>How are the members of my system related?</p>
+</li>
+</ul>
+<p>A Configuration Topology can be viewed as either a graph or a table <a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-D5555E78-A50E-4F6A-9BE0-169D87D0B0C1">Use the Configuration Topology</a>.</p>
+<div class="figure" id="GUID-D5555E78-A50E-4F6A-9BE0-169D87D0B0C1__GUID-C586D9B6-97BE-443F-AC1F-D77869F719B8">
+<p class="titleinfigure">Figure 5-12 Configuration Topology Page</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="1086" height="605" src="img/GUID-4AF4C04B-5C46-41BC-8ED8-11966466835B-default.jpg" alt="Screenshot of the display of the Configuration Topology with Graph option page in Oracle Enterprise Manager Cloud Control" title="Screenshot of the display of the Configuration Topology with Graph option page in Oracle Enterprise Manager Cloud Control" /></div>
+<br /></div>
+<!-- class="figure" -->
+<div class="figure" id="GUID-D5555E78-A50E-4F6A-9BE0-169D87D0B0C1__GUID-266E17B9-161D-4508-B685-C431233BECFB">
+<p class="titleinfigure">Figure 5-13 Configuration Topology with Table Option Page</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="1413" height="574" src="img/GUID-58A9C851-C646-4F5F-B8FB-4EB64FFE026A-default.jpg" alt="Screenshot of the display of the Configuration Topology with Table option page in Oracle Enterprise Manager Cloud Control" title="Screenshot of the display of the Configuration Topology with Table option page in Oracle Enterprise Manager Cloud Control" /></div>
+<br /></div>
+<!-- class="figure" --></div>
+</div>
+</div>
+<a id="OASAD65797"></a>
+<div class="props_rev_3"><a id="GUID-9C1EAFA7-EAE7-4C26-A2EB-36114CA81A1B"></a>
+<h2 id="OASAD-GUID-9C1EAFA7-EAE7-4C26-A2EB-36114CA81A1B" class="sect2"><span class="enumeration_section">5.3</span> Monitor System and Key Performance Indicators</h2>
+<div>
+<div class="p">This section contains the following topics:
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-69C0DF82-8589-4DA6-91F6-C7AD937E6416">Check System Performance Pages</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-14E394F4-1D04-45E8-9972-EEBFC5D0D027">Check Key Performance Indicators</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-5C15A65F-4E72-46F4-B770-F2EBA65E603B">Monitor Mid-Tier Elements</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-B65035B7-F8E8-40B5-B6BA-6A548D5221E4">View Activity, Historical Reports, Metrics, and Chart Sets</a></p>
+</li>
+</ul>
+</div>
+</div>
+<a id="OASAD65800"></a>
+<div class="props_rev_3"><a id="GUID-69C0DF82-8589-4DA6-91F6-C7AD937E6416"></a>
+<h3 id="OASAD-GUID-69C0DF82-8589-4DA6-91F6-C7AD937E6416" class="sect3"><span class="enumeration_section">5.3.1</span> Check System Performance Pages</h3>
+<div>
+<p>This section contains the following topic:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-2107A21D-0C15-4476-ABBF-316F930AC782">Monitor the System Performance of Oracle Fusion Applications Deployed to a Cluster</a></p>
+</li>
+</ul>
+</div>
+<a id="OASAD65836"></a>
+<div class="sect4"><a id="GUID-2107A21D-0C15-4476-ABBF-316F930AC782"></a>
+<h4 id="OASAD-GUID-2107A21D-0C15-4476-ABBF-316F930AC782" class="sect4"><span class="enumeration_section">5.3.1.1</span> Monitor the System Performance of <span id="FA">Oracle Fusion Applications</span> Deployed to a Cluster</h4>
+<div>
+<p>During installation, <span id="GUID-2107A21D-0C15-4476-ABBF-316F930AC782__FA">Oracle Fusion Applications</span> automatically deploys each application to a Managed Server in a cluster. For each Managed Server in the cluster, there is an instance of the application on each <span id="GUID-2107A21D-0C15-4476-ABBF-316F930AC782__WLS">Oracle WebLogic Server</span>.</p>
+<p>There are times when monitoring the system performance of the application on an individual server is needed, and times when monitoring the overall performance of the application across all the servers in the cluster is required.</p>
+<p>For example, normally, managing the overall performance of the application would be done to determine if there are any performance issues affecting all users of the application, regardless of which instance users access. If a performance problem is noticed, it is possible to drill down to a specific instance of the application to determine if the problem is affecting one or all of the application instances in the cluster. Cloud Control provides monitoring pages for both of these scenarios.</p>
+</div>
+<a id="OASAD65837"></a>
+<div class="sect5"><a id="GUID-4FE7826A-989F-4A65-A7DF-46A5A91053E9"></a>
+<h5 id="OASAD-GUID-4FE7826A-989F-4A65-A7DF-46A5A91053E9" class="sect5"><span class="enumeration_section">5.3.1.1.1</span> Monitor the Performance of <span>Oracle Fusion Applications</span> Cluster Applications</h5>
+<div>
+<p>To monitor the overall performance of the <span id="GUID-4FE7826A-989F-4A65-A7DF-46A5A91053E9__FA">Oracle Fusion Applications</span> cluster applications with Cloud Control:</p>
+<ol>
+<li>
+<p>Navigate to a product family home page:</p>
+<ol>
+<li>
+<p>From the <span class="bold">Targets</span> menu, choose <span class="bold">Fusion Applications</span>.</p>
+<p>The Fusion Applications List page displays.</p>
+</li>
+<li>
+<p>In the table on the Fusion Applications page, click the appropriate <span class="bold">Product Family</span> target.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>From the navigation pane, expand <span class="bold">Fusion Applications</span>.</p>
+<p>Cloud Control lists the applications deployed in the current domain.</p>
+</li>
+<li>
+<p>Monitor the overall performance of the applications on a cluster by clicking the cluster application name, for example, <span class="bold">PayablesApp</span>.</p>
+<p>The Fusion Cluster Application page displays.</p>
+</li>
+<li>
+<p>View performance metrics. From the <span class="bold">Fusion Cluster Application</span> menu, choose <span class="bold">Monitoring</span>, and then <span class="bold">Performance Summary</span>.</p>
+<p>The Performance Summary page displays. For more information about using this page, see the topic Using Performance Summary in the Cloud Control online help.</p>
+</li>
+<li>
+<p>From the Performance Summary page, a metric name can optionally be selected.</p>
+<p>The Additional Information dialog displays. From this dialog, more details about the metric can be viewed with the following links:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Problem Analysis</span></p>
+<p>Directs to the Problem Analysis page. This page makes possible to see a metric with other related metrics, which are affecting the metrics being analyzed. It also shows the related targets and the related targets topology. The <span class="bold">Problem Analysis</span> is only available for request-related metrics, such as the <span class="bold">Request Processing Time (ms)</span> and <span class="bold">Request (per minute)</span>.</p>
+</li>
+<li>
+<p><span class="bold">Analyze Logs</span></p>
+<p>Displays a message that shows the logs for a target on which the metric is viewed.</p>
+</li>
+<li>
+<p><span class="bold">Metric Details</span></p>
+<p>Shows historical metric data.</p>
+</li>
+<li>
+<p><span class="bold">Target Home</span></p>
+<p>Directs to the home page.</p>
+</li>
+</ul>
+<p>When used together, <span class="bold">Problem Analysis</span> and <span class="bold">Analyze Logs</span> can help with metrics inspection, target status information, and logs during troubleshooting. These links are not available for all metrics.</p>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD65838"></a>
+<div class="sect5"><a id="GUID-AC62E676-BE0E-4F83-8E71-88AF742C8BEF"></a>
+<h5 id="OASAD-GUID-AC62E676-BE0E-4F83-8E71-88AF742C8BEF" class="sect5"><span class="enumeration_section">5.3.1.1.2</span> Monitor the Performance of Oracle Fusion Application Instances</h5>
+<div>
+<p>To monitor a specific instance of the application with Cloud Control:</p>
+<ol>
+<li>
+<p>Navigate to a product family home page:</p>
+<ol>
+<li>
+<p>From the <span class="bold">Targets</span> menu, choose <span class="bold">Fusion Applications</span>.</p>
+<p>The Fusion Applications List page displays.</p>
+</li>
+<li>
+<p>In the table on the Fusion Applications List page, click the appropriate <span class="bold">Product Family</span> target.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>From the navigation pane, expand the product family, then <span class="bold">Fusion Applications</span>.</p>
+</li>
+<li>
+<p>Expand the cluster application that needs to be monitored to show each instance of the application, as shown in the following figure:</p>
+<div class="figure" id="GUID-AC62E676-BE0E-4F83-8E71-88AF742C8BEF__GUID-E09C93F9-A073-43B7-A250-0305A4096F90">
+<p class="titleinfigure">Figure 5-14 Expansion of Fusion Applications Family</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="272" height="167" src="img/GUID-3D48A7DC-005B-4876-B4F6-7747B327443D-default.gif" alt="Description of Figure 5-14 follows" title="Description of Figure 5-14 follows" /><br />
+<a href="img_text/GUID-3D48A7DC-005B-4876-B4F6-7747B327443D-default.htm">Description of "Figure 5-14 Expansion of Fusion Applications Family"</a></div>
+<br /></div>
+<!-- class="figure" --></li>
+<li>
+<p>Monitor the overall performance of an application instance in cluster by clicking one of the application deployment instances, for example, <span class="bold">PayablesApp (PayablesSever_1)</span>.</p>
+<p>The Fusion J2EE Application page displays.</p>
+</li>
+<li>
+<p>View performance metrics. From the <span class="bold">Fusion J2EE Application</span> menu, choose <span class="bold">Performance Summary</span>.</p>
+<p>The Performance Summary page displays. For more information about using this page, see the topic Using Performance Summary in the Cloud Control online help.</p>
+</li>
+<li>
+<p>From the Performance Summary page, a metric name can optionally be selected.</p>
+<p>The Additional Information dialog displays. From this dialog, more details about the metric can be shown with the following links:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Problem Analysis</span></p>
+<p>Directs to the Problem Analysis page. This page makes possible to see a metric with other related metrics, which are affecting the metrics being analyzed. It also shows the related targets and the related targets topology. The <span class="bold">Problem Analysis</span> is only available for request-related metrics, such as the <span class="bold">Request Processing Time (ms)</span> and <span class="bold">Request (per minute)</span>.</p>
+</li>
+<li>
+<p><span class="bold">Analyze Logs</span></p>
+<p>Displays a message that shows the logs for a target on which the metric is viewed.</p>
+</li>
+<li>
+<p><span class="bold">Metric Details</span></p>
+<p>Shows historical metric data.</p>
+</li>
+<li>
+<p><span class="bold">Target Home</span></p>
+<p>Directs to the home page.</p>
+</li>
+</ul>
+<p>When used together, <span class="bold">Problem Analysis</span> and <span class="bold">Analyze Logs</span> can help with metrics inspection, target status information, and logs during troubleshooting. These links are not available for all metrics.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<a id="OASAD65801"></a>
+<div class="props_rev_3"><a id="GUID-14E394F4-1D04-45E8-9972-EEBFC5D0D027"></a>
+<h3 id="OASAD-GUID-14E394F4-1D04-45E8-9972-EEBFC5D0D027" class="sect3"><span class="enumeration_section">5.3.2</span> Check Key Performance Indicators</h3>
+<div>
+<p>The Key Performance Indicators page displays an overview of the performance metrics of a given product family. Typically, several default metrics display on the page in the form of graphs. Multiple metrics are tracked, and these can be added to the Key Performance Indicators page. Each product belonging to a given product family has its own set of metrics.</p>
+<p>It is possible to modify the Key Performance Indicators page as follows:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Add or remove metrics from the page.</p>
+</li>
+<li>
+<p>Display performance data in tabular format.</p>
+</li>
+<li>
+<p>Save or delete a set of performance charts.</p>
+</li>
+<li>
+<p>Re-organize the display of charts, for example move charts up or down.</p>
+</li>
+<li>
+<p>Display the performance metrics of another instance of the product on top of the current chart sets, or display earlier metrics of the same product instance on top of current metrics.</p>
+</li>
+<li>
+<p>Toggle on or off the grid display on the performance chart set.</p>
+</li>
+<li>
+<p>Modify the performance time period.</p>
+</li>
+</ul>
+</div>
+</div>
+<a id="OASAD65802"></a>
+<div class="props_rev_3"><a id="GUID-5C15A65F-4E72-46F4-B770-F2EBA65E603B"></a>
+<h3 id="OASAD-GUID-5C15A65F-4E72-46F4-B770-F2EBA65E603B" class="sect3"><span class="enumeration_section">5.3.3</span> Monitor Mid-Tier Elements</h3>
+<div>
+<p>This section describes how to monitor an <span id="GUID-5C15A65F-4E72-46F4-B770-F2EBA65E603B__WLS">Oracle WebLogic Server</span>, discussing how to view the status of the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span>Oracle WebLogic Server</span> domains</p>
+</li>
+<li>
+<p><span>Oracle WebLogic Server</span> Administration or Managed Servers</p>
+</li>
+<li>
+<p>Clusters</p>
+</li>
+</ul>
+</div>
+<a id="OASAD65845"></a>
+<div class="sect4"><a id="GUID-9B9E71EB-AFA0-42B2-AF9D-6149F1DF9E53"></a>
+<h4 id="OASAD-GUID-9B9E71EB-AFA0-42B2-AF9D-6149F1DF9E53" class="sect4"><span class="enumeration_section">5.3.3.1</span> Monitor an <span id="WLS">Oracle WebLogic Server</span> Domain</h4>
+<div>
+<p>It is possible to view the status of a domain, including the servers, clusters, and deployments in the domain from the domain home page of <span id="GUID-9B9E71EB-AFA0-42B2-AF9D-6149F1DF9E53__IASOEMFRAMESHORT">Fusion Middleware Control</span>:</p>
+<ol>
+<li>
+<p>From the navigation pane, expand the farm, and then <span class="bold">WebLogic Domain.</span></p>
+</li>
+<li>
+<p>Select the domain.</p>
+<p>The domain home page is displayed, as shown in the following figure:</p>
+<div class="figure" id="GUID-9B9E71EB-AFA0-42B2-AF9D-6149F1DF9E53__GUID-7A4A66C4-EB1A-401E-9988-1AFD96B16921">
+<p class="titleinfigure">Figure 5-15 Domain Home Page</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="665" height="662" src="img/GUID-B0530930-5E12-472F-A644-FCD12E08F279-default.gif" alt="Description of Figure 5-15 follows" title="Description of Figure 5-15 follows" /><br />
+<a href="img_text/GUID-B0530930-5E12-472F-A644-FCD12E08F279-default.htm">Description of "Figure 5-15 Domain Home Page"</a></div>
+<br /></div>
+<!-- class="figure" --></li>
+</ol>
+<p>This page shows the following information:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>A general summary of the domain, along with a link to the <span id="GUID-9B9E71EB-AFA0-42B2-AF9D-6149F1DF9E53__WLS">Oracle WebLogic Server</span> Administration Console</p>
+</li>
+<li>
+<p>Information about the servers, both the Administration Server and the Managed Servers, in the domain</p>
+</li>
+<li>
+<p>Information about the clusters in the domain</p>
+</li>
+<li>
+<p>Information about the deployments in the domain</p>
+</li>
+<li>
+<p>A Resource Center, which provides links to more information</p>
+</li>
+</ul>
+</div>
+</div>
+<a id="OASAD65846"></a>
+<div class="sect4"><a id="GUID-7C74BD3A-7034-407B-B5FA-60ADC6E6BBAC"></a>
+<h4 id="OASAD-GUID-7C74BD3A-7034-407B-B5FA-60ADC6E6BBAC" class="sect4"><span class="enumeration_section">5.3.3.2</span> Monitor an Oracle WebLogic Server Administration or Managed Server</h4>
+<div>
+<p>It is possible to view the status of a WebLogic Server Administration Server or Managed Server in <span id="GUID-7C74BD3A-7034-407B-B5FA-60ADC6E6BBAC__IASOEMFRAMESHORT">Fusion Middleware Control</span>:</p>
+<ol>
+<li>
+<p>From the navigation pane, expand the farm, the <span class="bold">WebLogic Domain</span>, and then the domain.</p>
+</li>
+<li>
+<p>Select the server.</p>
+<p>The server home page is displayed.</p>
+<p>The following figure shows the home page for a Managed Server:</p>
+<div class="figure" id="GUID-7C74BD3A-7034-407B-B5FA-60ADC6E6BBAC__GUID-579274BE-FE70-4ECD-971B-476C949A1551">
+<p class="titleinfigure">Figure 5-16 Home Page for a Managed Server</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="710" height="612" src="img/GUID-7B72DAD1-95B7-4847-8BE9-87A2E7E27BB6-default.gif" alt="Description of Figure 5-16 follows" title="Description of Figure 5-16 follows" /><br />
+<a href="img_text/GUID-7B72DAD1-95B7-4847-8BE9-87A2E7E27BB6-default.htm">Description of "Figure 5-16 Home Page for a Managed Server"</a></div>
+<br /></div>
+<!-- class="figure" --></li>
+</ol>
+<p>This page shows the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>A general summary of the server, including its state, and information about the servlets, JSPs, and EJBs running in the server</p>
+</li>
+<li>
+<p>Response and load</p>
+</li>
+<li>
+<p>Information about the applications deployed to the server</p>
+</li>
+</ul>
+</div>
+</div>
+<a id="OASAD65847"></a>
+<div class="sect4"><a id="GUID-11C8E108-68C9-46A6-9661-C943A67CBF50"></a>
+<h4 id="OASAD-GUID-11C8E108-68C9-46A6-9661-C943A67CBF50" class="sect4"><span class="enumeration_section">5.3.3.3</span> Monitor a Cluster</h4>
+<div>
+<p>It is possible to view the status of a cluster, including the servers and deployments in the cluster using <span id="GUID-11C8E108-68C9-46A6-9661-C943A67CBF50__IASOEMFRAMESHORT">Fusion Middleware Control</span>:</p>
+<ol>
+<li>
+<p>From the navigation pane, expand the farm, then <span class="bold">WebLogic Domain</span>, and then the domain.</p>
+</li>
+<li>
+<p>Select the cluster.</p>
+<p>The cluster page is displayed, as shown in the following figure:</p>
+<div class="figure" id="GUID-11C8E108-68C9-46A6-9661-C943A67CBF50__GUID-ADFDA47B-3F74-4203-BE75-F27F59B6729D">
+<p class="titleinfigure">Figure 5-17 WebLogic Cluster Page</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="653" height="489" src="img/GUID-EC5C64D2-0F9B-43DB-9C31-F051FD5AF96F-default.gif" alt="Description of Figure 5-17 follows" title="Description of Figure 5-17 follows" /><br />
+<a href="img_text/GUID-EC5C64D2-0F9B-43DB-9C31-F051FD5AF96F-default.htm">Description of "Figure 5-17 WebLogic Cluster Page"</a></div>
+<br /></div>
+<!-- class="figure" -->
+<p>This page shows the following information:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>A general summary of the cluster, including the broadcast channel, if appropriate, the load algorithm, and the messaging mode</p>
+</li>
+<li>
+<p>A response and load section, which shows the requests per minute and the request processing time</p>
+</li>
+<li>
+<p>A deployments section with information about the applications deployed to the cluster</p>
+</li>
+<li>
+<p>A server section, with a table listing the servers that are part of the cluster</p>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OASAD1087"></a>
+<div class="sect3"><a id="GUID-B65035B7-F8E8-40B5-B6BA-6A548D5221E4"></a>
+<h3 id="OASAD-GUID-B65035B7-F8E8-40B5-B6BA-6A548D5221E4" class="sect3"><span class="enumeration_section">5.3.4</span> View Activity, Historical Reports, Metrics, and Chart Sets</h3>
+<div>
+<p>It is possible to monitor the performance of an instance, specifically current and historical performance data, as well as a summary of all performance data. Performance data displays in a chart set, which is saved, deleted and reordered. Additionally, the time period for which performance data displays can be modified.</p>
+</div>
+<a id="OASAD1088"></a>
+<div class="sect4"><a id="GUID-4B9A598B-C0BE-4F3B-917F-2CD2CA2D8623"></a>
+<h4 id="OASAD-GUID-4B9A598B-C0BE-4F3B-917F-2CD2CA2D8623" class="sect4"><span class="enumeration_section">5.3.4.1</span> View a Summary of Activity</h4>
+<div>
+<p>The <span id="GUID-4B9A598B-C0BE-4F3B-917F-2CD2CA2D8623__SCHEDULER">Oracle Enterprise Scheduler</span> Performance Summary page displays current charts of job requests such as requests completed per hour, running requests, requests by processing time and requests by status.</p>
+<p>To view a summary of <span>Oracle Enterprise Scheduler</span> activity:</p>
+<ol>
+<li>
+<p>From the <span class="bold">Scheduling Service</span> menu, choose <span class="bold">Performance</span> and then, <span class="bold">Service Summary</span>.</p>
+<p>By default, this page displays job requests running during a selected time period in the following categories:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Requests completed per hour</p>
+</li>
+<li>
+<p>Processing times, average, minimum and maximum</p>
+</li>
+<li>
+<p>Running requests and maximum running requests</p>
+</li>
+<li>
+<p>Requests over the past hour with the status <code class="codeph">SUCCESS</code>, <code class="codeph">WARNING</code>, <code class="codeph">ERROR</code> or <code class="codeph">CANCEL</code>.</p>
+</li>
+</ul>
+<p>The metrics displayed can be changed on the Service Summary performance page. Click the <span class="bold">Show Metric Palette</span> button to display the metric palette for <span>Oracle Enterprise Scheduler</span>.</p>
+</li>
+<li>
+<p>The duration for which performance data display can be changed: <a href="topicid:ess_selectperformanceperiod_proc" target="_blank">topicid:ess_selectperformanceperiod_proc</a></p>
+</li>
+<li>
+<p>Optionally, it is possible to change the display format of performance data on the page.</p>
+<ol>
+<li>
+<p>Choose <span class="bold">View</span> then, <span class="bold">Grid</span> to remove the grid display format from the charts.</p>
+</li>
+<li>
+<p>Click the <span class="bold">Table View</span> link to display the performance data in table format.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>It is possible to overlay an additional scheduler service over the current service performance metrics.</p>
+<ol>
+<li>
+<p>Choose <span class="bold">Overlay</span> and then <span class="bold">Another Scheduler Service</span>.</p>
+<p>In the Search and Select: Targets window, enter the name of the target and host server and click <span class="bold">Go</span> to search for the relevant service.</p>
+</li>
+<li>
+<p>From the search results table, select the relevant service and click <span class="bold">Select</span> to choose the scheduler service to overlay.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Additionally, any of the following actions can be taken.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Save the chart set, as described in <a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-D3FAB5A4-62DB-4820-A3B5-6BDA7C0919EB">Save a Chart Set</a>.</p>
+</li>
+<li>
+<p>Reorder the chart set, as described in <a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-3AC10350-34C9-4BE8-9FC6-F787E0A6D97F">Reorder Charts</a>.</p>
+</li>
+<li>
+<p>Revert to an old chart set, as described in <a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-78EDED86-5728-415B-84E8-B34589A51646">Revert to an Old Chart Set</a>.</p>
+</li>
+<li>
+<p>Delete a chart set, as described in <a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-B36FF77D-832F-469F-8E04-6BCB3495BFF3">Delete a Chart Set</a>.</p>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD1089"></a>
+<div class="sect4"><a id="GUID-753B0AF6-E4FE-43BD-B924-307C4783BD4F"></a>
+<h4 id="OASAD-GUID-753B0AF6-E4FE-43BD-B924-307C4783BD4F" class="sect4"><span class="enumeration_section">5.3.4.2</span> View Current Activity</h4>
+<div>
+<p>The <span id="GUID-753B0AF6-E4FE-43BD-B924-307C4783BD4F__SCHEDULER">Oracle Enterprise Scheduler</span> Current Activity page displays pending and running requests by user and application.</p>
+<p>To view current <span>Oracle Enterprise Scheduler</span> activity:</p>
+<ol>
+<li>
+<p>From the <span class="bold">Scheduling Service</span> menu, choose <span class="bold">Performance</span>, and then <span class="bold">Current Activity</span>.</p>
+</li>
+<li>
+<p>It is possible to view pending and running requests by user or application, or workload by work assignment.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>To view pending and running requests by user, choose <span class="bold">View</span>, and then <span class="bold">Requests By User</span>.</p>
+</li>
+<li>
+<p>To view pending and running requests by application, choose <span class="bold">View</span>, and then <span class="bold">Requests By Application</span>.</p>
+</li>
+<li>
+<p>To view workloads by work assignment, choose <span class="bold">View</span>, and then <span class="bold">Workload By Work Assignment</span>.</p>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD2216"></a><a id="OASAD2217"></a><a id="OASAD2218"></a><a id="OASAD2219"></a><a id="OASAD1090"></a>
+<div class="sect4"><a id="GUID-6F3A454A-77D8-4293-891B-97B49FB1FBFB"></a>
+<h4 id="OASAD-GUID-6F3A454A-77D8-4293-891B-97B49FB1FBFB" class="sect4"><span class="enumeration_section">5.3.4.3</span> View Historical Reports</h4>
+<div>
+<p>The <span id="GUID-6F3A454A-77D8-4293-891B-97B49FB1FBFB__SCHEDULER">Oracle Enterprise Scheduler</span> Historical Reports page displays completed job requests by user, application and work assignment.</p>
+<p>To view historical <span>Oracle Enterprise Scheduler</span> reports:</p>
+<ol>
+<li>
+<p>From the <span class="bold">Scheduling Service</span> menu, choose <span class="bold">Performance</span>, and then <span class="bold">Historical Reports</span>.</p>
+</li>
+<li>
+<p>From the <span class="bold">View</span> list, choose one of the following report views:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Completed Request Statistics By Job Name</p>
+</li>
+<li>
+<p>Completed Request Statistics By User</p>
+</li>
+<li>
+<p>Request Metrics By Work Assignment</p>
+</li>
+<li>
+<p>Completed Request Statistics</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Adjust the filter criteria as required. The filter criteria vary depending on the report view chosen.</p>
+<div class="tblformalwide" id="GUID-6F3A454A-77D8-4293-891B-97B49FB1FBFB__GUID-D8D59160-AB5D-4FBD-AA2E-29F2348C47D2">
+<p class="titleintable">Table 5-1 Completed Request Statistics by Job Name</p>
+<table class="cellalignment45" title="Completed Request Statistics by Job Name" summary="Completed Request Statistics By Job Name">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment72" id="d35871e1601">Filter Criterion</th>
+<th class="cellalignment133" id="d35871e1604">What to Do...</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment73" id="d35871e1609" headers="d35871e1601">
+<p><span class="bold">Application</span></p>
+</td>
+<td class="cellalignment134" headers="d35871e1609 d35871e1604">
+<p>From the list, choose the application whose statistics need to be viewed.</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment73" id="d35871e1617" headers="d35871e1601">
+<p><span class="bold">Minimum Run Time</span></p>
+</td>
+<td class="cellalignment134" headers="d35871e1617 d35871e1604">
+<p>Enter the shortest run time period for jobs whose statistics need to be viewed. Use the text field to enter a number, and select a unit of time from the list: <span class="bold">Seconds</span>, <span class="bold">Minutes</span>, <span class="bold">Hours</span> or <span class="bold">Days</span>.</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment73" id="d35871e1637" headers="d35871e1601">
+<p><span class="bold">Completed between</span></p>
+</td>
+<td class="cellalignment134" headers="d35871e1637 d35871e1604">
+<p>Use the calendar icons on either side of the text fields to select a start and end date and time.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="tblformalwide" id="GUID-6F3A454A-77D8-4293-891B-97B49FB1FBFB__GUID-4732F4AB-1ED6-4348-A0B8-B45C6587F4CE">
+<p class="titleintable">Table 5-2 Completed Request Statistics by User</p>
+<table class="cellalignment45" title="Completed Request Statistics by User" summary="Completed Request Statistics By User">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment72" id="d35871e1654">Filter Criterion</th>
+<th class="cellalignment133" id="d35871e1657">What to Do...</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment73" id="d35871e1662" headers="d35871e1654">
+<p><span class="bold">Application</span></p>
+</td>
+<td class="cellalignment134" headers="d35871e1662 d35871e1657">
+<p>From the list, choose the application whose statistics need to be viewed.</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment73" id="d35871e1670" headers="d35871e1654">
+<p><span class="bold">Minimum Total Run Time</span></p>
+</td>
+<td class="cellalignment134" headers="d35871e1670 d35871e1657">
+<p>Enter the shortest total time period for jobs whose statistics need to be viewed. Use the text field to enter a number, and select a unit of time from the list: <span class="bold">Seconds</span>, <span class="bold">Minutes</span>, <span class="bold">Hours</span> or <span class="bold">Days</span>.</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment73" id="d35871e1690" headers="d35871e1654">
+<p><span class="bold">Completed between</span></p>
+</td>
+<td class="cellalignment134" headers="d35871e1690 d35871e1657">
+<p>Use the calendar icons on either side of the text fields to select a start and end date and time.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="tblformalwide" id="GUID-6F3A454A-77D8-4293-891B-97B49FB1FBFB__GUID-A81CF23A-6F35-40F7-A55D-B23832F6FAA6">
+<p class="titleintable">Table 5-3 Request Metrics By Work Assignment</p>
+<table class="cellalignment45" title="Request Metrics By Work Assignment" summary="Request Metrics By Work Assignment">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment72" id="d35871e1707">Filter Criterion</th>
+<th class="cellalignment133" id="d35871e1710">What to Do...</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment73" id="d35871e1715" headers="d35871e1707">
+<p><span class="bold">Application</span></p>
+</td>
+<td class="cellalignment134" headers="d35871e1715 d35871e1710">
+<p>From the list, choose the application whose statistics need to be viewed.</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment73" id="d35871e1723" headers="d35871e1707">
+<p><span class="bold">Completed after</span></p>
+</td>
+<td class="cellalignment134" headers="d35871e1723 d35871e1710">
+<p>Use the calendar icon to choose the date and time after which the work assignment has completed.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="tblformalwide" id="GUID-6F3A454A-77D8-4293-891B-97B49FB1FBFB__GUID-D4DEC7F4-8B34-42B5-9001-CC987F1FF780">
+<p class="titleintable">Table 5-4 Completed Request Statistics</p>
+<table class="cellalignment45" title="Completed Request Statistics" summary="Completed Request Statistics">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment72" id="d35871e1740">Filter Criterion</th>
+<th class="cellalignment133" id="d35871e1743">What to Do...</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment73" id="d35871e1748" headers="d35871e1740">
+<p><span class="bold">Application</span></p>
+</td>
+<td class="cellalignment134" headers="d35871e1748 d35871e1743">
+<p>From the list, choose the application whose statistics need to be viewed.</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment73" id="d35871e1756" headers="d35871e1740">
+<p><span class="bold">Completed between</span></p>
+</td>
+<td class="cellalignment134" headers="d35871e1756 d35871e1743">
+<p>Use the calendar icons on either side of the text fields to choose a start and end date and time.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></li>
+<li>
+<p>Click <span class="bold">Go</span> to search for and display the historical data.</p>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD1095"></a>
+<div class="sect4"><a id="GUID-75179381-19CC-49CB-BF30-268506EBB5A6"></a>
+<h4 id="OASAD-GUID-75179381-19CC-49CB-BF30-268506EBB5A6" class="sect4"><span class="enumeration_section">5.3.4.4</span> View Metrics</h4>
+<div>
+<p>It is possible to view performance metrics for specific components of <span id="GUID-75179381-19CC-49CB-BF30-268506EBB5A6__SCHEDULER">Oracle Enterprise Scheduler</span>. Each set of metrics displays performance data that is relevant to the component.</p>
+<p>To view <span>Oracle Enterprise Scheduler</span> performance metrics:</p>
+<ol>
+<li>
+<p>From the Scheduling Service menu, choose <span class="bold">Performance</span>, and then <span class="bold">Service Summary</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Key Performance Indicators</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Show Metric Palette</span> and select the metrics that need to be displayed for each component.</p>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD1098"></a>
+<div class="sect4"><a id="GUID-5D62E178-A269-4BE0-902D-492C8B53EC6F"></a>
+<h4 id="OASAD-GUID-5D62E178-A269-4BE0-902D-492C8B53EC6F" class="sect4"><span class="enumeration_section">5.3.4.5</span> Manage Chart Sets</h4>
+<div>
+<p>The chart set displayed can be saved or deleted in the <span id="GUID-5D62E178-A269-4BE0-902D-492C8B53EC6F__SCHEDULER">Oracle Enterprise Scheduler</span> Performance Summary page. It is also possible to re-organize the order of a chart and revert to an old chart set.</p>
+<p>This section contains the following topics:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-D3FAB5A4-62DB-4820-A3B5-6BDA7C0919EB">Save a Chart Set</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-B36FF77D-832F-469F-8E04-6BCB3495BFF3">Delete a Chart Set</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-3AC10350-34C9-4BE8-9FC6-F787E0A6D97F">Reorder Charts</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-78EDED86-5728-415B-84E8-B34589A51646">Revert to an Old Chart Set</a></p>
+</li>
+</ul>
+</div>
+<a id="OASAD1099"></a>
+<div class="sect5"><a id="GUID-D3FAB5A4-62DB-4820-A3B5-6BDA7C0919EB"></a>
+<h5 id="OASAD-GUID-D3FAB5A4-62DB-4820-A3B5-6BDA7C0919EB" class="sect5"><span class="enumeration_section">5.3.4.5.1</span> Save a Chart Set</h5>
+<div>
+<p>The chart set displayed can be saved in the <span id="GUID-D3FAB5A4-62DB-4820-A3B5-6BDA7C0919EB__SCHEDULER">Oracle Enterprise Scheduler</span> Performance Summary page. Saving a chart set allows preserving a specific set of metrics selected for display, as opposed to the default metrics.</p>
+<p>To save a chart set complete the following steps:</p>
+<ol>
+<li>
+<p>Display the <span>Oracle Enterprise Scheduler</span> Performance Summary page.</p>
+</li>
+<li>
+<p>Choose <span class="bold">View</span>, and then <span class="bold">Save Chart Set</span>.</p>
+</li>
+<li>
+<p>In the Save Chart Set dialog box, enter a name for the chart set and click <span class="bold">OK</span>.</p>
+</li>
+<li>
+<p>When the chart set have been saved, it is possible to display it by choosing <span class="bold">Chart Set</span>, and then <span class="italic"><span class="bold">My Chart Set</span></span>.</p>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD1100"></a>
+<div class="sect5"><a id="GUID-B36FF77D-832F-469F-8E04-6BCB3495BFF3"></a>
+<h5 id="OASAD-GUID-B36FF77D-832F-469F-8E04-6BCB3495BFF3" class="sect5"><span class="enumeration_section">5.3.4.5.2</span> Delete a Chart Set</h5>
+<div>
+<p>Saved chart set files created in the <span id="GUID-B36FF77D-832F-469F-8E04-6BCB3495BFF3__SCHEDULER">Oracle Enterprise Scheduler</span> Performance Summary page can be deleted.</p>
+<p>To delete a chart set complete the following steps:</p>
+<ol>
+<li>
+<p>Display the <span>Oracle Enterprise Scheduler</span> Performance Summary page.</p>
+</li>
+<li>
+<p>Choose <span class="bold">View</span>, and then <span class="bold">Delete Chart Sets</span>.</p>
+</li>
+<li>
+<p>In the Delete Chart Sets dialog box, select the name of the chart set to be deleted and click <span class="bold">OK</span>.</p>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD1101"></a>
+<div class="sect5"><a id="GUID-3AC10350-34C9-4BE8-9FC6-F787E0A6D97F"></a>
+<h5 id="OASAD-GUID-3AC10350-34C9-4BE8-9FC6-F787E0A6D97F" class="sect5"><span class="enumeration_section">5.3.4.5.3</span> Reorder Charts</h5>
+<div>
+<p>The display of performance charts can be organized in the <span id="GUID-3AC10350-34C9-4BE8-9FC6-F787E0A6D97F__SCHEDULER">Oracle Enterprise Scheduler</span> Performance Summary page. Charts can be moved up or down, or removed entirely.</p>
+<p>To reorder chart sets complete the following steps:</p>
+<ol>
+<li>
+<p>Display the <span>Oracle Enterprise Scheduler</span> Performance Summary page.</p>
+</li>
+<li>
+<p>Choose <span class="bold">View</span>, and then <span class="bold">Reorder Charts</span>.</p>
+</li>
+<li>
+<p>In the Reorder Charts popup window, select the chart to be moved and click <span class="bold">Move Up</span> or <span class="bold">Move Down</span>, respectively.</p>
+<p>To delete a chart from the Performance Summary page, select the chart and click <span class="bold">Delete</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">OK</span>.</p>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD1102"></a>
+<div class="sect5"><a id="GUID-78EDED86-5728-415B-84E8-B34589A51646"></a>
+<h5 id="OASAD-GUID-78EDED86-5728-415B-84E8-B34589A51646" class="sect5"><span class="enumeration_section">5.3.4.5.4</span> Revert to an Old Chart Set</h5>
+<div>
+<p>If the chart sets have been re-organized, it is possible to revert to the chart set as it was originally saved.</p>
+<p>To revert chart sets complete the following steps:</p>
+<ol>
+<li>
+<p>Display the <span id="GUID-78EDED86-5728-415B-84E8-B34589A51646__SCHEDULER">Oracle Enterprise Scheduler</span> Performance Summary page.</p>
+</li>
+<li>
+<p>From the <span class="bold">Chart Set</span> list, choose the chart to be reverted to its original display.</p>
+</li>
+<li>
+<p>Choose <span class="bold">View</span>, and then <span class="bold">Revert Chart Set</span>.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OASAD1103"></a>
+<div class="sect4"><a id="GUID-EE945CDF-72B1-4275-B682-E6DB28B41D5E"></a>
+<h4 id="OASAD-GUID-EE945CDF-72B1-4275-B682-E6DB28B41D5E" class="sect4"><span class="enumeration_section">5.3.4.6</span> Select the Performance Time Period</h4>
+<div>
+<p>In the <span id="GUID-EE945CDF-72B1-4275-B682-E6DB28B41D5E__SCHEDULER">Oracle Enterprise Scheduler</span> Performance Summary page, the time period for which the performance summary displays can be changed.</p>
+<p>To select the performance time period complete the following steps:</p>
+<ol>
+<li>
+<p>Display the <span>Oracle Enterprise Scheduler</span> Performance Summary page.</p>
+</li>
+<li>
+<p>Change the duration for which job requests display.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">All</span>: Click to display all job requests within a specified, finite period.</p>
+</li>
+<li>
+<p><span class="bold">2 hours</span>: Click to display all job requests within the past two hours.</p>
+</li>
+<li>
+<p><span class="bold">15 minutes</span>: Click to display all job requests within the past fifteen minutes.</p>
+</li>
+<li>
+<p><span class="bold">Slider</span>: Click to display a slider that enables scrolling horizontally to show job requests from a specified period. The slider defaults to whichever time segment is selected, all, 2 hours, or 15 minutes.</p>
+</li>
+<li>
+<p><span class="bold">Calendar</span>: Click the calendar icon to select a time period for which job requests want to be displayed.</p>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<a id="OASAD65805"></a>
+<div class="props_rev_3"><a id="GUID-42800140-9722-4C35-8048-8BD60960845E"></a>
+<h2 id="OASAD-GUID-42800140-9722-4C35-8048-8BD60960845E" class="sect2"><span class="enumeration_section">5.4</span> Check Metrics and Change Metric Thresholds</h2>
+<div>
+<p>When Oracle Fusion Applications are installed and provisioned, a variety of pre-configured monitoring templates are installed as well. These templates simplify the task of monitoring large numbers of targets, as metric thresholds are defined once and applied as needed. The pre-configured metrics can be accessed at the mid-tier level, or at the instance/family/product levels. It is also possible to create custom monitoring templates if needed.</p>
+</div>
+<a id="OASAD65806"></a>
+<div class="props_rev_3"><a id="GUID-DD4D7F9F-DD7F-4C0E-B371-F76C64AB3768"></a>
+<h3 id="OASAD-GUID-DD4D7F9F-DD7F-4C0E-B371-F76C64AB3768" class="sect3"><span class="enumeration_section">5.4.1</span> Use Metrics at the Mid-Tier Level with Monitoring Templates</h3>
+<div>
+<p>The metric-collection settings that were pre-defined can be reviewed, those settings can be edited, or new templates can be created as desired.</p>
+</div>
+<a id="OASAD65860"></a><a id="OASAD65807"></a>
+<div class="props_rev_3"><a id="GUID-9D765EEB-3E48-46BC-89E0-919F742966DF"></a>
+<h4 id="OASAD-GUID-9D765EEB-3E48-46BC-89E0-919F742966DF" class="sect4"><span class="enumeration_section">5.4.1.1</span> Access Mid-Tier Metrics</h4>
+<div>
+<p>The mid-tier templates (for SOA, WebLogic Server, and so on) are accessed from the Middleware Targets menu, not the Fusion Applications Targets menu.</p>
+<p>To access the mid-tier templates, complete the following steps:</p>
+<ol>
+<li>
+<p>From the Targets menu, select <span class="bold">Middleware</span>.</p>
+</li>
+<li>
+<p>From the Enterprise drop-down in the left corner, select <span class="bold">Monitor</span>, and then <span class="bold">Monitoring Templates</span>.</p>
+</li>
+<li>
+<p>In the resulting search pane, type <span class="bold">%Fusion%</span> and check the <span class="bold">Display Oracle Certified Templates</span> box. Click the magnifying glass to launch the search. The resulting templates will be listed below the search pane.</p>
+<div class="figure" id="GUID-9D765EEB-3E48-46BC-89E0-919F742966DF__GUID-D65CBCE0-812F-4610-B388-A2489844DC22">
+<p class="titleinfigure">Figure 5-18 Mid-tier Monitoring Templates</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="1418" height="823" src="img/GUID-935713A6-0DA9-4ED5-B9E4-FB4C1D4CF8F4-default.jpg" alt="Description of Figure 5-18 follows" title="Description of Figure 5-18 follows" /><br />
+<a href="img_text/GUID-935713A6-0DA9-4ED5-B9E4-FB4C1D4CF8F4-default.htm">Description of "Figure 5-18 Mid-tier Monitoring Templates"</a></div>
+<br /></div>
+<!-- class="figure" --></li>
+</ol>
+</div>
+</div>
+<a id="OASAD65861"></a><a id="OASAD65808"></a>
+<div class="props_rev_3"><a id="GUID-9FD1A134-BBA5-4157-8935-C6E9E8E5C4F3"></a>
+<h4 id="OASAD-GUID-9FD1A134-BBA5-4157-8935-C6E9E8E5C4F3" class="sect4"><span class="enumeration_section">5.4.1.2</span> Edit Metrics Manually</h4>
+<div>
+<p>After accessing the list of mid-tier monitoring templates (<a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-9D765EEB-3E48-46BC-89E0-919F742966DF">Access Mid-Tier Metrics</a>), the settings can be reviewed and/or edited by performing the following steps:</p>
+<ol>
+<li>
+<p>Select a template name from the list (for example: the Oracle Certified Fusion Apps / FMW Template for WebLogic Server).</p>
+</li>
+<li>
+<p>Select the <span class="bold">Metrics Thresholds</span> tab at the top of the page. Notice that only a few of the many metrics have been enabled with time limits and/or thresholds.</p>
+</li>
+<li>
+<p>Optionally: Click <span class="bold">Edit</span> to change thresholds, enable or disable options, and click <span class="bold">OK</span>.</p>
+<div class="figure" id="GUID-9FD1A134-BBA5-4157-8935-C6E9E8E5C4F3__GUID-90A2E9DF-133F-4F08-8129-7997214AF2C6">
+<p class="titleinfigure">Figure 5-19 View Monitoring Template Page</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="1417" height="712" src="img/GUID-12D9ADEC-F8E9-49BF-A7EC-69B473BBA6EF-default.jpg" alt="Description of Figure 5-19 follows" title="Description of Figure 5-19 follows" /><br />
+<a href="img_text/GUID-12D9ADEC-F8E9-49BF-A7EC-69B473BBA6EF-default.htm">Description of "Figure 5-19 View Monitoring Template Page"</a></div>
+<br /></div>
+<!-- class="figure" --></li>
+</ol>
+</div>
+</div>
+<a id="OASAD65853"></a>
+<div class="sect4"><a id="GUID-A7A1DD35-F31B-4BA4-A015-CDD2D1838A12"></a>
+<h4 id="OASAD-GUID-A7A1DD35-F31B-4BA4-A015-CDD2D1838A12" class="sect4"><span class="enumeration_section">5.4.1.3</span> Create Mid-Tier Monitoring Templates</h4>
+<div>
+<p>To create a monitoring template from Cloud Control complete the following steps:</p>
+<ol>
+<li>
+<p>Search for existing templates as described in <a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-9D765EEB-3E48-46BC-89E0-919F742966DF">Access Mid-Tier Metrics</a>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Create.</span></p>
+</li>
+<li>
+<p>In the <span class="bold">Metric Threshold</span> tab, select the metrics to add to the template.</p>
+</li>
+</ol>
+<p>Use the tables in <a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE" title="This section discusses how to find the information needed to examine in order to tune the system. It includes how to monitor and tune the database and Oracle Fusion Applications, and troubleshooting.">Troubleshoot the Oracle Fusion Applications Tier Performance</a> for reference:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-BCE2F1E9-DF80-406B-8BE3-CA6020BE5B31__CIHBECIG" title="Key Host Metrics">Table 14-1</a></p>
+</li>
+<li>
+<p><a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-15DCD06C-578F-4F74-A85A-205E4C2654B6__CIHFDAJA" title="WebLogic Server Metrics">Table 14-2</a></p>
+</li>
+<li>
+<p><a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-C756A369-9ED1-4EF9-9B00-6F5268D9F5CA__CIHBECCI" title="Oracle HTML Server Metrics">Table 14-3</a></p>
+</li>
+<li>
+<p><a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-288435C6-660F-49A7-A820-753750913B61__CHDDIJFD" title="Oracle Identity Manager Metrics">Table 14-4</a></p>
+</li>
+<li>
+<p><a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-288435C6-660F-49A7-A820-753750913B61__CHDBFADB" title="tbd">Table 14-5</a></p>
+</li>
+<li>
+<p><a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-D2C4CDFC-9529-4473-A0DF-E80BE54E6FA4__CHDHJJFA" title="Key Enterprise Scheduler Metrics">Table 14-6</a></p>
+</li>
+<li>
+<p><a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-DF2A0321-5F91-4FB8-A4C6-A1D74A42EB21__CHDFEBAC" title="TBD">Table 14-7</a></p>
+</li>
+<li>
+<p><a href="GUID-61BE9E1A-B754-4BB0-9A8B-D7084275FEBE.htm#GUID-DF2A0321-5F91-4FB8-A4C6-A1D74A42EB21__CHDBAAJH" title="TBD">Table 14-8</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<a id="OASAD65810"></a>
+<div class="props_rev_3"><a id="GUID-3974A58B-70AF-4229-9C9C-70290ACCC5B9"></a>
+<h3 id="OASAD-GUID-3974A58B-70AF-4229-9C9C-70290ACCC5B9" class="sect3"><span class="enumeration_section">5.4.2</span> Use Metrics at the Instance, Product Family, and Product Levels</h3>
+<div>
+<p>The metrics pages can be accessed at the Instance, Product Family, or Product levels from within those drop-down menus, rather than from the Enterprise drop-down menu. This example uses the Product Family level.</p>
+<ol>
+<li>
+<p>Access a Product Family, such as the Oracle Fusion Financials and Supply Chain Management, as described in <a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-963FF8FE-152A-410F-97E8-0559E601D0BF">Access the Product Family and Product Home Pages</a>.</p>
+</li>
+<li>
+<p>From the Product Family drop-down menu, select <span class="bold">Monitoring</span>, and then <span class="bold">Metric and Collection Settings</span>.</p>
+<div class="figure" id="GUID-3974A58B-70AF-4229-9C9C-70290ACCC5B9__GUID-42773D58-B956-47BA-91D9-29786D00C2A9">
+<p class="titleinfigure">Figure 5-20 Metric and Collection Settings Page</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="1411" height="650" src="img/GUID-375D3D57-A841-4ADA-A0B3-E16895B26C05-default.jpg" alt="Description of Figure 5-20 follows" title="Description of Figure 5-20 follows" /><br />
+<a href="img_text/GUID-375D3D57-A841-4ADA-A0B3-E16895B26C05-default.htm">Description of "Figure 5-20 Metric and Collection Settings Page"</a></div>
+<br /></div>
+<!-- class="figure" --></li>
+<li>
+<p>Review the Collection Schedule and Thresholds.</p>
+</li>
+<li>
+<div class="p">If desired, change the settings:
+<ol>
+<li>
+<p>Enter Threshold levels in the relevant boxes and click OK to enter new values.</p>
+</li>
+<li>
+<p>Select a Collection Settings link to edit the timing, use of metric data, and to enable/disable Data Collection.</p>
+</li>
+<li>
+<p>Click the Edit symbol beside a setting to edit the Alert message.</p>
+</li>
+<li>
+<p>Click OK when complete.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OASAD65812"></a>
+<div class="props_rev_3"><a id="GUID-4D7BFEF1-F2AA-4422-A04F-CFCCB44641A5"></a>
+<h2 id="OASAD-GUID-4D7BFEF1-F2AA-4422-A04F-CFCCB44641A5" class="sect2"><span class="enumeration_section">5.5</span> Set Up Notifications and Incident Rules</h2>
+<div>
+<p>Cloud Control generates a range of alerts.</p>
+<p>See section Using Notifications in the <span class="italic">Oracle Enterprise Manager Cloud Control Administrator's Guide</span> to complete the configuration.</p>
+</div>
+</div>
+<a id="OASAD65833"></a>
+<div class="props_rev_3"><a id="GUID-C1966424-5B6C-4362-A3A5-8CBC481F62B8"></a>
+<h2 id="OASAD-GUID-C1966424-5B6C-4362-A3A5-8CBC481F62B8" class="sect2"><span class="enumeration_section">5.6</span> Start and Stop Components</h2>
+<div>
+<p>This section describes starting and stopping cluster components. Note that for Fusion Applications, it is often advisable simply to use the fastartstop utility to bring components up and down. See <a href="GUID-F6FF7583-44EE-498C-90F4-86DB7AF53B39.htm#GUID-6009F9B2-EF41-43AA-86C4-31BBEBCB2598">Start and Stop an Oracle Fusion Applications Environment</a>.</p>
+</div>
+<a id="OASAD65834"></a>
+<div class="sect3"><a id="GUID-CA554F75-E405-4688-A9E3-6F97D8B24044"></a>
+<h3 id="OASAD-GUID-CA554F75-E405-4688-A9E3-6F97D8B24044" class="sect3"><span class="enumeration_section">5.6.1</span> Start and Stop an Individual Application Instance for a Cluster Using <span id="OEMCLOUDFRAMESHORT">Cloud Control</span></h3>
+<div>
+<p>To start or stop an application using <span id="GUID-CA554F75-E405-4688-A9E3-6F97D8B24044__OEMCLOUDFRAMESHORT">Cloud Control</span>:</p>
+<ol>
+<li>
+<p>Navigate to a product family home page:</p>
+<ol>
+<li>
+<p>From the <span class="bold">Targets</span> menu, choose <span class="bold">Fusion Applications</span>.</p>
+<p>The Fusion Applications target home page displays.</p>
+</li>
+<li>
+<p>In the table on the Fusion Applications target home page, click the appropriate <span class="bold">Product Family</span> target.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>From the navigation pane, expand the product family and <span class="bold">Fusion Applications</span>, and then the cluster application.</p>
+</li>
+<li>
+<p>Select the application instance you want to start or stop.</p>
+</li>
+<li>
+<p>From the <span class="bold">Fusion J2EE Application</span> menu, choose <span class="bold">Control</span>, and then <span class="bold">Start Up</span> or <span class="bold">Shut Down.</span></p>
+</li>
+</ol>
+<p>If preferred, the WebLogic Server Administration Console can be used, see sections Start applications and modules and Stop applications and modules in the <span class="italic"><span id="GUID-CA554F75-E405-4688-A9E3-6F97D8B24044__WLACH"><cite>Oracle WebLogic Server Administration Console Online Help</cite></span></span>.</p>
+</div>
+</div>
+<a id="OASAD65835"></a>
+<div class="sect3"><a id="GUID-87F1D27B-2452-4DC5-8E6F-3BDA674F6FF6"></a>
+<h3 id="OASAD-GUID-87F1D27B-2452-4DC5-8E6F-3BDA674F6FF6" class="sect3"><span class="enumeration_section">5.6.2</span> Start and Stop all Application Instances for a Cluster Using <span>Cloud Control</span></h3>
+<div>
+<p>To start or stop all the application instances in a cluster using <span id="GUID-87F1D27B-2452-4DC5-8E6F-3BDA674F6FF6__OEMCLOUDFRAMESHORT">Cloud Control</span>:</p>
+<ol>
+<li>
+<p>Navigate to a product family home page:</p>
+<ol>
+<li>
+<p>From the <span class="bold">Targets</span> menu, choose <span class="bold">Fusion Applications</span>.</p>
+<p>The Fusion Applications target home page displays.</p>
+</li>
+<li>
+<p>In the table on the Fusion Applications target home page, click the appropriate <span class="bold">Product Family</span> target.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>From the navigation pane, expand the product family and <span class="bold">Fusion Applications</span>, and then the cluster application.</p>
+</li>
+<li>
+<p>From the <span class="bold">Fusion Cluster Application</span> menu, choose <span class="bold">Control</span>, and then <span class="bold">Start Up</span> or <span class="bold">Shut Down.</span></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OASAD65811"></a>
+<div class="props_rev_3"><a id="GUID-63A7C34E-E740-4155-BC18-2BE1BC5817F9"></a>
+<h2 id="OASAD-GUID-63A7C34E-E740-4155-BC18-2BE1BC5817F9" class="sect2"><span class="enumeration_section">5.7</span> Use Blackouts</h2>
+<div>
+<div class="p">The reasons to use blackouts are listed below:
+<ul style="list-style-type: disc;">
+<li>
+<p>Blackouts make possible to suspend collection of metrics on a target when performing scheduled maintenance on the target</p>
+</li>
+<li>
+<p>Blacking out a target suspends monitoring on the target for the duration of the blackout</p>
+</li>
+<li>
+<p>Blackouts are named entities that mainly consist of a list of targets that participate in the blackout and the schedule that defines when the blackout is in effect</p>
+</li>
+<li>
+<p>Blackouts may be defined on a single target or on aggregate targets such as groups, hosts, systems, or web applications</p>
+</li>
+</ul>
+</div>
+<p>To create a blackout from Cloud Control:</p>
+<ol>
+<li>
+<p>From the <span class="bold">Enterprise</span> menu, choose <span class="bold">Monitoring</span>, and then <span class="bold">Blackouts</span> to access the Blackouts main page.</p>
+</li>
+<li>
+<p>From the table, click <span class="bold">Create</span>.</p>
+<p>Cloud Control displays a wizard page that goes through the steps required to create a blackout. Click <span class="bold">Help</span> from any wizard page for more information on specific steps, or see the Using Blackouts and Notification Blackouts section in the <span class="italic">Enterprise Manager Cloud Control Administrator's Guide</span>.</p>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD65813"></a>
+<div class="sect2"><a id="GUID-3C5EDF12-DCEB-48CC-BE6E-FDB15F4FDBD7"></a>
+<h2 id="OASAD-GUID-3C5EDF12-DCEB-48CC-BE6E-FDB15F4FDBD7" class="sect2"><span class="enumeration_section">5.8</span> Implement Compliance Rules</h2>
+<div>
+<p>Oracle has established an array of configuration details that optimize the performance and handling of Oracle Fusion Applications, and now delivers seeded compliance rules with Cloud Control 13c. &ldquo;Compliance" means having a system adhere to, or comply with, such performance standards. This section explains how compliance Rules are defined, and how they are organized (into Standards and Frameworks). It explains how to associate the Standards to the<span id="GUID-3C5EDF12-DCEB-48CC-BE6E-FDB15F4FDBD7__FA">Oracle Fusion Applications</span> instance, how to create, edit, or delete configurations if desired, and how subsequently to monitor and respond to the results in Cloud Control.</p>
+</div>
+<a id="OASAD65814"></a>
+<div class="sect3"><a id="GUID-C1998183-30F9-41DC-A7AA-89FFA5FA9A00"></a>
+<h3 id="OASAD-GUID-C1998183-30F9-41DC-A7AA-89FFA5FA9A00" class="sect3"><span class="enumeration_section">5.8.1</span> Understand Rules, Standards, and Frameworks</h3>
+<div>
+<p>Compliance is implemented as a hierarchy, wherein configuration details&mdash;such as cache sizes, connection time-outs, and more&mdash;are codified into individual Rules. The Rules are collected into logical groups called Standards, which are further organized into a Framework.</p>
+<p>Out of the box, the predefined compliance Standards can be associated to the own installation. Each of these components&mdash;Rules, Standards, and Frameworks&mdash;can also be created, edited, or deleted by an <span id="GUID-C1998183-30F9-41DC-A7AA-89FFA5FA9A00__FA">Oracle Fusion Applications</span> administrator who has the appropriate privileges. It is possible to freely mix-and-match custom Rules or Standards with predefined ones.</p>
+</div>
+<a id="OASAD65815"></a>
+<div class="sect4"><a id="GUID-15ABEFFB-05F8-4035-B913-4051EBE5C541"></a>
+<h4 id="OASAD-GUID-15ABEFFB-05F8-4035-B913-4051EBE5C541" class="sect4"><span class="enumeration_section">5.8.1.1</span> Real-Time Monitoring Facets</h4>
+<div>
+<p>It is also possible to create &ldquo;real-time monitoring facets" if security warnings associated with particular files on the system need to be created. Facets, which can be associated with multiple Rules, define particular entities that should be monitored on an ongoing basis. Only critical files should be chosen, to avoid excess CPU load and data generation.</p>
+</div>
+</div>
+</div>
+<a id="OASAD65816"></a>
+<div class="sect3"><a id="GUID-A703B282-7D88-4B53-B4C5-C46E622F0696"></a>
+<h3 id="OASAD-GUID-A703B282-7D88-4B53-B4C5-C46E622F0696" class="sect3"><span class="enumeration_section">5.8.2</span> Prerequisites and Related Documentation</h3>
+<div>
+<p>It is necessary to have the <span id="GUID-A703B282-7D88-4B53-B4C5-C46E622F0696__FA">Oracle Fusion Applications</span> plug-in for <span id="GUID-A703B282-7D88-4B53-B4C5-C46E622F0696__OEMCLOUDFRAME">Oracle Enterprise Manager Cloud Control</span> 12c, version 12.1.0.5 or above, installed and configured.</p>
+<p>There are two additional guides that contain how-to steps on using the Compliance interface. This guide gives specific cross-references to them when needed. These guides are:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Configuration, Compliance, and Change Management sections in the <span class="italic">Oracle Enterprise Manager Lifecycle Management Administrator&rsquo;s Guide</span></p>
+</li>
+<li>
+<p>All of the <span class="italic">Oracle Enterprise Manager Cloud Control Oracle Database Compliance Standards Guide</span></p>
+</li>
+</ul>
+</div>
+</div>
+<a id="OASAD65817"></a>
+<div class="sect3"><a id="GUID-8F862572-B778-4F81-B836-0B8D35FFDC39"></a>
+<h3 id="OASAD-GUID-8F862572-B778-4F81-B836-0B8D35FFDC39" class="sect3"><span class="enumeration_section">5.8.3</span> Implement Compliance</h3>
+<div>
+<p>This section explains how to access and implement the Compliance components for <span id="GUID-8F862572-B778-4F81-B836-0B8D35FFDC39__FA">Oracle Fusion Applications</span>.</p>
+</div>
+<a id="OASAD65818"></a>
+<div class="sect4"><a id="GUID-F7EEF447-D067-4B6F-A28E-98F21EF507EF"></a>
+<h4 id="OASAD-GUID-F7EEF447-D067-4B6F-A28E-98F21EF507EF" class="sect4"><span class="enumeration_section">5.8.3.1</span> Understand the Rules, Standards, and Framework in the Compliance Library</h4>
+<div>
+<p>The Compliance components are created, edited, and stored in the Compliance Library.</p>
+</div>
+<a id="OASAD65819"></a>
+<div class="sect5"><a id="GUID-FD0452D9-F19D-4F52-ABCC-D37A71E3F8BE"></a>
+<h5 id="OASAD-GUID-FD0452D9-F19D-4F52-ABCC-D37A71E3F8BE" class="sect5"><span class="enumeration_section">5.8.3.1.1</span> Access the Compliance Library</h5>
+<div>
+<p>To access the Compliance Library, perform the following steps:</p>
+<ol>
+<li>
+<p>Log in to the Cloud Control Console.</p>
+</li>
+<li>
+<p>Select <span class="bold">Enterprise</span>, <span class="bold">Compliance</span> and then <span class="bold">Library</span>.</p>
+<div class="figure" id="GUID-FD0452D9-F19D-4F52-ABCC-D37A71E3F8BE__GUID-C0B29CBF-D200-4759-8C12-2FB3E251003E">
+<p class="titleinfigure">Figure 5-21 Expansion of Enterprise Tab</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="1078" height="424" src="img/GUID-A2F7F736-EA4B-48CE-982D-1A43FE886CD8-default.jpg" alt="Screenshot of expansion of Enterprise and Compliance options in the Oracle Manager Cloud Control" title="Screenshot of expansion of Enterprise and Compliance options in the Oracle Manager Cloud Control" /></div>
+<br /></div>
+<!-- class="figure" -->
+<p>The Compliance Library home page is displayed.</p>
+<div class="figure" id="GUID-FD0452D9-F19D-4F52-ABCC-D37A71E3F8BE__GUID-F88998F8-67E5-490B-8208-643432F56A07">
+<p class="titleinfigure">Figure 5-22 Compliance Library Home Page</p>
+<br />
+<div class="imagecenter"><img class="imagecenter" width="1407" height="779" src="img/GUID-D13DA0FB-D15F-4DAE-9706-3960DE8FDF7B-default.jpg" alt="Screenshot of the Compliance Library home page in Oracle Enterprise Cloud Control" title="Screenshot of the Compliance Library home page in Oracle Enterprise Cloud Control" /></div>
+<br /></div>
+<!-- class="figure" --></li>
+<li>
+<p>Select the relevant tab for the Compliance component to be used.</p>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD65821"></a><a id="OASAD65822"></a><a id="OASAD65823"></a><a id="OASAD65824"></a><a id="OASAD65825"></a><a id="OASAD65820"></a>
+<div class="sect5"><a id="GUID-94750BBE-3267-42E6-867B-ABAC41AA7E2F"></a>
+<h5 id="OASAD-GUID-94750BBE-3267-42E6-867B-ABAC41AA7E2F" class="sect5"><span class="enumeration_section">5.8.3.1.2</span> View the System Defined Rules for Oracle Fusion Applications</h5>
+<div>
+<p>To find the Rules delivered for Oracle Fusion Applications, complete the following steps:</p>
+<ol>
+<li>
+<p>Access the Compliance Library.</p>
+</li>
+<li>
+<p>Select the <span class="bold">Compliance Standard Rules</span> tab.</p>
+</li>
+<li>
+<p>Set the <span class="bold">System-Defined</span> dropdown to <span class="bold">YES</span>.</p>
+</li>
+<li>
+<p>Expand the <span class="bold">Search</span> item at the top left of the page, and select <span class="bold">Applicable To: Fusion Instance</span> in the Search drop-down.</p>
+<p>The defined Rules for Oracle Fusion Applications are listed in the table.</p>
+</li>
+<li>
+<p>To adjust the columns seen, click <span class="bold">View</span>, and then <span class="bold">Columns</span>. It is possible to select/deselect items to include in the overview. Selecting <span class="bold">Manage Columns</span> has the same effect.</p>
+</li>
+<li>
+<p>Follow the same steps to search for the <span id="GUID-94750BBE-3267-42E6-867B-ABAC41AA7E2F__FA">Oracle Fusion Applications</span>-specific Standards or Frameworks.</p>
+</li>
+</ol>
+<p>The 42 defined Rules are organized in four separate Standards. This section describes the primary details of the Rules delivered in:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-94750BBE-3267-42E6-867B-ABAC41AA7E2F__CHDICCJB" title="the 9 rules in this standard">Table 5-5</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-94750BBE-3267-42E6-867B-ABAC41AA7E2F__CHDHBIGE" title="The 7 rules in the OHS Server compliance standard">Table 5-6</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-94750BBE-3267-42E6-867B-ABAC41AA7E2F__CHDBGACC" title="The four rules in the WebLogic Server compliance standard.">Table 5-7</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-94750BBE-3267-42E6-867B-ABAC41AA7E2F__CHDJACIE" title="The 21 compliance rules for this standard.">Table 5-8</a></p>
+</li>
+<li>
+<p><a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-94750BBE-3267-42E6-867B-ABAC41AA7E2F__CHDCIABH" title="Oracle Business Intelligence Configuration Standard">Table 5-9</a></p>
+</li>
+</ul>
+<p>All the compliance Rules for <span>Oracle Fusion Applications</span> currently share the following attributes:</p>
+<p><span class="bold">Type:</span> <span class="italic">Repository Rule</span></p>
+<p><span class="bold">Compliance Rule State:</span> <span class="italic">Production</span></p>
+<p><span class="bold">Severity:</span> <span class="italic">Minor warning</span></p>
+<p><span class="bold">Description:</span> <span class="italic">Fusion Applications Configuration Rule for &lt;Rule name&gt;.</span></p>
+<p><span class="bold">Rationale:</span> <span class="italic">&lt;Rule name&gt;</span></p>
+<div class="tblformal" id="GUID-94750BBE-3267-42E6-867B-ABAC41AA7E2F__CHDICCJB">
+<p class="titleintable">Table 5-5 Java Platform Security Compliance Standard</p>
+<table class="cellalignment32" title="Java Platform Security Compliance Standard " summary="the 9 rules in this standard">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment68" id="d35871e3046">Compliance Standard Rule Name</th>
+<th class="cellalignment69" id="d35871e3049">Recommended Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment70" id="d35871e3054" headers="d35871e3046">
+<p>JPS_jps.authz</p>
+</td>
+<td class="cellalignment71" headers="d35871e3054 d35871e3049">
+<p>ACC</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment70" id="d35871e3061" headers="d35871e3046">
+<p>JPS_jps.combiner.lazyeval</p>
+</td>
+<td class="cellalignment71" headers="d35871e3061 d35871e3049">
+<p>TRUE</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment70" id="d35871e3068" headers="d35871e3046">
+<p>JPS_jps.combiner.optimize</p>
+</td>
+<td class="cellalignment71" headers="d35871e3068 d35871e3049">
+<p>TRUE</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment70" id="d35871e3075" headers="d35871e3046">
+<p>Java Platform Security permission cache size</p>
+</td>
+<td class="cellalignment71" headers="d35871e3075 d35871e3049">
+<p>1000</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment70" id="d35871e3082" headers="d35871e3046">
+<p>Java Platform Security permission cache strategy</p>
+</td>
+<td class="cellalignment71" headers="d35871e3082 d35871e3049">
+<p>PERMISSION_FIFO</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment70" id="d35871e3089" headers="d35871e3046">
+<p>Java Platform Security Enable Policy Lazy Load Property</p>
+</td>
+<td class="cellalignment71" headers="d35871e3089 d35871e3049">
+<p>TRUE</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment70" id="d35871e3096" headers="d35871e3046">
+<p>JPS_jps.policystore.hybrid.mode</p>
+</td>
+<td class="cellalignment71" headers="d35871e3096 d35871e3049">
+<p>FALSE</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment70" id="d35871e3103" headers="d35871e3046">
+<p>Java Platform Security rolemember cache size</p>
+</td>
+<td class="cellalignment71" headers="d35871e3103 d35871e3049">
+<p>1000</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment70" id="d35871e3110" headers="d35871e3046">
+<p>Java Platform Security rolemember cache strategy</p>
+</td>
+<td class="cellalignment71" headers="d35871e3110 d35871e3049">
+<p>FIFO</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment70" id="d35871e3117" headers="d35871e3046">
+<p>Java Platform Security rolemember cache type</p>
+</td>
+<td class="cellalignment71" headers="d35871e3117 d35871e3049">
+<p>'STATIC</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment70" id="d35871e3124" headers="d35871e3046">
+<p>Java Platform Security Refresh Purge Time Out</p>
+</td>
+<td class="cellalignment71" headers="d35871e3124 d35871e3049">
+<p>1296000000</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="tblformal" id="GUID-94750BBE-3267-42E6-867B-ABAC41AA7E2F__CHDHBIGE">
+<p class="titleintable">Table 5-6 Oracle HTTP Server Configuration Standard</p>
+<table class="cellalignment32" title="Oracle HTTP Server Configuration Standard " summary="The 7 rules in the OHS Server compliance standard">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment90" id="d35871e3140">Compliance Standard Rule Name</th>
+<th class="cellalignment23" id="d35871e3143">Recommended Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3148" headers="d35871e3140">
+<p>Oracle HTTP Server keep alive timeout</p>
+</td>
+<td class="cellalignment26" headers="d35871e3148 d35871e3143">
+<p>61</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3155" headers="d35871e3140">
+<p>Oracle HTTP Server maximum clients</p>
+</td>
+<td class="cellalignment26" headers="d35871e3155 d35871e3143">
+<p>1000</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3162" headers="d35871e3140">
+<p>Oracle HTTP Server maximum keep alive requests</p>
+</td>
+<td class="cellalignment26" headers="d35871e3162 d35871e3143">
+<p>0</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3169" headers="d35871e3140">
+<p>Oracle HTTP Server server limit</p>
+</td>
+<td class="cellalignment26" headers="d35871e3169 d35871e3143">
+<p>20</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3176" headers="d35871e3140">
+<p>Fusion Applications Configuration rule for Oracle HTTP Server StartServers</p>
+</td>
+<td class="cellalignment26" headers="d35871e3176 d35871e3143">
+<p>10</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3183" headers="d35871e3140">
+<p>Oracle HTTP Server threads per child</p>
+</td>
+<td class="cellalignment26" headers="d35871e3183 d35871e3143">
+<p>50</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3190" headers="d35871e3140">
+<p>Oracle HTTP Server WLIOTimeoutSecs</p>
+</td>
+<td class="cellalignment26" headers="d35871e3190 d35871e3143">
+<p>900</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3197" headers="d35871e3140">
+<p>Oracle HTTP Server Conn Retry Seconds</p>
+</td>
+<td class="cellalignment26" headers="d35871e3197 d35871e3143">
+<p>1</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3204" headers="d35871e3140">
+<p>Oracle HTTP Server Custom Log</p>
+</td>
+<td class="cellalignment26" headers="d35871e3204 d35871e3143">
+<p>Enabled</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3211" headers="d35871e3140">
+<p>Oracle HTTP Server File caching</p>
+</td>
+<td class="cellalignment26" headers="d35871e3211 d35871e3143">
+<p>OFF</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3218" headers="d35871e3140">
+<p>Oracle HTTP Server Max Spare Threads</p>
+</td>
+<td class="cellalignment26" headers="d35871e3218 d35871e3143">
+<p>800</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3226" headers="d35871e3140">
+<p>Oracle HTTP Server Min Spare Threads</p>
+</td>
+<td class="cellalignment26" headers="d35871e3226 d35871e3143">
+<p>200</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3233" headers="d35871e3140">
+<p>Oracle HTTP Server Thread Limit</p>
+</td>
+<td class="cellalignment26" headers="d35871e3233 d35871e3143">
+<p>250</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3240" headers="d35871e3140">
+<p>Oracle HTTP Server Browser caching</p>
+</td>
+<td class="cellalignment26" headers="d35871e3240 d35871e3143">
+<p>Enabled</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3247" headers="d35871e3140">
+<p>OHS Set Env If No Case</p>
+</td>
+<td class="cellalignment26" headers="d35871e3247 d35871e3143">
+<p>'Request_URI \.swf$ no-gzip don't-vary'</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3254" headers="d35871e3140">
+<p>Oracle HTTP Server Lock File</p>
+</td>
+<td class="cellalignment26" headers="d35871e3254 d35871e3143">
+<p>http_lock</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3261" headers="d35871e3140">
+<p>Oracle HTTP Server StartServers</p>
+</td>
+<td class="cellalignment26" headers="d35871e3261 d35871e3143">
+<p>10</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="tblformal" id="GUID-94750BBE-3267-42E6-867B-ABAC41AA7E2F__CHDBGACC">
+<p class="titleintable">Table 5-7 WebLogic Server Configuration Standard</p>
+<table class="cellalignment32" title="WebLogic Server Configuration Standard " summary="The four rules in the WebLogic Server compliance standard.">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment90" id="d35871e3277">Compliance Standard Rule Name</th>
+<th class="cellalignment23" id="d35871e3280">Recommended Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3285" headers="d35871e3277">
+<p>WebLogic Domain Log Severity</p>
+</td>
+<td class="cellalignment26" headers="d35871e3285 d35871e3280">
+<p>Error</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3292" headers="d35871e3277">
+<p>WebLogic Log File Severity</p>
+</td>
+<td class="cellalignment26" headers="d35871e3292 d35871e3280">
+<p>Warning</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3299" headers="d35871e3277">
+<p>WebLogic Memory Buffer Severity</p>
+</td>
+<td class="cellalignment26" headers="d35871e3299 d35871e3280">
+<p>Error</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3306" headers="d35871e3277">
+<p>WebLogic stdout Severity</p>
+</td>
+<td class="cellalignment26" headers="d35871e3306 d35871e3280">
+<p>Error</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3313" headers="d35871e3277">
+<p>WebLogic Keep Alive Enabled</p>
+</td>
+<td class="cellalignment26" headers="d35871e3313 d35871e3280">
+<p>TRUE</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3320" headers="d35871e3277">
+<p>WebLogic Domain Cache Size</p>
+</td>
+<td class="cellalignment26" headers="d35871e3320 d35871e3280">
+<p>102400</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3327" headers="d35871e3277">
+<p>WebLogic Domain Capacity Increment</p>
+</td>
+<td class="cellalignment26" headers="d35871e3327 d35871e3280">
+<p>1</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3334" headers="d35871e3277">
+<p>WebLogic Domain Cache TTL</p>
+</td>
+<td class="cellalignment26" headers="d35871e3334 d35871e3280">
+<p>600</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3341" headers="d35871e3277">
+<p>WebLogic Domain Conn. Creation Retry Frequency Seconds</p>
+</td>
+<td class="cellalignment26" headers="d35871e3341 d35871e3280">
+<p>60</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3348" headers="d35871e3277">
+<p>WebLogic Domain Elf Fields</p>
+</td>
+<td class="cellalignment26" headers="d35871e3348 d35871e3280">
+<p>'date time time-taken bytes cs-method cs-uri sc-status sc(X-ORACLE-DMS-ECID) cs(ECID-Context) cs(Proxy-Remote-User) cs(Proxy-Client-IP)'</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3355" headers="d35871e3277">
+<p>WebLogic Domain File Name</p>
+</td>
+<td class="cellalignment26" headers="d35871e3355 d35871e3280">
+<p>'logs/access.log.%yyyyMMdd%'</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3363" headers="d35871e3277">
+<p>WebLogic Domain Highest Num Waiters</p>
+</td>
+<td class="cellalignment26" headers="d35871e3363 d35871e3280">
+<p>2147483647</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3370" headers="d35871e3277">
+<p>WebLogic Domain Ignore In Use Connections Enabled</p>
+</td>
+<td class="cellalignment26" headers="d35871e3370 d35871e3280">
+<p>TRUE</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3377" headers="d35871e3277">
+<p>WebLogic Domain Max Group Hierarchies In Cache</p>
+</td>
+<td class="cellalignment26" headers="d35871e3377 d35871e3280">
+<p>15000</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3384" headers="d35871e3277">
+<p>WebLogic Domain Log File Format</p>
+</td>
+<td class="cellalignment26" headers="d35871e3384 d35871e3280">
+<p>Extended</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3391" headers="d35871e3277">
+<p>WebLogic Domain Login Delay Seconds</p>
+</td>
+<td class="cellalignment26" headers="d35871e3391 d35871e3280">
+<p>0</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3398" headers="d35871e3277">
+<p>WebLogic Domain Pinned To Thread</p>
+</td>
+<td class="cellalignment26" headers="d35871e3398 d35871e3280">
+<p>FALSE</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3405" headers="d35871e3277">
+<p>WebLogic Domain Statement Cache Size</p>
+</td>
+<td class="cellalignment26" headers="d35871e3405 d35871e3280">
+<p>5</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3412" headers="d35871e3277">
+<p>WebLogic Domain Statement Timeout</p>
+</td>
+<td class="cellalignment26" headers="d35871e3412 d35871e3280">
+<p>-1</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3419" headers="d35871e3277">
+<p>WebLogic Domain Test Table Name</p>
+</td>
+<td class="cellalignment26" headers="d35871e3419 d35871e3280">
+<p>SQL SELECT 1 FROM DUAL</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3426" headers="d35871e3277">
+<p>WebLogic Domain Test Frequency Seconds</p>
+</td>
+<td class="cellalignment26" headers="d35871e3426 d35871e3280">
+<p>300</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3433" headers="d35871e3277">
+<p>WebLogic Domain Test Connections On Reserve</p>
+</td>
+<td class="cellalignment26" headers="d35871e3433 d35871e3280">
+<p>TRUE</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3441" headers="d35871e3277">
+<p>WebLogic Domain Enable Group Membership Lookup Hierarchy Caching</p>
+</td>
+<td class="cellalignment26" headers="d35871e3441 d35871e3280">
+<p>TRUE</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3448" headers="d35871e3277">
+<p>WebLogic Domain Second To Trust An Idle Conn.</p>
+</td>
+<td class="cellalignment26" headers="d35871e3448 d35871e3280">
+<p>0</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3455" headers="d35871e3277">
+<p>WebLogic Domain Initial Capacity</p>
+</td>
+<td class="cellalignment26" headers="d35871e3455 d35871e3280">
+<p>0'</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3462" headers="d35871e3277">
+<p>WebLogic Domain Min Capacity</p>
+</td>
+<td class="cellalignment26" headers="d35871e3462 d35871e3280">
+<p>0'</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3469" headers="d35871e3277">
+<p>WebLogic Domain Max Capacity</p>
+</td>
+<td class="cellalignment26" headers="d35871e3469 d35871e3280">
+<p>100</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3476" headers="d35871e3277">
+<p>WebLogic Domain Inactive Conn. Timeout Seconds</p>
+</td>
+<td class="cellalignment26" headers="d35871e3476 d35871e3280">
+<p>0</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3483" headers="d35871e3277">
+<p>WebLogic Domain Init SQL</p>
+</td>
+<td class="cellalignment26" headers="d35871e3483 d35871e3280">
+<p>SQL SELECT 1 FROM DUAL'</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3490" headers="d35871e3277">
+<p>WebLogic Domain State Check Interval</p>
+</td>
+<td class="cellalignment26" headers="d35871e3490 d35871e3280">
+<p>1000</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="tblformal" id="GUID-94750BBE-3267-42E6-867B-ABAC41AA7E2F__CHDJACIE">
+<p class="titleintable">Table 5-8 Java Virtual Machine Configuration Standard</p>
+<table class="cellalignment32" title="Java Virtual Machine Configuration Standard" summary="The 21 compliance rules for this standard.">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment90" id="d35871e3506">Compliance Standard Rule Name</th>
+<th class="cellalignment23" id="d35871e3509">Recommended Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3514" headers="d35871e3506">
+<p>JVM_HTTPClient.socket.connectionTimeout</p>
+</td>
+<td class="cellalignment26" headers="d35871e3514 d35871e3509">
+<p>300000</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3521" headers="d35871e3506">
+<p>JVM_HTTPClient.socket.readTimeout</p>
+</td>
+<td class="cellalignment26" headers="d35871e3521 d35871e3509">
+<p>300000</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3528" headers="d35871e3506">
+<p>JVM_HeapDumpOnOutOfMemoryError</p>
+</td>
+<td class="cellalignment26" headers="d35871e3528 d35871e3509">
+<p>+HeapDumpOnOutOfMemoryError</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3535" headers="d35871e3506">
+<p>JVM_VOMaxFetchSize</p>
+</td>
+<td class="cellalignment26" headers="d35871e3535 d35871e3509">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3542" headers="d35871e3506">
+<p>JVM_Xgc</p>
+</td>
+<td class="cellalignment26" headers="d35871e3542 d35871e3509">
+<p>genpar</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3549" headers="d35871e3506">
+<p>JVM_Xmanagement</p>
+</td>
+<td class="cellalignment26" headers="d35871e3549 d35871e3509">
+<p>1</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3556" headers="d35871e3506">
+<p>JVM_Xverbose</p>
+</td>
+<td class="cellalignment26" headers="d35871e3556 d35871e3509">
+<p>gc</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3563" headers="d35871e3506">
+<p>JVM_jbo.ampool.minavailablesize</p>
+</td>
+<td class="cellalignment26" headers="d35871e3563 d35871e3509">
+<p>1</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3570" headers="d35871e3506">
+<p>JVM_jbo.ampool.timetolive</p>
+</td>
+<td class="cellalignment26" headers="d35871e3570 d35871e3509">
+<p>-1</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3577" headers="d35871e3506">
+<p>JVM_jbo.doconnectionpooling</p>
+</td>
+<td class="cellalignment26" headers="d35871e3577 d35871e3509">
+<p>TRUE</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3584" headers="d35871e3506">
+<p>JVM_jbo.load.components.lazily</p>
+</td>
+<td class="cellalignment26" headers="d35871e3584 d35871e3509">
+<p>TRUE</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3592" headers="d35871e3506">
+<p>JVM_jbo.max.cursors</p>
+</td>
+<td class="cellalignment26" headers="d35871e3592 d35871e3509">
+<p>5</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3599" headers="d35871e3506">
+<p>JVM_jbo.recyclethreshold</p>
+</td>
+<td class="cellalignment26" headers="d35871e3599 d35871e3509">
+<p>75</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3606" headers="d35871e3506">
+<p>JVM_jbo.txn.disconnect_level</p>
+</td>
+<td class="cellalignment26" headers="d35871e3606 d35871e3509">
+<p>1</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3613" headers="d35871e3506">
+<p>JVM_jps.auth.debug</p>
+</td>
+<td class="cellalignment26" headers="d35871e3613 d35871e3509">
+<p>FALSE</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3620" headers="d35871e3506">
+<p>JVM_jrockit</p>
+</td>
+<td class="cellalignment26" headers="d35871e3620 d35871e3509">
+<p>jrockit</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3627" headers="d35871e3506">
+<p>JVM_weblogic.ProductionModeEnabled</p>
+</td>
+<td class="cellalignment26" headers="d35871e3627 d35871e3509">
+<p>TRUE</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3634" headers="d35871e3506">
+<p>JVM_weblogic.SocketReaders</p>
+</td>
+<td class="cellalignment26" headers="d35871e3634 d35871e3509">
+<p>3</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3641" headers="d35871e3506">
+<p>JVM_weblogic.http.client.weblogic.http.client.defaultConnectTimeout</p>
+</td>
+<td class="cellalignment26" headers="d35871e3641 d35871e3509">
+<p>300000</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3648" headers="d35871e3506">
+<p>JVM_weblogic.http.client.defaultReadTimeout</p>
+</td>
+<td class="cellalignment26" headers="d35871e3648 d35871e3509">
+<p>300000</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment91" id="d35871e3655" headers="d35871e3506">
+<p>JVM_weblogic.security.providers.authentication.LDAPDelegatePoolSize</p>
+</td>
+<td class="cellalignment26" headers="d35871e3655 d35871e3509">
+<p>20</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="tblformal" id="GUID-94750BBE-3267-42E6-867B-ABAC41AA7E2F__CHDCIABH">
+<p class="titleintable">Table 5-9 Oracle Business Intelligence Configuration Standard</p>
+<table class="cellalignment32" title="Oracle Business Intelligence Configuration Standard" summary="Oracle Business Intelligence Configuration Standard">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment28" id="d35871e3671">Compliance Standard Rule Name</th>
+<th class="cellalignment29" id="d35871e3674">Recommended Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3679" headers="d35871e3671">
+<p>BI Presentation Service Client Session Expire Minutes</p>
+</td>
+<td class="cellalignment31" headers="d35871e3679 d35871e3674">
+<p>210</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3686" headers="d35871e3671">
+<p>BI Server DB Gateway Thread Range</p>
+</td>
+<td class="cellalignment31" headers="d35871e3686 d35871e3674">
+<p>40-200</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3693" headers="d35871e3671">
+<p>BI Server DB Gateway Thread Stack Size</p>
+</td>
+<td class="cellalignment31" headers="d35871e3693 d35871e3674">
+<p>0</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3700" headers="d35871e3671">
+<p>BI Server Enable</p>
+</td>
+<td class="cellalignment31" headers="d35871e3700 d35871e3674">
+<p>YES</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3707" headers="d35871e3671">
+<p>BI Server Init Block Cache Entries</p>
+</td>
+<td class="cellalignment31" headers="d35871e3707 d35871e3674">
+<p>20</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3714" headers="d35871e3671">
+<p>BI Server Max Cache Entries</p>
+</td>
+<td class="cellalignment31" headers="d35871e3714 d35871e3674">
+<p>1000</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3721" headers="d35871e3671">
+<p>BI Server Max cache Entry Size</p>
+</td>
+<td class="cellalignment31" headers="d35871e3721 d35871e3674">
+<p>20 MB</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3728" headers="d35871e3671">
+<p>BI Server Max Drilldown Query Cache Entries</p>
+</td>
+<td class="cellalignment31" headers="d35871e3728 d35871e3674">
+<p>1024</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3735" headers="d35871e3671">
+<p>BI Server Max Expanded Subquery Predicates</p>
+</td>
+<td class="cellalignment31" headers="d35871e3735 d35871e3674">
+<p>8192</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3742" headers="d35871e3671">
+<p>BI Server Max Query Plan Cache Entries</p>
+</td>
+<td class="cellalignment31" headers="d35871e3742 d35871e3674">
+<p>1024</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3749" headers="d35871e3671">
+<p>BI Server Max Request Per Session Limit</p>
+</td>
+<td class="cellalignment31" headers="d35871e3749 d35871e3674">
+<p>5000</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3757" headers="d35871e3671">
+<p>BI Server Max Session Limit</p>
+</td>
+<td class="cellalignment31" headers="d35871e3757 d35871e3674">
+<p>2000</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3764" headers="d35871e3671">
+<p>BI Presentation Service New Sync Logon Wait Seconds</p>
+</td>
+<td class="cellalignment31" headers="d35871e3764 d35871e3674">
+<p>60</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3771" headers="d35871e3671">
+<p>BI Server Read Only Mode</p>
+</td>
+<td class="cellalignment31" headers="d35871e3771 d35871e3674">
+<p>NO</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3778" headers="d35871e3671">
+<p>BI Server Thread Range</p>
+</td>
+<td class="cellalignment31" headers="d35871e3778 d35871e3674">
+<p>40-1000</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3785" headers="d35871e3671">
+<p>BI Server Thread Stack Size</p>
+</td>
+<td class="cellalignment31" headers="d35871e3785 d35871e3674">
+<p>0</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3792" headers="d35871e3671">
+<p>BI Presentation Service Path Job Log</p>
+</td>
+<td class="cellalignment31" headers="d35871e3792 d35871e3674">
+<p>'saw.mktgsqlsubsystem.joblog'</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3799" headers="d35871e3671">
+<p>BI Presentation Service Path Saw</p>
+</td>
+<td class="cellalignment31" headers="d35871e3799 d35871e3674">
+<p>saw</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3806" headers="d35871e3671">
+<p>BI Server FMW Sec.Max No. Of Connections</p>
+</td>
+<td class="cellalignment31" headers="d35871e3806 d35871e3674">
+<p>2000</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3813" headers="d35871e3671">
+<p>BI Presentation Service Max Queue</p>
+</td>
+<td class="cellalignment31" headers="d35871e3813 d35871e3674">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d35871e3820" headers="d35871e3671">
+<p>BI Presentation Service Max Queue</p>
+</td>
+<td class="cellalignment31" headers="d35871e3820 d35871e3674">
+<p>N/A</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+</div>
+<a id="OASAD65826"></a>
+<div class="sect4"><a id="GUID-97E67CB9-0423-4D44-80E5-9DCD34636708"></a>
+<h4 id="OASAD-GUID-97E67CB9-0423-4D44-80E5-9DCD34636708" class="sect4"><span class="enumeration_section">5.8.3.2</span> Apply Standards to Targets in the Fusion Instance</h4>
+<div>
+<p>To associate the compliance Rules on the Oracle Fusion Applications instance, it is necessary to apply the relevant Standards to the relevant targets.</p>
+<p>To associate predefined Standards to targets, complete the following steps:</p>
+<ol>
+<li>
+<p>Navigate to <span class="bold">Enterprise</span> select <span class="bold">Compliance</span>, then choose <span class="bold">Library</span> and then select the <span class="bold">Compliance Standards</span> tab.</p>
+</li>
+<li>
+<p>Expand the <span class="bold">Search</span> item at the top of the page and select <span class="bold">Applicable To: Fusion Instance.</span> Click <span class="bold">Search</span>.</p>
+<p>The predefined Standards are listed.</p>
+</li>
+<li>
+<p>Select a Standard and click <span class="bold">Associate Targets.</span></p>
+</li>
+<li>
+<p>On the <span class="bold">Target Association</span> page, click <span class="bold">Add</span>. A search page is displayed.</p>
+</li>
+<li>
+<p>Select the relevant target name(s) from the list and click <span class="bold">Select</span>.</p>
+<p>The host(s) appear in the Target Association page.</p>
+</li>
+<li>
+<p>Select the host(s) and click <span class="bold">Enable</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">OK</span>.</p>
+</li>
+<li>
+<p>On the Save Association window that appears, click <span class="bold">YES</span>.</p>
+</li>
+</ol>
+<p>After a Compliance Standard is associated to a specific target, the results can be seen almost immediately in the Compliance Results page.</p>
+</div>
+<a id="OASAD65827"></a>
+<div class="sect5"><a id="GUID-CB4E8D98-86A6-4521-B119-941BCAB8A9A9"></a>
+<h5 id="OASAD-GUID-CB4E8D98-86A6-4521-B119-941BCAB8A9A9" class="sect5"><span class="enumeration_section">5.8.3.2.1</span> Create, Edit, or Delete Compliance Details</h5>
+<div>
+<p>Rules, Standards, and Frameworks can all be created, edited, or deleted as desired. To do so requires having the correct user permissions. Thereafter, it is a simple matter to click the appropriate button (such as <span class="bold">Create</span>) and fill out the subsequent page.</p>
+<p>For information on compliance user permissions and how to create, edit, or delete, see the following topics in the <span class="italic">Oracle Enterprise Manager Lifecycle Management Administrator's Guide</span>:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Privileges and Roles Needed to Use the Compliance Features</p>
+</li>
+<li>
+<p>Operations on Compliance Frameworks</p>
+</li>
+<li>
+<p>Operations on Compliance Standards</p>
+</li>
+<li>
+<p>Operations on Compliance Standards Rules</p>
+</li>
+</ul>
+</div>
+</div>
+<a id="OASAD65828"></a>
+<div class="sect5"><a id="GUID-3D8F7843-8460-4558-AC0C-996BEACDE72B"></a>
+<h5 id="OASAD-GUID-3D8F7843-8460-4558-AC0C-996BEACDE72B" class="sect5"><span class="enumeration_section">5.8.3.2.2</span> Create Real-Time Monitoring Facets</h5>
+<div>
+<p>Real-time monitoring facets allow an administrator to receive warnings that are generated on-the-fly, should certain sensitive files be accessed or changed. This is especially useful as a security alert in case of any potential unauthorized activity to important parts of the system.</p>
+<p>There are no real-time monitoring facets delivered with Cloud Control 12c, version 12.1.0.5, for <span id="GUID-3D8F7843-8460-4558-AC0C-996BEACDE72B__FA">Oracle Fusion Applications</span>. To create customized monitoring facets and apply them to the system, see section Real-Time Monitoring Facets in <span class="bold">Managing Compliance</span> of <span class="italic">Oracle Enterprise Manager Lifecycle Management Administrator's Guide</span>.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<a id="OASAD2317"></a>
+<div class="props_rev_3"><a id="GUID-D4535D8F-CEE0-4E78-BA11-FC8F924AA4A5"></a>
+<h2 id="OASAD-GUID-D4535D8F-CEE0-4E78-BA11-FC8F924AA4A5" class="sect2"><span class="enumeration_section">5.9</span> Monitor Product Families and Products</h2>
+<div>
+<p>The product family and product home pages make possible to monitor various aspects of the servers and applications.</p>
+<p>The main steps in monitoring product families and products are as follows:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Verify component status.</p>
+</li>
+<li>
+<p>View and modify performance metrics.</p>
+</li>
+<li>
+<p>Monitor the status of any scheduled jobs.</p>
+</li>
+</ul>
+<p>To monitor a product family or product in <span id="GUID-D4535D8F-CEE0-4E78-BA11-FC8F924AA4A5__FAOEMFRAMESHORT">Fusion Applications Control</span> or Cloud Control:</p>
+<ol>
+<li>
+<p>Navigate to the <span class="bold">product family</span> home page or alternatively, navigate to the <span class="bold">product home</span> page:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Open <span class="bold">Cloud Control</span>:</p>
+<ol>
+<li>
+<p>From the <span class="bold">Targets</span> menu, choose <span class="bold">Fusion Applications</span>.</p>
+<p>The Fusion Applications list page is displayed.</p>
+</li>
+<li>
+<p>In the table on the Fusion Applications page, click the <span class="bold">Fusion Instance</span> whose overview page needs to be displayed.</p>
+<p>The Fusion Instance page is displayed.</p>
+</li>
+<li>
+<p>In the Fusion Instance overview page, expand the Fusion instance and click the name of the product family.</p>
+<p>But if this process started from the product home page,</p>
+</li>
+<li>
+<p>In the Fusion Instance overview page, expand the Fusion instance and the product family. Click the name of the product whose home page needs to be displayed.</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>Use the following sections on the main product family or product page to verify the status of various components.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Applications and Infrastructure</span>: Verify the availability of Fusion Applications and <span id="GUID-D4535D8F-CEE0-4E78-BA11-FC8F924AA4A5__FMW">Oracle Fusion Middleware</span>.</p>
+</li>
+<li>
+<p><span class="bold">Topology</span>: View the complete topology of the product or product family. Click a node to view the home page of the selected component.</p>
+</li>
+<li>
+<p><span class="bold">Fusion Applications</span>: Verify the status of Fusion cluster applications, Fusion applications and the relationship between domain and server.</p>
+</li>
+<li>
+<p><span class="bold">Servers</span>: Verify the status of Fusion cluster applications and all related servers.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>In the <span class="bold">Key Performance Indicators</span> section, view the product or product family main performance metrics. Click the <span class="bold">View Actions</span> menu to perform any of the following tasks.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Modifying performance metrics</span>: The performance metrics can be viewed and modified in this section by clicking the <span class="bold">View Actions</span> menu in the section and selecting <span class="bold">Select Metrics</span>.</p>
+<p>The Select Metrics popup window is displayed.</p>
+<div class="figure" id="GUID-D4535D8F-CEE0-4E78-BA11-FC8F924AA4A5__GUID-12F11CDE-A7E0-4B56-BD53-6E93EE063161"><br />
+<div class="imagecenter"><img class="imagecenter" width="609" height="571" src="img/GUID-9B3E18BD-DECE-4684-B1A8-552EEC371D07-default.png" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<br /></div>
+<!-- class="figure" -->
+<p>In the Select Metrics dialog, a particular metric can be searched for in the Search field and select or remove the desired metrics to be displayed or hide in the <span class="bold">Key Performance Indicators</span> section.</p>
+<p>For more information about monitoring and modifying performance metrics, see <a href="GUID-CDC7FEB0-D101-420E-A8B4-7F07DCDEAA80.htm#GUID-A59B63C3-2F03-4939-ADE0-E40E5BC1ADB8">Monitor Business Performance Metrics for a Product Family</a>.</p>
+</li>
+<li>
+<p><span class="bold">Saving charts</span>: metric charts can be saved to a file by selecting <span class="bold">View Actions</span>, and then <span class="bold">Save charts</span>.</p>
+</li>
+<li>
+<p><span class="bold">Restoring default charts</span>: it is possible to restore the metric charts to their defaults such that only the default metrics display, by selecting <span class="bold">View Actions</span>, and then <span class="bold">Restore default charts</span>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Monitor the status of any scheduled jobs by using the <span id="GUID-D4535D8F-CEE0-4E78-BA11-FC8F924AA4A5__SCHEDULER">Oracle Enterprise Scheduler</span> sections described. More scheduled jobs displayed can be viewed in these sections by clicking <span class="bold">Show All</span> at the bottom of each section.</p>
+<p>Clicking <span class="bold">Show All</span> displays the <span>Oracle Enterprise Scheduler</span> section in a larger pane such that a larger number of relevant jobs display.</p>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD720"></a>
+<div class="props_rev_3"><a id="GUID-A59B63C3-2F03-4939-ADE0-E40E5BC1ADB8"></a>
+<h2 id="OASAD-GUID-A59B63C3-2F03-4939-ADE0-E40E5BC1ADB8" class="sect2"><span class="enumeration_section">5.10</span> Monitor Business Performance Metrics for a Product Family</h2>
+<div>
+<p>The Key Performance Indicators page displays an overview of the performance metrics of a given product family. Typically, several default metrics display on the page in the form of graphs. Multiple metrics are tracked, and these can be added to the Key Performance Indicators page. Each product belonging to a given product family has its own set of metrics.</p>
+<p>The Key Performance Indicators page can be modified as follows:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Add or remove metrics from the page.</p>
+</li>
+<li>
+<p>Display performance data in tabular format.</p>
+</li>
+<li>
+<p>Save or delete a set of performance charts.</p>
+</li>
+<li>
+<p>Reorganize the display of charts, for example move charts up or down.</p>
+</li>
+<li>
+<p>Display the performance metrics of another instance of the product on top of the current chart sets, or display earlier metrics of the same product instance on top of current metrics.</p>
+</li>
+<li>
+<p>Toggle on or off the grid display on the performance chart set.</p>
+</li>
+<li>
+<p>Modify the performance time period.</p>
+</li>
+</ul>
+<p>To view and modify a product family's business performance summary page in <span id="GUID-A59B63C3-2F03-4939-ADE0-E40E5BC1ADB8__FAOEMFRAMESHORT">Fusion Applications Control</span> or Cloud Control:</p>
+<ol>
+<li>
+<p>Navigate to the product family home page.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Open <span class="bold">Cloud Control</span>:</p>
+<ol>
+<li>
+<p>From the <span class="bold">Targets</span> menu, choose <span class="bold">Fusion Applications</span>.</p>
+<p>The Fusion Applications list page is displayed.</p>
+</li>
+<li>
+<p>In the table on the Fusion Applications list page, click the product family.</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>Display the Key Performance Indicators page.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>In <span class="bold">Cloud Control</span>: From the <span class="bold">Product Family</span> menu, select <span class="bold">Monitoring</span> and then select <span class="bold">Key Performance Indicators</span>.</p>
+</li>
+</ul>
+<p>The product family home page is displayed. The key metrics can be viewed for the product family in the <span class="bold">Key Performance Indicators</span> page.</p>
+</li>
+<li id="GUID-A59B63C3-2F03-4939-ADE0-E40E5BC1ADB8__CIHDBHIF">
+<p>Display the metrics pane by clicking <span class="bold">Show Metric Palette</span>.</p>
+<p>The metrics that display on the Key Performance Indicators pane can be modified.</p>
+<p>In the Metrics Palette, select the desired metrics to be displayed in the Key Performance Indicators pane.</p>
+</li>
+<li>
+<p>In the <span class="bold">Metrics Palette Search</span> field, is possible to search for a particular metric by entering the name of the metric that is being searched for and clicking the <span class="bold">Search</span> button.</p>
+</li>
+<li>
+<p>To change the order in which metrics display on the Key Performance Indicators pane, or delete a metric from the display.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Click the bar to the left of the metric name and drag the metric up or down.</p>
+</li>
+<li>
+<p>Click the <span class="bold">Close</span> button on the upper right corner of the metric to delete it from the display.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>To display more information about a metric, click on the metric name.</p>
+<p>The Additional Information dialog is displayed. From this dialog, more details about the metric can be viewed using the following links:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Problem Analysis</span>: Directs to the Problem Analysis page. This page makes possible to to see a metric with other related metrics, which are affecting the metrics being analyzed. It also shows the related targets and the related targets topology. The Problem Analysis is only available for request-related metrics, such as the Request Processing Time (ms) and Request (per minute).</p>
+</li>
+<li>
+<p><span class="bold">Analyze Logs</span>: Displays a message that makes possible to to view the logs for a target on which the metric is viewed.</p>
+</li>
+<li>
+<p><span class="bold">Metric Details</span>: Makes possible to view historical metric data.</p>
+</li>
+<li>
+<p><span class="bold">Target Home</span>: Goes to the home page.</p>
+</li>
+</ul>
+<p>When used together, Problem Analysis and Analyze Logs can help to inspect metrics, target status information, and logs during troubleshooting. These links are not available for all metrics.</p>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD723"></a>
+<div class="props_rev_3"><a id="GUID-8D198617-0850-4E29-8712-571A589B4069"></a>
+<h2 id="OASAD-GUID-8D198617-0850-4E29-8712-571A589B4069" class="sect2"><span class="enumeration_section">5.11</span> Monitor Business Performance Metrics for a Product</h2>
+<div>
+<p>The Performance Summary page displays an overview of the performance metrics for a given product. Typically, several default metrics display on the page in the form of graphs. Multiple metrics are tracked, and these can be added to the Performance Summary page. Each product belonging to a given product family has its own set of metrics.</p>
+<p>The performance page can be modified as follows:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Add or remove metrics from the page.</p>
+</li>
+<li>
+<p>Display performance data in tabular format.</p>
+</li>
+<li>
+<p>Save or delete a set of performance charts.</p>
+</li>
+<li>
+<p>Reorganize the display of charts, for example move charts up or down.</p>
+</li>
+<li>
+<p>Display the performance metrics of another product family on top of the current chart sets, or display earlier metrics of the same product family on top of current metrics.</p>
+</li>
+<li>
+<p>Toggle on or off the grid display on the performance chart set.</p>
+</li>
+<li>
+<p>Modify the performance time period.</p>
+</li>
+</ul>
+<p>To view and modify a product's business performance summary page in Cloud Control:</p>
+<ol>
+<li>
+<p>Navigate to the product home page.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Open <span class="bold">Cloud Control</span>:</p>
+<ol>
+<li>
+<p>From the <span class="bold">Targets</span> menu, choose <span class="bold">Fusion Applications</span>.</p>
+<p>The Fusion Applications list page is displayed.</p>
+</li>
+<li>
+<p>In the table on the Fusion Applications list page, expand a product family and click an individual product.</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>Display the Key Performance Indicators page.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>In <span class="bold">Cloud Control</span>: From the <span class="bold">Product</span> menu, choose <span class="bold">Monitoring</span> and then select <span class="bold">Key Performance Indicators</span>.</p>
+</li>
+</ul>
+<p>The product family home page is displayed. The key metrics for the product family can be viewed in the <span class="bold">Key Performance Indicators</span> page.</p>
+</li>
+<li>
+<p>Display the metrics pane by clicking <span class="bold">Show Metric Palette</span>.</p>
+<p>The metrics that display on the Key Performance Indicators pane can be modified.</p>
+<p>In the Metrics Palette, select the desired metrics to be displayed in the Key Performance Indicators pane.</p>
+</li>
+<li>
+<p>In the <span class="bold">Metrics Palette Search</span> field, is possible to search for a particular metric by entering the name of the metric that is being searched for and clicking the <span class="bold">Search</span> button.</p>
+</li>
+<li>
+<p>To change the order in which metrics display on the Key Performance Indicators pane, or delete a metric from the display.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Click the bar to the left of the metric name and drag the metric up or down.</p>
+</li>
+<li>
+<p>Click the <span class="bold">Close</span> button on the upper right corner of the metric to delete it from the display.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>To display more information about a metric, click on the metric name.</p>
+<p>The Additional Information dialog is displayed. From this dialog, more details about the metric can be viewed using the following links:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Problem Analysis</span>: Directs to the Problem Analysis page. This page makes possible to to see a metric with other related metrics, which are affecting the metrics being analyzed. It also shows the related targets and the related targets topology. The Problem Analysis is only available for request-related metrics, such as the Request Processing Time (ms) and Request (per minute).</p>
+</li>
+<li>
+<p><span class="bold">Analyze Logs</span>: Displays a message that makes possible to to view the logs for a target on which the metric is viewed.</p>
+</li>
+<li>
+<p><span class="bold">Metric Details</span>: Makes possible to view historical metric data.</p>
+</li>
+<li>
+<p><span class="bold">Target Home</span>: Goes to the home page.</p>
+</li>
+</ul>
+<p>When used together, Problem Analysis and Analyze Logs can help to inspect metrics, target status information, and logs during troubleshooting. These links are not available for all metrics.</p>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD6381"></a>
+<div class="props_rev_3"><a id="GUID-D2A2D7E3-66AD-4005-BB9F-4D0FD61D2772"></a>
+<h2 id="OASAD-GUID-D2A2D7E3-66AD-4005-BB9F-4D0FD61D2772" class="sect2"><span class="enumeration_section">5.12</span> Manage Disk Usage for Log Files and Diagnostic Test Results</h2>
+<div>
+<p>In busy computing environments, the amount of disk space used by log files can become a concern. Large log files can also affect system performance. To manage log file sizes and disk space</p>
+</div>
+<a id="OASAD6382"></a>
+<div class="props_rev_3"><a id="GUID-EC2CBAF8-B303-4E5F-BAB2-B14842C94D9D"></a>
+<h3 id="OASAD-GUID-EC2CBAF8-B303-4E5F-BAB2-B14842C94D9D" class="sect3"><span class="enumeration_section">5.12.1</span> Manage Incidents and Flood Control for Fusion Applications:</h3>
+<div>
+<p>If a problem recurs frequently without being resolved, multiple incidents and large numbers of log messages may be created, without providing significant new information. The feature that governs whether multiple incidents can be created for the same problem within a particular time period (and, if so, how many) is known as flood control. For information about the default profile option configuration settings for <span id="GUID-EC2CBAF8-B303-4E5F-BAB2-B14842C94D9D__FA">Oracle Fusion Applications</span> incident creation, including settings for flood control, see <a href="GUID-3204BDBB-F9DE-4B0A-A918-46DF8833A2D1.htm#GUID-3EFB3AEA-481D-499F-9C70-BE5021862CCD__CHDDBEHA" title="Lists and describes profile options for Oracle Fusion Applications incidents.">Table 23-1</a>.</p>
+</div>
+</div>
+<a id="OASAD6383"></a>
+<div class="props_rev_3"><a id="GUID-A767ED6A-0138-45FC-9BEA-6F386197E27D"></a>
+<h3 id="OASAD-GUID-A767ED6A-0138-45FC-9BEA-6F386197E27D" class="sect3"><span class="enumeration_section">5.12.2</span> Manage Incidents and Flood Control for Middleware Components</h3>
+<div>
+<p>As part of the infrastructure for creating and handling incidents, the <span id="GUID-A767ED6A-0138-45FC-9BEA-6F386197E27D__FMW">Oracle Fusion Middleware</span> Diagnostics Framework includes settings that can be configured to affect functionality areas such as the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Whether multiple incidents that originate from Java or PL/SQL code can be created for the same problem within a particular time period, and, if so, how many (flood control).</p>
+</li>
+<li>
+<p>The total amount of space allocated for storage of information about incidents that originate from Java or PL/SQL code. (Older incidents are purged automatically when the allocated space limit is reached.)</p>
+</li>
+</ul>
+<p>For more information about these <span>Oracle Fusion Middleware</span> Diagnostic Framework settings, see the Configuring the Diagnostic Framework section in the <span class="italic"><span id="GUID-A767ED6A-0138-45FC-9BEA-6F386197E27D__ASADM"><cite>Administering Oracle Fusion Middleware</cite></span>.</span></p>
+</div>
+</div>
+<a id="OASAD6387"></a>
+<div class="sect3"><a id="GUID-AEB45E37-FC22-4480-9A0D-E0A7D29D03BD"></a>
+<h3 id="OASAD-GUID-AEB45E37-FC22-4480-9A0D-E0A7D29D03BD" class="sect3"><span class="enumeration_section">5.12.3</span> Purge the Results of Selected Diagnostic Tests</h3>
+<div>
+<p>From time to time, it would be necessary to remove diagnostic test run results from the database, to keep the Run Status table from becoming too large. For information about deleting diagnostic test results, see <a href="GUID-FE333592-7A78-438C-8743-FA5C36221622.htm#GUID-26715C76-6FEF-4ADD-9FA3-2134FE71DD7E">Purge the Results of Selected Diagnostic Test Runs</a>.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment10">
+<tr>
+<td class="cellalignment17">
+<table class="cellalignment15">
+<tr>
+<td class="cellalignment14"><a href="GUID-68F74DBA-26E2-43D1-A4EE-02D0B810384D.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment14"><a href="GUID-63CDDA6B-4DAE-4C6D-8141-C48769254F17.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2011, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment19">
+<table class="cellalignment13">
+<tr>
+<td class="cellalignment14"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment14"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

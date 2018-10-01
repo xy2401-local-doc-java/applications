@@ -1,0 +1,1234 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Data File Instructions and Delivery (Chapter 3) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:15 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM Data Loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM1672963.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM2126423.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="HCM Data Loader loads data from .zip files. Each .zip file can contain one or more data (.dat) files. Each data file includes
+      data for a single business object, such as location, grade, worker, or salary. The data file has the name of a business object
+      that is supported by HCM Data Loader, such as Job.dat or Worker.dat. The name of the data file is specified by HCM Data Loader.
+      In any .zip file, you supply data files only for the business objects that you're loading. Deliver one object per .zip file.
+      For example, create one .zip file for jobs, one for workers, and so on. Review the recommended load order on the Initiate
+      Data Load page, and load objects in that order. Correct any errors before loading the next object to avoid data-reference
+      errors."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">6/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM2121438" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">3</span>Data File Instructions and Delivery
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2041955">HCM Data Loader Data and .Zip Files: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2028389">File Line Instructions and File Discriminators: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2028196">The METADATA Instruction: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2028271">The MERGE Instruction: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2028303">The DELETE Instruction: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2028326">The SET and COMMENT Instructions: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2037169">Generating and Using Template Files: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2121437">FAQs for Data File Instructions and Delivery</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM2041955">
+                  <h2>HCM Data Loader Data and .Zip Files: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>HCM Data Loader loads data from .zip files.
+                     Each .zip file can contain one or more data (.dat) files. Each data
+                     file includes data for a single business object, such as location, grade, worker, or salary.
+                     The data file has the name of a business object that is supported
+                     by HCM Data Loader, such as Job.dat or Worker.dat. The name of the
+                     data file is specified by HCM Data Loader. In any .zip file, you supply
+                     data files only for the business objects that you're loading.
+                  </p>
+                  
+                  
+                  
+                  <p>This figure shows an example .zip file structure.
+                     The .zip file contains no folders for data (.dat) files.
+                  </p>
+                  <img src="img/hcm_hdl_zipfile_02_20058130.png" alt="The structure of the HCM Data Loader .zip file" class="fusappimg">
+                  
+                  <p>You define the name of the .zip file, which must
+                     be in alphanumeric characters (a-z, A-Z, and 0-9). The .zip file can
+                     be encrypted as a whole, but HCM Data Loader doesn't support the encryption
+                     of individual data files.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2041951">
+                     <h3 class="topictitle">BlobFiles and ClobFiles Folders in the .Zip File</h3>
+                     
+                     <p>The only two folders that can appear in the .zip
+                        file are:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>BlobFiles, which is for binary
+                              large objects
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>ClobFiles, which is for character
+                              large objects
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>In these folders you place files to be loaded either
+                        as attachments or into large objects. The file names of these attachments
+                        or images must be in alphanumeric characters (a-z, A-Z, and 0-9).
+                        The data type of the attribute that is used to load your attachment
+                        or large-object data determines which folder to use. For example,
+                        the <span class="uicontrol">File</span> attribute in the document
+                        record object is used for loading attachment files and it has a data
+                        type of BLOB. Therefore, you place files to be loaded as attachments
+                        to document records in the BlobFiles folder.
+                     </p>
+                     
+                     <p>This figure shows an example .zip file structure
+                        when attachments are included.
+                     </p>
+                     <img src="img/hcm_hdl_blobfile_02_20058131.png" alt="An HCM Data Loader .zip file containing a BlobFiles&#xA;folder" class="fusappimg">
+                     
+                     <p>The contents of the BlobFiles folder in this example
+                        are as shown here:
+                     </p>
+                     <img src="img/hcm_hdl_txtfile_02_20058141.png" alt="The contents of the BlobFiles folder" class="fusappimg">
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2041952">
+                     <h3 class="topictitle">Data Files</h3>
+                     
+                     <p>Each HCM Data Loader data file is specific to a business
+                        object. You provide all components that you want to load for a business-object
+                        hierarchy in the same data file.  For example, you provide job, job
+                        valid grade, job evaluation, job extra information, and job legislative
+                        extra information components in Job.dat. This approach enables you
+                        to see all data for a business object and supports the validation
+                        of parent references on all child components. It also simplifies the
+                        construction of the .zip file, as separate directories aren't required
+                        and fewer data files have to be generated. 
+                     </p>
+                     
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        You can generate data-file templates for all supported
+                        objects on the Initiate Data Load page. Each template defines the
+                        complete structure of the selected object.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM2127585.htm#FAIHM2034878">Loading Images, Attachments, and Large Strings: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2028389">
+                  <h2>File Line Instructions and File Discriminators: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Each line in a data file begins with an instruction,
+                     and most lines include a file discriminator. This topic introduces
+                     the available instructions and describes the file discriminators.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2028387">
+                     <h3 class="topictitle">File Line Instructions</h3>
+                     
+                     <p>This table identifies the instructions that can appear
+                        in an HCM Data Loader data file.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Instruction
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Line Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>METADATA</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Definition</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Identifies the business-object component and the
+                                    attributes of that component for which you're including values in
+                                    the data file.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>MERGE</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Data</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Provides data to be merged in Oracle HCM Cloud. </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>DELETE</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Data</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Identifies a business-object component to be purged
+                                    from Oracle HCM Cloud.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>SET</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Control</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>Enables override of the reserved
+                                          characters for a file.
+                                       </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Disables automatic postload processing
+                                          of the worker object.
+                                       </p>
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>COMMENT</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Comment</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Adds a comment to the data file.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2028426">
+                     <h3 class="topictitle">File Discriminators</h3>
+                     
+                     <p>METADATA, MERGE, and DELETE lines must include a
+                        file discriminator value, which identifies the business-object component
+                        to which the instruction applies. For example, the available file
+                        discriminators for the job business object are:
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Business-Object Component
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 File Discriminator
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Job</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Job valid grade</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>JobValidGrade</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Job evaluation</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>JobEvaluation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Job extra information</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>JobExtraInfo</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Job legislative extra information</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>JobLegislative</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The file discriminator appears immediately after
+                        the instruction in a file line. HCM Data Loader templates for a business
+                        object include the file discriminator for each of the object's components.
+                     </p>
+                     
+                     <p>This figure shows example instructions, file discriminator,
+                        attribute names, and attributes for the job business object.
+                     </p>
+                     <img src="img/hrc_hdl_datfile_02_20058143.png" alt="An example data file" class="fusappimg">
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2028196">
+                  <h2>The METADATA Instruction: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The METADATA instruction in an HCM Data Loader
+                     data file identifies a business-object component and its attributes.
+                     The attributes are those for which you're including values in the
+                     data file.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2028193">
+                     <h3 class="topictitle">Instruction Format</h3>
+                     
+                     <p>The METADATA line has this format:</p>
+                     
+                     <pre><code>METADATA|&lt;DISCRIMINATOR&gt;|&lt;ATTRIBUTE 1&gt;|&lt;ATTRIBUTE 2&gt;|&lt;ATTRIBUTE n&gt;<br></code></pre>
+                     <p>For example:</p>
+                     <pre><code>METADATA|Job|SetCode|JobCode|JobFamilyName|JobName|EffectiveStartDate|EffectiveEndDate<br></code></pre>
+                     
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM2028194">
+                     <h3 class="topictitle">Restrictions</h3>
+                     
+                     <p>These restrictions apply to the METADATA instruction:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The METADATA line must appear before
+                              the MERGE or DELETE data line to which it relates.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You can include multiple METADATA
+                              lines in a single data file. However, each line must be for a different
+                              business-object component. For example, in a Job.dat file, you can
+                              include METADATA lines for the job and job valid grade components.
+                              However, you can't include two job METADATA lines.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2028195">
+                     <h3 class="topictitle">Validation</h3>
+                     
+                     <p>Each METADATA line must:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Include a valid discriminator for
+                              the object that's identified in the data file name. For example, in
+                              a Job.dat file, the METADATA line must include one of these discriminators:
+                              Job, JobGrade, JobEvaluation, JobExtrainfo, and JobLegislative.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Be unique in the file. That is,
+                              you can't provide multiple METADATA lines for the same discriminator
+                              in a single data file.
+                           </p>
+                           <p>For example, having two
+                              METADATA lines for the JobGrade discriminator in the same data file
+                              is invalid.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Include only valid attributes for
+                              the discriminator. Attribute names are case-sensitive, but they can
+                              appear in any order.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Include the attributes for at least
+                              one of the supported key types. For example, if you're using source
+                              keys to identify a record uniquely, then you must include SourceSystemOwner
+                              and SourceSystemId attributes in the METADATA line.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>HCM Data Loader business-object templates include
+                        METADATA lines with all available attributes for each component of
+                        a business object.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2028271">
+                  <h2>The MERGE Instruction: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The MERGE instruction identifies a data line.
+                     You use the MERGE instruction whether creating or updating objects,
+                     and HCM Data Loader identifies the correct action.
+                  </p>
+                  
+                  
+                  
+                  <p>You can supply either partial or complete objects
+                     using the MERGE instruction. The data supplied on the MERGE line is
+                     merged into existing Oracle HCM Cloud data. The order in which you
+                     specify MERGE lines isn't necessarily the order in which HCM Data
+                     Loader processes them.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2028268">
+                     <h3 class="topictitle">Instruction Format</h3>
+                     
+                     <p>The MERGE line has this format:</p>
+                     
+                     <pre><code>MERGE|&lt;DISCRIMINATOR&gt;|&lt;ATTRIBUTE 1&gt;|&lt;ATTRIBUTE 2&gt;|&lt;ATTRIBUTE n&gt;<br></code></pre>
+                     <p>For example:</p>
+                     <pre><code>MERGE|Job|SE|Software Engineer|Common|2015/01/01|4712/12/31<br></code></pre>
+                     
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM2028269">
+                     <h3 class="topictitle">Restrictions</h3>
+                     
+                     <p>These restrictions apply to the MERGE line:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>You must not supply multiple MERGE
+                              lines for the same component in a single data file, unless the object
+                              is date-effective. For example, you can't supply two MERGE lines,
+                              one to create a person ethnicity record and one to update it, in the
+                              same data file. As the object isn't date-effective, these instructions
+                              would correct the data rather than update it. In such cases, you can
+                              supply only current data. Alternatively, you can create the record
+                              in one data file and update it in a different data file.
+                           </p>
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              HCM Data Loader doesn't process individual file lines,
+                              but groups related lines. This grouping works for date-effective records
+                              because the file lines are processed in order of effective start date.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>You can include MERGE and DELETE
+                              instructions in the same file, but not for the same logical record.
+                              For example, you can't load multiple date-effective records for the
+                              same component, such as a single job, using a mix of MERGE and DELETE
+                              instructions. However, you can provide both MERGE and DELETE instructions
+                              for components of a single logical object. For example, you can provide:
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>MERGE instructions for a worker
+                                    and person name
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>DELETE instructions for the person
+                                    e-mail and phone components of the same worker object
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2028270">
+                     <h3 class="topictitle">Validation</h3>
+                     
+                     <p>Each MERGE line must:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Be preceded by the METADATA line
+                              for the same discriminator.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Contain the same attributes as
+                              the relevant METADATA line and in the same order.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Not include values for attributes
+                              that aren't in the METADATA line.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Contain a unique identifier for
+                              itself, using any of the supported key types. In addition, each data
+                              line for a child component must include a unique reference to its
+                              parent. For example, GradeRateValue must include a unique reference
+                              to its associated GradeRate.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2028303">
+                  <h2>The DELETE Instruction: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The DELETE instruction identifies a business-object
+                     component to purge from Oracle HCM Cloud. The component doesn't have
+                     to have been loaded using HCM Data Loader.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2028301">
+                     <h3 class="topictitle">Instruction Format</h3>
+                     
+                     <p>The DELETE instruction has this format:</p>
+                     
+                     <pre><code>DELETE|&lt;DISCRIMINATOR&gt;|&lt;ATTRIBUTE 1&gt;|&lt;ATTRIBUTE 2&gt;|ATTRIBUTE n&gt;<br></code></pre>
+                     <p>For example:</p>
+                     <pre><code>METADATA|JobFamily|EffectiveStartDate|EffectiveEndDate|JobFamilyName
+DELETE|JobFamily|2012/10/01|4712/12/31|Sales01<br></code></pre>
+                     
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM2028302">
+                     <h3 class="topictitle">Restrictions</h3>
+                     
+                     <p>These restrictions apply to the DELETE instruction:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>You can delete a business object
+                              or a component of a business object. However, you can't delete individual
+                              date-effective records.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You can't provide MERGE and DELETE
+                              instructions for the same record in a single data file. The order
+                              in which HCM Data Loader processes instructions is unpredictable.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>You can't recover deleted records.
+                              Therefore, try to correct data rather than delete and recreate it.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Not all business-object components
+                              can be deleted. For information about deletion support, see Oracle
+                              HCM Data Loader: Business Object Documentation (2020600.1) on My Oracle
+                              Support at https://support.oracle.com.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="http://support.oracle.com/epmos/faces/DocumentDisplay?id=2020600.1">Oracle HCM Data Loader: Business Object Support
+                              (2020600.1)</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2028326">
+                  <h2>The SET and COMMENT Instructions: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The SET and COMMENT instructions are optional,
+                     and neither instruction includes a discriminator. This topic describes
+                     when to use the SET and COMMENT instructions.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2028324">
+                     <h3 class="topictitle">Using the SET Instruction to Override Reserved
+                     Characters</h3>
+                     
+                     <p>The format of the SET instruction for overriding
+                        the reserved characters for a file is:
+                     </p>
+                     
+                     <pre><code>SET FILE_DELIMITER &lt;VALUE&gt;
+SET FILE_ESCAPE &lt;VALUE&gt;
+SET FILE_NEW_LINE &lt;VALUE&gt;<br></code></pre>
+                     <p>For example, the default file delimiter is the vertical
+                        bar (|). To change it to a comma, include this instruction:
+                     </p>
+                     <pre><code>SET FILE_DELIMITER ,<br></code></pre>
+                     <p>The new value can be up to 10 characters.</p>
+                     
+                     <p>The SET instruction must appear before the first
+                        METADATA line in the data file.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2307105">
+                     <h3 class="topictitle">Using the SET Instruction to Disable Automatic
+                     Processing</h3>
+                     
+                     <p>You can use the SET instruction to disable some automatic
+                        postload processing of the worker object. By default, these processes
+                        run automatically after you load workers:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Refresh Manager Hierarchy</p>
+                        </li>
+                        
+                        <li>
+                           <p>Update Person Search Keywords</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>To prevent both processes from running automatically,
+                        include this SET instruction in the Worker.dat file:
+                     </p>
+                     <pre><code>SET INVOKE_POST_PROCESS N <br></code></pre>
+                     <p>To prevent only Refresh Manager Hierarchy from running
+                        automatically, include this SET instruction in the Worker.dat file:
+                     </p>
+                     <pre><code>SET DISABLE_POST_PROCESS_TASKS RefreshManagerHierarchy<br></code></pre>
+                     <p>To prevent only Update Person Search Keywords from
+                        running automatically, include this SET instruction in the Worker.dat
+                        file:
+                     </p>
+                     <pre><code>SET DISABLE_POST_PROCESS_TASKS UpdatePersonSearchKeywords<br></code></pre>
+                     <p>The SET instruction must appear before the first
+                        METADATA line in the data file.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2368758">
+                     <h3 class="topictitle">Using the SET Instruction to Set the Date-Effective
+                     Maintenance Mode</h3>
+                     
+                     <p>When you create business objects containing date-effective
+                        components, you include this instruction at the start of the file:
+                     </p>
+                     
+                     <pre><code>SET PURGE_FUTURE_CHANGES Y<br></code></pre>
+                     <p>This instruction sets the date-effective maintenance
+                        mode to Replace. In this mode, which is the default mode, the contents
+                        of the .dat file replace any existing data.
+                     </p>
+                     
+                     <p>When you update business objects containing date-effective
+                        components, you include this instruction at the start of the file:
+                     </p>
+                     <pre><code>SET PURGE_FUTURE_CHANGES N<br></code></pre>
+                     <p>This instruction sets the date-effective maintenance
+                        mode to Retain. In this mode, any existing future-dated changes are
+                        retained.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2356676">
+                     <h3 class="topictitle">Using the SET Instruction to Calculate FTE Values</h3>
+                     
+                     <p>To request automatic calculation of full-time equivalent
+                        (FTE) values for worker assignments, include this SET instruction
+                        in the Worker.dat file:
+                     </p>
+                     
+                     <pre><code>SET CALCULATE_FTE Y<br></code></pre>
+                     
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM2028325">
+                     <h3 class="topictitle">Using the COMMENT Instruction</h3>
+                     
+                     <p>The COMMENT instruction adds a comment to the data
+                        file. It has no effect on the processing and can appear anywhere in
+                        the file. COMMENT lines have the following format:
+                     </p>
+                     
+                     <pre><code>COMMENT &lt;comment&gt;<br></code></pre>
+                     <p>For example:</p>
+                     <pre><code>COMMENT Data for Business Object: Job Version: V2 Created on: 25-03-2016<br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM2127585.htm#FAIHM2036180">Managing Reserved Characters: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2037169">
+                  <h2>Generating and Using Template Files: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>HCM Data Loader provides a template file
+                     for each supported business-object hierarchy. The template contains:
+                  </p>
+                  
+                  
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>A COMMENT line, which identifies
+                           the business object, its version, and the file-creation date.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>A METADATA line for each component
+                           of the business-object hierarchy that you can load for the business
+                           object. The METADATA line includes every attribute of the component,
+                           including environment-specific configured flexfield attributes.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>You can generate template files and use them as the
+                     basis of your own data files. The topic describes how to generate
+                     and use template files.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2037168">
+                     <h3 class="topictitle">Generating a Single Template File</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Open the Data Exchange work area
+                              and select the Initiate Data Load task on the Tasks panel tab.
+                           </p>
+                           <p>By default, the Initiate Data Load page lists all business
+                              objects that HCM Data Loader supports. You can filter the list by
+                              searching for a specific object.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Select an object in the Search
+                              Results table and click the <span class="uicontrol">Generate Template</span> icon on the table toolbar.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Schedule page, click <span class="uicontrol">Submit</span>. Click <span class="uicontrol">OK</span> to close the Confirmation dialog box.
+                           </p>
+                           <p>When you
+                              click <span class="uicontrol">Submit</span>, you start the process
+                              that identifies the business-object shape and generates the template
+                              file. You can monitor progress on the Processes tab on the Initiate
+                              Data Load page.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>On the Business Objects tab, click
+                              the <span class="uicontrol">Refresh</span> icon.
+                           </p>
+                           <p>Once the template exists, an icon appears in the <span class="uicontrol">File</span> column and the <span class="uicontrol">Last Generated</span> column shows the time stamp.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click the <span class="uicontrol">Download File</span> icon to download the template.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        You can download an existing template. You don't
+                        have to regenerate it for each use, unless you know that the object
+                        has changed. For example, you may have configured a flexfield since
+                        the template was last generated. 
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2037204">
+                     <h3 class="topictitle">Generating Multiple Template Files</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click the <span class="uicontrol">Generate Templates</span> button on the Initiate Data Load page.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>On the Schedule page, leave the <span class="uicontrol">Module</span> field set to <span class="uicontrol">All</span> to generate templates for all supported business
+                              objects. Alternatively, select a module. For example, set <span class="uicontrol">Module</span> to <span class="uicontrol">Talent</span> to generate templates for all talent business objects.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Once the generation process completes,
+                              you can download templates individually. Click the <span class="uicontrol">Download File</span> icon for an object on the
+                              Business Objects tab of the Initiate Data Load page. Alternatively,
+                              follow these steps to download a single .zip file of the generated
+                              templates:
+                           </p>
+                           
+                           <ol>
+                              
+                              <li>
+                                 <p>Select the Processes tab on the
+                                    Initiate Data Load page.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click the <span class="uicontrol">Download File</span> icon for your process.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2037205">
+                     <h3 class="topictitle">Using Template Files</h3>
+                     
+                     <p>Template files identify the names of all available
+                        attributes of a business object, including those of environment-specific
+                        attributes, such as flexfield segments.  Don't simply copy the METADATA
+                        lines from the template file and use them in your own data files.
+                        Instead, include in your data files:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>METADATA lines for the components
+                              that you want to load 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Attribute names for the values
+                              you want to supply
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You can improve the speed and efficiency of the import
+                        and load processes by declaring only the attributes for which you're
+                        supplying data. Remove METADATA lines and attribute names that you
+                        don't intend to use.
+                     </p>
+                     
+                     <p>HCM Data Loader validates every attribute name on
+                        every METADATA line. It also identifies any potential dependencies
+                        on other business objects in the same .zip file by reviewing the attributes
+                        supplied in METADATA.  For example, the Job.dat file may contain a
+                        METADATA line for the ValidGrade component with the GradeId attribute.
+                        In this case, HCM Data Loader assumes that the Job.dat file has a
+                        potential dependency on grades.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2121437">
+                  <h2>FAQs for Data File Instructions and Delivery</h2>
+                  
+                  <div class="sect2" id="FAIHM2077163">
+                     <h3>How should I deliver data when creating objects?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Deliver one object per .zip file. For example,
+                        create one .zip file for jobs, one for workers, and so on. Review
+                        the recommended load order on the Initiate Data Load page, and load
+                        objects in that order. Correct any errors before loading the next
+                        object to avoid data-reference errors.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2077173">
+                     <h3>How should I deliver data for incremental updates?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Supply only changed and required attribute
+                        values. Deliver all business-object files in the same .zip file. HCM
+                        Data Loader processes them in the correct order and loads referenced
+                        data before the data that references it.
+                     </p>
+                     
+                     
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

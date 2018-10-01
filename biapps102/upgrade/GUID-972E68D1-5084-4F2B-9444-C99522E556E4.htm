@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Running the Source Upgrade Load Plan</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="You can run BI Applications with a particular source version, such as Fusion 10 or 11. That source version might be upgraded, such as from Fusion 10 to Fusion 11. When a source upgrade occurs, the regular data load plan detects the upgrade in the source version and logs an entry in the source version history tracking table. After the regular data load plan logs an entry into the source version history tracking table, you see a source version detection message that requests you to run the Source Upgrade Load Plan." />
+<meta name="dcterms.created" content="2017-05-25T22:33:25Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Upgrade Guide" />
+<meta name="dcterms.identifier" content="E72290-05" />
+<meta name="dcterms.isVersionOf" content="BIAUP" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-D9006769-5810-4552-B65E-B5A72F9248CA.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-B37884B2-4D5D-463B-9DF4-158F2465E8FB.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAUP.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-972E68D1-5084-4F2B-9444-C99522E556E4"></a> <span id="PAGE" style="display:none;">35/41</span> <!-- End Header -->
+<h1 id="BIAUP-GUID-972E68D1-5084-4F2B-9444-C99522E556E4" class="sect1">Running the Source Upgrade Load Plan</h1>
+<div>
+<p>You can run BI Applications with a particular source version, such as Fusion 10 or 11. That source version might be upgraded, such as from Fusion 10 to Fusion 11. When a source upgrade occurs, the regular data load plan detects the upgrade in the source version and logs an entry in the source version history tracking table. After the regular data load plan logs an entry into the source version history tracking table, you see a source version detection message that requests you to run the Source Upgrade Load Plan.</p>
+<div class="section">Instead of running the Source Upgrade Load Plan, you can reset the data warehouse, register the source, and perform a full load plan. You will want to run the Source Upgrade Load Plan if you need to use the existing data to the extent possible without forcing a load of the entire data warehouse.
+<div class="p">You can run the Source Upgrade Load Plan in these upgrade scenarios:
+<ul style="list-style-type: disc;">
+<li>
+<p>Fusion Adaptor</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Fusion 9 to Fusion 10</p>
+</li>
+<li>
+<p>Fusion 10 to Fusion 11</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Taleo Adaptor</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Taleo 14A to Taleo 15A</p>
+</li>
+<li>
+<p>Taleo 14B to Taleo 15A</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<p>Before running the Source Upgrade Load Plan, deactivate the load plan schedules. Do not manually run any load plans while running the Source Upgrade Load Plan.</p>
+<p>To run the Source Upgrade Load Plan:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Run a script on the sources to ensure that all ODI connections that have been pointing to logical schemas in the previous Fusion release now point to logical schemas in the upgraded Fusion release. The DSN remains the same.</span>
+<div>
+<p>Run the <code class="codeph">UpgradePLV</code> script to rewire PLV in the Configuration Manager.</p>
+<pre dir="ltr">
+<span class="bold">Usage</span>
+
+UpgradePLV.ksh &lt;oracle home&gt; &lt;username&gt; &lt;password&gt; &lt;dns&gt; &lt;PLV code&gt; [&lt;hostname&gt; &lt;port number&gt;]
+ &lt;oracle home&gt;: Oracle Home
+    &lt;username&gt;: Administrator username
+    &lt;password&gt;: Administrator password
+         &lt;dns&gt;: DNS of source instance which need to be upgraded
+    &lt;PLV code&gt;: Upgrade PLV code
+    &lt;hostname&gt;: Hostname of server where the Configuration Manager server is running (Optional, default: localhost)
+ &lt;port number&gt;: Port number where the Configuration Manager server is running (Optional, default: 9704)
+
+<span class="bold">Example On Linux</span>
+
+cd /scratch/kdinaman/work/mw3607/Oracle_BI1/biapps/admin/provisioning/update
+/bin/ksh UpgradePLV.ksh /scratch/kdinaman/work/mw3607/Oracle_BI1 Administrator1 Admin12345 205 FUSION_9_0
+
+<span class="bold">Example On Windows</span>
+
+cd C:\work\mw3607\Oracle_BI1\biapps\admin\provisioning\update
+UpgradePLV.bat C:\work\mw3607\Oracle_BI1 Administrator1  Admin12345 205 FUSION_9_0
+</pre></div>
+</li>
+<li class="stepexpand"><span>Regenerate the load plan to ensure that the plan has scenarios or steps that correspond to the upgraded source release.</span></li>
+<li class="stepexpand"><span>In the upgraded repository, select <span class="bold">Pre-Defined Load Plans</span>, then <span class="bold">Source Upgrade</span> to run the Source Upgrade Load Plan that synchronizes the tables and data with the metadata in the current BI Applications release.</span></li>
+<li class="stepexpand"><span>If the Fusion source is in the cloud, then place the full request files on the UCM/Storage Service for any VOs that are being reloaded as part of the Source Upgrade Load Plan using either of the following steps:</span>
+<ol>
+<li class="substepexpand"><span>Navigate to <span class="bold">Request for Full Load files</span> (the following figure displays the navigation path) by selecting <span class="bold">Source Upgrade</span>, <span class="bold">FusionUpgrade</span>, <span class="bold">FUSION_9_0_to_FUSION_10_0</span> or <span class="bold">FUSION_10_0_to_FUSION_11_0</span> , <span class="bold">Is Source Upgrade Required</span>, <span class="bold">Serial</span>, <span class="bold">SDS</span>, <span class="bold">File to SDS Load Phase</span>, and <span class="bold">Pre Load</span>. On the Fusion Applications side, select <span class="bold">Request for Full Load files</span> for those VOs that are included in the Cloud Table list parameter for that step.</span>
+<div>
+<div class="figure" id="GUID-972E68D1-5084-4F2B-9444-C99522E556E4__GUID-AFD8C01A-1507-43CA-99B5-A133C29C07C6"><img width="820" height="601" src="img/GUID-01A27F63-F244-4250-80CB-AFE555E699F0-default.gif" alt="Description of GUID-01A27F63-F244-4250-80CB-AFE555E699F0-default.gif follows" title="Description of GUID-01A27F63-F244-4250-80CB-AFE555E699F0-default.gif follows" /><br />
+<a href="img_text/GUID-01A27F63-F244-4250-80CB-AFE555E699F0-default.htm">Description of the illustration GUID-01A27F63-F244-4250-80CB-AFE555E699F0-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="substepexpand"><span>Run the Request for Full Load Files&nbsp;step in the load plan to generate the BATCHREQUEST file&nbsp;that needs to be uploaded to the UCM/Storage Service. Then run a single extract with the Fusion Applications Extractor. The extract downloads the BATCHREQUEST file and provides a full file for the VOs that are present in the BATCHREQUEST file.</span></li>
+</ol>
+</li>
+</ol>
+<div class="section">To verify that the Source Upgrade Load Plan ran successfully:
+<ol>
+<li>
+<p>View the context and ensure that all the physical Fusion Connections are mapped to logical schemas in the upgraded Fusion release. Nothing should be mapped to schemas in the previous Fusion release.</p>
+</li>
+<li>
+<p>Ensure that the DSN in the upgraded Fusion release is the same DSN as in the previous Fusion release.</p>
+</li>
+<li>
+<p>In the Generated Load Plan, ensure that all scenarios correspond to the upgraded Fusion release and not to the previous Fusion release.</p>
+</li>
+<li>
+<p>In the W_ETL_LOAD_DATES&nbsp;table, ensure that the entries correspond to the upgraded Fusion release and not to the previous Fusion release.</p>
+</li>
+<li>
+<p>Ensure that all existing load plan schedules are moved to the newly generated load plans.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment105">
+<tr>
+<td class="cellalignment112">
+<table class="cellalignment110">
+<tr>
+<td class="cellalignment109"><a href="GUID-D9006769-5810-4552-B65E-B5A72F9248CA.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment109"><a href="GUID-B37884B2-4D5D-463B-9DF4-158F2465E8FB.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment114">
+<table class="cellalignment108">
+<tr>
+<td class="cellalignment109"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment109"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment109"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

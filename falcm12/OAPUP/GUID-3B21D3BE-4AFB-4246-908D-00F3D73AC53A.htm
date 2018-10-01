@@ -1,0 +1,2759 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Upgrade Oracle Identity Management to Release 12</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="dcterms.created" content="2018-03-22T11:25:04Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Fusion Applications Upgrade Guide" />
+<meta name="dcterms.identifier" content="E70415-09" />
+<meta name="dcterms.isVersionOf" content="OAPUP" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2011, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-B23BA47E-F742-49AF-A08E-DD3BAC6DB3AC.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-8A80C606-D05D-4AA9-AC82-7194EF47776B.htm" title="Next" type="text/html" />
+<link rel="alternate" href="OAPUP.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A"></a> <span id="PAGE" style="display:none;">11/17</span> <!-- End Header -->
+<h1 id="OAPUP-GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A" class="sect1"><span class="enumeration_chapter">7</span> Upgrade Oracle Identity Management to Release 12</h1>
+<div>
+<p>This chapter describes how to upgrade your existing Oracle Identity Manager (IDM) environment for Oracle Fusion Applications to Release 12 (11.12.x.0.0). Perform the steps in this chapter after you have completed <a href="GUID-B23BA47E-F742-49AF-A08E-DD3BAC6DB3AC.htm#GUID-134063FB-70D2-43A1-968D-5BD2BAF3E0B3">Resume Upgrade Orchestrator (Oracle VM Only)</a>.</p>
+<div class="p">This chapter contains the following sections:
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-34247C31-C4F8-4FDE-99DB-B56895D30188">Pre-Upgrade Requirements</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-A71A9EB0-FF00-491B-A3DB-2335C61FD683" title="Review the following flowchart and roadmap for an overview of the upgrade process for IDM for FA to Release 12.">IDM for FA Upgrade Roadmap</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-DD15951A-6FD3-42BC-8ECB-76947363F321" title="The upgrade steps will vary according to the type of IDM installation you have.">Identify your IDM Topology</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-FA57B7E4-F9D8-455D-8131-E4CA66B56B98" title="Perform this steps only if your IDM for FA is integrated with Enterprise IDM. You must disconnect integrations by cloning your IDM environment. The cloning process involves the following high-level steps:">Disconnect Enterprise IDM Integrations</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-704B34A5-26BA-4E6F-A601-5E876362EC3C" title="This section describes how to upgrade type I IDM environments.">Upgrade Type I IDM Environments</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-FA9464DF-260B-48C6-9BD2-821D8F985E8E" title="Before the upgrade of your type II IDM environment, perform the following tasks:The topology&nbsp;discovery tool&nbsp;introspects the existing IDM environment to discover information that will be needed for setting up a parallel true-up environment.&nbsp;Before running the discovery tool, perform the following steps. Note that if your environment has OIF and it is not up during discovery, then OIF will not be part of the upgrade process.If your set up has IDM nodes on different machines (including scaled out support), the discovery tool will have to be run serially on each IDM node. A true-up environment is an entirely new IDM environment, which behaves exactly like the current IDM installation. Your true-up environment will conform to the layout and structure of an environment that has been provisioned using the IDM provisioning scripts provided by Oracle.Before setting up your true-up environment, ensure you meet the following prerequisites:To set up the binary files, you need the True-up tars.This section describes how to migrate the configuration to the true-up environment. This section contains the following sections:Before running migration, ensure the following prerequisites are met:After running migration, you must perform the following task:After completing migration, you must manually register OID instances to enable the OID and OVD status to be shown in EM console. The following preValidateOnPremise.pl script must be executed serially on each IDM node, including the scaled out nodes:After running the preValidate script on your type II environment, manually download the OIM email template as follows:Stop all IDM services by running the following command on all IDM nodes:Upgrade the binary files used by IDM components by running the following command on all IDM nodes:&nbsp;Update the IDM configuration to Release 12 level by running the following config upgrade commands on all IDM nodes:To confirm that the upgrade was successful, run the following post-upgrade validation command on all IDM nodes:">Upgrade Type II IDM Environments</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-E0CE7E00-6931-47B3-9E9F-F9F318DF0B8C">Reconnect Enterprise IDM Integrations</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-99252DE0-BC36-4630-AA42-D490DF692355">Update Status to Success</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-D03E8E4F-D0ED-4C28-9464-A8B835B1DD4B">Resume Upgrade Orchestrator to Upgrade Oracle Fusion Applications</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-52B57F62-A65A-400C-BE35-FFAB7A495F73" title="This section describes some properties files used in the IDM for FA Upgrade to Release 12 (11.12.x.0.0).">IDM for FA Upgrade Properties Files</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-715D0650-6A7D-4CDC-A403-522BFA02E3F4" title="The following table shows the location of the IDM Upgrade and migration log files:">IDM Upgrade and Migration Log Files Location</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2"><a id="GUID-34247C31-C4F8-4FDE-99DB-B56895D30188"></a>
+<h2 id="OAPUP-GUID-34247C31-C4F8-4FDE-99DB-B56895D30188" class="sect2"><span class="enumeration_section">7.1</span> Pre-Upgrade Requirements</h2>
+<div>
+<div class="p">Before you begin the upgrade of your IDM environment for Oracle Fusion Applications (FA) to Release 12, ensure you have completed the tasks as listed in:
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-5413A516-96B1-4B54-B7AA-E5A728B11A4F.htm#GUID-62355A3F-B248-42AB-9373-EBA5A1A6B46D" title="Before you begin the upgrade of your IDM environment for Oracle Fusion Applications (FA) to Release 12, you must verify that your system meets the upgrade requirements and perform pre-upgrade tasks:">Pre-Upgrade Tasks for IDM for FA Upgrade to Release 12</a></p>
+</li>
+<li>
+<p><a href="GUID-89F8BA95-C492-4C35-82FD-3DA6B14E879B.htm#GUID-89F8BA95-C492-4C35-82FD-3DA6B14E879B" title="Oracle Virtual Directory (OVD) is not a supported component in Fusion Applications (FA) Release 11.12.x.0.0. Therefore, if you are using OVD in your FA setup, you must remove it before starting your FA upgrade from Release 8 or 9 to Release 12.">Prepare for Upgrade</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect2"><a id="GUID-A71A9EB0-FF00-491B-A3DB-2335C61FD683"></a>
+<h2 id="OAPUP-GUID-A71A9EB0-FF00-491B-A3DB-2335C61FD683" class="sect2"><span class="enumeration_section">7.2</span> IDM for FA Upgrade Roadmap</h2>
+<div>
+<p>Review the following flowchart and roadmap for an overview of the upgrade process for IDM for FA to Release 12.</p>
+<div class="p">
+<div class="figure" id="GUID-A71A9EB0-FF00-491B-A3DB-2335C61FD683__GUID-58F137E3-1836-4624-A018-64A59BF9F8E8">
+<p class="titleinfigure">Figure 7-1 Upgrade Process Flowchart for IDM for FA</p>
+<img width="861" height="583" src="img/GUID-14BE8679-60A7-47CA-BB0B-205357B7AEC6-default.png" alt="Upgrade Process Flowchart for IDM for FA Release 11.12.x.0.0" title="Upgrade Process Flowchart for IDM for FA Release 11.12.x.0.0" /></div>
+<!-- class="figure" --></div>
+<p>The following table&nbsp;lists the high-level steps that you need to perform to upgrade to&nbsp;Oracle Fusion Applications&nbsp;Release&nbsp;11.12.x.0.0:</p>
+<div class="p">
+<div class="tblformal" id="GUID-A71A9EB0-FF00-491B-A3DB-2335C61FD683__GUID-F1BE5DA3-ED3C-4821-BE5C-3F5B6A1741E3">
+<p class="titleintable">Table 7-1 Tasks for Upgrading IDM for FA to Release 12</p>
+<table class="cellalignment153" title="Tasks for Upgrading IDM for FA to Release 12" summary="Tasks for Upgrading IDM for FA to Release 12">
+<thead>
+<tr class="cellalignment142">
+<th class="cellalignment149" id="d32384e174">Task</th>
+<th class="cellalignment149" id="d32384e176">Required</th>
+<th class="cellalignment149" id="d32384e178">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e182" headers="d32384e174">
+<p>Review pre-upgrade requirements</p>
+</td>
+<td class="cellalignment142" headers="d32384e182 d32384e176">
+<p>Required</p>
+</td>
+<td class="cellalignment142" headers="d32384e182 d32384e178">
+<p>The pre-upgrade requirements include having your Oracle Fusion Applications IDM on Release 8 or 9 and backing up the IDM middle tier and database. See <a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-34247C31-C4F8-4FDE-99DB-B56895D30188">Pre-Upgrade Requirements</a>.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e195" headers="d32384e174">
+<p>Identify your IDM topology</p>
+</td>
+<td class="cellalignment142" headers="d32384e195 d32384e176">
+<p>Required</p>
+</td>
+<td class="cellalignment142" headers="d32384e195 d32384e178">
+<p>Identify your IDM topology to choose the right upgrade procedure for your system. See <a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-DD15951A-6FD3-42BC-8ECB-76947363F321" title="The upgrade steps will vary according to the type of IDM installation you have.">Identify your IDM Topology</a>.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e211" headers="d32384e174">
+<p>Disconnect Enterprise IDM integrations</p>
+</td>
+<td class="cellalignment142" headers="d32384e211 d32384e176">
+<p>Required only if your IDM for FA is integrated with Enterprise IDM</p>
+</td>
+<td class="cellalignment142" headers="d32384e211 d32384e178">
+<p>If your IDM for FA is integrated with Enterprise IDM, you must disconnect integrations. See <a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-FA57B7E4-F9D8-455D-8131-E4CA66B56B98" title="Perform this steps only if your IDM for FA is integrated with Enterprise IDM. You must disconnect integrations by cloning your IDM environment. The cloning process involves the following high-level steps:">Disconnect Enterprise IDM Integrations</a>.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e227" headers="d32384e174">
+<p>Upgrade your type I IDM for FA</p>
+</td>
+<td class="cellalignment142" headers="d32384e227 d32384e176">
+<p>Required only if your IDM environment was set up using IDM provisioning scripts</p>
+</td>
+<td class="cellalignment142" headers="d32384e227 d32384e178">
+<p>After reviewing the requirements and confirming that you have the Type I IDM topology, run the upgrade steps. For the complete procedure, see <a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-704B34A5-26BA-4E6F-A601-5E876362EC3C" title="This section describes how to upgrade type I IDM environments.">Upgrade Type I IDM Environments</a>.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e243" headers="d32384e174">
+<p>Upgrade your type II IDM for FA</p>
+</td>
+<td class="cellalignment142" headers="d32384e243 d32384e176">
+<p>Required only if your IDM environment was not set up using IDM provisioning scripts</p>
+</td>
+<td class="cellalignment142" headers="d32384e243 d32384e178">
+<p>After reviewing the requirements and confirming that you have the Type II IDM topology, run the upgrade steps. For the complete procedure, see <a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-FA9464DF-260B-48C6-9BD2-821D8F985E8E" title="Before the upgrade of your type II IDM environment, perform the following tasks:The topology&nbsp;discovery tool&nbsp;introspects the existing IDM environment to discover information that will be needed for setting up a parallel true-up environment.&nbsp;Before running the discovery tool, perform the following steps. Note that if your environment has OIF and it is not up during discovery, then OIF will not be part of the upgrade process.If your set up has IDM nodes on different machines (including scaled out support), the discovery tool will have to be run serially on each IDM node. A true-up environment is an entirely new IDM environment, which behaves exactly like the current IDM installation. Your true-up environment will conform to the layout and structure of an environment that has been provisioned using the IDM provisioning scripts provided by Oracle.Before setting up your true-up environment, ensure you meet the following prerequisites:To set up the binary files, you need the True-up tars.This section describes how to migrate the configuration to the true-up environment. This section contains the following sections:Before running migration, ensure the following prerequisites are met:After running migration, you must perform the following task:After completing migration, you must manually register OID instances to enable the OID and OVD status to be shown in EM console. The following preValidateOnPremise.pl script must be executed serially on each IDM node, including the scaled out nodes:After running the preValidate script on your type II environment, manually download the OIM email template as follows:Stop all IDM services by running the following command on all IDM nodes:Upgrade the binary files used by IDM components by running the following command on all IDM nodes:&nbsp;Update the IDM configuration to Release 12 level by running the following config upgrade commands on all IDM nodes:To confirm that the upgrade was successful, run the following post-upgrade validation command on all IDM nodes:">Upgrade Type II IDM Environments</a>.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e268" headers="d32384e174">
+<p>Reconnect Enterprise IDM integrations</p>
+</td>
+<td class="cellalignment142" headers="d32384e268 d32384e176">
+<p>Required only if your IDM for FA is integrated with Enterprise IDM</p>
+</td>
+<td class="cellalignment142" headers="d32384e268 d32384e178">
+<p>If your IDM for FA is integrated with Enterprise IDM and you disconnected integrations, you can now reconnect them. See <a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-E0CE7E00-6931-47B3-9E9F-F9F318DF0B8C">Reconnect Enterprise IDM Integrations</a>.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e281" headers="d32384e174">
+<p>Update Status to Success</p>
+</td>
+<td class="cellalignment142" headers="d32384e281 d32384e176">
+<p>Required</p>
+</td>
+<td class="cellalignment142" headers="d32384e281 d32384e178">
+<p>After successfully upgrading your IDM, update the task status to&nbsp;&ldquo;success&rdquo;&nbsp;on the IDM host. See <a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-99252DE0-BC36-4630-AA42-D490DF692355">Update Status to Success</a>.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e294" headers="d32384e174">
+<p>Resume Upgrade Orchestrator to Upgrade Oracle Fusion Applications</p>
+</td>
+<td class="cellalignment142" headers="d32384e294 d32384e176">
+<p>Required</p>
+</td>
+<td class="cellalignment142" headers="d32384e294 d32384e178">
+<p>The IDM for FA upgrade process to Release 12 is complete. You can now resume Upgrade Orchestrator and continue with Pause Point 3. See <a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-D03E8E4F-D0ED-4C28-9464-A8B835B1DD4B">Resume Upgrade Orchestrator to Upgrade Oracle Fusion Applications</a>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+</div>
+<div class="sect2"><a id="GUID-DD15951A-6FD3-42BC-8ECB-76947363F321"></a>
+<h2 id="OAPUP-GUID-DD15951A-6FD3-42BC-8ECB-76947363F321" class="sect2"><span class="enumeration_section">7.3</span> Identify your IDM Topology</h2>
+<div>
+<p>The upgrade steps will vary according to the type of IDM installation you have.</p>
+<div class="p">Your topology will be one of the following:
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Type I</span>: IDM installation that was performed using IDM provisioning scripts without any subsequent manual scale out steps</p>
+</li>
+<li>
+<p><span class="bold">Type II</span>: IDM installation that was not performed using IDM provisioning scripts. This type also includes cases where a single node or EDG option was selected during your IDM provisioning and manual scale out was performed for second instances</p>
+</li>
+</ul>
+If you are not sure about which type of IDM installation you have, verify if the <code class="codeph">lcmconfig</code> folder exists under the shared configuration folder. For example:
+<pre dir="ltr">
+&lt;SHARED_CONFIG&gt;/lcmconfig/topology/topology.xml
+</pre>
+Where</div>
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">&lt;SHARED_CONFIG&gt;</code>: <code class="codeph">/u01/IDMTOP/config</code></p>
+</li>
+</ul>
+<p>This folder is specific to the type I environment or provisioned using IDM provisioning scripts without any subsequent manual IDM scale out steps.</p>
+</div>
+</div>
+<div class="sect2"><a id="GUID-FA57B7E4-F9D8-455D-8131-E4CA66B56B98"></a>
+<h2 id="OAPUP-GUID-FA57B7E4-F9D8-455D-8131-E4CA66B56B98" class="sect2"><span class="enumeration_section">7.4</span> Disconnect Enterprise IDM Integrations</h2>
+<div>
+<p>Perform this steps only if your IDM for FA is integrated with Enterprise IDM. You must disconnect integrations by cloning your IDM environment. The cloning process involves the following high-level steps:</p>
+<div class="p">Note that in this section, the original environment is called IDM1, and the cloned environment is called IDM2.
+<ol>
+<li>
+<p>Clone the IDM1 environment using the clone tool.</p>
+</li>
+<li>
+<p>Perform sanity testing to ensure IDM2 is working correctly.</p>
+</li>
+<li>
+<p>Rewire FA to point to IDM2.</p>
+</li>
+<li>
+<p>Perform sanity testing to ensure FA is working correctly.</p>
+</li>
+<li>
+<p>Upgrade IDM1 to a supported version.</p>
+</li>
+</ol>
+</div>
+<div class="p">To set up your cloned environment, perform the following steps:
+<ol>
+<li>
+<p>Clone your IDM environment by following the steps as listed in <a href="https://docs.oracle.com/cd/E56614_01/fa_lcm_gs/OACLO/cloning.htm#OACLO251" target="_blank">Cloning Procedure</a> in the <span class="italic">Oracle Fusion Applications Cloning and Content Movement Administrator's Guide</span>.</p>
+</li>
+<li>
+<p>Perform sanity tests on IDM2 to ensure it is working correctly by following the steps as listed in <a href="https://docs.oracle.com/cd/E56614_01/fa_lcm_gs/OACLO/cloning.htm#OACLO268" target="_blank">Perform Validation Steps</a> in the <span class="italic">Oracle Fusion Applications Cloning and Content Movement Administrator's Guide</span>.</p>
+</li>
+<li>
+<div class="p">Rewire FA to point to IDM2 as follows:
+<ol>
+<li>
+<div class="p">To have FA point to the IDM2, IDM specific entries in the <code class="codeph">/etc/hosts</code> should now point to IDM2. FA interactions with IDM is controlled by entries in the <code class="codeph">/etc/hosts</code> file of the FA machines. The following is an example file:
+<pre dir="ltr">
+192.0.2.1 <span class="italic">hostname</span>.example.com <span class="italic">hostname</span>
+192.0.2.1 idmhost1.osc.uk.example.com idmhost1 
+192.0.2.1 fahost1.osc.uk.example.com fahost1
+192.0.2.1 scmhost1.osc.uk.example.com scmhost1
+192.0.2.1 policystore.osc.uk.example.com policystore
+192.0.2.1 idstore.osc.uk.example.com idstore
+</pre></div>
+</li>
+<li>
+<p>Update your FA OHS configuration. OHS configuration contains information about URL redirects, for example, <code class="codeph">sso.example.com</code>. This configuration needs to be updated to point to the new IP addresses of IDM2 instead of the existing IP of IDM1.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Perform sanity tests to ensure FA is working correctly.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2"><a id="GUID-704B34A5-26BA-4E6F-A601-5E876362EC3C"></a>
+<h2 id="OAPUP-GUID-704B34A5-26BA-4E6F-A601-5E876362EC3C" class="sect2"><span class="enumeration_section">7.5</span> Upgrade Type I IDM Environments</h2>
+<div>
+<p>This section describes how to upgrade type I IDM environments.</p>
+<div class="p">This section contains the following topics:
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-436E01F7-77F3-4A96-98A8-C91FF7B9AEFE" title="Before the upgrade of your type I IDM environment, perform the following tasks:">Prerequisites for Upgrading Type I IDM Environments</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-812600A5-8379-4345-86AB-A5F1AF8ADD47" title="The following preValidateOnPremise.pl script must be executed serially on each IDM node, including the scaled out nodes:">Run preValidate Script</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-72BC5FA0-D237-4595-9C80-4F487C4A54B0" title="After running the preValidate script on your type I environment, manually download the OIM email template as follows:">Manually Download OIM Email Template</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-0B9FF306-DEDB-4F88-B3C4-27AB9E559F54" title="Stop all IDM services by running the following command on all IDM nodes:">Stop All IDM Services</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-DC9157A7-27C0-446E-85E3-EE7CC9D4F502" title="Upgrade the binary files used by IDM components by running the following command on all IDM nodes:">Upgrade Binaries</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-CD84CFF3-9A60-4C1D-81BF-06A2A7AE8F26" title="&nbsp;Update the IDM configuration to Release 12 level by running the following config upgrade commands on all IDM nodes:">Update IDM Configuration</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-48128B04-C9EB-4A84-826B-5B3BA0B792B1" title="To confirm that the upgrade was successful, run the following post-upgrade validation command on all IDM nodes:">Run postValidate Script</a></p>
+</li>
+</ul>
+Note the following:
+<ul style="list-style-type: disc;">
+<li>
+<p>All of the perl files mentioned in the following sections are present under <code class="codeph">SHARED_LOCATION/idmUpgrade</code>.</p>
+</li>
+<li>
+<p>All of the steps must be executed serially.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3"><a id="GUID-436E01F7-77F3-4A96-98A8-C91FF7B9AEFE"></a>
+<h3 id="OAPUP-GUID-436E01F7-77F3-4A96-98A8-C91FF7B9AEFE" class="sect3"><span class="enumeration_section">7.5.1</span> Prerequisites for Upgrading Type I IDM Environments</h3>
+<div>
+<p>Before the upgrade of your type I IDM environment, perform the following tasks:</p>
+<div class="p">
+<ul style="list-style-type: disc;">
+<li>
+<p>Obtain&nbsp;<code class="codeph">SHARED_LOCATION/11.12.x.0.0/idmUpgrade</code> as follows:</p>
+<ol>
+<li>
+<p>Unzip the patch 25734394 that you downloaded in <a href="GUID-5413A516-96B1-4B54-B7AA-E5A728B11A4F.htm#GUID-B31F2AD2-9247-4B80-8475-477D70111A73">Copy and Unzip idmUpgrade.zip</a> into the machine that contains the IDM nodes.</p>
+</li>
+<li>
+<p>Update the <code class="codeph">upgradeOnPremise.properties</code> file in the unzipped location, then modify the default values as applicable and provide values for all properties listed in the file. For more information about these properties, see <a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-52B57F62-A65A-400C-BE35-FFAB7A495F73" title="This section describes some properties files used in the IDM for FA Upgrade to Release 12 (11.12.x.0.0).">IDM for FA Upgrade Properties Files</a>.</p>
+<div class="p">
+<div class="infobox-note" id="GUID-436E01F7-77F3-4A96-98A8-C91FF7B9AEFE__GUID-8240D409-650B-41E6-98AB-B915793685FD">
+<p class="notep1">Note:</p>
+Use the updated <code class="codeph">upgradeOnPremise.properties</code> for all type I upgrade commands.</div>
+</div>
+</li>
+</ol>
+</li>
+<li>
+<div class="p">Create the RCU folder as follows:
+<ol>
+<li>
+<p>Create the <code class="codeph">rcu</code> folder under <code class="codeph">FA_REPOSITORY/installers</code>.</p>
+</li>
+<li>
+<p>Unzip the contents of <code class="codeph">&lt;FA_REPOSITORY&gt;/installers/fmw_rcu/linux/rcuHome.zip</code> into the <code class="codeph">rcu</code> folder.</p>
+</li>
+<li>
+<div class="p">Give 755 permissions to the <code class="codeph">rcu</code> folder recursively:
+<pre dir="ltr">
+chmod -R 755 rcu
+</pre></div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div class="p">Note that in the following sections, operations will be executed on all the IDM nodes. You must perform the operations in the following order, except when stopping all IDM services:
+<ul style="list-style-type: disc;">
+<li>
+<p>OID and OID scaled out (if present)</p>
+</li>
+<li>
+<p>OIM and OIM scaled out (if present)</p>
+</li>
+<li>
+<p>OHS and OHS scaled out (if present)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3"><a id="GUID-812600A5-8379-4345-86AB-A5F1AF8ADD47"></a>
+<h3 id="OAPUP-GUID-812600A5-8379-4345-86AB-A5F1AF8ADD47" class="sect3"><span class="enumeration_section">7.5.2</span> Run preValidate Script</h3>
+<div>
+<p>The following <code class="codeph">preValidateOnPremise.pl</code> script must be executed serially on each IDM node, including the scaled out nodes:</p>
+<div class="p">
+<pre dir="ltr">
+perl preValidateOnPremise.pl &lt;node type&gt; <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches upgradeOnPremise.properties
+</pre></div>
+<div class="p">Where
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph"><span class="codeinlineitalic">REPOSITORY_LOCATION</span></code>: Fusion Applications Release 12 repository.</p>
+</li>
+</ul>
+</div>
+<div class="p">Run the&nbsp;<code class="codeph">preValidateOnPremise</code> command in the following order:
+<ul style="list-style-type: disc;">
+<li>
+<p>OID</p>
+<pre dir="ltr">
+perl preValidateOnPremise.pl OID <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches upgradeOnPremise.properties
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OID scaled out node:
+<pre dir="ltr">
+perl preValidateOnPremise.pl OID-SO <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches upgradeOnPremise.properties
+</pre></div>
+</li>
+<li>
+<p>OIM</p>
+<pre dir="ltr">
+perl preValidateOnPremise.pl OIM <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches upgradeOnPremise.properties
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OIM scaled out node:
+<pre dir="ltr">
+perl preValidateOnPremise.pl OIM-SO <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches upgradeOnPremise.properties
+</pre></div>
+</li>
+<li>
+<p>OHS</p>
+<pre dir="ltr">
+perl preValidateOnPremise.pl OHS <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches upgradeOnPremise.properties
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OHS scaled out node:
+<pre dir="ltr">
+perl preValidateOnPremise.pl OHS-SO <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches upgradeOnPremise.properties
+</pre></div>
+</li>
+</ul>
+</div>
+<p>Confirm that the status message at the end of the run is successful on each node. If the script gives an error, check the error message and resolve the issue. Rerun <code class="codeph">preValidate</code> and ensure it is successful.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-72BC5FA0-D237-4595-9C80-4F487C4A54B0"></a>
+<h3 id="OAPUP-GUID-72BC5FA0-D237-4595-9C80-4F487C4A54B0" class="sect3"><span class="enumeration_section">7.5.3</span> Manually Download OIM Email Template</h3>
+<div>
+<p>After running the <code class="codeph">preValidate</code> script on your type I environment, manually download the OIM email template as follows:</p>
+<div class="p">
+<ol>
+<li>
+<p>Log in to the OIM host.</p>
+</li>
+<li>
+<p>Go to the&nbsp;<code class="codeph">idmUpgrade</code> unzip&nbsp;location.</p>
+</li>
+<li>
+<div class="p">Execute <code class="codeph">exportOIMDataOnPremise.pl</code> as follows:
+<pre dir="ltr">
+perl exportOIMDataOnPremise.pl upgradeOnPremise.properties &lt;SHARED_UPGRADE_LOCATION&gt;/&lt;podName&gt;/emailTemplateDir/emailtemplate.xml 
+</pre>
+Where
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">SHARED_UPGRADE_LOCATION</code>: It is located in <code class="codeph">pod.properties</code>, and its default value is <code class="codeph">/u01/sharedupgradelocation</code>.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Confirm that the status message at the end of the run is successful. If the script gives an error, check the error message and resolve the issue. Then, rerun <code class="codeph">exportOIMDataOnPremise.pl</code> and ensure it is successful.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect3"><a id="GUID-0B9FF306-DEDB-4F88-B3C4-27AB9E559F54"></a>
+<h3 id="OAPUP-GUID-0B9FF306-DEDB-4F88-B3C4-27AB9E559F54" class="sect3"><span class="enumeration_section">7.5.4</span> Stop All IDM Services</h3>
+<div>
+<p>Stop all IDM services by running the following command on all IDM nodes:</p>
+<div class="p">
+<pre dir="ltr">
+perl stopIDMOnPremise.pl &lt;node type&gt; upgradeOnPremise.properties
+</pre></div>
+<div class="p">Run the&nbsp;<code class="codeph">stopIDMOnPremise.pl</code> command in the following order:
+<ul style="list-style-type: disc;">
+<li>
+<p>OHS</p>
+<div class="p">If the environment is scaled out, run the following command on the OHS scaled out node:
+<pre dir="ltr">
+perl stopIDMOnPremise.pl OHS-SO upgradeOnPremise.properties
+</pre>
+If the environment is not scaled out, run the following command on the OHS node:
+<pre dir="ltr">
+perl stopIDMOnPremise.pl OHS upgradeOnPremise.properties
+</pre></div>
+</li>
+<li>
+<p>OIM</p>
+<div class="p">If the environment is scaled out, run the following command on the OIM scaled out node:
+<pre dir="ltr">
+perl stopIDMOnPremise.pl OIM-SO upgradeOnPremise.properties
+</pre>
+If the environment is not scaled out, run the following command on the OIM node:
+<pre dir="ltr">
+perl stopIDMOnPremise.pl OIM upgradeOnPremise.properties
+</pre></div>
+</li>
+<li>
+<p>OID</p>
+<div class="p">If the environment is scaled out, run the following command on the OID scaled out node:
+<pre dir="ltr">
+perl stopIDMOnPremise.pl OID-SO upgradeOnPremise.properties
+</pre>
+If the environment is not scaled out, run the following command on the OID node:
+<pre dir="ltr">
+perl stopIDMOnPremise.pl OID upgradeOnPremise.properties
+</pre></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3"><a id="GUID-DC9157A7-27C0-446E-85E3-EE7CC9D4F502"></a>
+<h3 id="OAPUP-GUID-DC9157A7-27C0-446E-85E3-EE7CC9D4F502" class="sect3"><span class="enumeration_section">7.5.5</span> Upgrade Binaries</h3>
+<div>
+<p>Upgrade the binary files used by IDM components by running the following command on all IDM nodes:</p>
+<div class="p">
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=&lt;node type&gt; -repoLocs=<span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=./upgradeOnPremise.properties -mode=binary
+</pre></div>
+<p>Where</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph"><span class="codeinlineitalic">REPOSITORY_LOCATION</span></code>: &nbsp;Fusion Applications Release 12 repository.</p>
+</li>
+</ul>
+<div class="p">Run the&nbsp;<code class="codeph">idmUpgradeOnPremise.pl</code> command in the following order:
+<ul style="list-style-type: disc;">
+<li>
+<p>OID</p>
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OID -repoLocs=<span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=./upgradeOnPremise.properties -mode=binary
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OID scaled out node:
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OID-SO -repoLocs=<span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=./upgradeOnPremise.properties -mode=binary
+</pre></div>
+</li>
+<li>
+<p>OIM</p>
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OIM -repoLocs=<span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=./upgradeOnPremise.properties -mode=binary
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OIM scaled out node:
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OIM-SO -repoLocs=<span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=./upgradeOnPremise.properties -mode=binary
+</pre></div>
+</li>
+<li>
+<p>OHS</p>
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OHS -repoLocs=<span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=./upgradeOnPremise.properties -mode=binary
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OHS scaled out node:
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OHS-SO -repoLocs=<span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=./upgradeOnPremise.properties -mode=binary
+</pre></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3"><a id="GUID-CD84CFF3-9A60-4C1D-81BF-06A2A7AE8F26"></a>
+<h3 id="OAPUP-GUID-CD84CFF3-9A60-4C1D-81BF-06A2A7AE8F26" class="sect3"><span class="enumeration_section">7.5.6</span> Update IDM Configuration</h3>
+<div>
+<p>&nbsp;Update the IDM configuration to Release 12 level by running the following <code class="codeph">config</code> upgrade commands on all IDM nodes:</p>
+<div class="p">
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=&lt;node type&gt; -repoLocs=<span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=./upgradeOnPremise.properties -mode=config
+</pre></div>
+<div class="p">Where:
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph"><span class="codeinlineitalic">REPOSITORY_LOCATION</span></code>: Fusion Applications Release 12 repository.</p>
+</li>
+</ul>
+</div>
+<div class="p">Run the&nbsp;<code class="codeph">idmUpgradeOnPremise.pl</code> command in the following order:
+<ul style="list-style-type: disc;">
+<li>
+<p>OID</p>
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OID -repoLocs=<span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=./upgradeOnPremise.properties -mode=config
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OID scaled out node:
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OID-SO -repoLocs=<span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=./upgradeOnPremise.properties -mode=config
+</pre></div>
+</li>
+<li>
+<p>OIM</p>
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OIM -repoLocs=<span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=./upgradeOnPremise.properties -mode=config
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OIM scaled out node:
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OIM-SO -repoLocs=<span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=./upgradeOnPremise.properties -mode=config
+</pre>
+If you are on a Solaris platform, after running this command on OIM perform the steps listed in <a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-12E4C2A9-187D-4744-A791-612F7EB1DA40" title="During IDM upgrade on Solaris platforms, the OIM Config step displays the following message in the IDM upgrade console:">Re-create IDM Schemas Manually (Solaris Only)</a>.</div>
+</li>
+<li>
+<p>OHS</p>
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OHS -repoLocs=<span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=./upgradeOnPremise.properties -mode=config
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OHS scaled out node:
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OHS-SO -repoLocs=<span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=./upgradeOnPremise.properties -mode=config
+</pre></div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4"><a id="GUID-12E4C2A9-187D-4744-A791-612F7EB1DA40"></a>
+<h4 id="OAPUP-GUID-12E4C2A9-187D-4744-A791-612F7EB1DA40" class="sect4"><span class="enumeration_section">7.5.6.1</span> Re-create IDM Schemas Manually (Solaris Only)</h4>
+<div>
+<p>During IDM upgrade on Solaris platforms, the OIM Config step displays the following message in the IDM upgrade console:</p>
+<div class="section">
+<pre dir="ltr">
+On non-Linux platforms, run the rcu from a Linux machine.
+Please follow the manual steps documented in the IDM Upgrade Guide to load the required schemas and resume Upgrade.
+</pre></div>
+<!-- class="section" -->
+<div class="section">Re-create the schemas and resume the upgrade as follows:</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Unzip the following Oracle Fusion Middleware RCU zip file to <code class="codeph"><span class="codeinlineitalic">REPOSITORY_LOCATION</span>/installers/rcu</code>:</span>
+<ul>
+<li>Linux:
+<pre dir="ltr">
+<span class="italic">REPOSITORY_LOCATION</span>/installers/fmw_rcu/linux/rcuHome.zip
+</pre></li>
+<li>Windows:
+<pre dir="ltr">
+<span class="italic">REPOSITORY_LOCATION</span>/installers/fmw_rcu/windows/rcuHome.zip
+</pre></li>
+</ul>
+<div>Where:
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph"><span class="codeinlineitalic">REPOSITORY_LOCATION</span></code>: The Oracle Fusion Applications provisioning repository.</p>
+</li>
+</ul>
+</div>
+<div>Use the Oracle Identity Management version of RCU, which now exists in that directory.</div>
+</li>
+<li class="stepexpand"><span>Drop the <code class="codeph">FA_OAM</code> schema, and then manually create the <code class="codeph">FA_OAM</code>, <code class="codeph">FA_OPSS</code>, and <code class="codeph">FA_BIPLATFORM</code>&nbsp;schemas in the Oracle Identity Management database by using the Fusion Applications Repository Creation Utility (RCU) <code class="codeph"><span class="codeinlineitalic">REPOSITORY_LOCATION</span>/installers/rcu</code>, for example, IDMDB. Note that the schema prefix may vary from &ldquo;<code class="codeph"><span class="codeinlineitalic">FA_</span></code>&rdquo;</span></li>
+<li class="stepexpand"><span>Export the following Solaris specific environment variables:</span>
+<ul>
+<li><code class="codeph">LD_LIBRARY_PATH</code></li>
+<li><code class="codeph">PERL5LIB</code></li>
+<li><code class="codeph">PATH</code></li>
+</ul>
+<div>For more information about exporting these Solaris variables, see <a href="GUID-3DDF50C7-783C-4091-B1BF-20A5A5465BA1.htm#GUID-F35B4600-C749-4F8F-B443-1FE37D8624FD">Environment Variables Required for Solaris</a>.</div>
+</li>
+<li class="stepexpand"><span>Add a checkpoint for schema&nbsp;creation by&nbsp;running the <code class="codeph"><span class="codeinlineitalic">IDM_UPGRADE_HOME</span>/addSchemaCheckPoint.pl</code> script as shown in the following example:</span>
+<div>
+<pre dir="ltr">
+perl addSchemaCheckPoint.pl -node=<span class="italic">OIM</span> -repoLocs=<span class="italic">REPOSITORY_LOCATION</span>/<span class="italic">installers</span> -props= ./upgradeOnPremise.properties
+</pre>
+<p>Where:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">node</code>: Node</p>
+</li>
+<li>
+<p><code class="codeph">repoLocs</code>: Comma separated paths of repo</p>
+</li>
+<li>
+<p><code class="codeph">props</code>: Properties files</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>Rerun OIM config upgrade mode.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect3"><a id="GUID-48128B04-C9EB-4A84-826B-5B3BA0B792B1"></a>
+<h3 id="OAPUP-GUID-48128B04-C9EB-4A84-826B-5B3BA0B792B1" class="sect3"><span class="enumeration_section">7.5.7</span> Run postValidate Script</h3>
+<div>
+<p>To confirm that the upgrade was successful, run the following post-upgrade validation command on all IDM nodes:</p>
+<div class="p">
+<pre dir="ltr">
+perl postvalidateOnPremise.pl &lt;node type&gt; upgradeOnPremise.properties
+</pre></div>
+<div class="p">Run the&nbsp;<code class="codeph">idmUpgradeOnPremise.pl</code> command in the following order:
+<ul style="list-style-type: disc;">
+<li>
+<p>OID</p>
+<pre dir="ltr">
+perl postvalidateOnPremise.pl OID upgradeOnPremise.properties
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OID scaled out node:
+<pre dir="ltr">
+perl postvalidateOnPremise.pl OID-SO upgradeOnPremise.properties
+</pre></div>
+</li>
+<li>
+<p>OIM</p>
+<pre dir="ltr">
+perl postvalidateOnPremise.pl OIM upgradeOnPremise.properties
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OIM scaled out node:
+<pre dir="ltr">
+perl postvalidateOnPremise.pl OIM-SO upgradeOnPremise.properties
+</pre></div>
+</li>
+<li>
+<p>OHS</p>
+<pre dir="ltr">
+perl postvalidateOnPremise.pl OHS upgradeOnPremise.properties
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OHS scaled out node:
+<pre dir="ltr">
+perl postvalidateOnPremise.pl OHS-SO upgradeOnPremise.properties
+</pre></div>
+</li>
+</ul>
+</div>
+<p>Confirm that the status message at the end of the run is successful on each node. If the script gives an error, check the error message and resolve the issue.</p>
+<p>After upgrade, you can start/stop the IDM components on a given node using the IDM provisioning start/stop scripts as described in <a href="GUID-4CF23357-D8FE-42D2-9CB4-071775464DC8.htm#GUID-A2D8CA70-0AEF-4CC8-BB89-A959DD8056E0">Start and Stop All IDM Components on a Host</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2"><a id="GUID-FA9464DF-260B-48C6-9BD2-821D8F985E8E"></a>
+<h2 id="OAPUP-GUID-FA9464DF-260B-48C6-9BD2-821D8F985E8E" class="sect2"><span class="enumeration_section">7.6</span> Upgrade Type II IDM Environments</h2>
+<div>
+<p>This section describes the upgrade process for the type II IDM environments that have been installed using Oracle's A-team's one click installation scripts or by following the instructions in <span class="italic"><a href="http://docs.oracle.com/cd/E40329_01/doc.1112/e48618/overview_imedg.htm#IMEDG109" target="_blank">Fusion Middleware Enterprise Deployment Guide for Oracle Identity and Access Management</a></span>.</p>
+<p>This upgrade process reuses the database from the old environment and creates an entirely new parallel IDM environment, and involves the following high-level steps:</p>
+<div class="p">
+<ol>
+<li>
+<p>Run the Discovery Tool to discover your environment topology and configuration.</p>
+</li>
+<li>
+<p>Set up a parallel True-up IDM environment matching the release of the current environment.</p>
+</li>
+<li>
+<p>Migrate the configuration and artifacts from the existing environment.</p>
+</li>
+<li>
+<p>Upgrade the true-up environment.</p>
+</li>
+</ol>
+<div class="infobox-note" id="GUID-FA9464DF-260B-48C6-9BD2-821D8F985E8E__GUID-E70B22A6-A833-44F4-A3A7-769CC0310082">
+<p class="notep1">Note:</p>
+Do not clean the source environment until after the entire upgrade of the true-up environment is completed.</div>
+This section contains the following topics:</div>
+<div class="p">
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-DD028021-EE18-4985-BF3D-EEB73EEBEFB7" title="Before the upgrade of your type II IDM environment, perform the following tasks:">Prerequisites for Upgrading Type II IDM Environments</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-4F86308A-2612-490A-BDBE-28FFAAE0DA90" title="The topology&nbsp;discovery tool&nbsp;introspects the existing IDM environment to discover information that will be needed for setting up a parallel true-up environment.&nbsp;">Discover Topology</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-96B8BDDA-6DFA-450F-AF8E-A21576DD4E91" title="A true-up environment is an entirely new IDM environment, which behaves exactly like the current IDM installation. Your true-up environment will conform to the layout and structure of an environment that has been provisioned using the IDM provisioning scripts provided by Oracle.">Set Up True-Up Environment</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-F0AC7508-9B97-422E-9A94-CF12D6EFD669" title="This section describes how to migrate the configuration to the true-up environment. This section contains the following sections:">Perform Migration Tasks</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-2C3D33CA-2ABB-4FD6-AAAD-831B01E2FDC9">Verify True-Up Environment Is Up</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-C4981E65-E5F5-479A-8A50-C56908CD4EAE" title="The following preValidateOnPremise.pl script must be executed serially on each IDM node, including the scaled out nodes:">Run preValidate Script</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-7338745E-4162-40D0-A5B2-84CEAE2E7BA0" title="After running the preValidate script on your type II environment, manually download the OIM email template as follows:">Manually Download OIM Email Template</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-1160923B-EA84-4D15-96AF-DC122C1D0853" title="Stop all IDM services by running the following command on all IDM nodes:">Stop All IDM Services</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-F73CDE0D-5F30-4505-B0B1-F2C76ACEF608" title="Upgrade the binary files used by IDM components by running the following command on all IDM nodes:">Upgrade Binaries</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-8B172A56-7680-4778-A6FB-EAE28B3CBE1E" title="&nbsp;Update the IDM configuration to Release 12 level by running the following config upgrade commands on all IDM nodes:">Update IDM Configuration</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-A637BA72-91CD-493F-9231-DE7C303804A7" title="To confirm that the upgrade was successful, run the following post-upgrade validation command on all IDM nodes:">Run postValidate Script</a></p>
+</li>
+</ul>
+Note the following:
+<ul style="list-style-type: disc;">
+<li>
+<p>All of the perl files mentioned in the following sections are present under <code class="codeph">SHARED_LOCATION/idmUpgrade</code>.</p>
+</li>
+<li>
+<p>All of the steps must be executed serially.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3"><a id="GUID-DD028021-EE18-4985-BF3D-EEB73EEBEFB7"></a>
+<h3 id="OAPUP-GUID-DD028021-EE18-4985-BF3D-EEB73EEBEFB7" class="sect3"><span class="enumeration_section">7.6.1</span> Prerequisites for Upgrading Type II IDM Environments</h3>
+<div>
+<p>Before the upgrade of your type II IDM environment, perform the following tasks:</p>
+<div class="p">
+<ul style="list-style-type: disc;">
+<li>
+<p>Ensure that the user running the upgrade is the same user used for the installation of the IDM home. This user must have read/write access to the staging directories throughout the upgrade cycle.</p>
+</li>
+<li>
+<p>Create <code class="codeph">stagedir</code> folder under <code class="codeph">SHARED_LOCATION</code>. <code class="codeph">stagedir</code> is the directory in the <code class="codeph">SHARED_LOCATION</code> that contains the artifacts generated by the Discovery tool.</p>
+</li>
+<li>
+<p>Confirm that you have permission on <code class="codeph">stagedir</code> and that it is shared across all IDM hosts.</p>
+</li>
+<li>
+<p>Verify that Webgate is configured on the OHS SO Node. If it is not configured, follow the steps as listed in <a href="GUID-1FD56739-E0D8-49F5-BCA2-1530E6D9EDDF.htm#GUID-8D00E81C-D150-40F9-A8A7-663A3B432C4F" title="If Webgate is not configured on the OHS SO Node, perform the following steps:">Webgate Is Not configured on the OHS SO Node</a>.</p>
+</li>
+<li>
+<div class="p">Choose the patch applicable to your starting release and environment. The following table shows the patch number for each release/environment:
+<div class="tblformal" id="GUID-DD028021-EE18-4985-BF3D-EEB73EEBEFB7__GUID-2F43812C-2610-4EBB-B207-162A01DA2982">
+<p class="titleintable">Table 7-2 FA IDM Patches for Type II Upgrades</p>
+<table class="cellalignment190" title="FA IDM Patches for Type II Upgrades" summary="Patch numbers for each release/environment">
+<thead>
+<tr class="cellalignment142">
+<th class="cellalignment149" id="d32384e1438">Release</th>
+<th class="cellalignment149" id="d32384e1440">Environment</th>
+<th class="cellalignment149" id="d32384e1442">Patch Number</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e1446" headers="d32384e1438">
+<p>Release 8</p>
+</td>
+<td class="cellalignment142" headers="d32384e1446 d32384e1440">
+<p>Linux non-provisioned environment&nbsp;</p>
+</td>
+<td class="cellalignment142" headers="d32384e1446 d32384e1442">
+<p>26504255</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e1456" headers="d32384e1438">
+<p>Release 8</p>
+</td>
+<td class="cellalignment142" headers="d32384e1456 d32384e1440">
+<p>Sparc non-provisioned environment&nbsp;</p>
+</td>
+<td class="cellalignment142" headers="d32384e1456 d32384e1442">
+<p>26504255</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e1466" headers="d32384e1438">
+<p>Release 9</p>
+</td>
+<td class="cellalignment142" headers="d32384e1466 d32384e1440">
+<p>Linux non-provisioned environment&nbsp;</p>
+</td>
+<td class="cellalignment142" headers="d32384e1466 d32384e1442">
+<p>26639496</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e1476" headers="d32384e1438">
+<p>Release 9</p>
+</td>
+<td class="cellalignment142" headers="d32384e1476 d32384e1440">
+<p>Sparc non-provisioned environment&nbsp;</p>
+</td>
+<td class="cellalignment142" headers="d32384e1476 d32384e1442">
+<p>26639496</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</li>
+<li>
+<p>Obtain the <code class="codeph">SHARED_LOCATION/11.12.x.0.0/idmUpgrade</code> file as follows:</p>
+<ol>
+<li>
+<p>Unzip the patch&nbsp;25734394&nbsp;that you downloaded in <a href="GUID-5413A516-96B1-4B54-B7AA-E5A728B11A4F.htm#GUID-B31F2AD2-9247-4B80-8475-477D70111A73">Copy and Unzip idmUpgrade.zip</a> into a location under <code class="codeph">SHARED_LOCATION//11.12.x.0.0</code>.</p>
+</li>
+</ol>
+</li>
+<li>
+<div class="p">Ensure that an empty staging directory is available for the upgrade process and that it meets the following requirements:
+<ul style="list-style-type: disc;">
+<li>
+<p>The directory must be writable and have at least 100MB empty space.</p>
+</li>
+<li>
+<p>If the environment is spread across multiple machines, then the staging directory needs to be on a network shared and write-accessible from all IDM nodes.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Unzip the <code class="codeph">idmUpgrade.zip</code> file parallel to <code class="codeph">stagedir</code> in the <code class="codeph">SHARED_DIR</code> directory.</p>
+</li>
+<li>
+<div class="p">&nbsp;Ensure that the following directories are created and empty on all IDM nodes:
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">/u01/IDMTOP</code>: Both <code class="codeph">IDMTOP</code> and <code class="codeph">stagedir</code> must be shared across the OID and the OIM hosts, including SO hosts. The only exception is for the OHS hosts when they are in DMZ.</p>
+</li>
+<li>
+<p><code class="codeph">/u02/local/IDMTOP</code>: Local folder on each of the IDM hosts.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>Ensure the&nbsp;<code class="codeph">u01</code>&nbsp;and&nbsp;<code class="codeph">u02</code>&nbsp;folders are created under root <code class="codeph">("/")</code> with the same user and group that the existing IDM environment has.</p>
+</li>
+<li>
+<div class="p">Create the RCU folder as follows:
+<ol>
+<li>
+<p>Create the <code class="codeph">rcu</code> folder under <code class="codeph">FA_REPOSITORY/installers</code>.</p>
+</li>
+<li>
+<p>Unzip the contents of <code class="codeph">&lt;FA_REPOSITORY&gt;/installers/fmw_rcu/linux/rcuHome.zip</code> into the <code class="codeph">rcu</code> folder.</p>
+</li>
+<li>
+<div class="p">Give 755 permissions to the <code class="codeph">rcu</code> folder recursively:
+<pre dir="ltr">
+chmod -R 755 rcu
+</pre></div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</div>
+<div class="p">Note that in the following sections, operations will be executed on all the IDM nodes. You must perform the operations in the following order, except when running discovery and stopping all IDM services:
+<ul style="list-style-type: disc;">
+<li>
+<p>OID and OID scaled out (if present)</p>
+</li>
+<li>
+<p>OIM and OIM scaled out (if present)</p>
+</li>
+<li>
+<p>OHS and OHS scaled out (if present)</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3"><a id="GUID-4F86308A-2612-490A-BDBE-28FFAAE0DA90"></a>
+<h3 id="OAPUP-GUID-4F86308A-2612-490A-BDBE-28FFAAE0DA90" class="sect3"><span class="enumeration_section">7.6.2</span> Discover Topology</h3>
+<div>
+<p>The topology&nbsp;discovery tool&nbsp;introspects the existing IDM environment to discover information that will be needed for setting up a parallel true-up environment.&nbsp;</p>
+<p>Discovery also generates the following artifacts based on the existing environment to stage directory (<code class="codeph">stagedir</code>). These artifacts are used during the migration and upgrade processes. No additional input is necessary:</p>
+<div class="p">
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">credconfig</code>: Folder that contains the discovery wallet</p>
+</li>
+<li>
+<p><code class="codeph">upgradeProps</code>: Folder that contains the upgrade wallet</p>
+</li>
+<li>
+<p><code class="codeph">idmMigration</code>: Folder that contains the migration wallet</p>
+</li>
+<li>
+<p><code class="codeph">discoverycache</code>: Folder that contains a list of the files required for migration</p>
+</li>
+<li>
+<p><code class="codeph">upgradeOnPremise.properties</code>: File that contains auto-generated properties required for the On-Premise upgrade. There are 2 properties that you can customize, <code class="codeph">OPSS_DB_PASSWORD</code> and <code class="codeph">OIF_11GR2_SINGNING_KEY_PWD</code> as they are new passwords. For more information about this file, see <a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-52B57F62-A65A-400C-BE35-FFAB7A495F73" title="This section describes some properties files used in the IDM for FA Upgrade to Release 12 (11.12.x.0.0).">IDM for FA Upgrade Properties Files</a>.</p>
+</li>
+<li>
+<p><code class="codeph">topology.xml</code>: File that contains information about the IDM topology such as server hosts, ports, <code class="codeph">mw_homes</code>, <code class="codeph">oracle_homes</code>, etc. related to source environment.</p>
+</li>
+<li>
+<p><code class="codeph">dest-topology.xml</code>: File that contains information about the IDM topology such as server hosts, ports, <code class="codeph">mw_homes</code>, <code class="codeph">oracle_homes</code> etc. related to destination true-up tar.</p>
+</li>
+<li>
+<p><code class="codeph">logs</code>: Folder that contains logs of the discovery tool. By default, the migration and the upgrade logs are pointed to the same location.</p>
+</li>
+<li>
+<p><code class="codeph">idmMigration.properties</code>: File that contains the properties required for the On-Premise migration. There are certain optional parameters that you can customize in this auto-generated file, such as <code class="codeph">LOG_DIR</code>.</p>
+</li>
+</ul>
+</div>
+<div class="p">This section contains the following topics:
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-42E764A1-A6E8-4397-A741-0086F5BF4C87" title="Before running the discovery tool, perform the following steps. Note that if your environment has OIF and it is not up during discovery, then OIF will not be part of the upgrade process.">Prerequisites</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-8BF433ED-3F62-4DFE-88CD-B724BB1DC807" title="If your set up has IDM nodes on different machines (including scaled out support), the discovery tool will have to be run serially on each IDM node.">Run the Discovery Tool</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4"><a id="GUID-42E764A1-A6E8-4397-A741-0086F5BF4C87"></a>
+<h4 id="OAPUP-GUID-42E764A1-A6E8-4397-A741-0086F5BF4C87" class="sect4"><span class="enumeration_section">7.6.2.1</span> Prerequisites</h4>
+<div>
+<p>Before running the discovery tool, perform the following steps. Note that if your environment has OIF and it is not up during discovery, then OIF will not be part of the upgrade process.</p>
+<ol>
+<li>
+<p>Set the following environment variables:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">JAVA_HOME</code> to a valid JDK6 install in all IDM hosts.</p>
+</li>
+<li>
+<p><code class="codeph">MW_HOME</code> on the&nbsp;Admin Server machine to a Middleware Home location, for example, <code class="codeph">/u01/oracle/products/app</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Ensure all IDM servers are up and running. If any of the servers is not running, the discovery fails and the next step of migration cannot be run.</p>
+</li>
+</ol>
+<div class="p">Discovery must be executed in the following order:
+<ol>
+<li>
+<p>On the IDM host where adminserver is present, and then on&nbsp;other hosts.</p>
+</li>
+<li>
+<p>If OID and OIM are on separate&nbsp;nodes, first run discovery on the OIM host where <code class="codeph">adminserver</code> is present, then on the OIM scaled-out node, and then on the OID nodes.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect4"><a id="GUID-8BF433ED-3F62-4DFE-88CD-B724BB1DC807"></a>
+<h4 id="OAPUP-GUID-8BF433ED-3F62-4DFE-88CD-B724BB1DC807" class="sect4"><span class="enumeration_section">7.6.2.2</span> Run the Discovery Tool</h4>
+<div>
+<p>If your set up has IDM nodes on different machines (including scaled out support), the discovery tool will have to be run serially on each IDM node.</p>
+<div class="p">Review&nbsp;the&nbsp;following&nbsp;diagram&nbsp;that&nbsp;shows&nbsp;a typical discovery flow including OHS in Demilitarized Zone (DMZ) scenario:
+<div class="figure" id="GUID-8BF433ED-3F62-4DFE-88CD-B724BB1DC807__GUID-28970779-DEC0-4040-A183-CD3B2272D98B">
+<p class="titleinfigure">Figure 7-2 Discovery Flow</p>
+<img width="759" height="843" src="img/GUID-35B92B27-7F80-4640-82BA-2D30CC0386F3-default.png" alt="Discovery flow chart including OHS in DMZ" title="Discovery flow chart including OHS in DMZ" /></div>
+<!-- class="figure" --></div>
+<div class="p">To run the discovery tool, perform the following steps:
+<ol>
+<li>
+<p>Ensure&nbsp;<code class="codeph">stagedir</code>&nbsp;is shared between IDM hosts.</p>
+</li>
+<li>
+<p>Run Discovery on IDM hosts as follows:</p>
+<pre dir="ltr">
+SHARED_LOCATION/idmUpgrade/discovery/bin
+./idmdisc.sh -stagedir &lt;location of the staging directory&gt;
+</pre>
+<div class="infobox-note" id="GUID-8BF433ED-3F62-4DFE-88CD-B724BB1DC807__GUID-7A999321-C9A0-4342-9DE1-190143B0DDED">
+<p class="notep1">Note:</p>
+<code class="codeph">SHARED_LOCATION</code> should be shared across all nodes. Since <code class="codeph">idmUpgrade</code> and <code class="codeph">stagedir</code> are under <code class="codeph">SHARED_LOCATION</code>, they are automatically shared across machines.</div>
+<p><code class="codeph">-topology</code>: The discovery tool updates the <code class="codeph">topology.xml</code> file, which contains information about all IDM nodes. For more information about this file, see <a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-4F86308A-2612-490A-BDBE-28FFAAE0DA90" title="The topology&nbsp;discovery tool&nbsp;introspects the existing IDM environment to discover information that will be needed for setting up a parallel true-up environment.&nbsp;">Discover Topology</a>.</p>
+<p><code class="codeph">-credconfig</code>: During the discovery process, the tool will prompt you for passwords to connect to IDM servers and services. These passwords will be stored in the <code class="codeph">credconfig</code> file to be used during later stages of upgrade. Both the <code class="codeph">topology.xml</code> file and <code class="codeph">credconfig</code> will be created inside <code class="codeph">stagedir</code>.</p>
+<p><code class="codeph">-logDir</code>: The location of the file where all discovery logs will be placed.</p>
+</li>
+<li>
+<p>Verify whether&nbsp;<code class="codeph">stagedir</code>&nbsp;is shared between IDM and OHS hosts:</p>
+<ul style="list-style-type: disc;">
+<li>
+<div class="p">If it is shared, perform the following steps:
+<ol>
+<li>
+<p>Run Discovery on OHS1.</p>
+</li>
+<li>
+<p>Run Discovery on OHS2.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<div class="p">If it is not shared, perform the following steps:
+<ol>
+<li>
+<p>Copy the contents of&nbsp;the <code class="codeph">stagedir</code>&nbsp;from the IDM hosts to the <code class="codeph">stagedir</code> of OHS1.</p>
+</li>
+<li>
+<div class="p">Verify whether&nbsp;<code class="codeph">stagedir</code>&nbsp;is shared between OHS1 and OHS2.
+<ul style="list-style-type: disc;">
+<li>
+<div class="p">If it is shared, perform the following steps:
+<ol>
+<li>
+<p>Run Discovery on OHS1.</p>
+</li>
+<li>
+<p>Run Discovery on OHS2.</p>
+</li>
+<li>
+<p>Copy the&nbsp;<code class="codeph">topology.xml</code>&nbsp;and&nbsp;<code class="codeph">dest-topology.xml</code>&nbsp;from&nbsp;the <code class="codeph">stagedir</code>&nbsp;of OHS2 to the <code class="codeph">stagedir</code>&nbsp;of the IDM hosts.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<div class="p">Otherwise, perform the following steps:
+<ol>
+<li>
+<p>Run Discovery on OHS1.</p>
+</li>
+<li>
+<p>Copy the contents of&nbsp;the <code class="codeph">stagedir</code>&nbsp;from the OHS1 to the&nbsp;<code class="codeph">stagedir</code>&nbsp;of OHS2.</p>
+</li>
+<li>
+<p>Run Discovery on OHS2.</p>
+</li>
+<li>
+<p>Copy the&nbsp;<code class="codeph">topology.xml</code>&nbsp;and&nbsp;<code class="codeph">dest-topology.xml</code>&nbsp;from&nbsp;the <code class="codeph">stagedir</code>&nbsp;of OHS2 to the <code class="codeph">stagedir</code>&nbsp;of the IDM hosts.</p>
+</li>
+</ol>
+After running Discovery successfully, you see the following message:
+<pre dir="ltr">
+Oracle IDM Discovery Utility succeeded.
+</pre></div>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+<p><span class="bold">Discovery Questionnaire</span></p>
+<p>The Discovery tool formulates some questions while being run. During the questionnaire, certain user names are set as defaults. Based on the relevance of values in your environment, you can either choose to use the same default user names as such by pressing enter or change them accordingly.</p>
+<div class="p">The following table shows the questions formulated by the discovery tool. The table also shows the answers you must provide and a brief description of each question if applicable:
+<div class="infobox-note" id="GUID-8BF433ED-3F62-4DFE-88CD-B724BB1DC807__GUID-29997ECB-341B-4758-BA17-E613F95606DD">
+<p class="notep1">Note:</p>
+The words in parenthesis are defaulted values. You must change them accordingly.</div>
+<div class="tblformal" id="GUID-8BF433ED-3F62-4DFE-88CD-B724BB1DC807__GUID-C03B726F-5A42-4497-9BED-EDA9BD89A12C">
+<p class="titleintable">Table 7-3 Questions Formulated by the Discovery Tool</p>
+<table class="cellalignment153" title="Questions Formulated by the Discovery Tool" summary="Questions formulated by the discovery tool and the answers you must provide">
+<thead>
+<tr class="cellalignment142">
+<th class="cellalignment149" id="d32384e1971">Question</th>
+<th class="cellalignment149" id="d32384e1973">Answer</th>
+<th class="cellalignment149" id="d32384e1975">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e1979" headers="d32384e1971">
+<p>Is <code class="codeph">stagedir</code> directory: <code class="codeph">$STAGE_DIR</code> shared across all nodes of IDM (OID/OIM/OHS), including Scale-Out nodes (if any).</p>
+<p>Note that if the OHS host(s) is in DMZ and <code class="codeph">stagedir</code> cannot be shared, you need to manually copy contents of <code class="codeph">stagedir</code> of OID/OIM node to <code class="codeph">stagedir</code> of OHS host(s) before running discovery on OHS node(s) and then after discovery completes on OHS node(s), copy back the <code class="codeph">topology.xml</code> and <code class="codeph">dest-topology.xml</code> from <code class="codeph">stagedir</code> of OHS host(s) to <code class="codeph">stagedir</code> of the OID/OIM node. [Y/N]:</p>
+</td>
+<td class="cellalignment142" headers="d32384e1979 d32384e1973">
+<p>Y</p>
+</td>
+<td class="cellalignment142" headers="d32384e1979 d32384e1975">
+<p>Verify if the <code class="codeph">stagedir</code> directory is shared across all IDM nodes, including scale out nodes (if any) and if it is, then enter <span class="bold">Y</span>. If you enter <span class="bold">N</span>, the discovery tool exits.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e2028" headers="d32384e1971">
+<p>Are all IDM servers up and running, please confirm? [Y/N]:</p>
+</td>
+<td class="cellalignment142" headers="d32384e2028 d32384e1973">
+<p>Y</p>
+</td>
+<td class="cellalignment142" headers="d32384e2028 d32384e1975">
+<p>Verify that the servers are up and running. If they are, then enter <span class="bold">Y</span>. If you enter <span class="bold">N</span>, the discovery tool exits.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e2044" headers="d32384e1971">
+<p>Enter Weblogic Server (WLS) admin user name for domain <code class="codeph">IDMDomain</code> (<code class="codeph">weblogic_idm</code>):</p>
+</td>
+<td class="cellalignment142" headers="d32384e2044 d32384e1973">
+<p>Your username</p>
+</td>
+<td class="cellalignment142" headers="d32384e2044 d32384e1975">
+<p>If the IDM Domain administrator is <code class="codeph">weblogic_idm</code>, you do not need to enter a value, it will be completed by default. Otherwise, you must enter the value.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e2063" headers="d32384e1971">
+<p>Enter password:</p>
+</td>
+<td class="cellalignment142" headers="d32384e2063 d32384e1973">
+<p>Your password</p>
+</td>
+<td class="cellalignment142" headers="d32384e2063 d32384e1975">
+<p>The IDM domain administrator password.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e2073" headers="d32384e1971">
+<p>Enter Oracle Identity Manager (OIM) admin user (<code class="codeph">xelsysadm</code>) password:</p>
+</td>
+<td class="cellalignment142" headers="d32384e2073 d32384e1973">
+<p>Your password</p>
+</td>
+<td class="cellalignment142" headers="d32384e2073 d32384e1975">
+<p>The OIM admin user&rsquo;s (usually <code class="codeph">xelsysadm</code>) password.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e2089" headers="d32384e1971">
+<p>Enter IDStore policy RW user, under user search DN (<code class="codeph">PolicyRWUser</code>):</p>
+</td>
+<td class="cellalignment142" headers="d32384e2089 d32384e1973">
+<p>Your username</p>
+</td>
+<td class="cellalignment142" headers="d32384e2089 d32384e1975">
+<p>The <code class="codeph">PolicyRWUSer</code> name, usually present under user search DN in LDAP.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e2105" headers="d32384e1971">
+<p>Enter IDStore policy RW user password:</p>
+</td>
+<td class="cellalignment142" headers="d32384e2105 d32384e1973">
+<p>Your password</p>
+</td>
+<td class="cellalignment142" headers="d32384e2105 d32384e1975">
+<p>The <code class="codeph">PolicyRWUSer</code> password.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e2118" headers="d32384e1971">
+<p>Enter Oracle Access Manager (OAM) admin user name (<code class="codeph">oamadmin</code>):</p>
+</td>
+<td class="cellalignment142" headers="d32384e2118 d32384e1973">
+<p>Your username</p>
+</td>
+<td class="cellalignment142" headers="d32384e2118 d32384e1975">
+<p>The OAM admin user, also used to login to the OAM console. Here since it is different to the default, the value provided is oamAdminUser.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e2131" headers="d32384e1971">
+<p>Enter password for admin user DN cn=oamadmin,cn=Users,dc=us,dc=oracle,dc=com:</p>
+</td>
+<td class="cellalignment142" headers="d32384e2131 d32384e1973">
+<p>Your password</p>
+</td>
+<td class="cellalignment142" headers="d32384e2131 d32384e1975">
+<p>The OAM admin user password.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e2141" headers="d32384e1971">
+<p>Enter OIM DB sys password:&nbsp;</p>
+</td>
+<td class="cellalignment142" headers="d32384e2141 d32384e1973">
+<p>Your password</p>
+</td>
+<td class="cellalignment142" headers="d32384e2141 d32384e1975">
+<p>The OIM DB sys user password.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e2151" headers="d32384e1971">
+<p>Enter Oracle Internet Directory(OID) admin user name (cn=orcladmin):</p>
+</td>
+<td class="cellalignment142" headers="d32384e2151 d32384e1973">
+<p>Your username</p>
+</td>
+<td class="cellalignment142" headers="d32384e2151 d32384e1975">
+<p>The OID admin user.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e2162" headers="d32384e1971">
+<p>Enter Oracle Internet Directory(OID) admin password for cn=orcladmin:</p>
+</td>
+<td class="cellalignment142" headers="d32384e2162 d32384e1973">
+<p>Your password</p>
+</td>
+<td class="cellalignment142" headers="d32384e2162 d32384e1975">
+<p>The OID admin user password.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e2172" headers="d32384e1971">
+<p>Enter OID DB sys password: (OID DB sys user password)</p>
+</td>
+<td class="cellalignment142" headers="d32384e2172 d32384e1973">
+<p>Your password</p>
+</td>
+<td class="cellalignment142" headers="d32384e2172 d32384e1975">
+<p>The OID DB sys user password.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e2182" headers="d32384e1971">
+<p>Enter Oracle Virtual Directory (OVD) admin user name (cn=orcladmin):</p>
+</td>
+<td class="cellalignment142" headers="d32384e2182 d32384e1973">
+<p>Your username</p>
+</td>
+<td class="cellalignment142" headers="d32384e2182 d32384e1975">
+<p>The OVD admin user.</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e2192" headers="d32384e1971">
+<p>Enter Oracle Virtual Directory(OVD) admin password for cn=orcladmin:</p>
+</td>
+<td class="cellalignment142" headers="d32384e2192 d32384e1973">
+<p>Your password</p>
+</td>
+<td class="cellalignment142" headers="d32384e2192 d32384e1975">
+<p>The OVD admin user password.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+</div>
+</div>
+<div class="sect3"><a id="GUID-96B8BDDA-6DFA-450F-AF8E-A21576DD4E91"></a>
+<h3 id="OAPUP-GUID-96B8BDDA-6DFA-450F-AF8E-A21576DD4E91" class="sect3"><span class="enumeration_section">7.6.3</span> Set Up True-Up Environment</h3>
+<div>
+<p>A true-up environment is an entirely new IDM environment, which behaves exactly like the current IDM installation. Your true-up environment will conform to the layout and structure of an environment that has been provisioned using the IDM provisioning scripts provided by Oracle.</p>
+<p>This section contains the following topics:</p>
+<div class="p">
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-835CA314-1BDF-4337-9C8E-031AA814A2BF" title="Before setting up your true-up environment, ensure you meet the following prerequisites:">Prerequisites for Setting Up True-Up Environment</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-9A81A600-2C5A-45E9-9E74-2CF887A64FD2" title="To set up the binary files, you need the True-up tars.">Set Up Binaries</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4"><a id="GUID-835CA314-1BDF-4337-9C8E-031AA814A2BF"></a>
+<h4 id="OAPUP-GUID-835CA314-1BDF-4337-9C8E-031AA814A2BF" class="sect4"><span class="enumeration_section">7.6.3.1</span> Prerequisites for Setting Up True-Up Environment</h4>
+<div>
+<p>Before setting up your true-up environment, ensure you meet the following prerequisites:</p>
+<div class="p">
+<ul style="list-style-type: disc;">
+<li>
+<p>The true-up environment must be set up on the <code class="codeph">/u01/IDMTOP</code> and <code class="codeph">/u02/local/IDMTOP</code> directories.</p>
+</li>
+<li>
+<p>Ensure that the directories are owned by the same user who owns the current IDM installation.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4"><a id="GUID-9A81A600-2C5A-45E9-9E74-2CF887A64FD2"></a>
+<h4 id="OAPUP-GUID-9A81A600-2C5A-45E9-9E74-2CF887A64FD2" class="sect4"><span class="enumeration_section">7.6.3.2</span> Set Up Binaries</h4>
+<div>
+<p>To set up the binary files, you need the True-up tars.</p>
+<p>To obtain these tars, use the patch 26504255 you downloaded in <a href="GUID-5413A516-96B1-4B54-B7AA-E5A728B11A4F.htm#GUID-B31F2AD2-9247-4B80-8475-477D70111A73">Copy and Unzip idmUpgrade.zip</a>. The tars must be unzipped accordingly under root.</p>
+<p>The patch contains the following zip files:</p>
+<div class="p">For Linux:
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">p26504255_111230_Linux-x86-64_1of5.zip</code></p>
+</li>
+<li>
+<p><code class="codeph">p26504255_111230_Linux-x86-64_2of5.zip</code></p>
+</li>
+<li>
+<p><code class="codeph">p26504255_111230_Linux-x86-64_3of5.zip</code></p>
+</li>
+<li>
+<p><code class="codeph">p26504255_111230_Linux-x86-64_4of5.zip</code></p>
+</li>
+<li>
+<p><code class="codeph">p26504255_111230_Linux-x86-64_5of5.zip</code></p>
+</li>
+</ul>
+</div>
+<div class="p">For Solaris:
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">p26504255_111230_SOLARIS64_1of6.zip</code></p>
+</li>
+<li>
+<p><code class="codeph">p26504255_111230_SOLARIS64_2of6.zip</code></p>
+</li>
+<li>
+<p><code class="codeph">p26504255_111230_SOLARIS64_3of6.zip</code></p>
+</li>
+<li>
+<p><code class="codeph">p26504255_111230_SOLARIS64_4of6.zip</code></p>
+</li>
+<li>
+<p><code class="codeph">p26504255_111230_SOLARIS64_5of6.zip</code></p>
+</li>
+<li>
+<p><code class="codeph">p26504255_111230_SOLARIS64_6of6.zip</code></p>
+</li>
+</ul>
+</div>
+<p>To ensure that the files are not corrupted, you can compare the checksum of the files listed above against the digests after downloading them.</p>
+<div class="p">This patch also contains the following true-up tars:
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">ohs.tar.gz</code></p>
+</li>
+<li>
+<p><code class="codeph">oid.tar.gz</code></p>
+</li>
+<li>
+<p><code class="codeph">oimX.tar.gz</code></p>
+<div class="p">Where
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">X</code>: is a digit.</p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="p">Depending on the topology setup, choose the tar corresponding to the node type viz OID, OIM, OHS and unzip them in the machines hosting those nodes, including the scaled out nodes. For example:
+<ul style="list-style-type: disc;">
+<li>
+<div class="p">On the OID and OID-SO (if it exists) node, run the following command:
+<pre dir="ltr">
+cd /
+tar -zxvf &lt;stagedir&gt;/oid.tar.gz --keep-old-files
+</pre></div>
+</li>
+<li>
+<p>On the OIM node, run the following command:</p>
+<div class="p">If the OIM node is scaled out, extract the OIM tar on the scaled out OIM.
+<pre dir="ltr">
+cd /
+tar -zxvf &lt;stagedir&gt;/oim.tar.gz --keep-old-files
+</pre></div>
+</li>
+<li>
+<div class="p">On the OHS and OHS-SO (if it exists) node, run the following command:
+<pre dir="ltr">
+cd /
+tar -zxvf &lt;stagedir&gt;/ohs.tar.gz --keep-old-files
+</pre></div>
+</li>
+</ul>
+</div>
+<div class="infobox-note" id="GUID-9A81A600-2C5A-45E9-9E74-2CF887A64FD2__GUID-958B228C-72FB-4C6D-B6C8-CF4CAA62D8F4">
+<p class="notep1">Note:</p>
+Do not use the option <code class="codeph">'--keep-old-files'</code> with the tar command on Solaris platforms.</div>
+<p>The tars will set up oracle homes and instance homes for IDM components inside the <code class="codeph">/u01</code> and <code class="codeph">/u02</code> directories.</p>
+</div>
+</div>
+</div>
+<div class="sect3"><a id="GUID-F0AC7508-9B97-422E-9A94-CF12D6EFD669"></a>
+<h3 id="OAPUP-GUID-F0AC7508-9B97-422E-9A94-CF12D6EFD669" class="sect3"><span class="enumeration_section">7.6.4</span> Perform Migration Tasks</h3>
+<div>
+<p>This section describes how to migrate the configuration to the true-up environment. This section contains the following sections:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-737EAF1C-90EC-4B87-A042-AC8FF1C9627F" title="Before running migration, ensure the following prerequisites are met:">Prerequisites for Running Migration</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-9E25D7E6-156B-4291-817B-F4EFFF917EA2">Migrate Configuration to True-Up Environment</a></p>
+</li>
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-F328C7BE-3ECC-47C9-BE38-AE5CB8AD4D3E" title="After running migration, you must perform the following task:">Post-Migration Tasks</a></p>
+</li>
+</ul>
+</div>
+<div class="sect4"><a id="GUID-737EAF1C-90EC-4B87-A042-AC8FF1C9627F"></a>
+<h4 id="OAPUP-GUID-737EAF1C-90EC-4B87-A042-AC8FF1C9627F" class="sect4"><span class="enumeration_section">7.6.4.1</span> Prerequisites for Running Migration</h4>
+<div>
+<p>Before running migration, ensure the following prerequisites are met:</p>
+<div class="p">
+<ul style="list-style-type: disc;">
+<li>
+<p>Stop only the IDM source environment.&nbsp;To minimize downtime, you can keep the services running when the binaries are set up and only shut down before the migration.</p>
+</li>
+<li>
+<p>Ensure that your administrator&nbsp;passwords or schema passwords do not expire in the next 7 days.</p>
+</li>
+<li>
+<p>Ensure that <code class="codeph">stagedir</code> is shared and mounted on same path on all hosts. This way when the <code class="codeph">stagedir</code> is passed during the invocation of migration on each host, the same directory path is passed.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect4"><a id="GUID-9E25D7E6-156B-4291-817B-F4EFFF917EA2"></a>
+<h4 id="OAPUP-GUID-9E25D7E6-156B-4291-817B-F4EFFF917EA2" class="sect4"><span class="enumeration_section">7.6.4.2</span> Migrate Configuration to True-Up Environment</h4>
+<div>
+<div class="p">Migrating the configuration from the introspected environment to the newly setup true-up environment uses the artifacts generated by the discovery tool. Before migrating, change to the following directory:
+<pre dir="ltr">
+cd SHARED_LOCATION/idmUpgrade
+</pre></div>
+<div class="p">Migrate the configuration to the true-up environment by running the following command on all IDM nodes:
+<pre dir="ltr">
+perl idmMigrateOnPremise.pl -node=&lt;node type&gt; -stagedir=&lt;stage dir&gt;
+</pre></div>
+<div class="p">Run the <code class="codeph">idmMigrateOnPremise.pl</code> command on each node in the following order:
+<ul style="list-style-type: disc;">
+<li>
+<p>OID</p>
+<pre dir="ltr">
+perl idmMigrateOnPremise.pl -node=OID -stagedir=&lt;location of staging directory&gt;
+</pre>
+<p>If the environment is scaled out, run the following commands on the OID scaled out node:</p>
+<pre dir="ltr">
+perl idmMigrateOnPremise.pl -node=OID-SO -stagedir=&lt;location of staging directory&gt;
+</pre></li>
+<li>
+<p>OIM</p>
+<pre dir="ltr">
+perl idmMigrateOnPremise.pl -node=OIM -stagedir=&lt;location of staging directory&gt;
+</pre>
+<div class="p">If the environment is scaled out, run the following commands on the OIM scaled out node:
+<pre dir="ltr">
+perl idmMigrateOnPremise.pl -node=OIM-SO -stagedir=&lt;location of staging directory&gt;
+</pre></div>
+</li>
+<li>
+<p>OHS</p>
+<pre dir="ltr">
+perl idmMigrateOnPremise.pl -node=OHS -stagedir=&lt;location of staging directory&gt;
+</pre>
+<div class="p">If the environment is scaled out, run the following commands on the OHS scaled out node:
+<pre dir="ltr">
+perl idmMigrateOnPremise.pl -node=OHS-SO -stagedir=&lt;location of staging directory&gt;
+</pre></div>
+</li>
+</ul>
+Confirm that the status message at the end of the run is successful on each node. If the script gives an error, check the error message and resolve the issue. Rerun <code class="codeph">idmMigrateOnPremise.pl</code> and ensure it is successful.</div>
+</div>
+</div>
+<div class="sect4"><a id="GUID-F328C7BE-3ECC-47C9-BE38-AE5CB8AD4D3E"></a>
+<h4 id="OAPUP-GUID-F328C7BE-3ECC-47C9-BE38-AE5CB8AD4D3E" class="sect4"><span class="enumeration_section">7.6.4.3</span> Post-Migration Tasks</h4>
+<div>
+<p>After running migration, you must perform the following task:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-6018C448-415D-4D0B-A666-A334B9ECA4A3" title="After completing migration, you must manually register OID instances to enable the OID and OVD status to be shown in EM console.">Manually Register OID Instances</a></p>
+</li>
+</ul>
+<p>After migration, you can start/stop the IDM components on a given node using the IDM provisioning start/stop scripts as described in <a href="GUID-4CF23357-D8FE-42D2-9CB4-071775464DC8.htm#GUID-A2D8CA70-0AEF-4CC8-BB89-A959DD8056E0">Start and Stop All IDM Components on a Host</a>.</p>
+</div>
+<div class="sect5"><a id="GUID-6018C448-415D-4D0B-A666-A334B9ECA4A3"></a>
+<h5 id="OAPUP-GUID-6018C448-415D-4D0B-A666-A334B9ECA4A3" class="sect5"><span class="enumeration_section">7.6.4.3.1</span> Manually Register OID Instances</h5>
+<div>
+<p>After completing migration, you must manually register OID instances to enable the OID and OVD status to be shown in EM console.</p>
+<div class="p">
+<ul style="list-style-type: disc;">
+<li>
+<div class="p">Run the following command:
+<pre dir="ltr">
+$OID_INST_HOME/bin/opmnctl registerinstance -adminHost ADMINSERVER_HOST -adminPort ADMINSERVER_PORT -adminUsername ADMIN_USER
+</pre>
+After running this command, you are prompted for the admin user password.</div>
+<div class="p">
+<div class="infobox-note" id="GUID-6018C448-415D-4D0B-A666-A334B9ECA4A3__GUID-73F66C2D-F19D-4CC4-86E1-69C8E29F292F">
+<p class="notep1">Note:</p>
+You must perform this on each of the OID instances involved in the IDM setup.</div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect3"><a id="GUID-2C3D33CA-2ABB-4FD6-AAAD-831B01E2FDC9"></a>
+<h3 id="OAPUP-GUID-2C3D33CA-2ABB-4FD6-AAAD-831B01E2FDC9" class="sect3"><span class="enumeration_section">7.6.5</span> Verify True-Up Environment Is Up</h3>
+<div>
+<div class="p">To verify if your true-up environment is up and running, perform the following tests:
+<ul style="list-style-type: disc;">
+<li>
+<div class="p"><span class="bold">WLS Tests</span>
+<ol>
+<li>
+<div class="p">Log in to the OIM Domain Admin Server console and perform the following steps:
+<ol>
+<li>
+<p>Check the server status.</p>
+</li>
+<li>
+<p>Check the cluster status.</p>
+</li>
+<li>
+<p>Check the data sources.</p>
+</li>
+<li>
+<p>Ensure that all the deployments are either in "Running" or "Installed" state.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p>Log in to the EM console.</p>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<p><span class="bold">OIM Tests</span></p>
+<ol>
+<li>
+<div class="p">Log in to the Oracle Identity Manager Administration Console, with&nbsp;<code class="codeph">xelsysadm</code> and perform the following steps:
+<ol>
+<li>
+<p>Verify requests as follows:</p>
+<ol>
+<li>
+<p>Create a Request, such as updating the phone number information for <code class="codeph">xelsysadm</code>.</p>
+</li>
+<li>
+<p>Go to your inbox and verify whether the request has come for approval.</p>
+</li>
+<li>
+<p>Click the task, and click&nbsp;<span class="bold">Approve</span>&nbsp;in the&nbsp;<span class="bold">Actions</span>&nbsp;tab.</p>
+</li>
+<li>
+<p>Click the refresh icon. The request comes back. Approve it again.</p>
+</li>
+<li>
+<p>Ensure that the request&rsquo;s details page shows the correct information.</p>
+</li>
+<li>
+<p>Click users, and then search <code class="codeph">xelsysadm</code>.</p>
+</li>
+<li>
+<p>Ensure that the phone number for <code class="codeph">xelsysadm</code> is modified.</p>
+</li>
+</ol>
+</li>
+<li>
+<div class="p">Verify new users as follows:
+<ol>
+<li>
+<p>Create a new user.</p>
+</li>
+<li>
+<p>Log in using the newly created user.</p>
+</li>
+<li>
+<p>Change the password for the user.</p>
+</li>
+<li>
+<p>Log out and log in again with the same user using the new password.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+<li>
+<div class="p">Log in to the sysadmin console and perform the following steps:
+<ol>
+<li>
+<p>In the left pane, under Event Management, click&nbsp;<span class="bold">Reconciliation</span>.</p>
+</li>
+<li>
+<p>In the left pane, under System Management, click&nbsp;<span class="bold">Scheduler</span>.</p>
+</li>
+<li>
+<div class="p">Search for "LDAP*" and proceed as follows:
+<ol>
+<li>
+<p>Run any full reconciliation job, for example, LDAP User Create and Update Full Reconciliation.</p>
+</li>
+<li>
+<p>Run any incremental reconciliation job, for example, LDAP User Create and Update Reconciliation.</p>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</li>
+<li>
+<p><span class="bold">OAM Tests</span></p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Log in to the OAM console.</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3"><a id="GUID-C4981E65-E5F5-479A-8A50-C56908CD4EAE"></a>
+<h3 id="OAPUP-GUID-C4981E65-E5F5-479A-8A50-C56908CD4EAE" class="sect3"><span class="enumeration_section">7.6.6</span> Run preValidate Script</h3>
+<div>
+<p>The following <code class="codeph">preValidateOnPremise.pl</code> script must be executed serially on each IDM node, including the scaled out nodes:</p>
+<div class="p">
+<pre dir="ltr">
+perl preValidateOnPremise.pl &lt;node type&gt; <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches STAGE_DIR/upgradeOnPremise.properties
+</pre>
+Where
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph"><span class="codeinlineitalic">REPOSITORY_LOCATION</span></code>: Fusion Applications Release 12 repository.</p>
+</li>
+<li>
+<p><code class="codeph">STAGE_DIR</code>: Location of stagedir.</p>
+</li>
+</ul>
+</div>
+<div class="p">Run the&nbsp;<code class="codeph">preValidateOnPremise</code> command in the following order:
+<ul style="list-style-type: disc;">
+<li>
+<p>OID</p>
+<pre dir="ltr">
+perl preValidateOnPremise.pl OID <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches STAGE_DIR/upgradeOnPremise.properties
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OID scaled out node:
+<pre dir="ltr">
+perl preValidateOnPremise.pl OID-SO <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches STAGE_DIR/upgradeOnPremise.properties
+</pre></div>
+</li>
+<li>
+<p>OIM</p>
+<pre dir="ltr">
+perl preValidateOnPremise.pl OIM <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches STAGE_DIR/upgradeOnPremise.properties
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OIM scaled out node:
+<pre dir="ltr">
+perl preValidateOnPremise.pl OIM-SO <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches STAGE_DIR/upgradeOnPremise.properties
+</pre></div>
+</li>
+<li>
+<p>OHS</p>
+<pre dir="ltr">
+perl preValidateOnPremise.pl OHS <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches STAGE_DIR/upgradeOnPremise.properties
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OHS scaled out node:
+<pre dir="ltr">
+perl preValidateOnPremise.pl OHS-SO <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches STAGE_DIR/upgradeOnPremise.properties
+</pre></div>
+</li>
+</ul>
+</div>
+<p>Confirm that the status message at the end of the run is successful on each node. If the script gives an error, check the error message and resolve the issue. Rerun <code class="codeph">preValidate</code> and ensure it is successful.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-7338745E-4162-40D0-A5B2-84CEAE2E7BA0"></a>
+<h3 id="OAPUP-GUID-7338745E-4162-40D0-A5B2-84CEAE2E7BA0" class="sect3"><span class="enumeration_section">7.6.7</span> Manually Download OIM Email Template</h3>
+<div>
+<p>After running the <code class="codeph">preValidate</code> script on your type II environment, manually download the OIM email template as follows:</p>
+<div class="p">
+<ol>
+<li>
+<p>Log in to the OIM host.</p>
+</li>
+<li>
+<p>Go to the&nbsp;<code class="codeph">idmUpgrade</code> unzip&nbsp;location.</p>
+</li>
+<li>
+<div class="p">Execute <code class="codeph">exportOIMDataOnPremise.pl</code> as follows:
+<pre dir="ltr">
+perl exportOIMDataOnPremise.pl <span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties &lt;SHARED_UPGRADE_LOCATION&gt;/&lt;podName&gt;/emailTemplateDir/emailtemplate.xml 
+</pre>
+Where</div>
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">SHARED_UPGRADE_LOCATION</code>: It is located in <code class="codeph">pod.properties</code>, and its default value is <code class="codeph">/u01/sharedupgradelocation</code>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Confirm that the status message at the end of the run is successful. If the script gives an error, check the error message and resolve the issue. Then, rerun <code class="codeph">exportOIMDataOnPremise.pl</code> and ensure it is successful.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect3"><a id="GUID-1160923B-EA84-4D15-96AF-DC122C1D0853"></a>
+<h3 id="OAPUP-GUID-1160923B-EA84-4D15-96AF-DC122C1D0853" class="sect3"><span class="enumeration_section">7.6.8</span> Stop All IDM Services</h3>
+<div>
+<p>Stop all IDM services by running the following command on all IDM nodes:</p>
+<div class="p">
+<pre dir="ltr">
+perl stopIDMOnPremise.pl &lt;node type&gt; <span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties
+</pre></div>
+<p>Where</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph"><span class="codeinlineitalic">STAGE_DIR</span></code>: Location of stagedir.</p>
+</li>
+</ul>
+<div class="p">Run the&nbsp;<code class="codeph">stopIDMOnPremise.pl</code> command in the following order:
+<ul style="list-style-type: disc;">
+<li>
+<p>OHS</p>
+<div class="p">If the environment is scaled out, run the following command on the OHS scaled out node:
+<pre dir="ltr">
+perl stopIDMOnPremise.pl OHS-SO <span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties
+</pre>
+If the environment is not scaled out, run the following command on the OHS node:
+<pre dir="ltr">
+perl stopIDMOnPremise.pl OHS <span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties
+</pre></div>
+</li>
+<li>
+<p>OIM</p>
+<div class="p">If the environment is scaled out, run the following command on the OIM scaled out node:
+<pre dir="ltr">
+perl stopIDMOnPremise.pl OIM-SO <span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties
+</pre>
+If the environment is not scaled out, run the following command on the OIM node:
+<pre dir="ltr">
+perl stopIDMOnPremise.pl OIM <span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties
+</pre></div>
+</li>
+<li>
+<p>OID</p>
+<div class="p">If the environment is scaled out, run the following command on the OID scaled out node:
+<pre dir="ltr">
+perl stopIDMOnPremise.pl OID-SO <span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties
+</pre>
+If the environment is not scaled out, run the following command on the OID node:
+<pre dir="ltr">
+perl stopIDMOnPremise.pl OID <span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties
+</pre></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3"><a id="GUID-F73CDE0D-5F30-4505-B0B1-F2C76ACEF608"></a>
+<h3 id="OAPUP-GUID-F73CDE0D-5F30-4505-B0B1-F2C76ACEF608" class="sect3"><span class="enumeration_section">7.6.9</span> Upgrade Binaries</h3>
+<div>
+<p>Upgrade the binary files used by IDM components by running the following command on all IDM nodes:</p>
+<div class="p">
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=&lt;node type&gt; <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=<span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties -mode=binary
+</pre></div>
+<p>Where</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph"><span class="codeinlineitalic">REPOSITORY_LOCATION</span></code>: Fusion Applications Release 12 repository.</p>
+</li>
+<li>
+<p><code class="codeph"><span class="codeinlineitalic">STAGE_DIR</span></code>: Location of stagedir.</p>
+</li>
+</ul>
+<div class="p">Run the&nbsp;<code class="codeph">idmUpgradeOnPremise.pl</code> command in the following order:
+<ul style="list-style-type: disc;">
+<li>
+<p>OID</p>
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OID <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=<span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties -mode=binary
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OID scaled out node:
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OID-SO <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=<span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties -mode=binary
+</pre></div>
+</li>
+<li>
+<p>OIM</p>
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OIM <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=<span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties -mode=binary
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OIM scaled out node:
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OIM-SO <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=<span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties -mode=binary
+</pre></div>
+</li>
+<li>
+<p>OHS</p>
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OHS <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=<span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties -mode=binary
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OHS scaled out node:
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OHS-SO <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=<span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties -mode=binary
+</pre></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3"><a id="GUID-8B172A56-7680-4778-A6FB-EAE28B3CBE1E"></a>
+<h3 id="OAPUP-GUID-8B172A56-7680-4778-A6FB-EAE28B3CBE1E" class="sect3"><span class="enumeration_section">7.6.10</span> Update IDM Configuration</h3>
+<div>
+<p>&nbsp;Update the IDM configuration to Release 12 level by running the following <code class="codeph">config</code> upgrade commands on all IDM nodes:</p>
+<div class="p">
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=&lt;node type&gt; <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=<span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties -mode=config
+</pre></div>
+<p>Where</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph"><span class="codeinlineitalic">REPOSITORY_LOCATION</span></code>: Fusion Applications Release 12 repository.</p>
+</li>
+<li>
+<p><code class="codeph"><span class="codeinlineitalic">STAGE_DIR</span></code>: Location of stagedir.</p>
+</li>
+</ul>
+<div class="p">Run the&nbsp;<code class="codeph">idmUpgradeOnPremise.pl</code> command in the following order:
+<ul style="list-style-type: disc;">
+<li>
+<p>OID</p>
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OID <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=<span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties -mode=config
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OID scaled out node:
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OID-SO <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=<span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties -mode=config
+</pre></div>
+</li>
+<li>
+<p>OIM</p>
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OIM <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=<span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties -mode=config
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OIM scaled out node:
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OIM-SO <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=<span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties -mode=config
+</pre>
+If you are on a Solaris platform, after running this command on OIM perform the steps as listed in <a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-12E4C2A9-187D-4744-A791-612F7EB1DA40" title="During IDM upgrade on Solaris platforms, the OIM Config step displays the following message in the IDM upgrade console:">Re-create IDM Schemas Manually (Solaris Only)</a>.</div>
+</li>
+<li>
+<p>OHS</p>
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OHS <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=<span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties -mode=config
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OHS scaled out node:
+<pre dir="ltr">
+perl idmUpgradeOnPremise.pl -node=OHS-SO <span class="italic">REPOSITORY_LOCATION</span>/installers,SHARED_LOCATION/11.12.x.0.0_post_repo_patches -props=<span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties -mode=config
+</pre></div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="sect3"><a id="GUID-A637BA72-91CD-493F-9231-DE7C303804A7"></a>
+<h3 id="OAPUP-GUID-A637BA72-91CD-493F-9231-DE7C303804A7" class="sect3"><span class="enumeration_section">7.6.11</span> Run postValidate Script</h3>
+<div>
+<p>To confirm that the upgrade was successful, run the following post-upgrade validation command on all IDM nodes:</p>
+<div class="p">
+<pre dir="ltr">
+perl postvalidateOnPremise.pl &lt;node type&gt; <span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties
+</pre></div>
+<p>Where</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph"><span class="codeinlineitalic">STAGE_DIR</span></code>: Location of stagedir.</p>
+</li>
+</ul>
+<div class="p">Run the&nbsp;<code class="codeph">idmUpgradeOnPremise.pl</code> command in the following order:
+<ul style="list-style-type: disc;">
+<li>
+<p>OID</p>
+<pre dir="ltr">
+perl postvalidateOnPremise.pl OID <span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OID scaled out node:
+<pre dir="ltr">
+perl postvalidateOnPremise.pl OID-SO <span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties
+</pre></div>
+</li>
+<li>
+<p>OIM</p>
+<pre dir="ltr">
+perl postvalidateOnPremise.pl OIM <span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OIM scaled out node:
+<pre dir="ltr">
+perl postvalidateOnPremise.pl OIM-SO <span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties
+</pre></div>
+</li>
+<li>
+<p>OHS</p>
+<pre dir="ltr">
+perl postvalidateOnPremise.pl OHS <span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties
+</pre>
+<div class="p">If the environment is scaled out, run the following command on the OHS scaled out node:
+<pre dir="ltr">
+perl postvalidateOnPremise.pl OHS-SO <span class="italic">STAGE_DIR</span>/upgradeOnPremise.properties
+</pre></div>
+</li>
+</ul>
+</div>
+<p>Confirm that the status message at the end of the run is successful on each node. If the script gives an error, check the error message and resolve the issue.</p>
+<p>After upgrade, you can start/stop the IDM components on a given node using the IDM provisioning start/stop scripts as described in <a href="GUID-4CF23357-D8FE-42D2-9CB4-071775464DC8.htm#GUID-A2D8CA70-0AEF-4CC8-BB89-A959DD8056E0">Start and Stop All IDM Components on a Host</a>.</p>
+</div>
+</div>
+</div>
+<div class="sect2"><a id="GUID-E0CE7E00-6931-47B3-9E9F-F9F318DF0B8C"></a>
+<h2 id="OAPUP-GUID-E0CE7E00-6931-47B3-9E9F-F9F318DF0B8C" class="sect2"><span class="enumeration_section">7.7</span> Reconnect Enterprise IDM Integrations</h2>
+<div>
+<p>If your IDM for FA is integrated with Enterprise IDM and you disconnected integrations as listed in <a href="GUID-3B21D3BE-4AFB-4246-908D-00F3D73AC53A.htm#GUID-FA57B7E4-F9D8-455D-8131-E4CA66B56B98" title="Perform this steps only if your IDM for FA is integrated with Enterprise IDM. You must disconnect integrations by cloning your IDM environment. The cloning process involves the following high-level steps:">Disconnect Enterprise IDM Integrations</a>, then you must reconnect them by following the steps listed in <span class="italic">Getting Started with Oracle Fusion Applications Bridge for Active Directory (Doc ID 2309139.1)</span> available on My Oracle Support.</p>
+</div>
+</div>
+<div class="sect2"><a id="GUID-99252DE0-BC36-4630-AA42-D490DF692355"></a>
+<h2 id="OAPUP-GUID-99252DE0-BC36-4630-AA42-D490DF692355" class="sect2"><span class="enumeration_section">7.8</span> Update Status to Success</h2>
+<div>
+<div class="p">After successfully upgrading Oracle Identity Management, update the task status to&nbsp;<code class="codeph">success</code>&nbsp;on the IDM host as follows:
+<pre dir="ltr">
+(Unix) 
+cd ORCH_LOCATION/bin 
+./orchestration.sh updateStatus -pod POD_NAME -hosttype IDM -hostname host_name -release 11.12.x.0.0 -phase DowntimePreFA -taskid UpgradeIDMPausePointPlugin  -taskstatus success 
+</pre></div>
+</div>
+</div>
+<div class="sect2"><a id="GUID-D03E8E4F-D0ED-4C28-9464-A8B835B1DD4B"></a>
+<h2 id="OAPUP-GUID-D03E8E4F-D0ED-4C28-9464-A8B835B1DD4B" class="sect2"><span class="enumeration_section">7.9</span> Resume Upgrade Orchestrator to Upgrade Oracle Fusion Applications</h2>
+<div>
+<div class="p">Resume orchestration on each IDM host that is listed in the following properties in the <code class="codeph"><a href="GUID-3157F2F3-4AB5-48B5-80C3-0839F9FF52B8.htm#GUID-38D5EDE0-ED59-4CE6-8711-B6CE0517E078">pod.properties</a></code> file, using the command in <a href="GUID-B23BA47E-F742-49AF-A08E-DD3BAC6DB3AC.htm#GUID-3FBB01B1-047B-4699-A166-66B9951C2966">Run Upgrade Orchestrator During Downtime</a>, Step <a href="GUID-B23BA47E-F742-49AF-A08E-DD3BAC6DB3AC.htm#GUID-3FBB01B1-047B-4699-A166-66B9951C2966__BABFEIJJ">4</a>:
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">HOSTNAME_IDMOID</code></p>
+</li>
+<li>
+<p><code class="codeph">HOSTNAME_IDMOIM</code></p>
+</li>
+<li>
+<p><code class="codeph">HOSTNAME_IDMOHS</code></p>
+</li>
+</ul>
+Upgrade Orchestrator runs the tasks in the following table to upgrade Oracle Fusion Applications.
+<div class="tblformal" id="GUID-D03E8E4F-D0ED-4C28-9464-A8B835B1DD4B__GUID-A9C87073-F546-4C1B-8C9A-6EAF090B4009">
+<p class="titleintable">Table 7-4 Tasks Run During Various Downtime Phases</p>
+<table class="cellalignment153" title="Tasks Run During Various Downtime Phases" summary="Task list for DowntimePreFA phase">
+<thead>
+<tr class="cellalignment142">
+<th class="cellalignment184" id="d32384e3439">Task Name</th>
+<th class="cellalignment184" id="d32384e3442">Phase Name</th>
+<th class="cellalignment184" id="d32384e3445">Task ID</th>
+<th class="cellalignment185" id="d32384e3448">Host Types</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment142">
+<td class="cellalignment187" id="d32384e3453" headers="d32384e3439">
+<p>Run Upgrade Readiness (During Downtime) Checks</p>
+</td>
+<td class="cellalignment187" headers="d32384e3453 d32384e3442">
+<p>DowntimePreFA</p>
+</td>
+<td class="cellalignment187" headers="d32384e3453 d32384e3445">
+<p>DuringDowntimeChecks</p>
+</td>
+<td class="cellalignment188" headers="d32384e3453 d32384e3448">
+<p>Primordial, OHS, Midtier</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment187" id="d32384e3466" headers="d32384e3439">
+<p>Remove Conflicting Patches for Oracle Fusion Middleware Component Oracle Homes</p>
+</td>
+<td class="cellalignment187" headers="d32384e3466 d32384e3442">
+<p>DowntimePreFA</p>
+</td>
+<td class="cellalignment187" headers="d32384e3466 d32384e3445">
+<p>RemoveConflictingPatches</p>
+</td>
+<td class="cellalignment188" headers="d32384e3466 d32384e3448">
+<p>Primordial</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment187" id="d32384e3479" headers="d32384e3439">
+<p>Upgrade JDK</p>
+</td>
+<td class="cellalignment187" headers="d32384e3479 d32384e3442">
+<p>DowntimePreFA</p>
+</td>
+<td class="cellalignment187" headers="d32384e3479 d32384e3445">
+<p>UpgradeJDK</p>
+</td>
+<td class="cellalignment188" headers="d32384e3479 d32384e3448">
+<p>Primordial</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment187" id="d32384e3492" headers="d32384e3439">
+<p>Run RUP Lite for OVM in Offline Mode as Application User</p>
+</td>
+<td class="cellalignment187" headers="d32384e3492 d32384e3442">
+<p>DowntimePreFA</p>
+</td>
+<td class="cellalignment187" headers="d32384e3492 d32384e3445">
+<p>RupLiteOvmOffline</p>
+</td>
+<td class="cellalignment188" headers="d32384e3492 d32384e3448">
+<p>Primordial, OHS, Midtier, IDM</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment187" id="d32384e3505" headers="d32384e3439">
+<p>Run Oracle Fusion Applications RUP Installation Part 1 of 2</p>
+</td>
+<td class="cellalignment187" headers="d32384e3505 d32384e3442">
+<p>DowntimeDuringFA Phase</p>
+</td>
+<td class="cellalignment187" headers="d32384e3505 d32384e3445">
+<p>RunFirstRUPInstaller</p>
+</td>
+<td class="cellalignment188" headers="d32384e3505 d32384e3448">
+<p>Primordial</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+Once you have successfully resumed Upgrade Orchestrator to upgrade Oracle Fusion Applications, proceed to <a href="GUID-B23BA47E-F742-49AF-A08E-DD3BAC6DB3AC.htm#GUID-1EEED638-D208-4B18-BEB3-CF9A3A74C522" title="Orchestration pauses after first RUP installer is completed. No manual step is&nbsp;required.">Pause Point 3 - Reload Orchestration</a>.</div>
+</div>
+</div>
+<div class="sect2"><a id="GUID-52B57F62-A65A-400C-BE35-FFAB7A495F73"></a>
+<h2 id="OAPUP-GUID-52B57F62-A65A-400C-BE35-FFAB7A495F73" class="sect2"><span class="enumeration_section">7.10</span> IDM for FA Upgrade Properties Files</h2>
+<div>
+<p>This section describes some properties files used in the IDM for FA Upgrade to Release 12 (11.12.x.0.0).</p>
+<div class="section">
+<p class="subhead2">upgradeOnPremise.properties</p>
+<div class="p">The following tables provides a description of the upgradeOnPremise.properties:
+<div class="infobox-note" id="GUID-52B57F62-A65A-400C-BE35-FFAB7A495F73__GUID-57C6B13E-5D17-4ECC-A1E6-135823CC52CB">
+<p class="notep1">Note:</p>
+The optional parameters are usually defaulted or introspected. You can change them if the property values differ in your environment.</div>
+</div>
+<div class="p">
+<div class="tblformal" id="GUID-52B57F62-A65A-400C-BE35-FFAB7A495F73__GUID-143F6FC3-92E1-4164-B5C2-518C79E3294B">
+<table class="cellalignment148" summary="Description of upgradeOnPremise.properties">
+<thead>
+<tr class="cellalignment142">
+<th class="cellalignment149" id="d32384e3562">Property Name</th>
+<th class="cellalignment149" id="d32384e3564">Mandatory</th>
+<th class="cellalignment149" id="d32384e3566">Default Value</th>
+<th class="cellalignment149" id="d32384e3568">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3572" headers="d32384e3562">
+<p>DB_OIM_SYS_PASSWORD</p>
+</td>
+<td class="cellalignment142" headers="d32384e3572 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3572 d32384e3566">
+<p>Blank</p>
+</td>
+<td class="cellalignment142" headers="d32384e3572 d32384e3568">
+<p>Password for the IDM sys DB</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3585" headers="d32384e3562">
+<p>DB_IDSTORE_SYS_PASSWORD</p>
+</td>
+<td class="cellalignment142" headers="d32384e3585 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3585 d32384e3566">
+<p>Blank</p>
+</td>
+<td class="cellalignment142" headers="d32384e3585 d32384e3568">
+<p>Password for the OID sys DB</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3598" headers="d32384e3562">
+<p>NODE_MANAGER_PWD</p>
+</td>
+<td class="cellalignment142" headers="d32384e3598 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3598 d32384e3566">
+<p>Blank</p>
+</td>
+<td class="cellalignment142" headers="d32384e3598 d32384e3568">
+<p>Password for the Node manager</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3611" headers="d32384e3562">
+<p>OID_IDSTORE_ORCLADMIN_PASSWORD</p>
+</td>
+<td class="cellalignment142" headers="d32384e3611 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3611 d32384e3566">
+<p>Blank</p>
+</td>
+<td class="cellalignment142" headers="d32384e3611 d32384e3568">
+<p>Password for the OID admin user</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3624" headers="d32384e3562">
+<p>OVD_IDSTORE_ORCLADMIN_PASSWORD</p>
+</td>
+<td class="cellalignment142" headers="d32384e3624 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3624 d32384e3566">
+<p>Blank</p>
+</td>
+<td class="cellalignment142" headers="d32384e3624 d32384e3568">
+<p>OVD admin user password</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3637" headers="d32384e3562">
+<p>OAM_ADMINUSER_PASSWORD</p>
+</td>
+<td class="cellalignment142" headers="d32384e3637 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3637 d32384e3566">
+<p>Blank</p>
+</td>
+<td class="cellalignment142" headers="d32384e3637 d32384e3568">
+<p>Password for the OAM Admin user</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3650" headers="d32384e3562">
+<p>OIM_XELSYADM_PASSWORD</p>
+</td>
+<td class="cellalignment142" headers="d32384e3650 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3650 d32384e3566">
+<p>Blank</p>
+</td>
+<td class="cellalignment142" headers="d32384e3650 d32384e3568">
+<p>Password for the OIM user xelsysadm</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3663" headers="d32384e3562">
+<p>IDM_DOMAIN_ADMIN_PASSWORD</p>
+</td>
+<td class="cellalignment142" headers="d32384e3663 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3663 d32384e3566">
+<p>Blank</p>
+</td>
+<td class="cellalignment142" headers="d32384e3663 d32384e3568">
+<p>Password for the WLS Domain administrator user</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3676" headers="d32384e3562">
+<p>OAM_SW_USER_PWD</p>
+</td>
+<td class="cellalignment142" headers="d32384e3676 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3676 d32384e3566">
+<p>Blank</p>
+</td>
+<td class="cellalignment142" headers="d32384e3676 d32384e3568">
+<p>Password for the OAM Software User account</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3689" headers="d32384e3562">
+<p>IDSTORE_USERSEARCHBASE</p>
+</td>
+<td class="cellalignment142" headers="d32384e3689 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3689 d32384e3566">
+<p><code class="codeph">cn=Users,dc=us,dc=oracle,dc=com</code></p>
+</td>
+<td class="cellalignment142" headers="d32384e3689 d32384e3568">
+<p>User search base</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3703" headers="d32384e3562">
+<p>IDSTORE_GROUPSEARCHBASE</p>
+</td>
+<td class="cellalignment142" headers="d32384e3703 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3703 d32384e3566">
+<p><code class="codeph">cn=Groups,dc=us,dc=oracle,dc=com</code></p>
+</td>
+<td class="cellalignment142" headers="d32384e3703 d32384e3568">
+<p>Group search base</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3718" headers="d32384e3562">
+<p>ID_STORE_SEARCH_BASE</p>
+</td>
+<td class="cellalignment142" headers="d32384e3718 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3718 d32384e3566">
+<p><code class="codeph">dc=us,dc=oracle,dc=com</code></p>
+</td>
+<td class="cellalignment142" headers="d32384e3718 d32384e3568">
+<p>Search base for all</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3732" headers="d32384e3562">
+<p>TOPOLOGY_XML_FILE_LOC</p>
+</td>
+<td class="cellalignment142" headers="d32384e3732 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3732 d32384e3566">
+<p><code class="codeph">/u01/IDMTOP/config/lcmconfig/topology/topology.xml</code></p>
+</td>
+<td class="cellalignment142" headers="d32384e3732 d32384e3568">
+<p>Location of the topology.xml file</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3746" headers="d32384e3562">
+<p>START_STOP_SCRIPT_WORKING_DIR</p>
+</td>
+<td class="cellalignment142" headers="d32384e3746 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3746 d32384e3566">
+<p><code class="codeph">/u01/IDMTOP/config/scripts</code></p>
+</td>
+<td class="cellalignment142" headers="d32384e3746 d32384e3568">
+<p>Location of&nbsp;IDM Provisioning Start/Stop scripts</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3760" headers="d32384e3562">
+<p>IDMLCM_HOME</p>
+</td>
+<td class="cellalignment142" headers="d32384e3760 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3760 d32384e3566">
+<p><code class="codeph">/u01/IDMTOP/idmlcm</code></p>
+</td>
+<td class="cellalignment142" headers="d32384e3760 d32384e3568">
+<p>Location of IDMLCM home</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3774" headers="d32384e3562">
+<p>IDMUTILS_HOME</p>
+</td>
+<td class="cellalignment142" headers="d32384e3774 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3774 d32384e3566">
+<p><code class="codeph">/u01/IDMTOP/products/app/Oracle_IDMUTILS1</code></p>
+</td>
+<td class="cellalignment142" headers="d32384e3774 d32384e3568">
+<p>Location of Oracle IDMUTILS</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3788" headers="d32384e3562">
+<p>OID_JAVA_HOME</p>
+</td>
+<td class="cellalignment142" headers="d32384e3788 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3788 d32384e3566">
+<p><code class="codeph">/u01/IDMTOP/products/dir/jdk6</code></p>
+</td>
+<td class="cellalignment142" headers="d32384e3788 d32384e3568">
+<p>Location of OID MW JAVA HOME</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3802" headers="d32384e3562">
+<p>OIM_JAVA_HOME</p>
+</td>
+<td class="cellalignment142" headers="d32384e3802 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3802 d32384e3566">
+<p><code class="codeph">/u01/IDMTOP/products/app/jdk6</code></p>
+</td>
+<td class="cellalignment142" headers="d32384e3802 d32384e3568">
+<p>Location of OIM MW JAVA HOME</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3816" headers="d32384e3562">
+<p>OHS_JAVA_HOME</p>
+</td>
+<td class="cellalignment142" headers="d32384e3816 d32384e3564">
+<p>Yes</p>
+</td>
+<td class="cellalignment142" headers="d32384e3816 d32384e3566">
+<p><code class="codeph">/u01/IDMTOP/products/ohs/jdk6</code></p>
+</td>
+<td class="cellalignment142" headers="d32384e3816 d32384e3568">
+<p>Location of OHS MW JAVA HOME</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3830" headers="d32384e3562">
+<p>NODE_MANAGER_USER=admin</p>
+</td>
+<td class="cellalignment142" headers="d32384e3830 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e3830 d32384e3566">
+<p>admin</p>
+</td>
+<td class="cellalignment142" headers="d32384e3830 d32384e3568">
+<p>Node manager username</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3843" headers="d32384e3562">
+<p>OID_USER=cn=orcladmin</p>
+</td>
+<td class="cellalignment142" headers="d32384e3843 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e3843 d32384e3566">
+<p>orcladmin</p>
+</td>
+<td class="cellalignment142" headers="d32384e3843 d32384e3568">
+<p>OID admin username</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3856" headers="d32384e3562">
+<p>OVD_USER=cn=orcladmin</p>
+</td>
+<td class="cellalignment142" headers="d32384e3856 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e3856 d32384e3566">
+<p>orcladmin</p>
+</td>
+<td class="cellalignment142" headers="d32384e3856 d32384e3568">
+<p>OVD admin username</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3870" headers="d32384e3562">
+<p>IDSTORE_OAMADMINUSER=oamAdminUser</p>
+</td>
+<td class="cellalignment142" headers="d32384e3870 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e3870 d32384e3566">
+<p>oamAdminUser</p>
+</td>
+<td class="cellalignment142" headers="d32384e3870 d32384e3568">
+<p>OAM Admin user used to login to oamconsole</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3883" headers="d32384e3562">
+<p>IDM_DOMAIN_ADMIN=weblogic_idm</p>
+</td>
+<td class="cellalignment142" headers="d32384e3883 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e3883 d32384e3566">
+<p>weblogic_idm</p>
+</td>
+<td class="cellalignment142" headers="d32384e3883 d32384e3568">
+<p>IDM weblogic domain administrator username</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3896" headers="d32384e3562">
+<p>IDSTORE_OAMSOFTWAREUSER=oamSoftwareUser</p>
+</td>
+<td class="cellalignment142" headers="d32384e3896 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e3896 d32384e3566">
+<p>oamSoftwareUser</p>
+</td>
+<td class="cellalignment142" headers="d32384e3896 d32384e3568">
+<p>OamSoftwareUser present in OAM configuration</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3909" headers="d32384e3562">
+<p>FA_POLICYSTORE_NAME=cn=FAPolicies</p>
+</td>
+<td class="cellalignment142" headers="d32384e3909 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e3909 d32384e3566">
+<p>cn=FAPolicies</p>
+</td>
+<td class="cellalignment142" headers="d32384e3909 d32384e3568">
+<p>FA Policy store name</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3922" headers="d32384e3562">
+<p>AGENT_ID=Webgate_IDM</p>
+</td>
+<td class="cellalignment142" headers="d32384e3922 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e3922 d32384e3566">
+<p>Webgate_IDM</p>
+</td>
+<td class="cellalignment142" headers="d32384e3922 d32384e3568">
+<p>Webgate Agent ID</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3935" headers="d32384e3562">
+<p>APP_DOMAIN=IAMSuite</p>
+</td>
+<td class="cellalignment142" headers="d32384e3935 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e3935 d32384e3566">
+<p>IAMSuite</p>
+</td>
+<td class="cellalignment142" headers="d32384e3935 d32384e3568">
+<p>Application Domain Name</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3948" headers="d32384e3562">
+<p>HOST_IDENTIFIER=IAMSuiteAgent</p>
+</td>
+<td class="cellalignment142" headers="d32384e3948 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e3948 d32384e3566">
+<p>IAMSuiteAgent</p>
+</td>
+<td class="cellalignment142" headers="d32384e3948 d32384e3568">
+<p>Host identifier related to application domain</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3961" headers="d32384e3562">
+<p>ACCESS_CLIENT_PASSPHRASE_USER=user</p>
+</td>
+<td class="cellalignment142" headers="d32384e3961 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e3961 d32384e3566">
+<p>user</p>
+</td>
+<td class="cellalignment142" headers="d32384e3961 d32384e3568">
+<p>Access client passphrase user</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3974" headers="d32384e3562">
+<p>ACCESS_CLIENT_PASSPHRASE_PWD=</p>
+</td>
+<td class="cellalignment142" headers="d32384e3974 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e3974 d32384e3566">
+<p>If not provided, the password is introspected</p>
+</td>
+<td class="cellalignment142" headers="d32384e3974 d32384e3568">
+<p>Access client passphrase password</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e3987" headers="d32384e3562">
+<p>NAP_GLOBAL_PASSPHRASE_USER=user</p>
+</td>
+<td class="cellalignment142" headers="d32384e3987 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e3987 d32384e3566">
+<p>user</p>
+</td>
+<td class="cellalignment142" headers="d32384e3987 d32384e3568">
+<p>NAP global passphrase user</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e4000" headers="d32384e3562">
+<p>OPSS_DB_PASSWORD=</p>
+</td>
+<td class="cellalignment142" headers="d32384e4000 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e4000 d32384e3566">
+<p>If not provided, it is defaulted to the OAM schema password</p>
+</td>
+<td class="cellalignment142" headers="d32384e4000 d32384e3568">
+<p>New password for OPSS DB schema</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e4014" headers="d32384e3562">
+<p>OIF_11GR2_SINGNING_KEY_PWD=</p>
+</td>
+<td class="cellalignment142" headers="d32384e4014 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e4014 d32384e3566">
+<p>If not provided, it is defaulted to the OAM schema password</p>
+</td>
+<td class="cellalignment142" headers="d32384e4014 d32384e3568">
+<p>New password required by OIF keystore for signing</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e4027" headers="d32384e3562">
+<p>IS_OVD_SPLIT_CONFIGURE=false</p>
+</td>
+<td class="cellalignment142" headers="d32384e4027 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e4027 d32384e3566">
+<p>If configured, set it to true</p>
+</td>
+<td class="cellalignment142" headers="d32384e4027 d32384e3568">
+<p>Flag to identify if OVD Split Profile is configured or not</p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e4040" headers="d32384e3562">
+<p>SHADOW_ENTRIES_USER_CONTAINER_DN=cn=shadowentries</p>
+</td>
+<td class="cellalignment142" headers="d32384e4040 d32384e3564">
+<p>No</p>
+</td>
+<td class="cellalignment142" headers="d32384e4040 d32384e3566">
+<p>cn=shadowentries</p>
+</td>
+<td class="cellalignment142" headers="d32384e4040 d32384e3568">
+<p>Container in Oracle Internet Directory when OVD split profile is configured</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+<!-- class="section" --></div>
+</div>
+<div class="sect2"><a id="GUID-715D0650-6A7D-4CDC-A403-522BFA02E3F4"></a>
+<h2 id="OAPUP-GUID-715D0650-6A7D-4CDC-A403-522BFA02E3F4" class="sect2"><span class="enumeration_section">7.11</span> IDM Upgrade and Migration Log Files Location</h2>
+<div>
+<p>The following table shows the location of the IDM Upgrade and migration log files:</p>
+<div class="p">
+<div class="infobox-note" id="GUID-715D0650-6A7D-4CDC-A403-522BFA02E3F4__GUID-859430E3-65CE-4FB8-A197-30840F400E1C">
+<p class="notep1">Note:</p>
+&nbsp;These values may change based on the customization you perform to the <code class="codeph">LOG_DIR</code> property in the upgrade and migration properties file.</div>
+<div class="tblformal" id="GUID-715D0650-6A7D-4CDC-A403-522BFA02E3F4__GUID-2C3C4359-473A-43E1-BAAF-895E79B58DC6">
+<p class="titleintable">Table 7-5 Log Files Location</p>
+<table class="cellalignment153" title="Log Files Location" summary="Location of the IDM Upgrade and migration log files">
+<thead>
+<tr class="cellalignment142">
+<th class="cellalignment149" id="d32384e4087">Log</th>
+<th class="cellalignment149" id="d32384e4090">Location</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e4095" headers="d32384e4087">
+<p>Type I Upgrade</p>
+</td>
+<td class="cellalignment142" headers="d32384e4095 d32384e4090">
+<p><code class="codeph">/u01/logs</code></p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e4103" headers="d32384e4087">
+<p>Type II Migration</p>
+</td>
+<td class="cellalignment142" headers="d32384e4103 d32384e4090">
+<p><code class="codeph">stagedir/logs</code></p>
+</td>
+</tr>
+<tr class="cellalignment142">
+<td class="cellalignment142" id="d32384e4111" headers="d32384e4087">
+<p>Type II Upgrade</p>
+</td>
+<td class="cellalignment142" headers="d32384e4111 d32384e4090">
+<p><code class="codeph">stagedir/logs</code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment141">
+<tr>
+<td class="cellalignment150">
+<table class="cellalignment146">
+<tr>
+<td class="cellalignment145"><a href="GUID-B23BA47E-F742-49AF-A08E-DD3BAC6DB3AC.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment145"><a href="GUID-8A80C606-D05D-4AA9-AC82-7194EF47776B.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2011, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment152">
+<table class="cellalignment144">
+<tr>
+<td class="cellalignment145"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment145"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

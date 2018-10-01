@@ -1,0 +1,2821 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>HCM Data Roles and Security Profiles (Chapter 12) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Securing Oracle HCM Cloud" name="doctitle">
+      <meta content="E73303-09" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="OCHUS" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Feb 16 01:08:36 PST 2018" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM data roles; security profiles; custom job roles; role categories;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="OCHUS2155404.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="OCHUS1410654.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="OCHUS.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="OCHUS.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="HCM data roles combine a job role with the data that users with the role must access. You identify the data in security profiles.
+      As data roles are specific to the enterprise, no predefined HCM data roles exist. You can edit or replace the security profiles
+      in an HCM data role. Saving your changes updates the relevant data instance sets. Users with this HCM data role find the updated
+      data instance sets when they next sign in."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">15/25</span><a name="BEGIN" id="BEGIN"></a><div id="OCHUS1210218" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">12</span>HCM Data Roles and Security Profiles
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS163383">HCM Data Roles: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS159675">HCM Security Profiles: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1231786">Predefined HCM Security Profiles: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS178244">Creating an HCM Data Role: Worked Example</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS173647">Creating HCM Data Roles and Security Profiles: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1206867">Role Delegation: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1349327">Enabling Role Delegation: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2124053">Assigning Security Profiles to Job and Abstract Roles: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1590906">Configuring HCM Data Roles and Security Profiles for Audit: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1242084">Enabling Access to HCM Audit Data: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS732644">HCM Data Roles Configuration Diagnostic Test</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS732695">HCM Security Profile Configuration Diagnostic Test</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS732764">HCM Securing Objects Metadata Diagnostic Test</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1210280">FAQs for HCM Data Roles and Security Profiles</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="OCHUS163383">
+                  <h2>HCM Data Roles: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>HCM data roles combine a job role with the data that users with
+                     the role must access. You identify the data in security profiles. As data roles
+                     are specific to the enterprise, no predefined HCM data roles exist.
+                  </p>
+                  
+                  
+                  
+                  <p>To create an HCM data role, you perform the Assign
+                     Security Profiles to Role task in the Setup and Maintenance work area.
+                     Alternatively, you can use the Manage Data Role and Security Profiles
+                     task. Both tasks open the Manage Data Roles and Security Profiles
+                     page. You must have the IT Security Manager job role to perform these
+                     tasks.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS163378">
+                     <h3 class="topictitle">Job Role Selection</h3>
+                     
+                     <p>When you create an HCM data role, you include a job
+                        role. The HCM object types that the job role accesses are identified
+                        automatically, and sections for the appropriate security profiles
+                        appear. 
+                     </p>
+                     
+                     
+                     <p>For example, if you select the job role Human Resource
+                        Analyst, then sections for managed person, public person, organization, position, LDG, document type, and payroll
+                        flow appear. You select or create security profiles for those object
+                        types in the HCM data role.
+                     </p>
+                     
+                     <p> If you select a job role that doesn't access objects
+                        secured by security profiles, then you can't create an HCM data role.
+                     </p>
+                     
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        If you create custom job roles, then the role category
+                        must end with <span class="uicontrol">Job Roles</span>. Otherwise,
+                        they don't appear in the list of job roles when you create an HCM
+                        data role.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS163379">
+                     <h3 class="topictitle">Security Profiles</h3>
+                     
+                     <p>For each object type, you can include only one security
+                        profile in an HCM data role.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS163381">
+                     <h3 class="topictitle">Components of the HCM Data Role</h3>
+                     
+                     <p>The following figure summarizes the components of
+                        an HCM data role.
+                     </p>
+                     
+                     
+                     
+                     <p> 
+                        <p>The job role that you select in
+                           the HCM data role is granted many function security privileges and
+                           data security policies directly. It also inherits many aggregate privileges, and may inherit some duty roles. Each aggregate privilege or duty role has its
+                           own function security privileges and related data security policies.
+                           Relevant HCM object types are identified automatically from the data
+                           security policies that the job role is granted either directly or
+                           indirectly. The specific instances of the objects required by this
+                           HCM data role are identified in security profiles and stored in a data instance set.
+                        </p> 
+                     </p>
+                     <img src="img/hrc_security_datarole_06_20050039.png" alt="The components of an HCM data role" class="fusappimg">
+                     
+                     
+                     <p>For example, the human resource specialist job role
+                        inherits the Manage Work Relationship and Promote Worker aggregate
+                        privileges, among many others. The aggregate privileges provide both
+                        function security privileges, such as Manage Work Relationship and
+                        Promote Worker, and access to objects, such as assignment. Security profiles identify
+                        specific instances of those objects for the HCM data role, such as
+                        persons with assignments in a specified legal employer.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS159675">
+                  <h2>HCM Security Profiles: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Security profiles identify instances of Human
+                     Capital Management (HCM) objects. For example, a person security profile
+                     identifies one or more person records, and a payroll security profile
+                     identifies one or more payrolls. This topic describes how to create
+                     and use security profiles and identifies the HCM objects that need
+                     them. To manage security profiles, you must have the IT Security Manager
+                     job role.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1236648">
+                     <h3 class="topictitle">Use of HCM Security Profiles</h3>
+                     
+                     <p>You include security profiles in HCM data roles to identify the
+                        data that users with those roles can access. You can also assign security
+                        profiles directly to abstract roles, such as employee. However, you're unlikely
+                        to assign them directly to job roles, because users with same job role usually access
+                        different sets of data.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS159667">
+                     <h3 class="topictitle">HCM Object Types</h3>
+                     
+                     <p>You can create security profiles for the following
+                        HCM object types:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Person</p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Managed person</p>
+                              </li>
+                              
+                              <li>
+                                 <p>Public person</p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Organization</p>
+                        </li>
+                        
+                        <li>
+                           <p>Position</p>
+                        </li>
+                        
+                        <li>
+                           <p>Legislative data group (LDG)</p>
+                        </li>
+                        
+                        <li>
+                           <p>Country</p>
+                        </li>
+                        
+                        <li>
+                           <p>Document type</p>
+                        </li>
+                        
+                        <li>
+                           <p>Payroll</p>
+                        </li>
+                        
+                        <li>
+                           <p>Payroll flow</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Two uses exist for the person security profile because
+                        many users access two distinct sets of people.
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The Managed Person security profile
+                              identifies people you can perform actions against. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The Public Person security profile
+                              identifies people you can search for in the worker directory.
+                           </p>
+                           <p> This type of security profile also secures some lists
+                              of values. For example, the Change Manager and Hire pages include
+                              a person list of values that the public person security profile secures.
+                              The person who's selecting the manager for a worker may not have view
+                              access to that manager through a managed person security profile.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS159669">
+                     <h3 class="topictitle">Security Criteria in HCM Security Profiles</h3>
+                     
+                     <p>In a security profile, you specify the criteria that
+                        identify data instances of the relevant type. For example, in an organization
+                        security profile, you can identify organizations by organization hierarchy,
+                        classification, or name. All criteria in a security profile apply.
+                        For example, if you identify organizations by both organization hierarchy
+                        and classification, then only organizations that satisfy both criteria
+                        belong to the data instance set.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1589413">
+                     <h3 class="topictitle">Access to Future-Dated Objects</h3>
+                     
+                     <p>By default, users can't access future-dated organization,
+                        position, or person objects. 
+                     </p>
+                     
+                     
+                     <p>To enable access to future-dated:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Organizations, select the <span class="uicontrol">Include future organizations</span> option in the
+                              organization security profile
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Positions, select the <span class="uicontrol">Include future positions</span> option in the position
+                              security profile
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Person records, select the <span class="uicontrol">Include future people</span> option in the person
+                              security profile
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS159671">
+                     <h3 class="topictitle">Security Profile Creation</h3>
+                     
+                     <p>You can create security profiles either individually
+                        or while creating an HCM data role. For standard requirements, it's
+                        more efficient to create the security profiles individually and include
+                        them in appropriate HCM data roles. 
+                     </p>
+                     
+                     
+                     <p>To create security profiles individually, use the
+                        relevant security profile task. For example, to create a position
+                        security profile, use the Manage Position Security Profile task in
+                        the Setup and Maintenance work area.
+                     </p>
+                     
+                     <p>Security profiles that provide view-all access are
+                        predefined.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS334034">
+                     <h3 class="topictitle">Reuse of Security Profiles</h3>
+                     
+                     <p>Regardless of how you create them, all security profiles
+                        are reusable.
+                     </p>
+                     
+                     
+                     <p>You can include security profiles in other security
+                        profiles. For example, you can include an organization security profile
+                        in a position security profile to secure positions by department or
+                        business unit. One security profile inherits the data instance set
+                        defined by another.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1231786">
+                  <h2>Predefined HCM Security Profiles: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The Oracle Human Capital Management Cloud security
+                     reference implementation includes these predefined HCM security profiles.
+                  </p>
+                  
+                  
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="This three-column table with&#xA;11 data rows shows, from left to right, the predefined security profiles,&#xA;their types, and the associated data instance set.">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Security Profile Name
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Security Profile Type
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Data Instance Set
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>View All People</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Person</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>All person records in the enterprise</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>View Own Record</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Person</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The signed-in user's own person record and the person
+                                 records of that user's contacts
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>View Manager Hierarchy</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Person</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The signed-in user's line manager hierarchy </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>View All Workers</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Person</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The person records of all people with currently active
+                                 or suspended assignments in the enterprise
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>View All Organizations</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Organization</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>All organizations in the enterprise</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>View All Positions</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Position</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>All positions in the enterprise</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>View All Legislative Data Groups</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>LDG</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>All LDGs in the enterprise</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>View All Countries</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Country</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>All countries in the FND_TERRITORIES table</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>View All Document Types</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Document Type</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>All custom document types in the enterprise</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>View All Payrolls</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Payroll</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>All payrolls in the enterprise</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>View All Flows</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Payroll Flow</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>All payroll flows in the enterprise</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  <p>You can include the predefined security profiles
+                     in any HCM data role, but you can't edit them. The <span class="uicontrol">View all</span> option is disabled in any security profile that you create. This
+                     restriction exists because predefined security profiles meet this
+                     requirement.
+                  </p>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS178244">
+                  <h2>Creating an HCM Data Role: Worked Example</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This example shows how to create an HCM data role. </p>
+                  
+                  <p>Vision Corporation is a global enterprise with multiple legal employers.
+                     Each human resource (HR) specialist in Vision Corporation has a defined
+                     area of responsibility as the human resources representative for a
+                     single legal employer. This example shows how to create a single HCM
+                     data role that you can assign to all HR specialists in Vision Corporation.
+                     This data role secures access to person records based on each HR specialist's
+                     area of responsibility.
+                  </p>
+                  
+                  
+                  
+                  <p>The following table summarizes key decisions for this
+                     scenario.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="This two-column table with 12&#xA;data rows lists questions to consider when creating an HCM data role&#xA;(left column) and the responses (right column).">
+                        
+                        
+                        <tr class="header">
+                           <th scope="col">
+                              Decisions to Consider
+                              
+                           </th>
+                           <th scope="col">
+                              In This Example
+                              
+                           </th>
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Which job
+                                 role does the HCM data role include?
+                              </p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Human resource specialist</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Can the role be delegated?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>No</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Which person records do users access?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Person records of all employees, contingent workers, pending workers,
+                                 and nonworkers in
+                                 the legal employer for which they have the human resources representative
+                                 responsibility
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Which public person records do users access?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>All</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Which organizations do users access?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>All</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Which positions do users access?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>All</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Which countries do users see in lists of countries?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>All</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Which legislative data groups (LDGs) do users access?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>All</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Which document types do users access?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>All</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Which payrolls do users access?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>All</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Which payroll flows do users access?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>All</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  <div class="sect2" id="OCHUS178009">
+                     <h3 class="topictitle">Summary of the Tasks</h3>
+                     
+                     <p>Create the HCM data role by:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Naming the HCM data role and selecting
+                              the associated job role
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Specifying the security criteria
+                              for each HCM object type
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Creating any new security profiles</p>
+                        </li>
+                        
+                        <li>
+                           <p>Reviewing and submitting the HCM
+                              data role
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                  </div>
+                  
+                  
+                  <h3 class="topictitle">Prerequisites</h3>
+                  
+                  Before you can perform these tasks:
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>Human resources representatives must have been
+                           identified for each legal employer.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>An area of responsibility must have been created
+                           for each human resources representative. The <span class="uicontrol">Responsibility Type</span> is set to <span class="uicontrol">Human resources representative</span>, and the scope of responsibility
+                           is set to the relevant legal employer.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Naming the HCM Data Role and Selecting the Job
+                  Role</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Setup and Maintenance</span></span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Setup and Maintenance work area, search
+                           for and select the Assign Security Profiles to Role task.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Search Results section of the Manage Data
+                           Roles and Security Profiles page, click <span class="uicontrol">Create</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Create Data Role: Select Role page, complete
+                           the fields as shown in this table.
+                        </p>
+                        
+                        <p></p>
+                        <div class="simpletable-margin">
+                           <table summary="This table lists field names (left column) and their respective values.">
+                              
+                              
+                              <tr>
+                                 
+                                 <th scope="col">
+                                    Field
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Data Role</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Legal Employer HR Specialist</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Job Role</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Human Resource Specialist</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Delegation Allowed</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Next</span>.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Specifying Security Criteria for Each HCM Object
+                  Type</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>In the Organization section of the Create Data Role:
+                           Security Criteria page, select the predefined organization security
+                           profile View All Organizations.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Position section, select the predefined position
+                           security profile View All Positions.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Countries section, select the predefined
+                           country security profile View All Countries.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Legislative Data Group section, select the
+                           predefined LDG security profile View All Legislative Data Groups.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Person section, complete the fields as shown
+                           in the table.
+                        </p>
+                        
+                        <p></p>
+                        <div class="simpletable-margin">
+                           <table summary="This table lists field names (left column) and their respective values.">
+                              
+                              
+                              <tr>
+                                 
+                                 <th scope="col">
+                                    Field
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Person Security Profile</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Create New</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Name</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Workers by Legal Employer</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Secure by Area of Responsibility</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Public Person section, select the predefined
+                           person security profile View All People.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Document Type section, select the predefined
+                           document type security profile View All Document Types.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Payroll section, select the predefined payroll
+                           security profile View All Payrolls.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Payroll Flow section, select the predefined
+                           payroll flow security profile View All Flows.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Next</span> until
+                           you reach the Assign Security Profiles to Role: Person Security Profile
+                           page.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Creating the Person Security Profile</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>In the Area of Responsibility section, ensure that
+                           the <span class="uicontrol">Secure by area of responsibility</span> option is selected.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Complete the fields as shown in this table.</p>
+                        
+                        <p></p>
+                        <div class="simpletable-margin">
+                           <table summary="This table lists field names (left column) and their respective values.">
+                              
+                              
+                              <tr>
+                                 
+                                 <th scope="col">
+                                    Field
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Responsibility Type</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Human resources representative</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Scope of Responsibility</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Legal employer</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Review</span>.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Review and Submit the HCM Data Role</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>Review the HCM data role.</p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Submit</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Manage Data Roles and Security Profiles page,
+                           search for the HCM data role. In the search results, confirm that
+                           the role status is <span class="uicontrol">Requested</span>.
+                           Once the role status is <span class="uicontrol">Request Complete</span>, you can provision the role to users.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS173647">
+                  <h2>Creating HCM Data Roles and Security Profiles: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>Planning your use of HCM data roles and security profiles helps minimize
+                     maintenance and eases their introduction in your enterprise. This topic suggests some
+                     approaches.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="OCHUS1726973">
+                     <h3 class="topictitle">Minimizing Numbers of Data Roles and Security
+                     Profiles</h3>
+                     
+                     
+                     
+                     <p>Secure access to person records based on
+                        a user's areas of responsibility whenever possible. Using this approach,
+                        you can:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Reduce dramatically the number
+                              of HCM data roles and security profiles that you must manage.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Avoid the performance problems
+                              that can occur with large numbers of HCM data roles.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS173638">
+                     <h3 class="topictitle">Identifying Standard Requirements</h3>
+                     
+                     
+                     
+                     <p>Most enterprises are likely to have some standard
+                        requirements for data access. For example, multiple HCM data roles
+                        may need access to all organizations in a single country. If you create
+                        an organization security profile that provides this access, then you
+                        can include it in multiple HCM data roles. This approach simplifies
+                        the management of HCM data roles and security profiles, and may also
+                        prevent the creation of duplicate security profiles.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS173639">
+                     <h3 class="topictitle">Naming HCM Data Roles and Security Profiles</h3>
+                     
+                     
+                     
+                     <p>You're recommended to define and use a naming
+                        scheme for HCM data roles and security profiles. 
+                     </p>
+                     
+                     <p>A security profile name can identify the scope of
+                        the resulting data
+                        instance set. For example, the position security profile name
+                        All Positions Sales Department conveys that the security profile identifies
+                        all positions in the Sales Department.
+                     </p>
+                     
+                     <p>An HCM data role name can include both the name of
+                        the inherited job role and the data scope. For example, the HCM data role Human Resource
+                        Specialist Legal Employer identifies both the job role and the role
+                        scope. HCM data role names must contain fewer than 55 characters.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS173640">
+                     <h3 class="topictitle">Planning Data Access for Each HCM Data Role</h3>
+                     
+                     
+                     
+                     <p>An HCM data role can include only one security
+                        profile of each type. For example, you can include one organization
+                        security profile, one managed person security profile, and one public person security profile.
+                        Therefore, you must plan the requirements of any HCM data role to
+                        ensure that each security profile identifies all required data instances.
+                        For example, if a user accesses both legal employers and departments,
+                        then the organization security profile must identify both types of
+                        organizations.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS173641">
+                     <h3 class="topictitle">Providing Access to All Instances of an Object</h3>
+                     
+                     
+                     
+                     <p>To provide access to all instances of an HCM
+                        object, use the appropriate predefined security profile. For example,
+                        to provide access to all person records in the enterprise, use the
+                        predefined security profile View All People.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1591057">
+                     <h3 class="topictitle">Auditing Changes to HCM Data Roles and Security
+                     Profiles</h3>
+                     
+                     
+                     
+                     <p>A user with the Application Implementation
+                        Consultant job role can enable audit of changes to HCM data roles
+                        and security profiles for the enterprise.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1206867">
+                  <h2>Role Delegation: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Role delegation is the assignment of a role
+                     from one user, known as the delegator, to another user, known as the
+                     proxy. The delegation can be either for a specified period, such as
+                     a planned absence, or indefinite. 
+                  </p>
+                  
+                  
+                  
+                  <p>You can delegate roles in the Roles and Approvals
+                     Delegated to Others section on the Manage User Account page. Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">About Me</span> - <span class="uicontrol">My Account</span></span>.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1207093">
+                     <h3 class="topictitle">Actions Enabled by Delegation</h3>
+                     
+                     <p>The proxy user can perform the tasks of the delegated
+                        role on the relevant data. For example, a line manager can manage
+                        absence records for his or her reports. If that manager delegates
+                        the line manager role, then the proxy can also manage the absence
+                        records of the delegator's reports. The delegator doesn't lose the
+                        role while it's delegated.
+                     </p>
+                     
+                     
+                     <p>The proxy user signs in using his or her own user
+                        name, but has additional function and data privileges from the delegated
+                        role.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1207094">
+                     <h3 class="topictitle">Proxy Users</h3>
+                     
+                     <p>You can delegate roles to any user whose details
+                        you can access by means of a public person security profile. This security
+                        profile typically controls access to person details in the worker
+                        directory.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1207095">
+                     <h3 class="topictitle">Roles That You Can Delegate</h3>
+                     
+                     <p>You can delegate any role that you have currently,
+                        provided that:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The role is enabled for delegation.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>The assignment that qualifies you for
+                              the role doesn't have a future-dated termination.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You can also delegate any role that you can provision
+                        to other users, provided that the role is enabled for delegation.
+                        By delegating roles rather than provisioning them to a user, you can:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Specify a limited period for the
+                              delegation.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Enable the proxy user to access
+                              your data.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1207097">
+                     <h3 class="topictitle">Duplicate Roles</h3>
+                     
+                     <p>If the proxy user already has the role, then the
+                        role isn't provisioned again. However, the proxy user gains access
+                        to the data that's accessible using the delegator's role.
+                     </p>
+                     
+                     
+                     <p>For example, you may delegate the line manager role
+                        to a proxy user who already has the role. The proxy user can access
+                        both your data (for example, your manager hierarchy) and his or her
+                        own data while the role is delegated.
+                     </p>
+                     
+                     <p>The proxy's My Account page shows the delegated role
+                        in the Roles Delegated to Me section, even though only the associated
+                        data has been delegated.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2093770">
+                     <h3 class="topictitle">Delegation from Multiple Delegators</h3>
+                     
+                     <p>Multiple users can delegate the same role to the
+                        same proxy for overlapping periods. If the proxy user already has
+                        the role, then it isn't provisioned again but the proxy can access
+                        the data associated with the delegated roles. For example, three line
+                        managers delegate the line manager role to the same proxy for the
+                        following periods:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Manager 1, January and February</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Manager 2, February and March</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Manager 3, January through April</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>This table shows which manager hierarchies the proxy
+                        can access in each month.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 January
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 February
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 March
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 April
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Manager 1</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manager 1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manager 2</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manager 2</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Manager 3</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manager 3</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manager 3</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manager 3</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>If the proxy is a line manager, then the proxy can
+                        access his or her own manager hierarchy in addition to those from
+                        other managers.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        A single delegator can't delegate the same role to
+                        the same proxy more than once for overlapping periods.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1207098">
+                     <h3 class="topictitle">Role Delegation Dates</h3>
+                     
+                     <p>You can enter both start and end dates or a start
+                        date only.
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>If the start date is today's date,
+                              then the delegation is immediate.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If the start and end dates are
+                              the same, then the delegation is immediate on the start date. A request
+                              to end the delegation is generated on the same date and processed
+                              when the Send Pending LDAP Requests process next runs.  
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If the start and end dates are
+                              different and in the future, then requests to start and end delegation
+                              are generated on the relevant dates. They're processed when Send Pending
+                              LDAP Requests runs on those dates.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If you change a delegation date
+                              to today's date, then the change is immediate if the start and end
+                              dates are different. If they're the same, then a request to end the
+                              delegation is generated and processed when Send Pending LDAP Requests
+                              next runs.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If you enter no end date, then
+                              the delegation is indefinite.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     
+                     <p>Role delegation ends automatically if the proxy user's assignment is terminated.</p>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1349327">
+                  <h2>Enabling Role Delegation: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>By default, delegation isn't enabled for
+                     any predefined HCM job or abstract role. You can change the delegation setting of any predefined HCM role,
+                     except the Employee and Contingent Worker abstract roles. You can
+                     also enable delegation for HCM data roles, custom job roles,
+                     and custom abstract roles.
+                  </p>
+                  
+                  
+                  
+                  <p>This topic describes how to manage role delegation
+                     using the Assign Security Profiles to Role task in the Setup and Maintenance
+                     work area. You must have the IT Security Manager job role to manage
+                     role delegation.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1349325">
+                     <h3 class="topictitle">Delegation of HCM Data Roles</h3>
+                     
+                     <p>When you create an HCM data role, you can indicate
+                        whether delegation is allowed on the Create Data Role: Select Role
+                        page.
+                     </p>
+                     
+                     
+                     <p>When you edit an HCM data role, you can change the
+                        delegation setting on the Edit Data Role: Role Details page. If you
+                        deselect the <span class="uicontrol">Delegation Allowed</span> option, then currently delegated roles aren't affected.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        You can delegate HCM data roles in which access to
+                        person records is managed using custom criteria. However, the SQL
+                        predicate in the Custom Criteria section of the person security profile must handle the delegation logic.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1349326">
+                     <h3 class="topictitle">Delegation of Custom Job and Abstract Roles</h3>
+                     
+                     <p>If you create a custom abstract role, then you can
+                        enable it for delegation when you assign security profiles to it directly.
+                        To assign security profiles to abstract roles, you perform the Assign
+                        Security Profiles to Role task. On the Edit Data Role: Role Details
+                        page, you select <span class="uicontrol">Delegation Allowed</span>. As soon as you submit the role, delegation is enabled.
+                     </p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        You can't delegate access to your own record. For
+                        example, you may assign the predefined View Own Record security profile
+                        to your custom role. Alternatively, you may create a person security
+                        profile that enables access to your own record and assign it to your
+                        custom role. In both cases, you can enable the role for delegation.
+                        Although the role itself can be delegated, access to your record isn't
+                        delegated. However, the delegated role can provide access to other
+                        data instances. 
+                        
+                     </div>
+                     
+                     <p>You can enable custom job roles for delegation in
+                        the same way, but you're unlikely to assign security profiles to them
+                        directly. Typically, job roles are inherited by HCM data roles, which
+                        you can enable for delegation.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS2124053">
+                  <h2>Assigning Security Profiles to Job and Abstract Roles: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>To give users access to data you usually
+                     create HCM data roles, which inherit job roles. However, you can also assign security profiles directly to
+                     job and abstract roles. You're most likely to assign security profiles to abstract roles,
+                     such as employee, to provide the data access that all employees need.
+                     For example, all employees must be able to access the worker directory.
+                     You're less likely to assign security profiles to job roles, as users
+                     with the same job role typically access different data instances.
+                  </p>
+                  
+                  
+                  
+                  <p> This topic describes how to:</p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Assign security profiles directly
+                           to a job or abstract role.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Remove security profiles from a
+                           job or abstract role.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="OCHUS2124052">
+                     <h3 class="topictitle">Assigning Security Profiles to Roles</h3>
+                     
+                     <p>You can assign security profiles to both predefined
+                        and custom job and abstract roles. Follow these steps to assign security
+                        profiles to a role:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Setup
+                                    and Maintenance</span></span> to open the Setup and Maintenance
+                              work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Search for and select the Assign
+                              Security Profiles to Role task.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Manage Data Roles and Security
+                              Profiles page, search for the job or abstract role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the search results, select the
+                              role and click <span class="uicontrol">Edit</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Edit Data Role: Role Details
+                              page, click <span class="uicontrol">Next</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Edit Data Role: Security
+                              Criteria page, select the security profiles that you want to assign
+                              to the role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Review</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Edit Data Role: Review page,
+                              click <span class="uicontrol">Submit</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        On the Manage Data Roles and Security Profiles page,
+                        search for the role again. In the search results, confirm that a green
+                        check mark appears in the <span class="uicontrol">Security Profiles
+                           Assigned</span> column. The check mark confirms that security
+                        profiles are assigned to the role.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2124069">
+                     <h3 class="topictitle">Revoking Security Profiles from Roles</h3>
+                     
+                     <p>You can remove security profiles that you assigned
+                        directly to a predefined or custom abstract or job role. For example,
+                        you may have assigned security profiles directly to a job role and
+                        included the job role in a data role later. In this case, users may
+                        have access to more data than you intended. Follow these steps to
+                        remove security profiles from a role:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>On the Manage Data Role and Security
+                              Profiles page, search for the job or abstract role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the search results, select the
+                              role and confirm that security profiles are currently assigned to
+                              the role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Revoke Security Profiles</span>. All security profiles currently
+                              assigned directly to the role are revoked.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        To replace the security profiles in an HCM data role,
+                        edit the data role in the usual way. You can't use the <span class="uicontrol">Revoke Security Profiles</span> button.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1590906">
+                  <h2>Configuring HCM Data Roles and Security Profiles for Audit: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This procedure describes how to configure
+                     the attributes of HCM data roles and security profiles for audit.
+                     You must have the Application Implementation Consultant job role to
+                     perform this task.
+                  </p>
+                  
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Setup
+                                 and Maintenance</span></span>.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Search for and select the <span class="uicontrol">Manage Audit Policies</span> task.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>On the Manage Audit Policies page,
+                           click <span class="uicontrol">Configure Business Object Attributes</span> in the Oracle Fusion Applications section.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>On the Configure Business Object
+                           Attributes page, set <span class="uicontrol">Application</span> to <span class="uicontrol">HCM Core Setup</span>.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In the <span class="uicontrol">Audit</span> column of the table of business objects that appears,
+                           select an object. For example, select <span class="uicontrol">Person
+                              Security Profile</span> or <span class="uicontrol">Data Role</span>.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In the Audited Attributes section
+                           of the page, click <span class="uicontrol">Create</span>.
+                        </p>
+                        <p>The <span class="uicontrol">Select and Add Audit Attributes</span> dialog box opens.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>In the <span class="uicontrol">Select and Add Audit Attributes</span> dialog box, select one
+                           or more attributes for audit and click <span class="uicontrol">OK</span>.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Click <span class="uicontrol">Save and Close</span>.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>On the Manage Audit Policies page,
+                           set <span class="uicontrol">Audit Level</span> to <span class="uicontrol">Auditing</span> in the Oracle Fusion Applications
+                           section.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Click <span class="uicontrol">Save and Close</span>.
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  <p>Changes made from now on to the selected attributes
+                     of the object are audited. A user who has the Internal Auditor job
+                     role can review audited changes on the Audit Reports page.
+                  </p>
+                  
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=D02C82F595D5648DE040D30A688140EF">Managing Audit Policies: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=9284AC376010D23DE040D30A6881531D">Configuring Audit Business Object Attributes: Points to Consider</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1242084">
+                  <h2>Enabling Access to HCM Audit Data: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic introduces ways of enabling access
+                     to HCM audit data. 
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="OCHUS1242079">
+                     <h3 class="topictitle">Create a Data Role </h3>
+                     
+                     
+                     
+                     <p>You can create an HCM data role that includes the
+                        Internal Auditor job role with security
+                        profiles to identify the data that the role accesses. For example,
+                        to access audit data for person records, the HCM data role must include
+                        an appropriate person security profile. Use the predefined View All
+                        Workers security profile to enable access to audit data for all worker
+                        records. 
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1242080">
+                     <h3 class="topictitle">Create Custom Job Roles</h3>
+                     
+                     
+                     
+                     <p>Your enterprise may allow other job roles,
+                        such as human resource specialist, to access audit data for the auditable
+                        business objects that they access. To enable this access, you create
+                        a custom version of the job role to which you add the relevant privileges.
+                        You include the custom job role in an HCM data role with one or more
+                        security profiles that identify the data.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS732644">
+                  <h2>HCM Data Roles Configuration Diagnostic Test</h2>
+                  
+                  
+                  
+                  
+                  <p>The HCM Data Roles Configuration diagnostic
+                     test verifies that the Manage HCM Data Roles task flow is configured
+                     successfully for a specified user.
+                  </p>
+                  
+                  
+                  
+                  <p>To run the HCM Data Roles Configuration diagnostic
+                     test, select <span><span class="uicontrol">Settings and Actions</span> - <span class="uicontrol">Troubleshooting</span> - <span class="uicontrol">Run Diagnostics Tests</span></span>.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="">
+                     <dl class="reference">
+                        <h3 class="parameterGroupTitle">Diagnostic Test Parameters</h3>
+                        
+                        
+                        
+                        <dt>User Name</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>The test is performed for the specified user. The
+                              user doesn't have to be signed-in while the test is running. However,
+                              the user must have signed in at least once, because the test uses
+                              details from the user's current or latest session.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                     </dl>
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS732695">
+                  <h2>HCM Security Profile Configuration Diagnostic Test</h2>
+                  
+                  
+                  
+                  
+                  <p>The HCM Security Profile Configuration diagnostic
+                     test verifies that the Manage Security Profiles task flows are configured
+                     successfully for a specified user.
+                  </p>
+                  
+                  
+                  
+                  <p>To run the HCM Security Profile Configuration diagnostic
+                     test, select <span><span class="uicontrol">Settings and Actions</span> - <span class="uicontrol">Troubleshooting</span> - <span class="uicontrol">Run Diagnostics Tests</span></span>.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="">
+                     <dl class="reference">
+                        <h3 class="parameterGroupTitle">Diagnostic Test Parameters</h3>
+                        
+                        
+                        
+                        <dt>User Name</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>The test is performed for the specified user. The
+                              user doesn't have to be signed-in while the test is running. However,
+                              the user must have signed in at least once, because the test uses
+                              details from the user's current or latest session.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                     </dl>
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS732764">
+                  <h2>HCM Securing Objects Metadata Diagnostic Test</h2>
+                  
+                  
+                  
+                  
+                  <p>The HCM Securing Objects Metadata diagnostic
+                     test validates securing-object metadata for the  HCM securing objects.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p>To run the HCM Securing Objects Metadata diagnostic
+                     test, select <span><span class="uicontrol">Settings and Actions</span> - <span class="uicontrol">Troubleshooting</span> - <span class="uicontrol">Run Diagnostics Tests</span></span>.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="">
+                     <dl class="reference">
+                        <h3 class="parameterGroupTitle">Diagnostic Test Parameters</h3>
+                        
+                        
+                        
+                        <dt>Securing Object</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Enter the name of an HCM securing object from the
+                              following table.
+                           </p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="This two-column table with eight&#xA;data rows shows the securing object name (left column) and its description&#xA;(right column).">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Securing Object Name
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Description
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>PERSON</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Person</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>LDG</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Legislative data group</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>POSITION</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Position</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>ORGANIZATION</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Organization</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>PAYROLL</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Payroll</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>FLOWPATTERN</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Payroll flow</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>DOR</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Document type</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>COUNTRY</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Country</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                           <p>If you don't enter the name of a securing object,
+                              then the test applies to all securing objects.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                     </dl>
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1210280">
+                  <h2>FAQs for HCM Data Roles and Security Profiles</h2>
+                  
+                  <div class="sect2" id="OCHUS167926">
+                     <h3>What happens if I edit an HCM data role?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>You can edit or replace the security profiles in an HCM data role. Saving
+                        your changes updates the relevant data instance sets. Users with
+                        this HCM data role find the updated data instance sets when they next
+                        sign in.
+                     </p>
+                     
+                     
+                     
+                     <p>You can't change the HCM data role name or select
+                        a different job role. To make such changes, you create a new HCM data role and disable
+                        this HCM data role, if appropriate.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS163210">
+                     <h3>How do I provision HCM data roles to users?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>On the Create Role Mapping page, create a role mapping for
+                        the role.
+                     </p>
+                     
+                     
+                     
+                     <p>Select the <span class="uicontrol">Autoprovision</span> option to provision the role automatically to any user whose assignment matches the mapping attributes.
+                     </p>
+                     
+                     
+                     
+                     <p>Select the <span class="uicontrol">Requestable</span> option if any user whose assignment matches the mapping attributes
+                        can provision the role manually to other users.
+                     </p>
+                     
+                     
+                     
+                     <p>Select the <span class="uicontrol">Self-Requestable</span> option if any user whose assignment matches the mapping attributes
+                        can request the role.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS157340">
+                     <h3>What happens if I edit a security profile that's enabled?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>If the security profile is in use,
+                        then saving your changes updates the security profile's data instance set. For example, if you remove a position from a position security profile,
+                        the position no longer appears in the data instance set. Users find
+                        the updated data instance set when they next access the data.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS154848">
+                     <h3>What happens if I disable a security profile?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>The security profile returns no
+                        data. For example, a user with an HCM data role that allows the user
+                        to update organization definitions would continue to access organization-related
+                        tasks. However, the user couldn't access organizations identified
+                        in a disabled organization security profile.
+                     </p>
+                     
+                     
+                     
+                     <p>You can't disable a security profile that another
+                        security profile includes.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS732772">
+                     <h3>How can I diagnose any issues with HCM data roles and security profiles?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Run these diagnostic tests by selecting <span><span class="uicontrol">Settings and Actions</span> - <span class="uicontrol">Troubleshooting</span> - <span class="uicontrol">Run
+                              Diagnostics Tests</span></span>.
+                     </p>
+                     
+                     
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with five&#xA;data rows shows the diagnostic test name (left column) and its description&#xA;(right column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Diagnostic Test Name
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Tests
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HCM Data Roles Configuration</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Configuration of Manage HCM Data Roles for a user</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HCM Data Role Detailed Information</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Potential problems with a data role</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HCM Security Profile Configuration</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Configuration of Manage Security Profiles tasks for
+                                    a user
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HCM Security Profiles Detailed Information</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Potential problems with security profiles of a type</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HCM Securing Objects Metadata</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Securing-object metadata </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

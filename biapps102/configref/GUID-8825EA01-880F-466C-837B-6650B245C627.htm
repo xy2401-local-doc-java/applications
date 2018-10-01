@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>About Configuring Cost Fact In Projects Analytics for EBS</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="Actual Costs are extracted from the Cost Distribution Lines table in the Project Costing module in E-Business Suite and loaded into the Cost Line Fact (W_PROJ_COST_LINE_F) table. For E-Business Suite, Transaction Currency is the Document Currency for this fact." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-3D67FCE8-6A33-467C-98C6-C02EF76FEE07.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-6F541D9E-A551-4A77-AC19-6BAE5CF8442E.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-8825EA01-880F-466C-837B-6650B245C627"></a> <span id="PAGE" style="display:none;">92/336</span> <!-- End Header -->
+<a id="IT_306"></a>
+<h1 id="BIAFC-GUID-8825EA01-880F-466C-837B-6650B245C627" class="sect1">About Configuring Cost Fact In Projects Analytics for EBS</h1>
+<div>
+<p>Actual Costs are extracted from the Cost Distribution Lines table in the Project Costing module in E-Business Suite and loaded into the Cost Line Fact (W_PROJ_COST_LINE_F) table. For E-Business Suite, Transaction Currency is the Document Currency for this fact.</p>
+<p>The GL Date is assigned to the Cost Distribution Line only (during Cost distribution) and not to the Expenditure Item records. The Expenditure data can only be analyzed by the Enterprise Calendar dimension and not by the GL calendar. The Expenditure data cannot be analyzed by the GL Account because the GL account is associated only when the data is distributed.</p>
+<div class="section">
+<p class="subhead1">Cost Fact Canonical Date</p>
+<p>The Canonical Date dimension for the Cost fact is based on the PRVDR_GL_DATE from Distribution Line table, whereas the Canonical Date dimension for the Expenditure fact is based on the EXPENDITURE_DATE from the Expenditure Items table.</p>
+<p>The multi calendar date dimension contains calendars for multiple organizations. It is essential that all records in a report analyzing data by the Fiscal Calendar (Dim - Fiscal Calendar) point to the same calendar. For this reason, all reports in the dashboard are filtered on the Project Business Unit. To make all Cost records in a Project Business Unit point to the same calendar, the RCVR_GL_DATE and RCVR_PA_DATE columns are used to populate the GL_ACCOUNTING_DT_WID and PROJ_ACCOUNTING_DT_WID columns in the fact table respectively. Expenditure OU view (in Cost Fact) can be built using Enterprise Calendar as well.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Domain Values for Cost Fact</p>
+<p>The Project Cost Transfer Status has been modeled as a domain value and can be configured in FSM.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Incremental Logic for Cost Fact</p>
+<p>The incremental extract logic for the Cost fact table depends on the 'REQUEST_ID' field of the Cost Distribution Lines table. The W_PROJ_ETL_PS parameter table facilitates this logic. Using a separate ODI interface, the maximum Request Id in the source table at the time of the ETL run is stored in this table, which is subsequently used to populate the SDE task (SDE_ORA_PROJECTCOSTLINE) level ODI variable #EBS_REQUEST_ID_1. It is initialized using the following query: SELECT COALESCE((SELECT PRE_REQUEST_ID FROM QUALIFY_DS(W_PROJ_ETL_PS) WHERE TBL_NAME = 'PA_COST_DISTRIBUTION_LINES_ALL'),0) FROM_DUAL()</p>
+<div class="infobox-note" id="GUID-8825EA01-880F-466C-837B-6650B245C627__GUID-655F171F-8F1D-401B-81EF-3B59767EC3C9">
+<p class="notep1">Note:</p>
+<p>If you are missing some Cost records in W_PROJ_COST_LINE_F after an incremental update, download patch 9896800 from My Oracle Support. The Tech Note included with the patch explains the scenarios where this can happen, and the proposed solution.</p>
+</div>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Configuring the Project Cost Aggregate Table</p>
+<p>The Project Cost aggregate table (W_PROJ_COST_A) is used to capture information about the project cost distributions for the expenditure items. You need to configure the Project Cost Lines aggregate table before the initial ETL run and subsequent incremental ETL.Before the initial ETL run, you need to configure the COST_TIME_GRAIN parameter in FSM for the time aggregation level in the Project Cost Lines aggregate fact table.By default, the COST_TIME_GRAIN parameter has a value of PERIOD. The possible values for the COST_TIME_GRAIN parameter are:</p>
+<div class="p">
+<ul style="list-style-type: disc;">
+<li>
+<p>PERIOD</p>
+</li>
+<li>
+<p>QUARTER</p>
+</li>
+<li>
+<p>YEAR</p>
+</li>
+</ul>
+</div>
+<p>The Project Cost Lines aggregate table is fully loaded from the base table in the initial ETL run. The table can grow to millions of records. Therefore, the Project Cost aggregate table is not fully reloaded from the base table after each incremental ETL run. The <span>Oracle Business Analytics Warehouse</span> minimizes the incremental aggregation effort by modifying the aggregate table incrementally as the base table is updated.</p>
+<ol>
+<li>
+<p><span>Oracle Business Analytics Warehouse</span> finds the records to be updated in the base table since the last ETL run, and loads them into the W_PROJ_COST_LINE_TMP table. The measures in these records are multiplied by (-1). The mapping responsible for this task is SIL_ProjectCostLinesFact_Derive_PreLoadImage.</p>
+</li>
+<li>
+<p><span>Oracle Business Analytics Warehouse</span> finds the inserted or updated records in the base table since the last ETL run, and loads them into the W_PROJ_COST_LINE_TMP table, without changing their sign. The mapping responsible for this task is SIL_ProjectCostLinesFact_Derive_PreLoadImage, which is run before PLP_ProjectCostLinesFact_Derive_PostLoadImage updates or inserts records in the base table.</p>
+</li>
+<li>
+<p><span>Oracle Business Analytics Warehouse</span> aggregates the W_PROJ_COST_LINE_TMP table and load to W_PROJ_COST_A_TMP, which has the same granularity as the W_PROJ_COST_A table.</p>
+</li>
+<li>
+<p>The PLP_ProjectCostLinesAggregate_Derive mapping looks up the W_PROJ_COST_A aggregate table to update existing buckets or insert new buckets in the aggregate table (the mapping is PLP_ProjectCostLinesAggregate_Load).</p>
+</li>
+</ol>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Configuring Revenue Fact for E-Business Suite</p>
+<p>Actual Revenue Line records are extracted from the Revenue/Event Distribution Lines tables (PA_CUST_REV_DISTRIB_LINES_ALL and PA_CUST_EVENT_DIST_ALL) in the Project Costing module in E-Business Suite and are loaded into the Revenue Line Fact (W_PROJ_REVENUE_LINE_F) table.</p>
+<p>For E-Business Suite, Revenue Transaction Currency Code is the Document Currency Code for this fact.</p>
+<div class="infobox-note" id="GUID-8825EA01-880F-466C-837B-6650B245C627__GUID-CF5CE5D4-C7B1-48C9-88F1-16389783A6C4">
+<p class="notep1">Note:</p>
+<p>E-Business Suite concurrent programs (such as PRC: Generate Draft Revenue for a Single Project or PRC: Generate Draft Revenue for a Range of Projects) for distributing revenue should be run before the ETL is run to load <span>Oracle Business Analytics Warehouse</span>.</p>
+</div>
+<p>For the Revenue Header Fact (W_PROJ_REVENUE_HDR_F), the primary source is the PA_DRAFT_REVENUES table. Revenue line metrics, such as Bill and Revenue amounts, are aggregated in this table as well.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Revenue Fact Canonical Date</p>
+<p>The Revenue Fact Canonical Date dimension is based on the GL_DATE from the Draft Revenues table.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Revenue Facts Staging Table</p>
+<p>The Revenue Facts Staging Table is a common staging table that loads both the header and the line level revenue fact tables.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Revenue Fact Multicurrency Support</p>
+<p>Some metrics such as Unearned Revenue, Unbilled Receivables, Realized Gains, and Realized Losses are only available in Local Currency and Global Currencies. There are three columns in w_proj_revenue_line_f and w_proj_revenue_hdr_f respectively for revenue amounts in global currencies.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Revenue Fact Domain Values</p>
+<p>The project revenue status has been modeled as a domain value and can be configured in FSM.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Incremental Logic for Revenue Fact</p>
+<p>The incremental extract logic for the Revenue fact table depends on the REQUEST_ID field of the Revenue Distribution Lines table. The W_PROJ_ETL_PS parameter facilitates this logic, and through a separate ODI process, the maximum Request Id in the source table at the time of the ETL run is stored in this table, which is subsequently used to populate the following variables for the SDE_ORA_ProjectRevenueLine task in ODI:</p>
+<p>#EBS_REQUEST_ID_2</p>
+<p>#EBS_REQUEST_ID_3</p>
+<p>#EBS_REQUEST_ID_4</p>
+<p>They are initialized using the following queries:</p>
+<pre dir="ltr">
+SELECT COALESCE((SELECT COALESCE(PRE_REQUEST_ID,0) FROM QUALIFY_DS(W_PROJ_ETL_PS) WHERE TBL_NAME ='PA_CUST_EVENT_RDL_ALL'),0) FROM_DUAL()
+SELECT COALESCE((SELECT COALESCE(PRE_REQUEST_ID,0) FROM QUALIFY_DS(W_PROJ_ETL_PS) WHERE TBL_NAME ='PA_CUST_REV_DIST_LINES_ALL'),0) FROM_DUAL()
+SELECT COALESCE((SELECT COALESCE(PRE_REQUEST_ID,0) FROM QUALIFY_DS(W_PROJ_ETL_PS) WHERE TBL_NAME ='PA_DRAFT_REVENUES_ALL'),0) FROM_DUAL()
+</pre></div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Configuring the Project Revenue Aggregate Table</p>
+<p>The Project Cost aggregate table (W_PROJ_REVENUE_A) is used to capture information about the project revenue distributions. You need to configure the Project Revenue Lines aggregate table before the initial ETL run and subsequent incremental ETL.</p>
+<p>Before the initial ETL run, you need to configure the REVENUE_TIME_GRAIN parameter in FSM for the time aggregation level in the Project Revenue Lines aggregate fact table.</p>
+<p>By default, the REVENUE _TIME_GRAIN parameter has a value of PERIOD. The possible values for the REVENUE_TIME_GRAIN parameter are:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>PERIOD</p>
+</li>
+<li>
+<p>QUARTER</p>
+</li>
+<li>
+<p>YEAR</p>
+</li>
+</ul>
+<p>The Project Revenue Lines aggregate table is fully loaded from the base table in the initial ETL run. The table can grow to millions of records. Therefore, the Project Revenue aggregate table is not fully reloaded from the base table after each incremental ETL run. The <span>Oracle Business Analytics Warehouse</span> minimizes the incremental aggregation effort by modifying the aggregate table incrementally as the base table is updated.</p>
+<p>The process is as follows:</p>
+<ol>
+<li>
+<p><span>Oracle Business Analytics Warehouse</span> finds the records to be updated in the base table since the last ETL run, and loads them into the W_PROJ_ REVENUE_LINE_TMP table. The measures in these records are multiplied by (-1). The mapping responsible for this task is SIL_Project RevenueLinesFact_Derive_PreLoadImage.</p>
+</li>
+<li>
+<p><span>Oracle Business Analytics Warehouse</span> finds the inserted or updated records in the base table since the last ETL run, and loads them into the W_PROJ_REVENUE_LINE_TMP table, without changing their sign. The mapping responsible for this task is SIL_ProjectRevenueLinesFact_Derive_PreLoadImage, which is run before PLP_ProjectRevenueLinesFact_Derive_PostLoadImage updates or inserts records in the base table.</p>
+</li>
+<li>
+<p><span>Oracle Business Analytics Warehouse</span> aggregates the W_PROJ_ REVENUE _LINE_TMP table and load to W_PROJ_REVENUE_A_TMP, which has the same granularity as the W_PROJ_REVENUE_A table.</p>
+</li>
+<li>
+<p>The PLP_ProjectRevenueLinesAggregate_Derive mapping looks up the W_PROJ_REVENUE_A aggregate table to update existing buckets or insert new buckets in the aggregate table (the mapping is PLP_ProjectRevenueLinesAggregate_Load).</p>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-3D67FCE8-6A33-467C-98C6-C02EF76FEE07.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-6F541D9E-A551-4A77-AC19-6BAE5CF8442E.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

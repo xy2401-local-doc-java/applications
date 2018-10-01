@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Setting Up Data Lineage</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="When you set up data lineage, prebuilt data lineage warehouse tables in the Oracle Business Analytics Warehouse are populated by an ETL package which loads lineage metadata from five sources." />
+<meta name="dcterms.created" content="2018-09-25T06:56:20Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Administrator's Guide" />
+<meta name="dcterms.identifier" content="E72283-05" />
+<meta name="dcterms.isVersionOf" content="BIASA" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2014, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-8E9904B5-E498-40E7-88BB-6F36B309CF37.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-7C5492C6-CB1A-417B-B7DA-1C9FA00B38F1.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIASA.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-3C2A71D4-7890-45AA-B0E8-BAF2E0680491"></a> <span id="PAGE" style="display:none;">25/34</span> <!-- End Header -->
+<a id="BIASA24671"></a><a id="BIASA24669"></a>
+<h1 id="BIASA-GUID-3C2A71D4-7890-45AA-B0E8-BAF2E0680491" class="sect1">Setting Up Data Lineage</h1>
+<div>
+<p>When you set up data lineage, prebuilt data lineage warehouse tables in the <span>Oracle Business Analytics Warehouse</span> are populated by an ETL package which loads lineage metadata from five sources.</p>
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p><span>Oracle BI Applications Configuration Manager</span> (<span>Configuration Manager</span>)</p>
+</li>
+<li>
+<p><span>Oracle Data Integrator</span> (ODI) Work Repository</p>
+</li>
+<li>
+<p><span>Oracle BI Presentation Catalog</span></p>
+</li>
+<li>
+<p>Oracle BI metadata repository</p>
+</li>
+<li>
+<p>Oracle Fusion OLTP tables</p>
+</li>
+</ul>
+<p>One-time preliminary setup steps include preparing metadata from and access to these sources for load of data lineage information into the prebuilt data lineage warehouse tables. Metadata and data refresh can then be performed on an ongoing basis.</p>
+<p>To install and set up data lineage dashboards, you must complete the following tasks, in order. Each high-level task breaks down into a list of detailed steps.</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li><span>Configure the environment to support data lineage, as described in <a href="GUID-3C2A71D4-7890-45AA-B0E8-BAF2E0680491.htm#GUID-91406FAD-F7B4-4769-B61F-60CDBD590AA1" title="The ODI Work Repository comes preconfigured with required topology and environment settings to support data lineage data extraction from the dashboards' five sources.">Setup Step: Configure ODI Topology and Load Plan</a>.</span></li>
+<li><span>Configure the WebLogic Server heap size, as described in <a href="GUID-3C2A71D4-7890-45AA-B0E8-BAF2E0680491.htm#GUID-A45849D7-EE12-453B-9830-F8CCE078AF1A" title="Configure the Oracle WebLogic Server heap size.">Setup Step: Configure the WebLogic Server Heap Size</a>.</span></li>
+<li><span>Optionally, disable the Fusion step if you are using other <span>Oracle BI Applications</span> sources, as described in <a href="GUID-3C2A71D4-7890-45AA-B0E8-BAF2E0680491.htm#GUID-3D1EBE6A-3FD8-49F9-958F-DB57B3DFF1C4" title="If you are not using a Fusion source for the data warehouse, you must disable Fusion steps in the Data Lineage ETL. This step is applicable only for non-Fusion sources. If you use Fusion as a source, you can skip this step.">Setup Step: Disable Fusion Step (Optional)</a>.</span></li>
+<li><span>Create data lineage warehouse tables, as described in <a href="GUID-3C2A71D4-7890-45AA-B0E8-BAF2E0680491.htm#GUID-9A34F088-E8D7-43E1-8005-5B151FD440F2" title="Use the Generate DataLineage DDL package to create the data lineage tables in the warehouse. These tables are created by default during data warehouse creation, but can be created at any time using this package.">Setup Step: Create the Data Lineage Warehouse Tables</a>.</span></li>
+<li><span>Extract metadata using Windows <span>Oracle BI Enterprise Edition</span> (<span>Oracle BI EE</span>) clients, as described in <a href="GUID-7C5492C6-CB1A-417B-B7DA-1C9FA00B38F1.htm#GUID-B726EDF8-52D9-43A7-90AB-D0C457A78B7C" title="Extract Presentation Catalog (webcat) and repository metadata into files sourced during load of the Data Lineage warehouse tables.">Extracting Oracle Business Intelligence Metadata Using Catalog Manager and Administration Tool</a>.</span></li>
+<li><span>Execute the data lineage load plan in ODI to load the data lineage warehouse tables, as described in <a href="GUID-7C5492C6-CB1A-417B-B7DA-1C9FA00B38F1.htm#GUID-D88F1535-DF8C-4821-9DB6-BB59750EBB8A" title="Execute the Data Lineage Extract and Load load plan in ODI. This load plan uses the sources and extracted metadata files you have configured and generated as sources to load and refresh the prebuilt data lineage warehouse tables.">Executing and Monitoring the Data Lineage Load Plan</a>. This step loads the data lineage warehouse tables.</span></li>
+</ol>
+</div>
+<a id="BIASA24673"></a>
+<div class="sect2"><a id="GUID-91406FAD-F7B4-4769-B61F-60CDBD590AA1"></a>
+<h2 id="BIASA-GUID-91406FAD-F7B4-4769-B61F-60CDBD590AA1" class="sect2">Setup Step: Configure ODI Topology and Load Plan</h2>
+<div>
+<p>The ODI Work Repository comes preconfigured with required topology and environment settings to support data lineage data extraction from the dashboards' five sources.</p>
+<div class="section">
+<p>During initial setup, you configure prebuilt data lineage sources in the ODI topology so that ODI, <span>Configuration Manager</span>, and <span>Oracle BI EE</span> data can be sourced during data lineage ETL. You then configure a prebuilt data lineage home directory variable which provides access to extracted metadata files and configure an adaptor list variable.</p>
+<p>The data lineage ETL uses the following connections to extract metadata from its sources and load it into the data warehouse:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>BIAPPS_ODIREP: Used to extract ODI Metadata from ODI schema where SNP_*** tables are located.</p>
+</li>
+<li>
+<p>BIAPPS_BIACOMP: Used to extract configuration metadata from the Configuration Manager schema where C_*** tables are located.</p>
+</li>
+<li>
+<p>BIAPPS_DW: Used to load data lineage tables located in the <span>Oracle Business Analytics Warehouse</span>.</p>
+</li>
+<li>
+<p>BIAPPS_DW_FILE: Used to extract <span>Oracle BI EE</span> metadata from files. This connection should point to the BIA_11 location (<code class="codeph">&lt;source file home&gt;/biapps/etl/data_files/src_files/BIA_11</code>)</p>
+</li>
+</ul>
+<p>To configure the data lineage source and target connections:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In ODI Studio, navigate to the Physical Architecture view of the Topology Navigator's tree view, and search for the prebuilt BIAPPS_BIACOMP Data Server.</span>
+<div>
+<p>The BIAPPS_BIACOMP connection to the <span>Configuration Manager</span> database may already have been configured during <span>Oracle BI Applications</span> installation and configuration.</p>
+<div class="figure" id="GUID-91406FAD-F7B4-4769-B61F-60CDBD590AA1__GUID-EC192A66-71E1-4903-955D-4E20A5EEA71D"><img width="321" height="371" src="img/GUID-744E4D0A-1570-4486-A67D-E5642250C0B1-default.gif" alt="Description of GUID-744E4D0A-1570-4486-A67D-E5642250C0B1-default.gif follows" title="Description of GUID-744E4D0A-1570-4486-A67D-E5642250C0B1-default.gif follows" /><br />
+<a href="img_text/GUID-744E4D0A-1570-4486-A67D-E5642250C0B1-default.htm">Description of the illustration GUID-744E4D0A-1570-4486-A67D-E5642250C0B1-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>In the Definition tab of the editor, verify or enter the correct connection details for the server, including the instance name and a correctly privileged ODI user and password.</span>
+<div>
+<div class="figure" id="GUID-91406FAD-F7B4-4769-B61F-60CDBD590AA1__GUID-F538C656-507A-46C0-BEAE-55F47124C82B"><img width="630" height="317" src="img/GUID-797CD949-62AF-4D2D-B884-EC2CEDCF0876-default.gif" alt="Description of GUID-797CD949-62AF-4D2D-B884-EC2CEDCF0876-default.gif follows" title="Description of GUID-797CD949-62AF-4D2D-B884-EC2CEDCF0876-default.gif follows" /><br />
+<a href="img_text/GUID-797CD949-62AF-4D2D-B884-EC2CEDCF0876-default.htm">Description of the illustration GUID-797CD949-62AF-4D2D-B884-EC2CEDCF0876-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>In the JDBC tab of the editor, verify the JDBC Driver and verify or specify a valid JDBC URL for the connection.</span>
+<div>
+<div class="figure" id="GUID-91406FAD-F7B4-4769-B61F-60CDBD590AA1__GUID-EF2288AA-F6E8-4A0E-B0AD-7852D087F2DC"><img width="630" height="317" src="img/GUID-AB60DFE3-370C-4180-A5CF-2618E758D809-default.gif" alt="Description of GUID-AB60DFE3-370C-4180-A5CF-2618E758D809-default.gif follows" title="Description of GUID-AB60DFE3-370C-4180-A5CF-2618E758D809-default.gif follows" /><br />
+<a href="img_text/GUID-AB60DFE3-370C-4180-A5CF-2618E758D809-default.htm">Description of the illustration GUID-AB60DFE3-370C-4180-A5CF-2618E758D809-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Click <span class="bold">Test Connection</span> to verify that the connection details you have entered are correct.</span></li>
+<li class="stepexpand"><span>In the Search pane, double-click the physical schema to open it in the editor.</span>
+<div>
+<div class="figure" id="GUID-91406FAD-F7B4-4769-B61F-60CDBD590AA1__GUID-25E562C4-2036-45BB-89B9-C89F3D2CD9CD"><img width="277" height="381" src="img/GUID-C21FAAD8-5641-49F6-923B-83A0AE596149-default.gif" alt="Description of GUID-C21FAAD8-5641-49F6-923B-83A0AE596149-default.gif follows" title="Description of GUID-C21FAAD8-5641-49F6-923B-83A0AE596149-default.gif follows" /><br />
+<a href="img_text/GUID-C21FAAD8-5641-49F6-923B-83A0AE596149-default.htm">Description of the illustration GUID-C21FAAD8-5641-49F6-923B-83A0AE596149-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Configure or confirm the Schema and Work Schema.</span>
+<div>
+<div class="figure" id="GUID-91406FAD-F7B4-4769-B61F-60CDBD590AA1__GUID-15852D17-FBFC-4E5D-86A7-F2F8D9BFE1F1"><img width="734" height="502" src="img/GUID-6BD579FA-DA1A-4000-89AC-9B9C248594D0-default.gif" alt="Description of GUID-6BD579FA-DA1A-4000-89AC-9B9C248594D0-default.gif follows" title="Description of GUID-6BD579FA-DA1A-4000-89AC-9B9C248594D0-default.gif follows" /><br />
+<a href="img_text/GUID-6BD579FA-DA1A-4000-89AC-9B9C248594D0-default.htm">Description of the illustration GUID-6BD579FA-DA1A-4000-89AC-9B9C248594D0-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Repeat the above steps to configure the other connections.</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>Configure the BIAPPS_ODIREP connection with ODI Repository database and schema details.</p>
+</li>
+<li>
+<p>Configure the BIAPPS_DW connection with <span>Oracle Business Analytics Warehouse</span> database and schema details. This connection may already have been configured while installing and configuring <span>Oracle BI Applications</span> product.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+<div class="sect3"><a id="CONFIGURE_DATA_LINEAGE_FILE_CONNECTION"></a>
+<h3 id="BIASA-CONFIGURE_DATA_LINEAGE_FILE_CONNECTION" class="sect3">Configuring Data Lineage File Connection</h3>
+<div>
+<p>To configure the data lineage file connection:</p>
+<ol>
+<li class="stepexpand"><span>Search for the prebuilt <span class="bold">BIAPPS_DW_FILE</span> and double-click it to open it in the editor.</span>
+<div>
+<div class="figure" id="CONFIGURE_DATA_LINEAGE_FILE_CONNECTION__GUID-1D28ACC7-8EA9-498B-B578-A2A1E315CDBD"><img width="328" height="358" src="img/GUID-84E0C7AE-92BD-42DC-964B-46BA1D8A4AEF-default.gif" alt="Description of GUID-84E0C7AE-92BD-42DC-964B-46BA1D8A4AEF-default.gif follows" title="Description of GUID-84E0C7AE-92BD-42DC-964B-46BA1D8A4AEF-default.gif follows" /><br />
+<a href="img_text/GUID-84E0C7AE-92BD-42DC-964B-46BA1D8A4AEF-default.htm">Description of the illustration GUID-84E0C7AE-92BD-42DC-964B-46BA1D8A4AEF-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Configure Schema and Work Schema to point to the BIA_11 location, <code><span class="variable">source file home</span>/biapps/etl/data_files/src_files/BIA_11</code>.</span>
+<div>
+<div class="figure" id="CONFIGURE_DATA_LINEAGE_FILE_CONNECTION__GUID-064DB0D4-CE3C-41E2-97F3-CE25A92B0AB8"><img width="734" height="175" src="img/GUID-B04648FC-ECBB-4A37-A4C6-9A9B71E15D8B-default.gif" alt="Description of GUID-B04648FC-ECBB-4A37-A4C6-9A9B71E15D8B-default.gif follows" title="Description of GUID-B04648FC-ECBB-4A37-A4C6-9A9B71E15D8B-default.gif follows" /><br />
+<a href="img_text/GUID-B04648FC-ECBB-4A37-A4C6-9A9B71E15D8B-default.htm">Description of the illustration GUID-B04648FC-ECBB-4A37-A4C6-9A9B71E15D8B-default.gif</a></div>
+<!-- class="figure" -->
+<p>Open Logical File Connection DL_BIAPPS11G_SRCFILES. It can be located in Topology - Logical Architecture under Technologies -&gt; File.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Navigate to the Logical Architecture view of the Topology Navigator's tree view, and locate the Logical File Connection DL_BIAPPS11G_SRCFILES under <span class="bold">Technologies</span>, then <span class="bold">File</span>.</span>
+<div>
+<div class="figure" id="CONFIGURE_DATA_LINEAGE_FILE_CONNECTION__GUID-771A89CF-4F05-4B27-807E-8F5A74465EFA"><img width="276" height="264" src="img/GUID-3948F0CC-050B-4D8A-8491-7D3EC8FED607-default.gif" alt="Description of GUID-3948F0CC-050B-4D8A-8491-7D3EC8FED607-default.gif follows" title="Description of GUID-3948F0CC-050B-4D8A-8491-7D3EC8FED607-default.gif follows" /><br />
+<a href="img_text/GUID-3948F0CC-050B-4D8A-8491-7D3EC8FED607-default.htm">Description of the illustration GUID-3948F0CC-050B-4D8A-8491-7D3EC8FED607-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Double-click the connection and, in the editor, associate DL_BIAPPS11G_SRCFILES to the BIAPPS_DW_FILE - Physical Schema.</span>
+<div>
+<div class="figure" id="CONFIGURE_DATA_LINEAGE_FILE_CONNECTION__GUID-A5C03276-A4DB-4BDA-86C8-C76FEA243EC3"><img width="735" height="151" src="img/GUID-6C865FBD-8A14-4A7C-B60F-6564C9202198-default.gif" alt="Description of GUID-6C865FBD-8A14-4A7C-B60F-6564C9202198-default.gif follows" title="Description of GUID-6C865FBD-8A14-4A7C-B60F-6564C9202198-default.gif follows" /><br />
+<a href="img_text/GUID-6C865FBD-8A14-4A7C-B60F-6564C9202198-default.htm">Description of the illustration GUID-6C865FBD-8A14-4A7C-B60F-6564C9202198-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3"><a id="CONFIGURE_LOAD_PLAN_VARIABLE"></a>
+<h3 id="BIASA-CONFIGURE_LOAD_PLAN_VARIABLE" class="sect3">Configuring the Load Plan Variable</h3>
+<div>
+<p>Configure the load plan variable in the Data Lineage Extract and Load loadplan.</p>
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>DL_HOME &mdash; Location of data lineage source files. Configure to <code><span class="variable">source file home</span>/biapps/etl/data_files/src_files/BIA_11</code>, the same as the BIAPPS_DW_FILE configured in a previous step.</p>
+<div class="infobox-note" id="CONFIGURE_LOAD_PLAN_VARIABLE__GUID-F79D210C-9475-4EB3-922B-E6218BC85EC8">
+<p class="notep1">Note:</p>
+If you are running DL on Windows, you should also use forward slash "/" as separator instead of "\" in the file patch. In the Windows actual path, <code>c:\biapps\etl\data_files\src_files\BIA_11</code>, DL_HOME should be set with a forward slash. The correct path is <code>c:/biapps/etl/data_files/src_files/BIA_11</code>.</div>
+</li>
+<li>
+<p>ADAPTOR_LIST &mdash; List of required Source Adaptor Names.</p>
+<p>Based on your source system, one or more values can be selected from the following list:</p>
+<p>'SDE_ORA11510_Adaptor','SDE_ORAR1212_Adaptor','SDE_PSFT_90_Adaptor','SDE_OP_V1_Adaptor','SDE_ORAR1211_Adaptor','SDE_PSFT_91_Adaptor','SDE_SBL_822_Adaptor','SDE_SBL_811_Adaptor','SDE_ORAR12_Adaptor', 'SDE_ORAR1213_Adaptor','SDE_JDEE1_91_Adaptor','SDE_JDEE1_90_Adaptor','SDE_Universal_Adaptor','SDE_FUSION_V1_Adaptor'</p>
+<p>The Adaptor Name has to be enclosed in single quotes. If you want to enter multiple adaptors, use commas as separators between multiple adaptor names.</p>
+</li>
+<li>
+<p>ADAPTOR_LIST &mdash; This is the same as ADAPTOR_LIST. If you want to configure multiple adaptors and ADAPTOR_LIST value has reached limits, use ADAPTOR_LIST1. Otherwise, copy the ADAPTOR_LIST value to ADAPTOR_LIST1.</p>
+<div class="infobox-note" id="CONFIGURE_LOAD_PLAN_VARIABLE__GUID-A9CA2305-4269-4516-A287-1B66C7F98721">
+<p class="notep1">Note:</p>
+<p>Do not leave ADAPTOR_LIST1 value empty. If the variable is empty, it will cause ETL failure.</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In ODI Designer tree view, navigate to the Load Plans and Scenarios view and open the Data Lineage Extract and Load load plan under Predefined Load Plans, then Data Lineage.</span>
+<div>
+<div class="figure" id="CONFIGURE_LOAD_PLAN_VARIABLE__GUID-459896DD-F8EA-45DA-BA59-A0118F6387E4"><img width="277" height="249" src="img/GUID-840374AF-B8F9-4F52-B7AA-3D92FF09B6D7-default.gif" alt="Description of GUID-840374AF-B8F9-4F52-B7AA-3D92FF09B6D7-default.gif follows" title="Description of GUID-840374AF-B8F9-4F52-B7AA-3D92FF09B6D7-default.gif follows" /><br />
+<a href="img_text/GUID-840374AF-B8F9-4F52-B7AA-3D92FF09B6D7-default.htm">Description of the illustration GUID-840374AF-B8F9-4F52-B7AA-3D92FF09B6D7-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>In the Steps tab, click the root step, <span class="bold">DATA_LINEAGE</span>.</span>
+<div>
+<div class="figure" id="CONFIGURE_LOAD_PLAN_VARIABLE__GUID-8F55EB83-1F4E-4C26-979D-EFA01A876338"><img width="361" height="208" src="img/GUID-BAEB761F-E6BB-4B31-821A-3125D0D8B92B-default.gif" alt="Description of GUID-BAEB761F-E6BB-4B31-821A-3125D0D8B92B-default.gif follows" title="Description of GUID-BAEB761F-E6BB-4B31-821A-3125D0D8B92B-default.gif follows" /><br />
+<a href="img_text/GUID-BAEB761F-E6BB-4B31-821A-3125D0D8B92B-default.htm">Description of the illustration GUID-BAEB761F-E6BB-4B31-821A-3125D0D8B92B-default.gif</a></div>
+<!-- class="figure" -->
+<p>The Property Inspector window lists all variables.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Enable the Overwrite option and type a value for DL_HOME, ADAPTOR_LIST and ADAPTOR_LIST1.</span>
+<div>
+<p>Enclose Adaptor Names in single quotes and, if you want to enter multiple adaptors, use commas as separators between multiple adaptor names.</p>
+<div class="figure" id="CONFIGURE_LOAD_PLAN_VARIABLE__GUID-F0B9BD0D-7DFE-446C-9E27-1D14DF1B946C"><img width="832" height="123" src="img/GUID-18405A27-919F-4D34-A38E-7AC3EC352005-default.gif" alt="Description of GUID-18405A27-919F-4D34-A38E-7AC3EC352005-default.gif follows" title="Description of GUID-18405A27-919F-4D34-A38E-7AC3EC352005-default.gif follows" /><br />
+<a href="img_text/GUID-18405A27-919F-4D34-A38E-7AC3EC352005-default.htm">Description of the illustration GUID-18405A27-919F-4D34-A38E-7AC3EC352005-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2"><a id="GUID-A45849D7-EE12-453B-9830-F8CCE078AF1A"></a>
+<h2 id="BIASA-GUID-A45849D7-EE12-453B-9830-F8CCE078AF1A" class="sect2">Setup Step: Configure the <span>Oracle WebLogic Server</span> Heap Size</h2>
+<p>Configure the <span>Oracle WebLogic Server</span> heap size.</p>
+<div class="sect3"><a id="WINDOWS_WLS_SET_HEAP_SIZE"></a>
+<h3 id="BIASA-WINDOWS_WLS_SET_HEAP_SIZE" class="sect3">Setting the <span>Oracle WebLogic Server</span> Heap Size in Windows</h3>
+<div>
+<p>Set the heap size in Windows.</p>
+<ol>
+<li class="stepexpand"><span>Open the <code><span class="variable">DOMAIN_HOME</span>/bin/setDomainEnv.cmd</code> file for editing.</span></li>
+<li class="stepexpand"><span>Locate the <code class="codeph">if NOT "%USER_MEM_ARGS%"=="" (</code> line, and add the following code before it:</span>
+<div>
+<pre dir="ltr">
+if "%SERVER_NAME%"=="odi_server1" (
+    set USER_MEM_ARGS=-Xms512m -Xmx3072m -XX:PermSize=256m -XX:MaxPermSize=512m
+)
+</pre></div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3"><a id="LINUX_WLS_SET_HEAP_SIZE"></a>
+<h3 id="BIASA-LINUX_WLS_SET_HEAP_SIZE" class="sect3">Setting the <span>Oracle WebLogic Server</span> Heap Size in Linux</h3>
+<div>
+<p>Set the heap size in Linux.</p>
+<ol>
+<li class="stepexpand"><span>Open the <code><span class="variable">DOMAIN_HOME</span>/bin/setDomainEnv.sh</code> file for editing.</span></li>
+<li class="stepexpand"><span>Locate the <code class="codeph">if [ "${USER_MEM_ARGS}" != "" ] ; then</code> line, and add the following code before it:</span>
+<div>
+<pre dir="ltr">
+if [ "${SERVER_NAME}" = "odi_server1" ] ; then
+      USER_MEM_ARGS="-Xms512m -Xmx12288m -XX:PermSize=256m -XX:MaxPermSize=512m"
+      export USER_MEM_ARG
+fi
+</pre></div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div class="sect2"><a id="GUID-3D1EBE6A-3FD8-49F9-958F-DB57B3DFF1C4"></a>
+<h2 id="BIASA-GUID-3D1EBE6A-3FD8-49F9-958F-DB57B3DFF1C4" class="sect2">Setup Step: Disable Fusion Step (Optional)</h2>
+<div>
+<p>If you are not using a Fusion source for the data warehouse, you must disable Fusion steps in the Data Lineage ETL. This step is applicable only for non-Fusion sources. If you use Fusion as a source, you can skip this step.</p>
+<ol>
+<li class="stepexpand"><span>In ODI Designer tree view, navigate to the Load Plans and Scenarios view and open the Data Lineage Extract and Load load plan under <span class="bold">Predefined Load Plans</span>, then <span class="bold">Data Lineage</span>.</span>
+<div>
+<div class="figure" id="GUID-3D1EBE6A-3FD8-49F9-958F-DB57B3DFF1C4__GUID-EFCD77E2-B186-46CA-B4DE-AD507F55CC74"><img width="277" height="249" src="img/GUID-840374AF-B8F9-4F52-B7AA-3D92FF09B6D7-default.gif" alt="Description of GUID-840374AF-B8F9-4F52-B7AA-3D92FF09B6D7-default.gif follows" title="Description of GUID-840374AF-B8F9-4F52-B7AA-3D92FF09B6D7-default.gif follows" /><br />
+<a href="img_text/GUID-840374AF-B8F9-4F52-B7AA-3D92FF09B6D7-default.htm">Description of the illustration GUID-840374AF-B8F9-4F52-B7AA-3D92FF09B6D7-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>In the Steps tab, in the Steps Hierarchy, expand <span class="bold">DATA LINEAGE</span>, then <span class="bold">Dimension_ETL</span>.</span>
+<div>
+<div class="figure" id="GUID-3D1EBE6A-3FD8-49F9-958F-DB57B3DFF1C4__GUID-910E30D9-892E-496E-B3C9-C5A7BC1E6C83"><img width="441" height="221" src="img/GUID-B30783C0-CB58-4868-BD3A-C9D032996FB3-default.gif" alt="Description of GUID-B30783C0-CB58-4868-BD3A-C9D032996FB3-default.gif follows" title="Description of GUID-B30783C0-CB58-4868-BD3A-C9D032996FB3-default.gif follows" /><br />
+<a href="img_text/GUID-B30783C0-CB58-4868-BD3A-C9D032996FB3-default.htm">Description of the illustration GUID-B30783C0-CB58-4868-BD3A-C9D032996FB3-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Deselect the <span class="bold">Enabled</span> check box for the Fusion step (step 28) to disable the step.</span>
+<div>
+<div class="figure" id="GUID-3D1EBE6A-3FD8-49F9-958F-DB57B3DFF1C4__GUID-2AA1AF58-2192-4AAF-9426-C9C7700F5010"><img width="615" height="157" src="img/GUID-FC4BCFD8-FB93-4081-B080-F4569C3DE5AE-default.gif" alt="Description of GUID-FC4BCFD8-FB93-4081-B080-F4569C3DE5AE-default.gif follows" title="Description of GUID-FC4BCFD8-FB93-4081-B080-F4569C3DE5AE-default.gif follows" /><br />
+<a href="img_text/GUID-FC4BCFD8-FB93-4081-B080-F4569C3DE5AE-default.htm">Description of the illustration GUID-FC4BCFD8-FB93-4081-B080-F4569C3DE5AE-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Expand <span class="bold">DATA LINEAGE</span>, then <span class="bold">Fact_ETL</span> in the hierarchy and disable the Fusion step (step 52).</span>
+<div>
+<div class="figure" id="GUID-3D1EBE6A-3FD8-49F9-958F-DB57B3DFF1C4__GUID-814C0DAE-708E-40F1-B8DB-ABC2C20C0CF3"><img width="602" height="97" src="img/GUID-ACAA4948-F32F-4F54-97BC-D5D36C823A88-default.gif" alt="Description of GUID-ACAA4948-F32F-4F54-97BC-D5D36C823A88-default.gif follows" title="Description of GUID-ACAA4948-F32F-4F54-97BC-D5D36C823A88-default.gif follows" /><br />
+<a href="img_text/GUID-ACAA4948-F32F-4F54-97BC-D5D36C823A88-default.htm">Description of the illustration GUID-ACAA4948-F32F-4F54-97BC-D5D36C823A88-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Expand <span class="bold">DATA_LINEAGE</span>, <span class="bold">Dimension_ETL</span>, then <span class="bold">OBIEE</span>, and enable the SDE_DL_OBIEE_BMM_HIERARCHY step (step 3).</span>
+<div>
+<div class="figure" id="GUID-3D1EBE6A-3FD8-49F9-958F-DB57B3DFF1C4__GUID-2DB42154-5847-4A29-9AB1-5AD3431F345B"><img width="626" height="198" src="img/GUID-023EF8E3-701C-42BD-A036-04EE7963519B-default.gif" alt="Description of GUID-023EF8E3-701C-42BD-A036-04EE7963519B-default.gif follows" title="Description of GUID-023EF8E3-701C-42BD-A036-04EE7963519B-default.gif follows" /><br />
+<a href="img_text/GUID-023EF8E3-701C-42BD-A036-04EE7963519B-default.htm">Description of the illustration GUID-023EF8E3-701C-42BD-A036-04EE7963519B-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+</ol>
+</div>
+</div>
+<a id="BIASA24675"></a>
+<div class="sect2"><a id="GUID-9A34F088-E8D7-43E1-8005-5B151FD440F2"></a>
+<h2 id="BIASA-GUID-9A34F088-E8D7-43E1-8005-5B151FD440F2" class="sect2">Setup Step: Create the Data Lineage Warehouse Tables</h2>
+<div>
+<p>Use the Generate DataLineage DDL package to create the data lineage tables in the warehouse. These tables are created by default during data warehouse creation, but can be created at any time using this package.</p>
+<ol>
+<li class="stepexpand"><span>In the ODI Studio Designer Navigator, expand <span class="bold">BI Apps Project</span>, <span class="bold">Components</span>, <span class="bold">DW</span>, <span class="bold">Oracle</span>, <span class="bold">Generate DW DDL</span>, <span class="bold">Generate DataLineageDDL</span>, <span class="bold">Scenarios</span>, then <span class="bold">ORACLE_GENERATE_DATALINEAGE_DDL</span>.</span>
+<div>
+<div class="figure" id="GUID-9A34F088-E8D7-43E1-8005-5B151FD440F2__GUID-06130CAC-74B0-4C55-9C35-F65D53396972"><img width="496" height="234" src="img/GUID-715A226F-E6C8-4704-BB08-248061CEF40C-default.gif" alt="Description of GUID-715A226F-E6C8-4704-BB08-248061CEF40C-default.gif follows" title="Description of GUID-715A226F-E6C8-4704-BB08-248061CEF40C-default.gif follows" /><br />
+<a href="img_text/GUID-715A226F-E6C8-4704-BB08-248061CEF40C-default.htm">Description of the illustration GUID-715A226F-E6C8-4704-BB08-248061CEF40C-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Select the <span class="bold">ORACLE_GENERATE_DATALINEAGE_DDL</span> and click the <span class="bold">Execute</span> (green arrow) button.</span></li>
+<li class="stepexpand"><span>In the Execution dialog box, choose <span class="bold">Agent</span> and click <span class="bold">OK</span>.</span></li>
+<li class="stepexpand"><span>In the Variable Values dialog box, change values for the third and fourth variables. Set BIAPPS.UTIL_GENDDL_RUN_DDL to 'Y' and set BIAPPS_UTIL_GENDDL_SCRIPT_LOCATION to a valid local folder location.</span>
+<div>
+<p>Set BIAPPS.UTIL_GENDDL_RUN_DDL to <span class="bold">Y</span> and set BIAPPS_UTIL_GENDDL_SCRIPT_LOCATION to a valid local folder location.</p>
+<div class="figure" id="GUID-9A34F088-E8D7-43E1-8005-5B151FD440F2__GUID-BB188CD6-0EEF-4D20-90B7-DE20DB36D423"><img width="477" height="290" src="img/GUID-9AB1F849-BD79-40B7-A7B5-C403BAA0CFD3-default.gif" alt="Description of GUID-9AB1F849-BD79-40B7-A7B5-C403BAA0CFD3-default.gif follows" title="Description of GUID-9AB1F849-BD79-40B7-A7B5-C403BAA0CFD3-default.gif follows" /><br />
+<a href="img_text/GUID-9AB1F849-BD79-40B7-A7B5-C403BAA0CFD3-default.htm">Description of the illustration GUID-9AB1F849-BD79-40B7-A7B5-C403BAA0CFD3-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Click <span class="bold">OK</span> in the Variable Values dialog box and monitor the progress in the Operator.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment237">
+<tr>
+<td class="cellalignment251">
+<table class="cellalignment242">
+<tr>
+<td class="cellalignment241"><a href="GUID-8E9904B5-E498-40E7-88BB-6F36B309CF37.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment241"><a href="GUID-7C5492C6-CB1A-417B-B7DA-1C9FA00B38F1.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2014, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment253">
+<table class="cellalignment240">
+<tr>
+<td class="cellalignment241"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment241"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment241"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

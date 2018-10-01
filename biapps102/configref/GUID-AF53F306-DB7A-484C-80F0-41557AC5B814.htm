@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>IKM BIAPPS Oracle Event Queue Delete Append</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This IKM integrates data into an Oracle target table using an event queue to process incremental changes. This IKM is used when working with data that is versioned over time (similar to a slowly changing dimension)." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-6E7E0794-54D2-42A3-951E-A21E436A5DD5.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-2C35C48F-1045-40E4-89B8-1DE988D197C2.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-AF53F306-DB7A-484C-80F0-41557AC5B814"></a> <span id="PAGE" style="display:none;">329/336</span> <!-- End Header -->
+<a id="BIAET24545"></a><a id="BIAET24546"></a><a id="BIAET24547"></a><a id="BIAET24544"></a>
+<h1 id="BIAFC-GUID-AF53F306-DB7A-484C-80F0-41557AC5B814" class="sect1">IKM BIAPPS Oracle Event Queue Delete Append</h1>
+<div>
+<p>This IKM integrates data into an Oracle target table using an event queue to process incremental changes. This IKM is used when working with data that is versioned over time (similar to a slowly changing dimension).</p>
+<div class="section">
+<p>In full load all records are inserted. The event queue tracks the natural keys that are changing, and the earliest date a change occurred. For each natural key, any existing target records on or after the earliest change are deleted and the new records inserted.</p>
+<p>If there are effective from and to dates, these are maintained automatically in both full and incremental loads.</p>
+<p>Data can be controlled by isolating invalid data in the error table, but recycling data is not supported.</p>
+<div class="infobox-note" id="GUID-AF53F306-DB7A-484C-80F0-41557AC5B814__GUID-9E15DC2F-1EB5-47D1-B94B-3714E3EA91DA">
+<p class="notep1">Note:</p>
+This IKM now supports ETL diagnostics and automatic corrections. The flow control option is no longer used with this IKM.</div>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Prerequisites</p>
+<div class="p">Prerequisites for using this IKM are:
+<ul style="list-style-type: disc;">
+<li>
+<p>The event queue table must be defined using the Event Queue Table option.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>It must have the column EARLIEST_CHANGE_DATE (DATE data type)</p>
+</li>
+<li>
+<p>It must follow the standard naming convention ending with _EQ_TMP</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Join between target table and event queue must be defined using the Event Queue Join option.</p>
+</li>
+<li>
+<p>Target table must have SCD behavior set for:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Natural key</p>
+</li>
+<li>
+<p>Starting/ending timestamp</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Interface must only select the source data that is changing, as controlled by the event queue, which lists the natural keys that are changing and the earliest date of any change.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Either the data is selected from temporary or staging tables which only contain incremental data</p>
+<p>Or</p>
+</li>
+<li>
+<p>Use the nested IKM BIAPPS Oracle Event Queue Delete Append to include a join to the event queue in incremental load</p>
+</li>
+</ul>
+</li>
+<li>
+<p>If the "Synchronize Deletions from Journal" process is executed, the deleted rows on the target are committed.</p>
+</li>
+</ul>
+</div>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Options for Functionality</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Event Queue Table</span> &mdash; The name of the event queue table that holds the incremental changes. This option is mandatory.</p>
+<p>Prerequisites for this option are the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Event queue table must contain EARLIEST_CHANGE_DATE column (DATE data type)</p>
+</li>
+<li>
+<p><span>Oracle BI Applications</span> naming standard for table ends with _EQ_TMP</p>
+</li>
+</ul>
+</li>
+<li>
+<p><span class="bold">Event Queue Join</span> &mdash; Assuming the alias T for Target Table and Q for Event Queue Table, define the equi-join between the Target Table and the Event Queue Table. This is used in the Event Queue Update and Event Queue Delete steps and in rare cases may be omitted if neither of those steps are required. The filter on EARLIEST_CHANGE_DATE should not be included in the join option.</p>
+</li>
+<li>
+<p><span class="bold">Event Queue Delete</span> &mdash; Whether or not to delete records in the target that are being processed in incremental load. In most cases this should be enabled, but in rare cases where more than one interface loads the target table then it only needs to be enabled on the first one.</p>
+</li>
+<li>
+<p><span class="bold">Event Queue Update</span> &mdash; Whether or not to correct effective dates on records in the target that are affected by the incremental load. In most cases this should be enabled, but in rare cases where more than one interface loads the target table then it only needs to be enabled on the last one.</p>
+</li>
+<li>
+<p><span class="bold">High Data Value</span> &mdash; The default value to use for the maximum ending timestamp. In most cases the default value of #HI_DATE is fine, but for some persisted staging tables that reflect the OLTP might use a different value e.g. #ORA_HI_DATE.</p>
+</li>
+<li>
+<p><span class="bold">Unspecified Record</span> &mdash; If the target table is a dimension, set this to TRUE to automatically insert an "Unspecified" record. This is referenced by facts in case no other dimension record matches. The default column values are determined by model naming standards using the user-defined function GET_UNSPEC_VALUE.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section"></div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Options for Performance Tuning</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Hints</span> &mdash; This IKM allows the passing of hints into the generated SQL. See My Oracle Support document (ID 1539322.1) titled <cite>Oracle Business Intelligence Applications Version 11.1.1.7.1 Performance Recommendations</cite>.</p>
+</li>
+<li><span class="bold">Alter Session List</span> &mdash; Applies a list of alter session commands to the session used by the KM. Commands should be separated by a semi-colon and without the "ALTER SESSION" prefix. Each command should be prefixed SRC or TGT depending on whether it should be executed on the source connection (relevant if using an LKM) or the target connection. For example:
+<pre dir="ltr">
+SRC set TRACEFILE_IDENTIFIER='ODI_TRACE'; SRC set events '10046 TRACE NAME CONTEXT FOREVER, LEVEL 8'; TGT set TRACEFILE_IDENTIFIER='ODI_TRACE_TGT';
+</pre></li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-6E7E0794-54D2-42A3-951E-A21E436A5DD5.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-2C35C48F-1045-40E4-89B8-1DE988D197C2.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

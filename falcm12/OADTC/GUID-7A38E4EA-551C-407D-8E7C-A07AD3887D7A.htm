@@ -1,0 +1,1731 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Customizing and Extending Oracle Fusion Applications</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This chapter provides an overview of how to customize and extend on-premises installations of Oracle Fusion applications and introduces the design time and runtime tools that are used in the process. The remainder of this book describes how to use the following tools to customize and extend on-premises installations." />
+<meta name="dcterms.created" content="2017-01-11T15:33:34Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Fusion Applications Extensibility Guide for Developers" />
+<meta name="dcterms.identifier" content="E70528-01" />
+<meta name="dcterms.isVersionOf" content="OADTC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2011, 2016, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-BCD03C5E-7F2B-4BEC-BB61-515CE8F27BB5.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8.htm" title="Next" type="text/html" />
+<link rel="alternate" href="OADTC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A"></a> <span id="PAGE" style="display:none;">6/20</span> <!-- End Header -->
+<a id="OADTC1589"></a><a id="OADTC152"></a>
+<h1 id="OADTC-GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A" class="sect1"><span class="enumeration_chapter">1</span> Customizing and Extending <span id="FA">Oracle Fusion Applications</span></h1>
+<div>
+<div><span>This chapter provides an overview of how to customize and extend on-premises installations of <span id="FAAPPS">Oracle Fusion applications</span> and introduces the design time and runtime tools that are used in the process. The remainder of this book describes how to use the following tools to customize and extend on-premises installations.</span></div>
+<ul style="list-style-type: disc;">
+<li>
+<p><span id="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A__JDEV">Oracle JDeveloper</span></p>
+</li>
+<li>
+<p>Worklist (<span id="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A__BPEL_WORKLIST">Oracle BPM Worklist</span>)</p>
+</li>
+<li>
+<p><span id="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A__SOACOMP">Oracle SOA Composer</span></p>
+</li>
+<li>
+<p><span id="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A__FAOEMFRAME">Oracle Enterprise Manager Fusion Applications Control</span> (<span id="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A__FAOEMFRAMESHORT">Fusion Applications Control</span>),</p>
+</li>
+<li>
+<p><span id="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A__ADF">Oracle Application Development Framework</span> (<span id="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A__ADFSHORT">Oracle ADF</span>) Skin Editor</p>
+</li>
+<li>
+<p><span id="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A__BI">Oracle Business Intelligence</span> Administration Tool (BI Administration Tool)</p>
+</li>
+</ul>
+<p>This chapter includes the following sections:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-09F3DF0F-1161-482C-B154-7ECC5C3C6FFC">About Customizing and Extending</a></p>
+</li>
+<li>
+<p><a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-E3D340F5-0D27-4423-B0D1-F8EC14601762">About Customization Layers</a></p>
+</li>
+<li>
+<p><a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-B4B22ED2-1453-48B0-BA73-C1E7D55DEF80">About the Customization Tools</a></p>
+</li>
+</ul>
+</div>
+<a id="OADTC153"></a>
+<div class="sect2"><a id="GUID-09F3DF0F-1161-482C-B154-7ECC5C3C6FFC"></a>
+<h2 id="OADTC-GUID-09F3DF0F-1161-482C-B154-7ECC5C3C6FFC" class="sect2"><span class="enumeration_section">1.1</span> About Customizing and Extending <span>Oracle Fusion Applications</span></h2>
+<div>
+<p>While <span id="GUID-09F3DF0F-1161-482C-B154-7ECC5C3C6FFC__FAAPPS">Oracle Fusion applications</span> provide robust out-of-the-box functionality, there may be areas in one of the applications that you must change to meet your business needs. On-premises installations of <span id="GUID-09F3DF0F-1161-482C-B154-7ECC5C3C6FFC__FA">Oracle Fusion Applications</span> provide runtime and design time tools to customize and extend <span>Oracle Fusion applications</span>. This book gives an overview of both the runtime and design time tools, and then guides you through the process of using the design time tools that are available for on-premises installations.</p>
+<p>Most customizations made to an <span id="GUID-09F3DF0F-1161-482C-B154-7ECC5C3C6FFC__FAAPP">Oracle Fusion application</span>, whether a personalization an end user makes, a change a business user makes using a runtime composer tool, or a change a developer makes using <span id="GUID-09F3DF0F-1161-482C-B154-7ECC5C3C6FFC__JDEVSHORT">JDeveloper</span> to create new source code, are stored in a metadata repository. Because these customizations are kept separate from the base code, you can safely upgrade your <span>Oracle Fusion application</span> without losing your changes.</p>
+<p>You can save runtime customizations in a sandbox. A sandbox is a testing environment that isolates changes and modifications so that you can validate them before publishing them to a full test environment. Changes done at design time are done in a development environment, and can also be deployed to a sandbox before being deployed into the full test environment. For more information about sandboxes, see <a href="GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8.htm#GUID-A3551083-5EB8-4913-A708-81C035A0D71D">About the Sandbox Manager</a> .</p>
+<p>The Manage Customizations dialog enables you to identify and examine where customizations have been made and for which layer. You can also use the Manage Customizations dialog to import customizations that others have done, or you can export your own customizations.</p>
+<p>For more information about using the Manage Customizations dialog and sandboxes, see <a href="GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8.htm#GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8" title="This chapter discusses the typical workflow for customizing and extending Oracle Fusion applications. It describes how to use sandboxes to perform customizations in an environment that is separate from the full test environment, publish the changes to a full test environment, and move the changes to other environments.">Understanding the Customization Development Life Cycle</a>.</p>
+<p>All <span>Oracle Fusion applications</span> are based on <span id="GUID-09F3DF0F-1161-482C-B154-7ECC5C3C6FFC__FMW">Oracle Fusion Middleware</span>. Most user interfaces are implemented using <span id="GUID-09F3DF0F-1161-482C-B154-7ECC5C3C6FFC__ADF">Oracle Application Development Framework</span> (<span id="GUID-09F3DF0F-1161-482C-B154-7ECC5C3C6FFC__ADFSHORT">Oracle ADF</span>) and standard Java technologies, such as the JavaServer Faces technology. The foundation of the applications are the service-oriented architecture (SOA) business processes. Business intelligence frameworks provide several reporting capabilities. Identity management works at every level to control access. Each of these areas of an application can be customized and extended to suit your business needs.</p>
+<p>Additionally, <span>Oracle Fusion applications</span> are built using a common data model. Because of this commonality, when you make a customization in one area, that customization will be available to all objects in the application. For example, if you add an attribute to an object, you can add that attribute to the web-based view page, to an associated mobile page, and to any associated reports.</p>
+<p>Within this guide, the term customize means to change a standard (existing) artifact. For example, you can add an attribute to an existing object or you can change what is displayed on a standard page. The term extend means to create a completely new artifact, such as a custom object.</p>
+<p>For customizations and extensions, there are three basic scenarios:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Personalization</p>
+</li>
+<li>
+<p>Runtime customizations and extensions</p>
+</li>
+<li>
+<p>Design time customizations and extensions</p>
+</li>
+</ul>
+</div>
+<a id="OADTC1473"></a>
+<div class="sect3"><a id="GUID-2A701CD6-0FF3-4C2F-866E-6048A4F7A1C3"></a>
+<h3 id="OADTC-GUID-2A701CD6-0FF3-4C2F-866E-6048A4F7A1C3" class="sect3"><span class="enumeration_section">1.1.1</span> About Personalization</h3>
+<div>
+<p>The term personalization refers to the changes that every end user of the <span id="GUID-2A701CD6-0FF3-4C2F-866E-6048A4F7A1C3__FA">Oracle Fusion Applications</span> product suite can make to certain artifacts in the user interface (UI) at runtime. These changes remain for that user each time that user logs in to the application. Personalization includes changes based on user behavior (such as changing the width of a column in a table), changes the user elects to save, such as search parameters, or composer-based personalizations, where an end user can redesign aspects of a page.</p>
+<p>For composer-based personalizations, <span>Oracle Fusion Applications</span> includes <span id="GUID-2A701CD6-0FF3-4C2F-866E-6048A4F7A1C3__PGCOMP">Page Composer</span>, which allows end users to change certain UI pages to suit their needs. For example, they can rearrange certain objects on a page, add and remove designated content, and save queries.</p>
+<div class="infobox-note" id="GUID-2A701CD6-0FF3-4C2F-866E-6048A4F7A1C3__GUID-513CB06E-601F-4DBE-B4CD-19325EF61D66">
+<p class="notep1">Note:</p>
+<p>By default, only certain personalizations are allowed. You can customize what can be personalized. For more information, see <a href="GUID-E8FA2E94-71F5-4CE2-9DA8-808916905BAF.htm#GUID-E8FA2E94-71F5-4CE2-9DA8-808916905BAF" title="This chapter describes how you can make pages in your Oracle Fusion application personalizable by the end user. Note that mobile applications cannot be personalized by the end user.">Configuring End-User Personalization</a> .</p>
+</div>
+</div>
+</div>
+<a id="OADTC1474"></a>
+<div class="sect3"><a id="GUID-E474E5C2-2869-44CB-890F-D5BFA87F95E1"></a>
+<h3 id="OADTC-GUID-E474E5C2-2869-44CB-890F-D5BFA87F95E1" class="sect3"><span class="enumeration_section">1.1.2</span> About Runtime Customizations and Extensions</h3>
+<div>
+<p>Runtime customizations and extensions include those that a business analyst can make to an <span id="GUID-E474E5C2-2869-44CB-890F-D5BFA87F95E1__FAAPP">Oracle Fusion application</span> at runtime using browser-based composers. These customizations and extensions are visible and usable by all or by a subset of <span id="GUID-E474E5C2-2869-44CB-890F-D5BFA87F95E1__FA">Oracle Fusion Applications</span> users. The types of runtime customizations and extensions range from changing the look and feel of a page, to customizing standard objects, adding a new object and associated pages and application functionality, changing workflows, defining security for new objects, and customizing reports. (Note that not all products support all of these types of runtime customizations.)</p>
+</div>
+</div>
+<a id="OADTC843"></a><a id="OADTC1475"></a>
+<div class="sect3"><a id="GUID-148730BF-6626-4943-AD5F-A1C509490502"></a>
+<h3 id="OADTC-GUID-148730BF-6626-4943-AD5F-A1C509490502" class="sect3"><span class="enumeration_section">1.1.3</span> About Design Time Customizations and Extensions</h3>
+<div>
+<p>Design time customizations and extensions include more complex changes, such as creating a SOA composite application or creating a new batch job, and they require deployment into the runtime environment. These design time customization and extensions are most often done by Java developers using <span id="GUID-148730BF-6626-4943-AD5F-A1C509490502__JDEV">Oracle JDeveloper</span> (a comprehensive integrated development environment), as shown in the following figure, or they may be done in other tools, such as <span id="GUID-148730BF-6626-4943-AD5F-A1C509490502__SOACOMP">Oracle SOA Composer</span>. The customizations are then uploaded or deployed to a running instance of <span id="GUID-148730BF-6626-4943-AD5F-A1C509490502__FA">Oracle Fusion Applications</span>. Developer-level extensions are covered in this book.</p>
+<div class="figure" id="GUID-148730BF-6626-4943-AD5F-A1C509490502__GUID-BF2AAA3A-16A7-4889-9628-C7DC2FC90F32">
+<p class="titleinfigure">Figure 1-1 <span>Oracle JDeveloper</span></p>
+<img width="283" height="216" src="img/GUID-392F9974-DBDE-4726-9F98-313915A6A4A4-default.png" alt="Oracle JDeveloper" title="Oracle JDeveloper" /></div>
+<!-- class="figure" --></div>
+</div>
+</div>
+<a id="OADTC1476"></a><a id="OADTC1477"></a><a id="OADTC155"></a>
+<div class="sect2"><a id="GUID-E3D340F5-0D27-4423-B0D1-F8EC14601762"></a>
+<h2 id="OADTC-GUID-E3D340F5-0D27-4423-B0D1-F8EC14601762" class="sect2"><span class="enumeration_section">1.2</span> About Customization Layers</h2>
+<div>
+<p><span id="GUID-E3D340F5-0D27-4423-B0D1-F8EC14601762__FAAPPS">Oracle Fusion applications</span> contain built-in customization layers that allow you to make customizations that affect only certain instances of an application. For example, the Sales application has a layer for the job role. A role is an identity that determines what application functions and data a user can access. When you customize an artifact, you can choose to make that customization available only to users of a specific job role, for example, a sales representative.</p>
+<p>Customizations that you make are not saved to the base standard artifact. Instead, they are saved to an Extensible Markup Language (XML) file that is stored in an <span id="GUID-E3D340F5-0D27-4423-B0D1-F8EC14601762__METASVC">Oracle Metadata Services</span> (<span id="GUID-E3D340F5-0D27-4423-B0D1-F8EC14601762__MDSSHORT">MDS</span>) repository. This XML file acts like a list of instructions that determines how the artifact looks or behaves in the application, based on the layer that is controlling the current context. The customization engine in <span>MDS</span> manages this process.</p>
+<p>For example, say you want to customize the Sales home page by removing the Quick Create panel, but only for users with the Sales Representative role. Before you make your customization, you first select the layer in which to make your customization, in this case the role layer whose value is <code>Sales Representative</code>. When you make your customization by removing that pane from the page, an XML file is generated with the instructions to remove the pane, but only in the role layer, and only when the value is <code>Sales Representative</code>. The original page file remains untouched. The customization engine in <span>MDS</span> then stores the XML file in an <span>MDS</span> repository.</p>
+<p>Now, whenever someone logs in to the application and requests an artifact, the customization engine in <span>MDS</span> checks the repository for XML files that match the requested artifact and the given context, and if there is a match, it layers the instructions on top of the base artifact. In this example, whenever the Sales home page is requested (the artifact) by someone who is assigned the role of Sales Representative (the context), before the page is rendered, the customization engine in <span>MDS</span> pulls the corresponding XML file from the repository, layers it on top of the standard Sales home page, and removes that pane. Whenever someone who is not a Sales Representative logs in (for example, someone with the role of Sales Manager), the XML file with your changes is not layered on top, and so the Quick Create panel is displayed.</p>
+<p>The following figure shows how the customization XML file is applied to the base document and is visible only to a sales representative.</p>
+<div class="figure" id="GUID-E3D340F5-0D27-4423-B0D1-F8EC14601762__GUID-A4E45300-3765-4914-83D9-5BDB674F2794">
+<p class="titleinfigure">Figure 1-2 One Customization Layer Handled by the Customization Engine in <span>MDS</span></p>
+<img width="627" height="296" src="img/GUID-E1577C08-ECF4-4E87-AA20-7E40633650F4-default.gif" alt="One customization layer handled by customization engine" title="One customization layer handled by customization engine" /></div>
+<!-- class="figure" -->
+<p>All users of <span>Oracle Fusion applications</span> can personalize certain pages using the Personalization menu. Users can move elements around on a page, hide elements, and even add available elements to their page. When they do this personalization, the customization engine in <span>MDS</span> creates an XML file specific to that user.</p>
+<p>For example, say User 1 (who has the role of Sales Representative) personalizes the Sales home page. There will then be an XML file stored in the repository, noting the changes that user made. When User 1 logs in, as in the previous example, the customization engine in <span>MDS</span> pulls the XML file with the sales representative customizations from the repository and layers it on top of the standard Sales home page. In addition, the engine pulls the XML file with the User 1 personalizations, allowing the user to see the personalization changes along with the Sales Representative changes. When other Sales Representatives log in, they do not see the User 1 personalization changes, as shown in the following figure.</p>
+<div class="figure" id="GUID-E3D340F5-0D27-4423-B0D1-F8EC14601762__GUID-866BA00F-6535-4CAE-B257-463F66D365A5">
+<p class="titleinfigure">Figure 1-3 Personalizations Are Also Handled by the Customization Engine in <span>MDS</span></p>
+<img width="652" height="294" src="img/GUID-982BD7B1-F427-4673-87CB-4EC42AA564A2-default.gif" alt="XML document for personalization" title="XML document for personalization" /></div>
+<!-- class="figure" -->
+<p>The exact customization layers available for an application depend on that application family. However, all <span>Oracle Fusion applications</span> have the following customization layers:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Global layer: When customizations are made in the global layer, they affect all users of the application. This layer's XML files are added for everyone, whenever the artifact is requested. Customizations made to ADF Business Components in <span id="GUID-E3D340F5-0D27-4423-B0D1-F8EC14601762__JDEVSHORT">JDeveloper</span> must be made in the global layer.</p>
+<p>In a multi-tenant environment, this layer affects all tenants.</p>
+</li>
+<li>
+<p>Site layer: Customizations made in the site affect users at a particular location.</p>
+</li>
+<li>
+<p>User layer: The user layer is where all personalizations are made. Users do not have to explicitly select this layer. It is automatically selected when you use the Personalization menu.</p>
+</li>
+</ul>
+<p>These layers are applied in a hierarchy, and the highest layer in that hierarchy in the current context is considered the <strong class="term">tip</strong>. Within the default customization layers, the global layer is the base layer, and the user layer is the tip. If customizations are done to the same object, but in different layers, at runtime, the tip layer customizations take precedence. For example, if you customize the label for a field in the site layer using <span id="GUID-E3D340F5-0D27-4423-B0D1-F8EC14601762__PGCOMP">Page Composer</span> and customize the same label in the global layer using <span>JDeveloper</span>, the site layer customization will be displayed at runtime.</p>
+<p>Because customizations are saved in these XML files, when you patch or upgrade your <span>Oracle Fusion applications</span>, the base artifacts can be updated without touching your changes. The base artifact is replaced, and when the application is run after the patch or upgrade, the XML files are simply layered on top of the new version. You do not need to redo your customizations.</p>
+<p>Before you create customizations, you must select the layer to which you want your customizations to be applied. Most of the tools that you use to create your customizations provide a dialog where you can pick the layer for your customizations.</p>
+<div class="infobox-note" id="GUID-E3D340F5-0D27-4423-B0D1-F8EC14601762__GUID-5EA92422-3A9E-4B89-926E-B3AC5EDEB034">
+<p class="notep1">Note:</p>
+<p>The changes that you make using the Manage Custom Objects task are applied to the site level.</p>
+</div>
+</div>
+</div>
+<a id="OADTC157"></a>
+<div class="sect2"><a id="GUID-B4B22ED2-1453-48B0-BA73-C1E7D55DEF80"></a>
+<h2 id="OADTC-GUID-B4B22ED2-1453-48B0-BA73-C1E7D55DEF80" class="sect2"><span class="enumeration_section">1.3</span> About the Customization Tools</h2>
+<div>
+<p><span id="GUID-B4B22ED2-1453-48B0-BA73-C1E7D55DEF80__FA">Oracle Fusion Applications</span> provides several tools to enable you to customize and extend <span id="GUID-B4B22ED2-1453-48B0-BA73-C1E7D55DEF80__FAAPPS">Oracle Fusion applications</span>. With these tools, you can perform the following tasks:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Personalize and customize pages using <span id="GUID-B4B22ED2-1453-48B0-BA73-C1E7D55DEF80__PGCOMP">Page Composer</span></p>
+</li>
+<li>
+<p>Customize pages using <span id="GUID-B4B22ED2-1453-48B0-BA73-C1E7D55DEF80__APPCOMPOSER_SHORT">Application Composer</span></p>
+</li>
+<li>
+<p>Create and customize objects using <span>Application Composer</span></p>
+</li>
+<li>
+<p>Create business process flows for custom objects</p>
+</li>
+<li>
+<p>Define security policies for custom objects</p>
+</li>
+<li>
+<p>Add custom attributes to a business object</p>
+</li>
+<li>
+<p>Customize reports and analytics</p>
+</li>
+<li>
+<p>Perform design time customizations using <span id="GUID-B4B22ED2-1453-48B0-BA73-C1E7D55DEF80__JDEVSHORT">JDeveloper</span></p>
+</li>
+<li>
+<p>Customize and extend <span id="GUID-B4B22ED2-1453-48B0-BA73-C1E7D55DEF80__BPM_SHORT">Oracle BPM</span> Project Templates</p>
+</li>
+<li>
+<p>Configure end-user personalization</p>
+</li>
+<li>
+<p>Customize help</p>
+</li>
+<li>
+<p>Customize the <span>Oracle Fusion Applications</span> skin (CSS style sheet)</p>
+</li>
+<li>
+<p>Translate custom text</p>
+</li>
+</ul>
+<p>See <a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-AB934257-7428-455A-9441-0B737AC6167B">What You Can Customize and Extend and with Which Tool</a> for links to further information about the tools that you use for each task.</p>
+<p>For a more detailed description of the workflow you must follow when customizing and extending <span>Oracle Fusion applications</span>, see <a href="GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8.htm#GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8" title="This chapter discusses the typical workflow for customizing and extending Oracle Fusion applications. It describes how to use sandboxes to perform customizations in an environment that is separate from the full test environment, publish the changes to a full test environment, and move the changes to other environments.">Understanding the Customization Development Life Cycle</a>.</p>
+</div>
+<a id="OADTC1478"></a>
+<div class="sect3"><a id="GUID-08510255-A7B2-45C4-9A2B-332FA26F176F"></a>
+<h3 id="OADTC-GUID-08510255-A7B2-45C4-9A2B-332FA26F176F" class="sect3"><span class="enumeration_section">1.3.1</span> About Role-Based Access to Tools</h3>
+<div>
+<p>The user interfaces in <span id="GUID-08510255-A7B2-45C4-9A2B-332FA26F176F__FAAPPS">Oracle Fusion applications</span> are controlled by role-based authorization, meaning that the information presented in the UI, and what the user can do in the UI, depends on the roles assigned to the currently logged-in user. For example, if you are assigned a role with an administrative privilege, which grants you access to administrative functions and data, you will see an <span class="bold">Administration</span> group in the <span class="bold">Settings and Actions</span> menu. The menu items in the <span class="bold">Administration</span> group allow you to do things such as customize a page for all users and manage customizations.</p>
+<p>Other core <span>Oracle Fusion applications</span> users and roles are created during the provisioning process. The <a href="http://docs.oracle.com/cd/E51367_01/common_op/OACSM/toc.htm" target="_blank"></a> identifies some of the seeded <span id="GUID-08510255-A7B2-45C4-9A2B-332FA26F176F__FA">Oracle Fusion Applications</span> duty roles related to customizations. These are available for review in the <span id="GUID-08510255-A7B2-45C4-9A2B-332FA26F176F__APM">Oracle Authorization Policy Manager</span> administration console and can be assigned to users in <span id="GUID-08510255-A7B2-45C4-9A2B-332FA26F176F__IDMGR">Oracle Identity Manager</span>.</p>
+<p>All the <span>Oracle Fusion Applications</span> products have roles with names like "<span class="italic">Product</span> Administrator Duty" or "<span class="italic">Feature</span> Administrator Duty", which inherit many of the items in the lists of roles that follow. These lists should prove especially useful when these standard roles need to be customized.</p>
+<p>There are two key roles for this type of work:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Application Developer role: Designed for most customization and development work. Useful for the Information Technology development team, but might be excessive for most functional users.</p>
+</li>
+<li>
+<p>Application Administrator role: Secures customization features within a product family, including adjusting the user-interface text and the navigator menus.</p>
+</li>
+</ul>
+<p>In addition, the following roles control specific features and functions that should be assigned and allocated as the users' tasks permit.</p>
+<div class="section">
+<p class="subhead3">Core Application Setups (not including Flexfields, Lookups, Messages, and so on)</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Application Menu Customization Duty: For customizing the application menus using the task in Functional Setup Manager</p>
+</li>
+<li>
+<p>Application Help Text Administration Duty: For adding and managing custom help for all products</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">Application Composer</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p><span id="GUID-08510255-A7B2-45C4-9A2B-332FA26F176F__FACRM">Oracle Fusion Customer Relationship Management</span> (CRM) Application Administrator Duty: A consolidated duty role that allows an administrator to manage all setup duties and administer custom objects</p>
+</li>
+<li>
+<p><span class="italic">CRM Product</span> Custom Objects Management Duty: For managing the custom objects in an Oracle Fusion <span class="italic">CRM Product</span></p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">User Interface/Pages</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="italic">Product Family</span> UI Customization Duty: Allows customization of <span class="italic">product family</span> application user interface (for example, Page Composer)</p>
+</li>
+<li>
+<p>Page Composer Source View Access Duty: Allows access to Page Composers' source view</p>
+</li>
+<li>
+<p>Application Sandbox Publish Duty: Allows access to the <span id="GUID-08510255-A7B2-45C4-9A2B-332FA26F176F__METASVC">Oracle Metadata Services</span> sandbox publication action</p>
+</li>
+<li>
+<p>Applications Sandbox Metadata Import Duty: Allows access to importing of sandbox metadata</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3"><span id="GUID-08510255-A7B2-45C4-9A2B-332FA26F176F__BI">Oracle Business Intelligence</span>/Reports</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Reports and Analytics Region Administration Duty: Allows for the select of reports to appear in the Reports and Analytics region of <span>Oracle Fusion Applications</span> work areas</p>
+</li>
+<li>
+<p>Business Intelligence Authoring Duty: Creates an author of <span>Oracle Business Intelligence</span> reports as presented in the online catalog. Includes <span id="GUID-08510255-A7B2-45C4-9A2B-332FA26F176F__BIAPPS">Oracle Business Intelligence Applications</span>, <span id="GUID-08510255-A7B2-45C4-9A2B-332FA26F176F__BIPUB">Oracle Business Intelligence Publisher</span>, <span id="GUID-08510255-A7B2-45C4-9A2B-332FA26F176F__RTD">Oracle Real-Time Decisions</span>, Oracle Enterprise Performance Management, and <span id="GUID-08510255-A7B2-45C4-9A2B-332FA26F176F__BIMO">Oracle Business Intelligence for Microsoft Office</span></p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3"><span id="GUID-08510255-A7B2-45C4-9A2B-332FA26F176F__FAHCM">Oracle Fusion Human Capital Management</span></p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Workforce Business Processes Registration Duty: Provides access to the Register Workforce Business Processes page to identify composite business processes</p>
+</li>
+<li>
+<p>Workforce Lifecycle Business Process Administration Duty: Required for setting up the launching of new composite business processes (<span id="GUID-08510255-A7B2-45C4-9A2B-332FA26F176F__BPM">Oracle Business Process Management</span>)</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OADTC1479"></a>
+<div class="sect3"><a id="GUID-96EAF9D2-5766-49A7-A8A2-9BCC9773348A"></a>
+<h3 id="OADTC-GUID-96EAF9D2-5766-49A7-A8A2-9BCC9773348A" class="sect3"><span class="enumeration_section">1.3.2</span> About Personalizing and Customizing Pages Using <span id="PGCOMP">Page Composer</span></h3>
+<div>
+<p>Both personalization and customization use <span id="GUID-96EAF9D2-5766-49A7-A8A2-9BCC9773348A__PGCOMP">Page Composer</span> to make changes to an application page. Using personalization, any user can drag and drop fields, rearrange regions, add approved external content, and save their favorite queries.</p>
+<p>Using administration customization, you also use <span>Page Composer</span> to customize pages for other users. You can add fields, add validation, change defaults, rearrange regions, and add external content. <span>Page Composer</span> allows you to work in a WYSIWYG view, and, in some cases, Source view.</p>
+</div>
+</div>
+<a id="OADTC1480"></a>
+<div class="sect3"><a id="GUID-DCAC3261-81BE-40AB-938F-BA6C509C7671"></a>
+<h3 id="OADTC-GUID-DCAC3261-81BE-40AB-938F-BA6C509C7671" class="sect3"><span class="enumeration_section">1.3.3</span> About Customizing Pages Using <span id="APPCOMPOSER_SHORT">Application Composer</span></h3>
+<div>
+<p>To extend or customize the Sales, Marketing, Customer Center, Trading Community Architecture (TCA), and Order Capture applications that are part of the product family of <span id="GUID-DCAC3261-81BE-40AB-938F-BA6C509C7671__FA">Oracle Fusion Applications</span>, use <span id="GUID-DCAC3261-81BE-40AB-938F-BA6C509C7671__APPCOMPOSER_SHORT">Application Composer</span>.</p>
+</div>
+</div>
+<a id="OADTC1481"></a>
+<div class="sect3"><a id="GUID-1E796382-B972-4F7E-9ADB-E3C836C8C84D"></a>
+<h3 id="OADTC-GUID-1E796382-B972-4F7E-9ADB-E3C836C8C84D" class="sect3"><span class="enumeration_section">1.3.4</span> About Creating and Customizing Objects</h3>
+<div>
+<p><span id="GUID-1E796382-B972-4F7E-9ADB-E3C836C8C84D__APPCOMPOSER_SHORT">Application Composer</span> allows business analysts to make more complex runtime customizations to Oracle Fusion CRM applications. In addition to customizing pages, business analysts can customize objects and all the artifacts that support them (such as fields, pages, buttons and links, security, server scripts, and saved searches), and can also extend Oracle Fusion CRM applications by creating completely new objects and artifacts.</p>
+<p>When new objects are created, you often also create associated Work Area pages for those objects. You can add those pages to the <span class="bold">Navigator</span> so that they can be accessed in the same way as standard objects.</p>
+</div>
+</div>
+<a id="OADTC1482"></a>
+<div class="sect3"><a id="GUID-9997F2A3-DFC0-4F48-9B76-784CC3A6DD63"></a>
+<h3 id="OADTC-GUID-9997F2A3-DFC0-4F48-9B76-784CC3A6DD63" class="sect3"><span class="enumeration_section">1.3.5</span> About Creating and Customizing Business Process Flows for Custom Objects</h3>
+<div>
+<p>When you create a new object in an application that is not a child of another object, you can also create a new object workflow to manage any business processes associated with it. For example, say you used <span id="GUID-9997F2A3-DFC0-4F48-9B76-784CC3A6DD63__APPCOMPOSER_SHORT">Application Composer</span> to create a marketing object and you want to create an associated approval flow. From within <span>Application Composer</span>, you can access <span id="GUID-9997F2A3-DFC0-4F48-9B76-784CC3A6DD63__BPMCOMPOSER">Oracle Business Process Composer</span> and create the process that defines that flow.</p>
+</div>
+</div>
+<a id="OADTC1483"></a>
+<div class="sect3"><a id="GUID-40293681-077E-4F95-9462-10F18E51D53F"></a>
+<h3 id="OADTC-GUID-40293681-077E-4F95-9462-10F18E51D53F" class="sect3"><span class="enumeration_section">1.3.6</span> About Defining Security Policies for Custom Objects</h3>
+<div>
+<p>When you create a new object in <span id="GUID-40293681-077E-4F95-9462-10F18E51D53F__APPCOMPOSER_SHORT">Application Composer</span>, you can define security policies for it. A security policy defines the end user's level of access to the data records of the object.</p>
+</div>
+</div>
+<a id="OADTC1484"></a>
+<div class="sect3"><a id="GUID-BD4B58E4-AF3F-4559-B743-E84731F2FFCC"></a>
+<h3 id="OADTC-GUID-BD4B58E4-AF3F-4559-B743-E84731F2FFCC" class="sect3"><span class="enumeration_section">1.3.7</span> About Adding Custom Attributes to Business Components</h3>
+<div>
+<p>If you need to add an attribute to a business component in an application that is not one of the five applications, you can often use flexfields. A flexfield enables you to define attributes on a business component and then apply business logic to them. For example, an airline manufacturer might require very specific attributes for their orders that are not provided by the out-of-the-box implementation of an order. Because a flexfield exists for the order business component, you can use it to create and configure the desired attribute. Flexfield configurations are stored in an <span id="GUID-BD4B58E4-AF3F-4559-B743-E84731F2FFCC__MDSSHORT">MDS</span> repository, and so are safe during patching and upgrading.</p>
+<div class="infobox-note" id="GUID-BD4B58E4-AF3F-4559-B743-E84731F2FFCC__GUID-2A436C0D-618D-48D0-9E5E-DCFD00373398">
+<p class="notep1">Note:</p>
+<p><span id="GUID-BD4B58E4-AF3F-4559-B743-E84731F2FFCC__FAHCMSHORT"><cite>Oracle Fusion HCM</cite></span> applications allow business analysts to create custom child objects using the Manage Custom Objects task. For more information, see the "Managing Custom Objects in <span><cite>Oracle Fusion HCM</cite></span>" topic in the <a class="olink fahelpportal" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=fahelpportal"><span id="GUID-BD4B58E4-AF3F-4559-B743-E84731F2FFCC__FAHELPPORTAL">Oracle Fusion Applications Help</span></a>.</p>
+</div>
+</div>
+</div>
+<a id="OADTC1485"></a>
+<div class="sect3"><a id="GUID-0BD2645F-1FE2-4946-B677-7AEA243F870E"></a>
+<h3 id="OADTC-GUID-0BD2645F-1FE2-4946-B677-7AEA243F870E" class="sect3"><span class="enumeration_section">1.3.8</span> About Customizing Reports and Analytics</h3>
+<div>
+<p><span id="GUID-0BD2645F-1FE2-4946-B677-7AEA243F870E__FA">Oracle Fusion Applications</span> comes with a complete set of reports. You can customize these reports (for example, change the layout) to fit your particular business needs. Additionally, if you customize or create a business object, you can create a new report for that object.</p>
+</div>
+</div>
+<a id="OADTC1486"></a>
+<div class="sect3"><a id="GUID-2BD3C8AE-767B-43C7-88BF-6AAB23279669"></a>
+<h3 id="OADTC-GUID-2BD3C8AE-767B-43C7-88BF-6AAB23279669" class="sect3"><span class="enumeration_section">1.3.9</span> About Performing Design Time Customizations</h3>
+<div>
+<p>To customize or create business objects outside of the five applications, or when required customizations cannot be made in one of the runtime composers, use <span id="GUID-2BD3C8AE-767B-43C7-88BF-6AAB23279669__JDEVSHORT">JDeveloper</span>. When you work in a <span>JDeveloper</span> environment, you create an application workspace that contains your changes and additions. When you create this application workspace, you do so in the <span id="GUID-2BD3C8AE-767B-43C7-88BF-6AAB23279669__FA">Oracle Fusion Applications</span> Developer role. Like <span>Oracle Fusion Applications</span>, <span>JDeveloper</span> uses roles to shape what you see and can do in the integrated development environment (IDE). Work done in a developer role is stored in actual projects with code that gets deployed to an environment. Use the <span>Oracle Fusion Applications</span> Administrator Customization role when customizing an existing standard object (as opposed to creating a new object). Work done in this role is saved to an XML file that gets deployed into an <span id="GUID-2BD3C8AE-767B-43C7-88BF-6AAB23279669__MDSSHORT">MDS</span> repository, keeping your changes separate from the base code. For more information about how to set up your <span>JDeveloper</span> customization environment, see <a href="GUID-BD1AACE2-8148-4EB8-BD0B-9EEB1D6B4A46.htm#GUID-BD1AACE2-8148-4EB8-BD0B-9EEB1D6B4A46" title="This chapter describes how to configure Oracle JDeveloper for implementing customizations in Oracle Fusion applications. It also describes how to customize Service-Oriented Architecture (SOA) composite applications with JDeveloper, including setting up the JDeveloper application workspace and SOA composite application project for Oracle Metadata Services (MDS) Repository customization, customizing the SOA composite application, and customizing the SOA resource bundle.">Using for Customizations</a> .</p>
+<div class="infobox-note" id="GUID-2BD3C8AE-767B-43C7-88BF-6AAB23279669__GUID-7D4F2419-15BB-4387-B61D-5AA126BDFAA9">
+<p class="notep1">Note:</p>
+<p>You cannot create your own roles to define what you see and what you can do in <span>JDeveloper</span>.</p>
+</div>
+<p>Developers can use <span>JDeveloper</span> to create and customize view pages, business objects, task flows (reusable components that specify the control flow in an application), searches, and resource bundles. All customizations and extensions created in <span>JDeveloper</span> must be deployed to an environment. For more information about using <span>JDeveloper</span> to customize business objects and associated artifacts, see <a href="GUID-D799CA7B-365F-411E-8027-9F7413B66787.htm#GUID-D799CA7B-365F-411E-8027-9F7413B66787" title="This chapter describes how to use Oracle JDeveloper to customize and extend application artifacts defined by Oracle Application Development Framework (Oracle ADF) in Oracle Fusion applications.">Customizing and Extending Application&nbsp;Artifacts</a>.</p>
+<p>SOA composite applications are the foundation on which <span id="GUID-2BD3C8AE-767B-43C7-88BF-6AAB23279669__FAAPPS">Oracle Fusion applications</span> are built: they are the glue that holds all the different components together and they allow the different applications to work in a unified manner. SOA composite applications contain service components such as Business Process Execution Language (BPEL) process flows. These BPEL process flows provide communication between applications, additional human-based workflows, and business rules that determine the branching in those flows. Developers can customize existing SOA composite applications or create new ones using a mixture of <span>JDeveloper</span> and browser-based tools. Customized and extended SOA composite applications are all stored in <span>MDS</span> repositories. For more information, see <a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A" title="This chapter describes how to customize (edit) a service-oriented architecture (SOA) component during runtime in a deployed SOA composite application with a runtime tool such as Oracle Business Process Management Worklist (Oracle BPM Worklist), Oracle SOA Composer, or Oracle Enterprise Manager Fusion Applications Control or customize and extend (create) a SOA component during design time in Oracle JDeveloper. It also provides recommendations for merging runtime customizations from a previously deployed revision into a new revision and instructions for synchronizing a customized flexfield in Oracle Metadata Services (MDS) Repository.">Customizing and Extending SOA Components</a> .</p>
+</div>
+</div>
+<a id="OADTC1675"></a>
+<div class="sect3"><a id="GUID-D1273FF0-9CED-4D6C-8D5C-962E5EDAF99D"></a>
+<h3 id="OADTC-GUID-D1273FF0-9CED-4D6C-8D5C-962E5EDAF99D" class="sect3"><span class="enumeration_section">1.3.10</span> About Modifying <span id="BI">Oracle Business Intelligence</span> Repository for Customized Analytics</h3>
+<div>
+<p>Sometimes, to support analytics and reporting requirements, you might need to create new objects in the <span id="GUID-D1273FF0-9CED-4D6C-8D5C-962E5EDAF99D__BI">Oracle Business Intelligence</span> repository (RPD), such as physical columns, logical tables sources, logical columns, and presentation columns. For information about modifying the RPD, see <a href="GUID-CF192994-FFD4-4ACA-8F3C-9655F4BA3D15.htm#GUID-CF192994-FFD4-4ACA-8F3C-9655F4BA3D15" title="This chapter contains information about modifying the Oracle BI repository to meet your company's specific Oracle Fusion Applications analytics needs.">Modifying the Repository for Customized Analytics</a>.</p>
+</div>
+</div>
+<a id="OADTC1488"></a>
+<div class="sect3"><a id="GUID-2E89D388-ACDA-4050-B7BE-9E153DE86B31"></a>
+<h3 id="OADTC-GUID-2E89D388-ACDA-4050-B7BE-9E153DE86B31" class="sect3"><span class="enumeration_section">1.3.11</span> Understanding Other Available Customizations</h3>
+<div>
+<p>When you create custom pages, you may want to make them personalizable, so that end users can change the page for themselves. For more information, see <a href="GUID-E8FA2E94-71F5-4CE2-9DA8-808916905BAF.htm#GUID-E8FA2E94-71F5-4CE2-9DA8-808916905BAF" title="This chapter describes how you can make pages in your Oracle Fusion application personalizable by the end user. Note that mobile applications cannot be personalized by the end user.">Configuring End-User Personalization</a> .</p>
+<p>You can customize the look and feel of <span id="GUID-2E89D388-ACDA-4050-B7BE-9E153DE86B31__FA">Oracle Fusion Applications</span>, such as change the colors or add a logo. For more information, see <a href="GUID-7A67185D-92A2-4D5F-9803-A1CE38B366CA.htm#GUID-7A67185D-92A2-4D5F-9803-A1CE38B366CA" title="This chapter introduces the runtime and design time tools for customizing the Oracle Fusion Applications skin.">Customizing the Skin</a> .</p>
+<p>Some customizations can be translated. For more information, see <a href="GUID-ED66DFBF-909B-42F6-B069-B8C5A5D488A0.htm#GUID-ED66DFBF-909B-42F6-B069-B8C5A5D488A0" title="This chapter describes how to localize the custom text in Oracle Fusion applications that you create using the following runtime tools:">Translating Custom Text</a>.</p>
+</div>
+</div>
+<a id="OADTC851"></a><a id="OADTC1452"></a><a id="OADTC1453"></a><a id="OADTC1454"></a><a id="OADTC1455"></a><a id="OADTC1456"></a><a id="OADTC1457"></a><a id="OADTC1458"></a><a id="OADTC850"></a>
+<div class="sect3"><a id="GUID-AB934257-7428-455A-9441-0B737AC6167B"></a>
+<h3 id="OADTC-GUID-AB934257-7428-455A-9441-0B737AC6167B" class="sect3"><span class="enumeration_section">1.3.12</span> What You Can Customize and Extend and with Which Tool</h3>
+<div>
+<div class="section">
+<p>There are many scenarios for which you can customize <span id="GUID-AB934257-7428-455A-9441-0B737AC6167B__FAAPPS">Oracle Fusion applications</span>. The following tables identify for each scenario the artifacts that you can customize or create in <span id="GUID-AB934257-7428-455A-9441-0B737AC6167B__FA">Oracle Fusion Applications</span>, what tool you use, the type of user that can make the change, and whether the changes are stored in an <span id="GUID-AB934257-7428-455A-9441-0B737AC6167B__MDSSHORT">MDS</span> repository:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>View page customizations: <a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-AB934257-7428-455A-9441-0B737AC6167B__BHCGHCDJ" title="Shows what tools to use for customizations">Table 1-1</a></p>
+</li>
+<li>
+<p>Branding customizations: <a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-AB934257-7428-455A-9441-0B737AC6167B__CEGFAHJC" title="Shows what tools to use for customizations">Table 1-2</a></p>
+</li>
+<li>
+<p>Object customization: <a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-AB934257-7428-455A-9441-0B737AC6167B__CEGCIJJF" title="Shows what tools to use for customizations">Table 1-3</a></p>
+</li>
+<li>
+<p>Business process customizations: <a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-AB934257-7428-455A-9441-0B737AC6167B__CEGEABAE" title="Shows what tools to use for customizations">Table 1-4</a></p>
+</li>
+<li>
+<p>Report customizations: <a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-AB934257-7428-455A-9441-0B737AC6167B__CEGIAHHI" title="Shows what tools to use for customizations">Table 1-5</a></p>
+</li>
+<li>
+<p>Analysis and dashboard customizations: <a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-AB934257-7428-455A-9441-0B737AC6167B__CEGGIDFH" title="Shows what tools to use for customizations">Table 1-6</a></p>
+</li>
+<li>
+<p><span id="GUID-AB934257-7428-455A-9441-0B737AC6167B__SCHEDULER">Oracle Enterprise Scheduler</span> job customizations: <a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-AB934257-7428-455A-9441-0B737AC6167B__CEGJCIAC" title="Shows what tools to use for customizations">Table 1-7</a></p>
+</li>
+<li>
+<p>Security customizations: <a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-AB934257-7428-455A-9441-0B737AC6167B__CEGHAJGB" title="Shows what tools to use for customizations">Table 1-8</a></p>
+</li>
+</ul>
+<div class="infobox-note" id="GUID-AB934257-7428-455A-9441-0B737AC6167B__GUID-55377C0B-8BE1-4B93-BA9E-7ED73EA8E7F4">
+<p class="notep1">Note:</p>
+<p>While you can customize view pages in <span id="GUID-AB934257-7428-455A-9441-0B737AC6167B__PGCOMP">Page Composer</span> and <span id="GUID-AB934257-7428-455A-9441-0B737AC6167B__APPCOMPOSER_SHORT">Application Composer</span>, only certain pages are configured to allow it. If the customization that you want to make is not available in <span>Page Composer</span>, then you must use <span id="GUID-AB934257-7428-455A-9441-0B737AC6167B__JDEVSHORT">JDeveloper</span> to make the customization.</p>
+<p><span>Application Composer</span> is available only in certain applications.</p>
+</div>
+</div>
+<!-- class="section" -->
+<div class="tblformal" id="GUID-AB934257-7428-455A-9441-0B737AC6167B__BHCGHCDJ">
+<p class="titleintable">Table 1-1 View Page Customization Scenarios in <span>Oracle Fusion Applications</span></p>
+<table class="cellalignment450" title="View Page Customization Scenarios in Oracle Fusion Applications" summary="Shows what tools to use for customizations">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment492" id="d3683e1264">Customization/ Extension</th>
+<th class="cellalignment477" id="d3683e1269">Tool</th>
+<th class="cellalignment500" id="d3683e1272">Type of User</th>
+<th class="cellalignment504" id="d3683e1275">MDS?</th>
+<th class="cellalignment464" id="d3683e1280">Where to Find Information</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1285" headers="d3683e1264">
+<p>Add, move, delete, show, or hide components on a page.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1285 d3683e1269">
+<p><span>Page Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1285 d3683e1272">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1285 d3683e1275">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1285 d3683e1280">
+<p><a class="olink OAEXT1184571" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1184571">"Page Customization Tasks"</a> section in the</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1307" headers="d3683e1264">
+<p>Change a page layout.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1307 d3683e1269">
+<p><span>Page Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1307 d3683e1272">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1307 d3683e1275">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1307 d3683e1280">
+<p><a class="olink OAEXT1184571" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1184571">"Page Customization Tasks"</a> section in the</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1329" headers="d3683e1264">
+<p>Create a site-level search for all users.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1329 d3683e1269">
+<p><span>Page Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1329 d3683e1272">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1329 d3683e1275">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1329 d3683e1280">
+<p><a class="olink OAEXT1184587" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1184587">"Customizing Pages"</a> chapter in the</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1351" headers="d3683e1264">
+<p>Customize a page title.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1351 d3683e1269">
+<p><span>Page Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1351 d3683e1272">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1351 d3683e1275">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1351 d3683e1280">
+<p><a class="olink OAEXT1184587" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1184587">"Customizing Pages"</a> chapter in the</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1373" headers="d3683e1264">
+<p>Customize a task list menu.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1373 d3683e1269">
+<p><span>Page Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1373 d3683e1272">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1373 d3683e1275">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1373 d3683e1280">
+<p><a class="olink OAEXT1184587" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1184587">"Customizing Pages"</a> chapter in the</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1395" headers="d3683e1264">
+<p>Customize dialog box window content.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1395 d3683e1269">
+<p><span>Page Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1395 d3683e1272">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1395 d3683e1275">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1395 d3683e1280">
+<p><a class="olink OAEXT1184587" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1184587">"Customizing Pages"</a> chapter in the</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1417" headers="d3683e1264">
+<p>Add fields, buttons, links, to a standard page ().</p>
+</td>
+<td class="cellalignment480" headers="d3683e1417 d3683e1269">
+<p><span>Application Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1417 d3683e1272">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1417 d3683e1275">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1417 d3683e1280">
+<p><a class="olink OACEX1056065" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OACEX1056065">"<span>Application Composer</span>: Using the <span>Application Composer</span>"</a> chapter in the <span class="italic"><span id="GUID-AB934257-7428-455A-9441-0B737AC6167B__OACEX"><cite>Oracle Cloud Extending Sales</cite></span></span></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1449" headers="d3683e1264">
+<p>Customize attributes for a flexfield on a page.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1449 d3683e1269">
+<p><span>Page Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1449 d3683e1272">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1449 d3683e1275">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1449 d3683e1280">
+<p>For information about implementing your specific product family, do the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Access the <a class="olink homepage" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=homepage">Oracle Fusion Applications Technology library</a>.</p>
+</li>
+<li>
+<p>See the Implementing Common Features guides for your product family. Search for flexfields.</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1477" headers="d3683e1264">
+<p>Make UI components on a page personalizable.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1477 d3683e1269">
+<p><span>Page Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1477 d3683e1272">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1477 d3683e1275">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1477 d3683e1280">
+<p><a href="GUID-E8FA2E94-71F5-4CE2-9DA8-808916905BAF.htm#GUID-E945E607-C6A3-4792-8E5C-2653DCDEE664">About Configuring End-User Personalization for Components</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1496" headers="d3683e1264">
+<p>Customize the UI Shell template.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1496 d3683e1269">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1496 d3683e1272">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e1496 d3683e1275">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1496 d3683e1280">
+<p><span><a href="GUID-D799CA7B-365F-411E-8027-9F7413B66787.htm#GUID-D64CF5D5-65C0-4FE5-A37C-9BFFB3627421">About Editing the UI Shell Template</a></span></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1516" headers="d3683e1264">
+<p>Customize the UI Shell template.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1516 d3683e1269">
+<p><span>Page Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1516 d3683e1272">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1516 d3683e1275">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1516 d3683e1280">
+<p><a class="olink OAEXT1184587" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1184587">"Customizing Pages"</a> chapter in the</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1539" headers="d3683e1264">
+<p>Define resource bundles.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1539 d3683e1269">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1539 d3683e1272">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e1539 d3683e1275">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1539 d3683e1280">
+<p><span><a href="GUID-D799CA7B-365F-411E-8027-9F7413B66787.htm#GUID-95A5FCDC-383D-40C6-B12C-9F31693B50E7">About Customizing or Adding Resource Bundles</a></span></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1559" headers="d3683e1264">
+<p>Make a custom page personalizable (custom pages created in <span>Application Composer</span> are customizable by default).</p>
+</td>
+<td class="cellalignment480" headers="d3683e1559 d3683e1269">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1559 d3683e1272">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e1559 d3683e1275">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1559 d3683e1280">
+<p><a href="GUID-E8FA2E94-71F5-4CE2-9DA8-808916905BAF.htm#GUID-A4E60841-14AB-4548-B686-380518310BF4">About Allowing Pages to Be Personalized by End Users in</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1581" headers="d3683e1264">
+<p>Customize onscreen help text.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1581 d3683e1269">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1581 d3683e1272">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e1581 d3683e1275">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1581 d3683e1280">
+<p><a href="GUID-D799CA7B-365F-411E-8027-9F7413B66787.htm#GUID-8F5A764F-56A9-45E3-9C2F-3A07545AE742">About Customizing or Adding Static Instructions_ In-Field Notes_ and Terminology Definitions</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1600" headers="d3683e1264">
+<p>Change the look and feel of the entire application.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1600 d3683e1269">
+<p>Theme Editor</p>
+</td>
+<td class="cellalignment502" headers="d3683e1600 d3683e1272">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1600 d3683e1275">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e1600 d3683e1280">
+<p><a href="GUID-7A67185D-92A2-4D5F-9803-A1CE38B366CA.htm#GUID-7A67185D-92A2-4D5F-9803-A1CE38B366CA" title="This chapter introduces the runtime and design time tools for customizing the Oracle Fusion Applications skin.">Customizing the Skin</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1624" headers="d3683e1264">
+<p>Translate custom text.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1624 d3683e1269">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1624 d3683e1272">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e1624 d3683e1275">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1624 d3683e1280">
+<p><a href="GUID-ED66DFBF-909B-42F6-B069-B8C5A5D488A0.htm#GUID-ED66DFBF-909B-42F6-B069-B8C5A5D488A0" title="This chapter describes how to localize the custom text in Oracle Fusion applications that you create using the following runtime tools:">Translating Custom Text</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="tblformal" id="GUID-AB934257-7428-455A-9441-0B737AC6167B__CEGFAHJC">
+<p class="titleintable">Table 1-2 Branding Customization Scenarios in <span>Oracle Fusion Applications</span></p>
+<table class="cellalignment450" title="Branding Customization Scenarios in Oracle Fusion Applications" summary="Shows what tools to use for customizations">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment492" id="d3683e1663">Customization/ Extension</th>
+<th class="cellalignment477" id="d3683e1668">Tool</th>
+<th class="cellalignment500" id="d3683e1671">Type of User</th>
+<th class="cellalignment504" id="d3683e1674">MDS?</th>
+<th class="cellalignment464" id="d3683e1679">Where to Find Information</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1684" headers="d3683e1663">
+<p>Customize the UI Shell template.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1684 d3683e1668">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1684 d3683e1671">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e1684 d3683e1674">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1684 d3683e1679">
+<p><a href="GUID-D799CA7B-365F-411E-8027-9F7413B66787.htm#GUID-D64CF5D5-65C0-4FE5-A37C-9BFFB3627421">About Editing the UI Shell Template</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1703" headers="d3683e1663">
+<p>Customize the UI Shell template.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1703 d3683e1668">
+<p><span>Page Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1703 d3683e1671">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1703 d3683e1674">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1703 d3683e1679">
+<p><a class="olink OAEXT1184587" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1184587">"Customizing Pages"</a> chapter in the</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1725" headers="d3683e1663">
+<p>Change the look and feel of the entire application.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1725 d3683e1668">
+<p>Theme Editor</p>
+</td>
+<td class="cellalignment502" headers="d3683e1725 d3683e1671">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1725 d3683e1674">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e1725 d3683e1679">
+<p><a href="GUID-7A67185D-92A2-4D5F-9803-A1CE38B366CA.htm#GUID-7A67185D-92A2-4D5F-9803-A1CE38B366CA" title="This chapter introduces the runtime and design time tools for customizing the Oracle Fusion Applications skin.">Customizing the Skin</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1749" headers="d3683e1663">
+<p>Change the logo.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1749 d3683e1668">
+<p>Theme Editor</p>
+</td>
+<td class="cellalignment502" headers="d3683e1749 d3683e1671">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1749 d3683e1674">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e1749 d3683e1679">
+<p><a href="GUID-7A67185D-92A2-4D5F-9803-A1CE38B366CA.htm#GUID-7A67185D-92A2-4D5F-9803-A1CE38B366CA" title="This chapter introduces the runtime and design time tools for customizing the Oracle Fusion Applications skin.">Customizing the Skin</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1773" headers="d3683e1663">
+<p>Customize report layouts.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1773 d3683e1668">
+<p><span id="GUID-AB934257-7428-455A-9441-0B737AC6167B__BIPUBSHORT">Oracle BI Publisher</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1773 d3683e1671">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1773 d3683e1674">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e1773 d3683e1679">
+<p><a class="olink OAEXT1203011" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1203011">"Customizing Reports and Analytics"</a> chapter in the</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="tblformal" id="GUID-AB934257-7428-455A-9441-0B737AC6167B__CEGCIJJF">
+<p class="titleintable">Table 1-3 Object Customization Scenarios in <span>Oracle Fusion Applications</span></p>
+<table class="cellalignment450" title="Object Customization Scenarios in Oracle Fusion Applications" summary="Shows what tools to use for customizations">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment492" id="d3683e1809">Customization/ Extension</th>
+<th class="cellalignment477" id="d3683e1814">Tool</th>
+<th class="cellalignment500" id="d3683e1817">Type of User</th>
+<th class="cellalignment504" id="d3683e1820">MDS?</th>
+<th class="cellalignment464" id="d3683e1825">Where to Find Information</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1830" headers="d3683e1809">
+<p>Customize business objects.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1830 d3683e1814">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1830 d3683e1817">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e1830 d3683e1820">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1830 d3683e1825">
+<p><a href="GUID-D799CA7B-365F-411E-8027-9F7413B66787.htm#GUID-3B5ECF94-A427-4E39-81F5-1A8C14473DA5">About Editing Existing Business Components</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1849" headers="d3683e1809">
+<p>Customize objects ().</p>
+</td>
+<td class="cellalignment480" headers="d3683e1849 d3683e1814">
+<p><span>Application Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1849 d3683e1817">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1849 d3683e1820">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1849 d3683e1825">
+<p><a class="olink OACEX398839" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OACEX398839">"Defining Objects: Explained"</a> section in the <span class="italic"><span><cite>Oracle Cloud Extending Sales</cite></span></span></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1875" headers="d3683e1809">
+<p>Add an attribute to a business object using flexfields (not ).</p>
+</td>
+<td class="cellalignment480" headers="d3683e1875 d3683e1814">
+<p>Setup and Maintenance work area</p>
+</td>
+<td class="cellalignment502" headers="d3683e1875 d3683e1817">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1875 d3683e1820">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e1875 d3683e1825">
+<p>For information about implementing your specific product family, do the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Access the <a class="olink homepage" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=homepage">Oracle Fusion Applications Technology library</a>.</p>
+</li>
+<li>
+<p>See the Implementing Common Features guides for your product family. Search for "Manage Menu Customizations".</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1904" headers="d3683e1809">
+<p>Create business objects.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1904 d3683e1814">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1904 d3683e1817">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e1904 d3683e1820">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1904 d3683e1825">
+<p><a href="GUID-D799CA7B-365F-411E-8027-9F7413B66787.htm#GUID-50789EF5-2BF5-4715-BDF3-987E1C36018B">About Creating Custom Business Components</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1923" headers="d3683e1809">
+<p>Create objects ().</p>
+</td>
+<td class="cellalignment480" headers="d3683e1923 d3683e1814">
+<p><span>Application Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e1923 d3683e1817">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1923 d3683e1820">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1923 d3683e1825">
+<p><a class="olink OACEX398839" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OACEX398839">"Defining Objects: Explained"</a> section in the <span class="italic"><span><cite>Oracle Cloud Extending Sales</cite></span></span></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1949" headers="d3683e1809">
+<p>Create child business object (<span id="GUID-AB934257-7428-455A-9441-0B737AC6167B__FAHCMSHORT"><cite>Oracle Fusion HCM</cite></span>).</p>
+</td>
+<td class="cellalignment480" headers="d3683e1949 d3683e1814">
+<p>Manage Custom Objects</p>
+</td>
+<td class="cellalignment502" headers="d3683e1949 d3683e1817">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1949 d3683e1820">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e1949 d3683e1825">
+<p>"Managing Custom Objects in <span><cite>Oracle Fusion HCM</cite></span>" in the <a class="olink fahelpportal" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=fahelpportal"><span id="GUID-AB934257-7428-455A-9441-0B737AC6167B__FAHELPPORTAL">Oracle Fusion Applications Help</span></a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e1977" headers="d3683e1809">
+<p>Add a business object page to the navigator menu.</p>
+</td>
+<td class="cellalignment480" headers="d3683e1977 d3683e1814">
+<p>Setup and Maintenance work area</p>
+</td>
+<td class="cellalignment502" headers="d3683e1977 d3683e1817">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e1977 d3683e1820">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e1977 d3683e1825">
+<p>For information about implementing your specific product family, do the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Access the <a class="olink homepage" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=homepage">Oracle Fusion Applications Technology library</a>.</p>
+</li>
+<li>
+<p>See the Implementing Common Features guides for your product family.</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2004" headers="d3683e1809">
+<p>Add custom object work area pages to the navigator menu ().</p>
+</td>
+<td class="cellalignment480" headers="d3683e2004 d3683e1814">
+<p><span>Application Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2004 d3683e1817">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2004 d3683e1820">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2004 d3683e1825">
+<p>For information about implementing your specific product family, do the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Access the <a class="olink homepage" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=homepage">Oracle Fusion Applications Technology library</a>.</p>
+</li>
+<li>
+<p>See the Implementing Common Features guides for your product family. Search for "Manage Menu Customizations".</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2034" headers="d3683e1809">
+<p>Add validation to a business object.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2034 d3683e1814">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2034 d3683e1817">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e2034 d3683e1820">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e2034 d3683e1825">
+<p><a href="GUID-D799CA7B-365F-411E-8027-9F7413B66787.htm#GUID-50789EF5-2BF5-4715-BDF3-987E1C36018B">About Creating Custom Business Components</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2053" headers="d3683e1809">
+<p>Add validation to an object ().</p>
+</td>
+<td class="cellalignment480" headers="d3683e2053 d3683e1814">
+<p><span>Application Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2053 d3683e1817">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2053 d3683e1820">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e2053 d3683e1825">
+<p><a class="olink OACEX1071033" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OACEX1071033">"Using Groovy Scripts"</a> section in the <span class="italic"><span><cite>Oracle Cloud Extending Sales</cite></span></span></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2079" headers="d3683e1809">
+<p>Customize saved searches for a custom object ().</p>
+</td>
+<td class="cellalignment480" headers="d3683e2079 d3683e1814">
+<p><span>Application Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2079 d3683e1817">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2079 d3683e1820">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e2079 d3683e1825">
+<p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=930FAEF6F048460EE040D30A688140E1" target="_blank">"Saved Searches: Explained"</a> section in the <span class="italic"><span><cite>Oracle Cloud Extending Sales</cite></span></span></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2106" headers="d3683e1809">
+<p>Create searches for an object.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2106 d3683e1814">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2106 d3683e1817">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e2106 d3683e1820">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e2106 d3683e1825">
+<p><a href="GUID-D799CA7B-365F-411E-8027-9F7413B66787.htm#GUID-5A3466CE-A10E-41F0-955B-7D140A42F13B">About Customizing or Creating a Custom Search Object</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2125" headers="d3683e1809">
+<p>Create saved searches for a custom object ().</p>
+</td>
+<td class="cellalignment480" headers="d3683e2125 d3683e1814">
+<p><span>Application Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2125 d3683e1817">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2125 d3683e1820">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e2125 d3683e1825">
+<p>"<a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=930FAEF6F048460EE040D30A688140E1" target="_blank">Saved Searches: Explained</a>" section in the <span class="italic"><span><cite>Oracle Cloud Extending Sales</cite></span></span></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2152" headers="d3683e1809">
+<p>Customize task flows for an object.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2152 d3683e1814">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2152 d3683e1817">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e2152 d3683e1820">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e2152 d3683e1825">
+<p><a href="GUID-D799CA7B-365F-411E-8027-9F7413B66787.htm#GUID-D2C9779B-ACFE-4528-AA23-8B382C5E0BEC">About Editing Task Flows</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2171" headers="d3683e1809">
+<p>Create task flows for an object.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2171 d3683e1814">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2171 d3683e1817">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e2171 d3683e1820">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e2171 d3683e1825">
+<p><a href="GUID-D799CA7B-365F-411E-8027-9F7413B66787.htm#GUID-8416D02B-BA89-4D17-874D-CD9E66F13F7E">About Creating Custom Task Flows</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2190" headers="d3683e1809">
+<p>Customize object workflows for an object ().</p>
+</td>
+<td class="cellalignment480" headers="d3683e2190 d3683e1814">
+<p><span>Application Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2190 d3683e1817">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2190 d3683e1820">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e2190 d3683e1825">
+<p><a class="olink OACEX304804" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OACEX304804">"Object Workflows: Explained"</a> section in the <span class="italic"><span><cite>Oracle Cloud Extending Sales</cite></span></span></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2216" headers="d3683e1809">
+<p>Create object workflows for an object ().</p>
+</td>
+<td class="cellalignment480" headers="d3683e2216 d3683e1814">
+<p><span>Application Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2216 d3683e1817">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2216 d3683e1820">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e2216 d3683e1825">
+<p><a class="olink OACEX304804" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OACEX304804">"Object Workflows: Explained"</a> section in the <span class="italic"><span><cite>Oracle Cloud Extending Sales</cite></span></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="tblformal" id="GUID-AB934257-7428-455A-9441-0B737AC6167B__CEGEABAE">
+<p class="titleintable">Table 1-4 Business Process Customization Scenarios in <span>Oracle Fusion Applications</span></p>
+<table class="cellalignment450" title="Business Process Customization Scenarios in Oracle Fusion Applications" summary="Shows what tools to use for customizations">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment492" id="d3683e2256">Customization/ Extension</th>
+<th class="cellalignment477" id="d3683e2261">Tool</th>
+<th class="cellalignment500" id="d3683e2264">Type of User</th>
+<th class="cellalignment504" id="d3683e2267">MDS?</th>
+<th class="cellalignment464" id="d3683e2272">Where to Find Information</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2277" headers="d3683e2256">
+<p>Work with object workflows to trigger a business process ().</p>
+</td>
+<td class="cellalignment480" headers="d3683e2277 d3683e2261">
+<p><span>Application Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2277 d3683e2264">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2277 d3683e2267">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e2277 d3683e2272">
+<p><a class="olink OACEX327384" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OACEX327384">"Object Workflows and Business Processes: How They Work Together"</a> chapter in the <span class="italic"><span><cite>Oracle Cloud Extending Sales</cite></span></span></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2303" headers="d3683e2256">
+<p>Customize a business rule (either an approval configuration and assignment rule or a nonapproval business rule), domain value map, or composite application endpoint property.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2303 d3683e2261">
+<p><span id="GUID-AB934257-7428-455A-9441-0B737AC6167B__BPEL_WORKLIST">Oracle BPM Worklist</span>, <span id="GUID-AB934257-7428-455A-9441-0B737AC6167B__SOACOMP">Oracle SOA Composer</span>, and <span id="GUID-AB934257-7428-455A-9441-0B737AC6167B__FAOEMFRAMESHORT">Fusion Applications Control</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2303 d3683e2264">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e2303 d3683e2267">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e2303 d3683e2272">
+<p><a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-B30D1303-5DC8-4117-A2BB-166C12014D45">About Customizing SOA Composite Applications</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2328" headers="d3683e2256">
+<p>Customize a task flow.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2328 d3683e2261">
+<p><span>Oracle BPM Worklist</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2328 d3683e2264">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e2328 d3683e2267">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e2328 d3683e2272">
+<p><a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-05C1FD0A-357C-4989-A663-6A1647B619B1">About Customizing Task Flows in</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2347" headers="d3683e2256">
+<p>Merge the customizations from a previous revision of a SOA composite application into a new revision.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2347 d3683e2261">
+<p>Opatch</p>
+</td>
+<td class="cellalignment502" headers="d3683e2347 d3683e2264">
+<p>Administrator</p>
+</td>
+<td class="cellalignment505" headers="d3683e2347 d3683e2267">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e2347 d3683e2272">
+<p><a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-3784E391-5A1D-4C6F-9B32-973DA4011C9A">About Merging Runtime Customizations from a Previously Deployed Revision into a New Revision</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2365" headers="d3683e2256">
+<p>Customize a BPEL process or a mediator component, or add additional SOA components.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2365 d3683e2261">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2365 d3683e2264">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e2365 d3683e2267">
+<p>Yes</p>
+</td>
+<td class="cellalignment468" headers="d3683e2365 d3683e2272">
+<p><a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-18086128-4304-4388-BE2B-B59EB22299FC">About Extending or Customizing Custom SOA Composite Applications</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="tblformal" id="GUID-AB934257-7428-455A-9441-0B737AC6167B__CEGIAHHI">
+<p class="titleintable">Table 1-5 Report Customization Scenarios in <span>Oracle Fusion Applications</span></p>
+<table class="cellalignment450" title="Report Customization Scenarios in Oracle Fusion Applications" summary="Shows what tools to use for customizations">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment492" id="d3683e2398">Customization/ Extension</th>
+<th class="cellalignment477" id="d3683e2403">Tool</th>
+<th class="cellalignment500" id="d3683e2406">Type of User</th>
+<th class="cellalignment504" id="d3683e2409">MDS?</th>
+<th class="cellalignment464" id="d3683e2414">Where to Find Information</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2419" headers="d3683e2398">
+<p>Create report layout.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2419 d3683e2403">
+<p><span>Oracle BI Publisher</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2419 d3683e2406">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2419 d3683e2409">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2419 d3683e2414">
+<p><a class="olink OAEXT1203011" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1203011">"Customizing Reports and Analytics"</a> chapter in the</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2441" headers="d3683e2398">
+<p>Customize report layouts.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2441 d3683e2403">
+<p><span>Oracle BI Publisher</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2441 d3683e2406">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2441 d3683e2409">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2441 d3683e2414">
+<p><a class="olink OAEXT1203011" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1203011">"Customizing Reports and Analytics"</a> chapter in the</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2463" headers="d3683e2398">
+<p>Customize style templates.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2463 d3683e2403">
+<p><span>Oracle BI Publisher</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2463 d3683e2406">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2463 d3683e2409">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2463 d3683e2414">
+<p><a class="olink OAEXT1203011" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1203011">"Customizing Reports and Analytics"</a> chapter in the</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2485" headers="d3683e2398">
+<p>Create a report.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2485 d3683e2403">
+<p><span>Oracle BI Publisher</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2485 d3683e2406">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2485 d3683e2409">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2485 d3683e2414">
+<p><a class="olink OAEXT1203011" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1203011">"Customizing Reports and Analytics"</a> chapter in the</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2507" headers="d3683e2398">
+<p>Translate a report.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2507 d3683e2403">
+<p><span>Oracle BI Publisher</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2507 d3683e2406">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2507 d3683e2409">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2507 d3683e2414">
+<p><a class="olink OAEXT1203011" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1203011">"Customizing Reports and Analytics"</a> chapter in the</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2529" headers="d3683e2398">
+<p>Create a report subject area ().</p>
+</td>
+<td class="cellalignment480" headers="d3683e2529 d3683e2403">
+<p><span>Application Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2529 d3683e2406">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2529 d3683e2409">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2529 d3683e2414">
+<p><a class="olink OACEX573021" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OACEX573021">"Custom Subject Areas: Explained"</a> section in the <span class="italic"><span><cite>Oracle Cloud Extending Sales</cite></span></span></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2555" headers="d3683e2398">
+<p>Customize and extend the Oracle BI repository (RPD).</p>
+</td>
+<td class="cellalignment480" headers="d3683e2555 d3683e2403">
+<p><span>JDeveloper</span>, <span id="GUID-AB934257-7428-455A-9441-0B737AC6167B__BIADMINMID"><cite>Oracle BI Administration Tool</cite></span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2555 d3683e2406">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e2555 d3683e2409">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2555 d3683e2414">
+<p><a href="GUID-CF192994-FFD4-4ACA-8F3C-9655F4BA3D15.htm#GUID-CF192994-FFD4-4ACA-8F3C-9655F4BA3D15" title="This chapter contains information about modifying the Oracle BI repository to meet your company's specific Oracle Fusion Applications analytics needs.">Modifying the Repository for Customized Analytics</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="tblformal" id="GUID-AB934257-7428-455A-9441-0B737AC6167B__CEGGIDFH">
+<p class="titleintable">Table 1-6 Analysis and Dashboard Customization Scenarios in <span>Oracle Fusion Applications</span></p>
+<table class="cellalignment450" title="Analysis and Dashboard Customization Scenarios in Oracle Fusion Applications" summary="Shows what tools to use for customizations">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment492" id="d3683e2595">Customization/ Extension</th>
+<th class="cellalignment477" id="d3683e2600">Tool</th>
+<th class="cellalignment500" id="d3683e2603">Type of User</th>
+<th class="cellalignment504" id="d3683e2606">MDS?</th>
+<th class="cellalignment464" id="d3683e2611">Where to Find Information</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2616" headers="d3683e2595">
+<p>Customize analyses.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2616 d3683e2600">
+<p>Reports and Analytics pane</p>
+</td>
+<td class="cellalignment502" headers="d3683e2616 d3683e2603">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2616 d3683e2606">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2616 d3683e2611">
+<p><a class="olink OAEXT1203011" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1203011">"Customizing Reports and Analytics"</a> chapter in the</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2637" headers="d3683e2595">
+<p>Customize and extend the Oracle BI repository (RPD).</p>
+</td>
+<td class="cellalignment480" headers="d3683e2637 d3683e2600">
+<p><span>JDeveloper</span>, <span><cite>Oracle BI Administration Tool</cite></span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2637 d3683e2603">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e2637 d3683e2606">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2637 d3683e2611">
+<p><a href="GUID-CF192994-FFD4-4ACA-8F3C-9655F4BA3D15.htm#GUID-CF192994-FFD4-4ACA-8F3C-9655F4BA3D15" title="This chapter contains information about modifying the Oracle BI repository to meet your company's specific Oracle Fusion Applications analytics needs.">Modifying the Repository for Customized Analytics</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="tblformal" id="GUID-AB934257-7428-455A-9441-0B737AC6167B__CEGJCIAC">
+<p class="titleintable">Table 1-7 <span>Oracle Enterprise Scheduler</span> Job Customization Scenarios in <span>Oracle Fusion Applications</span></p>
+<table class="cellalignment450" title="Oracle Enterprise Scheduler Job Customization Scenarios in Oracle Fusion Applications" summary="Shows what tools to use for customizations">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment492" id="d3683e2679">Customization/ Extension</th>
+<th class="cellalignment477" id="d3683e2684">Tool</th>
+<th class="cellalignment500" id="d3683e2687">Type of User</th>
+<th class="cellalignment504" id="d3683e2690">MDS?</th>
+<th class="cellalignment464" id="d3683e2695">Where to Find Information</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2700" headers="d3683e2679">
+<p>Create jobs.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2700 d3683e2684">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2700 d3683e2687">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e2700 d3683e2690">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2700 d3683e2695">
+<p><a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-354772F3-6367-4CCD-8363-90E5B078E0A0" title="This chapter describes how to use Oracle JDeveloper or Oracle Enterprise Manager Fusion Applications Control to create and extend scheduled jobs using Oracle Enterprise Scheduler.">Extending and Customizing Jobs</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2731" headers="d3683e2679">
+<p>Customize jobs.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2731 d3683e2684">
+<p><span>Fusion Applications Control</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2731 d3683e2687">
+<p>Administrator</p>
+</td>
+<td class="cellalignment505" headers="d3683e2731 d3683e2690">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2731 d3683e2695">
+<p><a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-354772F3-6367-4CCD-8363-90E5B078E0A0" title="This chapter describes how to use Oracle JDeveloper or Oracle Enterprise Manager Fusion Applications Control to create and extend scheduled jobs using Oracle Enterprise Scheduler.">Extending and Customizing Jobs</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2762" headers="d3683e2679">
+<p>Submit jobs.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2762 d3683e2684">
+<p><span>Fusion Applications Control</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2762 d3683e2687">
+<p>Administrator</p>
+</td>
+<td class="cellalignment505" headers="d3683e2762 d3683e2690">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2762 d3683e2695">
+<p><a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-354772F3-6367-4CCD-8363-90E5B078E0A0" title="This chapter describes how to use Oracle JDeveloper or Oracle Enterprise Manager Fusion Applications Control to create and extend scheduled jobs using Oracle Enterprise Scheduler.">Extending and Customizing Jobs</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2793" headers="d3683e2679">
+<p>Submit jobs.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2793 d3683e2684">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2793 d3683e2687">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e2793 d3683e2690">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2793 d3683e2695">
+<p><a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-354772F3-6367-4CCD-8363-90E5B078E0A0" title="This chapter describes how to use Oracle JDeveloper or Oracle Enterprise Manager Fusion Applications Control to create and extend scheduled jobs using Oracle Enterprise Scheduler.">Extending and Customizing Jobs</a></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="tblformal" id="GUID-AB934257-7428-455A-9441-0B737AC6167B__CEGHAJGB">
+<p class="titleintable">Table 1-8 Security Customization Scenarios in <span>Oracle Fusion Applications</span></p>
+<table class="cellalignment450" title="Security Customization Scenarios in Oracle Fusion Applications" summary="Shows what tools to use for customizations">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment492" id="d3683e2838">Customization/ Extension</th>
+<th class="cellalignment477" id="d3683e2843">Tool</th>
+<th class="cellalignment500" id="d3683e2846">Type of User</th>
+<th class="cellalignment504" id="d3683e2849">MDS?</th>
+<th class="cellalignment464" id="d3683e2854">Where to Find Information</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2859" headers="d3683e2838">
+<p>Add data security to a custom object.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2859 d3683e2843">
+<p>Manage Data Security task accessible from the Setup and Maintenance work area</p>
+</td>
+<td class="cellalignment502" headers="d3683e2859 d3683e2846">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e2859 d3683e2849">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2859 d3683e2854">
+<p><a href="GUID-858B8C4D-4379-45B3-9B4A-D845707244B8.htm#GUID-28D86D84-9CB6-49F8-86FE-76F01DFDCE3F">Defining Data Security Policies on Custom Business Objects</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2877" headers="d3683e2838">
+<p>Opt into data security policies for custom objects.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2877 d3683e2843">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2877 d3683e2846">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e2877 d3683e2849">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2877 d3683e2854">
+<p><a href="GUID-858B8C4D-4379-45B3-9B4A-D845707244B8.htm#GUID-28E2A08F-5EFF-4C24-895E-9B05FDB6417F">About Enforcing Data Security in the Data Model Project</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2896" headers="d3683e2838">
+<p>Grant access to application artifacts.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2896 d3683e2843">
+<p><span>JDeveloper</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2896 d3683e2846">
+<p>Developer</p>
+</td>
+<td class="cellalignment505" headers="d3683e2896 d3683e2849">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2896 d3683e2854">
+<p><a href="GUID-858B8C4D-4379-45B3-9B4A-D845707244B8.htm#GUID-E72F8A29-AD8E-4A94-8725-255FEB49AEE1">About Defining Function Security Policies for the User Interface Project</a></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2915" headers="d3683e2838">
+<p>Grant access to custom objects ().</p>
+</td>
+<td class="cellalignment480" headers="d3683e2915 d3683e2843">
+<p><span>Application Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2915 d3683e2846">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2915 d3683e2849">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2915 d3683e2854">
+<p><a class="olink OACEX462581" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OACEX462581">"Securing Custom Objects: Explained"</a> section in the <span class="italic"><span><cite>Oracle Cloud Extending Sales</cite></span></span></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d3683e2941" headers="d3683e2838">
+<p>Enable elevated privileges customization.</p>
+</td>
+<td class="cellalignment480" headers="d3683e2941 d3683e2843">
+<p><span>Application Composer</span></p>
+</td>
+<td class="cellalignment502" headers="d3683e2941 d3683e2846">
+<p>Business Analyst</p>
+</td>
+<td class="cellalignment505" headers="d3683e2941 d3683e2849">
+<p>No</p>
+</td>
+<td class="cellalignment468" headers="d3683e2941 d3683e2854">
+<p><a class="olink OACEX462581" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OACEX462581">"Securing Custom Objects: Explained"</a> section in the <span class="italic"><span><cite>Oracle Cloud Extending Sales</cite></span></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+<a id="OADTC470"></a>
+<div class="sect3"><a id="GUID-FBD75249-534E-4857-AD58-F0D4D9822319"></a>
+<h3 id="OADTC-GUID-FBD75249-534E-4857-AD58-F0D4D9822319" class="sect3"><span class="enumeration_section">1.3.13</span> About Installing Customization Tools</h3>
+<div>
+<p>All the business analyst tools are available from the <span class="bold">Navigator</span>. However, for most design time tools, you must install and configure a version of <span id="GUID-FBD75249-534E-4857-AD58-F0D4D9822319__JDEVSHORT">JDeveloper</span> that is certified for your <span id="GUID-FBD75249-534E-4857-AD58-F0D4D9822319__FA">Oracle Fusion Applications</span> release. This version of <span>JDeveloper</span>, along with the necessary extensions for customizing and extending <span>Oracle Fusion Applications</span>, is in the release's <span>Oracle Fusion Applications</span> Media Pack, which is available from Oracle Software Delivery Cloud at <a href="http://edelivery.oracle.com" target="_blank"><code>http://edelivery.oracle.com</code></a>. After installing <span>JDeveloper</span>, they must set up their environment for customization and extending.</p>
+<div class="section">
+<p class="subhead3">Related Links</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>The following documents provide additional information related to subjects discussed in this section:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>For procedures for installing <span>JDeveloper</span> and setting it up for extending (that is, for creating new objects), see the <a class="olink OADEE64925" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OADEE64925">"Setting Up Your Development Environment"</a> and <a class="olink OADEE59486" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OADEE59486">"Setting Up Your <span>JDeveloper</span> Application Workspace and Projects"</a> chapters in the <span class="italic"><span id="GUID-FBD75249-534E-4857-AD58-F0D4D9822319__OADEE"><cite>Developer's Guide</cite></span></span>.</p>
+</li>
+<li>
+<p>For procedures for setting up <span>JDeveloper</span> for customizations, see <a href="GUID-BD1AACE2-8148-4EB8-BD0B-9EEB1D6B4A46.htm#GUID-BD1AACE2-8148-4EB8-BD0B-9EEB1D6B4A46" title="This chapter describes how to configure Oracle JDeveloper for implementing customizations in Oracle Fusion applications. It also describes how to customize Service-Oriented Architecture (SOA) composite applications with JDeveloper, including setting up the JDeveloper application workspace and SOA composite application project for Oracle Metadata Services (MDS) Repository customization, customizing the SOA composite application, and customizing the SOA resource bundle.">Using for Customizations</a> .</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment439">
+<tr>
+<td class="cellalignment446">
+<table class="cellalignment444">
+<tr>
+<td class="cellalignment443"><a href="GUID-BCD03C5E-7F2B-4BEC-BB61-515CE8F27BB5.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment443"><a href="GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2011, 2016, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment448">
+<table class="cellalignment442">
+<tr>
+<td class="cellalignment443"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment443"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

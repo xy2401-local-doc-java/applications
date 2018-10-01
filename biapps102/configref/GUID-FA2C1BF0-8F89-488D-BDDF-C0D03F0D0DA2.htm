@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>About Oracle EBS Currency Balance Types</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="The ETL process extracts four different currency balance types from Oracle EBS, namely base currency, translated currency, entered currency, and statistical balance. These records are loaded and stored in W_GL_BALANCE_F table in the Oracle Data Warehouse." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-F9924D70-9020-493F-8D9A-4B1C8B77D1A4.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-A63AE08B-7ABF-424B-91EC-DA4CC39B0D87.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-FA2C1BF0-8F89-488D-BDDF-C0D03F0D0DA2"></a> <span id="PAGE" style="display:none;">135/336</span> <!-- End Header -->
+<h1 id="BIAFC-GUID-FA2C1BF0-8F89-488D-BDDF-C0D03F0D0DA2" class="sect1">About Oracle EBS Currency Balance Types</h1>
+<div>
+<p>The ETL process extracts four different currency balance types from Oracle EBS, namely base currency, translated currency, entered currency, and statistical balance. These records are loaded and stored in W_GL_BALANCE_F table in the Oracle Data Warehouse.</p>
+<div class="p">The following table shows sample records of the different balance types. All four records are from ledger 'US Ledger' with U.S. dollars (USD) as the base ledger currency. These five columns in the following table are columns in the physical data warehouse table:
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">LOC_CURR_CODE</code></p>
+</li>
+<li>
+<p><code class="codeph">ACCT_CURR_CODE</code></p>
+</li>
+<li>
+<p><code class="codeph">TRANSLATED_FLAG</code></p>
+</li>
+<li>
+<p><code class="codeph">BALANCE_LOC_AMT</code></p>
+</li>
+<li>
+<p><code class="codeph">BALANCE_ACCT_AMT</code></p>
+</li>
+</ul>
+<div class="tblformal" id="GUID-FA2C1BF0-8F89-488D-BDDF-C0D03F0D0DA2__GUID-83BBC8AD-0F5E-45B3-A2C7-C3E07C45CCD5">
+<table class="cellalignment150" summary="Sample records of different balance types.">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment151" id="d100020e60">Line</th>
+<th class="cellalignment151" id="d100020e62">Ledger Name</th>
+<th class="cellalignment151" id="d100020e64">LOC_CURR_CODE</th>
+<th class="cellalignment151" id="d100020e66">ACCT_CURR_CODE</th>
+<th class="cellalignment151" id="d100020e68">TRANSLATED_FLAG</th>
+<th class="cellalignment151" id="d100020e70">BALANCE_LOC_AMT</th>
+<th class="cellalignment151" id="d100020e72">BALANCE_ACCT_AMT</th>
+<th class="cellalignment151" id="d100020e74">Balance Type Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d100020e78" headers="d100020e60">1</td>
+<td class="cellalignment128" headers="d100020e78 d100020e62">US Ledger</td>
+<td class="cellalignment128" headers="d100020e78 d100020e64">USD</td>
+<td class="cellalignment128" headers="d100020e78 d100020e66">Null</td>
+<td class="cellalignment128" headers="d100020e78 d100020e68">N</td>
+<td class="cellalignment128" headers="d100020e78 d100020e70">200</td>
+<td class="cellalignment128" headers="d100020e78 d100020e72">0</td>
+<td class="cellalignment128" headers="d100020e78 d100020e74">
+<p>A Base Currency Balance record with base ledger currency of USD.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d100020e96" headers="d100020e60">2</td>
+<td class="cellalignment128" headers="d100020e96 d100020e62">US Ledger</td>
+<td class="cellalignment128" headers="d100020e96 d100020e64">USD</td>
+<td class="cellalignment128" headers="d100020e96 d100020e66">GBP</td>
+<td class="cellalignment128" headers="d100020e96 d100020e68">Y</td>
+<td class="cellalignment128" headers="d100020e96 d100020e70">0</td>
+<td class="cellalignment128" headers="d100020e96 d100020e72">100</td>
+<td class="cellalignment128" headers="d100020e96 d100020e74">
+<p>A Translated Currency Balance record with translation currency of GBP (British pounds). USD is the base ledger currency.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d100020e114" headers="d100020e60">3</td>
+<td class="cellalignment128" headers="d100020e114 d100020e62">US Ledger</td>
+<td class="cellalignment128" headers="d100020e114 d100020e64">USD</td>
+<td class="cellalignment128" headers="d100020e114 d100020e66">JPY</td>
+<td class="cellalignment128" headers="d100020e114 d100020e68">N</td>
+<td class="cellalignment128" headers="d100020e114 d100020e70">0</td>
+<td class="cellalignment128" headers="d100020e114 d100020e72">10000</td>
+<td class="cellalignment128" headers="d100020e114 d100020e74">
+<p>An Entered Currency Balance record with entered currency in JPY (USD is the base ledger currency).</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d100020e132" headers="d100020e60">4</td>
+<td class="cellalignment128" headers="d100020e132 d100020e62">US Ledger</td>
+<td class="cellalignment128" headers="d100020e132 d100020e64">USD</td>
+<td class="cellalignment128" headers="d100020e132 d100020e66">STAT</td>
+<td class="cellalignment128" headers="d100020e132 d100020e68">N</td>
+<td class="cellalignment128" headers="d100020e132 d100020e70">0</td>
+<td class="cellalignment128" headers="d100020e132 d100020e72">150</td>
+<td class="cellalignment128" headers="d100020e132 d100020e74">
+<p>A Statistical balance amount.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+<div class="p">You can query these balances by using different value columns and filters. The following tables contain sample queries that you can use to view different currency balance types and their corresponding results from the sample warehouse data in the preceding table.
+<div class="infobox-note" id="GUID-FA2C1BF0-8F89-488D-BDDF-C0D03F0D0DA2__GUID-B73B3C08-8354-48D8-AE59-96FC4D540046">
+<p class="notep1">Note:</p>
+Ledger 'US Ledger' corresponds to LEDGER_WID = 85228 in the following sample scenarios.</div>
+</div>
+<div class="tblformal" id="GUID-FA2C1BF0-8F89-488D-BDDF-C0D03F0D0DA2__GUID-3DCD32F4-CE12-422A-A2A0-B93130B1F9DE">
+<table class="cellalignment150" summary="Sample queries that you can use to view different currency balance types and their corresponding results.">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment151" id="d100020e164">Sample</th>
+<th class="cellalignment151" id="d100020e166">Desired Queries</th>
+<th class="cellalignment151" id="d100020e168">Physical Table Value Column</th>
+<th class="cellalignment151" id="d100020e170">Physical Query Filters</th>
+<th class="cellalignment151" id="d100020e172">Result for Value Column</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d100020e176" headers="d100020e164">A</td>
+<td class="cellalignment128" headers="d100020e176 d100020e166">
+<p>To query: balance amount for base currency of USD, in ledger 'US Ledger'</p>
+</td>
+<td class="cellalignment128" headers="d100020e176 d100020e168">
+<p>BALANCE_LOC_AMT</p>
+</td>
+<td class="cellalignment128" headers="d100020e176 d100020e170">
+<p>LEDGER_WID = 85228</p>
+</td>
+<td class="cellalignment128" headers="d100020e176 d100020e172">200</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d100020e190" headers="d100020e164">B</td>
+<td class="cellalignment128" headers="d100020e190 d100020e166">
+<p>To query: translated balance amount for translated currency of GBP, in ledger 'US Ledger'</p>
+</td>
+<td class="cellalignment128" headers="d100020e190 d100020e168">
+<p>BALANCE_ACCT_AMT</p>
+</td>
+<td class="cellalignment128" headers="d100020e190 d100020e170">
+<p>LEDGER_WID 85228</p>
+<p>AND TRANSLATED_FLAG = 'Y'</p>
+<p>AND ACCT_CURR_CODE = 'GBP'</p>
+</td>
+<td class="cellalignment128" headers="d100020e190 d100020e172">100</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d100020e208" headers="d100020e164">C</td>
+<td class="cellalignment128" headers="d100020e208 d100020e166">
+<p>To query: entered balance amount for entered currency of JPY, in ledger 'US Ledger'</p>
+</td>
+<td class="cellalignment128" headers="d100020e208 d100020e168">
+<p>BALANCE_ACCT_AMT</p>
+</td>
+<td class="cellalignment128" headers="d100020e208 d100020e170">
+<p>LEDGER_WID = 85228</p>
+<p>AND ACCT_CURR_CODE = 'JPY'</p>
+<p>AND TRANSLATED_FLAG = 'N'</p>
+</td>
+<td class="cellalignment128" headers="d100020e208 d100020e172">10000</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d100020e226" headers="d100020e164">D</td>
+<td class="cellalignment128" headers="d100020e226 d100020e166">
+<p>To query: statistical balance amounts, in ledger 'US Ledger'</p>
+</td>
+<td class="cellalignment128" headers="d100020e226 d100020e168">
+<p>BALANCE_ACCT_AMT</p>
+</td>
+<td class="cellalignment128" headers="d100020e226 d100020e170">
+<p>LEDGER_WID = 85228</p>
+<p>AND ACCT_CURR_CODE = 'STAT'</p>
+</td>
+<td class="cellalignment128" headers="d100020e226 d100020e172">150</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>Oracle BI Answers users can create reports on currency balance types by selecting the desired facts from the Financials - GL Balance Sheet presentation table, as shown in the following table.</p>
+<div class="tblformal" id="GUID-FA2C1BF0-8F89-488D-BDDF-C0D03F0D0DA2__GUID-6303EC22-C507-4569-8403-842506B3F6BC">
+<table class="cellalignment150" summary="Currency balance types reports that you can create by selecting the desired facts from the Financials - GL Balance Sheet presentation table.">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment151" id="d100020e254">Sample Scenario</th>
+<th class="cellalignment151" id="d100020e256">Desired Report</th>
+<th class="cellalignment151" id="d100020e258">Presentation Table</th>
+<th class="cellalignment151" id="d100020e260">Presentation Column</th>
+<th class="cellalignment151" id="d100020e262">Result in Report</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d100020e266" headers="d100020e254">A</td>
+<td class="cellalignment128" headers="d100020e266 d100020e256">
+<p>View the local currency balance amounts (Debit Local Amount), such as in sample query A in the preceding table</p>
+</td>
+<td class="cellalignment128" headers="d100020e266 d100020e258">
+<p>Ledger</p>
+<p>Facts &ndash; GL Balance</p>
+</td>
+<td class="cellalignment128" headers="d100020e266 d100020e260">
+<p>Ledger name</p>
+<p>Debit Local Amount</p>
+</td>
+<td class="cellalignment128" headers="d100020e266 d100020e262">
+<p>Apply filter on:</p>
+<p>"Ledger Name" = 'US Ledger' Ledger Name = US Ledger Debit Local Amount = 200</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d100020e287" headers="d100020e254">B</td>
+<td class="cellalignment128" headers="d100020e287 d100020e256">
+<p>View the translated currency balance amounts (Debit Translated Amount), such as in sample query B in the preceding table</p>
+</td>
+<td class="cellalignment128" headers="d100020e287 d100020e258">
+<p>Ledger</p>
+<p>Facts &ndash; GL Balance</p>
+<p>GL Balance Details</p>
+</td>
+<td class="cellalignment128" headers="d100020e287 d100020e260">
+<p>Ledger Name</p>
+<p>Debit Translated Amount</p>
+<p>Translated Currency Code</p>
+</td>
+<td class="cellalignment128" headers="d100020e287 d100020e262">
+<p>Apply filters on:</p>
+<p>"Ledger Name" = 'US Ledger' "Translated Currency Code" = 'GBP' Ledger Name = US Leger Debit Translated Amount = 100 Translated Currency Code = GBP</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d100020e312" headers="d100020e254">C</td>
+<td class="cellalignment128" headers="d100020e312 d100020e256">
+<p>View the entered currency balance amounts (Debit Entered Amount), such as in sample query C in the preceding table</p>
+</td>
+<td class="cellalignment128" headers="d100020e312 d100020e258">
+<p>Ledger</p>
+<p>Facts &ndash; GL Balance</p>
+<p>GL Balance Details</p>
+</td>
+<td class="cellalignment128" headers="d100020e312 d100020e260">
+<p>Ledger Name</p>
+<p>Debit Entered Amount</p>
+<p>Entered Currency Code</p>
+</td>
+<td class="cellalignment128" headers="d100020e312 d100020e262">
+<p>Apply filters on:</p>
+<p>"Ledger Name" = 'US Ledger' "Entered Currency Code" = 'JPY' Ledger Name = US Leger Debit Entered Amount = 10000 Entered Currency Code = JPY</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d100020e337" headers="d100020e254">D</td>
+<td class="cellalignment128" headers="d100020e337 d100020e256">
+<p>View the statistical amount (Statistical Amount), such as in sample query D in the preceding table</p>
+</td>
+<td class="cellalignment128" headers="d100020e337 d100020e258">
+<p>Ledger</p>
+<p>Facts - Balance Sheet Statement</p>
+</td>
+<td class="cellalignment128" headers="d100020e337 d100020e260">
+<p>Ledger Name</p>
+<p>Statistical Amount</p>
+</td>
+<td class="cellalignment128" headers="d100020e337 d100020e262">
+<p>Ledger Name = US Leger Statistical Amount = 150</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-F9924D70-9020-493F-8D9A-4B1C8B77D1A4.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-A63AE08B-7ABF-424B-91EC-DA4CC39B0D87.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

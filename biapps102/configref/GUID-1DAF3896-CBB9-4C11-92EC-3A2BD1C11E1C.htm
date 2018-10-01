@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Setting Up Group Account Numbers for PeopleSoft</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="Group Account Number configuration is an important step in the configuration of Financial Analytics, as it determines the accuracy of the majority of metrics in the General Ledger and Profitability module. Group Accounts in combination with Financial Statement Item codes are also leveraged in the GL reconciliation process, to ensure that subledger data reconciles with GL journal entries." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-C69A4B92-6886-42E2-B121-ABEB5D75AF12.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-33220339-A5E4-4B68-A392-88011C43C058.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-1DAF3896-CBB9-4C11-92EC-3A2BD1C11E1C"></a> <span id="PAGE" style="display:none;">23/336</span> <!-- End Header -->
+<a id="IT_276"></a>
+<h1 id="BIAFC-GUID-1DAF3896-CBB9-4C11-92EC-3A2BD1C11E1C" class="sect1">Setting Up Group Account Numbers for PeopleSoft</h1>
+<div>
+<p>Group Account Number configuration is an important step in the configuration of Financial Analytics, as it determines the accuracy of the majority of metrics in the General Ledger and Profitability module. Group Accounts in combination with Financial Statement Item codes are also leveraged in the GL reconciliation process, to ensure that subledger data reconciles with GL journal entries.</p>
+<div class="section">
+<p>You can categorize your PeopleSoft General Ledger accounts into specific group account numbers. The GROUP_ACCT_NUM field denotes the nature of the General Ledger accounts.</p>
+<p>You set up General Ledger accounts using the following configuration file:</p>
+<p><code>file_group_acct_codes_psft.csv</code> &mdash; this file maps General Ledger accounts to group account codes.</p>
+<p>The configuration file or files for this task are provided on installation of <span>Oracle BI Applications</span> at one of the following locations:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Source-independent files: <code><span class="variable">&lt;Oracle Home for BI&gt;</span>\biapps\etl\data_files\src_files\</code>.</p>
+</li>
+<li>
+<p>Source-specific files: <code><span class="variable">&lt;Oracle Home for BI&gt;</span>\biapps\etl\data_files\src_files\<span class="variable">&lt;source adaptor&gt;</span></code>.</p>
+<div class="infobox-note" id="GUID-1DAF3896-CBB9-4C11-92EC-3A2BD1C11E1C__GUID-A29E1FE8-913E-4A55-A8B1-DC38F7CD4D60">
+<p class="notep1">Note:</p>
+If you are deploying OTBI-Enterprise, then you must download the CSV files from Configuration Manager, as follows: 1. From the Tasks bar, click <span class="bold">Define Business Intelligence Applications</span>. 2. Click <span class="bold">Actions</span>, then <span class="bold">Manage Source Configuration Data Files</span>. 3. Click the <span class="bold">Export Source Configuration Data Files</span> option on the tool bar. 4. Move the required files to the right hand list, then click Export.</div>
+</li>
+</ul>
+<p>Your system administrator will have copied these files to another location and configured ODI connections to read from this location. Work with your system administrator to obtain the files. When configuration is complete, your system administrator will need to copy the configured files to the location from which ODI reads these files.</p>
+<p>Examples include Cash account, Payroll account, and so on. The group account number configuration is used during data extraction as well as front-end reporting. For example, the group account number configuration is used heavily in both Profitability Analysis (Income Statement) and General Ledger analysis. The logic for assigning the accounts is located in the <code>file_group_acct_codes_psft.csv</code> file.</p>
+<div class="tblformal" id="GUID-1DAF3896-CBB9-4C11-92EC-3A2BD1C11E1C__BABFCAGD">
+<table class="cellalignment137" summary="Example CSV Charfield Mapping Values">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment161" id="d10381e88">BUSINESS_UNIT</th>
+<th class="cellalignment161" id="d10381e90">FROM_ACCT</th>
+<th class="cellalignment161" id="d10381e92">TO_ACCT</th>
+<th class="cellalignment152" id="d10381e94">GROUP_ACCT_NUM</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d10381e98" headers="d10381e88">
+<p>AUS01</p>
+</td>
+<td class="cellalignment162" headers="d10381e98 d10381e90">
+<p>101010</p>
+</td>
+<td class="cellalignment162" headers="d10381e98 d10381e92">
+<p>101099</p>
+</td>
+<td class="cellalignment154" headers="d10381e98 d10381e94">
+<p>AP</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d10381e111" headers="d10381e88">
+<p>AUS01</p>
+</td>
+<td class="cellalignment162" headers="d10381e111 d10381e90">
+<p>131010</p>
+</td>
+<td class="cellalignment162" headers="d10381e111 d10381e92">
+<p>131939</p>
+</td>
+<td class="cellalignment154" headers="d10381e111 d10381e94">
+<p>AR</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d10381e124" headers="d10381e88">
+<p>AUS01</p>
+</td>
+<td class="cellalignment162" headers="d10381e124 d10381e90">
+<p>152121</p>
+</td>
+<td class="cellalignment162" headers="d10381e124 d10381e92">
+<p>152401</p>
+</td>
+<td class="cellalignment154" headers="d10381e124 d10381e94">
+<p>COGS</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d10381e137" headers="d10381e88">
+<p>AUS01</p>
+</td>
+<td class="cellalignment162" headers="d10381e137 d10381e90">
+<p>171101</p>
+</td>
+<td class="cellalignment162" headers="d10381e137 d10381e92">
+<p>173001</p>
+</td>
+<td class="cellalignment154" headers="d10381e137 d10381e94">
+<p>OTHER</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d10381e150" headers="d10381e88">
+<p>AUS01</p>
+</td>
+<td class="cellalignment162" headers="d10381e150 d10381e90">
+<p>240100</p>
+</td>
+<td class="cellalignment162" headers="d10381e150 d10381e92">
+<p>240120</p>
+</td>
+<td class="cellalignment154" headers="d10381e150 d10381e94">
+<p>REVENUE</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d10381e163" headers="d10381e88">
+<p>AUS01</p>
+</td>
+<td class="cellalignment162" headers="d10381e163 d10381e90">
+<p>251100</p>
+</td>
+<td class="cellalignment162" headers="d10381e163 d10381e92">
+<p>251120</p>
+</td>
+<td class="cellalignment154" headers="d10381e163 d10381e94">
+<p>TAX*</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="infobox-note" id="GUID-1DAF3896-CBB9-4C11-92EC-3A2BD1C11E1C__GUID-7545DA4B-2B87-4BDF-ADCE-E29099BCAA1B">
+<p class="notep1">Note:</p>
+*Oracle's PeopleSoft adapters for Financial Analytics do not support the Tax base fact (W_TAX_XACT_F).</div>
+<p>In the first row, all accounts within the account number range from 101010 to 101099 containing a Business Unit equal to AUS01 are assigned to AP. Each row maps all accounts within the specified account number range and with the given Business Unit. If you need to assign a new group of account numbers, you can then assign GL accounts to the new group of account numbers in the <code>file_group_acct_codes_psft.csv file</code>.</p>
+<p>You must also add a new row in <span>Configuration Manager</span> to map Financial Statement Item codes to the respective Base Table Facts. This table shows the Financial Statement Item codes to which Group Account Numbers must map, and their associated base fact tables.</p>
+<div class="tblformal" id="GUID-1DAF3896-CBB9-4C11-92EC-3A2BD1C11E1C__BABBIHJJ">
+<table class="cellalignment137" summary="Lists the financial statement item codes and their associated base fact tables.">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment138" id="d10381e196">Financial Statement Item Codes</th>
+<th class="cellalignment139" id="d10381e198">Base Fact Tables</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment140" id="d10381e202" headers="d10381e196">
+<p>AP</p>
+</td>
+<td class="cellalignment141" headers="d10381e202 d10381e198">
+<p>AP base fact (W_AP_XACT_F)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment140" id="d10381e209" headers="d10381e196">
+<p>AR</p>
+</td>
+<td class="cellalignment141" headers="d10381e209 d10381e198">
+<p>AR base fact (W_AR_XACT_F)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment140" id="d10381e216" headers="d10381e196">
+<p>COGS</p>
+</td>
+<td class="cellalignment141" headers="d10381e216 d10381e198">
+<p>Cost of Goods Sold base fact (W_GL_COGS_F)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment140" id="d10381e223" headers="d10381e196">
+<p>REVENUE</p>
+</td>
+<td class="cellalignment141" headers="d10381e223 d10381e198">
+<p>Revenue base fact (W_GL_REVN_F)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment140" id="d10381e230" headers="d10381e196">
+<p>TAX</p>
+</td>
+<td class="cellalignment141" headers="d10381e230 d10381e198">
+<p>Tax base fact (W_TAX_XACT_F)*</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment140" id="d10381e237" headers="d10381e196">
+<p>OTHERS</p>
+</td>
+<td class="cellalignment141" headers="d10381e237 d10381e198">
+<p>GL Journal base fact (W_GL_OTHER_F)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="infobox-note" id="GUID-1DAF3896-CBB9-4C11-92EC-3A2BD1C11E1C__GUID-87AF54FA-69AF-485C-A05D-5B054F749070">
+<p class="notep1">Note:</p>
+*Oracle's PeopleSoft adapters for Financial Analytics do not support the Tax base fact (W_TAX_XACT_F).</div>
+<p>By mapping your GL accounts against the group account numbers and then associating the group account number to a Financial Statement Item code, you have indirectly associated the GL account numbers to Financial Statement Item codes as well. This association is important to perform GL reconciliation and ensure the subledger data reconciles with GL journal entries. It is possible that after an invoice has been transferred to GL, a GL user might adjust that invoice in GL. In this scenario, it is important to ensure that the adjustment amount is reflected in the subledger base fact as well as balance tables. To determine such subledger transactions in GL, the reconciliation process uses Financial Statement Item codes.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">To Add Group Account Numbers to Domain Members and Map Financial Statement Items</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In <span>Configuration Manager</span>, click <span class="bold">Manage Warehouse Domains</span> on the Tasks pane to display the <span class="wintitle">Manage Warehouse Domains</span> dialog.</span></li>
+<li class="stepexpand"><span>In the Search area, select <span class="bold">Oracle Financial Analytics</span> in the <span class="bold">Offering</span> drop-down list, select <span class="bold">Name</span> in the <span class="bold">Domain</span> drop-down list, and enter <kbd class="userinput">Group Account</kbd> in the adjacent text box.</span>
+<div>
+<div class="figure" id="GUID-1DAF3896-CBB9-4C11-92EC-3A2BD1C11E1C__GUID-5EE9370C-A36B-4315-99FA-FA324C1FA3A5"><img width="795" height="384" src="img/GUID-0E138EE8-9715-47E0-8477-BDA4A2DB2CD3-default.png" alt="Description of GUID-0E138EE8-9715-47E0-8477-BDA4A2DB2CD3-default.png follows" title="Description of GUID-0E138EE8-9715-47E0-8477-BDA4A2DB2CD3-default.png follows" /><br />
+<a href="img_text/GUID-0E138EE8-9715-47E0-8477-BDA4A2DB2CD3-default.htm">Description of the illustration GUID-0E138EE8-9715-47E0-8477-BDA4A2DB2CD3-default.png</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Click <span class="bold">Search</span> to locate Group Account, and select Group Account in the Warehouse Domains area.</span>
+<div>
+<div class="figure" id="GUID-1DAF3896-CBB9-4C11-92EC-3A2BD1C11E1C__GUID-CD3F26B4-6B45-4040-A80F-EBC2A7A14D44"><img width="804" height="514" src="img/GUID-55259906-2CFD-4ECB-B105-86DB7072669F-default.png" alt="Description of GUID-55259906-2CFD-4ECB-B105-86DB7072669F-default.png follows" title="Description of GUID-55259906-2CFD-4ECB-B105-86DB7072669F-default.png follows" /><br />
+<a href="img_text/GUID-55259906-2CFD-4ECB-B105-86DB7072669F-default.htm">Description of the illustration GUID-55259906-2CFD-4ECB-B105-86DB7072669F-default.png</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Scroll down to the Warehouse Members area.</span>
+<div>
+<div class="figure" id="GUID-1DAF3896-CBB9-4C11-92EC-3A2BD1C11E1C__GUID-DC746177-8C84-4604-ABA7-E7748F65E21F"><img width="800" height="513" src="img/GUID-26C7BDA0-3ADE-4DAC-BDB6-4F0BF591F55B-default.png" alt="Description of GUID-26C7BDA0-3ADE-4DAC-BDB6-4F0BF591F55B-default.png follows" title="Description of GUID-26C7BDA0-3ADE-4DAC-BDB6-4F0BF591F55B-default.png follows" /><br />
+<a href="img_text/GUID-26C7BDA0-3ADE-4DAC-BDB6-4F0BF591F55B-default.htm">Description of the illustration GUID-26C7BDA0-3ADE-4DAC-BDB6-4F0BF591F55B-default.png</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Click <span class="bold">Add</span> to display the <span class="wintitle">Add Target Domain Member</span> dialog, and specify Group Account Number in the Code and Name fields.</span>
+<div>
+<div class="figure" id="GUID-1DAF3896-CBB9-4C11-92EC-3A2BD1C11E1C__GUID-4C77C7A1-6479-46B9-B81B-1DD6AA1D04D1"><img width="257" height="153" src="img/GUID-D40A0AF7-7D5F-4A1D-839B-D110848C0306-default.png" alt="Description of GUID-D40A0AF7-7D5F-4A1D-839B-D110848C0306-default.png follows" title="Description of GUID-D40A0AF7-7D5F-4A1D-839B-D110848C0306-default.png follows" /><br />
+<a href="img_text/GUID-D40A0AF7-7D5F-4A1D-839B-D110848C0306-default.htm">Description of the illustration GUID-D40A0AF7-7D5F-4A1D-839B-D110848C0306-default.png</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Click <span class="bold">Manage Domain Mappings and Hierarchies</span> on the Tasks pane to display the <span class="wintitle">Manage Domain Mappings and Hierarchies</span> dialog.</span></li>
+<li class="stepexpand"><span>Select <span class="bold">Source Instance and Dim Group 'GL Account Dimension'</span> and click <span class="bold">Search</span>.</span>
+<div>
+<div class="figure" id="GUID-1DAF3896-CBB9-4C11-92EC-3A2BD1C11E1C__GUID-2F95C487-B31D-4DD5-A339-818BCE19D2E8"><img width="799" height="513" src="img/GUID-1F420813-27FC-430C-985B-8B6BAAD70999-default.png" alt="Description of GUID-1F420813-27FC-430C-985B-8B6BAAD70999-default.png follows" title="Description of GUID-1F420813-27FC-430C-985B-8B6BAAD70999-default.png follows" /><br />
+<a href="img_text/GUID-1F420813-27FC-430C-985B-8B6BAAD70999-default.htm">Description of the illustration GUID-1F420813-27FC-430C-985B-8B6BAAD70999-default.png</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Click the <span class="bold">Warehouse Domain Hierarchies</span> tab, then select <span class="bold">W_GL_GROUP_ACCOUNT</span> under W_FIN_STMT.</span></li>
+<li class="stepexpand"><span>Navigate to the 'Domain Member Mappings' region and select the Group Account Number domain member that you added in Step 5.</span></li>
+<li class="stepexpand"><span>Click <span class="bold">Edit</span> and select <span class="bold">Financial Statement</span> Item in the Target Domain Member column to assign this value to Group Account Number.</span>
+<div>
+<div class="figure" id="GUID-1DAF3896-CBB9-4C11-92EC-3A2BD1C11E1C__GUID-A84C062A-38B9-4C04-88BB-3233209E6CD3"><img width="802" height="514" src="img/GUID-1212690A-3E92-4E4C-900F-6BF014E507F1-default.png" alt="Description of GUID-1212690A-3E92-4E4C-900F-6BF014E507F1-default.png follows" title="Description of GUID-1212690A-3E92-4E4C-900F-6BF014E507F1-default.png follows" /><br />
+<a href="img_text/GUID-1212690A-3E92-4E4C-900F-6BF014E507F1-default.htm">Description of the illustration GUID-1212690A-3E92-4E4C-900F-6BF014E507F1-default.png</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Save the changes.</span></li>
+</ol>
+<div class="section">
+<p>Financial Statement Item codes are internal codes used by the ETL process to process the GL journal records during the GL reconciliation process against the sub-ledgers. When the ETL process reconciles a GL journal record, it looks at the Financial Statement Item code associated with the GL account that the journal is charging against, and then uses the value of the Financial Statement item code to decide which base fact the GL journal should reconcile against. For example, when processing a GL journal that charges to a GL account which is associate to 'AP' Financial Statement Item code, then the ETL process will try to go against AP base fact table (W_AP_XACT_F), and try to locate the corresponding matching AP accounting entry. If that GL account is associated with the 'REVENUE' Financial Statement Item code, then the ETL program will try to go against the Revenue base fact table (W_GL_REVN_F), and try to locate the corresponding matching Revenue accounting entry.</p>
+</div>
+<!-- class="section" -->
+<div class="example" id="GUID-1DAF3896-CBB9-4C11-92EC-3A2BD1C11E1C__GUID-9B51BC07-B3C1-4D48-AC1F-00DEA06A8125">
+<p class="titleinexample">Example 1-1 Tasks</p>
+<div class="infobox-note" id="GUID-1DAF3896-CBB9-4C11-92EC-3A2BD1C11E1C__GUID-C8AE9AFE-7D6F-4241-B18D-2FD371AFA8D3">
+<p class="notep1">Note:</p>
+<p>It is critical that the GL account numbers are mapped to the group account numbers (or domain values) because the metrics in the GL reporting layer use these values. For a list of domain values for GL account numbers, see Oracle Business Analytics Warehouse Data Model Reference.</p>
+</div>
+</div>
+<!-- class="example" --></div>
+<div class="props_rev_3"><a id="GUID-AF6D60F8-FD6B-47D7-B00A-B408B716AD7D"></a>
+<h2 id="BIAFC-GUID-AF6D60F8-FD6B-47D7-B00A-B408B716AD7D" class="sect2">Mapping GL Account Numbers to Group Account Numbers for PeopleSoft</h2>
+<div>
+<p>You can map General Ledger Account Numbers to Group Account Numbers.</p>
+<div class="section">
+<p>If you add new Group Account Numbers to the <code>file_group_acct_codes_&lt;<span class="variable">source system type</span>&gt;.csv</code> file, then you must also add metrics to the BI metadata repository (that is, the RPD file). See <a href="GUID-C69A4B92-6886-42E2-B121-ABEB5D75AF12.htm#GUID-688B593B-159E-4532-A138-27E2390DE32C" title="If you add new Group Account Numbers to the file_group_acct_codes_&lt;source system type&gt;.csv file, use the Oracle BI Administration Tool to add metrics to the Oracle BI Repository to expose the new Group Account Numbers.">Adding a New Metric in the Logical Table Fact &ndash; Fins &ndash; GL Journals Posted</a>.</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Edit the <code>file_group_acct_codes_jde.csv</code>.</span>
+<div>
+<p>The configuration file or files for this task are provided on installation of <span>Oracle BI Applications</span> at one of the following locations:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Source-independent files: <code><span class="variable">&lt;Oracle Home for BI&gt;</span>\biapps\etl\data_files\src_files\</code>.</p>
+</li>
+<li>
+<p>Source-specific files: <code><span class="variable">&lt;Oracle Home for BI&gt;</span>\biapps\etl\data_files\src_files\<span class="variable">&lt;source adaptor&gt;</span></code>.</p>
+</li>
+</ul>
+<div class="infobox-note" id="GUID-AF6D60F8-FD6B-47D7-B00A-B408B716AD7D__GUID-C7874F1C-009C-485D-9507-448B567686D8">
+<p class="notep1">Note:</p>
+If you are deploying OTBI-Enterprise, then you must download the CSV files from Configuration Manager, as follows: 1. From the Tasks bar, click <span class="bold">Define Business Intelligence Applications</span>. 2. Click <span class="bold">Actions</span>, then <span class="bold">Manage Source Configuration Data Files</span>. 3. Click the <span class="bold">Export Source Configuration Data Files</span> option on the tool bar. 4. Move the required files to the right hand list, then click Export.</div>
+<p>Your system administrator will have copied these files to another location and configured ODI connections to read from this location. Work with your system administrator to obtain the files. When configuration is complete, your system administrator will need to copy the configured files to the location from which ODI reads these files.</p>
+</div>
+</li>
+<li class="stepexpand"><span>For each GL account number that you want to map, create a new row in the file containing the following fields:</span>
+<div>
+<div class="tblformal" id="GUID-AF6D60F8-FD6B-47D7-B00A-B408B716AD7D__GUID-303601FE-80BC-4384-9D60-6B228854FF32">
+<table class="cellalignment156" summary="Description of fields in file_group_acct_codes_psft.csv">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment138" id="d10381e484">Field Name</th>
+<th class="cellalignment139" id="d10381e486">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment140" id="d10381e490" headers="d10381e484">
+<p>BUSINESS_UNIT</p>
+</td>
+<td class="cellalignment141" headers="d10381e490 d10381e486">
+<p>The ID of the BUSINESS UNIT.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment140" id="d10381e497" headers="d10381e484">
+<p>FROM ACCT</p>
+</td>
+<td class="cellalignment141" headers="d10381e497 d10381e486">
+<p>The lower limit of the natural account range. This is based on the natural account segment of your GL accounts.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment140" id="d10381e504" headers="d10381e484">
+<p>TO ACCT</p>
+</td>
+<td class="cellalignment141" headers="d10381e504 d10381e486">
+<p>The higher limit of the natural account range. This is based on the natural account segment of your GL accounts.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment140" id="d10381e511" headers="d10381e484">
+<p>GROUP_ACCT_NUM</p>
+</td>
+<td class="cellalignment141" headers="d10381e511 d10381e486">
+<p>This field denotes the group account number of the General Ledger account, as specified in a domain in the Group Account domain in <span>Configuration Manager</span>. For example, 'AP' for Accounts Payables, 'CASH' for cash account, 'GEN PAYROLL' for payroll account, and so on.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>For example:</p>
+<pre dir="ltr">
+AUS01, 1110, 1110, CASH
+AUS01, 1210, 1210, AR
+AUS01, 1220, 1220, AR
+</pre>
+<div class="infobox-note" id="GUID-AF6D60F8-FD6B-47D7-B00A-B408B716AD7D__GUID-A7B40C9F-1A5B-45C8-BA83-F961864844D3">
+<p class="notep1">Note:</p>
+<p>You can optionally remove the unused rows in the CSV file.</p>
+</div>
+</div>
+</li>
+<li class="stepexpand"><span>Ensure that the values that you specify in the <code>file_group_acct_codes_psft.csv</code> file are consistent with the values that are specified for domains in <span>Configuration Manager</span>.</span></li>
+<li class="stepexpand"><span>Save and close the CSV file.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-C69A4B92-6886-42E2-B121-ABEB5D75AF12.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-33220339-A5E4-4B68-A392-88011C43C058.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

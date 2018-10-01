@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>About Aggregate Tables for Inventory Balances and Transactions</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="To configure the Inventory Monthly Balance (W_INVENTORY_DAILY_BALANCE_F) and Inventory Lot Monthly Balance (W_INV_LOT_MONTHLY_BAL_F) aggregate tables, you need to consider the aggregation level, the time period to update the aggregation, and the time period to keep records in the Inventory Balance tables." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-A1716457-ECED-4C28-8CA5-881843EB9470.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-24EE0CE9-062C-487B-9BF6-D959EC75AD26.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-545ADB08-3AA0-4A4A-9CB0-1E44F7F8E301"></a> <span id="PAGE" style="display:none;">57/336</span> <!-- End Header -->
+<a id="BIACF24754"></a><a id="BIACF24755"></a><a id="BIACF24756"></a><a id="BIACF24757"></a><a id="IT_339"></a>
+<h1 id="BIAFC-GUID-545ADB08-3AA0-4A4A-9CB0-1E44F7F8E301" class="sect1">About Aggregate Tables for Inventory Balances and Transactions</h1>
+<div>
+<p>To configure the Inventory Monthly Balance (W_INVENTORY_DAILY_BALANCE_F) and Inventory Lot Monthly Balance (W_INV_LOT_MONTHLY_BAL_F) aggregate tables, you need to consider the aggregation level, the time period to update the aggregation, and the time period to keep records in the Inventory Balance tables.</p>
+<p>You need to configure three parameters to configure the Inventory Monthly Balance tables:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>GRAIN</p>
+<p>The GRAIN parameter controls the time span for which the latest balance is kept. This parameter has a preconfigured value of Month. The possible values for the GRAIN parameter are:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>DAY</p>
+</li>
+<li>
+<p>WEEK</p>
+</li>
+<li>
+<p>MONTH</p>
+</li>
+<li>
+<p>QUARTER</p>
+</li>
+<li>
+<p>YEAR</p>
+</li>
+</ul>
+</li>
+<li>
+<p>KEEP_PERIOD</p>
+<p>The KEEP_PERIOD parameter, in conjunction with NUM_OF_PERIOD, controls how many periods worth of data are retained in the Inventory Daily Balance tables. For example, if KEEP_PERIOD is CAL_MONTH and NUM_OF_PERIOD is 3, then only the most recent 3 months of data are retained. This parameter has a preconfigured value of CAL_MONTH. Values for the KEEP_PERIOD parameter include:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>CAL_DAY</p>
+</li>
+<li>
+<p>CAL_WEEK</p>
+</li>
+<li>
+<p>CAL_MONTH</p>
+</li>
+<li>
+<p>CAL_QTR</p>
+</li>
+<li>
+<p>CAL_YEAR</p>
+</li>
+</ul>
+</li>
+<li>
+<p>NUM_OF_PERIOD</p>
+<p>The NUM_OF_PERIOD parameter has a preconfigured value of 3. The value for the NUM_OF_PERIOD parameter is a positive integer, for example, 1, 2, 3, and so on.</p>
+</li>
+</ul>
+<div class="infobox-note" id="GUID-545ADB08-3AA0-4A4A-9CB0-1E44F7F8E301__GUID-B212E19E-509E-4C04-B7C8-04E7896155CF">
+<p class="notep1">Note:</p>
+If you need Inventory Turns data for a period older than three months, you must change the parameter values for KEEP_PERIOD and NUM_OF_PERIOD. For example, if you want data for the last three years, then set KEEP_PERIOD to CAL_YEAR and NUM_OF_PERIOD to 3.</div>
+<div class="section">
+<p class="subhead1">About Configuring the Product Transaction Aggregate Table</p>
+<p>There are two aggregation scenarios to configure the Product Transaction aggregate (W_PRODUCT_XACT_A) table&mdash;the initial ETL run and then the incremental ETL run.</p>
+<p>For your initial ETL run, you need to configure the aggregation level, and the length of history kept in the Product Transaction fact table.</p>
+<p>For your initial ETL run, you need to configure the aggregation grain, using the GRAIN parameter.</p>
+<p>For the incremental ETL run, you need to configure the aggregation level, the update period in aggregation, and the length of history kept in the Product Transaction fact table, using the following parameters:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>GRAIN</p>
+<p>The GRAIN parameter specifies the aggregation level. Valid values are DAY, WEEK, MONTH (preconfigured value), QUARTER, YEAR.</p>
+</li>
+<li>
+<p>REFRESH_PERIOD</p>
+<p>The REFRESH_PERIOD parameter, together with NUM_OF_PERIOD, indicates the number of period of records that will be refresh from the transaction table to the aggregate table. Valid values are DAY, WEEK, MONTH (preconfigured value), QUARTER, YEAR.</p>
+</li>
+<li>
+<p>NUM_OF_PERIOD</p>
+<p>The NUM_OF_PERIOD parameter, together with REFRESH_METHOD, indicates the number of periods of records that will be refreshed from the transaction table to the aggregate table. Valid values are positive integers, for example, 1, 2, 3 (preconfigured value).</p>
+</li>
+</ul>
+<p>Before you run the initial ETL and then the incremental ETL to load the Product Transaction aggregate table, you need to configure the Product Transaction Aggregate Table, as follows.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">To configure the Product Transaction Aggregate Table</p>
+<p>You need to configure three parameters: REFRESH_PERIOD = 'MONTH', GRAIN = 'MONTH', and NUM_OF_PERIOD = 3.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">To configure the Product Transaction aggregate table for the initial ETL run</p>
+<ol>
+<li>
+<p>Retrieve the records in the Product Transaction fact (W_PRODUCT_XACT_F) table, and aggregate the records to the Product Transaction aggregate (W_PRODUCT_XACT_A) table at a certain grain level.</p>
+<p>For example, if GRAIN=MONTH then the records in the W_PRODUCT_XACT_F fact table are retrieved and aggregated to the W_PRODUCT_XACT_A table at a monthly level.</p>
+<p>Running the PLP_ProductTransactionAggregate scenario implements this step.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">To configure the Product Transaction aggregate table for the incremental ETL run</p>
+<ol>
+<li>
+<p>Delete the refreshed records from the Product Transaction aggregate (W_PRODUCT_XACT_A) table for a certain time.</p>
+<p>The REFRESH_PERIOD and the NUM_OF_PERIOD parameters determine the time period for the deletion.</p>
+<p>For example, if REFRESH_PERIOD=MONTH, NUM_OF_PERIOD=1, and the date is May 15, 2005, then all records for April and the current month (May) are deleted in the W_PRODUCT_XACT_A table.</p>
+<p>Running the PLP_ProductTransactionAggregate_Update scenario implements this step.</p>
+</li>
+<li>
+<p>Retrieve the records in the Product Transaction fact (W_PRODUCT_XACT_F) table, and aggregate the records to the W_PRODUCT_XACT_A table at a certain grain level.</p>
+<p>For example, if GRAIN=MONTH then the records in the W_PRODUCT_XACT_F fact table are retrieved and aggregated to the W_PRODUCT_XACT_A table at a monthly level.</p>
+<p>Running the PLP_ProductTransactionAggregate scenario implements this step.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-A1716457-ECED-4C28-8CA5-881843EB9470.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-24EE0CE9-062C-487B-9BF6-D959EC75AD26.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

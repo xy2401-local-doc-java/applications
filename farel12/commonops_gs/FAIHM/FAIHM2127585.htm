@@ -1,0 +1,1420 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Data Preparation (Chapter 5) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:16 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM Data Loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM2126423.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM2129860.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content=""><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">8/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM2127585" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">5</span>Data Preparation
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2054053">Preparing the Source Data: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2035215">General Data Considerations for HCM Data Loader: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2034878">Loading Images, Attachments, and Large Strings: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2035457">Supplying Source-Key Values: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2279985">Updating Source Keys: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2035492">Supplying User-Key Values: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2127548">Supplying Oracle Fusion Surrogate IDs: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2127525">Supplying Oracle Fusion GUIDs: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2036180">Managing Reserved Characters: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1372957">Loading and Maintaining Translated Objects: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2055441">Including Source-System References in Data Files: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2041456">Deleting Data: Explained</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM2054053">
+                  <h2>Preparing the Source Data: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic describes some ways in which you
+                     can prepare your data for loading to Oracle HCM Cloud and ensure that
+                     it loads successfully.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2054049">
+                     <h3 class="topictitle">Reviewing and Cleansing the Source Data</h3>
+                     
+                     <p>Identify the business objects that you're planning
+                        to upload to Oracle HCM Cloud and their source systems. Review this
+                        source data, and verify that it's both accurate and current. Correct
+                        any problems before you attempt to extract it. For example:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Ensure that a manager is identified
+                              for every worker and that the information is accurate.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>For jobs and positions, ensure that correct job codes
+                              and titles exist in the source systems.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>For worker history, establish the
+                              accuracy of any historical data. Understand whether all historical
+                              data must be uploaded or just key events, such as hire, promotion,
+                              and termination.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Preparing the source data in this way minimizes the
+                        problems that can occur when you upload data to Oracle HCM Cloud.
+                        It also makes it less likely that you load inaccurate data to the
+                        new environment.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2054050">
+                     <h3 class="topictitle">Extracting Data from the Source System</h3>
+                     
+                     <p>You must define mappings between your source data
+                        and the Oracle HCM Cloud business-object model by comparing source
+                        and target attributes. You can review the structure of business objects
+                        in Oracle HCM Cloud by:
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Selecting <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Data Exchange</span> - <span class="uicontrol">Initiate Data Load</span></span> to open the Initiate Data Load page.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Selecting the name of a business
+                              object in the <span class="uicontrol">Business Object</span> column of the Search Results table.
+                           </p>
+                           <p>A Business
+                              Object Details page for the selected object opens. It shows:
+                           </p>
+                           
+                           <ol>
+                              
+                              <li>
+                                 <p>The component hierarchy of the
+                                    object
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>For a selected component, some
+                                    general details, such as whether it's date effective, its attributes,
+                                    and whether you can load flexfield data.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>You must also define the transformation logic and
+                        build extraction routines. You can use tools that are native to the
+                        source system, such as PL/SQL in Oracle E-Business Suite or SQR in
+                        Oracle PeopleSoft. Alternatively, you can use an Extract, Transform,
+                        and Load tool, such as Oracle Data Integrator or PowerCenter Informatica. 
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2054051">
+                     <h3 class="topictitle">Validating the Source Data Before Upload</h3>
+                     
+                     <p>HCM Data Loader validates your data during both the
+                        import and load phases of data loading. The Data File Validator tool,
+                        available from My Oracle Support, can perform most of the data-formatting
+                        validations before you attempt to load the data. You run this utility
+                        in your source environment to test your generated .dat files. The
+                        utility generates a list of validation errors in HTML format. You
+                        can correct the errors in the .dat files before you load them.
+                     </p>
+                     
+                     <p>You can download the Data File Validator tool from
+                        the My Oracle Support document, Data File Validator Tool for HCM Data
+                        Loader (document ID 2022617.1).
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://support.oracle.com/epmos/faces/DocumentDisplay?parent=DOCUMENT&amp;sourceId=1504483.1&amp;id=2022617.1">Data File Validator Tool for HCM Data Loader
+                              (2022617.1)</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2035215">
+                  <h2>General Data Considerations for HCM Data Loader: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic describes some general aspects
+                     of data preparation. Follow these rules to ensure successful data
+                     upload.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2035209">
+                     <h3 class="topictitle">Retaining Current Values</h3>
+                     
+                     <p>When you update existing data in Oracle HCM Cloud,
+                        you supply:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>A unique identifier for the record
+                              being updated
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The attributes that have changed</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Any attributes that you omit retain their current
+                        values. For performance reasons, you're recommended not to include
+                        attributes that haven't changed.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        For date-effective records, all attributes that you
+                        supply are updated for the specified date range.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2035210">
+                     <h3 class="topictitle">Null Attribute Values</h3>
+                     
+                     <p>To set an attribute value explicitly to null, you
+                        must supply the #NULL token as the attribute value. You can't simply
+                        leave the attribute blank.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2035211">
+                     <h3 class="topictitle">Lookup-Validated Attributes</h3>
+                     
+                     <p>For nonflexfield attributes that are defined in Oracle
+                        HCM Cloud as lookup types, you can specify either the lookup code
+                        or its meaning. For example, you can specify the sex of a person using
+                        either the lookup codes or the lookup meanings in this table:
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Lookup Code
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Lookup Meaning
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>M</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Male</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>F</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Female</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>You're recommended to use the lookup code, as the
+                        lookup meaning can be translated. The language of the lookup meaning
+                        must match the language of the user who is uploading the data.
+                     </p>
+                     
+                     <p>Different rules apply to flexfield attributes that
+                        are defined as lookup types.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2035212">
+                     <h3 class="topictitle">Numeric Values</h3>
+                     
+                     <p>For numeric values, only the decimal separator is
+                        supported. Don't include currency symbols, scientific notation, or
+                        thousands separators. To set an existing numeric value to null, supply
+                        the #NULL token as the attribute value.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2035213">
+                     <h3 class="topictitle">Date and Time Attributes</h3>
+                     
+                     <p>The expected formats for date and time values are:</p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Date or Time
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Format
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Date</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>YYYY/MM/DD</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>YYYY/MM/DD HH24:MI:SS</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>For example: 2016/11/05 14:20:00</p>
+                     
+                     <p>To set an existing date or time value to null, supply
+                        the #NULL token as the attribute value.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM2137992.htm#FAIHM1964173">Loading Flexfield Data: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2034878">
+                  <h2>Loading Images, Attachments, and Large Strings: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can load both Character Large Objects
+                     (CLOB) and Binary Large Objects (BLOB) using HCM Data Loader. However,
+                     the way in which you provide data for these objects is unique to these
+                     attributes. Instead of supplying the data directly in the data (.dat)
+                     file, you supply it in a separate file. You supply the name of this
+                     file as the value of the relevant attribute in the data file.
+                  </p>
+                  
+                  
+                  
+                  <p>This example shows a data file for the document attachment
+                     component. The <span class="uicontrol">File</span> attribute
+                     references a text attachment file in each MERGE line.
+                  </p>
+                  <pre><code>METADATA|DocumentAttachment|DocumentType|File|PersonNumber|...
+MERGE|DocumentAttachment|Drivers License|file01.txt|23901|...
+MERGE|DocumentAttachment|Drivers License|file02.txt|64235|... <br></code></pre>
+                  <p>This approach is used because data for these data
+                     types can be very large. Also, data to be loaded directly rather than
+                     by attachment may need new-line characters, making it complex to include
+                     in the business-object data file.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2034877">
+                     <h3 class="topictitle">How to Supply CLOB and BLOB Files</h3>
+                     
+                     <p>To load data into a CLOB attribute, you supply the
+                        data in a separate file. You place the file in a <span class="uicontrol">ClobFiles</span> folder in the same .zip file as
+                        the business-object data file. Similarly, to load data or upload an
+                        attachment to a BLOB attribute, you supply the data or file to attach
+                        in a <span class="uicontrol">BlobFiles</span> folder. The data
+                        type of the attribute that's used to load a large object or attachment
+                        determines which folder to use.
+                     </p>
+                     
+                     
+                     <p>The business-object documentation specifies the data
+                        types of all attributes. For example, the <span class="uicontrol">File</span> attribute of the document attachment component has
+                        the BLOB data type. Therefore, you place referenced files in the <span class="uicontrol">BlobFiles</span> folder, as shown in this figure.
+                     </p>
+                     <img src="img/hcm_hrc_hdl_blob_clob_01_20056015.png" alt="The .zip file for Documents of Record contains&#xA;a BlobFiles folder, which contains one or more text files." class="fusappimg">
+                     
+                     
+                     <p>File names in the <span class="uicontrol">ClobFiles</span> and <span class="uicontrol">BlobFiles</span> folders can include
+                        UTF-8 single-byte characters. For example, file names can include
+                        the alphanumeric characters a through z, A through Z, and 0 through
+                        9, underscore (_), hyphen (-) and parentheses ( ). Most file-name
+                        extensions are supported, though CLOB data is usually supplied in
+                        text (.txt) files.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2035457">
+                  <h2>Supplying Source-Key Values: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>The source key is made up of two attributes,
+                     SourceSystemOwner and SourceSystemId. If you use a source key to identify
+                     a record being merged, then you can also use source keys to identify
+                     integration-enabled foreign objects. For example, you can identify
+                     the parent record of a child component using a source key. You can't
+                     use source keys for foreign-object references if you aren't also using
+                     a source key for the local record.
+                  </p>
+                  
+                  <p>This topic describes how to supply source keys for
+                     both local records and foreign-object references. It also describes
+                     how default source keys are constructed.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2035452">
+                     <h3 class="topictitle">Defining Source-System Owner Values</h3>
+                     
+                     <p>The SourceSystemOwner attribute is common to all
+                        source keys supplied in a record. Therefore, all foreign objects that
+                        you identify using source keys must have the same SourceSystemOwner
+                        value as the record being merged. You must define the SourceSystemOwner
+                        value by updating the HRC_SOURCE_SYSTEM_OWNER lookup type before you use source
+                        keys.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2035453">
+                     <h3 class="topictitle">Specifying Source Keys for Local Records</h3>
+                     
+                     <p>To identify a local record uniquely using a source
+                        key, you supply values for both the SourceSystemId and SourceSystemOwner
+                        source-key attributes. This example shows how to identify a job object
+                        using a source key.
+                     </p>
+                     <pre><code>METADATA|Job|SourceSystemId|SourceSystemOwner|JobCode|JobName|SetCode|EffectiveStartDate|EffectiveEndDate
+MERGE|Job|12349|EBS-UK|SE|Software Engineer|COMMON|2010/01/01|4712/12/31<br></code></pre>
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM2035454">
+                     <h3 class="topictitle">Specifying Source Keys for Foreign-Object References</h3>
+                     
+                     <p>To use a source key for a foreign-object reference,
+                        you append the hint (SourceSystemId) to the surrogate ID attribute
+                        for the foreign object. This example shows how to identify a job object
+                        in an assignment record using a source key. JobId is the surrogate ID attribute for
+                        the job object, to which you append the hint (SourceSystemId) in the
+                        METADATA line. You must have created the job object using HCM Data
+                        Loader with the supplied source key.
+                     </p>
+                     <pre><code>METADATA|Assignment|SourceSystemId|SourceSystemOwner|JobId(SourceSystemId)|EffectiveStartDate|EffectiveEndDate
+MERGE|Assignment|234234|EBS-UK|12349|2013/01/01|4712/12/31<br></code></pre>
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        You can use source keys for foreign objects only
+                        if those objects are integration-enabled. The integrated business-object
+                        documentation identifies which objects are integration enabled.
+                        
+                     </div>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2035455">
+                     <h3 class="topictitle">Default Source Keys</h3>
+                     
+                     <p>If you specify no source key when you create a record
+                        using HCM Data Loader, then a default source key is generated. The
+                        default SourceSystemOwner value is FUSION and the SourceSystemId is
+                        the surrogate ID. You can use source keys to identify records with
+                        default source keys. You can also update existing source keys, including
+                        default source keys, using the source key object. However, no process
+                        exists for extracting source-key information.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM1672963.htm#FAIHM2012584">Source Keys: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM2126423.htm#FAIHM2030634">Defining the Source-System Owner: Procedure</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2279985">
+                  <h2>Updating Source Keys: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>When you load data using HCM Data Loader,
+                     you can provide a source key. The source key is a value, usually generated
+                     from a legacy environment, that identifies the record uniquely in
+                     that environment. You can use the source key to refer to the object
+                     both when maintaining it and when referring to it from another object.
+                     If you specify no source key, then a default source key is generated.
+                     You can update both default and locally defined source keys for integration-enabled
+                     objects. This topic describes how to update source keys.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2279984">
+                     <h3 class="topictitle">Loading Updates to Source Keys</h3>
+                     
+                     <p>To update the source key associated with any record,
+                        you load a SourceKey.dat file. In the file, you supply both a reference
+                        to the record to update and the new source-key value.
+                     </p>
+                     
+                     
+                     <p>This example SourceKey.dat file updates the source
+                        key for a person address that's identified by its existing source
+                        key. The <span class="uicontrol">BusinessObject</span> and <span class="uicontrol">Component</span> attributes are used to identify
+                        the type of record being updated. For both attribute values, you supply
+                        the relevant file discriminator.
+                     </p>
+                     <pre><code>METADATA|SourceKey|BusinessObject|Component|OldSourceSystemId|OldSourceSystemOwner|NewSourceSystemId|NewSourceSystemOwner
+MERGE|SourceKey|Worker|PersonAddress|2342|FUSION|1422-HOME|VISION<br></code></pre>
+                     
+                     </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2035492">
+                  <h2>Supplying User-Key Values: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>User keys are specific to the business object
+                     component that you're loading. The integrated business-object documentation
+                     identifies the user-key attributes available for all business-object
+                     components and foreign-object references.
+                  </p>
+                  
+                  <p>The user-key attributes are required when you create
+                     a record. They're also required when you update it, unless you supply
+                     a different key type to identify the record uniquely. This topic describes
+                     how to use user keys to identify local records and refer to foreign
+                     objects. It also describes how changes to user-key values affect their
+                     usefulness as keys.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2035488">
+                     <h3 class="topictitle">Specifying User Keys for Local Records</h3>
+                     
+                     <p>A user key can be made up of multiple attributes.
+                        You must supply them all if you're not using another key type, such
+                        as a source key, to identify the record. This example shows how to
+                        identify a job object by its user key, which is made up of the JobCode
+                        and SetCode attributes.
+                     </p>
+                     <pre><code>METADATA|Job|JobCode|JobName|SetCode|EffectiveStartDate|EffectiveEndDate
+MERGE|Job|SE|Software Engineer|COMMON|2010/01/01|4712/12/31<br></code></pre>
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM2035489">
+                     <h3 class="topictitle">Specifying User Keys for Foreign-Object References</h3>
+                     
+                     <p>In this example, an assignment object is uniquely identified
+                        by its source key. However, a user key is used for the foreign-object
+                        reference to the associated job object.
+                     </p>
+                     <pre><code>METADATA|Assignment|SourceSystemId|SourceSystemOwner|JobCode|SetCode|EffectiveStartDate|EffectiveEndDate
+MERGE|Assignment|234234|EBS-UK|SE|COMMON|2013/01/01|4712/12/31<br></code></pre>
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM2035490">
+                     <h3 class="topictitle">Managing Changed User-Key Values</h3>
+                     
+                     <p>The values of some user keys aren't fixed. For example,
+                        you can change the name of an organization or location. As user keys
+                        can change, using them for historical references is difficult. If
+                        you're loading date-effective history for a business-object component
+                        where the user key has changed, then you must also supply a source
+                        key. This approach enables HCM Data Loader to identify related date-effective
+                        records correctly to form the object that you're loading.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM1672963.htm#FAIHM2012560">User Keys: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2127548">
+                  <h2>Supplying Oracle Fusion Surrogate IDs: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>An Oracle Fusion surrogate ID is assigned
+                     automatically to a new record when you save it to the database. Surrogate
+                     IDs are specific to the business-object component that you're loading.
+                     The integrated business-object documentation identifies the surrogate
+                     ID attribute for all business-object components and foreign-object
+                     references. This topic describes how to use surrogate IDs to identify
+                     local records and provide foreign-object references.
+                  </p>
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     Oracle HCM Cloud customers are unlikely to have access
+                     to the Oracle Fusion surrogate ID.
+                     
+                  </div>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2127535"><h3 class="OracleScenario">Specifying Surrogate IDs for Local Records</h3>
+                     <p>This example shows how to use a surrogate ID to identify
+                        a job component. For
+                        this component, the <span class="uicontrol">JobId</span> attribute
+                        is its surrogate ID.
+                     </p><pre><code>METADATA|Job|JobId|JobName|EffectiveStartDate|EffectiveEndDate
+MERGE|Job|13413|Software Engineer - Java|2013/01/01|4712/12/31<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2127536"><h3 class="OracleScenario">Specifying Surrogate IDs for Foreign-Object References</h3>
+                     <p>This example shows an assignment component that's uniquely
+                        identified using a source key. The record includes a foreign-object
+                        reference to the associated job object, which is identified by its
+                        surrogate ID, JobId.
+                     </p><pre><code>METADATA|Assignment|SourceSystemId|SourceSystemOwner|JobId|EffectiveStartDate|EffectiveEndDate
+MERGE|Assignment|234234|EBS-UK|13413|2013/01/01|4712/12/31<br></code></pre></div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM1672963.htm#FAIHM2012534">Oracle Fusion GUIDs and Surrogate IDs: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2127525">
+                  <h2>Supplying Oracle Fusion GUIDs: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>The Oracle Fusion GUID (Globally Unique Identifier)
+                     is a hexadecimal value that's assigned automatically to a record when
+                     it's saved to the database. This topic shows how to use GUIDs to identify
+                     local records and provide foreign-object references.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2127513"><h3 class="OracleScenario">Specifying GUIDs for Local Records</h3>
+                     <p>When you supply a GUID value to identify the record
+                        being merged or deleted, you use the attribute name GUID, regardless
+                        of the business-object component. This example shows how to specify
+                        a GUID value to identify a job component.
+                     </p><pre><code>METADATA|Job|GUID|JobName|EffectiveStartDate|EffectiveEndDate
+MERGE|Job|2342UJFHI2323|Software Engineer - Java|2013/01/01|4712/12/31<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2127514"><h3 class="OracleScenario">Specifying GUIDs for Foreign-Object References</h3>
+                     <p>To use a GUID for a foreign-object reference, you
+                        append the hint (GUID) to the surrogate ID attribute for the object
+                        to which you're referring. This example shows an assignment component that's identified
+                        using source keys. The record includes a foreign-object reference
+                        to the associated job object, which is identified by its GUID. JobId
+                        is the surrogate ID attribute for the job object.
+                     </p><pre><code>METADATA|Assignment|SourceSystemId|SourceSystemOwner|JobId(GUID)|EffectiveStartDate|EffectiveEndDate
+MERGE|Assignment|234234|EBS-UK|2342UJHFI2323|2013/01/01|4712/12/31<br></code></pre><p>You can use GUIDs for foreign objects only if they're
+                        integration enabled. The integrated business-object documentation
+                        identifies which foreign objects are integration enabled.
+                     </p>
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM1672963.htm#FAIHM2012534">Oracle Fusion GUIDs and Surrogate IDs: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2036180">
+                  <h2>Managing Reserved Characters: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>A few characters are reserved in the context
+                     of an HCM Data Loader data file. That is, they have a specific meaning
+                     by default, and you can't include them in attribute values unless
+                     you identify them explicitly as data. This topic explains how to use
+                     the reserved characters in data that you're uploading. It also explains
+                     how to override the default reserved characters.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2036178">
+                     <h3 class="topictitle">Using Reserved Characters in Attribute Values</h3>
+                     
+                     <p>By default, these characters are reserved: </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Delimiter (vertical bar |)</p>
+                        </li>
+                        
+                        <li>
+                           <p>Newline character (n)</p>
+                        </li>
+                        
+                        <li>
+                           <p>Escape (backslash \)</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>To include the newline (n) and vertical bar (|) characters
+                        in attribute values, you precede them immediately with the escape
+                        character (backslash \). For example:
+                     </p>
+                     <pre><code>METADATA|Address|AddressLine1
+MERGE|Address|The Stables\|Main Allan<br></code></pre>
+                     <p>This entry enables the vertical bar to appear in
+                        the attribute value for address line 1:
+                     </p>
+                     
+                     <p>The Stables|Main Allan</p>
+                     
+                     <p>To include the newline character in a value, you
+                        specify \n. For example: 
+                     </p>
+                     <pre><code>METADATA|Address|AddressLine1
+MERGE|Address|The Stables\nMain Allan<br></code></pre>
+                     <p>This entry results in the following value for address
+                        line 1:
+                     </p>
+                     
+                     <p>The Stables</p>
+                     
+                     <p>Main Allan</p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2036179">
+                     <h3 class="topictitle">Overriding the Reserved Characters</h3>
+                     
+                     <p>You can override the reserved characters for a file
+                        using the SET file-line instruction, which must appear before any
+                        METADATA lines in the file. The SET commands for overriding reserved
+                        characters have this format:
+                     </p>
+                     
+                     <pre><code>SET FILE_ESCAPE &lt;new_value&gt;
+SET FILE_DELIMITER &lt;new_value&gt;
+SET FILE_NEW_LINE &lt;new_value&gt;<br></code></pre>
+                     <p>The new value can be up to 10 characters. For example,
+                        you could set the newline character to newline and the file delimiter
+                        to comma (,) using the following SET commands:
+                     </p>
+                     <pre><code>SET FILE_DELIMITER ,
+SET FILE_NEW_LINE newline<br></code></pre>
+                     <p>In this case, METADATA and MERGE lines could appear
+                        as follows: 
+                     </p>
+                     <pre><code>METADATA,Address,AddressLine1
+MERGE,Address,TheSteading\newlineKier Allan<br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM2121438.htm#FAIHM2028326">The SET and COMMENT Instructions: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1372957">
+                  <h2>Loading and Maintaining Translated Objects: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>In environments where multiple languages
+                     are enabled, you can use HCM Data Loader to upload translated objects.
+                     You specify the character set of the data file by naming any Java-supported
+                     character set on the <span class="uicontrol">File Character Set</span> configuration parameter. The default character set is UTF-8.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM1372953">
+                     <h3 class="topictitle">Loading Translated Objects</h3>
+                     
+                     <p>Loading translated objects is a two-stage process:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>You create the object by loading
+                              the base-language version. At this stage, translation records are
+                              created for all enabled languages, but they hold base-language versions
+                              of any translatable values. For example, if US English is your base
+                              language, then translation records hold US English versions of translatable
+                              values.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You load the translated values
+                              as corrections to the base-language object. To perform this step,
+                              you use data-file templates that are provided specifically for translation.
+                              One translation data-file template is provided for each business-object
+                              component that includes translatable values.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                     
+                     <p>For example, you may create the Sales Manager job
+                        in an environment where US English is the base language. If French,
+                        German, and Spanish are also enabled, then the object is created as
+                        follows:
+                     </p>
+                     
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This table with three columns&#xA;and four data rows shows, from left to right, the language, source-language,&#xA;and job name.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Language
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Source Language
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Job Name
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>US English</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>US English</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Sales Manager</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>French</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>US English</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Sales Manager</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>German</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>US English</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Sales Manager</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Spanish</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>US English</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Sales Manager</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                     
+                     <p>Once this object exists, you can load a single translation
+                        data file (JobTranslation.dat) to correct the French, German, and
+                        Spanish versions of the job name. Alternatively, you can load a translation
+                        file for each language if you prefer. You can deliver translation
+                        files either in the same .zip file as the original object or separately.
+                        However, you can't deliver them before the base-language object exists.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1372954">
+                     <h3 class="topictitle">Updating Translated Data</h3>
+                     
+                     <p>To update existing translated data, you can upload
+                        just the relevant translation file, provided that the object isn't
+                        date effective.
+                     </p>
+                     
+                     
+                     <p>You must also update the base-language object if:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The object is date effective.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>The object currently has no date-effective
+                              record with the same effective start date as the new translation value.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>This requirement exists to ensure that the effective
+                        dates of the base-language and translation objects remain the same.
+                     </p>
+                     
+                     <p>You can't delete translation objects in isolation.
+                        Translation objects are deleted automatically when you delete the
+                        associated object. For example, when you delete a job family object
+                        any associated translation objects are deleted automatically.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1668626">
+                     <h3 class="topictitle">Translation-File Discriminators</h3>
+                     
+                     <p>Unique file discriminators exist for the translation
+                        files and are identified in relevant files. For example, the file
+                        discriminator for the file JobTranslation.dat is JobTranslation.
+                     </p>
+                     
+                     
+                     <p>This example shows a Job.dat file followed by the
+                        associated JobTranslation.dat file.
+                     </p>
+                     <pre><code>METADATA|Job|SourceSystemOwner|SourceSystemId|EffectiveStartDate|EffectiveEndDate|JobCode|Name|ActiveStatus
+MERGE|Job|EBS-UK|JB2ACC44|2010/01/01|2014/04/04|ACADM|Accounts Administrator|A
+MERGE|Job|EBS-UK|JB2ACC44|2014/04/05|4712/12/31|ACADM|Accounts Clerk|A<br></code></pre>
+                     <pre><code>METADATA|JobTranslation|SourceSystemOwner|SourceSystemId|EffectiveStartDate|EffectiveEndDate|Language|Name
+MERGE|JobTranslation|EBS-UK|JB2ACC44|2010/01/01|2014/04/04|ES|Administrador de Cuentas
+MERGE|JobTranslation|EBS-UK|JB2ACC44|2014/04/05|4712/12/31|ES|Cuentas Clerk<br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM2126423.htm#FAIHM996991">HCM Data Loader Configuration Parameters</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2055441">
+                  <h2>Including Source-System References in Data Files: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can include source-system references
+                     in each data line in a file. They enable you to record the database-table
+                     name, column names, and attribute values from the source system. You
+                     can see these values on the Object Errors page for an object that
+                     fails to load. Therefore, you can easily identify the data source.
+                     Source-system references are optional. This topic describes how to
+                     construct source-system references, which are made up of a name and
+                     a value.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2055439">
+                     <h3 class="topictitle">Source-System Names</h3>
+                     
+                     <p>You specify source-system database-table and column
+                        names in the relevant METADATA line. To specify the source-system
+                        database-table name, you add the following entry to the METADATA line:
+                     </p>
+                     
+                     <pre><code>SourceRefTableName=&lt;table name&gt;<br></code></pre>
+                     <p>You can specify up to 10 source-system column names
+                        in the same METADATA line using the SourceRef001 to SourceRef010 tags.
+                        For example:
+                     </p>
+                     <pre><code>METADATA|Job|SourceRefTableName=PER_JOBS|SourceRef001=JOB_ID|SourceRef002=EFFECTIVE_START_DATE|SourceRef003=EFFECTIVE_END_DATE<br></code></pre>
+                     <p>Source-system references can appear anywhere in the
+                        METADATA line after the instruction and discriminator values.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2055440">
+                     <h3 class="topictitle">Source-System Values</h3>
+                     
+                     <p>Supply the source-system values on each data line,
+                        ensuring that they appear in the order specified on the METADATA line.
+                        In data lines, you must leave the source-system database-table name
+                        blank. This value appears in the METADATA definition only. For example:
+                     </p>
+                     
+                     <pre><code>METADATA|Job|SourceRefTableName=PER_JOBS|SourceRef001=JOB_ID|SourceRef002=EFFECTIVE_START_DATE|SourceRef003=EFFECTIVE_END_DATE
+MERGE|Job||135|2010/01/01|4712/12/31
+MERGE|Job||136|2010/01/01|4712/12/31<br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM2139760.htm#FAIHM2055307">Reviewing and Correcting Errors: Procedure</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2041456">
+                  <h2>Deleting Data: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can delete many objects using HCM Data
+                     Loader, regardless of whether they were loaded using HCM Data Loader.
+                     This topic explains how to delete an object or its components and
+                     identifies any restrictions.
+                  </p>
+                  
+                  
+                  
+                  <div class="infobox-tip"><span class="notep1">Tip: </span>
+                     As you can't recover a deleted object, try to correct
+                     your data instead of deleting and recreating it.
+                     
+                  </div>
+                  
+                  
+                  <div class="sect2" id="FAIHM2041453">
+                     <h3 class="topictitle">What You Can and Can't Delete</h3>
+                     
+                     <p>You can delete:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Most complete business objects,
+                              except worker.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Most individual business-object
+                              components.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Some child components of the worker
+                              object. For example, you can delete the person e-mail component of
+                              a worker object.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>When you delete a parent object, its child objects
+                        and any translation objects are also deleted. For example, to delete
+                        a grade and its child business-object components, you create a DELETE
+                        instruction for the Grade discriminator. To delete only a grade rate
+                        value child component, you create a DELETE instruction for the GradeRateValue
+                        discriminator.
+                     </p>
+                     
+                     <p>You can't delete:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Individual date-effective records</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Individual translation objects</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Worker objects</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For detailed information about deletion support,
+                        see Oracle HCM Data Loader: Business Object Documentation (2020600.1)
+                        on My Oracle Support at https://support.oracle.com.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Before you delete an object, ensure that other business
+                        objects don't refer to it.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2041454">
+                     <h3 class="topictitle">DELETE Instructions</h3>
+                     
+                     <p>To delete an object, include the DELETE instruction
+                        in the relevant data file. For example, you could delete a job family
+                        object by including these lines in the JobFamily.dat file:
+                     </p>
+                     
+                     <pre><code>METADATA|JobFamily|EffectiveStartDate|EffectiveEndDate|JobFamilyName
+DELETE|JobFamily|2012/10/01|4712/12/31|Sales01<br></code></pre>
+                     <p>These rules apply:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>You can't include DELETE instructions
+                              in translation data files.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You must not supply a DELETE instruction
+                              for an object that has a MERGE instruction in the same file. HCM Data
+                              Loader doesn't know which instruction to process first.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2041455">
+                     <h3 class="topictitle">Deleting Date-Effective Objects</h3>
+                     
+                     <p>To delete a date-effective object identified by user
+                        keys, you must supply both the effective start and effective end dates.
+                        If the object is identified using any of the other key types, then
+                        the effective start and end dates are optional.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="http://support.oracle.com/epmos/faces/DocumentDisplay?id=2020600.1">HCM Data Loader: Business Object Documentation
+                              (2020600.1)</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

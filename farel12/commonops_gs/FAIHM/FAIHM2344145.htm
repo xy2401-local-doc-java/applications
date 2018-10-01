@@ -1,0 +1,1033 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Loading Worker-Related Objects (Chapter 10) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:16 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM Data Loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM2197527.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM2356686.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="You use absence cases to group related absences, typically those having the same cause. For example, a worker may take two
+      periods of sickness absence after sustaining an injury at work. In this case, you can associate the two absences with the
+      same absence case for ease of management. This topic describes how to load Absence Case objects for a worker using HCM Data
+      Loader. Use the AbsenceCase.dat file Yes. Both the checklist template and the worker to whom the checklist is allocated must
+      exist in the target environment."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">13/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM2344145" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">10</span>Loading Worker-Related Objects
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2370697">Loading Absence Cases: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2290403">Loading Areas of Responsibility: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2632531">Loading Calculation Cards: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2370368">Loading Document Delivery Preferences: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2363407">Loading Document Records: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2232843">Loading User-Update Requests: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2233680">Loading User-Update Requests: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2345504">FAQs for Loading Worker-Related Objects</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM2370697">
+                  <h2>Loading Absence Cases: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You use absence cases to group related absences,
+                     typically those having the same cause. For example, a worker may take
+                     two periods of sickness absence after sustaining an injury at work.
+                     In this case, you can associate the two absences with the same absence
+                     case for ease of management. This topic describes how to load Absence
+                     Case objects for a worker using HCM Data Loader. Use the AbsenceCase.dat
+                     file
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2370696">
+                     <h3 class="topictitle">Absence Categories</h3>
+                     
+                     <p>If you associate an absence case with an absence category, then all absences in the case must have the same category. If you
+                        specify no category for the absence case, then you can associate any
+                        type of absence with the absence case. You define absence categories
+                        using the Manage Absence Categories task in the Absence Administration
+                        work area.
+                     </p>
+                     
+                  </div>
+                  <div class="sect2" id="FAIHM2370715">
+                     <h3 class="topictitle">Loading Absence Cases</h3>
+                     
+                     <p>These records must exist in Oracle HCM Cloud before
+                        you can create an absence case that refers to them: 
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Absence category, if you're using
+                              categories
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Worker and work relationship</p>
+                        </li>
+                        
+                        <li>
+                           <p>Worker assignment, if absences are specific
+                              to the assignment
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Absence records</p>
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  <div class="sect2" id="FAIHM2370716">
+                     <h3 class="topictitle">Deleting Absence Cases</h3>
+                     
+                     <p>You can delete Absence Case objects using HCM Data
+                        Loader. To identify the record to be deleted, supply the <span class="uicontrol">AbsenceCaseCode</span> attribute.
+                     </p>
+                     
+                  </div>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2290403">
+                  <h2>Loading Areas of Responsibility: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Areas of responsibility are responsibilities
+                     that a worker has as part of his or her job. Such responsibilities
+                     have a defined scope, such as a country or department. For example,
+                     a worker may be:
+                  </p>
+                  
+                  
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>The Human Resources Representative
+                           for a group of organizations
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>The Benefits Representative for
+                           workers with a specified job
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>The Union Representative for workers
+                           in Germany
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>Areas of responsibility are a recommended way of
+                     securing access to person records. This topic describes how to load
+                     areas of responsibility for a person using HCM Data Loader. Use the AreasOfResponsibility.dat file.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2290422">
+                     <h3 class="topictitle">Responsibility Type</h3>
+                     
+                     <p>Responsibility types must exist in the target environment
+                        before you can load areas of responsibility. These five responsibility
+                        types are available by default, but you can add your own to suit business
+                        needs:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Benefits Representative </p>
+                        </li>
+                        
+                        <li>
+                           <p>Human Resources Representative</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Payroll Representative</p>
+                        </li>
+                        
+                        <li>
+                           <p>Recruiting</p>
+                        </li>
+                        
+                        <li>
+                           <p>Union Representative</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>The responsibility type is validated against the lookup type PER_RESPONSIBILITY_TYPES.</p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2290423">
+                     <h3 class="topictitle">Responsibility Name</h3>
+                     
+                     <p>The responsibility name must be unique for the combination
+                        of person and responsibility type.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2290424">
+                     <h3 class="topictitle">Scope of Responsibility</h3>
+                     
+                     <p>Various attributes available under scope of responsibility,
+                        such as business unit, legal employer, department, and location, must exist before you can load areas
+                        of responsibility. For example, a location must exist before you identify
+                        it as the scope of an area of responsibility.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2290425">
+                     <h3 class="topictitle">Deleting Areas of Responsibility</h3>
+                     
+                     <p>You can delete areas of responsibility using HCM
+                        Data Loader. However, ensure that deleting an area of responsibility
+                        doesn't have unintended consequences. For example, a worker's secured
+                        access to person records may be lost if you delete the area of responsibility
+                        on which it's based.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=997CFD868ECA1C51E040D30A6881626E">Areas of Responsibility: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=3646232858D30172E05362C3F00A3903">Securing Person Records: Points to Consider</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2632531">
+                  <h2>Loading Calculation Cards: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Calculation cards capture values required
+                     for payroll calculation of some earnings and deductions, such as absence
+                     payments and involuntary deductions. Various types of calculation cards exist. For example, UK calculation cards include those for statutory
+                     deductions, automatic enrollment in pensions, court orders and student
+                     loans, and benefits and pensions. Most legislations support the Calculation
+                     Card object. However, the types of calculation cards that are supported
+                     vary by legislation. This topic describes some general considerations
+                     that apply to all calculation cards when you load them using HCM Data
+                     Loader. For legislation-specific information, see All White Papers
+                     for Oracle Fusion Applications HCM (Document ID 1504483.1) on My Oracle
+                     Support at https://support.oracle.com.
+                  </p>
+                  
+                  
+                  
+                  <p>Each calculation card has one or more components,
+                     and each component may have one or more sets of component details.
+                     For example, in the UK court orders and student loans calculation
+                     card, each component corresponds to a different type of court order.
+                     You enter information about that court order in the component details. 
+                  </p>
+                  
+                  <p>Calculation cards are used mainly at the level of
+                     the payroll
+                     relationship. Depending on the legislation, they can also be
+                     used at the level of the payroll statutory unit or tax reporting
+                     unit. However, HCM Data Loader supports calculation cards only
+                     at the payroll-relationship level.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2632573">
+                     <h3 class="topictitle">Key Support</h3>
+                     
+                     <p>Calculation Card objects are integration-enabled.
+                        They support all key types that HCM Data Loader supports.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2632574">
+                     <h3 class="topictitle">Using the Reconcile Integration Keys Process</h3>
+                     
+                     <p>Source keys are supported for integration-enabled
+                        objects only. Any business-object occurrences that were created before
+                        the Calculation Card business object was enabled for integration may
+                        not have <span class="uicontrol">SourceSystemOwner</span> and <span class="uicontrol">SourceSystemId</span> values. To supply source
+                        keys for these objects, run the Reconcile Integration Keys process
+                        for individual components of the Calculation Card business object.
+                        This process allocates default source keys to any instance of a component
+                        without a source key. 
+                     </p>
+                     
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        If required, you can update these default source
+                        keys later using the Source Key object.
+                        
+                     </div>
+                     
+                     <p>Run the Reconcile Integration Keys process once only
+                        for each component of the Calculation Card object. This table lists
+                        the components with their integration object names. You select the
+                        integration object name when running the Reconcile Integration Keys
+                        process.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Calculation Card Component
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Integration Object Name
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Calculation Card</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>CalculationCard</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Card Association</p>
+                                 
+                                 <p>Component Association</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>CalculationCardAssociations</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Card Association Detail</p>
+                                 
+                                 <p>Component Association Detail</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>CalculationCardAssociationDetails</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Card Component</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>CalculationCardComponents</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Calculation Value Definitions</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>ValueDefinition</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Enterable Calculation Value</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>RangeItem</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Component Detail</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>CalculationComponentDetails</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2632575">
+                     <h3 class="topictitle">Translating Attribute Values</h3>
+                     
+                     <p>The values of these attributes are translatable and
+                        vary depending on the language of the user session:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p><span class="uicontrol">DirCardDefinitionName</span></p>
+                        </li>
+                        
+                        <li>
+                           <p><span class="uicontrol">DirCardCompDefName</span></p>
+                        </li>
+                        
+                        <li>
+                           <p><span class="uicontrol">ValueDefinitionName</span></p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>To ensure that the CalculationCard.dat file uploads
+                        correctly, the user loading the file must use the same language as
+                        the user who created it. Supply the translated values on the base
+                        object. No separate translation object exists.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2632588">
+                     <h3 class="topictitle">Changing Logical Start and End Dates</h3>
+                     
+                     <p>In general, you can change the first effective start date and last effective
+                        end date of an existing calculation card. Include the <span class="uicontrol">ReplaceFirstEffectiveStartDate</span> and <span class="uicontrol">ReplaceLastEffectiveEndDate</span> attributes in
+                        your METADATA line, as appropriate, and set them to <span class="uicontrol">Y</span>. Provide the new values on the <span class="uicontrol">EffectiveStartDate</span> and <span class="uicontrol">EffectiveEndDate</span> attributes. 
+                     </p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Legislation-specific validations may mean that some
+                        changes to logical start and end dates aren't valid.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2632591">
+                     <h3 class="topictitle">Deleting Calculation Cards</h3>
+                     
+                     <p>You can delete all components of the Calculation
+                        Card object using HCM Data Loader. When you delete a Calculation Card
+                        component, its child components are deleted automatically. You can
+                        also delete individual child components.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="http://support.oracle.com/epmos/faces/DocumentDisplay?id=2124649.1">HCM Data Loader: Loading Calculation Cards
+                              for Australia (2124649.1)</a></p>
+                     </li>
+                     <li>
+                        <p><a href="http://support.oracle.com/epmos/faces/DocumentDisplay?id=2233630.1">HCM Data Loader: Loading Calculation Cards
+                              for France (2233630.1)</a></p>
+                     </li>
+                     <li>
+                        <p><a href="http://support.oracle.com/epmos/faces/DocumentDisplay?id=2098480.1">HCM Data Loader: Loading Calculation Cards
+                              for United Kingdom (2098480.1)</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2370368">
+                  <h2>Loading Document Delivery Preferences: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Employers periodically deliver documents,
+                     such as payslips and year-end tax statements, to workers. Document
+                     delivery preferences specify how workers receive those documents.
+                     For example, workers may receive their payslips online. You can specify
+                     a default delivery method for a document type, and you can override
+                     the default method on relevant work structures. For example, delivery
+                     preferences for payroll documents can be overridden at Payroll Statutory
+                     Unit level. You can also specify delivery preferences for a person.
+                     Preferences specified at person level override those at all other
+                     levels. This topic describes how to load Document Record Delivery
+                     Preference objects for a person using HCM Data Loader.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2370365">
+                     <h3 class="topictitle">Document Type</h3>
+                     
+                     <p>Before you can load document delivery preferences
+                        for a person:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The document type must exist in
+                              the target environment.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Document delivery preferences must
+                              be enabled for the document type. In the document type definition, <span class="uicontrol">Override Hierarchy</span> must be set to either <span class="uicontrol">Payroll</span> or <span class="uicontrol">General</span>, as appropriate. For example, if you're loading delivery preferences
+                              for performance documents, then <span class="uicontrol">Override
+                                 Hierarchy</span> must be set to <span class="uicontrol">General</span>.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  <div class="sect2" id="FAIHM2370366">
+                     <h3 class="topictitle">Loading Document Delivery Preferences</h3>
+                     
+                     <p>You load document delivery preferences for a person
+                        in a DocumentDeliveryPreference.dat file.
+                     </p>
+                     
+                     
+                     <p>This example DocumentDeliveryPreference.dat file
+                        loads document delivery preference records. These records are for
+                        the document type identified by source key DT1345 and the three people
+                        identified by the person number user key.
+                     </p>
+                     <pre><code>METADATA|DocumentDeliveryPreference|DocumentTypeId(SourceSystemId)|LevelCode|PersonNumber|OnlineEnabledFlag|PaperEnabledFlag|AllowWorkerOverrideFlag|OnlineConsentRequiredFlag|InitialConsentFlag|SourceSystemId|SourceSystemOwner
+MERGE|DocumentDeliveryPreference|DT1435|900_PERSON|Z8154257|Y|N|Y|Y|Y|LoadPref1|PSFT-US
+MERGE|DocumentDeliveryPreference|DT1435|900_PERSON|Z8154806|N|Y|Y|Y|Y|LoadPref3|PSFT-US
+MERGE|DocumentDeliveryPreference|DT1435|900_PERSON|Z8154813|Y|N|Y|Y|Y|LoadPref2|PSFT-US<br></code></pre>
+                     </div>
+                  <div class="sect2" id="FAIHM2370367">
+                     <h3 class="topictitle">Deleting Document Delivery Preferences</h3>
+                     
+                     <p>You can delete Document Record Delivery Preference
+                        objects for a person using HCM Data Loader.
+                     </p>
+                     
+                  </div>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2363407">
+                  <h2>Loading Document Records: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Document records store information about
+                     documents, such as visas, licenses, and medical certificates, for
+                     a person. Document records can include electronic versions of the
+                     documents as attachments. This topic describes how to load Document
+                     Record and Document Record Attachment components for a person using
+                     HCM Data Loader.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2363406">
+                     <h3 class="topictitle">Document Type</h3>
+                     
+                     <p>Document records exist for a specific document type. You
+                        must ensure that the document type exists in the target environment.
+                        The definition of the document type identifies supported and required
+                        attributes.
+                     </p>
+                     
+                  </div>
+                  <div class="sect2" id="FAIHM2363436">
+                     <h3 class="topictitle">Attachment Files</h3>
+                     
+                     <p>The Document Record Attachment component holds the
+                        electronic version of a document for a person. Use the attribute <span class="uicontrol">URLorTextorFilename</span> to supply the:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>URL, if the DataTypeCode is WEB_PAGE</p>
+                        </li>
+                        
+                        <li>
+                           <p>Text, if the DataTypeCode is TEXT</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>File name, if the DataTypeCode
+                              is FILE
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>If you're uploading attachment files, then they must
+                        be in the same .zip file as the DocumentsOfRecord.dat file that contains
+                        the related document records. All attachment files must be placed
+                        in a subdirectory named BlobFiles. This subdirectory is named for
+                        the BLOB data-type format in which attachment files are held. You
+                        specify the name of the attachment file on the <span class="uicontrol">File</span> attribute of the Document Record Attachment component. 
+                     </p>
+                     
+                  </div>
+                  <div class="sect2" id="FAIHM2363440">
+                     <h3 class="topictitle">Loading Document Records</h3>
+                     
+                     <p>You supply document record data in a DocumentsOfRecord.dat
+                        file. This example DocumentsOfRecord.dat file creates a passport document
+                        for a person and includes a PDF file of the passport as an attachment.
+                        It identifies both the document record and the attachment using source
+                        keys.
+                     </p>
+                     
+                     <pre><code>METADATA|DocumentsOfRecord|SourceSystemOwner|SourceSystemId|PersonId(SourceSystemId)|DocumentCode|DocumentName|DateFrom|DateTo|IssuingAuthority|IssuedDate|IssuingCountry
+MERGE|DocumentsOfRecord|VISION|56883|134003891|PASSPORT_2442|UK Passport|2012/04/03|2022/04/03|United Kingdom Passport Control|2012/04/03|UK
+METADATA|DocumentAttachment|SourceSystemOwner|SourceSystemId|DocumentsOfRecordId(SourceSystemId)|DataTypeCode|URLorTextorFileName|File
+MERGE|DocumentAttachment|VISION|90982|56883|FILE|Passport_2442|JSmithPassport.pdf<br></code></pre>
+                     </div>
+                  <div class="sect2" id="FAIHM2363449">
+                     <h3 class="topictitle">Deleting Document Records</h3>
+                     
+                     <p>You can delete Document Record objects using HCM
+                        Data Loader. When you delete a document record, any associated attachment
+                        record is deleted automatically. You can delete just the attachment,
+                        if appropriate.
+                     </p>
+                     
+                     
+                     <p>This example DocumentsOfRecord.dat file deletes an
+                        existing document record. It identifies the document record using
+                        its source key.
+                     </p>
+                     <pre><code>METADATA|DocumentsOfRecord|SourceSystemOwner|SourceSystemId
+DELETE|DocumentsOfRecord|VISION|56883<br></code></pre>
+                     </div>
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM2127585.htm#FAIHM2034878">Loading Images, Attachments, and Large Strings: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2232843">
+                  <h2>Loading User-Update Requests: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You use the user object to create requests
+                     to update existing Oracle HCM Cloud user accounts. This topic describes
+                     when to use each of the components of the user object. It also describes
+                     any restrictions on its use.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2232842">
+                     <h3 class="topictitle">The User Component</h3>
+                     
+                     <p>You use the user component to create requests to:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Update a user name.</p>
+                        </li>
+                        
+                        <li>
+                           <p>Suspend or activate a user.</p>
+                        </li>
+                        
+                        <li>
+                           <p>Add a single role to or remove
+                              a single role from a user.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Create a user account, in specific
+                              circumstances.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You also use this component to update the <span class="uicontrol">CredentialsEmailSent</span> value in the PER_USERS
+                        table. This value records whether the account and password details
+                        have been sent to the user. Valid values are <span class="uicontrol">Y</span> (yes) and <span class="uicontrol">N</span> (no).
+                        Once the e-mail has been sent, it can't be sent again unless you reset
+                        this value. For example, to reset user passwords, you can run the
+                        Send User Name and Password E-Mail Notifications process. Before doing
+                        so, you can set <span class="uicontrol">CredentialsEmailSent</span> to <span class="uicontrol">N</span> to ensure that users are
+                        notified of new passwords.  Otherwise, they aren't notified.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2233650">
+                     <h3 class="topictitle">The User Role Component</h3>
+                     
+                     <p>The user role component is a child of the user object.
+                        You use the user role component to add or remove multiple roles for
+                        a user. To add or remove a single role, use the user component.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2233658">
+                     <h3 class="topictitle">Creating User Accounts</h3>
+                     
+                     <p>Depending on the setting of the <span class="uicontrol">User Account Creation</span> enterprise option,
+                        user accounts can be created automatically for workers loaded in bulk.
+                        However, you may have prevented the user account from being created
+                        for an individual worker. Alternatively, it may have failed to be
+                        created for some reason. In these cases, you can use the user object
+                        to request a user account.
+                     </p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Use the user object to request a user account only
+                        as an exception. The standard method is to request the user account
+                        when you create the worker.
+                        
+                     </div>
+                     
+                     <p>A user account can be created by means of the user
+                        object only if the <span class="uicontrol">User Account Creation</span> enterprise option enables automatic creation of user accounts.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2233662">
+                     <h3 class="topictitle">Running Send Pending LDAP Requests</h3>
+                     
+                     <p>After loading user-update requests, you run the Send
+                        Pending LDAP Requests process to deliver them to your LDAP directory
+                        server. The recommendation is to schedule this process to run daily.
+                        You don't have to run this process after updating the <span class="uicontrol">CredentialsEmailSent</span> indicator.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=ECB91E1E1C13E691E040D30A68814BD5">Send Pending LDAP Requests: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2233680">
+                  <h2>Loading User-Update Requests: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>Use the user object to manage existing users
+                     and their roles. This topic provides examples showing how to create
+                     some typical user-update requests.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2233671"><h3 class="OracleScenario">Updating a User</h3>
+                     <p>This example creates a request to update the user
+                        name for the user identified by the specified person number.
+                     </p><pre><code>METADATA|User|PersonNumber|Username
+MERGE|User|12312|carlton.baugh@vision.com<br></code></pre><p>This example creates a request to suspend an active
+                        user.
+                     </p><pre><code>METADATA|User|PersonNumber|Suspended
+MERGE|User|12312|Y<br></code></pre><p>This example creates a request to activate a suspended
+                        user.
+                     </p><pre><code>METADATA|User|PersonNumber|Suspended
+MERGE|User|12312|N<br></code></pre><p>This example updates the<span class="uicontrol"> CredentialsEmailSent</span> indicator, which determines whether
+                        an e-mail containing the user credentials is sent to the user.  If
+                        the <span class="uicontrol">CredentialsEmailSent</span> indicator
+                        is <span class="uicontrol">Y</span>, then no e-mail is sent.
+                        If the indicator is <span class="uicontrol">N</span>, then an
+                        e-mail is sent. In this example, the indicator is changed from <span class="uicontrol">Y</span> to <span class="uicontrol">N</span>.
+                     </p><pre><code>METADATA|User|PersonNumber|CredentialsEmailSent
+MERGE|User|12312|N<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2233696"><h3 class="OracleScenario">Updating User Roles</h3>
+                     <p>You use the user component to add a single role.
+                        Note that you supply role codes rather than role names. For example,
+                        you specify ORA_PER_EMPLOYEE_ABSTRACT rather than Employee to add
+                        the employee role. If you supply an invalid role code, then the request
+                        is created but any attempt to provision the role fails.
+                     </p>
+                     <p>This example creates a request to add a single role
+                        to the user.
+                     </p><pre><code>METADATA|User|PersonNumber|RoleCommonName|AddRemoveRole
+MERGE|User|12312|ORA_PER_EMPLOYEE_ABSTRACT|ADD<br></code></pre><p>This example creates a request to add multiple roles
+                        to the user. You use the user role component to add multiple roles.
+                     </p><pre><code>METADATA|User|PersonNumber
+MERGE|User|12312
+METADATA|UserRole|PersonNumber|RoleCommonName|AddRemoveRole
+MERGE|UserRole|12312|ORA_PER_EMPLOYEE_ABSTRACT|ADD
+MERGE|UserRole|12312|ORA_PER_LINE_MANAGER_ABSTRACT|ADD<br></code></pre><p>This example creates a request to remove a single
+                        role from the user. You use the user component to remove a single
+                        role.
+                     </p><pre><code>METADATA|User|PersonNumber|RoleCommonName|AddRemoveRole
+MERGE|User|12312|ORA_PER_EMPLOYEE_ABSTRACT|REMOVE<br></code></pre><p>This example creates a request to remove multiple
+                        roles from the user. You use the user role component to remove multiple
+                        roles.
+                     </p><pre><code>METADATA|User|PersonNumber
+MERGE|User|12312
+METADATA|UserRole|PersonNumber|RoleCommonName|AddRemoveRole
+MERGE|UserRole|12312|ORA_PER_EMPLOYEE_ABSTRACT|REMOVE
+MERGE|UserRole|12312|ORA_PER_LINE_MANAGER_ABSTRACT|REMOVE<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2233706"><h3 class="OracleScenario">Creating a User Account</h3>
+                     <p>You can use the user object to create a user account
+                        in limited circumstances. For example:
+                     </p>
+                     <ul>
+                        
+                        <li>
+                           <p>An attempt to request a user account
+                              when loading the worker object has failed.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The <span class="uicontrol">GeneratedUserAccountFlag</span> attribute of the person user information component was set to <span class="uicontrol">N</span> either by mistake or intentionally for
+                              the loaded worker.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     <p>Creating a user account is a two-step process:</p>
+                     <ol>
+                        
+                        <li>
+                           <p>Create the user.</p>
+                        </li>
+                        
+                        <li>
+                           <p>Activate the user and add roles.</p>
+                           
+                        </li>
+                        
+                     </ol>
+                     <p>This example creates a request to create a user account
+                        for the specified person number. You can also supply a user name if
+                        required. If you supply no user name, then the user name is generated
+                        in the default format as specified on the Security Console. Once the
+                        account exists, it's suspended immediately as it has no roles.
+                     </p><pre><code>METADATA|User|PersonNumber|GenerateUserAccount
+MERGE|User|12312|Y <br></code></pre><p>This example activates the user account and adds
+                        roles so that the account remains active. 
+                     </p><pre><code>METADATA|User|PersonNumber|Suspended
+METADATA|UserRole|PersonNumber|RoleCommonName|AddRemoveRole
+MERGE|User|12312|N
+MERGE|UserRole|12312|ORA_PER_EMPLOYEE_ABSTRACT|ADD
+MERGE|UserRole|12312|ORA_PER_LINE_MANAGER_ABSTRACT|ADD<br></code></pre><div class="infobox-tip"><span class="notep1">Tip: </span>
+                        User-update requests aren't processed until Send
+                        Pending LDAP Requests next runs. If the process isn't scheduled, remember
+                        to run it. 
+                        
+                     </div>
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2345504">
+                  <h2>FAQs for Loading Worker-Related Objects</h2>
+                  
+                  <div class="sect2" id="FAIHM2525422">
+                     <h3>Can I load allocated checklists using HCM Data Loader?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Yes. Both the checklist template and the
+                        worker to whom the checklist is allocated must exist in the target
+                        environment.
+                     </p>
+                     
+                     
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

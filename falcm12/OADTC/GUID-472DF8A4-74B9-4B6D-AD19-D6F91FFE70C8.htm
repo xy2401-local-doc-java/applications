@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Understanding the Customization Development Life Cycle</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This chapter discusses the typical workflow for customizing and extending Oracle Fusion applications. It describes how to use sandboxes to perform customizations in an environment that is separate from the full test environment, publish the changes to a full test environment, and move the changes to other environments." />
+<meta name="dcterms.created" content="2017-01-11T15:33:34Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Fusion Applications Extensibility Guide for Developers" />
+<meta name="dcterms.identifier" content="E70528-01" />
+<meta name="dcterms.isVersionOf" content="OADTC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2011, 2016, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-D63D287B-90AE-42B7-95BA-A437C2132E26.htm" title="Next" type="text/html" />
+<link rel="alternate" href="OADTC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8"></a> <span id="PAGE" style="display:none;">7/20</span> <!-- End Header -->
+<a id="OADTC1213"></a><a id="OADTC158"></a>
+<h1 id="OADTC-GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8" class="sect1"><span class="enumeration_chapter">2</span> Understanding the Customization Development Life Cycle</h1>
+<div>
+<div><span>This chapter discusses the typical workflow for customizing and extending <span id="FAAPPS">Oracle Fusion applications</span>. It describes how to use sandboxes to perform customizations in an environment that is separate from the full test environment, publish the changes to a full test environment, and move the changes to other environments.</span></div>
+<p>This chapter includes the following sections:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8.htm#GUID-850AAB67-B541-4488-A036-4DC1A5CED860">Understanding Typical Customization Workflows</a></p>
+</li>
+<li>
+<p><a href="GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8.htm#GUID-A3551083-5EB8-4913-A708-81C035A0D71D">About the Sandbox Manager</a></p>
+</li>
+<li>
+<p><a href="GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8.htm#GUID-CC63954A-D375-4777-81C0-1EDFD1633A80">About Exporting and Moving Customizations</a></p>
+</li>
+</ul>
+</div>
+<a id="OADTC1351"></a><a id="OADTC159"></a>
+<div class="sect2"><a id="GUID-850AAB67-B541-4488-A036-4DC1A5CED860"></a>
+<h2 id="OADTC-GUID-850AAB67-B541-4488-A036-4DC1A5CED860" class="sect2"><span class="enumeration_section">2.1</span> Understanding Typical Customization Workflows</h2>
+<div>
+<p>All customizations and extensions to <span id="GUID-850AAB67-B541-4488-A036-4DC1A5CED860__FA">Oracle Fusion Applications</span> should be done in a full test environment, as shown in the following figure. Typically, this environment contains one or more <span id="GUID-850AAB67-B541-4488-A036-4DC1A5CED860__FAAPPS">Oracle Fusion applications</span> that will then be moved to a production environment after all customizations and extensions are complete and tested.</p>
+<p>As described in <a href="GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8.htm#GUID-8249EA5F-1E5C-497D-B21D-94C22FF5A413">About the Runtime Customization Workflow</a>, business analysts using <span id="GUID-850AAB67-B541-4488-A036-4DC1A5CED860__PGCOMP">Page Composer</span> and <span id="GUID-850AAB67-B541-4488-A036-4DC1A5CED860__APPCOMPOSER">Oracle Fusion CRM Application Composer</span> (<span id="GUID-850AAB67-B541-4488-A036-4DC1A5CED860__APPCOMPOSER_SHORT">Application Composer</span>) make their application customizations in a sandbox. Sandboxes store the customizations in isolated, protected <span id="GUID-850AAB67-B541-4488-A036-4DC1A5CED860__METASVC">Oracle Metadata Services</span> (<span id="GUID-850AAB67-B541-4488-A036-4DC1A5CED860__MDSSHORT">MDS</span>) labels that are available only when you work in that particular sandbox. The changes can be done in a test-only sandbox (that is, the code in the sandbox is for testing only, and is never deployed), or they can be done in a sandbox that is then published to the full test environment.</p>
+<p>Developers using design time tools, such as <span id="GUID-850AAB67-B541-4488-A036-4DC1A5CED860__JDEV">Oracle JDeveloper</span>, have the option to publish their customizations to a sandbox, as described in <a href="GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8.htm#GUID-89067D33-3CFE-4157-8047-48419B4B9564">About the Design Time Customization Workflow</a>.</p>
+<p>After testing, you can then move the customizations to the mainline code as described in <a href="GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8.htm#GUID-CC63954A-D375-4777-81C0-1EDFD1633A80">About Exporting and Moving Customizations</a>.</p>
+<div class="figure" id="GUID-850AAB67-B541-4488-A036-4DC1A5CED860__GUID-7404D8C5-5C42-4BFD-9E59-F4CD4D9EA891">
+<p class="titleinfigure">Figure 2-1 Customization Workflow in a Full Test Environment</p>
+<img width="533" height="585" src="img/GUID-7C1DB05C-A084-45C0-B124-EEFA455F38A9-default.gif" alt="Described in the surrounding text" title="Described in the surrounding text" /></div>
+<!-- class="figure" --></div>
+<a id="OADTC853"></a>
+<div class="sect3"><a id="GUID-8249EA5F-1E5C-497D-B21D-94C22FF5A413"></a>
+<h3 id="OADTC-GUID-8249EA5F-1E5C-497D-B21D-94C22FF5A413" class="sect3"><span class="enumeration_section">2.1.1</span> About the Runtime Customization Workflow</h3>
+<div>
+<p>When you use <span id="GUID-8249EA5F-1E5C-497D-B21D-94C22FF5A413__APPCOMPOSER_SHORT">Application Composer</span> and <span id="GUID-8249EA5F-1E5C-497D-B21D-94C22FF5A413__PGCOMP">Page Composer</span> to make runtime customizations to <span id="GUID-8249EA5F-1E5C-497D-B21D-94C22FF5A413__FAAPPS">Oracle Fusion applications</span>, you use sandboxes to save your changes in an isolated environment. For example, before you begin making customizations, you create a sandbox named <code>MySandbox</code> and make your customizations in that sandbox. If others want to see the customizations, then they would use <code>MySandbox</code>.</p>
+<p>You also use a sandbox when you define security policies for custom objects that you have created using <span>Application Composer</span>. A security sandbox stores the security information in new database tables that are available only when you choose to work in that sandbox.</p>
+<p>After you complete your customizations, others can review and validate the sandbox. Then you can publish the sandbox to the full test environment where your customizations become part of that repository. For more information about sandboxes, see <a href="GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8.htm#GUID-A3551083-5EB8-4913-A708-81C035A0D71D">About the Sandbox Manager</a> .</p>
+</div>
+</div>
+<a id="OADTC1230"></a><a id="OADTC855"></a>
+<div class="sect3"><a id="GUID-89067D33-3CFE-4157-8047-48419B4B9564"></a>
+<h3 id="OADTC-GUID-89067D33-3CFE-4157-8047-48419B4B9564" class="sect3"><span class="enumeration_section">2.1.2</span> About the Design Time Customization Workflow</h3>
+<div>
+<p>After you create these customizations using <span id="GUID-89067D33-3CFE-4157-8047-48419B4B9564__JDEVSHORT">JDeveloper</span>, you can test them locally in <span>JDeveloper</span> and then deploy your customizations to a sandbox. Note that security customizations done at design time are not saved to a sandbox.</p>
+<p>Additionally, you can use source control software to manage design time customizations.</p>
+<p>Because your customizations (other than security changes) are stored in customization XML files in an <span id="GUID-89067D33-3CFE-4157-8047-48419B4B9564__MDSSHORT">MDS</span> repository, they can also be viewed and managed using the Manage Customizations dialog.</p>
+<div class="infobox-note" id="GUID-89067D33-3CFE-4157-8047-48419B4B9564__GUID-F348B8E0-5EEC-43A4-AF1C-13787FAD52E0">
+<p class="notep1">Note:</p>
+<p>Customizations can also be new Java artifacts, which would not be in XML and would not be stored in the MDS repository.</p>
+</div>
+<p>The following figure shows the flow for a typical design time customization process.</p>
+<div class="figure" id="GUID-89067D33-3CFE-4157-8047-48419B4B9564__GUID-715E8A27-EE8E-42F8-A14A-1BD214FB8F22">
+<p class="titleinfigure">Figure 2-2 Typical Design Time Customization Workflow</p>
+<img width="558" height="851" src="img/GUID-5929DFDE-DF64-4C73-9938-4088C9A594EE-default.gif" alt="Typical Design Time Customization Workflow" title="Typical Design Time Customization Workflow" /></div>
+<!-- class="figure" -->
+<div class="section">
+<p class="subhead3">Related Links</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>The following documents provide additional information related to subjects discussed in this section:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>For further information about migrating security customizations, see <a href="GUID-858B8C4D-4379-45B3-9B4A-D845707244B8.htm#GUID-590E1841-B61F-4898-874F-90402616CC93">What You Cannot Do with Security Policies at Design Time</a>.</p>
+</li>
+<li>
+<p>For further information about what source control software <span>JDeveloper</span> supports, see the "Versioning Applications with Source Control" topic of the <span>JDeveloper</span> online help.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+</div>
+<a id="OADTC160"></a>
+<div class="sect2"><a id="GUID-A3551083-5EB8-4913-A708-81C035A0D71D"></a>
+<h2 id="OADTC-GUID-A3551083-5EB8-4913-A708-81C035A0D71D" class="sect2"><span class="enumeration_section">2.2</span> About the Sandbox Manager</h2>
+<div>
+<p>The sandbox manager is a tool for managing the different types of customization changes that can be applied to an application These changes that are contained within a sandbox do not affect the mainline code. You can test and validate the changes by publishing the sandbox to the full test environment. After the application has been tested, it can then be moved to the production environment.</p>
+<p>There are three types of sandboxes:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Metadata</p>
+<p>The metadata sandbox supports making changes to the application's metadata stored in the <span id="GUID-A3551083-5EB8-4913-A708-81C035A0D71D__MDSSHORT">MDS</span> repository.</p>
+</li>
+<li>
+<p>Security</p>
+<p>The security-enabled sandbox supports making data security changes.</p>
+</li>
+<li>
+<p>Flexfield</p>
+<p>The flexfield sandbox is not created using the sandbox manager. Use the flexfield UI to make changes to the flexfields and then deploy them to the sandbox. The flexfield deployment process manages the creation of the sandbox.</p>
+</li>
+</ul>
+<p>To customize an <span id="GUID-A3551083-5EB8-4913-A708-81C035A0D71D__FAAPP">Oracle Fusion application</span> in runtime, you must first create a sandbox and then use <span id="GUID-A3551083-5EB8-4913-A708-81C035A0D71D__PGCOMP">Page Composer</span> or <span id="GUID-A3551083-5EB8-4913-A708-81C035A0D71D__APPCOMPOSER_SHORT">Application Composer</span> to make the customizations.</p>
+<p><span id="GUID-A3551083-5EB8-4913-A708-81C035A0D71D__BPMCOMPOSER">Oracle Business Process Composer</span> and <span id="GUID-A3551083-5EB8-4913-A708-81C035A0D71D__SOACOMP">Oracle SOA Composer</span> are also runtime customization tools, but they do not use the sandbox manager. They have their own mechanisms for handling customization changes.</p>
+<p>A metadata sandbox that you create using the sandbox manager is available in <span id="GUID-A3551083-5EB8-4913-A708-81C035A0D71D__JDEVSHORT">JDeveloper</span> when you are creating and deploying customizations intended for a deployed <span>Oracle Fusion application</span> in <span id="GUID-A3551083-5EB8-4913-A708-81C035A0D71D__WLS">Oracle WebLogic Server</span>. The available sandboxes will appear in a selection list in <span>JDeveloper</span> during deployment. Note that the security sandboxes created using the sandbox manager are not available in <span>JDeveloper</span>.</p>
+<p>The metadata and security sandbox sessions can be saved, downloaded, and imported as files into other <span id="GUID-A3551083-5EB8-4913-A708-81C035A0D71D__FAAPPS">Oracle Fusion applications</span>.</p>
+<p>If more than one person is using a sandbox, then you must take care to prevent conflicts.</p>
+<div class="section">
+<p class="subhead2">Related Links</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>The following documents provide additional information related to subjects discussed in this section:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>For information about using sandboxes for runtime customizations, see the <a class="olink OACEX1011684" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OACEX1011684">"Using Sandboxes"</a> chapter in the <span class="italic"><span id="GUID-A3551083-5EB8-4913-A708-81C035A0D71D__OACEX"><cite>Oracle Cloud Extending Sales</cite></span></span> and the <a class="olink OAEXT1189604" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1189604">"Using the Sandbox Manager"</a> section in the .</p>
+</li>
+<li>
+<p>For further information about using <span>Oracle Business Process Composer</span>, see the <a class="olink OACEX327384" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OACEX327384">"Object Workflows and Business Processes: How They Work Together"</a> chapter in the <span class="italic"><span><cite>Oracle Cloud Extending Sales</cite></span></span>.</p>
+</li>
+<li>
+<p>For further more information about using sandboxes in <span>JDeveloper</span>, see <a href="GUID-D799CA7B-365F-411E-8027-9F7413B66787.htm#GUID-62874CDA-F6E3-46F2-B95E-6DA49A9DF9C8">About Deploying Customizations and Extensions</a>.</p>
+</li>
+<li>
+<p>For further information about using <span>Oracle SOA Composer</span>, see <a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A" title="This chapter describes how to customize (edit) a service-oriented architecture (SOA) component during runtime in a deployed SOA composite application with a runtime tool such as Oracle Business Process Management Worklist (Oracle BPM Worklist), Oracle SOA Composer, or Oracle Enterprise Manager Fusion Applications Control or customize and extend (create) a SOA component during design time in Oracle JDeveloper. It also provides recommendations for merging runtime customizations from a previously deployed revision into a new revision and instructions for synchronizing a customized flexfield in Oracle Metadata Services (MDS) Repository.">Customizing and Extending SOA Components</a> .</p>
+</li>
+<li>
+<p>For further information about preventing conflicts if more than one person is using a sandbox, see the <a class="olink OACEX916746" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OACEX916746">"Multiple Sandbox User Conflicts: Explained"</a> section in the <span class="italic"><span><cite>Oracle Cloud Extending Sales</cite></span></span> and the <a class="olink OAEXT1189604" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1189604">"Using the Sandbox Manager"</a> section in the .</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OADTC1232"></a>
+<div class="sect2"><a id="GUID-CC63954A-D375-4777-81C0-1EDFD1633A80"></a>
+<h2 id="OADTC-GUID-CC63954A-D375-4777-81C0-1EDFD1633A80" class="sect2"><span class="enumeration_section">2.3</span> About Exporting and Moving Customizations</h2>
+<div>
+<p>There are several tools available for exporting and moving customizations. These tools enable you to perform the following tasks:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Move customizations and extensions to another <span id="GUID-CC63954A-D375-4777-81C0-1EDFD1633A80__FA">Oracle Fusion Applications</span> environment, such as the production environment.</p>
+</li>
+<li>
+<p>Diagnose issues seen in the test environment.</p>
+</li>
+<li>
+<p>Send files to Oracle Support Services for further diagnosing.</p>
+</li>
+<li>
+<p>Import a customization into another environment. For example, a customization developer using <span id="GUID-CC63954A-D375-4777-81C0-1EDFD1633A80__JDEVSHORT">JDeveloper</span> might need to see customizations done by someone else.</p>
+</li>
+</ul>
+<div class="section">
+<p class="subhead2">Related Links</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>For information about the tools that are available for exporting and moving customizations, see the <a class="olink OAEXT1184569" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OAEXT1184569">"Moving Customizations"</a> section in the .</p>
+</div>
+<!-- class="section" --></div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment439">
+<tr>
+<td class="cellalignment446">
+<table class="cellalignment444">
+<tr>
+<td class="cellalignment443"><a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment443"><a href="GUID-D63D287B-90AE-42B7-95BA-A437C2132E26.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2011, 2016, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment448">
+<table class="cellalignment442">
+<tr>
+<td class="cellalignment443"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment443"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

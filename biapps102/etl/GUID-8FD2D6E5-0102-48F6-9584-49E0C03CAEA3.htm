@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Category 1 Customizations: Adding Columns to Existing Fact or Dimension Tables</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="Category 1 customizations add columns from the source systems that have pre-packaged adapters and load the data into the existing Oracle Business Analytics Warehouse tables." />
+<meta name="dcterms.created" content="2017-05-25T23:49:13Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications ETL Guide" />
+<meta name="dcterms.identifier" content="E72285-04" />
+<meta name="dcterms.isVersionOf" content="BIAET" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2014, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-7EEE748C-9271-4CAA-9EB5-CB247CE7537A.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-AF634C2B-93D1-4338-A375-30ED1504E741.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAET.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-8FD2D6E5-0102-48F6-9584-49E0C03CAEA3"></a> <span id="PAGE" style="display:none;">41/47</span> <!-- End Header -->
+<a id="BIASA24492"></a>
+<h1 id="BIAET-GUID-8FD2D6E5-0102-48F6-9584-49E0C03CAEA3" class="sect1">Category 1 Customizations: Adding Columns to Existing Fact or Dimension Tables</h1>
+<div>
+<p>Category 1 customizations add columns from the source systems that have pre-packaged adapters and load the data into the existing Oracle Business Analytics Warehouse tables.</p>
+<p>Category 1 customizations involve extracting additional columns from the source systems for which pre-packaged adapters are included (for example, Oracle E-Business Suite) and loading the data into the existing Oracle Business Analytics Warehouse tables. For Category 1 customizations, data can also come from non-packaged sources, but this section assumes that you have already mapped the sources with a Universal adapter and you need to extend to capture additional columns. The initial mapping of a Universal adapter is considered a Category 3 customization. For information, see <a href="GUID-8AC83C32-DAC5-4898-B0A9-EE76B5EF2A27.htm#GUID-8AC83C32-DAC5-4898-B0A9-EE76B5EF2A27" title="Category 3 customizations use the Universal adapter to load data from sources that do not have pre-packaged adapters.">Category 3 Customizations: Adding New Data</a>.</p>
+<p>To see additional columns in the Oracle Business Analytics Warehouse, you must pass the columns first through the ETL process. The existing mappings and tables are extensible. <span>Oracle BI Applications</span> provides a methodology to extend preconfigured mappings to include these additional columns and load the data into the existing tables.</p>
+<p><span>Oracle BI Applications</span> recognizes two types of customization: extension and modification. The supported extension logic allows you to add to the existing objects. For example, you can extract additional columns from a source, pass them through the existing mappings, and populate new columns added to an existing table. Generally, <span>Oracle BI Applications</span> does not allow you to modify the existing logic or columns. You should not change the existing calculations to use different columns, and you should not remap the existing columns to be loaded from different sources.</p>
+<p>For example, if you want to calculate revenue differently from the existing logic, create a new column (for example, X_REVENUE) and populate it with a custom mapping expression. You can then remap the Oracle Business Intelligence repository to point to the new X_REVENUE column.</p>
+<p>Most datastores have a single placeholder column named X_CUSTOM. Each ETL task has mapping expressions to populate this column. These serve as templates for customizing ODI datastores and interfaces. When creating new custom columns, follow the naming convention of including the X_ prefix to help distinguish custom columns.</p>
+<p>In the figure, the preconfigured logic is shaded in gray. Do not modify anything contained within these objects. Add customizations to the existing objects rather than creating new packages and interfaces, which allows them to run in parallel to the existing logic.</p>
+<div class="figure" id="GUID-8FD2D6E5-0102-48F6-9584-49E0C03CAEA3__GUID-712D0544-295E-4B14-B23D-AE93EE39040E"><img width="443" height="106" src="img/GUID-EB892DC2-C07D-44A7-B058-5764B4CC9BBA-default.gif" alt="Description of GUID-EB892DC2-C07D-44A7-B058-5764B4CC9BBA-default.gif follows" title="Description of GUID-EB892DC2-C07D-44A7-B058-5764B4CC9BBA-default.gif follows" /><br />
+<a href="img_text/GUID-EB892DC2-C07D-44A7-B058-5764B4CC9BBA-default.htm">Description of the illustration GUID-EB892DC2-C07D-44A7-B058-5764B4CC9BBA-default.gif</a></div>
+<!-- class="figure" --></div>
+<a id="BIASA24495"></a>
+<div class="sect2"><a id="GUID-F44B5A82-B1DE-4EF4-9648-8B66717421B3"></a>
+<h2 id="BIAET-GUID-F44B5A82-B1DE-4EF4-9648-8B66717421B3" class="sect2">Extending Mappings in Oracle Business Analytics Warehouse</h2>
+<div>
+<p>The most common reason for extending the Oracle Business Analytics Warehouse is to extract the existing columns from a source system and map them to an existing Oracle Business Analytics Warehouse table (either fact or dimension). This type of change typically requires you to extend the interfaces within a SIL package.</p>
+<div class="section">
+<p>If the data is coming from a packaged source, then you must extend the interfaces within an appropriate SDE adapter package. If the data is coming from a non-packaged source, then you must use a Universal adapter package. If an appropriate package does not already exist, you must create a Universal adapter package with interfaces.</p>
+<p>To extend an ODI package in the Oracle Business Analytics Warehouse:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Create new SDE and SIL Adaptor folders (do not copy an existing Adaptor folder as this copies all subfolders).</span>
+<div>
+<p>Rename folders to include <code class="codeph">Custom</code> or some other useful identifier in the name, and set Release Tag to match that of the existing Adaptor folder. Do this for both the SDE and SIL folders.</p>
+</div>
+<ol>
+<li class="substepexpand"><span>Right-click the Mappings folder and select <span class="bold">New Sub-Folder</span>.</span></li>
+<li class="substepexpand"><span>Set Name as CUSTOM _<span class="variable">Original Folder Name</span>.</span>
+<div>
+<p>For example, CUSTOM_SDE_ORA11510_Adaptor and CUSTOM_SILOS represent custom SDE and SIL folders.</p>
+</div>
+</li>
+<li class="substepexpand"><span>Click the <span class="bold">Connect Navigator</span> button in the Designer tab.</span></li>
+<li class="substepexpand"><span>Select <span class="bold">Edit Release Tags</span>.</span></li>
+<li class="substepexpand"><span>Select the release tag that corresponds to your source. For example, EBS_11_5_10.</span></li>
+<li class="substepexpand"><span>Select the custom SDE folder you created and add it to the release tag.</span></li>
+<li class="substepexpand"><span>Click <span class="bold">Next</span>, then click <span class="bold">Finish</span>.</span></li>
+<li class="substepexpand"><span>Repeat Steps a-g for the CUSTOM_SILOS folder, associating it with the BIA_11 Release Tag.</span></li>
+</ol>
+</li>
+<li class="stepexpand"><span>Enable versioning for the preconfigured Task Folder to be customized.</span>
+<div>
+<p>The version comment should indicate this is the base version of the task. Subsequent patches applied to this task in the future require increasing the version in the comment so that you can compare to the original task to identify any changes.</p>
+</div>
+<ol>
+<li><span>Right-click the Task folder and select <span class="bold">Version</span>, then <span class="bold">Create Version</span>.</span></li>
+<li><span>Accept the default version number, 1.0.0.0.</span></li>
+<li><span>Add a description indicating that this is the original version of this task.</span></li>
+</ol>
+</li>
+<li class="stepexpand"><span>Duplicate the Task folder to be customized by copying it.</span>
+<div>
+<p>Cut and paste the copied task folder to the Custom adaptor, and rename it to remove the Copy of&hellip; prefix.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Using the same method as in step 2, enable versioning of copied Task folder.</span>
+<div>
+<p>The version comment should indicate this is the original version. This versioning enables comparison of the customized task to a copy of the original version to determine all changes that have been introduced.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Follow Steps 1-4 and create another version of the copied task.</span>
+<div>
+<p>You should indicate in the version comment that this is the customized version.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Version the model that the datastore to be customized exists in, for example, Oracle BI Applications.</span>
+<div>
+<p>You cannot version submodels and datastores. You should indicate in the version comment that this is the base or original version.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Create a new version of the model, with a version comment indicating that this is where customizations are introduced.</span>
+<div>
+<p>You can compare the models to show differences. If the model ever needs to be patched, you should version the model again to compare the patched version to the custom and original version.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Apply customizations to the datastore and task.</span>
+<div>
+<p>Customizations should be additive as much as possible rather than overwriting the existing content. For example, if you don't like the way a particular column is calculated, add a new custom column and map it in the way you prefer. In the repository, have the logical column point to this new custom column rather than the original column.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Prior to generating scenarios, ensure the <span class="bold">Scenario Naming Convention</span> User Parameter has a value of <code class="codeph">%FOLDER_NAME(2)%_%OBJECT_NAME%</code>.</span></li>
+<li class="stepexpand"><span>Generate a new scenario for the custom task using the same scenario name as the original.</span>
+<div>
+<p>ODI enforces unique scenario names and versions. Use the same scenario name for the custom task so that the load plan executes this ETL task rather than the out-of-the-box ETL task. Retain the same scenario name, but use a different, higher version number. The load plan always executes the scenario with the largest version number. By using the same scenario name, but with a larger higher version number, the load plan executes the custom scenario without requiring any changes.</p>
+</div>
+<ol>
+<li class="substepexpand"><span>Note the name of the out-of-the-box scenario.</span>
+<div>
+<p>Navigate to the original <span class="bold">Task folder</span> -<span class="bold">Packages</span> -<span class="variable">Package Name</span> -<span class="bold">Scenarios</span> -<span class="variable">Scenario Name</span>. Make a note of the Scenario Name (you can double-click the scenario and use CTRL-C to copy the scenario name).</p>
+</div>
+</li>
+<li class="substepexpand"><span>Generate a scenario for the custom task.</span>
+<div>
+<p>Navigate to the custom Task folder -<span class="bold">Packages</span> -<span class="variable">Package Name</span> , then right-click the package and select <span class="bold">Generate Scenario</span>. Use the original scenario name as noted (you can use CTRL-V to paste the name if you copied it). Set the version number to <kbd class="userinput">002</kbd> (or any value larger than the default, 001, used by the out-of-the-box scenario).</p>
+</div>
+</li>
+<li class="substepexpand"><span>Select the <span class="bold">Generate scenario as if all underlying objects are materialized</span> option, then click <span class="bold">OK</span>.</span></li>
+<li class="substepexpand"><span>Select <kbd class="userinput">Use All</kbd> from the <span class="bold">Startup Parameters</span> list.</span></li>
+<li class="substepexpand"><span>Click <span class="bold">OK</span>.</span></li>
+</ol>
+<div>
+<p>When you execute the load plan, it now executes the custom task rather than the original task. In the future if you make changes to any of the interfaces or the package, you can either regenerate the existing scenario or generate a new scenario. Unless you need separate scenarios, it is recommended that you regenerate the existing scenario. To do this, right-click the scenario and select <span class="bold">Regenerate</span>.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Generate the Load Plan.</span></li>
+<li class="stepexpand"><span>Execute the Load Plan.</span></li>
+</ol>
+</div>
+</div>
+<a id="BIASA24498"></a><a id="BIASA24496"></a>
+<div class="sect2"><a id="GUID-08E3B8E2-5DFD-4056-9B94-B81DA8A48A07"></a>
+<h2 id="BIAET-GUID-08E3B8E2-5DFD-4056-9B94-B81DA8A48A07" class="sect2">Example of Extending the Oracle Business Analytics Warehouse</h2>
+<div>
+<p>This working example describes adding columns from source systems that have pre-packaged adapters and loading the data into the existing Oracle Business Analytics Warehouse tables (known as a Category 1 customization).</p>
+<p>In this example, a company has identified additional fields in a source system table HZ_CUST_ACCOUNTS that must be added to the Oracle Business Analytics Warehouse table W_ORG_D. Data is passed from an existing source table to an existing target table, known as a category 1 customization. The company uses an extension field to capture information related to organizations referred to as ACCOUNT_LOG. In addition, the company wants to include the name of the person who last updated the record as an attribute of the organization.</p>
+<p>In this example, you want to extract information from the following two fields that are not extracted by the out-of-the-box application:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>HZ_CUST_ACCOUNTS.ATTRIBUTE1</p>
+<p>ATTRIBUTE1 is currently not extracted from the source table HZ_CUST_ACCOUNTS into the temporary table ODI_SQ_BCI_CUSTOMERS.</p>
+</li>
+<li>
+<p>HZ_CUST_ACCOUNTS.LAST_UPDATE_LOGIN</p>
+<p>LAST_UPDATE_LOGIN is currently extracted from the source table HZ_CUST_ACCOUNTS into the temporary table ODI_SQ_BCI_CUSTOMERS, but is not loaded into the staging table W_ORG_DS.</p>
+</li>
+</ul>
+<p>The following diagram shows the two fields ATTRIBUTE1 and LAST_UPDATE_LOGIN as they pass from the source system table to the target table via the tables: HZ_CUST_ACCOUNTS to ODI_SQ_BCI_CUSTOMERS to W_ORG_DS to ODI_Sq_W_ORG_DS to W_ORG_D.</p>
+<div class="figure" id="GUID-08E3B8E2-5DFD-4056-9B94-B81DA8A48A07__GUID-0A6D283B-8537-4CC8-A705-2AD0C13E9897"><img width="804" height="226" src="img/GUID-8C7C51AB-D5B4-4BFA-9C9D-2F14539DD90D-default.gif" alt="Description of GUID-8C7C51AB-D5B4-4BFA-9C9D-2F14539DD90D-default.gif follows" title="Description of GUID-8C7C51AB-D5B4-4BFA-9C9D-2F14539DD90D-default.gif follows" /><br />
+<a href="img_text/GUID-8C7C51AB-D5B4-4BFA-9C9D-2F14539DD90D-default.htm">Description of the illustration GUID-8C7C51AB-D5B4-4BFA-9C9D-2F14539DD90D-default.gif</a></div>
+<!-- class="figure" -->
+<p>The customization is done in two parts:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>SDE Processing that extracts data from the source system and loads it into the staging area. See <a href="GUID-8FD2D6E5-0102-48F6-9584-49E0C03CAEA3.htm#GUID-6091C2F3-0C84-4ED9-89C5-0FC7028B3A99" title="This section shows how data is extracted from an existing source table into the staging area.">Example of Extracting Data from an Oracle EBS 11.5.10 Data Packaged Source into the ODI Staging Area</a>.</p>
+</li>
+<li>
+<p>SIL Processing that extracts data from the staging area and loads it into the target table. See <a href="GUID-8FD2D6E5-0102-48F6-9584-49E0C03CAEA3.htm#GUID-A867F3E1-FD1E-4B80-8397-F2A0BDE8E159" title="This section shows how data is loaded from the staging area into an existing target table.">Example of Loading Data from the Staging Area into an Existing Target Table</a>.</p>
+</li>
+</ul>
+</div>
+<a id="BIASA24500"></a><a id="BIASA24499"></a>
+<div class="sect3"><a id="GUID-6091C2F3-0C84-4ED9-89C5-0FC7028B3A99"></a>
+<h3 id="BIAET-GUID-6091C2F3-0C84-4ED9-89C5-0FC7028B3A99" class="sect3">Example of Extracting Data from an Oracle EBS 11.5.10 Data Packaged Source into the ODI Staging Area</h3>
+<div>
+<p>This section shows how data is extracted from an existing source table into the staging area.</p>
+<div class="section">
+<p>The following diagram shows the new ETL mappings that to load the new data into the staging area, and the ODI Interfaces to modify.</p>
+<div class="figure" id="GUID-6091C2F3-0C84-4ED9-89C5-0FC7028B3A99__GUID-AE320841-3A06-4B20-ADC3-CA554A74141F"><img width="646" height="281" src="img/GUID-72817C2D-CC41-4EC4-9CD8-22E8B4C4DBAF-default.gif" alt="Description of GUID-72817C2D-CC41-4EC4-9CD8-22E8B4C4DBAF-default.gif follows" title="Description of GUID-72817C2D-CC41-4EC4-9CD8-22E8B4C4DBAF-default.gif follows" /><br />
+<a href="img_text/GUID-72817C2D-CC41-4EC4-9CD8-22E8B4C4DBAF-default.htm">Description of the illustration GUID-72817C2D-CC41-4EC4-9CD8-22E8B4C4DBAF-default.gif</a></div>
+<!-- class="figure" -->
+<div class="infobox-note" id="GUID-6091C2F3-0C84-4ED9-89C5-0FC7028B3A99__GUID-6B46B4ED-AB68-498F-BE35-B04DBEDB9067">
+<p class="notep1">Note:</p>
+The new ETL mappings diagram only shows the incremental interfaces.</div>
+<p>To customize the ETL process for loading these two fields into the staging area:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Extract the HZ_CUST_ACCOUNTS.ATTRIBUTE1 value from the source table HZ_CUST_ACCOUNTS into the temporary table ODI_SQ_BCI_CUSTOMERS using the Interfaces SQ_BCI_CUSTOMERS and SQ_BCI_CUSTOMERS_FULL.</p>
+<p>Then, load the ODI_SQ_BCI_CUSTOMERS.ATTRIBUTE1 value from the temporary table ODI_SQ_BCI_CUSTOMERS into the X_ACCOUNT_LOG field in the staging table W_ORG_DS using the Interfaces ORG_DS and ORG_DS_FULL.</p>
+</li>
+<li>
+<p>Load the SQ_BCI_CUSTOMERS.LAST_UPDATE_LOGIN value from the temporary table ODI_SQ_BCI_CUSTOMERS into the X_LAST_LOGIN field in the staging table W_ORG_DS using the Interfaces ORG_DS and ORG_DS_FULL.</p>
+<div class="infobox-note" id="GUID-6091C2F3-0C84-4ED9-89C5-0FC7028B3A99__GUID-63009D33-1CD1-4849-948B-0C163E09D7C2">
+<p class="notep1">Note:</p>
+Remember that LAST_UPDATE_LOGIN value is already extracted from the source table HZ_CUST_ACCOUNTS into the temporary table ODI_SQ_BCI_CUSTOMERS, but is not loaded into the staging table W_ORG_DS.</div>
+</li>
+</ul>
+<p>To extract data from an Oracle EBS 11.5.10 Data Packaged Source:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In ODI Designer, display the <span class="bold">Projects</span> view, and expand the <code>Oracle BI Applications\Mappings\SDE_ORA11510_Adaptor</code> folder.</span></li>
+<li class="stepexpand"><span>Right-click the SDE_ORA_OrganizationDimension_Customer folder, and select <span class="bold">Version</span>, then <span class="bold">Create</span> to display the Create: <span class="variable">Object</span> dialog, and specify a unique version number and optional version description.</span>
+<div>
+<div class="figure" id="GUID-6091C2F3-0C84-4ED9-89C5-0FC7028B3A99__GUID-F62550AF-AF72-4773-B51F-913FA723E8CA"><img width="746" height="486" src="img/GUID-E471AE7B-316E-4773-A781-5610D0C60886-default.gif" alt="Description of GUID-E471AE7B-316E-4773-A781-5610D0C60886-default.gif follows" title="Description of GUID-E471AE7B-316E-4773-A781-5610D0C60886-default.gif follows" /><br />
+<a href="img_text/GUID-E471AE7B-316E-4773-A781-5610D0C60886-default.htm">Description of the illustration GUID-E471AE7B-316E-4773-A781-5610D0C60886-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Display the <span class="bold">Models</span> view, expand the Dimension Stage folder, and edit the W_ORG_DS datastore to display the DataStore: <span class="variable">Name</span> dialog, and display the Columns tab.</span>
+<div>
+<div class="figure" id="GUID-6091C2F3-0C84-4ED9-89C5-0FC7028B3A99__GUID-2E8572B3-CAFA-47A8-9BB7-3AD4DF606C27"><img width="697" height="606" src="img/GUID-D45097F3-6543-4211-AD4E-3068A29DF0A2-default.gif" alt="Description of GUID-D45097F3-6543-4211-AD4E-3068A29DF0A2-default.gif follows" title="Description of GUID-D45097F3-6543-4211-AD4E-3068A29DF0A2-default.gif follows" /><br />
+<a href="img_text/GUID-D45097F3-6543-4211-AD4E-3068A29DF0A2-default.htm">Description of the illustration GUID-D45097F3-6543-4211-AD4E-3068A29DF0A2-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Create the following columns:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>X_ACCOUNT_LOG (VARCHAR2(10))</p>
+</li>
+<li>
+<p>X_LAST_LOGIN (VARCHAR2(10))</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>In the <span class="bold">Models</span> view, right-click the model <span class="bold">Oracle BI Applications</span> and select <span class="bold">Generate DDL</span> to display the Generate DDL dialog.</span>
+<div>
+<p>The Generate DDL option deploys the changes in the database.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Select the option in the Synchronize column next for the W_ORG_DS table.</span></li>
+<li class="stepexpand"><span>Click the (...) button to the right of the <span class="bold">Generation Folder</span> field to display the <span class="wintitle">Select a folder</span> dialog, and select the <code>\Utilities\System</code> folder, and click <span class="bold">OK</span>.</span></li>
+<li class="stepexpand"><span>When the Procedure: DDL <span class="variable">Name</span> dialog is displayed, click <span class="bold">Execute</span>.</span>
+<div>
+<p>Display ODI Operator and make sure that the procedure executes successfully.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Display the <span class="bold">Projects</span> view, expand the Mappings folder, and expand the SDE_ORA_OrganizationDimension_Customer folder.</span>
+<div>
+<div class="figure" id="GUID-6091C2F3-0C84-4ED9-89C5-0FC7028B3A99__GUID-D9F3B719-2808-466B-B992-12D92E4BD4BC"><img width="463" height="338" src="img/GUID-F5CCEFEA-1EFC-4D04-A570-10303BA5C1E5-default.gif" alt="Description of GUID-F5CCEFEA-1EFC-4D04-A570-10303BA5C1E5-default.gif follows" title="Description of GUID-F5CCEFEA-1EFC-4D04-A570-10303BA5C1E5-default.gif follows" /><br />
+<a href="img_text/GUID-F5CCEFEA-1EFC-4D04-A570-10303BA5C1E5-default.htm">Description of the illustration GUID-F5CCEFEA-1EFC-4D04-A570-10303BA5C1E5-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Edit the Interface SDE_ORA_OrganizationDimension_Customer.SQ_BCI_CUSTOMERS to display the Interface: <span class="wintitle">Name</span> dialog.</span>
+<ol>
+<li><span>Display the Diagram tab, and select the <span class="bold">ATTRIBUTE1</span> field in the Target Datastore area.</span></li>
+<li><span>Click the <span class="bold">Launch Expression Editor</span> icon to display the Expression Editor dialog, and then select <span class="bold">HZ_CUST_ACCOUNTS.ATTRIBUTE1</span> as the value in the <span class="bold">Implementation</span> field.</span></li>
+<li><span>Click <span class="bold">OK</span> to save the details.</span></li>
+</ol>
+</li>
+<li class="stepexpand"><span>Repeat Step 10 for the Interface SDE_ORA_OrganizationDimension_Customer.SQ_BCI_CUSTOMERS_FULL.</span></li>
+<li class="stepexpand"><span>Edit the Interface SDE_ORA_OrganizationDimension_Customer.ORG_DS to display the Interface: <span class="variable">Name</span> dialog.</span>
+<ol>
+<li class="substepexpand"><span>Display the Diagram tab, and select the <span class="bold">X_ACCOUNT_LOG</span> field in the Target Datastore area.</span>
+<div>
+<div class="figure" id="GUID-6091C2F3-0C84-4ED9-89C5-0FC7028B3A99__GUID-BFE97804-19C4-44CF-AC32-B5E34EE1982F"><img width="518" height="476" src="img/GUID-C2AA0B00-D080-45CE-8DEB-3CE0E6A2E53C-default.gif" alt="Description of GUID-C2AA0B00-D080-45CE-8DEB-3CE0E6A2E53C-default.gif follows" title="Description of GUID-C2AA0B00-D080-45CE-8DEB-3CE0E6A2E53C-default.gif follows" /><br />
+<a href="img_text/GUID-C2AA0B00-D080-45CE-8DEB-3CE0E6A2E53C-default.htm">Description of the illustration GUID-C2AA0B00-D080-45CE-8DEB-3CE0E6A2E53C-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="substepexpand"><span>Click the <span class="bold">Launch Expression Editor</span> icon to display the Expression Editor dialog, and then select <span class="bold">SQ_BCI_CUSTOMERS.ATTRIBUTE1</span> as the value in the <span class="bold">Implementation</span> field.</span>
+<div>
+<div class="figure" id="GUID-6091C2F3-0C84-4ED9-89C5-0FC7028B3A99__GUID-7B00EC40-5D3A-4965-A29D-B3F54658E7A6"><img width="481" height="433" src="img/GUID-A83BEC10-8B55-407F-9B7D-2206FA5A613E-default.gif" alt="Description of GUID-A83BEC10-8B55-407F-9B7D-2206FA5A613E-default.gif follows" title="Description of GUID-A83BEC10-8B55-407F-9B7D-2206FA5A613E-default.gif follows" /><br />
+<a href="img_text/GUID-A83BEC10-8B55-407F-9B7D-2206FA5A613E-default.htm">Description of the illustration GUID-A83BEC10-8B55-407F-9B7D-2206FA5A613E-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="substepexpand"><span>Select the <span class="bold">X_LAST_LOGIN</span> field in the Target Datastore area.</span></li>
+<li class="substepexpand"><span>Click the <span class="bold">Launch Expression Editor</span> icon to display the Expression Editor dialog, and then select <span class="bold">SQ_BCI_CUSTOMERS.LAST_UPDATE_LOGIN</span> as the value in the <span class="bold">Implementation</span> field.</span>
+<div>
+<div class="figure" id="GUID-6091C2F3-0C84-4ED9-89C5-0FC7028B3A99__GUID-803694F1-98DC-468D-8314-823A1693A0A6"><img width="481" height="433" src="img/GUID-A83BEC10-8B55-407F-9B7D-2206FA5A613E-default.gif" alt="Description of GUID-A83BEC10-8B55-407F-9B7D-2206FA5A613E-default.gif follows" title="Description of GUID-A83BEC10-8B55-407F-9B7D-2206FA5A613E-default.gif follows" /><br />
+<a href="img_text/GUID-A83BEC10-8B55-407F-9B7D-2206FA5A613E-default.htm">Description of the illustration GUID-A83BEC10-8B55-407F-9B7D-2206FA5A613E-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="substepexpand"><span>Click <span class="bold">OK</span> to save the details.</span></li>
+</ol>
+</li>
+<li class="stepexpand"><span>Repeat Step 12 for the Interface SDE_ORA_OrganizationDimension_Customer.ORG_DS_FULL.</span></li>
+<li class="stepexpand"><span>Right-click the scenario <span class="bold">SDE_ORA_OrganizationDimension_Customer</span> and select <span class="bold">Regenerate</span>.</span></li>
+</ol>
+<div class="section">
+<p>Now that you have set up the ETL process for extracting and staging the data, you must load the new data into the data warehouse. See <a href="GUID-8FD2D6E5-0102-48F6-9584-49E0C03CAEA3.htm#GUID-A867F3E1-FD1E-4B80-8397-F2A0BDE8E159" title="This section shows how data is loaded from the staging area into an existing target table.">Example of Loading Data from the Staging Area into an Existing Target Table</a>.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="BIASA24502"></a><a id="BIASA24501"></a>
+<div class="sect3"><a id="GUID-A867F3E1-FD1E-4B80-8397-F2A0BDE8E159"></a>
+<h3 id="BIAET-GUID-A867F3E1-FD1E-4B80-8397-F2A0BDE8E159" class="sect3">Example of Loading Data from the Staging Area into an Existing Target Table</h3>
+<div>
+<p>This section shows how data is loaded from the staging area into an existing target table.</p>
+<div class="section">
+<p>The following diagram shows the new ETL mappings to load the new data from the staging area into the target table and the ODI Interfaces to modify.</p>
+<div class="figure" id="GUID-A867F3E1-FD1E-4B80-8397-F2A0BDE8E159__GUID-AE3B0238-1537-477B-989C-CD201CC9E8D0"><img width="646" height="281" src="img/GUID-C70B60B1-7637-44B0-9742-D8022CB90A27-default.gif" alt="Description of GUID-C70B60B1-7637-44B0-9742-D8022CB90A27-default.gif follows" title="Description of GUID-C70B60B1-7637-44B0-9742-D8022CB90A27-default.gif follows" /><br />
+<a href="img_text/GUID-C70B60B1-7637-44B0-9742-D8022CB90A27-default.htm">Description of the illustration GUID-C70B60B1-7637-44B0-9742-D8022CB90A27-default.gif</a></div>
+<!-- class="figure" -->
+<p>To customize the ETL process to load these two fields into the staging area:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Load the X_ACCOUNT_LOG value and X_LAST_LOGIN value from the staging table W_ORG_DS into the temporary table SQ_W_ORG_DS using the Interfaces Sq_W_ORG_DS and Sq_W_ORG_DS_FULL.</p>
+</li>
+<li>
+<p>Load the X_ACCOUNT_LOG value and X_LAST_LOGIN value from the temporary table ODI_Sq_W_ORG_DS into the Target table W_ORG_D using the Interfaces ORG_D, ORG_D_FULL, and ORG_D_UNSPC.</p>
+</li>
+</ul>
+<p>To extract data from an Oracle EBS 11.5.10 Data Packaged Source:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In ODI Designer, display the <span class="bold">Projects</span> view, expand the Oracle BI Applications\Mappings\SILOS folder.</span></li>
+<li class="stepexpand"><span>Right-click the SIL_OrganizationDimension folder, and select <span class="bold">Version</span>, then <span class="bold">Create</span> to display the Create: <span class="variable">Object</span> dialog, and specify a unique version number and optional version description.</span></li>
+<li class="stepexpand"><span>Display the <span class="bold">Models</span> view, expand the Dimension Stage folder, and edit the W_ORG_DS datastore to display the DataStore: <span class="variable">Name</span> dialog, and display the Columns tab.</span></li>
+<li class="stepexpand"><span>Make sure that these columns are setup:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>X_ACCOUNT_LOG (VARCHAR2(10))</p>
+</li>
+<li>
+<p>X_LAST_LOGIN (VARCHAR2(10))</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>Repeat steps 3 and 4 for the W_ORG_D datastore.</span></li>
+<li class="stepexpand"><span>In the <span class="bold">Models</span> view, right-click the <span class="bold">Oracle BI Applications</span> model and select <span class="bold">Generate DDL</span> to display the Generate DDL dialog.</span>
+<div>
+<p>The <span class="bold">Generate DDL</span> option deploys the changes in the database.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Select the check box in the Synchronize column next for the W_ORG_DS table.</span></li>
+<li class="stepexpand"><span>Click the (...) button to the right of the <span class="bold">Generation Folder</span> field to display the <span class="wintitle">Select a folder</span> dialog, and select the <code>\Utilities\System</code> folder, and click <span class="bold">OK</span>.</span></li>
+<li class="stepexpand"><span>When the Procedure: DDL <span class="variable">Name</span> dialog is displayed, click <span class="bold">Execute</span>.</span>
+<div>
+<p>Display ODI Operator and make sure that the procedure executes successfully.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Display the <span class="bold">Projects</span> view, expand the Mappings folder, and expand the SIL_OrganizationDimension folder.</span></li>
+<li class="stepexpand"><span>Edit the Interface Sq_W_ORG_DS to display the Interface: <span class="variable">Name</span> dialog.</span>
+<ol>
+<li><span>Display the Diagram tab, and select the <span class="bold">X_ACCOUNT_LOG</span> field in the Target Datastore area.</span></li>
+<li><span>Click the <span class="bold">Launch Expression Editor</span> icon to display the Expression Editor dialog, and then select <span class="bold">W_ORG_DS.X_ACCOUNT_LOG</span> as the value in the <span class="bold">Implementation</span> field.</span></li>
+<li><span>Select the <span class="bold">X_LAST_LOGIN</span> field in the Target Datastore area.</span></li>
+<li><span>Click the <span class="bold">Launch Expression Editor</span> icon to display the Expression Editor dialog, and then select <span class="bold">W_ORG_DS.X_LAST_LOGIN</span> as the value in the <span class="bold">Implementation</span> field.</span></li>
+<li><span>Click <span class="bold">OK</span> to save the details.</span></li>
+</ol>
+</li>
+<li class="stepexpand"><span>Repeat Step 11 for the Interface Sq_W_ORG_DS_FULL.</span></li>
+<li class="stepexpand"><span>Edit the Interface ORG_D to display the Interface: <span class="variable">Name</span> dialog.</span>
+<ol>
+<li><span>Display the Diagram tab, and select the <span class="bold">X_ACCOUNT_LOG</span> field in the Target Datastore area.</span></li>
+<li><span>Click the <span class="bold">Launch Expression Editor</span> icon to display the Expression Editor dialog, and then select <span class="bold">Sq_W_ORG_DS.X_ACCOUNT_LOG</span> as the value in the <span class="bold">Implementation</span> field.</span></li>
+<li><span>Select the <span class="bold">X_LAST_LOGIN</span> field in the Target Datastore area.</span></li>
+<li><span>Click the <span class="bold">Launch Expression Editor</span> icon to display the Expression Editor dialog, and then select <span class="bold">Sq_W_ORG_DS.X_LAST_LOGIN</span> as the value in the <span class="bold">Implementation</span> field.</span></li>
+<li><span>Click <span class="bold">OK</span> to save the details.</span></li>
+</ol>
+</li>
+<li class="stepexpand"><span>Repeat Step 13 for the Interface ORG_D_FULL and ORG_D_UNSPC.</span></li>
+<li class="stepexpand"><span>Right-click the scenario <span class="bold">SILOS\SIL_OrganizationDimension</span> and select <span class="bold">Regenerate</span>.</span></li>
+</ol>
+</div>
+</div>
+<a id="BIASA24503"></a>
+<div class="sect3"><a id="GUID-929D44E2-1F60-40B9-83FD-EAED7F48C0F3"></a>
+<h3 id="BIAET-GUID-929D44E2-1F60-40B9-83FD-EAED7F48C0F3" class="sect3">Tips for Modifying the SQ_BCI_ Interface</h3>
+<div>
+<p>Follow these tips to modify the SQ_BCI_Interface:</p>
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Make sure that you define a new source table on the right side of a LEFT OUTER join syntax with the existing source tables. Using an INNER join or a RIGHT OUTER join might result in loss of records.</p>
+</li>
+<li>
+<p>Make sure that you define joins to match on a unique set of values. If you do not define a join that ensures a unique relationship, you might get a Cartesian product, which changes the granularity and results in duplicate errors.</p>
+</li>
+</ul>
+<p>If it is not possible to define a unique join, then do the following:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Create an inline view interface sourcing from the new table, outputting necessary columns plus a column LKP_ACTIVE.</span>
+<div>
+<p>For example, you might specify the expression for LKP_ACTIVE as:</p>
+<pre dir="ltr">
+IS_FIRST(
+ARG_GROUP(columns to be partitioned by),
+ARG_GROUP(columns to be ordered by))
+</pre>
+<div class="infobox-note" id="GUID-929D44E2-1F60-40B9-83FD-EAED7F48C0F3__GUID-AC3A410C-8042-4479-9EC1-4BF34A857E09">
+<p class="notep1">Note:</p>
+In the given example (specify the expression for LKP_ACTIVE), the IS_FIRST command and the matching filter are only needed if multiple records might be returned.</div>
+</div>
+</li>
+<li class="stepexpand"><span>Bring the inline view interface into an existing interface with a filter LKP_ACTIVE=1, which guarantees that at most one record is returned.</span>
+<div>
+<p>As a best practice, you can comment custom code that you introduce. Comments should include the developer's name and the date indicating when the code is added.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<a id="BIASA24504"></a>
+<div class="sect2"><a id="GUID-2D53A083-406B-451A-A056-27DC262D8A65"></a>
+<h2 id="BIAET-GUID-2D53A083-406B-451A-A056-27DC262D8A65" class="sect2">Other Types of Customizations Requiring Special Handling</h2>
+<div>
+<p>These types of customization require special handling.</p>
+<div class="section">
+<p class="subhead2">Topics:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-8FD2D6E5-0102-48F6-9584-49E0C03CAEA3.htm#GUID-4E08C3BA-A54D-4228-BDC2-4E2348EFB600" title="The Oracle BI Applications ETL process supports Type I and Type II slowly changing dimension behavior. Some dimensions are enabled only for Type I behavior while other dimensions are enabled to also support Type II behavior.">Modifying Category 2 SCD Behavior</a></p>
+</li>
+<li>
+<p><a href="GUID-8FD2D6E5-0102-48F6-9584-49E0C03CAEA3.htm#GUID-1E3C06BE-88CF-417D-99FC-000AC4817D87" title="You can add a dimension to an existing fact, adding a dimension and dimension staging datastores as well as associated SDE and SIL processes, which also requires extending the fact and fact staging tables to reflect the association with the new dimension.">Adding a Dimension to an Existing Fact</a></p>
+</li>
+<li>
+<p><a href="GUID-8FD2D6E5-0102-48F6-9584-49E0C03CAEA3.htm#GUID-B6F42D40-82FE-424B-B253-1C2326D2EAE7" title="This use case is similar to adding a regular Dimension to a fact but in this case, a Date dimension is used. There are several Date related dimension, each representing dates in a different manner (fiscal, enterprise, and so on) and different granularities (day, week, month, etc.).">Adding a DATE_WID Column to a Fact</a></p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+<a id="BIASA24505"></a>
+<div class="sect3"><a id="GUID-4E08C3BA-A54D-4228-BDC2-4E2348EFB600"></a>
+<h3 id="BIAET-GUID-4E08C3BA-A54D-4228-BDC2-4E2348EFB600" class="sect3">Modifying Category 2 SCD Behavior</h3>
+<div>
+<p>The <span>Oracle BI Applications</span> ETL process supports Type I and Type II slowly changing dimension behavior. Some dimensions are enabled only for Type I behavior while other dimensions are enabled to also support Type II behavior.</p>
+<div class="section">
+<p>Of those dimensions that support Type II behavior, different dimension attributes have different Slowly Changing behavior including some attributes being treated as Type I.</p>
+<div class="infobox-note" id="GUID-4E08C3BA-A54D-4228-BDC2-4E2348EFB600__GUID-F283F19C-65AC-4CAC-B0DB-66D9594172D2">
+<p class="notep1">Note:</p>
+Modifying the Type-II tracking logic is the only change that you should make to shipped logic.</div>
+<p>To modify a Category 2 SCD Trigger:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li><span>In ODI Designer, modify the dimension datastore.</span>
+<ol>
+<li><span>In the <span class="bold">Models</span> view, expand the Oracle BI Applications folder, <span class="bold">Oracle BI Applications</span> (Model), and <span class="bold">Dimension</span> (Submodel).</span></li>
+<li><span>Double-click the Dimension table.</span></li>
+<li><span>In the Definition tab, change the OLAP type value to either <span class="bold">Dimension</span> (only supports Type I changes) or <span class="bold">Slowly Changing Dimension</span> (supports Type II changes).</span></li>
+</ol>
+</li>
+<li><span>Modify the SIL Dimension Task.</span>
+<ol>
+<li><span>Navigate to the SIL task that populates this dimension.</span></li>
+<li><span>Double-click the <span class="bold">Main</span> interface.</span></li>
+<li><span>In the Flow subtab, select the Target (ORACLE_BI_APPLICATIONS) window.</span></li>
+<li><span>If the Property Window is not visible, open it by selecting <span class="bold">Property Inspector</span> under <span class="bold">View</span>.</span></li>
+<li><span>Change the IKM Selector value to <kbd class="userinput">IKM BIAPPS Oracle Slowly Changing Dimension</kbd> if enabling Type II behavior or <kbd class="userinput">IKM BIAPPS Oracle Incremental Update</kbd> if removing Type II behavior.</span></li>
+<li><span>Regenerate the scenario.</span></li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="sect4"><a id="ENABLE_DISABLE_TYPE_2_BEHAVIOR"></a>
+<h4 id="BIAET-ENABLE_DISABLE_TYPE_2_BEHAVIOR" class="sect4">Enabling or Disabling Type II Behavior Associated with a Dimension</h4>
+<div>
+<p>You can modify which columns are treated as Type I or Type II in a dimension that is configured to support Type II behavior. If a dimension is configured to support only Type I behavior, the following changes have no effect as all columns are treated as Type I.</p>
+<div class="section">To enable or disable Type II behavior:</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In ODI Designer, modify the dimension datastore.</span>
+<div>
+<p>In the <span class="bold">Models</span> view, expand the Oracle BI Applications folder, Oracle BI Applications (Model), Dimension (Submodel), and Columns.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Double-click the column whose SCD behavior you want to change.</span></li>
+<li class="stepexpand"><span>In the Description subtab, from the <span class="bold">Slowly Changing Dimensions Behavior</span> list, select the column behavior.</span>
+<div>
+<p>To implement Type I behavior, select Overwrite on Change. To implement Type II behavior, select Add Row on Change. If enabling Type II behavior for a custom dimension, be sure to set columns as follows:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>ROW_WID - Surrogate Key</p>
+</li>
+<li>
+<p>INTEGRATION_ID, DATASOURCE_NUM_ID - Natural Key</p>
+</li>
+<li>
+<p>CURRENT_FLG - Current Record Flag</p>
+</li>
+<li>
+<p>EFFECTIVE_FROM_DT - Starting Timestamp</p>
+</li>
+<li>
+<p>EFFECTIVE_TO_DT - Ending Timestamp</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<a id="BIASA24506"></a>
+<div class="sect3"><a id="GUID-1E3C06BE-88CF-417D-99FC-000AC4817D87"></a>
+<h3 id="BIAET-GUID-1E3C06BE-88CF-417D-99FC-000AC4817D87" class="sect3">Adding a Dimension to an Existing Fact</h3>
+<p>You can add a dimension to an existing fact, adding a dimension and dimension staging datastores as well as associated SDE and SIL processes, which also requires extending the fact and fact staging tables to reflect the association with the new dimension.</p>
+<a id="BIASA24513"></a>
+<div class="sect4"><a id="GUID-DB5136AE-4878-4B88-9D2F-83F44ADE1D7D"></a>
+<h4 id="BIAET-GUID-DB5136AE-4878-4B88-9D2F-83F44ADE1D7D" class="sect4">Customizing Fact Datastores and Tasks</h4>
+<div>
+<p>You must extend the Fact related datastores, W_<span class="variable">Fact Name</span>_FS and W_<span class="variable">Fact Name</span>_F and tasks to reflect the new dimension.</p>
+<div class="section">To extend the Fact related datastores and tasks:</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Extend the Fact Staging datastore by adding an ID column that follows the naming convention X_<span class="variable">name</span>_ID and datatype VARCHAR2(80).</span>
+<div>
+<p>The Oracle BI Applications Model should already be versioned.</p>
+</div>
+<ol>
+<li><span>Navigate to <span class="bold">Models</span>, Oracle BI Applications (Folder), <span class="bold">Oracle BI Applications</span> (Model), <span class="bold">Fact Stage</span> (Submodel) and double-click the <span class="bold">Fact Staging</span> Table.</span></li>
+<li><span>In the Columns subtab, select the <span class="bold">X_CUSTOM</span> column.</span></li>
+<li><span>Click the green <span class="bold">+</span> symbol to add a column below the X_CUSTOM column.</span></li>
+</ol>
+</li>
+<li class="stepexpand"><span>Extend the Fact datastore by adding a WID column that follows the naming convention X_<span class="variable">name</span>_WID and datatype NUMBER(10).</span>
+<div>
+<p>Repeat Step 1 to add a column to the fact datastore.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Add a foreign key constraint to the fact table that refers to the created custom dimension table.</span>
+<div>
+<p>The foreign key constraint ensures the Custom SIL task is included in the generated load plan. The Custom SDE task is included in the generated load plan because it populates the staging table that is used as a source for the custom SIL task.</p>
+</div>
+<ol>
+<li class="substepexpand"><span>Drill into the Fact datastore.</span></li>
+<li class="substepexpand"><span>Right-click the <span class="bold">Constraints</span> subfolder below the Fact datastore and select <span class="bold">New Reference</span>.</span>
+<div>
+<p>The naming convention is FK_<span class="variable">Fact Table</span>_<span class="variable">Dimension Table</span>.</p>
+</div>
+</li>
+<li class="substepexpand"><span>Enumerate each WID column with a numeric suffix, for example, FK_WC_CUSTOM_F_WC_CUSTOM_D1. Type must be User Reference if there are multiple WID columns that need to reference the same dimension table.</span></li>
+<li class="substepexpand"><span>Select <span class="bold">Custom Dimension</span> from the <span class="bold">Table</span> list.</span></li>
+<li class="substepexpand"><span>In the Columns subtab, click the green <span class="bold">+</span> symbol to add a new column.</span></li>
+<li class="substepexpand"><span>For the Foreign Table column, select the custom WID column in the fact table.</span></li>
+<li class="substepexpand"><span>For the Primary Table column, select the ROW_WID column in the dimension table.</span></li>
+</ol>
+</li>
+<li class="stepexpand"><span>Add a non-unique bitmap index on the X_<span class="variable">name</span>_WID column.</span>
+<ol>
+<li class="substepexpand"><span>Drill into the Fact datastore.</span></li>
+<li class="substepexpand"><span>Right-click the <span class="bold">Constraints</span> subfolder below the Fact datastore and select <span class="bold">New Key</span>.</span>
+<div>
+<p>The naming convention is <span class="wintitle">Fact Table</span>_F<span class="variable">n</span>.</p>
+</div>
+</li>
+<li class="substepexpand"><span>Enumerate each of these indexes with a numeric suffix, for example, WC_CUSTOM_F1.</span></li>
+<li class="substepexpand"><span>Select the <span class="bold">Not Unique Index</span> option.</span></li>
+<li class="substepexpand"><span>In the Columns subtab, add the WID column using the shuttle button.</span></li>
+<li class="substepexpand"><span>In the Control subtab, select the <span class="bold">Defined in the Database</span> and <span class="bold">Active</span> options.</span></li>
+<li class="substepexpand"><span>In the Flexfields subtab, set the index type value to QUERY and the bitmap index value to <kbd class="userinput">Y</kbd>.</span></li>
+</ol>
+</li>
+<li class="stepexpand"><span>Modify the Fact SDE task.</span>
+<div>
+<p>Pass the value from the source table to the custom X_<span class="variable">name</span>_ID column in the staging table. In the mapping expression, include any necessary conversion functions to get the data into the VARCHAR2(80) format.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Modify the Fact SIL task. Add logic to retrieve the ROW_WID value from the custom dimension.</span>
+<div>
+<p>This is usually done in one of the following ways. There is no significant difference between these two methods:</p>
+</div>
+<ol>
+<li class="substepexpand"><span>Add the dimension as a source in the SQ temp interface.</span>
+<div>
+<p>Join on the fact table's ID column and the dimension table's INTEGRATION_ID column and the fact and dimension DATASOURCE_NUM_ID columns. If the dimension is a Type II dimension, include a range join on the fact's canonical date between the dimension's effective dates. Configure the join as a Left Outer Join. Pass the ROW_WID column as an output.</p>
+</div>
+</li>
+<li class="substepexpand"><span>Add the dimension as a lookup in the main interface.</span>
+<div>
+<p>The Lookup join is on the fact table's ID column and the dimension table's INTEGRATION_ID column and the fact and dimension DATASOURCE_NUM_ID columns. If the dimension is a Type II dimension, include a range join on the fact's canonical date between the dimension's effective dates. Configure the Lookup Type as SQL left-outer join in the from clause.</p>
+</div>
+</li>
+</ol>
+</li>
+<li class="stepexpand"><span>In the mapping expression to populate the custom WID column in the main interface, embed the ROW_WID column from the dimension table in a function that defaults NULL values to <span class="bold">0</span>.</span>
+<div>
+<p>For example, <code class="codeph">COALESCE(SQ_W_AP_HOLDS_FS.PURCHASE_ORG_WID,0)</code></p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<a id="BIASA24515"></a><a id="BIASA24514"></a>
+<div class="sect3"><a id="GUID-B6F42D40-82FE-424B-B253-1C2326D2EAE7"></a>
+<h3 id="BIAET-GUID-B6F42D40-82FE-424B-B253-1C2326D2EAE7" class="sect3">Adding a DATE_WID Column to a Fact</h3>
+<div>
+<p>This use case is similar to adding a regular Dimension to a fact but in this case, a Date dimension is used. There are several Date related dimension, each representing dates in a different manner (fiscal, enterprise, and so on) and different granularities (day, week, month, etc.).</p>
+<div class="section">
+<p>Joins between a fact and Date dimension table are performed on a Date specific WID column. The Date WID column is a smart key value that represents the date in <code class="codeph">YYYYMMDD</code> format. You must not perform a lookup to resolve the ROW_WID of the Date dimension, rather you pass the Date column through the ETL process and convert it to this format.</p>
+<p>Each fact table has exactly one canonical Date specific WID column. This is the primary date used to drive various date-related calculations. There is no particular metadata to identify this column, but lookups to effective dated tables use this column in the ETL and various date-related expressions in the repository also use this column. All packaged fact tables have a single canonical date already identified. When creating custom fact tables, nominate one Date WID column as the canonical date and use consistently.</p>
+<p>Follow the same steps as adding a dimension to a fact with the following changes. You must not create a custom SDE as you use the existing Date dimension.</p>
+<p>You must extend the facts related datastores, W_<span class="variable">Fact Name</span>_FS and W_<span class="variable">Fact Name</span>_F and tasks to reflect the new dimension.</p>
+<p>To extend the facts related datastores and tasks:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Extend the Fact Staging datastore by adding a DT column that follows the naming convention X_<span class="variable">name</span>_DT.</span>
+<div>
+<p>This column should have the format DATE(7).</p>
+</div>
+</li>
+<li class="stepexpand"><span>Extend the Fact datastore by adding both custom DT and DT_WID columns.</span>
+<div>
+<p>These follow the naming convention X_<span class="variable">name</span>_DT and X_<span class="variable">name</span>_DT_WID.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Add a foreign key constraint to the Date dimension or dimensions. If there are multiple WID columns that must reference the same date dimension table, enumerate each with a numeric suffix.</span></li>
+<li class="stepexpand"><span>Modify the Fact SDE task.</span>
+<div>
+<p>Pass the value from the source table to the custom X_<span class="wintitle">name</span>_DT column in the staging table. Apply any conversions required to get the data into DATE format.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Modify the Fact SIL task. Pass the X_<span class="variable">name</span>_DT value from the staging table to the corresponding column in the fact table.</span>
+<div>
+<p>In the mapping expression to populate the custom X_<span class="variable">name</span>_DT_WID column in the main interface, embed the DT column in a function that calculates the DT_WID value, defaulting to 0 when the supplied DT value is NULL. For example, <code class="codeph">CALCULATE_DT_WID_DFLT(SQ_W_AP_HOLDS_FS.HOLD_DATE,0)</code>.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment43">
+<tr>
+<td class="cellalignment50">
+<table class="cellalignment48">
+<tr>
+<td class="cellalignment47"><a href="GUID-7EEE748C-9271-4CAA-9EB5-CB247CE7537A.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment47"><a href="GUID-AF634C2B-93D1-4338-A375-30ED1504E741.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2014, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment52">
+<table class="cellalignment46">
+<tr>
+<td class="cellalignment47"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment47"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment47"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

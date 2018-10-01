@@ -1,0 +1,249 @@
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+
+<meta name="DC.Type" content="topic">
+<meta name="description" content="Use Perl to invoke web services using various techniques such as HTTP::Request and SOAP::Lite."><meta content="all" name="robots">
+<meta content="yes" name="mos_crawl">
+<meta content="SOAP Web Services for Oracle Project Portfolio Management Cloud" name="dcterms.title">
+<meta content="SOAP Web Services for Oracle Project Portfolio Management Cloud" name="doctitle">
+<meta content="E74441-03" name="dcterms.identifier">
+<meta content="E67968-01" name="partno">
+<meta content="OESPP" name="dcterms.isVersionOf">
+<meta content="Fusion Publishing Server, UAE Print Staging" name="generator">
+<meta content="Tue Jul 18 16:32:28 MDT 2017" name="dcterms.created">
+<meta name="relnum" content="Release 12">
+<meta name="rel_num" content="Release 12"><link type="text/html" title="Previous" href="PHP.htm" rel="Prev">
+<link type="text/html" title="Next" href="Python.htm" rel="Next">
+<link type="text/html" title="Home" href="../../index.html" rel="Start">
+<link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+<script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+<script src="../nav/js/doccd.js" type="application/javascript"></script>
+<link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+<link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+<link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+<script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+<script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+<script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+<script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+<script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+<script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+<meta class="foundation-mq-topbar">
+<link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/oer.css" rel="stylesheet">
+Perl-5B0A508F<meta name="DC.Language" content="en">
+<title>Perl</title>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header><div class="row" id="CONTENT"><div class="IND large-9 medium-8 columns"><div id="EXTRATOC"></div><span id="PAGE" style="display:none;">50/297</span><a name="BEGIN" id="BEGIN"></a><div class="fusiondoc" id="Perl-5B0A508F">
+
+   <h1 class="title topictitle1" id="Perl-5B0A508F__topic-148-5B0A888D">Perl</h1>
+
+   
+   
+   <div class="body" id="topic-164-5B0A8890"><p class="shortdesc">Use Perl to invoke web services
+using various techniques such as <samp class="ph codeph" id="topic-152-5B0A888F">HTTP::Request</samp> and <samp class="ph codeph" id="topic-154-5B0A888F">SOAP::Lite</samp>.</p>
+
+      <section class="section" id="topic-170-5B0B22DB"><h2 class="title sectiontitle">HTTP::Request</h2>
+         
+         <p class="p" id="topic-174-5B0B22DC">Use <a class="xref" href="http://search.cpan.org/~gaas/HTTP-Message-6.06/lib/HTTP/Request.pm" target="_blank">HTTP::Request</a> to directly
+construct and process the XML for the SOAP web services.</p>
+
+         <div class="p" id="topic-166-5B0A8892">The following is a sample code to:<ol class="ol" id="topic-178-5B0B22DE">
+               <li class="li" id="topic-180-5B0B22DE"><p>Construct an xml payload to invoke the
+service. This example code passes a hard coded string, which is encoded
+to UTF-8 byte array, to the request.</p></li>
+
+               <li class="li" id="topic-182-5B0B22DE"><p>Construct a Base64-encoded string for
+the credentials of the service call.</p></li>
+
+               <li class="li" id="topic-184-5B0B22DF"><p>Create a POST request for the service.</p></li>
+
+               <li class="li" id="topic-186-5B0B41D0"><p>Configure the request content type to
+be <samp class="ph codeph" id="topic-130-1DC68CBC">xml</samp>, to use basic authentication
+with Base64-encoded credentials.</p></li>
+
+               <li class="li" id="topic-188-5B0C555B"><p>Set the <samp class="ph codeph" id="SOAPAction-5B0B673A">SOAPAction</samp> to be invoked. Though the service call works
+without this value, it is a recommended standard.</p></li>
+
+               <li class="li" id="topic-190-5B0C555B"><p>Write the xml payload to the request.</p></li>
+
+               <li class="li" id="topic-192-5B0C555C"><p>Call the service.</p></li>
+
+               <li class="li" id="topic-194-5B0C555C"><p>Process the response. This example just
+prints the response.</p></li>
+
+            </ol>
+
+         </div>
+
+         <pre class="pre codeblock" id="topic-168-5B0A8892">#!/usr/bin/perl -w
+
+use strict;
+
+use LWP::UserAgent;
+use HTTP::Request::Common;
+use MIME::Base64;
+
+my $ua = LWP::UserAgent-&gt;new(agent =&gt; 'perl post');
+
+# Construct xml payload to invoke the service. In the example, it is hard coded.
+my $envelope = &lt;&lt;END;
+&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;soap:Body&gt;
+    &lt;findRule
+               xmlns="http://xmlns.oracle.com/apps/incentiveCompensation/cn/creditSetup/creditRule/creditRuleService/types/"&gt;
+    &lt;findCriteria&gt;
+        &lt;fetchStart xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;0&lt;/fetchStart&gt;
+        &lt;fetchSize xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;-1&lt;/fetchSize&gt;
+        &lt;filter xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;
+     &lt;group&gt;
+        &lt;upperCaseCompare&gt;false&lt;/upperCaseCompare&gt;
+        &lt;item&gt;
+          &lt;upperCaseCompare&gt;false&lt;/upperCaseCompare&gt;
+          &lt;attribute&gt;RuleId&lt;/attribute&gt;
+          &lt;operator&gt;=&lt;/operator&gt;
+          &lt;value&gt;300000000851162&lt;/value&gt;
+        &lt;/item&gt;
+     &lt;/group&gt;
+    &lt;/filter&gt;
+     &lt;excludeAttribute xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;false&lt;/excludeAttribute&gt;
+    &lt;/findCriteria&gt;
+    &lt;findControl&gt;
+       &lt;retrieveAllTranslations xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;false&lt;/retrieveAllTranslations&gt;
+    &lt;/findControl&gt;
+    &lt;/findRule&gt;
+  &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+END
+
+# Construct the base 64 encoded string used as the credentials for the service call.
+my $credentials = encode_base64('username:password');
+my $url = 'https://host:port/icCnSetupCreditRulesPublicService/CreditRuleService';
+
+# Create new POST request
+my $req=new HTTP::Request 'POST',$url;
+
+# Configure the request to use basic authentication, with base64-encoded user name and password to invoke the service.
+$req-&gt;header('Authorization' =&gt; "Basic " . $credentials);
+
+# Set the SOAP action to be invoked; while the call works without this, the value is expected to be set based on standards
+$req-&gt;header('SOAPAction' =&gt;
+'http://xmlns.oracle.com/apps/incentiveCompensation/cn/creditSetup/creditRule/creditRuleService/findRule');
+
+# Configure the request content type to be xml, HTTP method to be POST, and set the content length
+$req-&gt;header('Content-Type' =&gt; 'text/xml;charset=UTF-8');
+
+# Write the xml payload to the request.
+$req-&gt;content($envelope);
+
+# Call the service
+my $response=$ua-&gt;request($req);
+
+# Process the response. In this example, we simply print the response.
+print $response-&gt;error_as_HTML unless $response-&gt;is_success;
+print $response-&gt;as_string;</pre>
+
+      </section>
+
+      <section class="section" id="topic-196-5B0C555E"><h2 class="title sectiontitle">SOAP::Lite</h2>
+         
+         <div class="p" id="topic-200-5B0C5561">The following is a <a class="xref" href="http://search.cpan.org/~phred/SOAP-Lite-0.716/lib/SOAP/Lite.pm" target="_blank">SOAP:Lite</a> code example
+to:<ol class="ol" id="topic-206-5B0CECF6">
+               <li class="li" id="topic-208-5B0CECF7"><p>Create a new of the SOAP Lite.</p></li>
+
+               <li class="li" id="topic-210-5B0CECF7"><p>Register the namespaces for the envelope.</p></li>
+
+               <li class="li" id="topic-212-5B0CECF7"><p>Create a SOAP header with security information.</p></li>
+
+               <li class="li" id="topic-214-5B0CECF9"><p>Call the service.</p></li>
+
+               <li class="li" id="topic-216-5B0CECF9"><p>Process the response. This example just
+prints the response.</p></li>
+
+            </ol>
+
+         </div>
+
+         <pre class="pre codeblock" id="topic-202-5B0C5561">#!/usr/bin/perl
+use lib '/usr/lib/perl5/5.8.8/';
+use MIME::Base64;
+use SOAP::Lite;
+
+SOAP::Lite-&gt;import(trace =&gt; debug);
+
+# Create a new instance for the SOAP Lite
+my $soap = SOAP::Lite-&gt;new(
+           proxy =&gt; 'http://host:port/hcmEmploymentCoreWorker/WorkerService',
+           service =&gt; 'http://host:port/hcmEmploymentCoreWorker/WorkerService?wsdl',
+           );
+		   
+# Register namespace(s) for the envelope
+my $serializer = $soap-&gt;serializer();
+$serializer-&gt;register_ns( 'http://xmlns.oracle.com/apps/hcm/employment/core/workerService/types/', 'typ' );
+
+# Create SOAP header with security information
+my $auth = SOAP::Header-&gt;new( name =&gt; "wsse:Security" );
+$auth-&gt;attr( { "xmlns:wsse" =&gt; "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecuritysecext-1.0.xsd"});
+$auth-&gt;mustUnderstand(1);
+$auth-&gt;value( \SOAP::Data-&gt;value(
+               SOAP::Data-&gt;name("wsse:UsernameToken" =&gt; \SOAP::Data-&gt;value(
+                  SOAP::Data-&gt;name("wsse:Username" =&gt; 'username')-&gt;type(""),
+                  SOAP::Data-&gt;name("wsse:Password" =&gt; 'password')-&gt;type("")
+                  -&gt;attr( {"Type" =&gt; "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-usernametoken-profile-1.0#PasswordText"}),
+                  SOAP::Data-&gt;name("wsse:nonce" =&gt; 'jwCzGGijT90Wml6eZe4cxg==')-&gt;type("")
+                  -&gt;attr( {"EncodingType" =&gt; "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wsssoap-message-security-1.0#Base64Binary"}),
+                  SOAP::Data-&gt;name("wsse:created" =&gt; '2012-07-04T06:49:48.981Z')-&gt;type("")
+                  )-&gt;type("")
+                )-&gt;attr( {"wsu:Id" =&gt; "UsernameToken-2",
+                          "xmlns:wsu" =&gt; "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wsswssecurity-utility-1.0.xsd"
+                         })
+                )-&gt;type("")
+            );
+			
+# Populate parameters to call the service
+my $parameters =SOAP::Data-&gt;name("typ:personId" =&gt; '300000010363707')-&gt;type("");
+
+# Call the service
+my $result = $soap-&gt;call(SOAP::Data-&gt;name('typ:getWorker') =&gt; $parameters, $auth);
+
+# Process the response. In this example, we simply print the response
+die $result-&gt;faultstring if ($result-&gt;fault);
+print $result-&gt;result, "\n";</pre>
+
+      </section>
+
+   </div>
+
+   <nav role="navigation" class="related-links">
+<div class="linklist linklist"><h5 class="relatedlinks">Related Topics</h5>
+<ul>
+<li><p><a class="link" href="Java_Client.htm">Java
+Client</a></p></li>
+<li><p><a class="link" href="Database.htm">Oracle
+Database</a></p></li>
+<li><p><a class="link" href="_NET_Framework.htm">.NET
+Framework</a></p></li>
+<li><p><a class="link" href="PHP.htm">PHP</a></p></li>
+<li><p><a class="link" href="Python.htm">Python</a></p></li>
+<li><p><a class="link" href="Ruby.htm">Ruby</a></p></li>
+<li><p><a class="link" href="Invoking_SOAP_Web_Services.htm">Invoking SOAP Web Services</a></p></li></ul></div>
+</nav>
+</div></div></div><footer></footer><noscript><p>Scripting on this page enhances content navigation, but does not change the content in any way.</p></noscript>
+<!-- Start SiteCatalyst code -->
+<script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+<!-- End SiteCatalyst code -->
+</body>
+</html>

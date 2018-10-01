@@ -1,0 +1,254 @@
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+
+<meta name="DC.Type" content="reference">
+<meta name="description" content="The process operation performs create, update, delete, or merge operation on a list of business objects of the same type specified in a request payload."><meta content="all" name="robots">
+<meta content="yes" name="mos_crawl">
+<meta content="SOAP Web Services for Oracle Procurement Cloud " name="dcterms.title">
+<meta content="SOAP Web Services for Oracle Procurement Cloud " name="doctitle">
+<meta content="E74440-01" name="dcterms.identifier">
+<meta content="E67967-01" name="partno">
+<meta content="OESWP" name="dcterms.isVersionOf">
+<meta content="Fusion Publishing Server, UAE Print Staging" name="generator">
+<meta content="Fri Dec 09 12:40:20 MST 2016" name="dcterms.created">
+<meta name="relnum" content="Release 12">
+<meta name="rel_num" content="Release 12"><link type="text/html" title="Previous" href="merge_Operation.htm" rel="Prev">
+<link type="text/html" title="Next" href="Standard_Metadata_Operations.htm" rel="Next">
+<link type="text/html" title="Home" href="../../index.html" rel="Start">
+<link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+<script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+<script src="../nav/js/doccd.js" type="application/javascript"></script>
+<link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+<link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+<link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+<script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+<script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+<script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+<script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+<script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+<script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+<meta class="foundation-mq-topbar">
+<link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/oer.css" rel="stylesheet">
+ProcessOperation-D29E22E6<meta name="DC.Language" content="en">
+<title>process Operation</title>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header><div class="row" id="CONTENT"><div class="IND large-9 medium-8 columns"><div id="EXTRATOC"></div><span id="PAGE" style="display:none;">22/166</span><a name="BEGIN" id="BEGIN"></a><div class="fusiondoc" id="ProcessOperation-D29E22E6">
+
+   <h1 class="title topictitle1" id="ProcessOperation-D29E22E6__reference-178-D29E867B">process Operation</h1>
+
+   
+   
+   <div class="body refbody" id="reference-190-D29E867D"><p class="shortdesc">The <samp class="ph codeph" id="reference-204-D6DB223F">process</samp> operation performs create,
+update, delete, or merge operation on a list of business objects of
+the same type specified in a request payload. </p>
+
+      <section class="section" id="reference-192-D29E8680">
+         <p class="p" id="reference-124-D5B155E0">This operation is typically used for bulk processing and can perform
+the same operation on all the business objects. It can't perform a
+create operation for one object and delete operation on another object
+in the same call. The <samp class="ph codeph" id="reference-170-D5BDCD18">processControl</samp> parameter controls the following behavior of the operation:</p>
+
+         <ul class="ul" id="reference-126-D5B4D9FB">
+            <li class="li" id="reference-128-D5B4D9FD"><p>Level of detail in the response payload:
+Controls whether the response payload returns an empty payload, a
+payload of primary keys, or a payload with the complete definitions
+of the service data object. Use the first two options to improve performance.
+The first option eliminates the fetch, and both options reduce the
+size of the response payload. </p></li>
+
+            <li class="li" id="reference-130-D5B4D9FE"><p>Level of detail in the error message:
+Controls whether the error message contains no information, only the
+primary key, or all the attributes of the service data object that
+failed. The first option doesn't provide any information about the
+object.</p></li>
+
+            <li class="li" id="reference-132-D5B4DA00"><p>Partial failure control: Controls
+how the changes to the list of service data objects are committed.
+You must enable this parameter on a service during the design phase,
+to use it at run time. If enabled and used in a request payload, the
+objects with successful changes are committed and objects with errors
+are not. If this parameter is not enabled, the operation commits either
+all or none of the service data objects.</p></li>
+
+         </ul>
+
+      </section>
+
+      <section class="section" id="reference-134-D5B76123"><h2 class="title sectiontitle">Operation Signature</h2>
+         
+         <p class="p" id="reference-138-D5B76124">For the
+Sales Lead Service, the signature of the <samp class="ph codeph" id="reference-140-D5BCE5DD">processSalesLead</samp> operation consists
+of:</p>
+
+         <ul class="ul" id="reference-142-D5BCE5DE">
+            <li class="li" id="reference-144-D5BCE5E1"><p>Name of the operation to be performed
+on the business objects in the request payload. The <samp class="ph codeph" id="reference-146-D5BCE5E3">changeOperation</samp> parameter holds
+this name, and valid values are <samp class="ph codeph" id="reference-206-D6DB37CC">Create</samp>, <samp class="ph codeph" id="reference-208-D6DB37CE">Update</samp>, <samp class="ph codeph" id="reference-210-D6DB37CE">Merge</samp>, and <samp class="ph codeph" id="reference-212-D6DB37D0">Delete</samp>. This value is case sensitive.</p></li>
+
+            <li class="li" id="reference-148-D5BCE5E6"><p>List of business objects on which
+to perform the operation specified in the <samp class="ph codeph" id="reference-150-D5BCE584">changeOperation</samp> parameter.</p></li>
+
+            <li class="li" id="reference-152-D5BCE587"><p>Parameters to control the details
+of response payload and error messages. Set the <samp class="ph codeph" id="reference-154-D5BCE588">returnMode</samp> and <samp class="ph codeph" id="reference-156-D5BCE58B">exceptionReturnMode</samp> elements
+to <samp class="ph codeph" id="reference-158-D5BCE58F">Full</samp> to return the
+entire object, <samp class="ph codeph" id="reference-160-D5BCE590">Key</samp> to
+return only the primary key, or <samp class="ph codeph" id="reference-162-D5BCE593">None</samp> to return no information.</p></li>
+
+            <li class="li" id="reference-168-D5BD6ADD"><p>Parameter for partial failure mode.
+Set this parameter to <samp class="ph codeph" id="reference-178-D5BDCD1D">true</samp> to enable partial failure mode. The default value is <samp class="ph codeph" id="reference-180-D5BDCD1D">false</samp>.</p></li>
+
+         </ul>
+
+         <p class="p" id="reference-172-D5BDCD18">The request payload has the following
+signature. For the definition of <samp class="ph codeph" id="reference-174-D5BDCD1A">ProcessControl</samp> type, see <a class="xref" href="Sample_BC4JService_xsd.htm" title="To access BC4JService.xsd for the common service operations and the XSDs that it references for a cloud instance, replace the external virtual host and port in the URL:">Sample BC4JService.xsd</a>.</p>
+
+         <pre class="pre codeblock" id="reference-182-D5BDF224">&lt;element name="processSalesLead"&gt;
+    &lt;complexType&gt;
+        &lt;sequence&gt;
+            &lt;element name="changeOperation" type="string"/&gt;
+            &lt;element maxOccurs="unbounded" minOccurs="0" name="salesLead" type="ns1:MklLead"/&gt;
+            &lt;element name="processControl" type="ns2:ProcessControl"/&gt;
+        &lt;/sequence&gt;
+    &lt;/complexType&gt;
+&lt;/element&gt;
+</pre>
+
+         <p class="p" id="reference-184-D5BE39A0">The response payload returns
+values based on the <samp class="ph codeph" id="reference-186-D5BE67F8">ProcessControl</samp> settings after the operation completes successfully.</p>
+
+         <pre class="pre codeblock" id="reference-188-D5BE81A9">&lt;element name="processSalesLeadResponse"&gt;
+    &lt;complexType&gt;
+        &lt;sequence&gt;
+            &lt;element maxOccurs="unbounded" minOccurs="0" name="result" type="ns1:MklLead"/&gt;
+        &lt;/sequence&gt;
+    &lt;/complexType&gt;
+&lt;/element&gt;
+</pre>
+
+      </section>
+
+      <section class="section" id="reference-196-D29E8680"><h2 class="title sectiontitle">Example</h2>
+         
+         <p class="p" id="reference-200-D29E8685">This example creates
+two new Sales Lead objects for <span class="keyword" id="reference-238-DA8BB5E9">Sammamish Technologies</span> and <span class="keyword" id="reference-240-DA8BB5E9">Snoqualmie Software</span> with deal
+amounts set to <span class="keyword" id="reference-242-DA8BB5E9">$1,500,000 USD</span> and <span class="keyword" id="reference-244-DA8BB5EB">$450,000 USD</span> respectively. </p>
+
+         <pre class="pre codeblock" id="reference-202-D29E8685">&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+    &lt;soap:Body&gt;
+        &lt;ns1:processSalesLead
+xmlns:ns1="http://xmlns.oracle.com/apps/marketing/leadMgmt/leads/leadService/types/"&gt;
+            &lt;ns1:changeOperation&gt;Create&lt;/ns1:changeOperation&gt;
+            &lt;ns1:salesLead 
+xmlns:ns2="http://xmlns.oracle.com/oracle/apps/marketing/leadMgmt/leads/leadService/"&gt;
+                &lt;ns2:Name&gt;Sammamish Technoloiges&lt;/ns2:Name&gt;
+                &lt;ns2:DealAmount currencyCode="USD"&gt;1500000&lt;/ns2:DealAmount&gt;
+            &lt;/ns1:salesLead&gt;
+            &lt;ns1:salesLead 
+                &lt;ns2:Name&gt;Snoqualmie Software&lt;/ns2:Name&gt;
+                &lt;ns2:DealAmount currencyCode="USD"&gt;450000&lt;/ns2:DealAmount&gt;
+            &lt;/ns1:salesLead&gt;
+            &lt;ns1:processControl xmlns:ns2="http://xmlns.oracle.com/adf/svc/types/"&gt;
+                &lt;ns2:returnMode&gt;Key&lt;/ns2:returnMode&gt;
+                &lt;ns2:exceptionReturnMode&gt;Key&lt;/ns2:exceptionReturnMode&gt;
+                &lt;ns2:partialFailureAllowed&gt;false&lt;/ns2:partialFailureAllowed&gt;
+            &lt;/ns1:processControl&gt;
+        &lt;/ns1:processSalesLead&gt;
+    &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</pre>
+
+         <p class="p" id="reference-204-D29E8686">The
+response payload contains only the primary keys of the newly created
+Sales Lead objects.</p>
+
+         <pre class="pre codeblock" id="reference-206-D29E8686">&lt;ns0:processSalesLeadResponse xmlns="" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+xmlns:ns0="http://xmlns.oracle.com/apps/marketing/leadMgmt/leads/leadService/types/" 
+xmlns:wsa="http://www.w3.org/2005/08/addressing"
+xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"&gt;
+   &lt;ns2:result xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+xmlns:ns1="http://xmlns.oracle.com/apps/marketing/leadMgmt/leads/leadService/"
+xmlns:ns2="http://xmlns.oracle.com/apps/marketing/leadMgmt/leads/leadService/types/"
+xmlns:ns3="http://xmlns.oracle.com/apps/crmCommon/notes/noteService"
+xmlns:ns4="http://xmlns.oracle.com/oracle/apps/marketing/leadMgmt/leads/leadService/" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns4:MklLead"&gt;
+         &lt;ns4:LeadId&gt;300100055477603&lt;/ns4:LeadId&gt;
+    &lt;/ns2:result&gt;
+    &lt;ns2:result xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+xmlns:ns1="http://xmlns.oracle.com/apps/marketing/leadMgmt/leads/leadService/"
+xmlns:ns2="http://xmlns.oracle.com/apps/marketing/leadMgmt/leads/leadService/types/"
+xmlns:ns3="http://xmlns.oracle.com/apps/crmCommon/notes/noteService"
+xmlns:ns4="http://xmlns.oracle.com/oracle/apps/marketing/leadMgmt/leads/leadService/"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns4:MklLead"&gt;
+        &lt;ns4:LeadId&gt;300100055477605&lt;/ns4:LeadId&gt;
+   &lt;/ns2:result&gt;
+&lt;/ns0:processSalesLeadResponse&gt;
+</pre>
+
+         <p class="p" id="reference-208-D29E8689">This example shows a response
+payload when the <samp class="ph codeph" id="reference-190-D5BFC9E4">ReturnMode</samp> of the <samp class="ph codeph" id="reference-192-D5BFC9E4">ProcessSalesLead</samp> parameter is set to <samp class="ph codeph" id="reference-194-D5BFC9E4">None</samp>.</p>
+
+         <pre class="pre codeblock" id="reference-210-D29E8689">&lt;ns0:processSalesLeadResponse xmlns="" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:ns0="http://xmlns.oracle.com/apps/marketing/leadMgmt/leads/leadService/types/" 
+xmlns:wsa="http://www.w3.org/2005/08/addressing"
+xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"&gt;
+   &lt;ns2:result xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+xmlns:ns1="http://xmlns.oracle.com/apps/marketing/leadMgmt/leads/leadService/" 
+xmlns:ns2="http://xmlns.oracle.com/apps/marketing/leadMgmt/leads/leadService/types/"
+xmlns:ns3="http://xmlns.oracle.com/apps/crmCommon/notes/noteService" 
+xmlns:ns4="http://xmlns.oracle.com/oracle/apps/marketing/leadMgmt/leads/leadService/" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns4:MklLead"/&gt;
+    &lt;ns2:result xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/"
+xmlns:ns1="http://xmlns.oracle.com/apps/marketing/leadMgmt/leads/leadService/" 
+xmlns:ns2="http://xmlns.oracle.com/apps/marketing/leadMgmt/leads/leadService/types/" 
+xmlns:ns3="http://xmlns.oracle.com/apps/crmCommon/notes/noteService" 
+xmlns:ns4="http://xmlns.oracle.com/oracle/apps/marketing/leadMgmt/leads/leadService/" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns4:MklLead"/&gt;
+&lt;/ns0:processSalesLeadResponse&gt;</pre>
+
+      </section>
+
+      <section class="section" id="reference-212-D29E8689"><h2 class="title sectiontitle">Related Operations</h2>
+         
+         <p class="p" id="reference-216-D29E8689">To perform
+different operations on different objects in a request payload, use
+the <samp class="ph codeph" id="reference-196-D5C887E5">processCS</samp> operation.</p>
+
+         <p class="p" id="reference-198-D5C887E5">To control the values in the payload
+for performance optimizations, use the <samp class="ph codeph" id="reference-200-D5C887E7">process</samp> operation instead of <samp class="ph codeph" id="reference-202-D5C887E8">create</samp>, <samp class="ph codeph" id="reference-204-D5C887EA">update</samp>, <samp class="ph codeph" id="reference-206-D5C887EA">merge</samp>, and <samp class="ph codeph" id="reference-208-D5C887EB">delete</samp> operations on individual
+business objects.</p>
+
+      </section>
+
+   </div>
+
+   <nav role="navigation" class="related-links">
+<div class="linklist linklist"><h5 class="relatedlinks">Related Topics</h5>
+<ul>
+<li><p><a class="link" href="Standard_CRUD_Operations.htm">Standard CRUD Operations</a></p></li>
+<li><p><a class="link" href="create_Operation.htm">create Operation</a></p></li>
+<li><p><a class="link" href="delete_Operation.htm">delete Operation</a></p></li>
+<li><p><a class="link" href="get_Operation.htm">get Operation</a></p></li>
+<li><p><a class="link" href="find_Operation.htm">find Operation</a></p></li>
+<li><p><a class="link" href="Find_By_Additional_Pre_Defined_Search_Criteria_Operation.htm">find by additional predefined search criteria
+Operation</a></p></li>
+<li><p><a class="link" href="update_Operation.htm" title="The update operation updates the existing rows in the top-level service data object as well as the child and descendant entities. The operation throws an exception if the rows do not exist.">update Operation</a></p></li>
+<li><p><a class="link" href="merge_Operation.htm" title="The merge operation performs an upsert, which means that the operation updates a service data object if it exists, or creates a new service data object if it doesn't exist.">merge Operation</a></p></li></ul></div>
+</nav>
+</div></div></div><footer></footer><noscript><p>Scripting on this page enhances content navigation, but does not change the content in any way.</p></noscript>
+<!-- Start SiteCatalyst code -->
+<script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+<!-- End SiteCatalyst code -->
+</body>
+</html>

@@ -1,0 +1,228 @@
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+
+<meta name="DC.Type" content="topic">
+<meta name="description" content="If you enable service warnings on a service, the response payload returns the warning messages generated during operation execution along with the service data object. The data type of the element in the response payload extends the service data object and captures the warning messages."><meta content="all" name="robots">
+<meta content="yes" name="mos_crawl">
+<meta content="SOAP Web Services for Oracle Procurement Cloud " name="dcterms.title">
+<meta content="SOAP Web Services for Oracle Procurement Cloud " name="doctitle">
+<meta content="E74440-01" name="dcterms.identifier">
+<meta content="E67967-01" name="partno">
+<meta content="OESWP" name="dcterms.isVersionOf">
+<meta content="Fusion Publishing Server, UAE Print Staging" name="generator">
+<meta content="Fri Dec 09 12:40:19 MST 2016" name="dcterms.created">
+<meta name="relnum" content="Release 12">
+<meta name="rel_num" content="Release 12"><link type="text/html" title="Previous" href="Business_Object_Service_Advanced_Examples.htm" rel="Prev">
+<link type="text/html" title="Next" href="Request_Payload_Element.htm" rel="Next">
+<link type="text/html" title="Home" href="../../index.html" rel="Start">
+<link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+<script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+<script src="../nav/js/doccd.js" type="application/javascript"></script>
+<link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+<link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+<link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+<script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+<script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+<script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+<script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+<script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+<script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+<meta class="foundation-mq-topbar">
+<link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/oer.css" rel="stylesheet">
+ServicesWithWarningsEnabled-D73A504E<meta name="DC.Language" content="en">
+<title>Services with Warnings Enabled Examples</title>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header><div class="row" id="CONTENT"><div class="IND large-9 medium-8 columns"><div id="EXTRATOC"></div><span id="PAGE" style="display:none;">37/166</span><a name="BEGIN" id="BEGIN"></a><div class="fusiondoc" id="ServicesWithWarningsEnabled-D73A504E">
+
+   <h1 class="title topictitle1" id="ServicesWithWarningsEnabled-D73A504E__topic-100-D73D6C68">Services with Warnings Enabled Examples</h1>
+
+   
+   
+   <div class="body" id="topic-112-D73D6C6C"><p class="shortdesc">If you enable service warnings
+on a service, the response payload returns the warning messages generated
+during operation execution along with the service data object. The
+data type of the element in the response payload extends the service
+data object and captures the warning messages.</p>
+
+      <p class="p" id="topic-114-D73D6C6C">For example, suppose service warnings are
+enabled on Location Service. The <samp class="ph codeph" id="topic-146-D7661D02">create</samp> operation accepts the Location business object to be defined and
+returns the newly created object along with the service warnings generated
+during the operation. The <samp class="ph codeph" id="topic-194-E4AA5CC1">LocationResult</samp> data type acts as a wrapper that allows the result to store both
+location type and warning messages.</p>
+
+      <pre class="pre codeblock" id="topic-116-D73D7EC1">&lt;element name="createLocation"&gt;
+    &lt;complexType&gt;
+        &lt;sequence&gt;
+            &lt;element name="location" type="ns1:Location"/&gt;
+        &lt;/sequence&gt;
+    &lt;/complexType&gt;
+&lt;/element&gt;
+
+ement name="createLocationResponse"&gt;
+    &lt;complexType&gt;
+        &lt;sequence&gt;
+            &lt;element name="result" type="ns1:LocationResult"/&gt;
+        &lt;/sequence&gt;
+    &lt;/complexType&gt;
+&lt;/element&gt;
+</pre>
+
+      <p class="p" id="topic-120-D73E861F">The <samp class="ph codeph" id="topic-122-D73E8620">LocationResult</samp> data type extends the <samp class="ph codeph" id="topic-124-D73E8620">MethodResult</samp> type. For the definition of the <samp class="ph codeph" id="topic-126-D73E8622">MethodResult</samp> type, see <a class="xref" href="Sample_BC4JService_xsd.htm" title="To access BC4JService.xsd for the common service operations and the XSDs that it references for a cloud instance, replace the external virtual host and port in the URL:">Sample BC4JService.xsd</a>. The <samp class="ph codeph" id="topic-130-D73E8623">maxOccurs</samp> parameter is set to <samp class="ph codeph" id="topic-132-D73E8623">unbounded</samp> instead of to <samp class="ph codeph" id="topic-134-D73E8623">1</samp> because the same data type is used
+for the <samp class="ph codeph" id="topic-136-D73E8625">find</samp> and <samp class="ph codeph" id="topic-138-D73E8625">process</samp> operations, which return
+multiple objects.</p>
+
+      <pre class="pre codeblock" id="topic-140-D73E9793">&lt;xsd:complexType name="LocationResult"&gt;
+    &lt;xsd:complexContent&gt;
+        &lt;xsd:extension base="ns0:MethodResult"&gt;
+            &lt;xsd:sequence&gt;
+                &lt;xsd:element name="Value" type="Location" minOccurs="0"
+                maxOccurs="unbounded"/&gt;
+            &lt;/xsd:sequence&gt;
+        &lt;/xsd:extension&gt;
+    &lt;/xsd:complexContent&gt;
+&lt;/xsd:complexType&gt;</pre>
+
+      <p class="p" id="topic-142-D73F508E">If you don't enable service warnings on
+a service, the response payload returns the business object service
+itself. For example, the <samp class="ph codeph" id="topic-148-D7661D02">createSalesLead</samp> operation defined on the Sales Lead service has a request and response
+payload that accepts and returns the Sales Lead object, which is of <samp class="ph codeph" id="topic-144-D7404818">MklLead</samp> type.</p>
+
+      <section class="section" id="topic-146-D7404818">
+         <p class="p" id="topic-150-D740481A">The following
+example request payload is for the <samp class="ph codeph" id="topic-152-D740481A">createLocation</samp> operation that is defined on <samp class="ph codeph" id="topic-180-F29AAC09">http://xmlns.oracle.com/apps/cdm/foundation/parties/locationService/applicationModule/}LocationService</samp>. This XML fragment creates <samp class="ph codeph" id="topic-174-F29486BE">1 Oracle</samp> 
+            <samp class="ph codeph" id="topic-176-F29486BE">Parkway, Redwood Shores, CA 94065,</samp> 
+            <samp class="ph codeph" id="topic-178-F294B8B8">US</samp> location object by using
+the <samp class="ph codeph" id="topic-158-D74079F3">AMS</samp> module. This module
+is registered as a lookup code for the <samp class="ph codeph" id="topic-160-D74079F3">HZ_CREATED_BY_MODULES</samp> lookup type. See <a class="xref" href="Lookup_Type_Explained.htm" title="The attribute description of a service data object may contain references to a lookup type to indicate valid values for that attribute. For example, the CustomerCategoryCode attribute of the Trading Community Customer Account Site service data object contains reference to ADDRESS_CATEGORY lookup type.">Using Lookups</a>.</p>
+
+         <pre class="pre codeblock" id="topic-162-D74079F4">&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+    &lt;soap:Body&gt;
+        &lt;ns1:createLocation 
+        xmlns:ns1="http://xmlns.oracle.com/apps/cdm/foundation/parties/
+        locationService/applicationModule/types/"&gt;
+            &lt;ns1:location
+            xmlns:ns2="http://xmlns.oracle.com/apps/cdm/foundation/parties/locationService/"&gt;
+                &lt;ns2:Address1&gt;1 Oracle Parkway&lt;/ns2:Address1&gt;
+                &lt;ns2:City&gt;Redwood Shores&lt;/ns2:City&gt;
+                &lt;ns2:State&gt;CA&lt;/ns2:State&gt;
+                &lt;ns2:Country&gt;US&lt;/ns2:Country&gt;
+                &lt;ns2:PostalCode&gt;94065&lt;/ns2:PostalCode&gt;
+                &lt;ns2:CreatedByModule&gt;AMS&lt;/ns2:CreatedByModule&gt;
+            &lt;/ns1:location&gt;
+        &lt;/ns1:createLocation&gt;
+    &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</pre>
+
+         <p class="p" id="topic-164-D740B93F">The response
+payload for the <samp class="ph codeph" id="topic-166-D740B93F">createLocation</samp> operation contains the complete definition of the newly created
+location business object.</p>
+
+         <pre class="pre codeblock" id="topic-168-D740B93F">&lt;ns0:createLocationResponse xmlns=""
+xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:ns0="http://xmlns.oracle.com/apps/cdm/foundation/parties/locationService/
+applicationModule/types/" xmlns:wsa="http://www.w3.org/2005/08/addressing"
+xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-
+utility-1.0.xsd"&gt;
+    &lt;ns2:result xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" 
+xmlns:ns1="http://xmlns.oracle.com/apps/cdm/foundation/parties/locationService/"
+xmlns:ns2="http://xmlns.oracle.com/apps/cdm/foundation/parties/locationService/
+applicationModule/types/"
+xmlns:ns3="http://xmlns.oracle.com/apps/cdm/foundation/parties/partyService/"
+xmlns:ns4="http://xmlns.oracle.com/apps/cdm/foundation/parties/flex/location/"
+xmlns:tns="http://xmlns.oracle.com/adf/svc/errors/"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:type="ns1:LocationResult"&gt;
+    &lt;ns1:Value&gt;
+        &lt;ns1:LocationId&gt;300100039119119&lt;/ns1:LocationId&gt;
+        &lt;ns1:LastUpdateDate&gt;2014-04-22T23:43:17.153-07:00&lt;/ns1:LastUpdateDate&gt;
+        &lt;ns1:LastUpdatedBy&gt;SALES_ADMIN&lt;/ns1:LastUpdatedBy&gt;
+        &lt;ns1:CreationDate&gt;2014-04-22T23:43:17.001-07:00&lt;/ns1:CreationDate&gt;
+        &lt;ns1:CreatedBy&gt;SALES_ADMIN&lt;/ns1:CreatedBy&gt;
+        &lt;ns1:LastUpdateLogin&gt;F7B103E144504B3CE0433A90F50A0448
+        &lt;/ns1:LastUpdateLogin&gt;
+        &lt;ns1:RequestId xsi:nil="true"/&gt;
+        &lt;ns1:OrigSystem xsi:nil="true"/&gt;
+        &lt;ns1:OrigSystemReference&gt;300100039119119&lt;/ns1:OrigSystemReference&gt;
+        &lt;ns1:Country&gt;US&lt;/ns1:Country&gt;
+        &lt;ns1:Address1&gt;1 Oracle Parkway&lt;/ns1:Address1&gt;
+        &lt;ns1:Address2 xsi:nil="true"/&gt;
+        &lt;ns1:Address3 xsi:nil="true"/&gt;
+        &lt;ns1:Address4 xsi:nil="true"/&gt;
+        &lt;ns1:City&gt;Redwood Shores&lt;/ns1:City&gt;
+        &lt;ns1:PostalCode&gt;94065&lt;/ns1:PostalCode&gt;
+        &lt;ns1:State&gt;CA&lt;/ns1:State&gt;
+        &lt;ns1:Province xsi:nil="true"/&gt;
+        &lt;ns1:County xsi:nil="true"/&gt;
+        &lt;ns1:AddressStyle xsi:nil="true"/&gt;
+        &lt;ns1:ValidatedFlag&gt;false&lt;/ns1:ValidatedFlag&gt;
+        &lt;ns1:AddressLinesPhonetic xsi:nil="true"/&gt;
+        &lt;ns1:PostalPlus4Code xsi:nil="true"/&gt;
+        &lt;ns1:Position xsi:nil="true"/&gt;
+        &lt;ns1:LocationDirections xsi:nil="true"/&gt;
+        &lt;ns1:AddressEffectiveDate xsi:nil="true"/&gt;
+        &lt;ns1:AddressExpirationDate xsi:nil="true"/&gt;
+        &lt;ns1:ClliCode xsi:nil="true"/&gt;
+        &lt;ns1:Language xsi:nil="true"/&gt;
+        &lt;ns1:ShortDescription xsi:nil="true"/&gt;
+        &lt;ns1:Description xsi:nil="true"/&gt;
+        &lt;ns1:SalesTaxGeocode xsi:nil="true"/&gt;
+        &lt;ns1:SalesTaxInsideCityLimits&gt;1&lt;/ns1:SalesTaxInsideCityLimits&gt;
+        &lt;ns1:FaLocationId xsi:nil="true"/&gt;
+        &lt;ns1:ObjectVersionNumber&gt;1&lt;/ns1:ObjectVersionNumber&gt;
+        &lt;ns1:CreatedByModule&gt;AMS&lt;/ns1:CreatedByModule&gt;
+        &lt;ns1:GeometryStatusCode&gt;DIRTY&lt;/ns1:GeometryStatusCode&gt;
+        &lt;ns1:ValidationStatusCode xsi:nil="true"/&gt;
+        &lt;ns1:DateValidated xsi:nil="true"/&gt;
+        &lt;ns1:DoNotValidateFlag xsi:nil="true"/&gt;
+        &lt;ns1:Comments xsi:nil="true"/&gt;
+        &lt;ns1:HouseType xsi:nil="true"/&gt;
+        &lt;ns1:EffectiveDate&gt;2014-04-22&lt;/ns1:EffectiveDate&gt;
+        &lt;nsl:AddrElementAttribute1 xsi:nil="true"/&gt;
+        &lt;ns1:AddrElementAttribute2 xsi:nil="true"/&gt;
+        &lt;ns1:AddrElementAttribute3 xsi:nil="true"/&gt;
+        &lt;ns1:AddrElementAttribute4 xsi:nil="true"/&gt;
+        &lt;ns1:AddrElementAttribute5 xsi:nil="true"/&gt;
+        &lt;ns1:Building xsi:nil="true"/&gt;
+        &lt;ns1:FloorNumber xsi:nil="true"/&gt;
+        &lt;ns1:StatusFlag&gt;true&lt;/ns1:StatusFlag&gt;
+        &lt;ns1:InternalFlag&gt;false&lt;/ns1:InternalFlag&gt;
+        &lt;ns1:TimezoneCode xsi:nil="true"/&gt;
+        &lt;ns1:Latitude xsi:nil="true"/&gt;
+        &lt;ns1:Longitude xsi:nil="true"/&gt;
+        &lt;ns1:Distance xsi:nil="true"/&gt;
+        &lt;/ns1:Value&gt;
+    &lt;/ns2:result&gt;
+&lt;/ns0:createLocationResponse&gt;</pre>
+
+      </section>
+
+   </div>
+
+   <nav role="navigation" class="related-links">
+<div class="linklist linklist"><h5 class="relatedlinks">Related Topics</h5>
+<ul>
+<li><p><a class="link" href="create_Operation.htm">create
+Operation</a></p></li>
+<li><p><a class="link" href="Request_Payload_Element.htm">Request Payload Element Behavior</a></p></li>
+<li><p><a class="link" href="find_Operation_Examples.htm">find Operation Examples</a></p></li>
+<li><p><a class="link" href="Lookup_Type_Explained.htm">Using Lookups</a></p></li></ul></div>
+</nav>
+</div></div></div><footer></footer><noscript><p>Scripting on this page enhances content navigation, but does not change the content in any way.</p></noscript>
+<!-- Start SiteCatalyst code -->
+<script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+<!-- End SiteCatalyst code -->
+</body>
+</html>

@@ -1,0 +1,2381 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Postload Processing (Chapter 18) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:17 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM Data Loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM1413013.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM1446823.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="After a successful data migration or incremental update, you must run processes to complete the setup of some business objects.
+      Run these processes in the Scheduled Processes work area. Select Navigator ToolsScheduled Processes."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">21/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM2141648" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">18</span>Postload Processing
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2051431">Processes to Run After Loading Data: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2584955">Running Postload Processes: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1343344">Validating Loaded Data: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2050599">Maintaining the Stage Tables: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2051675">HCM Data Loader Extracts: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2051749">Copying an HCM Data Loader Extract: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2051878">Configuring a Copied HCM Data Loader Extract: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2053932">Submitting an HCM Data Loader Extract: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2048813">HCM Data Loader Error Analysis Report</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2048745">Running the HCM Data Loader Error Analysis Report: Procedure</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM2051431">
+                  <h2>Processes to Run After Loading Data: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>After a successful data migration or incremental
+                     update, you must run processes to complete the setup of some business
+                     objects. Run these processes in the Scheduled Processes work area.
+                     Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">Scheduled Processes</span></span>.
+                  </p>
+                  
+                  
+                  
+                  <p>This table identifies processes to run after loading
+                     data and the object to which each process applies. For worker objects,
+                     the table also suggests the order in which to run the processes when
+                     you're running them all manually. By default, these two processes
+                     run automatically when a load of worker objects completes:.
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Refresh Manager Hierarchy</p>
+                     </li>
+                     
+                     <li>
+                        <p>Update Person Search Keywords</p>
+                        
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>You can prevent either or both of these processes
+                     from running automatically using a SET instruction in the Worker.dat
+                     file.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Process
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Business Object
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Order
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Description
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Synchronize Person Records</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Worker</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>1</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Notifies consuming Oracle Cloud applications, such
+                                 as Oracle Fusion Trading Community Model, of changes to person and assignment details since
+                                 the last data load.
+                              </p>
+                              
+                              <p>Submit this process with the <span class="uicontrol">After Batch Load</span> parameter set to <span class="uicontrol">Yes</span>. In the <span class="uicontrol">From Date</span> field enter the start date of the load. In the <span class="uicontrol">To Date</span> field enter the end date of the
+                                 load.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Refresh Manager Hierarchy</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Worker</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>2</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>For performance reasons, the complete manager hierarchy
+                                 for each person is extracted from active data tables. The hierarchy
+                                 is stored in a separate manager hierarchy table, known as the denormalized
+                                 manager hierarchy. This approach ensures that a person's manager hierarchy
+                                 is both easily accessible and up to date. The Refresh Manager Hierarchy
+                                 process populates the denormalized manager hierarchy table with latest
+                                 information after each data load.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Update Person Search Keywords</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Worker</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>3</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Several attributes of person, employment, and profile
+                                 records are used as person-search keywords. This process copies keyword
+                                 values in all installed languages from the originating records to
+                                 the PER_KEYWORDS table, where they're indexed to improve search performance.
+                              </p>
+                              
+                              <p>Enter a person name in the <span class="uicontrol">Name</span> field to run the process for a single worker. If
+                                 you leave the field blank, then the process runs for all workers,
+                                 which can be time consuming. To avoid performance problems, submit
+                                 the process with the <span class="uicontrol">After Batch Load</span> parameter set to <span class="uicontrol">Yes</span>. In this
+                                 case, the process creates keywords for new records but doesn't update
+                                 those for existing records.
+                              </p>
+                              
+                              <p>Leave the <span class="uicontrol">Batch ID</span> field blank.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Optimize Person Search Keywords Index</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Worker</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>4</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Optimizes the index of the PER_KEYWORDS table to
+                                 improve search performance. Run this process after the Update Person
+                                 Search Keywords process completes. By default, the process runs for
+                                 a maximum of 180 minutes and performs a full optimization. You can
+                                 enter a different <span class="uicontrol">Maximum Optimization Time</span>. If you select the <span class="uicontrol">Rebuild the Index</span> option, then the <span class="uicontrol">Maximum Optimization Time</span> value is ignored. Rebuilding the index can be time consuming.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Send Pending LDAP Requests</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Worker</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>5</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Sends user-account requests to your LDAP directory. Run this process only when
+                                 you want user accounts to be either created or updated. 
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Send Personal Data for Multiple Users to LDAP</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Worker</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>6</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Ensures that personal data held in your LDAP directory
+                                 matches that held by Oracle HCM Cloud.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Autoprovision Roles for All Users</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Worker</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>7</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Provisions and removes user roles based on current role-provisioning rules.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Apply Name Formats to Person Names</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Name Format</p>
+                              
+                           </td>
+                           
+                           <td>
+                              <p>
+                                 					&nbsp;
+                                 					
+                              </p>
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Applies the Display Name, List Name, Full Name, and
+                                 Order Name formats to denormalized person-name data when you add or
+                                 update a name format. You can run the process for either a single
+                                 format or all formats in a single country.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>ESS process for trees flattening</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>Department Tree Node</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Organization Tree Node</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                           <td>
+                              <p>
+                                 					&nbsp;
+                                 					
+                              </p>
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Flattens tree data to improve query performance against
+                                 the hierarchical data, especially for hierarchical queries such as
+                                 roll-up queries.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>ESS process for trees audit</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>Department Tree Node</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Organization Tree Node</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                           <td>
+                              <p>
+                                 					&nbsp;
+                                 					
+                              </p>
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Audits tree-structure metadata to verify that it
+                                 conforms to all rules and ensures data integrity. You can view audit
+                                 details, view messages, and correct any validation errors that the
+                                 audit detects.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=ECB91E1E1C13E691E040D30A68814BD5">Send Pending LDAP Requests: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=E34B29B507B7FF27E040D30A688137C1">Sending Personal Data to LDAP: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=F0F5DCBF52496DDBE040D30A68815F08">Autoprovisioning: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM2121438.htm#FAIHM2028326">The SET and COMMENT Instructions: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2584955">
+                  <h2>Running Postload Processes: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic provides additional guidance for
+                     some postload processes. In particular, it identifies when the processes
+                     are required and when they're optional.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2584953">
+                     <h3 class="topictitle">Send Pending LDAP Requests</h3>
+                     
+                     <p>You must always run Send Pending LDAP Requests after
+                        loading worker records. When you run Send Pending LDAP Requests: 
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>User accounts are created for new
+                              workers.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Roles are provisioned to user accounts
+                              as specified by current role mappings.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>If appropriate role mappings don't exist when you
+                        load new workers, then user accounts are created but no roles are
+                        provisioned. User accounts without roles are automatically suspended
+                        when Send Pending LDAP Requests completes. Also, subsequent role-provisioning
+                        requests to the suspended user accounts may be slow to process. To
+                        avoid this scenario:
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Create a role mapping to provision
+                              at least one role, for example, Employee, to every current worker
+                              before you load worker records.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Prevent the creation of user accounts
+                              for terminated workers. Use the Manage Enterprise HCM Information
+                              task in the Setup and Maintenance work area to set the <span class="uicontrol">User Account Creation for Terminated Workers</span> option to <span class="uicontrol">No</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Load worker records.</p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Always create a role mapping for the workers you're
+                        loading before you load them. Having this role-provisioning rule in
+                        place prevents new user accounts from being suspended unnecessarily.
+                        
+                     </div>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2584969">
+                     <h3 class="topictitle">Autoprovision Roles for All Users</h3>
+                     
+                     <p>You don't have to run this process after the initial
+                        or only load of worker records if you create role mappings to autoprovision
+                        roles before you load workers. However, if you load the workers before
+                        creating the role mapping, then you must run this process followed
+                        by Send Pending LDAP Requests for the loaded workers.
+                     </p>
+                     
+                     <p>You don't have to run this process after an incremental
+                        update. However, you're recommended to run this process whenever a
+                        change is made to the autoprovisioning rules.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2584979">
+                     <h3 class="topictitle">Send Personal Data for Multiple Users to LDAP</h3>
+                     
+                     <p>Run this process after the initial or only load of
+                        worker records. Run it after an incremental load:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>For changed users only</p>
+                        </li>
+                        
+                        <li>
+                           <p>If you're loading workers separately
+                              from their managers
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If updates were made to personal
+                              data by means of SQL scripts
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=9633D922BF48554FE040D30A68815494">Role Mappings: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=EDF9442F5DF7CE1FE040D30A68815D84">Creating a Role Mapping: Procedure</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1343344">
+                  <h2>Validating Loaded Data: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Once HCM Data Loader loads your data successfully,
+                     you're recommended to validate that the loaded objects appear as expected.
+                     This topic identifies some of the ways in which you can validate loaded
+                     data. These include use of:
+                  </p>
+                  
+                  
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Manual testing</p>
+                     </li>
+                     
+                     <li>
+                        <p>Oracle Transactional Business Intelligence
+                           (OTBI) reports
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>HCM Extracts</p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="FAIHM1343341">
+                     <h3 class="topictitle">Using Manual Testing</h3>
+                     
+                     <p>You can:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Validate data interactively by
+                              searching for a representative sample. For example, you can search
+                              for workers in the Directory or Manage Person work area. If a worker
+                              is also a manager, then you can explore the manager hierarchy.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Validate work structures by searching
+                              for them. For example, you can search for jobs on the Manage Job page
+                              and locations on the Manage Locations page. Alternatively, you can
+                              test that they're available for selection. For example, you can update
+                              a worker's assignment to select a different job or location.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1343342">
+                     <h3 class="topictitle">Using Oracle Transactional Business Intelligence
+                     Reports</h3>
+                     
+                     <p>You can use predefined OTBI reports to validate some
+                        uploaded data. To run these reports:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">Reports and Analytics</span></span> to open the Reports and Analytics work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the Contents pane of the work
+                              area, open the folder <span><span class="uicontrol">Shared
+                                    Folders</span> - <span class="uicontrol">Human Capital Management</span></span>. Many subfolders of the <span class="uicontrol">Human
+                                 Capital Management</span> folder contain a <span class="uicontrol">Transactional Analysis Samples</span> folder, which contains
+                              the predefined reports.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                     
+                     <p>To list the predefined reports for an area, select
+                        the relevant <span class="uicontrol">Transactional Analysis Samples</span> folder in the Contents pane and click the <span class="uicontrol">Browse Catalog</span> icon. A list of predefined reports for
+                        the selected area, such as Workforce Management, appears in the work
+                        area. For example, you can run the Job Details report to list active
+                        jobs and the Location Details report to list active locations.
+                     </p>
+                     
+                     
+                     
+                     <p>You can also design your own reports using Oracle
+                        BI Publisher. To open Oracle BI Publisher, select <span><span class="uicontrol">Create</span> - <span class="uicontrol">Report</span></span> in the Contents pane of the Reports
+                        and Analytics work area.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1343343">
+                     <h3 class="topictitle">Using HCM Extracts</h3>
+                     
+                     <p>You can use HCM Extracts to extract data from Oracle
+                        HCM Cloud and deliver it in various formats. These formats include
+                        CSV, XML, Microsoft Excel,
+                        HTML, RTF, and PDF.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2050599">
+                  <h2>Maintaining the Stage Tables: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>When you load large volumes of data into
+                     Oracle HCM Cloud, the HCM Data Loader stage tables can increase in size
+                     rapidly. You're recommended to delete processed data sets that you no
+                     longer need in the stage tables. How often you delete stage-table
+                     data depends on the volume and frequency of your data loads. During
+                     data migration, consider deleting every large data set as its processing
+                     finishes. However, deleting stage-table data isn't reversible. Don't
+                     delete stage-table data that you want to report on or for which you
+                     want to extract error information.
+                  </p>
+                  
+                  
+                  
+                  <p>You can delete:</p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>An individual data set on the Import
+                           and Load Data page
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Multiple data sets on the Delete
+                           Stage Table Data page
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="FAIHM2050609">
+                     <h3 class="topictitle">Deleting a Single Data Set </h3>
+                     
+                     <p>Follow these steps to delete a single data set from
+                        the stage tables:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Data Exchange</span> - <span class="uicontrol">Import and Load Data</span></span> to open the Import and Load Data page.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the Search Results section of
+                              the Import and Load Data page, select the data set that you want to
+                              delete. Use the search criteria to restrict the data sets that appear
+                              in this section.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Delete</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Schedule Request</span> dialog box, set the <span class="uicontrol">Delete Source File</span> parameter to <span class="uicontrol">Yes</span> to delete the source file from the Oracle
+                              WebCenter Content server.
+                           </p>
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              You can delete the stage-table data without also
+                              deleting the source file. However, if you loaded this data set with
+                              the <span class="uicontrol">Delete Source File</span> parameter
+                              set to <span class="uicontrol">Yes</span>, then the source file
+                              has already been deleted. In this case, selecting <span class="uicontrol">Yes</span> here has no effect.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Submit</span>. The ID of the deletion process appears.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the confirmation dialog box.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        You can review the status of the deletion process
+                        in the Processes table on the Delete Stage Table Data page.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2050674">
+                     <h3 class="topictitle">Deleting Multiple Data Sets </h3>
+                     
+                     <p>Follow these steps to delete stage-table data for
+                        multiple data sets or data sets that meet specific conditions:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Data Exchange</span> - <span class="uicontrol">Delete Stage Table Data</span></span> to open the Delete Stage Table Data page.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Set the search criteria to identify
+                              the data sets you that you want to retrieve. By default, all data
+                              sets created by the current user and that have not been updated in
+                              the last month are listed.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p> Confirm that all data sets in
+                              the Search Results table are to be deleted and click <span class="uicontrol">Schedule</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>To delete the source files for
+                              the data sets from the Oracle WebCenter Content server, set the <span class="uicontrol">Delete Source File</span> parameter to <span class="uicontrol">Yes</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Submit</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>You can review the status of the deletion process
+                        by refreshing the Processes table on the Delete Stage Table Data page.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2051675">
+                  <h2>HCM Data Loader Extracts: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>HCM Extracts provides two extracts for HCM
+                     Data Loader:
+                  </p>
+                  
+                  
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Extract Name
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Description
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>HCM Data Loader Data Set Summary</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Run this extract for a specified data set. It provides
+                                 status values and record counts for both the data set and each business
+                                 object in the data set. It reports all error messages and identifies
+                                 all records affected by each error.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Compensation Changes</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Run this extract for a specified compensation run
+                                 to extract assignment, salary, and bonus changes made by the run. This extract is most
+                                 useful if you're implementing a coexistence scenario.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  <p>The output from both extracts is in XML format. You can provide a BI Publisher
+                     layout to reformat the output. You can also define options to automate
+                     delivery of the output.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2051674">
+                     <h3 class="topictitle">Running the HCM Data Loader Extracts</h3>
+                     
+                     <p>To run either of these extracts, you:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Copy the predefined extract.</p>
+                        </li>
+                        
+                        <li>
+                           <p>Compile the formulas for your copy
+                              of the extract.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Configure your copy of the extract.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Submit the extract. </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2051749">
+                  <h2>Copying an HCM Data Loader Extract: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>HCM Extracts provides two predefined extracts
+                     for HCM Data Loader:
+                  </p>
+                  
+                  
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>HCM Data Loader Data Set Summary</p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Compensation Changes</p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>This topic explains how to copy a predefined extract
+                     and compile the formulas for the copied extract. You can follow these
+                     instructions for either the HCM Data Loader Data Set Summary extract
+                     or the Compensation Changes extract.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2051747">
+                     <h3 class="topictitle">Copying the Extract</h3>
+                     
+                     <p>Follow these steps to copy an HCM Data Loader extract:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Data Exchange</span></span> to open the Data Exchange work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Tasks panel tab, select <span class="uicontrol">Manage Extract Definitions</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Manage HCM Extract Definitions
+                              page, search for the extract.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select the extract in the search
+                              results and click <span class="uicontrol">Copy</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Copy Extract Definition</span> dialog box, enter a name for
+                              your copy of the extract and click <span class="uicontrol">OK</span>.
+                           </p>
+                           <p>A confirmation message appears when the copy
+                              is complete.
+                           </p>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2051748">
+                     <h3 class="topictitle">Compiling the Formulas for the Copied Extract</h3>
+                     
+                     <p>Follow these steps to compile the formulas:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>On the Manage HCM Extract Definitions
+                              page, search for your copy of the extract.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click the extract name in the search
+                              results to display the extract definition on the Manage HCM Extract
+                              Definitions page.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Switch Layout</span> to edit the extract definition.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Edit Extract Definition
+                              page, select the <span class="uicontrol">Extract Execution Tree</span> folder in the left-hand pane to show the Extract Execution Tree
+                              page. All formulas have an error status.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p> Click <span class="uicontrol">Compile All Formula</span> to compile the formulas.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Refresh the table periodically
+                              until all formulas are successfully compiled. A green check mark means
+                              success.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2051878">
+                  <h2>Configuring a Copied HCM Data Loader Extract: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>HCM Extracts provides two predefined extracts
+                     for HCM Data Loader:
+                  </p>
+                  
+                  
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>HCM Data Loader Data Set Summary</p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Compensation Changes</p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>This topic explains how to configure an extract after
+                     copying it and compiling its formulas. Follow these steps:
+                  </p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Data Exchange</span></span> to open the Data Exchange work area.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>On the Tasks panel tab, select <span class="uicontrol">Refine Extracts</span> to open the Refine HCM Extracts
+                           page.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>On the Refine HCM Extracts page,
+                           search for your copy of the extract.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In the search results, select your
+                           extract and click <span class="uicontrol">Edit</span>.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Click the Parameters tab to review
+                           the parameter definitions.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Edit the <span class="uicontrol">Display</span>, <span class="uicontrol">Sequence</span>, <span class="uicontrol">Parameter Basis</span>, and <span class="uicontrol">Basis Value</span> for each parameter.
+                        </p>
+                        <p>This table shows the parameters that you must edit and
+                           the required values for the HCM Data Loader Data Set Summary extract.
+                           You can ignore parameters not shown here.
+                        </p>
+                        
+                        <div class="simpletable-margin">
+                           <table class="customlayout" summary="">
+                              
+                              
+                              <tr class="header">
+                                 
+                                 <th scope="col">
+                                    Parameter
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Display
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Sequence
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Parameter Basis
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Basis Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Process End Date</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>3</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Context Binding </p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>System Date</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Process Start Date</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>9</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Content ID</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>12</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Data Set Name</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>13</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Process ID</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>11</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Show Messages</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>14</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Constant Bind</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Y</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Show Stack Trace</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>15</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Constant Bind</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>N</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        <p></p>
+                        
+                        <p>This table shows the parameters that you must edit
+                           and the required values for the Compensation Changes extract. You
+                           can ignore parameters not shown here.
+                        </p>
+                        
+                        <div class="simpletable-margin">
+                           <table class="customlayout" summary="">
+                              
+                              
+                              <tr class="header">
+                                 
+                                 <th scope="col">
+                                    Parameter
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Display
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Sequence
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Parameter Basis
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Basis Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Process End Date</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>3</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Context Binding </p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>System Date</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Process Start Date</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>9</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Extract Target</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>15</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Constant Bind</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>HDL</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Period Name</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>12</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Plan</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>11</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Process Id</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>13</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Run Id</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>14</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p></p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        <p></p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Save your changes.</p>
+                     </li>
+                     
+                  </ol>
+                  
+                  <p>You can now run your copy of the extract.</p>
+                  
+                  <p>Refer to the following HCM Extracts documentation
+                     on My Oracle Support for guidance on modifying the extract output
+                     and specifying delivery options:
+                  </p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>Oracle Fusion HCM Extracts Guide
+                           (document ID 1559127.1)
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Oracle Fusion HCM Extracts: Delivery
+                           Options (document ID 1573099.1)
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="http://support.oracle.com/epmos/faces/DocumentDisplay?id=1559127.1">Oracle Fusion HCM Extracts Guide</a></p>
+                     </li>
+                     <li>
+                        <p><a href="http://support.oracle.com/epmos/faces/DocumentDisplay?id=1573099.1">Oracle Fusion HCM Extracts: Delivery Options</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2053932">
+                  <h2>Submitting an HCM Data Loader Extract: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>HCM Extracts provides two predefined extracts
+                     for HCM Data Loader:
+                  </p>
+                  
+                  
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>HCM Data Loader Data Set Summary</p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Compensation Changes</p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>This topic explains how to submit an HCM Data Loader
+                     extract after configuring it. Follow these steps:
+                  </p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Data Exchange</span></span> to open the Data Exchange work area.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>On the Tasks panel tab, select <span class="uicontrol">Submit Extracts</span> to open the Submit a Process
+                           or Report page.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Using the <span class="uicontrol">Query by Example</span> fields, find your extract and click <span class="uicontrol">Next</span>.
+                        </p>
+                        <p>The Enter Parameters
+                           page opens.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>To submit the HCM Data Loader Data
+                           Set Summary extract, enter any one of the <span class="uicontrol">Content ID</span>, <span class="uicontrol">Process ID</span>, and <span class="uicontrol">Data Set Name</span> parameters.
+                           Leave the <span class="uicontrol">Process Configuration Group</span> parameter blank. This table describes the parameter values, which
+                           you can find on the Import and Load Data page.
+                        </p>
+                        
+                        <div class="simpletable-margin">
+                           <table class="customlayout" summary="">
+                              
+                              
+                              <tr class="header">
+                                 
+                                 <th scope="col">
+                                    Parameter
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Description
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Content ID</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>The content ID associated with the data set. This ID was
+                                       assigned when you uploaded your source file to the Oracle WebCenter
+                                       Content server.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Process ID</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>The process ID of the process that created the data
+                                       set. This ID was assigned when you submitted your source file for
+                                       processing by HCM Data Loader.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Data Set Name</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>The data set name, which is also your source file
+                                       name.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        <p></p>
+                        
+                        <p>To submit the Compensation Changes extract, enter
+                           a flow name for this execution of the extract. To identify the compensation
+                           run to report on, enter either the <span class="uicontrol">Plan</span> and <span class="uicontrol">Period Name</span> or the <span class="uicontrol">Process Id</span> or the <span class="uicontrol">Run Id</span>. This table describes the parameter values.
+                        </p>
+                        
+                        <div class="simpletable-margin">
+                           <table class="customlayout" summary="">
+                              
+                              
+                              <tr class="header">
+                                 
+                                 <th scope="col">
+                                    Parameter
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Description
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Plan</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>The compensation plan name. </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Period Name</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>The period name for the compensation run. </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Process Id</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>The process ID for the compensation run.</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Run Id</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>The run ID for the compensation run.</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        <p></p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Click <span class="uicontrol">Next</span> until you reach the Review page.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Click <span class="uicontrol">Submit</span>.
+                        </p>
+                        <p>A confirmation message appears
+                           when your extract is submitted successfully.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Click <span class="uicontrol">OK and View Checklist</span> in the <span class="uicontrol">Confirmation</span> dialog box to open the extract results.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2048813">
+                  <h2>HCM Data Loader Error Analysis Report </h2>
+                  
+                  
+                  
+                  
+                  <p>The HCM Data Loader Error Analysis Report
+                     is a diagnostic test. It provides technical information that can help
+                     to resolve data-loading errors. Run this diagnostic test when error
+                     messages don't supply enough information for you to identify a solution.
+                     You can send the test output to Oracle Support, if necessary.
+                  </p>
+                  
+                  
+                  
+                  <p>To run the HCM Data Loader Error Analysis Report
+                     test, select <span><span class="uicontrol">Settings and Actions</span> - <span class="uicontrol">Run Diagnostic Tests</span></span>.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="">
+                     <dl class="reference">
+                        <h3 class="parameterGroupTitle">Diagnostic Test Parameters</h3>
+                        
+                        
+                        
+                        <dt>Content ID</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>A unique reference to a single data set. You can find
+                              the content ID in the <span class="uicontrol">Content ID</span> column of the Search Results table on the Import and Load Data page.
+                              You must specify either the content ID or the process ID to identify
+                              the data set.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Process ID</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>A unique reference to a single data set. You can
+                              find the process ID in the <span class="uicontrol">Process ID</span> column of the Search Results table on the Import and Load Data page.
+                              You must specify either the content ID or the process ID to identify
+                              the data set.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Business Object Name</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>The name of a business object in the data set, such
+                              as Worker or Job. You can find the business object name in the <span class="uicontrol">Business Object</span> column of the Details table
+                              on the Import and Load Data page. This parameter is optional, but
+                              you're recommended to supply it if your data set contains multiple
+                              business objects.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Detailed Mode</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Set this parameter to <span class="uicontrol">Y</span> to include the details of any reported errors in the output, including
+                              message stack trace for the records in error.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                     </dl>
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2048819">
+                     <h3 class="topictitle">Diagnostic Test Results</h3>
+                     
+                     <p>The diagnostic test output is in user-readable HTML
+                        format. It provides:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Status information</p>
+                        </li>
+                        
+                        <li>
+                           <p>Details of every process submitted
+                              to process your data set
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>All errors raised for each business
+                              object in the data set
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Message stack trace and nonsensitive
+                              attribute values for the records in error, if you set the <span class="uicontrol">Detailed Mode</span> parameter to <span class="uicontrol">Y</span></p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>No sensitive data appears in the test results.</p>
+                     
+                  </div>
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2048745">
+                  <h2>Running the HCM Data Loader Error Analysis Report: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The HCM Data Loader Error Analysis Report
+                     is a diagnostic test that provides technical information about data
+                     loads to help you resolve errors. To submit this diagnostic test,
+                     you must have access to the Diagnostic Dashboard. 
+                  </p>
+                  
+                  
+                  
+                  <p>Follow these steps:</p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>Select <span><span class="uicontrol">Settings and Actions</span> - <span class="uicontrol">Run Diagnostic Tests</span></span> to open the Diagnostic
+                           Dashboard.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In the Search for Tests section
+                           of the Diagnostic Dashboard, enter <span class="uicontrol">HCM Data
+                              Loader Error Analysis Report</span> in the <span class="uicontrol">Test Name</span> field and click <span class="uicontrol">Search</span>.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In the search results, select the
+                           check box next to the test name and click <span class="uicontrol">Add to Run</span>. The test appears in the Choose Tests to Run
+                           and Supply Inputs section of the page.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>To review the parameters, click
+                           the <span class="uicontrol">Click to Supply or Edit Input Parameters</span> icon in the <span class="uicontrol">Input Status</span> column.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>In the <span class="uicontrol">Input Parameters</span> dialog box, select parameters to include
+                           in this test run and supply values for the selected parameters.
+                        </p>
+                        
+                        <div class="infobox-"><span class="notep1">Note: </span>
+                           Use the parameters to restrict the output from the
+                           test to those errors that need investigation. For example, don't run
+                           the test for an entire data set if the errors relate to a single business
+                           object.
+                           
+                        </div>
+                     </li>
+                     
+                     <li>
+                        <p>Click <span class="uicontrol">OK</span>.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>If required, enter a name for the
+                           test run in the <span class="uicontrol">Run Name</span> field.
+                           The name can help you to locate your results easily. If you leave
+                           the field blank, then a name is generated.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Click <span class="uicontrol">Run</span> to run the test and click <span class="uicontrol">OK</span> to close the confirmation dialog box.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In the Diagnostic Test Run Status
+                           section, click the <span class="uicontrol">Display Latest Test Run
+                              Status Information</span> icon to see the results of this test.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Expand the test hierarchy for your
+                           run to see the results. Click the <span class="uicontrol">Report</span> icon to open the report. 
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  <p>You can save the output and attach it to a service
+                     request if required.
+                  </p>
+                  
+                  
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

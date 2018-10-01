@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Changing the Time Grain for Cost and Revenue</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="You can configure the grain of Cost aggregate (W_PROJ_COST_A) and Revenue aggregate (W_PROJ_REVENUE_A) to Period, Quarter, or Year. As installed by default, the grain of the cost aggregate and revenue aggregate are set at Fiscal Period." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-2D5AA05B-CD7B-428B-B8A2-23F0295F53F9.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-98F6372C-6F31-46FD-B64E-5F7A7AAB3930.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-95F41735-757B-40BB-9A6D-678598AB4D73"></a> <span id="PAGE" style="display:none;">64/336</span> <!-- End Header -->
+<a id="IT_39"></a>
+<h1 id="BIAFC-GUID-95F41735-757B-40BB-9A6D-678598AB4D73" class="sect1">Changing the Time Grain for Cost and Revenue</h1>
+<div>
+<p>You can configure the grain of Cost aggregate (W_PROJ_COST_A) and Revenue aggregate (W_PROJ_REVENUE_A) to Period, Quarter, or Year. As installed by default, the grain of the cost aggregate and revenue aggregate are set at Fiscal Period.</p>
+<div class="section">
+<p>However, you can modify the grain of the aggregate to either Period or Quarter or Year. This is done by configuring the FSM Parameters - COST_TIME_GRAIN and REVENUE_TIME_GRAIN - to 'PERIOD' or 'QUARTER' or 'YEAR'. In addition, you must make changes to the BI metadata repository (that is, the RPD file) that are included in this section.</p>
+<div class="infobox-note" id="GUID-95F41735-757B-40BB-9A6D-678598AB4D73__GUID-0C164460-D20C-490E-9062-D2D828DBDFF9">
+<p class="notep1">Note:</p>
+Oracle recommends that you back up the BI metadata repository (that is, the RPD file) before applying making changes.</div>
+<p>The tasks to change the time grain parameters are:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-95F41735-757B-40BB-9A6D-678598AB4D73.htm#GUID-CCB72FD7-985E-4386-8BCA-4CFA30F81329" title="By default, the parameters COST_TIME_GRAIN and REVENUE_TIME_GRAIN is set to 'PERIOD'. If you want to change the grain of aggregates, you will have to set these variables to desired levels and concurrently the joins in the repository should be updated to reflect the appropriate tables.">Setting the Time Grain Parameters in FSM</a></p>
+</li>
+<li>
+<p><a href="GUID-95F41735-757B-40BB-9A6D-678598AB4D73.htm#GUID-3FB74118-BAEC-44A5-A3E9-92C2A56B4389" title="You must ensure that the COST_TIME_GRAIN is set to PERIOD in FSM, and that the following repository joins are in place. This is the default configuration.">Changing the Time Grain of the Cost Aggregate table to Fiscal/Project/Enterprise Period</a></p>
+</li>
+<li>
+<p><a href="GUID-95F41735-757B-40BB-9A6D-678598AB4D73.htm#GUID-05CE030C-36EC-4166-A641-8092BDC51FD1" title="You must ensure that the REVENUE_TIME_GRAIN is set to 'PERIOD' in the FSM and that the following repository joins are in place. This is default configuration.">Changing the Time Grain of the Revenue Aggregate Table to Fiscal/Project/Enterprise Period</a></p>
+</li>
+<li>
+<p><a href="GUID-95F41735-757B-40BB-9A6D-678598AB4D73.htm#GUID-6F40F1F7-FC53-473F-B739-A229F7B27087" title="If the grain of Cost aggregate is at quarter level, then you must ensure that the COST_TIME_GRAIN is set to 'QUARTER' in the FSM.">Changing the Time Grain of the Cost Aggregate table to Fiscal/Project/Enterprise Quarter</a></p>
+</li>
+<li>
+<p><a href="GUID-95F41735-757B-40BB-9A6D-678598AB4D73.htm#GUID-005DAC93-9EBD-48FE-A30E-5A602323B470" title="If the grain of Revenue aggregate is at quarter level, then you must ensure that the REVENUE_TIME_GRAIN is set to 'QUARTER' in FSM.">Changing the Time Grain of the Revenue Aggregate table to Fiscal/Project/Enterprise Quarter</a></p>
+</li>
+<li>
+<p><a href="GUID-95F41735-757B-40BB-9A6D-678598AB4D73.htm#GUID-00BB76AF-59D3-4977-A0B5-CC13CE68A079" title="If the grain of Cost aggregate is at year level, then you must ensure that the COST_TIME_GRAIN is set to 'YEAR' in FSM.">Changing the Time Grain of the Cost Aggregate table to Fiscal/Project/Enterprise Year</a></p>
+</li>
+<li>
+<p><a href="GUID-95F41735-757B-40BB-9A6D-678598AB4D73.htm#GUID-B05DAB0F-9321-4898-822A-E73BA8232BD2" title="If the grain of Revenue aggregate is at year level, then you must ensure that the REVENUE_TIME_GRAIN is set to 'YEAR' in the FSM.">Changing the Time grain of the Revenue Aggregate table to Fiscal/Project/Enterprise Year</a></p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+<div class="props_rev_3"><a id="GUID-CCB72FD7-985E-4386-8BCA-4CFA30F81329"></a>
+<h2 id="BIAFC-GUID-CCB72FD7-985E-4386-8BCA-4CFA30F81329" class="sect2">Setting the Time Grain Parameters in FSM</h2>
+<div>
+<p>By default, the parameters COST_TIME_GRAIN and REVENUE_TIME_GRAIN is set to 'PERIOD'. If you want to change the grain of aggregates, you will have to set these variables to desired levels and concurrently the joins in the repository should be updated to reflect the appropriate tables.</p>
+<div class="section">
+<p>To change the values in FSM, navigate to Manage Parameters, select 'COST_TIME_GRAIN' and click the <span class="bold">Edit</span> button.</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Navigate to Manage Parameters.</span></li>
+<li class="stepexpand"><span>Select COST_TIME_GRAIN and click the <span class="bold">Edit</span> button.</span></li>
+<li class="stepexpand"><span>In the Manage Parameter Default values area, specify a value in the Default Value field. The allowed values are:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>PERIOD</p>
+</li>
+<li>
+<p>QUARTER</p>
+</li>
+<li>
+<p>YEAR</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>Repeat the above steps for REVENUE_TIME_GRAIN.</span></li>
+</ol>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-3FB74118-BAEC-44A5-A3E9-92C2A56B4389"></a>
+<h2 id="BIAFC-GUID-3FB74118-BAEC-44A5-A3E9-92C2A56B4389" class="sect2">Changing the Time Grain of the Cost Aggregate table to Fiscal/Project/Enterprise Period</h2>
+<div>
+<p>You must ensure that the COST_TIME_GRAIN is set to PERIOD in FSM, and that the following repository joins are in place. This is the default configuration.</p>
+<ol>
+<li class="stepexpand"><span>Verify the joins to Fiscal Calendar (Dim-Date Fiscal Calendar).</span>
+<div>
+<p>In the Business Model and Mapping layer, select the 'Dim_W_MCAL_PERIOD_D_Fiscal_Period' Logical Table Source from the 'Dim - Date Fiscal Calendar' and the 'Fact_Agg_W_PROJ_COST_A_Project_Cost' and 'Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD' Logical Table Sources in 'Fact - Project Cost' and then right-click and select <span class="bold">physical diagram</span>, then <span class="bold">selected objects only</span> and verify the following physical joins, then click <span class="bold">OK</span>.</p>
+<div class="figure" id="GUID-3FB74118-BAEC-44A5-A3E9-92C2A56B4389__GUID-61131F3D-20E5-4A36-91C0-36DE624BFB09"><img width="770" height="215" src="img/GUID-01AE479F-1461-460F-83BC-CB94700E729D-default.gif" alt="Description of GUID-01AE479F-1461-460F-83BC-CB94700E729D-default.gif follows" title="Description of GUID-01AE479F-1461-460F-83BC-CB94700E729D-default.gif follows" /><br />
+<a href="img_text/GUID-01AE479F-1461-460F-83BC-CB94700E729D-default.htm">Description of the illustration GUID-01AE479F-1461-460F-83BC-CB94700E729D-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_PERIOD_START_DAY_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost"."PRVDR_GL_ACCT_PRD_STRT_DAY_WID"
+</pre>
+<div class="figure" id="GUID-3FB74118-BAEC-44A5-A3E9-92C2A56B4389__GUID-0A1D71CB-167F-4C75-82FD-2A7539EFF658"><img width="563" height="623" src="img/GUID-4A05A3CC-5FED-4589-BE81-B47534E04CDE-default.gif" alt="Description of GUID-4A05A3CC-5FED-4589-BE81-B47534E04CDE-default.gif follows" title="Description of GUID-4A05A3CC-5FED-4589-BE81-B47534E04CDE-default.gif follows" /><br />
+<a href="img_text/GUID-4A05A3CC-5FED-4589-BE81-B47534E04CDE-default.htm">Description of the illustration GUID-4A05A3CC-5FED-4589-BE81-B47534E04CDE-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_PERIOD_END_DAY_WID" &gt;=   "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_ACCT_PRD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_MCAL_CAL_WID"
+</pre>
+<div class="figure" id="GUID-3FB74118-BAEC-44A5-A3E9-92C2A56B4389__GUID-8D969708-2DB1-4E44-96CB-75F047A43F1E"><img width="541" height="617" src="img/GUID-A998AFC7-9349-45F6-8F66-587178F2E308-default.gif" alt="Description of GUID-A998AFC7-9349-45F6-8F66-587178F2E308-default.gif follows" title="Description of GUID-A998AFC7-9349-45F6-8F66-587178F2E308-default.gif follows" /><br />
+<a href="img_text/GUID-A998AFC7-9349-45F6-8F66-587178F2E308-default.htm">Description of the illustration GUID-A998AFC7-9349-45F6-8F66-587178F2E308-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_ACCT_PRD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Fiscal_Quarter"."MCAL_QTR_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Fiscal_Quarter"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_MCAL_CAL_WID"
+</pre>
+<p>Join D:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Fiscal_Year"."MCAL_YEAR_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_ACCT_PRD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Fiscal_Year"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_MCAL_CAL_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Verify the joins to Project Calendar (Dim-Date Project Calendar).</span>
+<div>
+<p>In the Business Model and Mapping layer, select the 'Dim_W_MCAL_PERIOD_D_Project_Period' Logical Table Source from the 'Dim - Date Project Calendar' and the 'Fact_Agg_W_PROJ_COST_A_Project_Cost' and 'Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD' Logical Table Sources in 'Fact - Project Cost' and then right-click and select <span class="bold">physical diagram</span>, then <span class="bold">selected objects only</span> and verify the following physical join, then click <span class="bold">OK</span>.</p>
+<div class="figure" id="GUID-3FB74118-BAEC-44A5-A3E9-92C2A56B4389__GUID-ECA37F19-A20B-418C-BA6B-2BBC1A2F8A92"><img width="769" height="198" src="img/GUID-67B5EC18-A4D0-4EB2-8213-A4671D845B08-default.gif" alt="Description of GUID-67B5EC18-A4D0-4EB2-8213-A4671D845B08-default.gif follows" title="Description of GUID-67B5EC18-A4D0-4EB2-8213-A4671D845B08-default.gif follows" /><br />
+<a href="img_text/GUID-67B5EC18-A4D0-4EB2-8213-A4671D845B08-default.htm">Description of the illustration GUID-67B5EC18-A4D0-4EB2-8213-A4671D845B08-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_PERIOD_START_DAY_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost"."PRVDR_PRJ_ACCT_PRD_ST_DAY_WID"
+</pre>
+<div class="figure" id="GUID-3FB74118-BAEC-44A5-A3E9-92C2A56B4389__GUID-D0709B91-7DD4-4C51-9DAD-36A3E66453B9"><img width="597" height="681" src="img/GUID-2A6979A7-7330-4D88-9084-06CCE3D9F4A8-default.gif" alt="Description of GUID-2A6979A7-7330-4D88-9084-06CCE3D9F4A8-default.gif follows" title="Description of GUID-2A6979A7-7330-4D88-9084-06CCE3D9F4A8-default.gif follows" /><br />
+<a href="img_text/GUID-2A6979A7-7330-4D88-9084-06CCE3D9F4A8-default.htm">Description of the illustration GUID-2A6979A7-7330-4D88-9084-06CCE3D9F4A8-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_PERIOD_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PRJ_ACCT_PRD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PROJ_MCAL_CAL_WID"
+</pre>
+<div class="figure" id="GUID-3FB74118-BAEC-44A5-A3E9-92C2A56B4389__GUID-BAA47684-B054-414D-B544-7CC8541429C8"><img width="493" height="561" src="img/GUID-AAC8007B-DB83-431E-AC77-C1C6577B7CD9-default.gif" alt="Description of GUID-AAC8007B-DB83-431E-AC77-C1C6577B7CD9-default.gif follows" title="Description of GUID-AAC8007B-DB83-431E-AC77-C1C6577B7CD9-default.gif follows" /><br />
+<a href="img_text/GUID-AAC8007B-DB83-431E-AC77-C1C6577B7CD9-default.htm">Description of the illustration GUID-AAC8007B-DB83-431E-AC77-C1C6577B7CD9-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PRJ_ACCT_PRD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Project_Quarter"."MCAL_QTR_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Project_Quarter"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PROJ_MCAL_CAL_WID"
+</pre>
+<p>Join D:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Project_Year"."MCAL_YEAR_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PRJ_ACCT_PRD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Project_Year"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PROJ_MCAL_CAL_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Verify the joins to Enterprise Calendar (Dim-Date).</span>
+<div>
+<p>In the Business Model and Mapping layer, select the 'Dim_W_ENT_PERIOD_D' Logical Table Source from the 'Dim - Date' and the 'Fact_Agg_W_PROJ_COST_A_Project_Cost' and 'Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD' Logical Table Sources in 'Fact - Project Cost' and then right-click and select <span class="bold">physical diagram</span>, then <span class="bold">selected objects only</span> and verify the following physical join, then click <span class="bold">OK</span>.</p>
+<div class="figure" id="GUID-3FB74118-BAEC-44A5-A3E9-92C2A56B4389__GUID-0F9746A5-CE4B-4D53-A250-4E78873545F9"><img width="741" height="217" src="img/GUID-EBD752AA-F492-4CD5-86D9-D22D9391D1F9-default.gif" alt="Description of GUID-EBD752AA-F492-4CD5-86D9-D22D9391D1F9-default.gif follows" title="Description of GUID-EBD752AA-F492-4CD5-86D9-D22D9391D1F9-default.gif follows" /><br />
+<a href="img_text/GUID-EBD752AA-F492-4CD5-86D9-D22D9391D1F9-default.htm">Description of the illustration GUID-EBD752AA-F492-4CD5-86D9-D22D9391D1F9-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_PERIOD_D"."ENT_PERIOD_START_DT_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost"."ENT_PERIOD_START_DAY_WID"
+</pre>
+<div class="figure" id="GUID-3FB74118-BAEC-44A5-A3E9-92C2A56B4389__GUID-183DDED9-37E5-4ADD-BA15-E3DFE2EE73B7"><img width="461" height="521" src="img/GUID-A4878086-E660-4960-AED0-9EEFAD6F0ED9-default.gif" alt="Description of GUID-A4878086-E660-4960-AED0-9EEFAD6F0ED9-default.gif follows" title="Description of GUID-A4878086-E660-4960-AED0-9EEFAD6F0ED9-default.gif follows" /><br />
+<a href="img_text/GUID-A4878086-E660-4960-AED0-9EEFAD6F0ED9-default.htm">Description of the illustration GUID-A4878086-E660-4960-AED0-9EEFAD6F0ED9-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."ENT_PERIOD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_PERIOD_D"."ENT_PERIOD_END_DT_WID"
+</pre>
+<div class="figure" id="GUID-3FB74118-BAEC-44A5-A3E9-92C2A56B4389__GUID-2062DC09-A8A6-4EC4-97E0-4DCE47363681"><img width="597" height="355" src="img/GUID-8A6ACB05-AFF6-492F-9D60-4CBE4032B131-default.gif" alt="Description of GUID-8A6ACB05-AFF6-492F-9D60-4CBE4032B131-default.gif follows" title="Description of GUID-8A6ACB05-AFF6-492F-9D60-4CBE4032B131-default.gif follows" /><br />
+<a href="img_text/GUID-8A6ACB05-AFF6-492F-9D60-4CBE4032B131-default.htm">Description of the illustration GUID-8A6ACB05-AFF6-492F-9D60-4CBE4032B131-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."ENT_PERIOD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_QTR_D"."ENT_QTR_END_DT_WID"
+</pre>
+<p>Join D:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_YEAR_D"."ENT_YEAR_END_DT_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."ENT_PERIOD_END_DAY_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Change the Content Aggregation Level in the Business Model and Mapping layer.</span>
+<div>
+<p>As installed by default, the grain for cost aggregate is set to Period against the dimensions Dim-Date Fiscal Calendar, Dim-Date Project Calendar and Dim - Date. In the Business Model and Mapping layer open these two Logical Table Sources in 'Fact &ndash; Project Cost' and verify if grain is set at Period level.</p>
+<div class="figure" id="GUID-3FB74118-BAEC-44A5-A3E9-92C2A56B4389__GUID-4435A49E-9585-40FD-ABC2-E9FD4C6B2681"><img width="701" height="643" src="img/GUID-B2A2AF82-A0CF-412A-B90F-9B2E64C8C20F-default.gif" alt="Description of GUID-B2A2AF82-A0CF-412A-B90F-9B2E64C8C20F-default.gif follows" title="Description of GUID-B2A2AF82-A0CF-412A-B90F-9B2E64C8C20F-default.gif follows" /><br />
+<a href="img_text/GUID-B2A2AF82-A0CF-412A-B90F-9B2E64C8C20F-default.htm">Description of the illustration GUID-B2A2AF82-A0CF-412A-B90F-9B2E64C8C20F-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Save the changes.</span>
+<div>
+<p>Run the Consistency Check and ensure that there are no errors, save the repository file, and clear Oracle BI Enterprise Edition Cache. If you are making the changes in offline mode, then restart the Oracle BI Server and Oracle BI Presentation Services.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-05CE030C-36EC-4166-A641-8092BDC51FD1"></a>
+<h2 id="BIAFC-GUID-05CE030C-36EC-4166-A641-8092BDC51FD1" class="sect2">Changing the Time Grain of the Revenue Aggregate Table to Fiscal/Project/Enterprise Period</h2>
+<div>
+<p>You must ensure that the REVENUE_TIME_GRAIN is set to 'PERIOD' in the FSM and that the following repository joins are in place. This is default configuration.</p>
+<ol>
+<li class="stepexpand"><span>Verify the joins to Fiscal Calendar (Dim-Date Fiscal Calendar).</span>
+<div>
+<p>In the Business Model and Mapping layer, select the 'Dim_W_MCAL_PERIOD_D_Fiscal_Period' Logical Table Source from the 'Dim - Date Fiscal Calendar' and the ' Fact_Agg_W_PROJ_REVENUE_A_Revenue' and 'Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD' Logical Table Sources in 'Fact - Project Revenue' and then right-click and select <span class="bold">physical</span> diagram, then <span class="bold">selected objects only</span> and verify the following physical join, then click <span class="bold">OK</span>.</p>
+<div class="figure" id="GUID-05CE030C-36EC-4166-A641-8092BDC51FD1__GUID-730F94DC-B851-412D-99BA-44660A263DFC"><img width="756" height="238" src="img/GUID-1502B7C9-914E-4BEB-A9D6-95C111BEA55D-default.gif" alt="Description of GUID-1502B7C9-914E-4BEB-A9D6-95C111BEA55D-default.gif follows" title="Description of GUID-1502B7C9-914E-4BEB-A9D6-95C111BEA55D-default.gif follows" /><br />
+<a href="img_text/GUID-1502B7C9-914E-4BEB-A9D6-95C111BEA55D-default.htm">Description of the illustration GUID-1502B7C9-914E-4BEB-A9D6-95C111BEA55D-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_PERIOD_START_DAY_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue"."GL_ACCT_PERIOD_START_DAY_WID"
+</pre>
+<div class="figure" id="GUID-05CE030C-36EC-4166-A641-8092BDC51FD1__GUID-33247301-605A-420E-8605-F844AB520783"><img width="685" height="503" src="img/GUID-532F4AC7-186A-441F-9F5B-98F6F2CE1FD6-default.gif" alt="Description of GUID-532F4AC7-186A-441F-9F5B-98F6F2CE1FD6-default.gif follows" title="Description of GUID-532F4AC7-186A-441F-9F5B-98F6F2CE1FD6-default.gif follows" /><br />
+<a href="img_text/GUID-532F4AC7-186A-441F-9F5B-98F6F2CE1FD6-default.htm">Description of the illustration GUID-532F4AC7-186A-441F-9F5B-98F6F2CE1FD6-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_PERIOD_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_ACCT_PERIOD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_MCAL_CAL_WID"
+</pre>
+<div class="figure" id="GUID-05CE030C-36EC-4166-A641-8092BDC51FD1__GUID-BA53BD5E-A190-47C6-BC40-BC411F12CA0B"><img width="789" height="573" src="img/GUID-197875E5-972D-4B84-84DB-18FC640A7CFA-default.gif" alt="Description of GUID-197875E5-972D-4B84-84DB-18FC640A7CFA-default.gif follows" title="Description of GUID-197875E5-972D-4B84-84DB-18FC640A7CFA-default.gif follows" /><br />
+<a href="img_text/GUID-197875E5-972D-4B84-84DB-18FC640A7CFA-default.htm">Description of the illustration GUID-197875E5-972D-4B84-84DB-18FC640A7CFA-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_ACCT_PERIOD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Fiscal_Quarter"."MCAL_QTR_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Fiscal_Quarter"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_MCAL_CAL_WID"
+</pre>
+<p>Join D:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Fiscal_Year"."MCAL_YEAR_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_ACCT_PERIOD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Fiscal_Year"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_MCAL_CAL_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Verify the joins to Project Calendar (Dim-Date Project Calendar).</span>
+<div>
+<p>In the Business Model and Mapping layer, select the 'Dim_W_MCAL_PERIOD_D_Project_Period' Logical Table Source from the 'Dim - Date Project Calendar' and the ' Fact_Agg_W_PROJ_REVENUE_A_Revenue' and 'Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD' Logical Table Sources in 'Fact - Project Revenue' and then right-click and select <span class="bold">physical</span> diagram, then <span class="bold">selected objects only</span> and verify the following physical join, then click <span class="bold">OK</span>.</p>
+<div class="figure" id="GUID-05CE030C-36EC-4166-A641-8092BDC51FD1__GUID-2CAD34EC-826D-41FC-961C-8F5AF31578E1"><img width="684" height="204" src="img/GUID-C981EF59-DFEA-4A08-B201-AB2A2D960FFA-default.gif" alt="Description of GUID-C981EF59-DFEA-4A08-B201-AB2A2D960FFA-default.gif follows" title="Description of GUID-C981EF59-DFEA-4A08-B201-AB2A2D960FFA-default.gif follows" /><br />
+<a href="img_text/GUID-C981EF59-DFEA-4A08-B201-AB2A2D960FFA-default.htm">Description of the illustration GUID-C981EF59-DFEA-4A08-B201-AB2A2D960FFA-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_PERIOD_START_DAY_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue"."PROJ_ACCT_PERIOD_START_DAY_WID"
+</pre>
+<div class="figure" id="GUID-05CE030C-36EC-4166-A641-8092BDC51FD1__GUID-585FD5CD-AA5D-4C22-AD59-95F588FB4F11"><img width="693" height="507" src="img/GUID-E5D8E317-225F-4BE5-917D-96CD33130A6A-default.gif" alt="Description of GUID-E5D8E317-225F-4BE5-917D-96CD33130A6A-default.gif follows" title="Description of GUID-E5D8E317-225F-4BE5-917D-96CD33130A6A-default.gif follows" /><br />
+<a href="img_text/GUID-E5D8E317-225F-4BE5-917D-96CD33130A6A-default.htm">Description of the illustration GUID-E5D8E317-225F-4BE5-917D-96CD33130A6A-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_PERIOD_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_ACCT_PERIOD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_MCAL_CAL_WID"
+</pre>
+<div class="figure" id="GUID-05CE030C-36EC-4166-A641-8092BDC51FD1__GUID-CDB52306-01DE-4641-B573-54F30F7BAA42"><img width="577" height="423" src="img/GUID-5F6B8899-D18F-46FD-8DA5-FA85F299E3B6-default.gif" alt="Description of GUID-5F6B8899-D18F-46FD-8DA5-FA85F299E3B6-default.gif follows" title="Description of GUID-5F6B8899-D18F-46FD-8DA5-FA85F299E3B6-default.gif follows" /><br />
+<a href="img_text/GUID-5F6B8899-D18F-46FD-8DA5-FA85F299E3B6-default.htm">Description of the illustration GUID-5F6B8899-D18F-46FD-8DA5-FA85F299E3B6-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_ACCT_PERIOD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Project_Quarter"."MCAL_QTR_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Project_Quarter"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_MCAL_CAL_WID"
+</pre>
+<p>Join D:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Project_Year"."MCAL_YEAR_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_ACCT_PERIOD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Project_Year"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_MCAL_CAL_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Verify the joins to Enterprise Calendar (Dim-Date).</span>
+<div>
+<p>In the Business Model and Mapping layer, select the 'Dim_W_ENT_PERIOD_D' Logical Table Source from the 'Dim - Date' and the 'Fact_Agg_W_PROJ_COST_A_Project_Cost' and the 'Fact_Agg_W_PROJ_REVENUE_A_Revenue' and ' Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD' Logical Table Sources in 'Fact - Project Revenue' and then right-click and select <span class="bold">physical</span> diagram, then <span class="bold">selected objects only</span> and verify the following physical join, then click <span class="bold">OK</span>.</p>
+<div class="figure" id="GUID-05CE030C-36EC-4166-A641-8092BDC51FD1__GUID-0A1F5A68-6BD7-4A63-92A2-198843667BF9"><img width="763" height="237" src="img/GUID-5B33676F-BAA5-4954-A6C5-B4457D01C11E-default.gif" alt="Description of GUID-5B33676F-BAA5-4954-A6C5-B4457D01C11E-default.gif follows" title="Description of GUID-5B33676F-BAA5-4954-A6C5-B4457D01C11E-default.gif follows" /><br />
+<a href="img_text/GUID-5B33676F-BAA5-4954-A6C5-B4457D01C11E-default.htm">Description of the illustration GUID-5B33676F-BAA5-4954-A6C5-B4457D01C11E-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_PERIOD_D"."ENT_PERIOD_START_DT_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue"."ENT_PERIOD_START_DAY_WID"
+</pre>
+<div class="figure" id="GUID-05CE030C-36EC-4166-A641-8092BDC51FD1__GUID-FE790471-FA26-47A1-9B76-7E9E56B0D81E"><img width="693" height="401" src="img/GUID-DC6BA43C-D171-48B8-9C05-B0820A53D9D9-default.gif" alt="Description of GUID-DC6BA43C-D171-48B8-9C05-B0820A53D9D9-default.gif follows" title="Description of GUID-DC6BA43C-D171-48B8-9C05-B0820A53D9D9-default.gif follows" /><br />
+<a href="img_text/GUID-DC6BA43C-D171-48B8-9C05-B0820A53D9D9-default.htm">Description of the illustration GUID-DC6BA43C-D171-48B8-9C05-B0820A53D9D9-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."ENT_PERIOD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_PERIOD_D"."ENT_PERIOD_END_DT_WID"
+</pre>
+<div class="figure" id="GUID-05CE030C-36EC-4166-A641-8092BDC51FD1__GUID-54EFF1D8-1C34-404F-8E01-C20F09CB5255"><img width="697" height="395" src="img/GUID-0F04F80D-3AB4-4F66-A3F0-2A467D8CA13C-default.gif" alt="Description of GUID-0F04F80D-3AB4-4F66-A3F0-2A467D8CA13C-default.gif follows" title="Description of GUID-0F04F80D-3AB4-4F66-A3F0-2A467D8CA13C-default.gif follows" /><br />
+<a href="img_text/GUID-0F04F80D-3AB4-4F66-A3F0-2A467D8CA13C-default.htm">Description of the illustration GUID-0F04F80D-3AB4-4F66-A3F0-2A467D8CA13C-default.gif</a></div>
+<!-- class="figure" -->
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."ENT_PERIOD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_QTR_D"."ENT_QTR_END_DT_WID"
+</pre>
+<p>Join D:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_YEAR_D"."ENT_YEAR_END_DT_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."ENT_PERIOD_END_DAY_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Change the Content Aggregation Level in the Business Model and Mapping layer.</span>
+<div>
+<p>As installed by default, the grain for cost aggregate is set to Period against the dimensions Dim-Date Fiscal Calendar, Dim-Date Project Calendar and Dim- Date. In the Business Model and Mapping layer open these two Logical Table Sources in 'Fact &ndash; Project Revenue' and verify if grain is set at Period level.</p>
+<div class="figure" id="GUID-05CE030C-36EC-4166-A641-8092BDC51FD1__GUID-8499F6E3-148E-40B2-85E3-222AAB9651E5"><img width="571" height="517" src="img/GUID-74110534-02C8-455A-B383-C1D928E73297-default.gif" alt="Description of GUID-74110534-02C8-455A-B383-C1D928E73297-default.gif follows" title="Description of GUID-74110534-02C8-455A-B383-C1D928E73297-default.gif follows" /><br />
+<a href="img_text/GUID-74110534-02C8-455A-B383-C1D928E73297-default.htm">Description of the illustration GUID-74110534-02C8-455A-B383-C1D928E73297-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Save the changes.</span>
+<div>
+<p>Run the Consistency Check and ensure that there are no errors, save the repository file, and clear Oracle BI Enterprise Edition Cache. If you are making the changes in offline mode, then restart the Oracle BI Server and Oracle BI Presentation Services.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-6F40F1F7-FC53-473F-B739-A229F7B27087"></a>
+<h2 id="BIAFC-GUID-6F40F1F7-FC53-473F-B739-A229F7B27087" class="sect2">Changing the Time Grain of the Cost Aggregate table to Fiscal/Project/Enterprise Quarter</h2>
+<div>
+<p>If the grain of Cost aggregate is at quarter level, then you must ensure that the COST_TIME_GRAIN is set to 'QUARTER' in the FSM.</p>
+<div class="section">
+<p>In addition, make the following metadata changes for the Fiscal, Project, and Enterprise calendars:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Delete the joins to Dim_W_MCAL_PERIOD_D_Fiscal_Period/ Dim_W_MCAL_ PERIOD_D_Project_Period /Dim_W_ENT_ PERIOD_D.</span>
+<div>
+<p>Delete the existing physical joins between Fact_Agg_W_PROJ_COST_A_Project_Cost (under logical fact 'Fact &ndash; Project Cost') to Dim_W_MCAL_PERIOD_D_Fiscal_Period (under logical dimension 'Dim &ndash; Date Fiscal Calendar'), Dim_W_MCAL_PERIOD_D_Project_Period (under logical dimension 'Dim &ndash; Date Project Calendar') and Dim_W_ENT_PERIOD_D (under logical dimension 'Dim - Date')</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_PERIOD_START_DAY_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost"."PRVDR_GL_ACCT_PRD_STRT_DAY_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_PERIOD_START_DAY_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost"."PRVDR_PRJ_ACCT_PRD_ST_DAY_WID"
+</pre>
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_PERIOD_D"."ENT_PERIOD_START_DT_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost"."ENT_PERIOD_START_DAY_WID"
+</pre>
+<p>Delete the existing physical joins between Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD (under logical fact 'Fact &ndash; Project Cost') to Dim_W_MCAL_PERIOD_D_Fiscal_Period (under logical dimension 'Dim &ndash; Date Fiscal Calendar'), Dim_W_MCAL_PERIOD_D_Project_Period (under logical dimension 'Dim &ndash; Date Project Calendar') and Dim_W_ENT_PERIOD_D (under logical dimension 'Dim - Date').</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_PERIOD_END_DAY_WID" &gt;=   "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_ACCT_PRD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_MCAL_CAL_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_PERIOD_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PRJ_ACCT_PRD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PROJ_MCAL_CAL_WID"
+</pre>
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."ENT_PERIOD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_PERIOD_D"."ENT_PERIOD_END_DT_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Create join to Dim_W_MCAL_QTR_D_Fiscal_Quarter.</span>
+<div>
+<p>In the Business Model and Mapping layer, select the Dim_W_MCAL_QTR_D_Project_Quarter/ Dim_W_MCAL_YEAR_D_Project_Year Logical Table Source from the 'Dim - Date Project Calendar' and the Fact_Agg_W_PROJ_COST_A_Project_Cost and Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD Logical Table Sources in 'Fact - Project Cost' and then right click and select 'physical diagram-&gt;selected objects only' and click ok. Create following physical join:</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Fiscal_Quarter"."MCAL_QTR_START_DAY_WID" = 
+        "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost"."PRVDR_GL_ACCT_PERIOD_START_DAY_WID"
+</pre>
+<p>And verify the following joins:</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_ACCT_PERIOD_END_DAY_WID" &lt;=   "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Fiscal_Quarter"."MCAL_QTR_END_DAY_WID" AND 
+        "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_MCAL_CAL_WID" = 
+        "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Fiscal_Quarter"."MCAL_CAL_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Fiscal_Year"."MCAL_YEAR_END_DAY_WID"
+  &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_ACCT_PERIOD_END_DAY_WID"
+        AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Fiscal_Year"."MCAL_CAL_WID" = 
+        "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_MCAL_CAL_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Create joins to Dim_W_MCAL_QTR_D_Project_Quarter.</span>
+<div>
+<p>In the Business Model and Mapping layer, select the Dim_W_MCAL_QTR_D_Project_Quarter/ Dim_W_MCAL_YEAR_D_Project_Year Logical Table Source from the 'Dim - Date Project Calendar' and the Fact_Agg_W_PROJ_COST_A_Project_Cost and Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD Logical Table Sources in 'Fact - Project Cost' and then right click and select 'physical diagram-&gt;selected objects only' and click ok. Create following physical join:</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Project_Quarter"."MCAL_QTR_START_DAY_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost"."PRVDR_PRJ_ACCT_PRD_START_DAY_WID"
+</pre>
+<p>And verify the following joins:</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PRJ_ACCT_PRD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Project_Quarter"."MCAL_QTR_END_DAY_WID" 
+AND "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PROJ_MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Project_Quarter"."MCAL_CAL_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Project_Year"."MCAL_YEAR_END_DAY_WID" &gt;= 
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PRJ_ACCT_PRD_END_DAY_WID" 
+AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Project_Year"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PROJ_MCAL_CAL_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Create joins to Dim_W_ENT_QTR_D.</span>
+<div>
+<p>In the Business Model and Mapping layer, select the Dim_W_ENT_QTR_D / Dim_W_ENT_YEAR_D Logical Table Source from the 'Dim - Date' and the Fact_Agg_W_PROJ_COST_A_Project_Cost and Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD Logical Table Sources in 'Fact - Project Cost' and then right click and select 'physical diagram-&gt;selected objects only' and click ok. Create following physical join:</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_QTR_D"."ENT_QTR_START_DT_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost"."ENT_PERIOD_START_DAY_WID"
+</pre>
+<p>And verify following joins:</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."ENT_PERIOD_END_DAY_WID" &lt;=  
+        "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_QTR_D"."ENT_QTR_END_DT_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_YEAR_D"."ENT_YEAR_END_DT_WID" &gt;= 
+        "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."ENT_PERIOD_END_DAY_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Change the Content Aggregation Level in the Business Model and Mapping layer.</span>
+<div>
+<p>As installed by default, the grain for cost aggregate is set to Period against the dimensions Dim-Date Fiscal Calendar, Dim-Date Project Calendar and Dim - Date.</p>
+<p>Instead of Fiscal/Project/Enterprise Period you must set this to Fiscal Quarter for Dim &ndash; Date Fiscal Calendar, Project Quarter for Dim &ndash; Date Project Calendar and Enterprise Quarter for Dim - Date.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Save the changes.</span>
+<div>
+<p>When these changes are complete, run the Consistency Check and ensure that there are no errors, save the repository file, and clear the Oracle BI Enterprise Edition Cache. If you are making the changes in offline mode, then restart the Oracle BI Server and Oracle BI Presentation Services.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-005DAC93-9EBD-48FE-A30E-5A602323B470"></a>
+<h2 id="BIAFC-GUID-005DAC93-9EBD-48FE-A30E-5A602323B470" class="sect2">Changing the Time Grain of the Revenue Aggregate table to Fiscal/Project/Enterprise Quarter</h2>
+<div>
+<p>If the grain of Revenue aggregate is at quarter level, then you must ensure that the REVENUE_TIME_GRAIN is set to 'QUARTER' in FSM.</p>
+<div class="section">
+<p>Also, the following metadata changes should be made for the Fiscal, Project, and Enterprise calendars:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Delete the joins to Dim_W_MCAL_PERIOD_D_Fiscal_Period/ Dim_W_MCAL_ PERIOD_D_Project_Period /Dim_W_ENT_ PERIOD_D.</span>
+<div>
+<p>Delete the existing physical joins between Fact_Agg_W_PROJ_REVENUE_A_Revenue (under logical fact 'Fact &ndash; Project Revenue') to Dim_W_MCAL_ PERIOD_D_Fiscal_Period (under logical dimension 'Dim &ndash; Date Fiscal Calendar'), Dim_W_MCAL_ PERIOD_D_Project_Period (under logical dimension 'Dim &ndash; Date Project Calendar') and Dim_W_ENT_ PERIOD_D (under logical dimension 'Dim - Date').</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_PERIOD_START_DAY_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue"."GL_ACCT_PERIOD_START_DAY_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_PERIOD_START_DAY_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue"."PROJ_ACCT_PERIOD_START_DAY_WID"
+</pre>
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_PERIOD_D"."ENT_PERIOD_START_DT_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue"."ENT_PERIOD_START_DAY_WID"
+</pre>
+<p>Delete the existing physical joins between Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD (under logical fact 'Fact &ndash; Project Revenue') to Dim_W_MCAL_PERIOD_D_Fiscal_Period (under logical dimension 'Dim &ndash; Date Fiscal Calendar'), Dim_W_MCAL_PERIOD_D_Project_Period (under logical dimension 'Dim &ndash; Date Project Calendar') and Dim_W_ENT_PERIOD_D (under logical dimension 'Dim - Date').</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_PERIOD_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_ACCT_PERIOD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_MCAL_CAL_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_PERIOD_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_ACCT_PERIOD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_MCAL_CAL_WID"
+</pre>
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."ENT_PERIOD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_PERIOD_D"."ENT_PERIOD_END_DT_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Create joins to Dim_W_MCAL_QTR_D_Fiscal_Quarter.</span>
+<div>
+<p>In the Business Model and Mapping layer, select the Dim_W_MCAL_QTR_D_Fiscal_Quarter/ Dim_W_MCAL_YEAR_D_Fiscal_Year Logical Table Source from the 'Dim - Date Fiscal Calendar' and the Fact_Agg_W_PROJ_REVENUE_A_Revenue and Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD Logical Table Sources in 'Fact - Project Revenue' and then right click and select 'physical diagram-&gt; selected objects only' and click ok. Create following physical join:</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Fiscal_Quarter"."MCAL_PERIOD_START_DAY_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue"."GL_ACCT_PERIOD_START_DAY_WID"
+</pre>
+<p>And verify the following joins:</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_ACCT_PERIOD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Fiscal_Quarter"."MCAL_QTR_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Fiscal_Quarter"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_MCAL_CAL_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Fiscal_Year"."MCAL_YEAR_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_ACCT_PERIOD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Fiscal_Year"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_MCAL_CAL_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Create joins to Dim_W_MCAL_QTR_D_Project_Quarter.</span>
+<div>
+<p>In the Business Model and Mapping layer, select the Dim_W_MCAL_QTR_D_Project_Quarter/ Dim_W_MCAL_YEAR_D_Project_Year Logical Table Source from the 'Dim - Date Project Calendar' and the Fact_Agg_W_PROJ_REVENUE_A_Revenue and Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD_Logical Table Sources in 'Fact - Project Revenue' and then right click and select 'physical diagram-&gt;selected objects only' and click ok. Create following physical join:</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Project_Quarter"."MCAL_QTR_START_DAY_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue"."PROJ_ACCT_PERIOD_START_DAY_WID"
+</pre>
+<p>And verify the following joins:</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_ACCT_PERIOD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Project_Quarter"."MCAL_QTR_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_QTR_D_Project_Quarter"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_MCAL_CAL_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Project_Year"."MCAL_YEAR_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_ACCT_PERIOD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Project_Year"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_MCAL_CAL_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Create joins to Dim_W_ENT_QTR_D.</span>
+<div>
+<p>In the Business Model and Mapping layer, select the Dim_W_ENT_QTR_D / Dim_W_ENT_YEAR_D Logical Table Source from the 'Dim - Date' and the Fact_Agg_W_PROJ_REVENUE_A_Revenue and Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD_ Logical Table Sources in 'Fact - Project Revenue' and then right click and select 'physical diagram-&gt;selected objects only' and click ok. Create following physical join:</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_QTR_D"."ENT_QTR_START_DT_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue"."ENT_PERIOD_START_DAY_WID"
+</pre>
+<p>And verify the following joins:</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."ENT_PERIOD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_QTR_D"."ENT_QTR_END_DT_WID"
+</pre>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_YEAR_D"."ENT_YEAR_END_DT_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."ENT_PERIOD_END_DAY_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Changing Content Aggregation Level in the Business Model and Mapping layer.</span>
+<div>
+<p>As installed by default, the grain for revenue aggregate is set to Period against the dimensions Dim-Date Fiscal Calendar, Dim-Date Project Calendar and Dim - Date.</p>
+<p>Instead of Fiscal/Project Period you must set this to Fiscal Quarter for Dim &ndash; Date Fiscal Calendar, Project Quarter for Dim &ndash; Date Project Calendar and Enterprise Quarter for Dim - Date.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Save the changes.</span>
+<div>
+<p>When these changes are complete, run the Consistency Check and ensure that there are no errors, save the repository file, and clear the Oracle BI Enterprise Edition Cache. If you are making the changes in offline mode, then restart the Oracle BI Server and Oracle BI Presentation Services.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-00BB76AF-59D3-4977-A0B5-CC13CE68A079"></a>
+<h2 id="BIAFC-GUID-00BB76AF-59D3-4977-A0B5-CC13CE68A079" class="sect2">Changing the Time Grain of the Cost Aggregate table to Fiscal/Project/Enterprise Year</h2>
+<div>
+<p>If the grain of Cost aggregate is at year level, then you must ensure that the COST_TIME_GRAIN is set to 'YEAR' in FSM.</p>
+<div class="section">
+<p>Also, the following metadata changes should be made for the Fiscal, Project, and Enterprise calendars:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Delete the joins to Dim_W_MCAL_PERIOD_D_Fiscal_Period/ Dim_W_MCAL_ PERIOD_D_Project_Period /Dim_W_ENT_ PERIOD_D.</span>
+<div>
+<p>Delete the existing physical joins between Fact_Agg_W_PROJ_COST_A_Project_Cost (under logical fact 'Fact &ndash; Project Cost') to Dim_W_MCAL_PERIOD_D_Fiscal_Period (under logical dimension 'Dim &ndash; Date Fiscal Calendar'), Dim_W_MCAL_PERIOD_D_Project_Period (under logical dimension 'Dim &ndash; Date Project Calendar') and Dim_W_ENT_PERIOD_D (under logical dimension 'Dim - Date').</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_PERIOD_START_DAY_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost"."PRVDR_GL_ACCT_PRD_STRT_DAY_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_PERIOD_START_DAY_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost"."PRVDR_PRJ_ACCT_PRD_ST_DAY_WID"
+</pre>
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_PERIOD_D"."ENT_PERIOD_START_DT_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost"."ENT_PERIOD_START_DAY_WID"
+</pre>
+<p>Delete the existing physical joins between Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD (under logical fact 'Fact &ndash; Project Cost') to Dim_W_MCAL_PERIOD_D_Fiscal_Period (under logical dimension 'Dim &ndash; Date Fiscal Calendar'), Dim_W_MCAL_PERIOD_D_Project_Period (under logical dimension 'Dim &ndash; Date Project Calendar') and Dim_W_ENT_PERIOD_D (under logical dimension 'Dim - Date').</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_PERIOD_END_DAY_WID" &gt;=   "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_ACCT_PRD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_MCAL_CAL_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_PERIOD_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PRJ_ACCT_PRD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PROJ_MCAL_CAL_WID"
+</pre>
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."ENT_PERIOD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_PERIOD_D"."ENT_PERIOD_END_DT_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Create joins to Dim_W_MCAL_YEAR_D_Fiscal_Year/ Dim_W_MCAL_YEAR_D_Project_Year/ Dim_W_ENT_YEAR_D.</span>
+<div>
+<p>Following physical joins need to be created between following Logical Table Source fact Fact_Agg_W_PROJ_COST_A_Project_Cost (under logical fact 'Fact &ndash; Project Cost') and Dim_W_MCAL_YEAR_D_Fiscal_Year (under logical dimension 'Dim &ndash; Date Fiscal Calendar'), Dim_W_MCAL_YEAR_D_Project_Year (under logical dimension 'Dim &ndash; Date Project Calendar') and Dim_W_ENT_YEAR_D (under logical dimension 'Dim &ndash; Date').</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Fiscal_Year"."MCAL_YEAR_START_DAY_WID" =    
+        "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost"."PRVDR_GL_ACCT_PERIOD_START_DAY_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Project_Year"."MCAL_YEAR_START_DAY_WID" =    
+        "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost"."PRVDR_PRJ_ACCT_PRD_START_DAY_WID"
+</pre>
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_YEAR_D"."ENT_YEAR_START_DT_WID" = 
+        "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost"."ENT_PERIOD_START_DAY_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Verify the joins to Dim_W_MCAL_YEAR_D_Fiscal_Year/ Dim_W_MCAL_YEAR_D_Project_Year/ Dim_W_ENT_YEAR_D.</span>
+<div>
+<p>Ensure that there are joins between Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD Logical Table Source in 'Fact - Project Cost' to Dim_W_MCAL_YEAR_D_Fiscal_Year Logical Table Source from the 'Dim - Date Fiscal Calendar', Dim_W_MCAL_YEAR_D_Project_Year Logical Table Source from the 'Dim - Date Project Calendar' and Dim_W_ENT_YEAR_D Logical Table Source from the 'Dim - Date'. These are done by default.</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Fiscal_Year"."MCAL_YEAR_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_ACCT_PRD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Fiscal_Year"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_GL_MCAL_CAL_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Project_Year"."MCAL_YEAR_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PRJ_ACCT_PRD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Project_Year"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."PRVDR_PROJ_MCAL_CAL_WID"
+</pre>
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_YEAR_D"."ENT_YEAR_END_DT_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_COST_A_Project_Cost_ITD"."ENT_PERIOD_END_DAY_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Change the Content Aggregation Level in the Business Model and Mapping layer.</span>
+<div>
+<p>As installed by default, the grain for cost aggregate is set to Period against the dimensions Dim-Date Fiscal Calendar, Dim-Date Project Calendar and Dim - Date.</p>
+<p>Instead of Fiscal/Project Period you must set this to Fiscal Year for Dim &ndash; Date Fiscal Calendar, Project Year for Dim &ndash; Date Project Calendar and Enterprise year for Dim - Date.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Save the changes.</span>
+<div>
+<p>When these changes are complete, run the Consistency Check and ensure that there are no errors, save the repository file, and clear the Oracle BI Enterprise Edition Cache. If you are making the changes in offline mode, then restart the Oracle BI Server and Oracle BI Presentation Services.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-B05DAB0F-9321-4898-822A-E73BA8232BD2"></a>
+<h2 id="BIAFC-GUID-B05DAB0F-9321-4898-822A-E73BA8232BD2" class="sect2">Changing the Time Grain of the Revenue Aggregate table to Fiscal/Project/Enterprise Year</h2>
+<div>
+<p>If the grain of Revenue aggregate is at year level, then you must ensure that the REVENUE_TIME_GRAIN is set to 'YEAR' in the FSM.</p>
+<div class="section">
+<p>Also, the following metadata changes should be made for the Fiscal, Project, and Enterprise calendars:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Delete the joins to Dim_W_MCAL_PERIOD_D_Fiscal_Period/ Dim_W_MCAL_ PERIOD_D_Project_Period /Dim_W_ENT_ PERIOD_D.</span>
+<div>
+<p>Delete the existing physical joins between Fact_Agg_W_PROJ_REVENUE_A_Revenue (under logical fact 'Fact &ndash; Project Revenue') to Dim_W_MCAL_ PERIOD_D_Fiscal_Period (under logical dimension 'Dim &ndash; Date Fiscal Calendar'), Dim_W_MCAL_ PERIOD_D_Project_Period (under logical dimension 'Dim &ndash; Date Project Calendar') and Dim_W_ENT_ PERIOD_D (under logical dimension 'Dim - Date').</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_PERIOD_START_DAY_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue"."GL_ACCT_PERIOD_START_DAY_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_PERIOD_START_DAY_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue"."PROJ_ACCT_PERIOD_START_DAY_WID"
+</pre>
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_PERIOD_D"."ENT_PERIOD_START_DT_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue"."ENT_PERIOD_START_DAY_WID"
+</pre>
+<p>Delete the existing physical joins between Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD (under logical fact 'Fact &ndash; Project Revenue') to Dim_W_MCAL_PERIOD_D_Fiscal_Period (under logical dimension 'Dim &ndash; Date Fiscal Calendar'), Dim_W_MCAL_PERIOD_D_Project_Period (under logical dimension 'Dim &ndash; Date Project Calendar') and Dim_W_ENT_PERIOD_D (under logical dimension 'Dim - Date').</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_PERIOD_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_ACCT_PERIOD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Fiscal_Period"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_MCAL_CAL_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_PERIOD_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_ACCT_PERIOD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_PERIOD_D_Project_Period"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_MCAL_CAL_WID"
+</pre>
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."ENT_PERIOD_END_DAY_WID" &lt;= "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_PERIOD_D"."ENT_PERIOD_END_DT_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Create joins to Dim_W_MCAL_YEAR_D_Fiscal_Year/ Dim_W_MCAL_YEAR_D_Project_Year.</span>
+<div>
+<p>Additional physical joins need to be created between following Logical Table Source fact Fact_Agg_W_PROJ_REVENUE_A_Revenue (under logical fact 'Fact &ndash; Project Cost') and Dim_W_MCAL_YEAR_D_Fiscal_Year (under logical dimension 'Dim &ndash; Date Fiscal Calendar'), Dim_W_MCAL_YEAR_D_Project_Year (under logical dimension 'Dim &ndash; Date Project Calendar') and Dim_W_ENT_YEAR_D (under logical dimension 'Dim &ndash; Date').</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Fiscal_Year"."MCAL_YEAR_START_DAY_WID" =    
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue"."GL_ACCT_PERIOD_START_DAY_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Project_Year"."MCAL_YEAR_START_DAY_WID" =    
+"Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue"."PROJ_ACCT_PERIOD_START_DAY_WID"
+</pre>
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_YEAR_D"."ENT_YEAR_START_DT_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue"."ENT_PERIOD_START_DAY_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Verify the joins to Dim_W_MCAL_YEAR_D_Fiscal_Year/ Dim_W_MCAL_YEAR_D_Project_Year.</span>
+<div>
+<p>Ensure that there are joins between Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD Logical Table Source in 'Fact - Project Revenue' to Dim_W_MCAL_YEAR_D_Fiscal_Year Logical Table Source from the 'Dim - Date Fiscal Calendar', Dim_W_MCAL_YEAR_D_Project_Year Logical Table Source from the 'Dim - Date Project Calendar' and Dim_W_ENT_YEAR_D Logical Table Source from the 'Dim - Date'. These are done by default.</p>
+<p>Join A:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Fiscal_Year"."MCAL_YEAR_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_ACCT_PERIOD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Fiscal_Year"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."GL_MCAL_CAL_WID"
+</pre>
+<p>Join B:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Project_Year"."MCAL_YEAR_END_DAY_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_ACCT_PERIOD_END_DAY_WID" AND "Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_MCAL_YEAR_D_Project_Year"."MCAL_CAL_WID" = "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."PROJ_MCAL_CAL_WID"
+</pre>
+<p>Join C:</p>
+<pre dir="ltr">
+"Oracle Data Warehouse"."Catalog"."dbo"."Dim_W_ENT_YEAR_D"."ENT_YEAR_END_DT_WID" &gt;= "Oracle Data Warehouse"."Catalog"."dbo"."Fact_Agg_W_PROJ_REVENUE_A_Revenue_ITD"."ENT_PERIOD_END_DAY_WID"
+</pre></div>
+</li>
+<li class="stepexpand"><span>Changing Content Aggregation Level in the Business Model and Mapping layer</span>
+<div>
+<p>As installed by default, the grain for revenue aggregate is set to Period against the dimensions Dim-Date Fiscal Calendar, Dim-Date Project Calendar and Dim - Date.</p>
+<p>Instead of Fiscal/Project Period you must set this to Fiscal Year for Dim &ndash; Date Fiscal Calendar and Project Year for Dim &ndash; Date Project Calendar and Enterprise year for Dim - Date.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Save the changes.</span>
+<div>
+<p>When these changes are complete, run the Consistency Check and ensure that there are no errors, save the repository file, and clear the Oracle BI Enterprise Edition Cache. If you are making the changes in offline mode, then restart the Oracle BI Server and Oracle BI Presentation Services.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-2D5AA05B-CD7B-428B-B8A2-23F0295F53F9.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-98F6372C-6F31-46FD-B64E-5F7A7AAB3930.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

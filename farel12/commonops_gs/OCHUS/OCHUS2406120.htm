@@ -1,0 +1,551 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Regenerating Roles (Chapter 17) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Securing Oracle HCM Cloud" name="doctitle">
+      <meta content="E73303-09" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="OCHUS" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Feb 16 01:08:37 PST 2018" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM security;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="OCHUS1210220.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="OCHUS1210221.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="OCHUS.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="OCHUS.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="You must regenerate an HCM data role if you change its role hierarchy. For example, if you remove an aggregate privilege from
+      a custom job role, then you must regenerate any data role that inherits the job role. You must also regenerate any abstract
+      role to which security profiles are assigned if you change its role hierarchy. Regenerating a role updates its data security
+      policies to reflect the latest role hierarchy. This topic introduces the ways in which you can regenerate data and abstract
+      roles."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">20/25</span><a name="BEGIN" id="BEGIN"></a><div id="OCHUS2406120" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">17</span>Regenerating Roles
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1218173">Regenerating Roles: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2852241">Enabling the Grants Regeneration Process: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2851767">Regenerating Multiple Data and Abstract Roles: Procedure</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="OCHUS1218173">
+                  <h2>Regenerating Roles: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You must regenerate an HCM data role if you change its
+                     role hierarchy. For example, if you remove an aggregate privilege from
+                     a custom job role, then you must regenerate any data role that inherits the job role.
+                     You must also regenerate any abstract role to which security profiles are assigned if you change its role hierarchy. Regenerating a role
+                     updates its data security policies to reflect the latest role hierarchy.
+                     This topic introduces the ways in which you can regenerate data and
+                     abstract roles.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS2406114">
+                     <h3 class="topictitle">Regenerating Multiple Roles</h3>
+                     
+                     <p>To regenerate multiple roles at once, you use the
+                        Process Grants Regeneration process. Before you can use this process,
+                        you must add the <span class="uicontrol">Resubmit All Roles</span> button to the Manage Data Roles and Security Profiles page. Adding
+                        this button is a once-only task.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1258661">
+                     <h3 class="topictitle">Regenerating a Role</h3>
+                     
+                     <p>To regenerate a single data or abstract role, you
+                        can use the Process Grants Regeneration process. Alternatively, you
+                        can edit the role on the Manage Data Roles and Security Profiles page.
+                     </p>
+                     
+                     
+                     <p>Follow these steps:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Search for the data or abstract
+                              role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select the role in the Search Results
+                              and click <span class="uicontrol">Edit</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Edit Data Role: Select Role
+                              page, click <span class="uicontrol">Next</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Edit Data Role: Security
+                              Criteria page, click <span class="uicontrol">Review</span>.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>On the Edit Data Role: Review page,
+                              click <span class="uicontrol">Submit</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>This procedure automatically regenerates the role's
+                        data security policies based on the security profiles assigned to
+                        the role.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        You must regenerate updated, predefined roles after
+                        each release upgrade of Oracle HCM Cloud. For example, if the predefined
+                        Payroll Manager role is updated in an upgrade, then you must regenerate
+                        any data role that inherits that job role.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS2852241">
+                  <h2>Enabling the Grants Regeneration Process: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can regenerate HCM data roles and abstract roles individually
+                     by editing them on the Manage Data Roles and Security Profiles page.
+                     Alternatively, to regenerate one or more roles, you can run the Process
+                     Grants Regeneration process. This topic describes how to enable this
+                     process by adding the <span class="uicontrol">Resubmit All Roles</span> button to the Manage Data Roles and Security Profiles page. You
+                     perform this task once only.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS2852240">
+                     <h3 class="topictitle">Adding the Resubmit All Roles Button</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Sign in with the following roles
+                              or privileges:
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>IT Security Manager</p>
+                              </li>
+                              
+                              <li>
+                                 <p>Application Implementation Consultant
+                                    or Human Capital Management Application Administrator
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Create and activate a sandbox.</p>
+                        </li>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Workforce
+                                    Structures</span></span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the Tasks panel tab of the Workforce
+                              Structures work area, select Manage Data Roles and Security Profiles.
+                           </p>
+                           
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              Don't select this task in the Setup and Maintenance
+                              work area. Select it in the Workforce Structures work area.
+                              
+                           </div>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>In the Settings and Actions menu
+                              in the global header, select <span class="uicontrol">Customize Pages...</span> to open the Page Composer. Follow these steps to add the <span class="uicontrol">Resubmit All Roles</span> button to the Manage
+                              Data Roles and Security Profiles page.
+                           </p>
+                           
+                           <ol>
+                              
+                              <li>
+                                 <p>In the dialog box that opens, select
+                                    the <span class="uicontrol">Site</span> layer and click <span class="uicontrol">OK</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>From the View menu in the Page
+                                    Composer, select <span class="uicontrol">Source</span>. This
+                                    option opens a source-code area at the bottom of the page.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Expand the source-code area to
+                                    show more of the content.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Move the cursor to the Manage Data
+                                    Roles and Security Profiles page header and left-click. In the warning
+                                    about editing a shared component, click <span class="uicontrol">Edit</span>.
+                                 </p>
+                                 
+                                 <div class="infobox-"><span class="notep1">Note: </span>
+                                    You aren't editing the page header, but this approach
+                                    provides a quick way to find the <span class="uicontrol">Resubmit
+                                       All Roles</span> button in the source code.
+                                    
+                                 </div>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>The toolbar component that contains
+                                    the <span class="uicontrol">Resubmit All Roles</span> button
+                                    opens in the source-code area.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the source-code area, right-click
+                                    the <span class="uicontrol">commandToolbarButton: Resubmit All Roles</span> entry and click <span class="uicontrol">Show Component</span>. The <span class="uicontrol">Resubmit All Roles</span> button
+                                    now appears on the Manage Data Roles and Security Profiles page.
+                                 </p>
+                                 
+                              </li>
+                              
+                           </ol>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Close the Page Composer.</p>
+                        </li>
+                        
+                        <li>
+                           <p>Select the sandbox, click <span class="uicontrol">More</span>, and publish your changes.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>The <span class="uicontrol">Resubmit All Roles</span> button is now available to all users of the Manage Data Roles and
+                        Security Profiles page to regenerate roles.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS2851767">
+                  <h2>Regenerating Multiple Data and Abstract Roles: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You must regenerate an HCM data role if changes are made
+                     to the data security policies of its inherited job role. For example, if an aggregate privilege is removed from the job role, then you must regenerate any data
+                     role that inherits the job role. You must also regenerate any abstract
+                     role that has directly assigned security profiles if changes
+                     are made to the role's data security policies. You can regenerate
+                     data and abstract roles individually by editing them on the Manage
+                     Data Roles and Security Profiles page. Alternatively, to regenerate
+                     one or more roles, you can run the Process Grants Regeneration process.
+                     This topic describes how to run this process.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS2851766">
+                     <h3 class="topictitle">Running Process Grants Regeneration</h3>
+                     
+                     <p>Follow these steps.</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Sign in with the IT Security Manager
+                              role or privileges and select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Workforce Structures</span></span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the Tasks panel tab of the Workforce
+                              Structures work area, select the Manage Data Roles and Security Profiles
+                              task.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Manage Data Roles and Security
+                              Profiles page, click <span class="uicontrol">Resubmit All Roles</span>.
+                           </p>
+                           
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              The <span class="uicontrol">Resubmit All Roles</span> button doesn't appear by default. You must configure the page to
+                              include this button. Configuring the page is a once-only task.
+                              
+                           </div>
+                           
+                           <p>The Process Flow page opens.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>On the Process Flow page, click <span class="uicontrol">Schedule</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Schedule page, click the <span class="uicontrol">Process Grants Regeneration</span> name. The Schedule:
+                              Process Grants Regeneration page opens.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Schedule: Process Grants
+                              Regeneration page:
+                           </p>
+                           
+                           <ol>
+                              
+                              <li>
+                                 <p>In the <span class="uicontrol">Process Flow</span> field, enter a name for this run of the
+                                    process. You can enter any text that helps you to identify this run.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>In the <span class="uicontrol">Mode</span> field, select a value. This table describes the
+                                    values.
+                                 </p>
+                                 
+                                 <div class="simpletable-margin">
+                                    <table class="customlayout" summary="">
+                                       
+                                       
+                                       <tr class="header">
+                                          
+                                          <th scope="col">
+                                             Mode Value
+                                             
+                                          </th>
+                                          
+                                          <th scope="col">
+                                             Description
+                                             
+                                          </th>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Named Job Role</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Regenerates any data role that inherits the specified
+                                                job role directly. Data roles that inherit the job role indirectly
+                                                aren't regenerated.
+                                             </p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Named Data Role</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Regenerates the specified data role only.</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Named Abstract Role</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Regenerates the specified abstract role only.</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Process All Roles</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Regenerates all roles to which security profiles
+                                                are assigned. In this mode, secured access for all roles is recalculated
+                                                and the secured access of all users is refreshed. The time taken to
+                                                complete this process depends on the number of roles to be regenerated.
+                                             </p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       
+                                       
+                                    </table>
+                                 </div>
+                                 <p></p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>If you're regenerating a named
+                                    role, then select a <span class="uicontrol">Role</span> value.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>Select a <span class="uicontrol">Run</span> value.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Submit</span>.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                           
+                           <p>On the Process Flow page, the processing information
+                              refreshes automatically while the process is running. You can open
+                              other pages and return to this page to review progress. When the process
+                              completes, click the process run name to see the process results.
+                              The Process Flow page shows the name that you specified for this run.
+                              The Process Results section of the page lists all roles that were
+                              processed and indicates whether the regeneration succeeded.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Done</span> to close the page.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                  </div>
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

@@ -1,0 +1,410 @@
+{
+    "info":{
+        "description":"Oracle Procurement Cloud delivers Representational State Transfer (REST) APIs to support your integration requirements. The REST APIs allow you to integrate data into new and existing business process flows.",
+        "version":"2018.03.21",
+        "title":"Oracle Procurement Cloud Release 12",
+        "x-summary":"Oracle Procurement Cloud delivers Representational State Transfer (REST) APIs to support your integration requirements."
+    },
+    "definitions":{
+        "collectionQuery":{
+            "properties":{
+                "dependency":{
+                    "type":"string",
+                    "description":"This parameter specifies dependencies which are attributes that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The attributes specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the attributes will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency attributes.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;"
+                },
+                "expand":{
+                    "type":"string",
+                    "description":"When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers)."
+                },
+                "fields":{
+                    "type":"string",
+                    "description":"This parameter filters the resource attributes. Only the specified attributes are returned, which means that if no attributes are specified, no attributes are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource attributes. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2"
+                },
+                "finder":{
+                    "type":"string",
+                    "description":"Used as a predefined finder to search the collection.<br><br>Format: ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;"
+                },
+                "limit":{
+                    "type":"integer",
+                    "description":"This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources."
+                },
+                "offset":{
+                    "type":"integer",
+                    "description":"Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0."
+                },
+                "onlyData":{
+                    "type":"boolean",
+                    "description":"The resource item payload will be filtered in order to contain only data (no links section, for example)."
+                },
+                "orderBy":{
+                    "type":"string",
+                    "description":"This parameter orders a resource collection based on the specified attributes.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc"
+                },
+                "q":{
+                    "type":"string",
+                    "description":"This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2"
+                },
+                "totalResults":{
+                    "type":"boolean",
+                    "description":"The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\"."
+                }
+            },
+            "type":"object"
+        },
+        "link":{
+            "properties":{
+                "href":{
+                    "type":"string",
+                    "description":"The URI to the related resource.",
+                    "title":"hyperlink reference"
+                },
+                "rel":{
+                    "type":"string",
+                    "description":"The name of the relation to the resource instance.  Example: self.",
+                    "title":"relation"
+                }
+            },
+            "type":"object"
+        },
+        "purchaseOrders":{
+            "properties":{
+                "count":{
+                    "type":"integer",
+                    "description":"The number of resource instances returned in the current range.",
+                    "title":"Count"
+                },
+                "hasMore":{
+                    "type":"boolean",
+                    "description":"Indicates whether more resources are available on the server than the subset returned in the response. If the value is true, then there are more resources to retrieve from the server. The default value is false.",
+                    "title":"HasMore"
+                },
+                "items":{
+                    "items":{
+                        "$ref":"#/definitions/purchaseOrders-item"
+                    },
+                    "type":"array",
+                    "description":"The items in the collection.",
+                    "title":"Items"
+                },
+                "limit":{
+                    "type":"integer",
+                    "description":"The actual paging size used by the server.",
+                    "title":"Limit"
+                },
+                "links":{
+                    "items":{
+                        "$ref":"#/definitions/link"
+                    },
+                    "type":"array",
+                    "description":"The link relations associated with the resource instance.",
+                    "title":"Items"
+                },
+                "offset":{
+                    "type":"integer",
+                    "description":"The offset value used in the current page.",
+                    "title":"Offset"
+                }
+            },
+            "type":"object"
+        },
+        "purchaseOrders-item":{
+            "properties":{
+                "OrderNumber":{
+                    "maxLength":30,
+                    "type":"string",
+                    "description":"Number that uniquely identifies the purchase order in the sold-to legal entity."
+                },
+                "SoldToLegalEntity":{
+                    "maxLength":240,
+                    "type":"string",
+                    "description":"Legal entity that is liable for the purchase order amount.",
+                    "title":"Legal Entity"
+                },
+                "links":{
+                    "items":{
+                        "$ref":"#/definitions/link"
+                    },
+                    "type":"array",
+                    "description":"Link Relations",
+                    "title":"Items"
+                }
+            },
+            "type":"object"
+        },
+        "purchaseOrders-submitRequest":{
+            "properties":{
+                "name":{
+                    "type":"string",
+                    "enum":[
+                        "submit"
+                    ],
+                    "description":"This parameter value must be set to \"submit\"."
+                },
+                "parameters":{
+                    "items":[
+                        {
+                            "properties":{
+                                "bypassApprovalsFlag":{
+                                    "type":"boolean",
+                                    "description":"Contains True or False. True: Bypass the approval workflow. False: do not bypass."
+                                }
+                            },
+                            "additionalProperties":false,
+                            "type":"object"
+                        }
+                    ],
+                    "minItems":1,
+                    "maxItems":1,
+                    "type":"array"
+                }
+            },
+            "type":"object"
+        },
+        "purchaseOrders-submitResponse":{
+            "properties":{
+                "return":{
+                    "type":"string",
+                    "description":"This action might return a value of Success."
+                }
+            },
+            "type":"object"
+        },
+        "squery":{
+            "properties":{
+                "dependency":{
+                    "type":"string",
+                    "description":"This parameter specifies dependencies which are attributes that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The attributes specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the attributes will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency attributes.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;"
+                },
+                "expand":{
+                    "type":"string",
+                    "description":"When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers)."
+                },
+                "fields":{
+                    "type":"string",
+                    "description":"This parameter filters the resource attributes. Only the specified attributes are returned, which means that if no attributes are specified, no attributes are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource attributes. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2"
+                },
+                "onlyData":{
+                    "type":"boolean",
+                    "description":"The resource item payload will be filtered in order to contain only data (no links section, for example)."
+                }
+            },
+            "type":"object"
+        }
+    },
+    "tags":[
+        {
+            "name":"Purchase Orders",
+            "description":"The Purchase Orders resource manages purchase orders. A purchase order is a commercial document that controls purchasing of an item or service, typically from a supplier who resides outside of your organization."
+        }
+    ],
+    "basePath":"/procurementApi/resources/11.12.1.0",
+    "paths":{
+        "/purchaseOrders":{
+            "get":{
+                "summary":"Get all purchase orders",
+                "parameters":[
+                    {
+                        "name":"expand",
+                        "description":"When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+                        "in":"query",
+                        "type":"string"
+                    },
+                    {
+                        "name":"fields",
+                        "description":"This parameter filters the resource attributes. Only the specified attributes are returned, which means that if no attributes are specified, no attributes are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource attributes. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+                        "in":"query",
+                        "type":"string"
+                    },
+                    {
+                        "name":"onlyData",
+                        "description":"The resource item payload will be filtered in order to contain only data (no links section, for example).",
+                        "in":"query",
+                        "type":"boolean"
+                    },
+                    {
+                        "name":"dependency",
+                        "description":"This parameter specifies dependencies which are attributes that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The attributes specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the attributes will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency attributes.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+                        "in":"query",
+                        "type":"string"
+                    },
+                    {
+                        "name":"limit",
+                        "description":"This parameter restricts the number of resources returned inside the resource collection. If the limit exceeds the resource count then the framework will only return the available resources.",
+                        "in":"query",
+                        "type":"integer"
+                    },
+                    {
+                        "name":"offset",
+                        "description":"Used to define the starting position of the resource collection. If offset exceeds the resource count then no resources are returned. Default value is 0.",
+                        "in":"query",
+                        "type":"integer"
+                    },
+                    {
+                        "name":"totalResults",
+                        "description":"The resource collection representation will include the \"estimated row count\" when \"?totalResults=true\", otherwise the count is not included.  The default value is \"false\".",
+                        "in":"query",
+                        "type":"boolean"
+                    },
+                    {
+                        "name":"q",
+                        "description":"This query parameter defines the where clause. The resource collection will be queried using the provided expressions. The value of this query parameter is one or more expressions. Example: ?q=Deptno&gt;=10 and &lt;= 30;Loc!=NY <br><br>Format: ?q=expression1;expression2",
+                        "in":"query",
+                        "type":"string"
+                    },
+                    {
+                        "name":"orderBy",
+                        "description":"This parameter orders a resource collection based on the specified attributes.  The parameter value is a comma-separated string of attribute names, each optionally followed by a colon and \"asc\" or \"desc\".  Specify \"asc\" for ascending and \"desc\" for descending. The default value is \"asc\".  For example, ?orderBy=field1:asc,field2:desc",
+                        "in":"query",
+                        "type":"string"
+                    },
+                    {
+                        "name":"finder",
+                        "description":"Used as a predefined finder to search the collection.<br><br>Format: ?finder=&lt;finderName&gt;;&lt;variableName&gt;=&lt;variableValue&gt;,&lt;variableName2&gt;=&lt;variableValue2&gt;",
+                        "in":"query",
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "default":{
+                        "description":"The following table describes the default response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/purchaseOrders"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/vnd.oracle.adf.resourcecollection+json"
+                ],
+                "tags":[
+                    "Purchase Orders"
+                ],
+                "x-internal-id":"purchaseOrders-get"
+            }
+        },
+        "/purchaseOrders/{POHeaderId}":{
+            "get":{
+                "summary":"Get one purchase order",
+                "parameters":[
+                    {
+                        "name":"expand",
+                        "description":"When this parameter is provided, the specified children are included in the resource payload (instead of just a link). The value of this query parameter is \"all\" or \"\". More than one child can be specified using comma as a separator. Example: ?expand=Employees,Localizations. Nested children can also be provided following the format \"Child.NestedChild\" (Example: ?expand=Employees.Managers). If a nested child is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?expand=Employees.Managers\" is the same as \"?expand=Employees,Employees.Managers\" (which will expand Employees and Managers).",
+                        "in":"query",
+                        "type":"string"
+                    },
+                    {
+                        "name":"fields",
+                        "description":"This parameter filters the resource attributes. Only the specified attributes are returned, which means that if no attributes are specified, no attributes are returned (useful to get only the links). If an indirect child resource is provided (Example: Employees.Managers), the missing children will be processed implicitly. For example, \"?fields=Employees.Managers:Empname\" is the same as \"?fields=;Employees:;Employees.Managers:Empname\" (which will only return the \"Empname\" field for Managers). the value of this query parameter is a list of resource attributes. The attribute can be a direct (Example: Employees) or indirect (Example: Employees.Managers) child. It cannot be combined with expand query parameter. If both are provided, only fields will be considered.<br><br>Format: ?fields=Attribute1,Attribute2<br><br>Format for fields in child resource: ?fields=Accessor1:Attribute1,Attribute2",
+                        "in":"query",
+                        "type":"string"
+                    },
+                    {
+                        "name":"onlyData",
+                        "description":"The resource item payload will be filtered in order to contain only data (no links section, for example).",
+                        "in":"query",
+                        "type":"boolean"
+                    },
+                    {
+                        "name":"dependency",
+                        "description":"This parameter specifies dependencies which are attributes that are set before and rolled back after generating the response. Generally they are used to preview the effects of an attribute change. The attributes specified in this parameter are always set in the resource instance in question. When a child resource collection is requested and the parameter is set, the attributes will be set in the parent resource instance before generating the resource collection payload. The value of this query parameter is a set of dependency attributes.  Example: dependency=ProductId=2<br><br>Format: &lt;attr1&gt;=&lt;val1&gt;,&lt;attr2&gt;=&lt;value2&gt;",
+                        "in":"query",
+                        "type":"string"
+                    }
+                ],
+                "responses":{
+                    "default":{
+                        "description":"The following table describes the default response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/purchaseOrders-item"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/vnd.oracle.adf.resourceitem+json"
+                ],
+                "tags":[
+                    "Purchase Orders"
+                ],
+                "x-internal-id":"purchaseOrders-{POHeaderId}-get"
+            },
+            "post":{
+                "summary":"POST",
+                "description":"Post operation",
+                "parameters":[
+                    {
+                        "name":"request",
+                        "description":"The following table describes the body parameters in the request for this task.",
+                        "schema":{
+                            "type":"object"
+                        },
+                        "in":"body"
+                    }
+                ],
+                "responses":{
+                    "default":{
+                        "description":"The following table describes the default response for this task.",
+                        "schema":{
+                            "type":"object"
+                        }
+                    }
+                },
+                "consumes":[
+                    "application/vnd.oracle.adf.action+json"
+                ],
+                "produces":[
+                    "application/vnd.oracle.adf.actionresult+json"
+                ],
+                "tags":[
+                    "Purchase Orders"
+                ],
+                "x-operations":[
+                    {
+                        "summary":"Submit purchase order for approval",
+                        "description":"Submit a purchase order or change order for approval. Set the bypassApprovalsFlag attribute to True to bypass the approval workflow.",
+                        "parameters":[
+                            {
+                                "name":"request",
+                                "description":"The following table describes the body parameters in the request for this task.",
+                                "schema":{
+                                    "$ref":"#/definitions/purchaseOrders-submitRequest"
+                                },
+                                "in":"body"
+                            }
+                        ],
+                        "responses":{
+                            "default":{
+                                "description":"The following table describes the default response for this task.",
+                                "schema":{
+                                    "$ref":"#/definitions/purchaseOrders-submitResponse"
+                                }
+                            }
+                        },
+                        "consumes":[
+                            "application/vnd.oracle.adf.action+json"
+                        ],
+                        "produces":[
+                            "application/vnd.oracle.adf.actionresult+json"
+                        ],
+                        "tags":[
+                            "Purchase Orders"
+                        ],
+                        "x-internal-id":"purchaseOrders-{POHeaderId}-post-x-operations-0"
+                    }
+                ],
+                "x-internal-id":"purchaseOrders-{POHeaderId}-post"
+            },
+            "parameters":[
+                {
+                    "name":"POHeaderId",
+                    "description":"Value that uniquely identifies the purchase order header.",
+                    "required":true,
+                    "in":"path",
+                    "type":"integer"
+                }
+            ]
+        }
+    },
+    "swagger":"2.0",
+    "schemes":[
+        "https"
+    ]
+}

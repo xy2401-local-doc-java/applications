@@ -1,0 +1,1599 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Automated Invoice Processing Configuration (Chapter 1) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Implementing Payables Invoice to Pay" name="dcterms.title">
+      <meta content="Implementing Payables Invoice to Pay" name="doctitle">
+      <meta content="E73069-03" name="dcterms.identifier">
+      <meta content="E67969-01" name="partno">
+      <meta content="FAIPP" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Thu Jul 20 09:29:03 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="Automated Invoice Processing; integrated invoice images; scanning invoice images; invoice images; routing incomplete invoices;
+      integrated invoice imaging solution; integrated invoice imaging process; receiving invoice images; receiving scanned invoices;
+      recognizing scanned invoices; recognizing scanned images; scanning invoices; e-mail invoices; e-mail invoices; Oracle Document
+      Capture Import Server; Oracle Forms Recognition; incomplete invoices; designated e-mail accounts; invoice imaging requirements;
+      supervised learning;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="preface.htm" rel="Prev">
+      <link type="text/html" title="Next" href="FAIPP1470345.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIPP.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIPP.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="The integrated invoice imaging solution for Oracle Cloud provides scanned image import, intelligent character recognition,
+      and automatic invoice creation. In addition, the solution routes invoices with exceptions to accounts payables personnel for
+      review and completion."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">4/14</span><a name="BEGIN" id="BEGIN"></a><div id="FAIPP1469798" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">1</span>Automated Invoice Processing Configuration
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIPP908615">Integrated Invoice Imaging for Oracle Cloud Implementations: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIPP913265">Integrated Invoice Imaging for Oracle Cloud Implementations: Critical Choices</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIPP839982">Receiving Invoice Images from E-Mail: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIPP1143151">Routing Incomplete Invoices: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIPP1782335">Overriding Default Business Units on Unmatched Scanned Invoices: Explained</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIPP908615">
+                  <h2>Integrated Invoice Imaging for Oracle Cloud Implementations: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The integrated invoice imaging solution for
+                     Oracle Cloud provides scanned image import, intelligent character
+                     recognition, and automatic invoice creation. In addition, the solution
+                     routes invoices with exceptions to accounts payables personnel for
+                     review and completion.
+                  </p>
+                  
+                  
+                  
+                  <p>This figure shows the integrated invoice imaging flow.</p>
+                  <img src="img/ap_defpay_invoicimgcld_07_20043303.png" alt="Integrated Invoice Imaging Flow for Oracle Cloud" class="fusappimg">
+                  
+                  <p>Here's a summary of the steps in the imaging process
+                     followed by details of the processing flow.
+                  </p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>To use the integrated invoice imaging
+                           solution, you must have a designated e-mail account to send the invoice
+                           images. When you sign up for the Oracle Cloud Application Service,
+                           you're provided with one.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>After you have the e-mail account,
+                           prepare the invoices for processing.
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>If your business process is to
+                                 receive invoice images from your suppliers, communicate to them your
+                                 imaging requirements. The suppliers can then e-mail the invoice images
+                                 directly to the designated e-mail account.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>If you receive paper invoices,
+                                 prepare images from the invoices and send the images to the e-mail
+                                 account.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Once the images are sent to the
+                           e-mail account, the imaging solution retrieves them for further processing.
+                           The solution checks for new images every minute and creates invoices
+                           from the images.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>If any exceptions occur during
+                           automatic invoice creation, the invoices are marked as incomplete
+                           and routed to accounts payable personnel for review and completion.
+                           The incomplete invoices appear in the Scanned information tile on
+                           the Invoices landing page.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>After the rest of the invoice processing
+                           tasks are finished, such as validation and approval, the invoices
+                           are ready for payment.
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  <div class="sect2" id="FAIPP908609">
+                     <h3 class="topictitle">E-Mail Scanned Images</h3>
+                     
+                     
+                     <p>Based on agreements with your suppliers, you
+                        might receive paper invoices at your bill-to locations, or you might
+                        receive images by e-mail. You can communicate imaging requirements
+                        to your suppliers, such as to send images in the TIFF format with
+                        a minimum of 300 dpi.
+                     </p>
+                     
+                     
+                     
+                     <p>For images sent by e-mail, imaging specialists can
+                        check for quality and proper formatting. For paper invoices, imaging
+                        specialists can sort the invoices into different categories based
+                        on parameters, such as geography, invoice type, invoice amount, and
+                        due date. They can then scan the invoices to convert them to images. 
+                     </p>
+                     
+                     <p></p>
+                     
+                     <p>Imaging specialists forward the images to the designated
+                        e-mail account. They can optionally specify attributes in the e-mail
+                        subject for the purposes of routing and recording.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIPP908610">
+                     <h3 class="topictitle">Import Images</h3>
+                     
+                     
+                     <p>Oracle Document Capture Import Server retrieves
+                        the images from the designated e-mail account at scheduled intervals.
+                        All of the invoice images in an e-mail are grouped into a batch.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIPP908611">
+                     <h3 class="topictitle">Recognize Images</h3>
+                     
+                     
+                     <p>The imaging solution sends the batches to
+                        Oracle Forms Recognition for intelligent data recognition and extraction
+                        of the invoice attributes.
+                     </p>
+                     
+                     
+                     
+                     <p>Forms Recognition offers cutting-edge intelligent
+                        recognition capabilities for extracting the invoice attributes from
+                        the scanned images. Unlike other solutions that use supplier-specific
+                        templates to extract information, Forms Recognition can intelligently
+                        locate data within the invoice. The data can be found regardless of
+                        its location on the image and whether Forms Recognition has processed
+                        invoices from that supplier before. As suppliers are added, or an
+                        existing supplier changes its invoice layout, Forms Recognition can
+                        extract the attributes from the new invoice layouts.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIPP908612">
+                     <h3 class="topictitle">Store Images</h3>
+                     
+                     
+                     <p>Oracle WebCenter Imaging stores the invoice
+                        images and extracted information. For the rest of the invoice life
+                        cycle, any reference to the invoice image points to the imaging repository.
+                        This ensures documents are never replicated further during invoice
+                        processing.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIPP908613">
+                     <h3 class="topictitle">Process Invoices</h3>
+                     
+                     
+                     <p>The imaging solution uses the extracted attributes
+                        from the images to create the invoices. If exceptions occur during
+                        processing, the invoices are marked as incomplete and routed to accounts
+                        payable personnel using Oracle Business Process Execution Language
+                        (BPEL) workflows. A default routing rule routes the incomplete invoices
+                        to all users with the Accounts Payable Specialist and Accounts Payable
+                        Supervisor job roles.
+                     </p>
+                     
+                     
+                     
+                     <p>Incomplete invoices appear in the Scanned information
+                        tile on the Invoices landing page. Invoice header attributes and lines
+                        requiring attention are highlighted on the Edit Invoice page for quick
+                        identification and resolution. With a dual monitor setup, you can
+                        review both the invoice and the invoice image at the same time.
+                     </p>
+                     
+                     <p>WebCenter Imaging provides an image viewer that's
+                        embedded within Oracle Fusion Payables. Accounts payable personnel
+                        can review and annotate the images using the embedded image viewer.
+                     </p>
+                     
+                     <p>This figure shows the Scanned information tile on
+                        the Invoices landing page.
+                     </p>
+                     <img src="img/ap_recpro_scaninwa_04_20052276.png" alt="Scanned information tile on the Invoices landing&#xA;page" class="fusappimg">
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIPP908614">
+                     <h3 class="topictitle">Pay Invoices</h3>
+                     
+                     
+                     <p>After you complete the rest of the invoice
+                        processing tasks, such as validating, approving, and accounting, the
+                        invoices are ready to be paid. You can schedule a payment process request to select them for payment.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=E46A24095BCF25CCE040D30A68813473">What's an incomplete invoice?</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIPP913265">
+                  <h2>Integrated Invoice Imaging for Oracle Cloud Implementations: Critical Choices</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>The integrated invoice imaging solution for
+                     Oracle Cloud provides scanned image import, intelligent character
+                     recognition, and automatic invoice creation. In addition, the solution
+                     routes invoices with exceptions to accounts payables personnel for
+                     review and completion.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIPP913256">
+                     <h3 class="topictitle">Scanning Invoice Images</h3>
+                     
+                     
+                     
+                     <p>Review these critical points for scanning
+                        invoices.
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Consider any legal requirements for
+                              processing and storing invoices in the same country that received
+                              the invoices.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Scan invoices in black and white
+                              using the TIFF image format with International Telegraph and Telephone
+                              Consultative Committee (CCIT) Group IV compression at 300 dpi. Scanning
+                              this way provides the optimal balance between scan quality and image
+                              size.
+                           </p>
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              Avoid the JPEG format because the lossy compression logic results in loss
+                              of image details, affecting recognition accuracy.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>Enable adaptive thresholding technology
+                              on scanners to remove background colors, gray scaling, and gradients
+                              for pure black and white images. Black and white images provide optimal
+                              Optical Character Recognition accuracy as well as a reduced image
+                              size.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>To achieve a higher rate of recognition:</p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Define purchase order numbers as
+                                    a combination of letters and numbers instead of using the default
+                                    seven-digit numeric format. For example, define purchase order numbers
+                                    like CN388392.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Implement a uniform numbering scheme
+                                    for purchase orders across all business units.
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIPP1156745">
+                     <h3 class="topictitle">Attaching Invoice Images in E-Mail</h3>
+                     
+                     
+                     
+                     <p>Review these critical points for attaching
+                        invoice images in e-mail.
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Include invoice images in e-mail
+                              attachments in the following ways:
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Single page invoice in one attachment</p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>Multiple page invoice in one attachment</p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>Multiple invoices in one attachment</p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>Single and multiple page invoices
+                                    in multiple attachments
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Organize invoices within the attachments
+                              for successful recognition. If you have:
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Single page invoices in an attachment,
+                                    you don't have to place a blank page between invoices as a separator.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>One multiple page invoice in an
+                                    attachment, place a blank page at the end or beginning of the attachment.
+                                    This method prevents processing each page as a single page invoice.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>More than one multiple page invoice
+                                    in the batch, insert a blank page between the invoices.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Both single and multiple page invoices
+                                    in an attachment, insert a blank page between invoices.
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIPP1156714">
+                     <h3 class="topictitle">Processing Invoices</h3>
+                     
+                     
+                     
+                     <p>Review these critical points for processing
+                        invoices.
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Schedule the Import Payables Invoices
+                              and Validate Payables Invoices processes to run every 15 to 30 minutes.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Define distribution sets for your supplier
+                              sites.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Modify the invoice routing rule
+                              to achieve the specialization that you want within your payables department.
+                              For example, route the incomplete invoices based on supplier, business
+                              unit, or invoice amount. Routing this way can ensure the payables
+                              personnel process invoices based on their specific assignments. The
+                              default rule routes all incomplete invoices to users with the Accounts
+                              Payable Specialist and Accounts Payable Supervisor job roles.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=E46A24095BCF25CCE040D30A68813473">What's an incomplete invoice?</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIPP1470346.htm#FAIPP152976">Distribution Sets: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIPP839982">
+                  <h2>Receiving Invoice Images from E-Mail: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>The integrated invoice imaging solution provides
+                     for processing invoice images that are received by e-mail.
+                  </p>
+                  
+                  
+                  <p>The e-mail must be sent in a certain format and meet
+                     specifications that are acceptable by Oracle Document Capture. Imaging
+                     specialists must scan and convert the paper invoices received from
+                     suppliers to images. Alternatively, if invoices have been received
+                     as e-mail attachments, imaging specialists check for quality and proper
+                     formatting.
+                  </p>
+                  
+                  <p>You can optionally enter attributes in the e-mail
+                     subject for recording on the invoice and for routing if the invoices
+                     are incomplete. A preconfigured routing rule is provided to route
+                     incomplete invoices to all users with Accounts Payables Specialist
+                     and Accounts Payable Supervisor job roles. 
+                  </p>
+                  
+                  <p></p>
+                  
+                  <p>Consider the following when receiving invoice images
+                     through e-mail.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIPP839974">
+                     <h3 class="topictitle">Invoice Images as E-Mail Attachments</h3>
+                     
+                     
+                     
+                     <p>Invoice images can be included in e-mail attachments
+                        in the following ways:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Single page invoice in one attachment.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Multiple page invoice in one attachment.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Multiple invoices in one attachment.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Single and multiple page invoices
+                              in multiple attachments.
+                           </p>
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              A single invoice cannot be represented by multiple
+                              attachments.
+                              
+                           </div>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        Depending on the size of each scanned image, consider
+                        grouping the images into a single e-mail to optimize the number of
+                        e-mails sent for processing.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIPP839976">
+                     <h3 class="topictitle">Attribute Information in the E-Mail Subject</h3>
+                     
+                     
+                     
+                     <p>You can specify up to five attributes in an
+                        e-mail subject. These attributes can be recorded on the invoice or
+                        used to route the incomplete invoices to payables personnel for review
+                        and completion. Use the underscore sign <code>(_)</code> as a separator to indicate the start of routing attribute information.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        You can also use one of these attributes to override
+                        the default business unit on an unmatched scanned invoice.
+                        
+                     </div>
+                     
+                     <p>For example, you have a specific business requirement
+                        to record categories on the invoice. These categories include invoice
+                        priority, supplier category, manufacturing plant number, storage bin
+                        number, and processing queue. You can specify values for these categories
+                        in the e-mail subject.
+                     </p>
+                     
+                     <p>This table lists the categories and their possible
+                        values.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Example categories with corresponding&#xA;values.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Category
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Invoice priority</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Regular, Urgent</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplier category</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Regular, Supply chain related</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Manufacturing plant number</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Plant-1, Plant-2, Plant-3</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Storage bin number</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Bin#1, Bin#2, Bin#3</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Processing queue</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Section1, Section2, Section3</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>A supplier sends an invoice with the e-mail subject
+                        of Invoice-1234 attached. The imaging specialist reviews the e-mail
+                        and provides additional routing information in the e-mail subject.
+                        The revised e-mail subject is Invoice-1234 attached_Urgent_Supply
+                        chain related_Plant-1_Bin#1_Section1.
+                     </p>
+                     
+                     <p>This table shows how the content in the e-mail subject
+                        maps to the routing attributes.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary=" Example mapping of values in&#xA;an e-mail subject to the corresponding routing attribute.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 E-Mail Subject Content
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Routing Attribute Mapping
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Invoice-1234 attached</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Not applicable since the text appears before the first
+                                    separator character
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Urgent </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Routing attribute 1</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supply chain related</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Routing attribute 2</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Plant-1</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Routing attribute 3</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Bin#1</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Routing attribute 4</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Section1</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Routing attribute 5</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        The routing attribute number and the category aren't
+                        explicitly linked together. You must enter the value for the category
+                        in the same order.
+                        
+                     </div>
+                     
+                     
+                     <p>The supplier sends another invoice with the e-mail
+                        subject of Invoice-2345 attached. The revised e-mail subject is Invoice-2345
+                        attached_Regular_Supply chain related_Plant-1_Bin#1_Section1. The
+                        routing rule is defined as follows:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>If routing attribute 1 = <span class="uicontrol">Urgent</span>, assign invoice image to accounts
+                              payable specialist Harry.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If routing attribute 1 = <span class="uicontrol">Regular</span>, assign invoice image to accounts
+                              payable specialist Nathan.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>In this example, invoice 1234 is assigned to Harry
+                        and invoice 2345 is assigned to Nathan.
+                     </p>
+                     
+                     <p>As in the previous example, attributes can include
+                        alphanumeric characters. The maximum length for each attribute depends
+                        on how many attributes you're using. For example, if you use all five
+                        attributes, the maximum length of each attribute is 34 characters.
+                        You can modify the maximum length of each attribute to meet your requirements
+                        however, the sum of the attribute values should not exceed the limit.
+                        This limit is calculated as follows, assuming that all five attributes
+                        are used and that the image is stored in the file location C:\OFR\Import\.
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Total number of characters allowed
+                              by Oracle Forms Recognition: 233
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Number of characters in the file
+                              path C:\OFR\Import\: 14
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Number of characters in the file
+                              extension .tif, including the period: 4
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Number of characters reserved for
+                              internal use as a unique reference number: 40
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Number of separator characters: 5</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Limit is the total characters minus
+                              file path minus file extension minus reserved characters minus separator
+                              characters (233-14-4-40-5): 170
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        The limit changes if you use fewer than five attributes,
+                        because fewer separators are needed.
+                        
+                     </div>
+                     
+                     <p>If the attribute in an e-mail subject exceeds the
+                        maximum length specified for that attribute, the Document Capture
+                        scan and commit process errors.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIPP1143151">
+                  <h2>Routing Incomplete Invoices: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>An incomplete invoice is an invoice created
+                     from an image that has invalid or missing information. Incomplete
+                     invoices are automatically routed to users with the Accounts Payable
+                     Specialist and Accounts Payables Supervisor job roles for review and completion.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIPP1836318">
+                     <h3 class="topictitle">Routing Rule Administration</h3>
+                     
+                     <p>You can modify the predefined routing rule using
+                        the Approval Management extensions of the Oracle SOA Suite and Oracle
+                        Human Workflow. The Oracle Business Process Management (BPM) Worklist
+                        application provides the interface to administer the rule.
+                     </p>
+                     
+                     
+                     <p>Users with the Financial Application Administrator
+                        job role are BPM Worklist administrators and can access the rules
+                        in the BPM Worklist application. To navigate to the BPM Worklist application,
+                        use the Manage Task Configurations for Financials task. The predefined
+                        task that assigns and routes incomplete invoices is called the FinAPIncompleteInvoiceHold
+                        task.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIPP1145278">
+                     <h3 class="topictitle">Tasks</h3>
+                     
+                     
+                     <p>The following table lists the predefined
+                        settings for the FinAPIncompleteInvoiceHold task.
+                     </p>
+                     
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Predefined settings for the FinAPIncompleteInvoiceHold&#xA;task.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Field
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Setting
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Task Aggregation</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Once per stage</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>On Error Notify</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Not applicable</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Allow all participants to invite other participants</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Not enabled</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Allow participants to edit future participants</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Not enabled</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Allow initiator to add participants</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Not enabled</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Enable automatic claim</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Enabled</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Complete task when participant chooses</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Not enabled</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Enable early completion of parallel subtasks</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Not enabled</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Complete parent tasks of early completing subtasks</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Not enabled</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Expiration and Escalation Policy</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Never Expire</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Reminders</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>No reminders</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIPP1145279">
+                     <h3 class="topictitle">Rule Sets and Rules</h3>
+                     
+                     
+                     <p>The FinAPIncompleteInvoiceHold task has a
+                        rule set, which is a collection of rules, called IncompleteInvoiceRuleSet.
+                        This rule set has a rule called JobRoleAssignmentRule. Rules consist
+                        of IF and THEN components. The IF component specifies the conditions
+                        that determine when to apply the rule. The THEN component specifies
+                        what happens when the conditions are met.
+                     </p>
+                     
+                     
+                     
+                     <p>The following table lists the predefined settings
+                        for the JobRoleAssignmentRule rule.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Definition of the redefined rule called JobRoleAssignmentRule.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Field
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Condition</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>FinAPHoldApprovalPayloadType.holdName is "Incomplete
+                                    Invoice"
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Activates the rule when the invoice is placed on
+                                    an incomplete hold. To use other invoice attributes, select from the
+                                    condition browser window.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>List Builder</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Resource</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Determines the resource to which the invoice is routed.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Response Type</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Required</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Indicates that the routing notification requires
+                                    a response.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Participants</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Users: null, Groups: "AP_ACCOUNTS_PAYABLE_SPECIALIST_JOB,
+                                    AP_ACCOUNTS_PAYABLE_SUPERVISOR_JOB", Application Role: null
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Identifies the participant to whom the invoice is
+                                    routed.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Rule Name</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>"JobRoleAssignmentRule"</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Identifies the approval reason to display in the
+                                    approval history diagram.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIPP1145280">
+                     <h3 class="topictitle">Rule Conditions</h3>
+                     
+                     <p>You can use the available invoice header, line, and
+                        distribution attributes in the routing rule condition.
+                     </p>
+                     
+                     
+                     <p>To edit the rule condition:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Start a search in the left-most
+                              field in the IF section of the rule. The Condition Browser opens.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Select the attribute to use in
+                              the condition.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=E46A24095BCF25CCE040D30A68813473">What's an incomplete invoice?</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIPP1782335">
+                  <h2>Overriding Default Business Units on Unmatched Scanned Invoices: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Business units for unmatched scanned invoices
+                     are automatically determined based on attributes, such as supplier
+                     address and the Default Business Unit profile option. You can override
+                     automatic business unit assignment and instead, specify a business
+                     unit by performing the following steps:
+                  </p>
+                  
+                  
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Indicate that routing attribute
+                           1 represents the business unit.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Find the business unit ID for the
+                           overriding business unit.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Specify the business unit ID in
+                           the e-mail subject.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="FAIPP1782332">
+                     <h3 class="topictitle">Indicate Routing Attribute 1 Represents Business
+                     Unit</h3>
+                     
+                     <p>As part of the standard invoice imaging flow, you
+                        can use up to five additional attributes to route scanned invoices
+                        for completion or to record on the invoice. To override the default
+                        business unit, you must indicate that values for routing attribute
+                        1 represent business units.
+                     </p>
+                     
+                     
+                     <p>Perform these steps:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Navigate to the Manage Payables
+                              Lookups page.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Search for lookup type ORA_IMAGING_ROUTING_ATTRIBUTES.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Enable lookup code ORA_BUSINESS_UNIT.</p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIPP1782333">
+                     <h3 class="topictitle">Find the ID for the Overriding Business Unit</h3>
+                     
+                     <p>You must use the identifier for the business unit
+                        as the override. To find the business unit ID:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Navigate to the Manage Business
+                              Units page.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Search for the applicable business
+                              unit.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If you don't see the Business Unit
+                              ID column in the Search Results table, use the View menu to enable
+                              the column.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIPP1782334">
+                     <h3 class="topictitle">Specify the Business Unit ID in the E-mail Subject</h3>
+                     
+                     <p>For scanned invoices that aren't matched to purchase
+                        orders, edit the e-mail subject to:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Append the underscore sign (_)
+                              followed by the business unit ID. For example, if a scanned invoice
+                              has an e-mail subject of <span class="uicontrol">Invoice 42366_30014001</span>, the business unit ID for that invoice is <span class="uicontrol">30014001</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <div class="infobox-note"><span class="notep1">Note: </span>
+                        If you specify an invalid ID, or the ID is missing
+                        from the e-mail subject, the business unit is automatically assigned.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

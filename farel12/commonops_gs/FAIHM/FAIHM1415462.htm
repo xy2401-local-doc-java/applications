@@ -1,0 +1,3054 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Payroll Batch Loader (Chapter 20) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:18 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="batch loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM1446823.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM2009020.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="Payroll managers and administrators use the batch loader for a variety of purposes when migrating and loading data during
+      implementation and on an ongoing basis. This topic compares the different tasks to help you determine which approach to take
+      when loading data. You can load as many as 500,000 record in a single batch. If you require loading more than 500,000 records,
+      split them up into separate batches."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">23/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM1415462" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">20</span>Payroll Batch Loader
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM306458">Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1141931">Importing Data: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1996511">Creating a Report to View Batch Line Errors: Worked Example</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1907564">Task Actions for Migrating Elements: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1398746">Migrating Objects: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2079152">FAQs for Payroll Batch Loader</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM306458">
+                  <h2>Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Payroll managers and administrators use the batch loader for a
+                     variety of purposes when migrating and loading data during implementation
+                     and on an ongoing basis. This topic compares the different tasks to
+                     help you determine which approach to take when loading data.
+                  </p>
+                  
+                  
+                  
+                  <p>You can use the batch loader tasks and processes to
+                     perform the following actions:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Create, update, and delete data for
+                           supported objects
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Create elements and formulas using template questions</p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Create batches from files</p>
+                     </li>
+                     
+                     <li>
+                        <p>Migrate objects between environments</p>
+                        
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>The following table describes the tasks and processes
+                     that you might use when working with the batch loader. You can access
+                     these tasks and processes in the Payroll Administration work area
+                     or using the Enter Batch task in a payroll flow.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="Description of the batch loader&#xA;tasks and processes">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Task or Process
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Description
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Comments
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Batch Loader</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Launches a workbook where you can create a batch
+                                 or search for an existing batch.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Access this task in the Tasks pane.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Create Batch</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Creates a batch to load element entries or balances by object group. Populates
+                                 a workbook with all the elements or people in the object group you
+                                 select when submitting the process.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Access this process from the Submit a Payroll Flow
+                                 task.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Create Batch for an Object</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Downloads some or all records and history for a specified
+                                 object, such as an element or formula, into a batch for data migration.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Copy the batch lines to a new batch in another environment
+                                 and submit the Transfer Batch flow to create the data.
+                              </p>
+                              
+                              <p>Access this process from the Submit a Process or
+                                 Report task.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Enter Batch</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>For user-defined flows, launches a workbook for a
+                                 single batch.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Sequence tasks in the flow pattern so that the Transfer
+                                 Batch task follows the Enter Batch task.
+                              </p>
+                              
+                              <p>Access this process from the checklist of a user-defined
+                                 flow pattern.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Load Batch from File</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Uploads a file and transforms its data using the
+                                 specified formula into a batch that you can transfer.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Access this process from the Submit a Payroll Flow
+                                 task.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Purge Batch</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Removes the specified batch.</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>You can purge a batch at any time. You can't transfer
+                                 or view purged batches.
+                              </p>
+                              
+                              <p>Access this process from the Submit a Process or
+                                 Report task.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Transfer Batch</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Creates entries in the applicable HCM tables for
+                                 the specified batch.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Access this process from the Submit a Process or
+                                 Report task.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  <div class="sect2" id="FAIHM1288831">
+                     <h3 class="topictitle">Creating, Updating, and Deleting Data</h3>
+                     
+                     <p>The batch loader workbooks provide a fast way to
+                        upload batches of data. You create batches based on predefined templates,
+                        enter your data, load data into staging tables, and then transfer
+                        the batch into the HCM tables. The following figure illustrates the
+                        basic process and the tasks you use.
+                     </p>
+                     
+                     <img src="img/PAY_BatchLoaderCRUD02_20048193.png" alt="Basic process for creating, updating, and deleting&#xA;data using the payroll batch loader" class="fusappimg">
+                     
+                     
+                     
+                     <p>The task names in the workbook represent the type
+                        of object the batch loader supports. The task actions available depend
+                        on the task name you select, shown in the following table.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Actions available by task name">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Task Name
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Task Action
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Balance</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Adjust Balance</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Balance Group</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Add Balance Definition</p>
+                                 
+                                 <p>Remove Balance Definition</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Bank and Branch</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Create Bank</p>
+                                 
+                                 <p>Inactivate Bank</p>
+                                 
+                                 <p>Create Bank Branch</p>
+                                 
+                                 <p>Inactivate Bank Branch</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Costing Setups</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Create Cost Allocation</p>
+                                 
+                                 <p>Delete Cost Allocation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Element</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Create Element Eligibility</p>
+                                 
+                                 <p>Delete Element Eligibility</p>
+                                 
+                                 <p>Create Input Value</p>
+                                 
+                                 <p>Delete Input Value</p>
+                                 
+                                 <p>Update Input Value</p>
+                                 
+                                 <p>Update Element</p>
+                                 
+                                 <p>Delete Element</p>
+                                 
+                                 <p>Create People Group Key Flexfield Segment Combination</p>
+                                 
+                                 <p>Delete People Group Key Flexfield Segment Combination</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Element Entry</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Create Element Entry</p>
+                                 
+                                 <p>Update Element Entry</p>
+                                 
+                                 <p>Delete Element Entry</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>External Bank Account</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Add Person to Existing Account</p>
+                                 
+                                 <p>Create External Bank Account</p>
+                                 
+                                 <p>Inactivate External Bank Account</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Fast Formula</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Create</p>
+                                 
+                                 <p>Update</p>
+                                 
+                                 <p>Delete</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Fast Formula Global</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Create</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HCM User-Defined Table</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Create User-Defined Table</p>
+                                 
+                                 <p>Update User-Defined Table</p>
+                                 
+                                 <p>Delete User-Defined Table</p>
+                                 
+                                 <p>Create User-Defined Column</p>
+                                 
+                                 <p>Update User-Defined Column</p>
+                                 
+                                 <p>Delete User-Defined Column</p>
+                                 
+                                 <p>Create User-Defined Row</p>
+                                 
+                                 <p>Update User-Defined Row</p>
+                                 
+                                 <p>Delete User-Defined Row</p>
+                                 
+                                 <p>Create User-Defined Column Instance</p>
+                                 
+                                 <p>Update User-Defined Column Instance</p>
+                                 
+                                 <p>Delete User-Defined Column Instance</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Payment Method</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Create Personal Payment Method</p>
+                                 
+                                 <p>End-Date Personal Payment Method</p>
+                                 
+                                 <p>Delete Personal Payment Method</p>
+                                 
+                                 <p>Create Third-Party Personal Payment Method</p>
+                                 
+                                 <p>Delete Third-Party Personal Payment Method</p>
+                                 
+                                 <p>Update Third-Party Personal Payment Method</p>
+                                 
+                                 <p>Create Third-Party Organization Payment Method</p>
+                                 
+                                 <p>Delete Third-Party Organization Payment Method</p>
+                                 
+                                 <p>Update Third-Party Organization Payment Method</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Payroll Definition</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Create Payroll Definition</p>
+                                 
+                                 <p>Update Payroll Definition</p>
+                                 
+                                 <p>Delete Payroll Definition</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Payroll Relationship</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Add Payroll</p>
+                                 
+                                 <p>Delete Payroll</p>
+                                 
+                                 <p>End Payroll</p>
+                                 
+                                 <p>Update Assigned Payroll Details</p>
+                                 
+                                 <p>Update Assignment Details</p>
+                                 
+                                 <p>Update Payroll Element Duration Date</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Person</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Person Delivery Method</p>
+                                 
+                                 <p>Person EFF</p>
+                                 
+                                 <p>Person Legislative Data</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Third-Party Organization</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Create Third-Party Organization</p>
+                                 
+                                 <p>Update Third-Party Organization</p>
+                                 
+                                 <p>Merge Address</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <div class="infobox-note"><span class="notep1">Note: </span>
+                        You can have only one task action per workbook. If
+                        you require multiple task actions for a large set of data to load,
+                        use the Load Batch from File process.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM2009020.htm#FAIHM280546">Creating Globals Using the Batch Loader: Worked Example</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM2009020.htm#FAIHM874922">Creating Element Entries Using the Batch Loader: Worked Example</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM2009021.htm#FAIHM1398738">Loading a Payroll Batch From a File: Procedure</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1141931">
+                  <h2>Importing Data: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Use the Batch Loader task in the Payroll
+                     Administration, Data Exchange, or Checklist work area to import data
+                     from integrated Microsoft Excel workbook templates into the staging
+                     tables and transfers data into the application.
+                  </p>
+                  
+                  
+                  
+                  <p>The upload tasks available vary depending on the
+                     data type that you want to load. Each workbook template includes required
+                     and optional columns for loading data.
+                  </p>
+                  
+                  <div class="infobox-tip"><span class="notep1">Tip: </span>
+                     You perform tasks with interdependencies sequentially,
+                     creating separate workbooks for each task. For example, a bank must
+                     exist before you associate its branches, so you first create banks
+                     in one workbook, and then create the branches in the next workbook.
+                     
+                  </div>
+                  
+                  
+                  
+                  <p>The following figure illustrates the basic process
+                     for importing data using the batch loader.
+                  </p>
+                  <img src="img/PAY_BatchUploadProcess2_20048185.png" alt="Basic process for uploading data using the payroll&#xA;batch loader" class="fusappimg">
+                  
+                  
+                  <div class="sect2" id="FAIHM2217326">
+                     <h3 class="topictitle">Data Exchange Work Area, Payroll Administration,
+                     and Checklist Work Areas </h3>
+                     
+                     <p>In the Data Exchange, Payroll Administration, and
+                        Checklist work areas, you can: 
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Create, update, and delete data
+                              for supported objects. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Create elements and formulas using
+                              template questions.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Create batches from files.</p>
+                        </li>
+                        
+                        <li>
+                           <p>Transfer the batches into the HCM
+                              tables.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Verify the imported results.</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Additionally, in the Data Exchange work area, you
+                        can run archives and extracts and view the results.
+                     </p>
+                     
+                     <p>For Payroll Batch Loader, the Data Exchange work
+                        area offers user friendly options to:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>View the batches by status, such
+                              as Completed and Requires Attention.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Download the log file, correct
+                              the erroneous processes, and resubmit them.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For Extracts, the Data Exchange work area offers
+                        options to: 
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Submit an Extract Process to run
+                              immediately or at a later time.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Monitor the process runs, including
+                              the number of records archived and extracted, and errors at each stage.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>View the process results by status.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Download the log file, correct
+                              the erroneous processes, and resubmit them.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Use the Payroll Administration and Checklist work
+                        areas provide access to detailed checklists for tasks that have child
+                        tasks. For example, a custom process that has several batch loader
+                        tasks with in a flow. 
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM2009020.htm#FAIHM874922">Creating Element Entries Using the Batch Loader: Worked Example</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM1415466.htm#FAIHM1173458">Payroll Batch Loader Workbook for Payroll Definitions</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM1415466.htm#FAIHM1184718">Payroll Batch Loader Workbook for Payroll Relationships</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM2009020.htm#FAIHM280546">Creating Globals Using the Batch Loader: Worked Example</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1996511">
+                  <h2>Creating a Report to View Batch Line Errors: Worked Example</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This example describes how to create a flow to view a report
+                     showing errors that occurred while transferring a batch using the payroll batch loader. After you create the report and the flow pattern for it, you
+                     can add it to other flow patterns. For example, for a custom flow
+                     pattern that includes the Transfer Batch flow task, you could add this
+                     flow immediately after that task.
+                  </p>
+                  
+                  <p>In this example, the SQL query that defines the data
+                     model for the report takes the batch name as a bind variable. The
+                     bind variable enables the batch name to be user-entered when run alone,
+                     or dynamically derived when run within another flow.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM1996489">
+                     <h3 class="topictitle">Summary of Tasks</h3>
+                     
+                     <p>This worked example includes details for the following
+                        tasks:
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Creating the report data model
+                              and output file name
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Creating the report template</p>
+                        </li>
+                        
+                        <li>
+                           <p>Creating the flow pattern to submit
+                              the report
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                  </div>
+                  
+                  
+                  <h3 class="topictitle">Prerequisites</h3>
+                  
+                  This worked example assumes you completed the
+                  following prerequisites:
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>The following software is installed:</p>
+                        
+                        <p>
+                           <ul>
+                              
+                              <li>
+                                 <p>JRE version 7 or later</p>
+                              </li>
+                              
+                              <li>
+                                 <p>Microsoft Word</p>
+                              </li>
+                              
+                              <li>
+                                 <p>Oracle BI Desktop Integration for
+                                    Word
+                                 </p>
+                                 <div class="infobox-tip"><span class="notep1">Tip: </span>
+                                    Select the Download BI Desktop Tools menu in the
+                                    Get Started section of the Oracle Business Intelligence home page
+                                    to download the Template Builder for Word installer.
+                                    
+                                 </div>
+                              </li>
+                              
+                           </ul>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>You know the name of an existing batch that has
+                           transferred with errors. You will use this batch name for testing
+                           your report.
+                        </p>
+                        
+                        <p>
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              You can use the following SQL query to retrieve the
+                              batch names:
+                              
+                              <p><code>select * from pay_batch_headers
+                                    where batch_status = 'E';</code></p>
+                              
+                           </div>
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Creating the Report Data Model and Output File
+                  Name</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>Sign in as a user with the Oracle Business Intelligence
+                           administration privileges.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Create a SQL-based data model for the report as
+                           follows:
+                        </p>
+                        
+                        <p>
+                           <ol>
+                              
+                              <li>
+                                 <p>In the Navigator, select <span class="uicontrol">Reports and Analytics</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>On the Reports and Analytics work
+                                    area, click <span class="uicontrol">Browse Catalog</span>.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>On the Catalog page, select <span class="uicontrol">New</span>, and then select <span class="uicontrol">Data Model</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>On the Diagram tab, click <span class="uicontrol">New Data Set</span>, and then click <span class="uicontrol">SQL Query</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the SQL Query window, enter
+                                    values as shown in this table, and then click <span class="uicontrol">OK</span>.
+                                 </p>
+                                 
+                                 <div class="simpletable-margin">
+                                    <table class="customlayout" summary="">
+                                       
+                                       
+                                       <tr class="header">
+                                          
+                                          <th scope="col">
+                                             Field
+                                             
+                                          </th>
+                                          
+                                          <th scope="col">
+                                             Value
+                                             
+                                          </th>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Name</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Batch Lines Report</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Data Source</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>ApplicationDB_HCM</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Type of SQL</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Standard SQL</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>SQL Query</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p><code>select 'Marker' as Marker,
+                                                   bl.batch_line_id, bl.batch_line_status, line_text, bl.line_sequence
+                                                   from pay_batch_headers bh, pay_batch_lines bl, pay_message_lines ml
+                                                   where bh.batch_id = bl.batch_id and bl.batch_line_id = ml.source_id
+                                                   and bh.batch_name = :batchName</code></p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       
+                                       
+                                    </table>
+                                 </div>
+                                 <p></p>
+                                 
+                                 <div class="infobox-note"><span class="notep1">Note: </span>
+                                    Ensure that you don't include a semicolon at the
+                                    end of your SQL query.
+                                    
+                                 </div>
+                              </li>
+                              
+                              <li>
+                                 <p>In the Add Parameter window, select <span class="uicontrol">batchName</span>, and then click <span class="uicontrol">OK</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>On the Parameters page, in the <span class="uicontrol">Display Label</span> field, enter <span class="uicontrol">Batch Name</span>.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>To change the name of the output file from Default
+                           Document.pdf, follow these steps:
+                        </p>
+                        
+                        <p>
+                           <ol>
+                              
+                              <li>
+                                 <p>In the left pane, select <span class="uicontrol">Bursting</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>On the Bursting page, click <span class="uicontrol">Create New Bursting</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Set field values as shown in this
+                                    table.
+                                 </p>
+                                 
+                                 <div class="simpletable-margin">
+                                    <table class="customlayout" summary="">
+                                       
+                                       
+                                       <tr class="header">
+                                          
+                                          <th scope="col">
+                                             Field
+                                             
+                                          </th>
+                                          
+                                          <th scope="col">
+                                             Value
+                                             
+                                          </th>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Data Source</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>ApplicationDB_HCM</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Split By</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>/DATA_DS/G_1/MARKER</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Delivery By</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>/DATA_DS/G_1/MARKER</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>SQL Query</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p><code>select 'Marker' as KEY, 'Batch
+                                                   Lines Report' as TEMPLATE, 'PDF' as OUTPUT_FORMAT, 'Batch Lines Report
+                                                   - '|| to_char(sysdate, 'YYYY-MM-DD:HH:MI:SS') as output_name from
+                                                   dual</code></p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       
+                                       
+                                    </table>
+                                 </div>
+                                 <p></p>
+                                 
+                                 <div class="infobox-note"><span class="notep1">Note: </span>
+                                    Ensure that you don't include a semicolon at the
+                                    end of your SQL query.
+                                    
+                                 </div>
+                              </li>
+                              
+                           </ol>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click the <span class="uicontrol">Save As</span> icon and save the data model under the path <span class="uicontrol">Shared Folders/Custom/</span> with the name <span class="uicontrol">BatchReportDataModel</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Test that the data model query returns data as
+                           follows:
+                        </p>
+                        
+                        <p>
+                           <ol>
+                              
+                              <li>
+                                 <p>In the left pane, click <span class="uicontrol">Data Sets</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>On the Data tab, enter the name
+                                    of an existing batch that transferred successfully with errors, and
+                                    then click <span class="uicontrol">View</span>.
+                                 </p>
+                                 <p>You should see values for BATCH_LINE_ID and BATCH_LINE_STATUS
+                                    and any messages that occurred.
+                                 </p>
+                                 
+                                 <div class="infobox-note"><span class="notep1">Note: </span>
+                                    The batch name field is case sensitive, so enter
+                                    the name exactly. If you don't see values or if you entered incorrect
+                                    SQL syntax, edit the SQL for the data model and try again.
+                                    
+                                 </div>
+                              </li>
+                              
+                           </ol>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Save As Sample Data</span>, and then click <span class="uicontrol">OK</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Export</span>, and then save the XML file to your file system. You will use this
+                           when designing your report template.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Save</span>.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Creating the Report Template</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>Generate the report template as follows:</p>
+                        
+                        <p>
+                           <ol>
+                              
+                              <li>
+                                 <p>On your data model page, click <span class="uicontrol">Create Report</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the Create Report window, click <span class="uicontrol">Cancel</span>, and then click <span class="uicontrol">OK</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click the <span class="uicontrol">Select Data Model</span> icon, select your data model, and then
+                                    click <span class="uicontrol">OK</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click the <span class="uicontrol">Generate</span> icon.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the <span class="uicontrol">Template Name</span> field, <span class="uicontrol">Batch Lines
+                                       Report</span>, and then click the <span class="uicontrol">Generate</span> button. 
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Edit</span> and open the file in Microsoft Word.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Save the RTF file to your file
+                                    system.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In Microsoft Word, modify your template as follows:</p>
+                        
+                        <p>
+                           <ol>
+                              
+                              <li>
+                                 <p>Delete the <span class="uicontrol">MARKER</span> and <span class="uicontrol">BATCH_LINE_ID</span> columns from the table.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Change the column headings to user-friendly
+                                    values, such as Status, Error Text, and Line Number.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click the <span class="uicontrol">Field</span> icon and insert <span class="uicontrol">BATCHNAME</span> before the batch lines table.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Insert text before the BATCHNAME
+                                    field, such as <span class="uicontrol">Batch Lines Errors for Batch</span> followed by a colon and space character. 
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Make any other layout changes,
+                                    as needed, such as changing column width.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Save and close the RTF file.</p>
+                              </li>
+                              
+                           </ol>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Upload your modified template as follows:</p>
+                        
+                        <p>
+                           <ol>
+                              
+                              <li>
+                                 <p>On the report page, under your
+                                    report icon, click <span class="uicontrol">Properties</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click the <span class="uicontrol">Upload</span> icon.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Browse</span> to select your RTF template, and then click <span class="uicontrol">OK</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the Upload Template File window,
+                                    in the <span class="uicontrol">Locale</span> field, select the
+                                    same local that is listed as the default local, and then click <span class="uicontrol">OK</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">OK</span> to overwrite the existing template for that locale.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Save</span>, and then click <span class="uicontrol">Return</span>.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Set the default format as follows:</p>
+                        
+                        <p>
+                           <ol>
+                              
+                              <li>
+                                 <p>At the top-right corner, click <span class="uicontrol">View a List</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the <span class="uicontrol">Default Format</span> field, select <span class="uicontrol">PDF</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Save Report</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the Save As window, in the <span class="uicontrol">Name</span> field, enter <span class="uicontrol">Batch Lines Report</span>, and then click <span class="uicontrol">OK</span>.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Ensure that the report has the correct role access
+                           as follows:
+                        </p>
+                        
+                        <p>
+                           <ol>
+                              
+                              <li>
+                                 <p>On the Catalog page, locate the
+                                    batch lines report.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>On the More menu for Batch Lines
+                                    Report, click <span class="uicontrol">Permissions</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Add users/roles</span> to add roles, as necessary.
+                                 </p>
+                                 <div class="infobox-tip"><span class="notep1">Tip: </span>
+                                    If you have several roles to add, search for and
+                                    add the BI Consumer role with full control, which most other roles
+                                    inherit.
+                                    
+                                 </div>
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">OK</span>.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Test your report as follows:</p>
+                        
+                        <p>
+                           <ol>
+                              
+                              <li>
+                                 <p>On the Catalog page, for the batch
+                                    lines report, click <span class="uicontrol">Edit</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Ensure that the name of your data
+                                    model displays above the report icon. If it doesn't, add it and save
+                                    your changes.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>On the Catalog page, for the batch
+                                    lines report, click <span class="uicontrol">Open</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the <span class="uicontrol">Batch Name</span> field, enter the batch name you entered previously.
+                                    You should see the data in the sample report.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Creating the Flow Pattern</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>Ensure that you are signed in as a user with payroll
+                           administration privileges.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Payroll Checklist work area, select the <span class="uicontrol">Manage Payroll Flow Patterns</span> task.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Create</span>, and then click <span class="uicontrol">Continue</span>, with
+                           no legislative data group selected.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Basic Information page, enter the values
+                           as shown in this table, and then click <span class="uicontrol">Next</span>.
+                        </p>
+                        
+                        <p></p>
+                        <div class="simpletable-margin">
+                           <table summary="This table lists field names (left column) and their respective values.">
+                              
+                              
+                              <tr>
+                                 
+                                 <th scope="col">
+                                    Field
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Flow Pattern</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Batch Lines Report</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Description</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Submit a report to view batch line errors for a specified
+                                       batch transferred using the payroll batch loader.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>LDG Required</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Optional</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Default Flow</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Activities to Include</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Statutory</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Selected Tasks</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Run BI Publisher Report</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Next</span> to accept default values until you are on the Parameters page.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Add the Batch Name parameter as follows:</p>
+                        
+                        <p>
+                           <ol>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Select and Add</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Search for and select <span class="uicontrol">First Argument</span>, and then click <span class="uicontrol">OK</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Edit</span> and change its values as shown in this table, and
+                                    then click <span class="uicontrol">Next</span>.
+                                 </p>
+                                 
+                                 <div class="simpletable-margin">
+                                    <table class="customlayout" summary="">
+                                       
+                                       
+                                       <tr class="header">
+                                          
+                                          <th scope="col">
+                                             Field
+                                             
+                                          </th>
+                                          
+                                          <th scope="col">
+                                             Value
+                                             
+                                          </th>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Flow Parameter</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Batch Name</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Use for Searches</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>No</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Display</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Mandatory</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Display Format</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Text</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Sequence</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>2</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Usage</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Input parameter</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Parameter Basis</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Post SQL Bind</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Basis Value</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p><code>select batch_name from pay_batch_headers
+                                                   where batch_id = :BATCH</code></p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       
+                                       
+                                    </table>
+                                 </div>
+                                 <p></p>
+                                 
+                              </li>
+                              
+                           </ol>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Task Parameters page, edit the <span class="uicontrol">Report Path</span> parameter as shown in this table.
+                        </p>
+                        
+                        <p></p>
+                        <div class="simpletable-margin">
+                           <table summary="This table lists field names (left column) and their respective values.">
+                              
+                              
+                              <tr>
+                                 
+                                 <th scope="col">
+                                    Field
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Display</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Parameter Basis</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Constant Bind</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Basis Value</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>/Custom/Batch Lines Report.xdo</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Select the <span class="uicontrol">First Argument</span> parameter and ensure that its values are as shown in this table.
+                        </p>
+                        
+                        <p></p>
+                        <div class="simpletable-margin">
+                           <table summary="This table lists field names (left column) and their respective values.">
+                              
+                              
+                              <tr>
+                                 
+                                 <th scope="col">
+                                    Field
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Parameter Basis</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Bind to Flow</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Basis Value</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Batch Name</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Next</span>, and then click <span class="uicontrol">Submit</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Test your flow as follows:</p>
+                        
+                        <p>
+                           <ol>
+                              
+                              <li>
+                                 <p>In the Payroll Checklist work area,
+                                    select the <span class="uicontrol">Submit a Process or Report</span> task.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Select <span class="uicontrol">Batch Lines Report</span>, and then click <span class="uicontrol">Next</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Enter a unique name for the current
+                                    flow instance.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Enter the same batch name that
+                                    you used when creating the report, and then click <span class="uicontrol">Submit</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">OK and View Checklist</span>, and then click the <span class="uicontrol">Refresh</span> icon until the status shows as completed.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>In the row for Run BI Publisher
+                                    Report, click <span class="uicontrol">Go to Task</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>On the Process and Reports tab,
+                                    click <span class="uicontrol">View Results</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click the PDF file name to open
+                                    the report.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM1685993.htm#FAIHM1997610">Creating a Flow within a Flow: Worked Example</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1907564">
+                  <h2>Task Actions for Migrating Elements: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The task action you select to migrate elements
+                     in the payroll batch loader workbook determines the columns in the
+                     workbook. You must select the correct task action so that the workbook
+                     columns contain the appropriate element template questions for your
+                     country extension and element classification. Use the same task action
+                     in the batch to download the original element and in the batch to
+                     upload that element to another environment.
+                  </p>
+                  
+                  
+                  
+                  <p>This topic describes which task actions to select
+                     for each of the following country extensions:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Human Resources or None</p>
+                     </li>
+                     
+                     <li>
+                        <p>Payroll Interface</p>
+                     </li>
+                     
+                     <li>
+                        <p>Payroll</p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>Check your country extension on the Manage Features
+                     by Country or Territory page. Refer to the following sections to ensure
+                     that you select the appropriate task action.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM1907563">
+                     <h3 class="topictitle">Human Resources or None</h3>
+                     
+                     <p>For all element classifications, use the <span class="uicontrol">Quick Create - Basic Element Template</span> task
+                        action for implementations that don't process payroll information
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1907712">
+                     <h3 class="topictitle">Payroll Interface</h3>
+                     
+                     <p>The following table lists the two available task
+                        actions to select for elements created for implementations that share
+                        payroll-related data with third-party payroll providers.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Primary Classification
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Task Action Name
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Standard Earnings</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Global Earnings Basic</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>All other classifications</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Basic Element Template</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <div class="infobox-note"><span class="notep1">Note: </span>
+                        All task action names begin with the prefix, <span class="uicontrol">Quick Create - </span>.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1907713">
+                     <h3 class="topictitle">Payroll</h3>
+                     
+                     <p>The following table lists the two available task
+                        actions to select for elements created for implementations that share
+                        payroll-related data with third-party payroll providers.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Primary Classification Base Name (and Display Name
+                                 Variations)
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Secondary Classification
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Task Action Name
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Absences</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Global Absences</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Balance Initialization</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Basic Element Template</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Direct Payments (Nonpayroll Payments)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Global Earnings</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Employee Tax Credits</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Global Tax Credits and Charges</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Employer Charges (Employer Liabilities)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>401K Deduction Template</p>
+                                 
+                                 <p>Global Tax Credits and Charges</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Employer Taxes</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Global Tax Credits and Charges</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Information</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Basic Element Template</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Involuntary Deductions</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Alimony</p>
+                                 
+                                 <p>Child Support</p>
+                                 
+                                 <p>Spousal Support</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Support </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Bankruptcy Order</p>
+                                 
+                                 <p>Creditor Debt or Wage Attachment</p>
+                                 
+                                 <p>Court Order or Garnishment</p>
+                                 
+                                 <p>Debt Collection</p>
+                                 
+                                 <p>Educational Loan</p>
+                                 
+                                 <p>Employee Requested</p>
+                                 
+                                 <p>Regional Tax Levy</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Court Order</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Tax Levy</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Tax Levy</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Pre-Statutory Deductions (Pretax Nonstatutory Deductions)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Deferred Compensation Plan</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>401K Deduction Template</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Pension Plan Pre-Statutory</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Global Pension Pre-Statutory</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All others</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Global Pre-Statutory Deduction</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Social Insurance Deductions (National Insurance Deductions,
+                                    Social Security Deductions, Superannuation Deductions)
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Basic Element Template</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Standard Earnings (Regular Earnings, Ordinary Wages)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Regular</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Global Earnings</p>
+                                 
+                                 <p>Global Time Card</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Premium</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Global Earnings Premium</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplemental Earnings (Irregular Earnings, Allowances,
+                                    Additional Wages)
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Global Earnings</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Tax Deductions (Employee Tax Deductions, PAYE Deductions)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Basic Element Template</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Taxable Benefits (Imputed Earnings, Benefits in Kind)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Global Earnings</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Voluntary Deductions</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Pension Plan After Tax</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Global Pension After Tax</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All others</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Global Voluntary Deduction</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <div class="infobox-note"><span class="notep1">Note: </span>
+                        All task action names begin with the prefix, <span class="uicontrol">Quick Create - </span>.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=C754E605C873EAF6E040D30A6881602C">Selecting Country Extensions: Critical Choices</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1398746">
+                  <h2>Migrating Objects: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Using the Create Batch for an Object process
+                     in the Payroll Administration work area, you can migrate objects between
+                     environments. To copy or migrate elements or formulas, follow these
+                     steps:
+                  </p>
+                  
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>In the source environment, submit
+                           the <span class="uicontrol">Create Batch for an Object</span> process in the Payroll Administration work area.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Enter a name for the flow to create
+                           the batch.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Enter a name of the batch to create
+                           and select a process date.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In the <span class="uicontrol">Object</span> field, enter either <span class="uicontrol">Element</span> or <span class="uicontrol">Fast Formula</span>.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In the <span class="uicontrol">Record</span> field, enter all or part of the object name to
+                           narrow results.
+                        </p>
+                        <div class="infobox-tip"><span class="notep1">Tip: </span>
+                           Use the percent sign (%) as a wildcard character
+                           for partial names.
+                           
+                        </div>
+                     </li>
+                     
+                     <li>
+                        <p>In the <span class="uicontrol">Legislative Data Group Level</span> field, search for and select <span class="uicontrol">Yes</span>.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In the <span class="uicontrol">Process Configuration Group</span> field, search for and select
+                           the name of the group to use to control logging preferences.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Download the batch loader workbook
+                           and search for and double-click the batch you created.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>On the Batch Content sheet, select
+                           the task action that is appropriate for your object. Double-click
+                           the task action to populate the columns with your object's attribute
+                           values.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In the target environment, use
+                           the Batch Loader task in the Payroll Administration work area to create
+                           a batch.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>On the Batch Content sheet, search
+                           for and select the same task action as the original batch. Double-click
+                           the task action to display the columns.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Copy and paste the corresponding
+                           lines from the source environment's workbook to the target environment's
+                           workbook.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Save and transfer the batch on
+                           the target environment.
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2079152">
+                  <h2>FAQs for Payroll Batch Loader</h2>
+                  
+                  <div class="sect2" id="FAIHM2038417">
+                     <h3>How many records can I load using the payroll batch loader?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>You can load as many as 500,000 record in
+                        a single batch. If you require loading more than 500,000 records,
+                        split them up into separate batches.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1737455">
+                     <h3>How do I cancel a batch loader task?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>You can use the Roll Back Batch Transfer
+                        process to roll back a batch transfer process only if it used the
+                        Create Element Entry task name in the payroll batch loader workbook. You
+                        can cancel the CreateBatchFromFile process and the Transfer HCM Upload
+                        Entry Batch process on the Scheduled Processes work area.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2115392">
+                     <h3>Why can't I load bank account numbers for personal payment methods?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>The Transfer Batch process for bank account
+                        numbers will fail if any masking types are enabled in the environment.
+                        Ensure that the masking type for bank account numbers on the Manage
+                        System Security Options page is set to display all digits and retry
+                        the Transfer Batch process.
+                     </p>
+                     
+                     
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

@@ -1,0 +1,806 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Loading Flexfield Data (Chapter 7) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:16 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM Data Loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM2129860.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM2261419.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="Using HCM Data Loader, you can load data for both descriptive flexfields and extensible flexfields. This topic explains concepts
+      that are common to both types of flexfields."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">10/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM2137992" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">7</span>Loading Flexfield Data
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1964173">Loading Flexfield Data: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1994261">Loading Data for Descriptive Flexfields: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1994386">Loading Data for Descriptive Flexfields: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1994471">Loading Data for Extensible Flexfields: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1994502">Loading Data for Extensible Flexfields: Examples</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM1964173">
+                  <h2>Loading Flexfield Data: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Using HCM Data Loader, you can load data
+                     for both descriptive
+                     flexfields and extensible flexfields. This
+                     topic explains concepts that are common to both types of flexfields.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM1964168">
+                     <h3 class="topictitle">Configuring Flexfields</h3>
+                     
+                     <p>Before you generate template files for objects with
+                        flexfields, you must configure the flexfields in Oracle HCM Cloud.
+                        Once the flexfields are configured, the METADATA lines in generated
+                        template files include all attributes that are required to load the
+                        flexfield data.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1964169">
+                     <h3 class="topictitle">Flexfield Codes</h3>
+                     
+                     <p>When loading flexfield data, you must supply the
+                        flexfield code in the METADATA line in this format:
+                     </p>
+                     
+                     <pre><code>FLEX:&lt;flexfield code&gt;<br></code></pre>
+                     <p>For example, to load data for the job descriptive
+                        flexfield, the flexfield code is:
+                     </p>
+                     <pre><code>FLEX:PER_JOBS_DFF<br></code></pre>
+                     <p>Relevant flexfield codes appear in the generated
+                        template file for the business object.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1964170">
+                     <h3 class="topictitle">Flexfield Attributes</h3>
+                     
+                     <p>Flexfield attribute names are those that you specify
+                        when configuring the flexfield. Both descriptive and extensible flexfields
+                        have one or more contexts. When you include a flexfield attribute
+                        name on the METADATA line for an object, you must also identify the
+                        context. You provide a hint value in the following format to identify
+                        both the flexfield and the context to which the attribute belongs:
+                     </p>
+                     
+                     <pre><code>&lt;flexfield attribute name&gt;(&lt;flexfield code&gt;=&lt;context code&gt;)<br></code></pre>
+                     <p>For example, for the _MAIN_CONTRACT attribute of
+                        the PER_CONTRACT_LEG_DDF descriptive flexfield with the CN context
+                        code, the entry on the METADATA line is:
+                     </p>
+                     <pre><code>_MAIN_CONTRACT(PER_CONTRACT_LEG_DDF=CN)<br></code></pre>
+                     
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM1964171">
+                     <h3 class="topictitle">Business Objects with Multiple Descriptive Flexfields</h3>
+                     
+                     <p>Some business object components support multiple
+                        descriptive flexfields. You can include all descriptive flexfield
+                        attributes for every flexfield and configured context on a single
+                        METADATA line. This approach is possible because you supply both the
+                        flexfield code and the context for each attribute.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1964172">
+                     <h3 class="topictitle">Lookup-Validated Flexfield Values</h3>
+                     
+                     <p>For flexfield values that are validated by lookups,
+                        you can supply either the lookup code or the lookup value. To supply the value, you
+                        must append the suffix<code> _Display</code> to
+                        the attribute name in the METADATA line.
+                     </p>
+                     
+                     
+                     <p>For example, for a configured gender flexfield attribute,
+                        you can supply either the lookup code (M or F) or the value (Male
+                        or Female). To supply the value, use the attribute name <code>gender_Display</code>, as shown in this example:
+                     </p>
+                     <pre><code>METADATA|Job|FLEX:PER_JOBS_DFF|gender_Display(PER_JOBS_DFF=JOBCONTEXT1)|...
+MERGE|Job|JOBCONTEXT1|Male|...
+MERGE|Job|JOBCONTEXT1|Female|...  <br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM2121438.htm#FAIHM2037169">Generating and Using Template Files: Procedure</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1994261">
+                  <h2>Loading Data for Descriptive Flexfields: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic describes how to construct METADATA
+                     and MERGE lines in a .dat file to supply descriptive flexfield data.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM1994259">
+                     <h3 class="topictitle">Constructing the METADATA Line</h3>
+                     
+                     <p>Descriptive flexfields extend a business object.
+                        You can supply the attributes of the descriptive flexfield on the
+                        same MERGE line as the core attributes of the business-object component.
+                        On the METADATA line, you must include both the flexfield code and
+                        the descriptive flexfield attributes for which you want to load data.
+                        In a generated business-object template, the METADATA line automatically
+                        includes the flexfield code and attributes for configured descriptive
+                        flexfields.
+                     </p>
+                     
+                     
+                     <p>This example shows the METADATA line for the job
+                        business object with entries for the PER_JOBS_DFF descriptive flexfield:
+                     </p>
+                     <pre><code>METADATA|Job|FLEX:PER_JOBS_DFF|JobCode|ActiveStatus|FullPartTime|MedicalCheckupRequired|RegularTemporary|EffectiveStartDate|EffectiveEndDate|Name|SetCode|JobFamilyName|_JOB_LEVEL(PER_JOBS_DFF=US)<br></code></pre>
+                     <p>The descriptive flexfield attributes can appear anywhere
+                        on the line. You don't have to append them at the end.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1994260">
+                     <h3 class="topictitle">Constructing the MERGE Lines</h3>
+                     
+                     <p>For each descriptive flexfield for a business-object
+                        component, a single MERGE record can have only one context. You specify
+                        the context value on the MERGE line against the flexfield code for
+                        the descriptive flexfield in the METADATA line.
+                     </p>
+                     
+                     
+                     <p>For example:</p>
+                     <pre><code>METADATA|Job|FLEX:PER_JOBS_DFF|JobCode|ActiveStatus|FullPartTime|MedicalCheckupRequired|RegularTemporary|EffectiveStartDate|EffectiveEndDate|Name|SetCode|JobFamilyName|_JOB_LEVEL(PER_JOBS_DFF=US)
+MERGE|Job|US|ACC|A|F|N|R|2000/01/01|4712/12/31|Accountant|COMMON|Finance|1<br></code></pre>
+                     <p>On the MERGE line, the context value (US) appears
+                        in the same position as the flexfield code (FLEX:PER_JOBS_DFF) on
+                        the METADATA line.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1994272">
+                     <h3 class="topictitle">Supplying MERGE Lines for Multiple Flexfield Codes
+                     and Contexts</h3>
+                     
+                     <p>When a single business object component supports
+                        multiple descriptive flexfields, you can load all of the flexfield
+                        data at once. The following example shows METADATA and MERGE lines
+                        for the contract component of the worker object. Each MERGE line is
+                        for a single context.
+                     </p>
+                     
+                     <pre><code>METADATA|Contract|AssignmentId|ContractId|EffectiveStartDate|EffectiveEndDate|FLEX:PER_CONTRACT_DF|FLEX:PER_CONTRACT_LEG_DDF|_CONTRACT_GLB(PER_CONTRACT_DF=Global Data Elements) |_Currency(PER_CONTRACT_DF=CONTRACT_DF) |_MAIN_CONTRACT(PER_CONTRACT_LEG_DDF=CH)|_CONST_PROB_DATE(PER_CONTRACT_LEG_DDF=CN)|_NDA(PER_CONTRACT_LEG_DDF=CN)|_COMPETETION_CLAUSE(PER_CONTRACT_LEG_DDF=CN)|_NOTICE_DURATION_UNIT(PER_CONTRACT_LEG_DDF=CN)
+MERGE|Contract|E8732|39987|2013/12/14|2014/03/04|CONTRACT_DF|CN|Contract Glb value|USD|Contract Data|||
+MERGE|Contract|E8732|39987|2014/03/05|4712/12/31|CONTRACT_DF|CH|Contract Glb value|USD||31/03/2015|NDA Value|Competition Clause Value<br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1994386">
+                  <h2>Loading Data for Descriptive Flexfields: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic shows how to construct the METADATA
+                     line for the contract component of the worker object with multiple
+                     configured descriptive flexfields. The METADATA line appears automatically
+                     in the generated worker template.
+                  </p>
+                  
+                  <p>The contract component supports these descriptive
+                     flexfields:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>PER_CONTRACT_DF</p>
+                     </li>
+                     
+                     <li>
+                        <p>PER_CONTRACT_LEG_DDF</p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM1994372"><h3 class="OracleScenario">Constructing the METADATA Line for the Worker
+                     Contract Component</h3>
+                     <p>The PER_CONTRACT_DF descriptive flexfield is configured
+                        in Oracle HCM Cloud with the context and attribute values shown in
+                        this table. The <span class="uicontrol">Hint</span> column shows
+                        the resulting hint for each attribute.
+                     </p>
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Context
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Attribute
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Hint
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Global</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>CONTRACT_GLB</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>(PER_CONTRACT_DF=Global Data Elements)</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CONTRACT_DF</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Currency</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>(PER_CONTRACT_DF=CONTRACT_DF)</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     <p>The PER_CONTRACT_LEG_DDF descriptive flexfield is
+                        configured in Oracle HCM Cloud with the context and attribute values
+                        shown in this table. The <span class="uicontrol">Hint</span> column shows the resulting hint for each attribute.
+                     </p>
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Context
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Attribute
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Hint
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CH</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>_MAIN_CONTRACT</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>(PER_CONTRACT_LEG_DDF=CH)</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CN</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>_CONST_PROB_DATE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>(PER_CONTRACT_LEG_DDF=CN)</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CN</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>_NDA</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>(PER_CONTRACT_LEG_DDF=CN)</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CN</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>_COMPETITION_CLAUSE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>(PER_CONTRACT_LEG_DDF=CN)</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CN</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>_NOTICE_DURATION_UNIT</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>(PER_CONTRACT_LEG_DDF=CN)</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     <p>In the generated Worker.dat template file, the Contract
+                        METADATA line includes these attribute definitions for the flexfield
+                        attributes:
+                     </p><pre><code>METADATA|Contract|...|_CONTRACT_GLB(PER_CONTRACT_DF=Global Data Elements) |_Currency(PER_CONTRACT_DF=CONTRACT_DF)|_MAIN_CONTRACT(PER_CONTRACT_LEG_DDF=CH)|_CONST_PROB_DATE(PER_CONTRACT_LEG_DDF=CN)|_NDA(PER_CONTRACT_LEG_DDF=CN)|_COMPETETION_CLAUSE(PER_CONTRACT_LEG_DDF=CN)|_NOTICE_DURATION_UNIT(PER_CONTRACT_LEG_DDF=CN)<br></code></pre><p>As each attribute has a hint that identifies both
+                        the descriptive flexfield and the context, you can define attributes
+                        for multiple flexfields on the same METADATA line.
+                     </p>
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1994471">
+                  <h2>Loading Data for Extensible Flexfields: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic describes how to construct METADATA
+                     and MERGE lines in a data file to supply extensible flexfield data.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM1994470">
+                     <h3 class="topictitle">Category Code</h3>
+                     
+                     <p>Extensible flexfields have both a flexfield code
+                        and a category code. The category code is provided automatically in
+                        generated template files and has the attribute name EFF_CATEGORY_CODE.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1994484">
+                     <h3 class="topictitle">Constructing the METADATA Line</h3>
+                     
+                     <p>Unlike descriptive flexfields, extensible flexfields
+                        aren't an extension of a business-object component. Rather, they're
+                        separate components in the business object hierarchy. To supply data
+                        for an extensible flexfield, you simply include the METADATA line
+                        for the extensible flexfield component in the data file.  Remove the
+                        names of any attributes for which you aren't supplying data.
+                     </p>
+                     
+                     
+                     <p>This example shows a METADATA line for the JobLegislative
+                        extensible flexfield.
+                     </p>
+                     <pre><code>METADATA|JobLegislative|EFF_CATEGORY_CODE|FLEX:PER_JOBS_LEG_EFF|JobId(SourceSystemId)|JobCode|SetCode|EffectiveStartDate|EffectiveEndDate|SourceSystemOwner|SourceSystemId|LegislationCode|_EEO1_CATEGORY(PER_JOBS_LEG_EFF=HRX_US_JOBS)|_FLSA_STATUS(PER_JOBS_LEG_EFF=HRX_US_JOBS)|_INSEE_PCS_CODE(PER_JOBS_LEG_EFF=FR)|_ECAP_JOB(PER_JOBS_LEG_EFF=FR)|_LINE_OF_PROGRESSION(PER_JOBS_LEG_EFF=HRX_US_JOBS)<br></code></pre>
+                     
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM1994485">
+                     <h3 class="topictitle">Constructing the MERGE Lines</h3>
+                     
+                     <p>Each MERGE line for an extensible flexfield record
+                        can have only one context. In the METADATA line, you specify the context
+                        value against the flexfield code for the extensible flexfield.
+                     </p>
+                     
+                     
+                     <p>This example shows a METADATA line and two MERGE
+                        lines for the JobLegislative extensible flexfield:
+                     </p>
+                     <pre><code>METADATA|JobLegislative|EFF_CATEGORY_CODE|FLEX:PER_JOBS_LEG_EFF|JobId(SourceSystemId)|JobCode|SetCode|EffectiveStartDate|EffectiveEndDate|SourceSystemOwner|SourceSystemId|LegislationCode|_EEO1_CATEGORY(PER_JOBS_LEG_EFF=HRX_US_JOBS)|_FLSA_STATUS(PER_JOBS_LEG_EFF=HRX_US_JOBS)|_INSEE_PCS_CODE(PER_JOBS_LEG_EFF=FR)|_ECAP_JOB(PER_JOBS_LEG_EFF=FR)|_LINE_OF_PROGRESSION(PER_JOBS_LEG_EFF=HRX_US_JOBS)
+MERGE|JobLegislative|JOB_LEG|HRX_US_JOBS|OCT18EFF1|OCT18EFF1|COMMON|1990/01/01|4712/12
+MERGE|JobLegislative|JOB_LEG|FR|OCT18EFF1|OCT18EFF1|COMMON|1990/01/01|4712/12/31|VISION|OCT18EFF1_LEG2|FR|||387b|N|<br></code></pre>
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Unlike other components of the business-object hierarchy,
+                        extensible flexfields can't be supplied in isolation. They must be
+                        accompanied by a parent record.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2137978">
+                     <h3 class="topictitle">Multirow Extensible Flexfield Contexts</h3>
+                     
+                     <p>You can configure an extensible flexfield context
+                        with multiple rows. In this case, you configure one or more of the
+                        flexfield segments as the key that uniquely identifies a single row
+                        of the multirow context. HCM Data Loader treats these flexfield segments
+                        as user-key attributes. Therefore, you can uniquely identify a single
+                        flexfield record using user keys.
+                     </p>
+                     
+                     
+                     <p>You must supply a value for the user-key flexfield-segment
+                        attributes when creating an extensible flexfield record. When updating
+                        a multirow extensible-flexfield record, you must supply either the
+                        source key or the complete user key, including the flexfield segments
+                        defined as the unique key. You can identify which flexfield segments
+                        form the unique key by reviewing the flexfield-segment configuration
+                        on the Manage Extensible Flexfields page. All flexfield segments for
+                        which <span class="uicontrol">Unique Key</span> is selected
+                        are user-key attributes.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1994502">
+                  <h2>Loading Data for Extensible Flexfields: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic shows how the METADATA line is
+                     constructed for a job business object component with the configured
+                     JobLegislative extensible flexfield. The METADATA line appears automatically
+                     in the generated job template.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM1994494"><h3 class="OracleScenario">Constructing the METADATA Line for the JobLegislative
+                     Extensible Flexfield</h3>
+                     <p>The PER_JOBS_LEG_EFF extensible flexfield is configured
+                        in Oracle HCM Cloud with the context and attribute values shown in
+                        this table. The <span class="uicontrol">Hint</span> column shows
+                        the resulting hint for each attribute.
+                     </p>
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Context
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Attribute
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Hint
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CA</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>_EE0G</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>(PER_JOBS_LEG_EFF=CA)</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CA</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>_NOC_CODE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>(PER_JOBS_LEG_EFF=CA)</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CH</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>_POSITION_TYPE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>(PER_JOBS_LEG_EFF=CH)</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>FR</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>_ECAP_JOB</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>(PER_JOBS_LEG_EFF=FR)</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>FR</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>_INSEE_PCS_EXT_CODE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>(PER_JOBS_LEG_EFF=FR)</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     <p>In the generated Job.dat template file, the JobLegislative
+                        METADATA line includes these attribute definitions for the flexfield
+                        attributes:
+                     </p><pre><code>METADATA|JobLegislative|...|EFF_CATEGORY_CODE|FLEX:PER_JOBS_LEG_EFF|_EEOG(PER_JOBS_LEG_DFF=CA)|_NOC_CODE(PER_JOBS_LEG_DFF=CA)|_POSITION_TYPE(PER_JOBS_LEG_DFF=CH)|_ECAP_JOB(PER_JOBS_LEG_DFF=FR)|_INSEE_PCS_EXT_CODE(PER_JOBS_LEG_DFF=FR)<br></code></pre></div>
+                  
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

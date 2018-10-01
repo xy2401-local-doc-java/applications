@@ -1,0 +1,1666 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Provisioning Roles to Application Users (Chapter 10) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Securing Oracle HCM Cloud" name="doctitle">
+      <meta content="E73303-09" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="OCHUS" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Feb 16 01:08:36 PST 2018" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="role mappings; automatic role provisioning; manual role provisioning; requesting roles; requestable roles; self-requestable
+      roles; autoprovisioning;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="OCHUS1210216.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="OCHUS2155404.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="OCHUS.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="OCHUS.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="Roles give users access to data and functions. To provision a role to users, you define a relationship, called a role mapping,
+      between the role and some conditions. This topic describes how to provision roles to users both automatically and manually.
+      Use the Manage Role Provisioning Rules or Manage HCM Role Provisioning Rules task in the Setup and Maintenance work area.
+      Most are assignment attributes, such as job or department. At least one of a user's assignments must match all assignment
+      values in the role mapping for the user to qualify for the associated roles.">
+                    <script>var w=window;if(w.performance||w.mozPerformance||w.msPerformance||w.webkitPerformance){var d=document;AKSB=w.AKSB||{},AKSB.q=AKSB.q||[],AKSB.mark=AKSB.mark||function(e,_){AKSB.q.push(["mark",e,_||(new Date).getTime()])},AKSB.measure=AKSB.measure||function(e,_,t){AKSB.q.push(["measure",e,_,t||(new Date).getTime()])},AKSB.done=AKSB.done||function(e){AKSB.q.push(["done",e])},AKSB.mark("firstbyte",(new Date).getTime()),AKSB.prof={custid:"322179",ustr:"",originlat:"0",clientrtt:"1",ghostip:"23.212.3.15",ipv6:false,pct:"10",clientip:"45.78.37.67",requestid:"154873f",region:"32996",protocol:"",blver:14,akM:"dsca",akN:"ae",akTT:"O",akTX:"1",akTI:"154873f",ai:"206465",ra:"false",pmgn:"",pmgi:"",pmp:"",qc:""},function(e){var _=d.createElement("script");_.async="async",_.src=e;var t=d.getElementsByTagName("script"),t=t[t.length-1];t.parentNode.insertBefore(_,t)}(("https:"===d.location.protocol?"https:":"http:")+"//ds-aksb-a.akamaihd.net/aksb.min.js")}</script>
+                    <script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">13/25</span><a name="BEGIN" id="BEGIN"></a><div id="OCHUS1210217" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">10</span>Provisioning Roles to Application Users
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS181362">Role Mappings: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1218131">Creating a Role Mapping: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS210488">Role Mappings: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS204788">Role Provisioning and Deprovisioning: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1235928">Autoprovisioning: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1415908">Editing Role Mappings: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1210267">FAQs for Provisioning Roles to Application Users</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="OCHUS181362">
+                  <h2>Role Mappings: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Roles give users access to data and functions.
+                     To provision a role to users, you define a relationship, called a
+                     role mapping, between the role and some conditions. This topic describes
+                     how to provision roles to users both automatically and manually. Use
+                     the Manage Role Provisioning Rules or Manage HCM Role Provisioning
+                     Rules task in the Setup and Maintenance work area.
+                  </p>
+                  
+                  
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     All role provisioning generates requests to provision
+                     roles. Only when those requests are processed successfully is role
+                     provisioning complete.
+                     
+                  </div>
+                  
+                  
+                  <div class="sect2" id="OCHUS204676">
+                     <h3 class="topictitle">Automatic Provisioning of Roles to Users</h3>
+                     
+                     <p>Role provisioning occurs automatically if:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>At least one of the user's assignments matches
+                              all role-mapping conditions.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You select the <span class="uicontrol">Autoprovision</span> option for the role in the role mapping.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For example, for the data role Sales Manager Finance
+                        Department, you could select the <span class="uicontrol">Autoprovision</span> option and specify the following conditions.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with three&#xA;data rows identifies attributes (left column) and their values (right&#xA;column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Attribute
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Department</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Finance Department</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Job</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Sales Manager</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">HR Assignment Status</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Active</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>Users with at least one assignment that matches these
+                        conditions acquire the role automatically when you either create or
+                        update the assignment. The provisioning process also removes automatically
+                        provisioned roles from users who no longer satisfy the role-mapping
+                        conditions.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS204677">
+                     <h3 class="topictitle">Manual Provisioning of Roles to Users</h3>
+                     
+                     <p>Users such as line managers can provision roles manually
+                        to other users if: 
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>At least one of the assignments of
+                              the user who's provisioning the role, for example, the line manager,
+                              matches all role-mapping conditions.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You select the <span class="uicontrol">Requestable</span> option for the role in the role mapping.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For example, for the data role Training Team Leader,
+                        you could select the <span class="uicontrol">Requestable</span> option and specify the following conditions.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with two&#xA;data rows identifies attributes (left column) and their values (right&#xA;column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Attribute
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Manager with Reports</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">HR Assignment Status</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Active</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>Any user with at least one assignment that matches
+                        both conditions can provision the role Training Team Leader manually
+                        to other users.
+                     </p>
+                     
+                     <p>Users keep manually provisioned roles until either
+                        all of their work
+                        relationships are terminated or you deprovision the roles manually.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS204678">
+                     <h3 class="topictitle">Role Requests from Users</h3>
+                     
+                     <p>Users can request a role when managing their own accounts
+                        if: 
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>At least one of their assignments
+                              matches all role-mapping conditions. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You select the <span class="uicontrol">Self-requestable</span> option for the role in the role mapping.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For example, for the data role Expenses Reporter you
+                        could select the <span class="uicontrol">Self-requestable</span> option and specify the following conditions.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with three&#xA;data rows identifies attributes (left column) and their values (right&#xA;column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Attribute
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Department</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Finance Department</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">System Person Type</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Employee</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">HR Assignment Status</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Active</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>Any user with at least one assignment that matches
+                        these conditions can request the role. Self-requested roles are defined
+                        as manually provisioned.
+                     </p>
+                     
+                     <p>Users keep manually provisioned roles until either
+                        all of their work relationships are terminated or you deprovision
+                        the roles manually.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS238516">
+                     <h3 class="topictitle">Role-Mapping Names</h3>
+                     
+                     <p>Role mapping names must be unique in the enterprise. Devise a
+                        naming scheme that shows the scope of each role mapping. For example,
+                        the role mapping Autoprovisioned Roles Sales could include all roles
+                        provisioned automatically to workers in the sales department.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1218131">
+                  <h2>Creating a Role Mapping: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>To provision roles to users, you create role mappings. This
+                     topic explains how to create a role mapping.
+                  </p>
+                  
+                  
+                  
+                  <p>Sign in as IT Security Manager and follow these steps:</p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Setup
+                                 and Maintenance</span></span> to open the Setup and Maintenance
+                           work area.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Search for and select the Manage
+                           Role Provisioning Rules or Manage HCM Role Provisioning Rules task. 
+                        </p>
+                        
+                        <p>The Manage Role Mappings page opens.</p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>In the Search Results section of
+                           the page, click <span class="uicontrol">Create</span>. 
+                        </p>
+                        <p>The Create Role Mapping page opens.</p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  <div class="sect2" id="OCHUS1225454">
+                     <h3 class="topictitle">Defining the Role-Mapping Conditions</h3>
+                     
+                     <p>Set values in the Conditions section to specify when
+                        the role mapping applies. For example, these values limit the role
+                        mapping to current employees of the Procurement Department in Denver
+                        whose job is Chief Buyer.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with five&#xA;data rows shows the field (left column) and its value (right column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Field
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Department</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Procurement Department</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Job</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Chief Buyer</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Location</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Denver</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">System Person Type</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Employee</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">HR Assignment Status</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Active</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>Users must have at least one assignment that meets all these conditions.</p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1225455">
+                     <h3 class="topictitle">Identifying the Roles</h3>
+                     
+                     <p></p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>In the Associated Roles section,
+                              click <span class="uicontrol">Add Row</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Role Name</span> field, search for and select the role that
+                              you're provisioning. For example, search for the HCM data role <span class="uicontrol">Procurement Analyst Denver</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select one or more of the role-provisioning options:</p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="This two-column table with three&#xA;data rows shows the role-provisioning option (left column) and its&#xA;description (right column).">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Role-Provisioning Option
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Description
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Requestable</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Qualifying users can provision the role to other
+                                          users.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Self-Requestable</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Qualifying users can request the role for themselves.</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Autoprovision</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Qualifying users acquire the role automatically.</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                           <p>Qualifying users have at least one assignment that
+                              matches the role-mapping conditions.
+                           </p>
+                           
+                           <div class="infobox-note"><span class="notep1">Note: </span>
+                              <span class="uicontrol">Autoprovision</span> is selected by default. Remember to deselect it if you don't want
+                              autoprovisioning.
+                              
+                           </div>
+                           <p>The <span class="uicontrol">Delegation Allowed</span> option indicates whether users who have the role or can provision
+                              it to others can also delegate it. You can't change this value, which
+                              is part of the role definition. When adding roles to a role mapping,
+                              you can search for roles that allow delegation.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>If appropriate, add more rows to
+                              the Associated Roles section and select provisioning options. The
+                              role-mapping conditions apply to all roles in this section.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Save and Close</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1415445">
+                     <h3 class="topictitle">Applying Autoprovisioning</h3>
+                     
+                     <p>You're recommended to run the process Autoprovision
+                        Roles for All Users after creating or editing role mappings and after
+                        loading person records in bulk. This process compares all current
+                        user assignments with all current role mappings and creates appropriate
+                        autoprovisioning requests.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS210488">
+                  <h2>Role Mappings: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>You must provision roles to users either automatically
+                     or manually. This topic provides some examples of typical role mappings to support
+                     automatic and manual role provisioning.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="OCHUS210472"><h3 class="OracleScenario">Creating a Role Mapping for Employees</h3>
+                     <p>All employees must have the Employee role automatically
+                        from their hire dates. In addition, the few employees who claim expenses
+                        must request the Expenses Reporting data role.
+                     </p>
+                     <p>You create a role mapping called All Employees and
+                        enter the following conditions.
+                     </p>
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with two&#xA;data rows identifies attributes (left column) and their values (right&#xA;column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Attribute
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">System Person Type</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Employee</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">HR Assignment Status</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Active</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     <p>In the role mapping you include the:</p>
+                     <ul>
+                        
+                        <li>
+                           <p>Employee role, and select the <span class="uicontrol">Autoprovision</span> option
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Expenses Reporting role, and select
+                              the <span class="uicontrol">Self-requestable</span> option
+                           </p>
+                        </li>
+                        
+                     </ul>
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS210474"><h3 class="OracleScenario">Creating a Role Mapping for Line Managers</h3>
+                     <p>Any type of worker can be a line manager in the sales
+                        business unit. You create a role mapping called Line Manager Sales
+                        BU and enter the following conditions.
+                     </p>
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary=" This two-column table with three&#xA;data rows identifies attributes (left column) and their values (right&#xA;column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Attribute
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Business Unit</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Sales</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">HR Assignment Status</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Active</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Manager with Reports</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     <p>You include the Line Manager role and select the <span class="uicontrol">Autoprovision</span> option. Any worker with at
+                        least one assignment that matches the role-mapping conditions acquires the role automatically.
+                     </p>
+                     <p>In the same role mapping, you can include roles that
+                        line managers can:
+                     </p>
+                     <ul>
+                        
+                        <li>
+                           <p>Provision manually to other users. </p>
+                           
+                           <p>You select the <span class="uicontrol">Requestable</span> option for these roles.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Request for themselves.</p>
+                           <p>You select the <span class="uicontrol">Self-requestable</span> option for these roles.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        The <span class="uicontrol">Manager with Reports</span> attribute always means a line manager. Setting the <span class="uicontrol">Manager Type</span> attribute to <span class="uicontrol">Line Manager</span> is the same as setting <span class="uicontrol">Manager with Reports</span> to <span class="uicontrol">Yes</span>. If your role mapping applies to managers
+                        of a type other than Line Manager, then don't set the <span class="uicontrol">Manager with Reports</span> attribute.
+                        
+                     </div>
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS210475"><h3 class="OracleScenario">Creating a Role Mapping for Retirees</h3>
+                     <p>Retired workers have system access to manage their
+                        retirement accounts. You create a role mapping called All Retirees
+                        and enter the following conditions.
+                     </p>
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with two&#xA;data rows identifies attributes (left column) and their values (right&#xA;column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Attribute
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">System Person Type</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Retiree</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">HR Assignment Status</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Inactive</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     <p>You include the custom role Retiree in the role mapping
+                        and select the <span class="uicontrol">Autoprovision</span> option.
+                        When at least one of a worker's assignments satisfies the role-mapping
+                        conditions, he or she acquires the role automatically.
+                     </p>
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS204788">
+                  <h2>Role Provisioning and Deprovisioning: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You must provision roles to users. Otherwise,
+                     they have no access to data or functions and can't perform application
+                     tasks. This topic explains how role mappings control role provisioning
+                     and deprovisioning. Use the Manage Role Provisioning Rules or Manage
+                     HCM Role Provisioning Rules task to create role mappings.  
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS204781">
+                     <h3 class="topictitle">Role Provisioning Methods</h3>
+                     
+                     <p>You can provision roles to users:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Automatically</p>
+                        </li>
+                        
+                        <li>
+                           <p>Manually</p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Users such as line managers can provision
+                                    roles manually to other users.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Users can request roles for themselves.</p>
+                                 
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For both automatic and manual role provisioning, you
+                        create a role mapping to specify when a user becomes eligible for
+                        a role.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS204782">
+                     <h3 class="topictitle">Role Types</h3>
+                     
+                     <p>You can provision data roles, abstract roles, and job roles to users. However,
+                        for Oracle HCM Cloud users, you typically include job roles in HCM
+                        data roles and provision those data roles.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS204783">
+                     <h3 class="topictitle">Automatic Role Provisioning</h3>
+                     
+                     <p>Users acquire a role automatically when at least one
+                        of their assignments satisfies the conditions in the relevant role mapping. Provisioning
+                        occurs when you create or update worker assignments. For example,
+                        when you promote a worker to a management position, the worker acquires
+                        the line manager role automatically if an appropriate role mapping
+                        exists. All changes to assignments cause review and update of a worker's
+                        automatically provisioned roles.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS204784">
+                     <h3 class="topictitle">Role Deprovisioning</h3>
+                     
+                     <p>Users lose automatically provisioned roles when they
+                        no longer satisfy the role-mapping conditions. For example, a line
+                        manager loses an automatically provisioned line manager role when
+                        he or she stops being a line manager. You can also manually deprovision
+                        automatically provisioned roles at any time.
+                     </p>
+                     
+                     
+                     <p>Users lose manually provisioned roles automatically
+                        only when all of their work relationships are terminated.
+                        Otherwise, users keep manually provisioned roles until you deprovision
+                        them manually.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS204786">
+                     <h3 class="topictitle">Roles at Termination</h3>
+                     
+                     <p>When you terminate a work relationship, the user automatically
+                        loses all automatically provisioned roles for which he or she no longer
+                        qualifies. The user loses manually provisioned roles only if he or
+                        she has no other work relationships. Otherwise, the user keeps manually
+                        provisioned roles until you remove them manually.
+                     </p>
+                     
+                     
+                     <p>The user who's terminating a work relationship specifies
+                        when the user loses roles. Deprovisioning can occur:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>On the termination date</p>
+                        </li>
+                        
+                        <li>
+                           <p>On the day after the termination
+                              date
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>If you enter a future termination date, then role
+                        deprovisioning doesn't occur until that date or the day after. The
+                        Role Requests in the Last 30 Days section on the Manage User Account
+                        page is updated only when the deprovisioning request is created. Entries
+                        remain in that section until they're processed.
+                     </p>
+                     
+                     <p>Role mappings can provision roles to users automatically
+                        at termination. For example, a terminated worker could acquire the
+                        custom role Retiree at termination based on assignment status and person type values.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2118753">
+                     <h3 class="topictitle">Reversal of Termination</h3>
+                     
+                     <p>Reversing a termination removes any roles that the
+                        user acquired automatically at termination. It also provisions roles
+                        to the user as follows:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Any manually provisioned roles
+                              that were lost automatically at termination are reinstated.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>As the autoprovisioning process
+                              runs automatically when a termination is reversed, roles are provisioned
+                              automatically as specified by current role-provisioning rules.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You must reinstate manually any roles that you removed
+                        manually, if appropriate.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS204787">
+                     <h3 class="topictitle">Date-Effective Changes to Assignments</h3>
+                     
+                     <p>Automatic role provisioning and deprovisioning are
+                        based on current data. For a future-dated transaction, such as a future
+                        promotion, role provisioning occurs on the day the changes take effect.
+                        The Send Pending LDAP Requests process identifies future-dated transactions
+                        and manages role provisioning and deprovisioning at the appropriate
+                        time. These role-provisioning changes take effect on the system date.
+                        Therefore, a delay of up to 24 hours may occur before users in other
+                        time zones acquire their roles.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1235928">
+                  <h2>Autoprovisioning: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Autoprovisioning is the automatic allocation
+                     or removal of user roles. It occurs for individual users when you
+                     create or update assignments. You can also apply autoprovisioning explicitly for the enterprise using the
+                     Autoprovision Roles for All Users process. This topic explains the
+                     effects of applying autoprovisioning for the enterprise.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1235958">
+                     <h3 class="topictitle">Roles That Autoprovisioning Affects</h3>
+                     
+                     <p>Autoprovisioning applies only to roles that have
+                        the <span class="uicontrol">Autoprovision</span> option enabled
+                        in a role mapping.
+                     </p>
+                     
+                     
+                     <p>It doesn't apply to roles without the <span class="uicontrol">Autoprovision</span> option enabled. 
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1235959">
+                     <h3 class="topictitle">The Autoprovision Roles for All Users Process</h3>
+                     
+                     <p>The Autoprovision Roles for All Users process compares
+                        all current user assignments with all current role mappings.
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Users with at least one assignment
+                              that matches the conditions in a role mapping and who don't currently
+                              have the associated roles acquire those roles.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Users who currently have the roles
+                              but no longer satisfy the associated role-mapping conditions lose
+                              those roles.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>When a user has no roles, his or her user account
+                        is also suspended automatically by default.
+                     </p>
+                     
+                     <p>The process creates requests immediately to add or
+                        remove roles. When running the process, you can specify when role
+                        requests are to be processed. You can either process them immediately
+                        or defer them as a batch to the next run of the Send Pending LDAP
+                        Requests process. Deferring the processing is better for performance,
+                        especially when thousands of role requests may be generated. Set the <span class="uicontrol">Process Generated Role Requests</span> parameter
+                        to <span class="uicontrol">No</span> to defer the processing.
+                        If you process the requests immediately, then Autoprovision Roles
+                        for All Users produces a report identifying the LDAP request ranges
+                        that were generated. Requests are processed on their effective dates.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1415081">
+                     <h3 class="topictitle">When to Run the Process</h3>
+                     
+                     <p>You're recommended to run Autoprovision Roles for
+                        All Users after creating or editing role mappings. You may also have
+                        to run it after loading person records in bulk if you request user
+                        accounts for those records. If an appropriate role mapping exists
+                        before the load, then this process isn't necessary. Otherwise, you
+                        must run it to provision roles to new users loaded in bulk. Avoid
+                        running the process more than once in any day. Otherwise, the number
+                        of role requests that the process generates may slow the provisioning
+                        process.
+                     </p>
+                     
+                     
+                     <p>Only one instance of Autoprovision Roles for All
+                        Users can run at a time.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1235960">
+                     <h3 class="topictitle">Autoprovisioning for Individual Users</h3>
+                     
+                     <p>You can apply autoprovisioning for individual users
+                        on the Manage User Account page.   
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="OCHUS1210216.htm#OCHUS230626">What happens when I autoprovision roles for a user?</a></p>
+                     </li>
+                     <li>
+                        <p><a href="OCHUS2150631.htm#OCHUS1208831">Scheduling the Send Pending LDAP Requests Process: Procedure</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1415908">
+                  <h2>Editing Role Mappings: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>On the Edit Role Mapping page, you can update
+                     a role mapping. Changes that you make to start and end dates, role-mapping conditions,
+                     and the associated roles may affect current role provisioning. This topic
+                     describes when such changes take effect. To edit a role mapping, perform
+                     the Manage Role Provisioning Rules task in the Setup and Maintenance
+                     work area.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="OCHUS1415901">
+                     <h3 class="topictitle">Making Changes to Roles That Were Provisioned
+                     Automatically</h3>
+                     
+                     
+                     
+                     <p>Changes to roles that were provisioned automatically
+                        take effect as soon as one of the following occurs:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The Autoprovision Roles for All
+                              Users process runs. 
+                           </p>
+                           <p>This process compares all
+                              current user assignments with all current role mappings and updates role provisioning as
+                              appropriate. You're recommended to run this process after creating
+                              or editing role mappings and after loading person records in bulk.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>A human resource specialist (HR
+                              specialist) or line manager clicks <span class="uicontrol">Apply
+                                 Autoprovisioning</span> on the Manage User Account or Edit User
+                              page for individual users affected by the role mapping.
+                           </p>
+                           <p>This action compares the user's current assignments
+                              with all current role mappings and updates the user's roles as appropriate. 
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>An HR specialist or line manager
+                              creates or updates assignments of users affected by the role mapping.
+                           </p>
+                           
+                           <p>These actions cause a user's roles to be reevaluated.</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1415902">
+                     <h3 class="topictitle">Making Changes to Requestable Roles</h3>
+                     
+                     
+                     
+                     <p>Changes to requestable roles take effect
+                        immediately. If you remove a requestable role from the role mapping
+                        or change the role-mapping conditions, then:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Users who currently have the role
+                              keep it.
+                           </p>
+                           <p>Users such as line managers provision
+                              requestable roles manually to other users. Users lose manually provisioned
+                              roles automatically only when all of their work relationships are terminated.
+                              Otherwise, users keep manually provisioned roles until you deprovision
+                              them manually.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Users who could provision the role
+                              to other users can no longer do so, unless they satisfy any revised
+                              role-mapping conditions.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1415903">
+                     <h3 class="topictitle">Making Changes to Self-Requestable Roles</h3>
+                     
+                     
+                     
+                     <p>Changes to self-requestable roles take effect
+                        immediately. If you remove a self-requestable role from the role mapping
+                        or change the role-mapping conditions, then:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Users who currently have the role
+                              keep it.
+                           </p>
+                           <p>Users lose manually provisioned roles
+                              automatically only when all of their work relationships are terminated.
+                              Otherwise, users keep manually provisioned roles until you deprovision
+                              them manually.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Users who could request the role
+                              can no longer do so, unless they satisfy any revised role-mapping
+                              conditions.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1210267">
+                  <h2>FAQs for Provisioning Roles to Application Users</h2>
+                  
+                  <div class="sect2" id="OCHUS353905">
+                     <h3>What's a role-mapping condition?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Most are assignment attributes, such as job
+                        or department. At least one of a user's assignments must match all
+                        assignment values in the role mapping for the user to qualify for the associated roles.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1292374">
+                     <h3>What's the difference between HR Assignment Status and Assignment Status?</h3>
+                     
+                     
+                     
+                     
+                     
+                     
+                     <p>Use <span class="uicontrol">HR Assignment
+                           Status</span> to specify whether qualifying assignments must be active or inactive.
+                     </p>
+                     
+                     
+                     
+                     <p>Use <span class="uicontrol">Assignment Status</span> to specify a subcategory, such as <span class="uicontrol">Active
+                           - Payroll Eligible</span> or <span class="uicontrol">Suspended
+                           - No Payroll</span>.
+                     </p>
+                     
+                     <p>When you select an <span class="uicontrol">HR Assignment
+                           Status</span> value, the corresponding <span class="uicontrol">Assignment Status</span> values appear. For example, if <span class="uicontrol">HR Assignment Status</span> is <span class="uicontrol">Inactive</span>, then <span class="uicontrol">Assignment Status</span> values have the prefix Inactive or
+                        Suspended.
+                     </p>
+                     
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS354042">
+                     <h3>What's an associated role in a role mapping?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Any role that you want to provision to users.
+                        You can provision data roles, abstract roles, and job roles to users. The roles can be either predefined or
+                        custom.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS362658">
+                     <h3>What's the provisioning method?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>The provisioning method identifies how the
+                        user acquired the role. This table describes its values.
+                     </p>
+                     
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with three data rows shows&#xA;the provisioning method (left column) and its meaning (right column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Provisioning Method
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Meaning
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Automatic</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The user qualifies for the role automatically based
+                                    on his or her assignment attribute values.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Manual</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Either another user assigned the role to the user,
+                                    or the user requested the role.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>External</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The user acquired the role outside Oracle Applications
+                                    Cloud.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                     
+                  </div>
+                  
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

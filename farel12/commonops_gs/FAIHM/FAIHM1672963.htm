@@ -1,0 +1,1358 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Introduction to HCM Data Loader (Chapter 2) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:15 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM Data Loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM1434011.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM2121438.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="HCM Data Loader is a powerful tool for bulk-loading and maintaining data. The data can be from any source. You can use HCM
+      Data Loader for data migration, ongoing maintenance of HCM data, and coexistence scenarios, where core HR data is uploaded
+      regularly. This topic introduces the main features and advantages of HCM Data Loader, which is available in both cloud and
+      on-premises environments. You can load business objects for most Oracle Fusion Human Capital Management (HCM) products. These
+      products include Oracle Fusion Absence Management, Compensation, Global Human Resources, Global Payroll, Performance Management,
+      Profile Management, Talent Review and Succession Management, and Workforce Management. You can also update business objects
+      using HCM Data Loader, regardless of how they were created. HCM Data Loader has a comprehensive user interface for loading
+      data, monitoring progress, and reviewing any errors. It provides real-time information for all stages of its processing. HCM
+      Data Loader's user interface also includes detailed information about the component hierarchies and attributes of supported
+      business objects. HCM Data Loader supports multithreaded processing, which enables you to upload complete data extracts without
+      severe performance impacts. References among objects that are processed on separate threads are managed automatically. You
+      can set HCM Data Loader configuration parameters to optimize processing for your environment. HCM Data Loader supports these
+      key types for all business objects: HCM Data Loader supports most business-object features and requirements. For example,
+      you can upload: You can initiate HCM Data Loader using a web-service call, which enables you to automate data upload. You
+      may not have the correct permissions. You must have the Human Capital Management Integration Specialist job role or privileges
+      to access HCM Data Loader."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">5/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM1672963" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">2</span>Introduction to HCM Data Loader
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2243095">HCM Data Loader: Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2249396">HCM Data Loader and Implementation Scenarios: Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1372446">HCM Data Loader Process: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2012341">Supported Key Types: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2012584">Source Keys: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2012560">User Keys: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2012534">Oracle Fusion GUIDs and Surrogate IDs: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1646515">Business-Object Structure: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2249511">FAQs for Introduction to HCM Data Loader</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM2243095">
+                  <h2>HCM Data Loader: Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>HCM Data Loader is a powerful tool for bulk-loading
+                     and maintaining data. The data can be from any source. You can use
+                     HCM Data Loader for data migration, ongoing maintenance of HCM data,
+                     and coexistence scenarios, where core HR data is uploaded regularly. This topic
+                     introduces the main features and advantages of HCM Data Loader, which
+                     is available in both cloud and on-premises environments.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2243089">
+                     <h3 class="topictitle">Business-Object Support</h3>
+                     
+                     <p>You can load business objects for most Oracle
+                        Fusion Human Capital Management (HCM) products. These products include
+                        Oracle Fusion Absence Management, Compensation, Global Human Resources,
+                        Global Payroll, Performance Management, Profile Management, Talent
+                        Review and Succession Management, and Workforce Management. You can
+                        also update business objects using HCM Data Loader, regardless of
+                        how they were created.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2243102">
+                     <h3 class="topictitle">Ease of Use</h3>
+                     
+                     <p>HCM Data Loader has a comprehensive user
+                        interface for loading data, monitoring progress, and reviewing any
+                        errors. It provides real-time information for all stages of its processing.
+                        HCM Data Loader's user interface also includes detailed information
+                        about the component hierarchies and attributes of supported business
+                        objects. 
+                     </p>
+                     
+                     <p>You can load data from either delimited data (.dat)
+                        files or spreadsheets. You can load most supported business objects
+                        using either method. You can generate business-object templates to
+                        use as the basis of your own .dat files. For a selected business-object
+                        component, the template includes every attribute, including those
+                        for configured flexfields. When using spreadsheets, you define spreadsheet templates to suit
+                        business needs and generate spreadsheets from those templates. 
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2243107">
+                     <h3 class="topictitle">Performance</h3>
+                     
+                     <p>HCM Data Loader supports multithreaded processing,
+                        which enables you to upload complete data extracts without severe
+                        performance impacts. References among objects that are processed on
+                        separate threads are managed automatically. You can set HCM Data Loader
+                        configuration parameters to optimize processing for your environment.
+                     </p>
+                     
+                     <p>You can also perform partial or incremental loads
+                        to update existing objects, thereby minimizing the related processing.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2243109">
+                     <h3 class="topictitle">Supported Key Types</h3>
+                     
+                     <p>HCM Data Loader supports these key types
+                        for all business objects:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Oracle Fusion GUID</p>
+                        </li>
+                        
+                        <li>
+                           <p>Oracle Fusion surrogate ID</p>
+                        </li>
+                        
+                        <li>
+                           <p>Source key</p>
+                        </li>
+                        
+                        <li>
+                           <p>User key</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>As user keys and source keys are supported, knowledge
+                        of Oracle Fusion internal IDs isn't required.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2243122">
+                     <h3 class="topictitle">Business-Object Features</h3>
+                     
+                     <p>HCM Data Loader supports most business-object
+                        features and requirements. For example, you can upload:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Current and historical records
+                              for date-effective
+                              objects. You determine the amount of history to load.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>End-dated, terminated, or inactive
+                              records.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Translated attributes in multiple
+                              languages. You specify the character set of the data file on the <span class="uicontrol">File Character Set</span> configuration parameter
+                              for HCM Data Loader.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Descriptive flexfields and extensible
+                              flexfields.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Hierarchical tree data, such as
+                              organization and department trees.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Attachments and pictures.</p>
+                        </li>
+                        
+                        <li>
+                           <p>Data from multiple sources. You
+                              can include source-system references in uploaded data.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2243121">
+                     <h3 class="topictitle">Automation</h3>
+                     
+                     <p>You can initiate HCM Data Loader using a
+                        web-service call, which enables you to automate data upload.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2249396">
+                  <h2>HCM Data Loader and Implementation Scenarios: Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can implement Oracle HCM Cloud either
+                     in full or in coexistence mode. In a coexistence implementation, you
+                     use Oracle Fusion Talent Management or Oracle Fusion Compensation,
+                     but continue to use your existing HR applications. For both full and coexistence implementations,
+                     you implement Oracle HCM Cloud by performing the tasks that appear
+                     in your implementation project or for selected functional areas. This
+                     topic describes how HCM Data Loader supports these implementation
+                     types.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2249389">
+                     <h3 class="topictitle">Full Implementations</h3>
+                     
+                     <p>If you're performing a full implementation
+                        of Oracle HCM Cloud, then you can use HCM Data Loader to bulk-load
+                        any existing HCM data at appropriate stages in the implementation.
+                        Typically, you load each type of data once only for this type of implementation.
+                        Following successful upload, you manage your data in Oracle HCM Cloud.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2249390">
+                     <h3 class="topictitle">Coexistence Implementations</h3>
+                     
+                     <p>In a coexistence implementation, you use
+                        Oracle Fusion Talent Management or Oracle Fusion Compensation, but
+                        maintain your existing HR applications. For this type of implementation,
+                        you: 
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Move talent data permanently to
+                              Oracle HCM Cloud, which becomes the application of record for talent
+                              data. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Upload other types of data, such
+                              as person records, periodically to Oracle HCM Cloud. The source system
+                              remains the application of record for this data.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>To implement an HCM coexistence scenario, for any
+                        source system, you can use HCM Data Loader for data upload. Follow
+                        the general instructions provided for HCM Data Loader. Oracle doesn't
+                        supply tools to extract data from your source systems. Work with your
+                        implementation partner or develop your own process for extracting
+                        the source data.
+                     </p>
+                     
+                     <p>HCM Data Loader provides a Compensation Changes extract.
+                        You can extract assignment, bonus, and salary changes for a specified compensation run if you're
+                        using Oracle Fusion Compensation in a coexistence scenario.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2249402">
+                     <h3 class="topictitle">The Coexistence for HCM Feature</h3>
+                     
+                     <p>The Coexistence for HCM feature, which isn't
+                        available for new coexistence implementations, enables coexistence
+                        implementations for specific source environments only. The source
+                        environments supported by the Coexistence for HCM feature are Oracle
+                        PeopleSoft Enterprise Human Resources and Oracle E-Business Suite
+                        Human Resources. For information about the Coexistence for HCM feature,
+                        see the Release 11 Integrating with Oracle HCM Cloud guide on the
+                        Oracle Help Center at http://docs.oracle.com/.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1372446">
+                  <h2>HCM Data Loader Process: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic outlines the process of loading
+                     data in bulk from .dat files using HCM Data Loader. The data can be
+                     from any source.
+                  </p>
+                  
+                  
+                  
+                  <p>This figure provides a high-level summary of the
+                     process.
+                  </p>
+                  
+                  
+                  <img src="img/hrc_hdl_process_01_20050781.png" alt="HCM Data Loader Process When Loading .dat Files" class="fusappimg">
+                  
+                  
+                  
+                  <p>The steps of this process are:</p>
+                  
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>You place a .zip file containing
+                           your .dat files on the Oracle WebCenter Content server.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>You submit a request to HCM Data
+                           Loader to import and load the .zip file. For this step, you can use
+                           either the HCM Data Loader interface or the HcmCommonDataLoader web
+                           service.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>HCM Data Loader decompresses the
+                           .zip file and imports individual data lines to its stage tables. In the stage tables,
+                           related data lines are grouped to form business objects. 
+                        </p>
+                        <p>Any errors that occur during the import phase are reported
+                           on the HCM Data Loader interface.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>HCM Data Loader calls the relevant
+                           logical object interface method (delivered in product services) to
+                           load valid objects to the application tables.
+                        </p>
+                        <p>Any errors that occur during the load phase are reported in the HCM
+                           Data Loader interface. 
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>You review any errors from the
+                           import and load phases. You can perform this step either on the HCM
+                           Data Loader interface or using the HCM Data Loader Data Set Summary
+                           extract.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>You correct errors from the import
+                           and load phases in your source data.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>You load a new .zip file containing
+                           the corrected data to the WebCenter Content server. 
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  <p> You repeat this process from step 2 until all of
+                     the data is successfully loaded.
+                  </p>
+                  
+                  <div class="infobox-tip"><span class="notep1">Tip: </span>
+                     You can also correct load errors interactively on
+                     the HCM Data Loader interface and resubmit any corrected data from
+                     there.
+                     
+                  </div>
+                  
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM1413013.htm#FAIHM2088921">Uploading Data Using HCM Spreadsheet Data Loader: How It's Processed</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2012341">
+                  <h2>Supported Key Types: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>When planning to integrate data from one
+                     system to another, you must select key types to identify records uniquely.
+                     This topic introduces the key types that HCM Data Loader supports.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2120361">
+                     <h3 class="topictitle">What Keys Identify</h3>
+                     
+                     <p>In HCM Data Loader, you use unique keys to identify:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The record that you're creating
+                              or updating.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The parent of the record that you're
+                              creating or updating.
+                           </p>
+                           <p>The parent record may either
+                              be in the same data file or exist already in Oracle HCM Cloud.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Any objects that the record you're
+                              creating or updating references.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2120359">
+                     <h3 class="topictitle">Supported Key Types</h3>
+                     
+                     <p>HCM Data Loader supports the following key types,
+                        which you can use for all types of object references. When more than
+                        one key value exists for an object, key references are resolved in
+                        this order:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Oracle Fusion Globally Unique Identifier
+                              (GUID)
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Source key</p>
+                        </li>
+                        
+                        <li>
+                           <p>Oracle Fusion surrogate ID</p>
+                        </li>
+                        
+                        <li>
+                           <p>User key</p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>If you supply multiple key values, then no cross-validation
+                        occurs. For example, if you supply both a GUID and a source key, then
+                        the GUID is used and the source key is ignored. If the source key
+                        identifies a different record from the GUID, then no error is raised.
+                     </p>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        Whenever possible, use source keys for both creating
+                        and updating business objects.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2120356">
+                     <h3 class="topictitle">Key-Type Features</h3>
+                     
+                     <p>The following table summarizes the main features
+                        of the available key types. The Create and Update columns indicate
+                        whether you can use the key type when creating and updating objects.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Key Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Create
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Update
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Held on Object
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Generated Automatically
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>GUID</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Hexadecimal</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Surrogate ID</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes (see note)</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Numeric</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Source Key</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Alphanumeric</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Conditionally (see note)</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>User Key</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes (see note)</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Alphanumeric</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        You can use surrogate IDs when updating objects,
+                        but the IDs may not be readily available to Oracle HCM Cloud users.
+                        Default source keys are generated only if you don't supply a source
+                        key when creating an object. You can't use user keys alone when updating
+                        some objects because their values are subject to change.
+                        
+                     </div>
+                     
+                     <p>Keys that aren't held on the object exist in the
+                        Integration Key Map table.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2012340">
+                     <h3 class="topictitle">Foreign-Object References</h3>
+                     
+                     <p>Oracle Fusion GUIDs and surrogate IDs are generated
+                        only when the associated record is successfully created in Oracle
+                        HCM Cloud. Source keys aren't recognized in Oracle HCM Cloud until
+                        the associated record exists in Oracle HCM Cloud. Therefore, before
+                        you attempt to load data that references foreign objects, you must
+                        ensure that those foreign objects exist in Oracle HCM Cloud. For a
+                        new implementation, you're recommended to load each business object
+                        separately and ensure that it loads successfully before importing
+                        the next. If you supply all business objects in the same .zip file,
+                        then HCM Data Loader loads them in order of dependency. In this case,
+                        a reference to a foreign object fails only if the referenced object
+                        failed to load.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2012584">
+                  <h2>Source Keys: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>A source key is the ID that identifies a
+                     business object in its source system. Source keys are supported only
+                     for integration-enabled business objects. You can use source keys
+                     when creating or updating business objects. You're recommended to
+                     use source keys for all implementations but particularly for ongoing
+                     integrations, where data is maintained in the source system.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2012580">
+                     <h3 class="topictitle">Source-Key Structure</h3>
+                     
+                     <p>A source key has these two components: </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Component
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Source-system owner</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Identifies where the data originated.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Source-system ID</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>ID used in the source system. The ID must be unique
+                                    for the business-object component and source-system owner.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>Having a source-system owner component to the key
+                        enables you to upload data from multiple source systems for the same
+                        business objects. For example, you may have person data in both US
+                        and UK databases to combine in one Oracle HCM Cloud system. The source-system
+                        ID doesn't have to be unique across both source systems. It must be
+                        unique only for the business-object component and source-system owner.
+                     </p>
+                     
+                     <p>If you don't have an obvious source-system ID for
+                        a record, then you can generate or derive one. For example, you could
+                        derive a source-system ID for a person address by concatenating the person number with
+                        the address type.
+                     </p>
+                     
+                     <p>Source keys aren't held against the created record.
+                        They exist in the Integration Key Map table.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2012581">
+                     <h3 class="topictitle">Source Keys for Date-Effective Business Objects</h3>
+                     
+                     <p>If you're supplying date-effective history for an
+                        object, then you must supply the source system IDs for every date-effective
+                        record in the file. The values must be the same for each line of the
+                        date-effective history.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2012582">
+                     <h3 class="topictitle">Default Source Keys</h3>
+                     
+                     <p>If you provide no source key when creating an object,
+                        then the source key is created automatically. The default source-system
+                        owner is <span class="uicontrol">FUSION</span> and the default
+                        source-system ID is the surrogate ID. You can update the source key
+                        later using the source key business object. In the source key business
+                        object, you supply the new source key and a reference to the object
+                        that you're updating.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2012583">
+                     <h3 class="topictitle">Source-System Owner Values</h3>
+                     
+                     <p>The source-system owner value is validated against
+                        the HRC_SOURCE_SYSTEM_OWNER lookup. You must add your source-system
+                        names to this lookup before loading data using source-system references.
+                        Use the Manage Common Lookups task in the Setup and Maintenance work
+                        area to update HRC_SOURCE_SYSTEM_OWNER.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2012560">
+                  <h2>User Keys: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Most Oracle HCM Cloud business objects, regardless
+                     of whether they're enabled for integration, have one or more attributes
+                     that make up a user key. The user key, which is also known as a natural
+                     key, is always visible on the user interface.
+                  </p>
+                  
+                  
+                  
+                  <p>For example:</p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>The user key for an organization
+                           is the organization name.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>The user key for an area of responsibility
+                           is the responsibility name plus the person number.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="FAIHM2012558">
+                     <h3 class="topictitle">When to Use User Keys</h3>
+                     
+                     <p>User keys are part of the business object definition.
+                        They're always required when you create a logical object, regardless
+                        of how you create it.
+                     </p>
+                     
+                     
+                     <p>You can also use user keys when updating logical
+                        objects. However, the value of a user key can change, and some user-key
+                        attributes are translatable. For this reason, you can't update some
+                        business objects if you supply only user keys to reference them. Therefore,
+                        whenever possible, you're recommended to use source keys when updating
+                        objects.
+                     </p>
+                     
+                     <p>User keys are recommended when:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>You're referencing or maintaining
+                              an object that wasn't created with a source key.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The source-key value is unknown.</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2012559">
+                     <h3 class="topictitle">User Keys for Child Objects</h3>
+                     
+                     <p>When a business object is bound by another, the user
+                        key must include the user key for its parent. For example:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Jobs are always part of a set. Therefore, job code alone
+                              doesn't uniquely identify a job. Instead, the set code must be part of the user key for
+                              a job.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Job grades apply to a specific
+                              job. Therefore, the user key for a job grade must include both the
+                              user key for the grade and the user key for the parent job. Therefore, the user key for
+                              the job grade is made up of the grade code, job code, and set code.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2012534">
+                  <h2>Oracle Fusion GUIDs and Surrogate IDs: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Oracle Fusion Globally Unique Identifiers
+                     (GUIDs) and surrogate IDs are two of the four types of keys that HCM
+                     Data Loader supports. This topic describes when you can use GUIDs
+                     and surrogate IDs to identify business objects uniquely.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2012532">
+                     <h3 class="topictitle">Oracle Fusion GUIDs</h3>
+                     
+                     <p>When you create an integration-enabled business object
+                        in Oracle HCM Cloud, a GUID is generated for the object automatically.
+                        As the GUID is generated when you create the business object, it's
+                        suitable only for identifying business objects that already exist.
+                        You can't supply a GUID when creating a business object. The GUID,
+                        a hexadecimal value, isn't held on the created object but exists in
+                        the Integration Key Map table.
+                     </p>
+                     
+                     
+                     <p>GUIDs are useful when you share changes with down-stream
+                        applications, such as third-party payroll providers. You extract the
+                        changes for the third-party payroll and provide the GUID as the unique
+                        key to the worker. When reporting any updates back to Oracle HCM Cloud,
+                        you can use GUIDs to identify the records to update.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2012533">
+                     <h3 class="topictitle">Oracle Fusion Surrogate IDs</h3>
+                     
+                     <p>The surrogate ID, a numeric value, is the internal
+                        system identifier that's generated when you create a business object.
+                        All objects, including those that aren't integration-enabled, have
+                        surrogate IDs. The surrogate ID is held on the object. The ID is also
+                        used in the Integration Key Map table to provide a mapping for GUID
+                        and source-key values. As the surrogate ID isn't generated until the
+                        object is created, you can't use this value when creating objects.
+                        Access to surrogate IDs may also be limited. On-premises customers
+                        are more likely to have access to surrogate IDs than Oracle HCM Cloud
+                        customers.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1646515">
+                  <h2>Business-Object Structure: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Each Oracle HCM Cloud business object is
+                     a hierarchy of business-object components. At the top of the hierarchy
+                     is the parent component, and beneath it may be child and grandchild
+                     components. Each business-object component has multiple attributes.
+                  </p>
+                  
+                  
+                  
+                  <p>This figure shows a generic business-object structure.</p>
+                  <img src="img/hrc_hdl_fusion_bsns_obj_structure_02_20050783.png" alt="Oracle HCM Cloud business object structure" class="fusappimg">
+                  
+                  
+                  
+                  <p>For example, the rating model business object includes
+                     rating model, rating level, and rating category components. The rating
+                     model component is the parent of the other two components. Each component
+                     has attributes such as rating model name, rating model code, rating
+                     level code, and so on.
+                  </p>
+                  
+                  
+                  
+                  <p>The most complex business object supported by HCM
+                     Data Loader is the worker object, where five levels exist in the object
+                     hierarchy. These range from the worker component at the top to assignment
+                     work measure, assignment manager, assignment grade steps, and assignment
+                     extra information at the bottom. By contrast, the person type object has only the
+                     person type component.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2037631">
+                     <h3 class="topictitle">Terminology</h3>
+                     
+                     <p>This table defines the terms used by HCM Data Loader
+                        to refer to business objects.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Term
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Meaning
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Object or business object</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Refers to the complete object, which is the parent
+                                    component and all child components. For example, grade and worker are business objects.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Component or business-object component</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Refers to components of a business object. For example,
+                                    person name and work relationship are components of the worker object.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Logical object</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Refers to a group of related components that form
+                                    one occurrence of a business object. For example, the grade IC1 is
+                                    a logical object.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1646534">
+                     <h3 class="topictitle">Loading Logical Objects</h3>
+                     
+                     <p>When you deliver multiple components for the same
+                        business object together, HCM Data Loader groups them and loads the
+                        complete logical object. It doesn't process the components separately.
+                        If any component of the logical object fails validation, then the
+                        whole logical object is rejected. As HCM Data Loader loads only complete
+                        logical objects, you can be sure of exactly which data has been loaded.
+                        For example, when loading jobs, you know which jobs loaded successfully and which jobs failed to
+                        load.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2245526">
+                     <h3 class="topictitle">Integration-Enabled Objects</h3>
+                     
+                     <p>HCM Data Loader can load any integration-enabled
+                        business object. An integration-enabled business object supports these
+                        four key types:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Oracle Fusion GUID</p>
+                        </li>
+                        
+                        <li>
+                           <p>Oracle Fusion surrogate ID</p>
+                        </li>
+                        
+                        <li>
+                           <p>Source key</p>
+                        </li>
+                        
+                        <li>
+                           <p>User key</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>An integration-enabled object has an entry in the
+                        Integration Key Map table, where its GUIDs and source keys exist.
+                     </p>
+                     
+                     <p>HCM Data Loader can also load a few objects, such
+                        as department tree, that aren't integration enabled. Typically, Oracle
+                        HCM Cloud doesn't own such objects and they support neither source
+                        keys nor GUIDs.
+                     </p>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        You can review business-object details on the Initiate
+                        Data Load page. The <span class="uicontrol">Integration Keys Supported</span> field on the Component Details tab for a selected component indicates
+                        whether the component is integration enabled.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM2126423.htm#FAIHM2176353">Finding Business-Object Information: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2249511">
+                  <h2>FAQs for Introduction to HCM Data Loader</h2>
+                  
+                  <div class="sect2" id="FAIHM2249498">
+                     <h3>Why can't I access HCM Data Loader?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>You may not have the correct permissions.
+                        You must have the Human Capital Management Integration Specialist
+                        job role or privileges to access HCM Data Loader.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

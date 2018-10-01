@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>About Order Item and Service Request Flat Files For ETL</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="In Oracle Fusion Applications, there are several entities that are sourced from non-Fusion Applications systems. Oracle Fusion Applications CRM is leveraging OBIA (Oracle BI Applications) to integrate data from Oracle Fusion Applications and non-Fusion Applications source systems." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-31BDF0BE-9366-4748-8D1E-F9A425015B08.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-342F87BC-49BA-44A1-8E74-E4D426D3C7B1"></a> <span id="PAGE" style="display:none;">115/336</span> <!-- End Header -->
+<a id="BIACF25421"></a><a id="BIACF25422"></a><a id="IT_215"></a>
+<h1 id="BIAFC-GUID-342F87BC-49BA-44A1-8E74-E4D426D3C7B1" class="sect1">About Order Item and Service Request Flat Files For ETL</h1>
+<div>
+<p>In <span>Oracle Fusion Applications</span>, there are several entities that are sourced from non-Fusion Applications systems. <span>Oracle Fusion Applications</span> CRM is leveraging OBIA (<span>Oracle BI Applications</span>) to integrate data from <span>Oracle Fusion Applications</span> and non-Fusion Applications source systems.</p>
+<p>The <span>Oracle BI Applications</span> metadata layer consolidates disparate physical data sources and makes it ready for analysis by <span>Oracle Fusion Applications</span> users. Sales Prospector (SPE) is a brand new Fusion application for sales users helping them to manage their pipeline and whitespace effectively. SPE expects Order Item and Service Request data to be supplied from non-Fusion applications.</p>
+<p>The configuration file or files for this task are provided on installation of <span>Oracle BI Applications</span> at one of the following locations:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Source-independent files: <code><span class="variable">&lt;Oracle Home for BI&gt;</span>\biapps\etl\data_files\src_files\</code>.</p>
+</li>
+<li>
+<p>Source-specific files: <code><span class="variable">&lt;Oracle Home for BI&gt;</span>\biapps\etl\data_files\src_files\<span class="variable">&lt;source adaptor&gt;</span></code>.</p>
+</li>
+</ul>
+<p>Your system administrator will have copied these files to another location and configured ODI connections to read from this location. Work with your system administrator to obtain the files. When configuration is complete, your system administrator will need to copy the configured files to the location from which ODI reads these files.</p>
+<div class="infobox-note" id="GUID-342F87BC-49BA-44A1-8E74-E4D426D3C7B1__GUID-14DEF06E-07DF-41D7-A780-142D4ECF7429">
+<p class="notep1">Note:</p>
+If you are deploying OTBI-Enterprise, then you must download the CSV files from Configuration Manager, as follows: 1. From the Tasks bar, click <span class="bold">Define Business Intelligence Applications</span>. 2. Click <span class="bold">Actions</span>, then <span class="bold">Manage Source Configuration Data Files</span>. 3. Click the <span class="bold">Export Source Configuration Data Files</span> option on the tool bar. 4. Move the required files to the right hand list, then click Export.</div>
+<div class="section">
+<p class="subhead1">ETL from Flat Files</p>
+<p>Non-Fusion Applications data such as Order Item and Service Request can be directly loaded into <span>Oracle Business Analytics Warehouse</span> as long as the data can be presented in the specified flat file format. The ETL process loads the non-Fusion Applications data from the flat files and <span>Oracle Fusion Applications</span> data from <span>Oracle Fusion Applications</span> database tables into staging tables; then loads data from the staging tables into <span>Oracle Business Analytics Warehouse</span>.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">SPE ETL Preparation</p>
+<p>SPE needs non-Fusion Applications data for Order Item Fact, Service Request Fact and Service Request Dimension. The data should be presented in flat files according to the following specifications:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Data should be in CSV files (*.csv).</p>
+</li>
+<li>
+<p>For full ETL, the files should contain all initial records that are supposed to be loaded into <span>Oracle Business Analytics Warehouse</span>; for incremental ETL, the files should contain only new or updated records.</p>
+</li>
+<li>
+<p>The files are specially formatted for Fusion Sales Prediction Engine (SPE) data mining use only. All columns in the files should follow Fusion application data model terms and standards, and all ID columns in the files are expected to have corresponding Fusion Integration ID.</p>
+</li>
+<li>
+<p>Data should start from line six of each file. The first five lines of each file will be skipped during ETL process.</p>
+</li>
+<li>
+<p>Each row represents one record in staging table.</p>
+</li>
+<li>
+<p>All date values should be in the format of <code class="codeph">YYYYMMDDHH24MISS</code>. For example, 20071231140300 should be used for December 31, 2007, 2:03 pm.</p>
+</li>
+<li>
+<p>Columns DATASOURCE_NUM_ID and INTEGRATION_ID in all flat files cannot be NULL.</p>
+</li>
+<li>
+<p>Column DATASOURCE_NUM_ID needs to be fixed to 200, which is also the <span>Oracle Fusion Applications</span> data source number.</p>
+</li>
+</ul>
+<p>The Flat files for Order Item Fact, Service Request Fact and Service Request Dimension are:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><code>file_orderitem_fs.csv</code>, see <a href="GUID-342F87BC-49BA-44A1-8E74-E4D426D3C7B1.htm#GUID-9A34DD0F-552C-4A6E-A830-B9A52137CAD2" title="The generic file does not support any source order system-specific features, such as recurring order lines and etc. Each line in this file will contribute to the total order amount. The granularity of this file is each order line. The file is specially formatted for Fusion Sales Prediction Engine (SPE) data mining use only.">Flat file file_orderitem_fs.csv</a>.</p>
+</li>
+<li>
+<p><code>file_srvreq_fs.csv</code>, see <a href="GUID-342F87BC-49BA-44A1-8E74-E4D426D3C7B1.htm#GUID-C9E79307-C565-4828-B37A-7ADABF8C31D7" title="The columns listed below are required for SPE ETL use. The granularity of this file is each Service Request. The file is specially formatted for Fusion Sales Prediction Engine (SPE) data mining use only.">Flat file file_srvreq_fs.csv</a>.</p>
+</li>
+<li>
+<p><code>file_srvreq_ds.csv</code>, see <a href="GUID-342F87BC-49BA-44A1-8E74-E4D426D3C7B1.htm#GUID-39F50081-A661-49F7-AC3A-B2047895B4CC" title="The columns listed below are required for SPE ETL use. The granularity of this file is each Service Request. The file is specially formatted for Fusion Sales Prediction Engine (SPE) data mining use only.">Flat file file_srvreq_ds.csv</a>.</p>
+</li>
+</ul>
+<p>Before starting the ETL run, the flat files should be prepared based on the formats provided in sections below.</p>
+</div>
+<!-- class="section" --></div>
+<a id="BIACF25424"></a>
+<div class="props_rev_3"><a id="GUID-9A34DD0F-552C-4A6E-A830-B9A52137CAD2"></a>
+<h2 id="BIAFC-GUID-9A34DD0F-552C-4A6E-A830-B9A52137CAD2" class="sect2">Flat file file_orderitem_fs.csv</h2>
+<div>
+<p>The generic file does not support any source order system-specific features, such as recurring order lines and etc. Each line in this file will contribute to the total order amount. The granularity of this file is each order line. The file is specially formatted for Fusion Sales Prediction Engine (SPE) data mining use only.</p>
+<div class="tblformal" id="GUID-9A34DD0F-552C-4A6E-A830-B9A52137CAD2__GUID-9400DE8A-1F13-4B25-BE3F-310733214E8C">
+<table class="cellalignment137" summary="File structure - refer to table header for description.">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment215" id="d88681e219">Column Name</th>
+<th class="cellalignment186" id="d88681e221">Data Type</th>
+<th class="cellalignment186" id="d88681e223">Sample Data</th>
+<th class="cellalignment216" id="d88681e225">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e229" headers="d88681e219">
+<p>CUSTOMER_ID</p>
+</td>
+<td class="cellalignment187" headers="d88681e229 d88681e221">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment187" headers="d88681e229 d88681e223">
+<p>999997551042159</p>
+</td>
+<td class="cellalignment218" headers="d88681e229 d88681e225">
+<p>Customer Party Id. There could be more than one customer IDs in an order. Among the possible customer IDs of bill to, ship to, invoice to and so on; this is the primary ID for BI analysis use.</p>
+<p>Foreign key to HZ_PARTIES.PARTY_ID.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e244" headers="d88681e219">
+<p>CURCY_CD</p>
+</td>
+<td class="cellalignment187" headers="d88681e244 d88681e221">
+<p>VARCHAR(20)</p>
+</td>
+<td class="cellalignment187" headers="d88681e244 d88681e223">
+<p>USD</p>
+</td>
+<td class="cellalignment218" headers="d88681e244 d88681e225">
+<p>Currency Code, the currency that the order line amounts are based on.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e257" headers="d88681e219">
+<p>CRM_CURR_EXCHANGE_RATE</p>
+</td>
+<td class="cellalignment187" headers="d88681e257 d88681e221">
+<p>NUMBER(28,10)</p>
+</td>
+<td class="cellalignment187" headers="d88681e257 d88681e223">
+<p>1.00</p>
+</td>
+<td class="cellalignment218" headers="d88681e257 d88681e225">
+<p>CRM Currency Exchange Rate, which is for the conversion of the order line amounts to the CRM common currency.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e270" headers="d88681e219">
+<p>CRM_CORP_CURR_CODE</p>
+</td>
+<td class="cellalignment187" headers="d88681e270 d88681e221">
+<p>VARCHAR(20)</p>
+</td>
+<td class="cellalignment187" headers="d88681e270 d88681e223">
+<p>USD</p>
+</td>
+<td class="cellalignment218" headers="d88681e270 d88681e225">
+<p>CRM Common Currency Code.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e283" headers="d88681e219">
+<p>ORDER_ID</p>
+</td>
+<td class="cellalignment187" headers="d88681e283 d88681e221">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment187" headers="d88681e283 d88681e223">
+<p>4171787</p>
+</td>
+<td class="cellalignment218" headers="d88681e283 d88681e225">
+<p>Order header ID.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e296" headers="d88681e219">
+<p>PROD_ID</p>
+</td>
+<td class="cellalignment187" headers="d88681e296 d88681e221">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment187" headers="d88681e296 d88681e223">
+<p>999997500678718</p>
+</td>
+<td class="cellalignment218" headers="d88681e296 d88681e225">
+<p>Product Inventory Item ID.</p>
+<p>Foreign key to EGP_SYSTEM_ITEMS_B.INVENTORY_ITEM_ID.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e311" headers="d88681e219">
+<p>PROD_GROUP_ID</p>
+</td>
+<td class="cellalignment187" headers="d88681e311 d88681e221">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment187" headers="d88681e311 d88681e223">
+<p>Null</p>
+</td>
+<td class="cellalignment218" headers="d88681e311 d88681e225">
+<p>Product Group ID. Optional for SPE ETL use. Leave null.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e324" headers="d88681e219">
+<p>RESOURCE_ID</p>
+</td>
+<td class="cellalignment187" headers="d88681e324 d88681e221">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment187" headers="d88681e324 d88681e223">
+<p>123445623</p>
+</td>
+<td class="cellalignment218" headers="d88681e324 d88681e225">
+<p>Resource ID, order owner Resource ID for order.</p>
+<p>Foreign key to HZ_PARTIES.PARTY_ID</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e339" headers="d88681e219">
+<p>RESOURCE_ORG_ID</p>
+</td>
+<td class="cellalignment187" headers="d88681e339 d88681e221">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment187" headers="d88681e339 d88681e223">
+<p>3453453453</p>
+</td>
+<td class="cellalignment218" headers="d88681e339 d88681e225">
+<p>Resource Organization ID, order owner's organization ID.</p>
+<p>Foreign key to HR_ALL_ORGANIZATION_UNITS_F.ORGANIZATION_ID.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e354" headers="d88681e219">
+<p>SOURCE_ID</p>
+</td>
+<td class="cellalignment187" headers="d88681e354 d88681e221">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment187" headers="d88681e354 d88681e223">
+<p>100000016742344</p>
+</td>
+<td class="cellalignment218" headers="d88681e354 d88681e225">
+<p>Marketing campaign source code defined in MKT_SC_SOURCE_CODES.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e367" headers="d88681e219">
+<p>ORDER_DT</p>
+</td>
+<td class="cellalignment187" headers="d88681e367 d88681e221">
+<p>DATE</p>
+</td>
+<td class="cellalignment187" headers="d88681e367 d88681e223">
+<p>20061220000000</p>
+</td>
+<td class="cellalignment218" headers="d88681e367 d88681e225">
+<p>Order Date in the format of YYYYMMDDHH24MISS. It is the date when order is placed. This date is used in ETL as canonical date for resolving dimensional FKs.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e381" headers="d88681e219">
+<p>DATASOURCE_NUM_ID</p>
+</td>
+<td class="cellalignment187" headers="d88681e381 d88681e221">
+<p>NUMBER(10)</p>
+</td>
+<td class="cellalignment187" headers="d88681e381 d88681e223">
+<p>200</p>
+</td>
+<td class="cellalignment218" headers="d88681e381 d88681e225">
+<p>Data source number ID. Need to be fixed to 200, which is the same value for <span>Oracle Fusion Applications</span> data source in ETL.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e397" headers="d88681e219">
+<p>INTEGRATION_ID</p>
+</td>
+<td class="cellalignment187" headers="d88681e397 d88681e221">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment187" headers="d88681e397 d88681e223">
+<p>12149813</p>
+</td>
+<td class="cellalignment218" headers="d88681e397 d88681e225">
+<p>Integration ID, the order Line ID. Typically, each order has one order header and multiple order lines.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e410" headers="d88681e219">
+<p>DISCNT_AMT</p>
+</td>
+<td class="cellalignment187" headers="d88681e410 d88681e221">
+<p>NUMBER(28,10)</p>
+</td>
+<td class="cellalignment187" headers="d88681e410 d88681e223">
+<p>2.33</p>
+</td>
+<td class="cellalignment218" headers="d88681e410 d88681e225">
+<p>Discount Amount, deduction made to the unit price.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e423" headers="d88681e219">
+<p>NET_PRI</p>
+</td>
+<td class="cellalignment187" headers="d88681e423 d88681e221">
+<p>NUMBER(28,10)</p>
+</td>
+<td class="cellalignment187" headers="d88681e423 d88681e223">
+<p>45.752</p>
+</td>
+<td class="cellalignment218" headers="d88681e423 d88681e225">
+<p>Net Price of order line item. This is the final price after deducting discount amount.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e436" headers="d88681e219">
+<p>QTY_REQ</p>
+</td>
+<td class="cellalignment187" headers="d88681e436 d88681e221">
+<p>NUMBER(28,10)</p>
+</td>
+<td class="cellalignment187" headers="d88681e436 d88681e223">
+<p>12</p>
+</td>
+<td class="cellalignment218" headers="d88681e436 d88681e225">
+<p>Quantity Ordered for the line item.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e449" headers="d88681e219">
+<p>PR_TERR_ID</p>
+</td>
+<td class="cellalignment187" headers="d88681e449 d88681e221">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment187" headers="d88681e449 d88681e223">
+<p>1000000000023112</p>
+</td>
+<td class="cellalignment218" headers="d88681e449 d88681e225">
+<p>Primary Territory ID, ID of primary sales territory where order is placed.</p>
+<p>Territory ID is defined in MOT_TERRITORIES.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e464" headers="d88681e219">
+<p>CREATED_BY_ID</p>
+</td>
+<td class="cellalignment187" headers="d88681e464 d88681e221">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment187" headers="d88681e464 d88681e223">
+<p>SALES_ADMIN</p>
+</td>
+<td class="cellalignment218" headers="d88681e464 d88681e225">
+<p>Created By ID, Login ID of the user who created the row.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e477" headers="d88681e219">
+<p>CREATED_ON_DT</p>
+</td>
+<td class="cellalignment187" headers="d88681e477 d88681e221">
+<p>DATE</p>
+</td>
+<td class="cellalignment187" headers="d88681e477 d88681e223">
+<p>20071231140300</p>
+</td>
+<td class="cellalignment218" headers="d88681e477 d88681e225">
+<p>Created On Date in the format of YYYYMMDDHH24MISS.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e490" headers="d88681e219">
+<p>CHANGED_BY_ID</p>
+</td>
+<td class="cellalignment187" headers="d88681e490 d88681e221">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment187" headers="d88681e490 d88681e223">
+<p>SALES_ADMIN</p>
+</td>
+<td class="cellalignment218" headers="d88681e490 d88681e225">
+<p>Changed By ID, Login ID of the user who modified the row.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e503" headers="d88681e219">
+<p>CHANGED_ON_DT</p>
+</td>
+<td class="cellalignment187" headers="d88681e503 d88681e221">
+<p>DATE</p>
+</td>
+<td class="cellalignment187" headers="d88681e503 d88681e223">
+<p>20071231140300</p>
+</td>
+<td class="cellalignment218" headers="d88681e503 d88681e225">
+<p>Changed On Date in the format of YYYYMMDDHH24MISS.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e516" headers="d88681e219">
+<p>DELETE_FLG</p>
+</td>
+<td class="cellalignment187" headers="d88681e516 d88681e221">
+<p>VARCHAR(1)</p>
+</td>
+<td class="cellalignment187" headers="d88681e516 d88681e223">
+<p>Null, Y or N</p>
+</td>
+<td class="cellalignment218" headers="d88681e516 d88681e225">
+<p>Delete Flag, indicates if the record is deleted since last ETL. Default to N if null.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment217" id="d88681e530" headers="d88681e219">
+<p>X_CUSTOM</p>
+</td>
+<td class="cellalignment187" headers="d88681e530 d88681e221">
+<p>VARCHAR(10)</p>
+</td>
+<td class="cellalignment187" headers="d88681e530 d88681e223">
+<p>Null</p>
+</td>
+<td class="cellalignment218" headers="d88681e530 d88681e225">
+<p>ETL reserved. Leave null.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+<a id="BIACF25426"></a>
+<div class="props_rev_3"><a id="GUID-C9E79307-C565-4828-B37A-7ADABF8C31D7"></a>
+<h2 id="BIAFC-GUID-C9E79307-C565-4828-B37A-7ADABF8C31D7" class="sect2">Flat file file_srvreq_fs.csv</h2>
+<div>
+<p>The columns listed below are required for SPE ETL use. The granularity of this file is each Service Request. The file is specially formatted for Fusion Sales Prediction Engine (SPE) data mining use only.</p>
+<div class="tblformal" id="GUID-C9E79307-C565-4828-B37A-7ADABF8C31D7__GUID-B9DF562C-B15A-498E-8D77-B163484C65D5">
+<table class="cellalignment137" summary="File structure - refer to table header for description.">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment161" id="d88681e579">Column Name</th>
+<th class="cellalignment161" id="d88681e581">Data Type</th>
+<th class="cellalignment161" id="d88681e583">Sample Data</th>
+<th class="cellalignment152" id="d88681e585">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e589" headers="d88681e579">
+<p>DATASOURCE_NUM_ID</p>
+</td>
+<td class="cellalignment162" headers="d88681e589 d88681e581">
+<p>NUMBER(10)</p>
+</td>
+<td class="cellalignment162" headers="d88681e589 d88681e583">
+<p>200</p>
+</td>
+<td class="cellalignment154" headers="d88681e589 d88681e585">
+<p>Data source number ID. Fix this ID to 200, the same value for <span>Oracle Fusion Applications</span> data source in ETL.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e605" headers="d88681e579">
+<p>INTEGRATION_ID</p>
+</td>
+<td class="cellalignment162" headers="d88681e605 d88681e581">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment162" headers="d88681e605 d88681e583">
+<p>12149813</p>
+</td>
+<td class="cellalignment154" headers="d88681e605 d88681e585">
+<p>Integration ID, unique IDentifier ID for each Service Request.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e618" headers="d88681e579">
+<p>CLOSE_DT</p>
+</td>
+<td class="cellalignment162" headers="d88681e618 d88681e581">
+<p>DATE</p>
+</td>
+<td class="cellalignment162" headers="d88681e618 d88681e583">
+<p>20030616174947</p>
+</td>
+<td class="cellalignment154" headers="d88681e618 d88681e585">
+<p>Closed Date, date in the format of <code class="codeph">YYYYMMDDHH24MISS</code> when service request was closed.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e634" headers="d88681e579">
+<p>OPEN_DT</p>
+</td>
+<td class="cellalignment162" headers="d88681e634 d88681e581">
+<p>DATE</p>
+</td>
+<td class="cellalignment162" headers="d88681e634 d88681e583">
+<p>20020516174947</p>
+</td>
+<td class="cellalignment154" headers="d88681e634 d88681e585">
+<p>Open Date, date in the format of <code class="codeph">YYYYMMDDHH24MISS</code> when service request was open.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e650" headers="d88681e579">
+<p>DELETE_FLG</p>
+</td>
+<td class="cellalignment162" headers="d88681e650 d88681e581">
+<p>VARCHAR(1)</p>
+</td>
+<td class="cellalignment162" headers="d88681e650 d88681e583">
+<p>Null, Y or N</p>
+</td>
+<td class="cellalignment154" headers="d88681e650 d88681e585">
+<p>Delete Flag, indicates if the record is deleted since last ETL. Default to N if null.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e663" headers="d88681e579">
+<p>CREATED_BY_ID</p>
+</td>
+<td class="cellalignment162" headers="d88681e663 d88681e581">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment162" headers="d88681e663 d88681e583">
+<p>SALES_ADMIN</p>
+</td>
+<td class="cellalignment154" headers="d88681e663 d88681e585">
+<p>Created By ID, Login ID of user who created the row.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e676" headers="d88681e579">
+<p>CREATED_ON_DT</p>
+</td>
+<td class="cellalignment162" headers="d88681e676 d88681e581">
+<p>DATE</p>
+</td>
+<td class="cellalignment162" headers="d88681e676 d88681e583">
+<p>20071231140300</p>
+</td>
+<td class="cellalignment154" headers="d88681e676 d88681e585">
+<p>Created On Date in the format of <code class="codeph">YYYYMMDDHH24MISS</code>.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e692" headers="d88681e579">
+<p>CHANGED_BY_ID</p>
+</td>
+<td class="cellalignment162" headers="d88681e692 d88681e581">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment162" headers="d88681e692 d88681e583">
+<p>SALES_ADMIN</p>
+</td>
+<td class="cellalignment154" headers="d88681e692 d88681e585">
+<p>Changed By ID, Login ID of the user who modified the row.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e705" headers="d88681e579">
+<p>CHANGED_ON_DT</p>
+</td>
+<td class="cellalignment162" headers="d88681e705 d88681e581">
+<p>DATE</p>
+</td>
+<td class="cellalignment162" headers="d88681e705 d88681e583">
+<p>20071231140300</p>
+</td>
+<td class="cellalignment154" headers="d88681e705 d88681e585">
+<p>Changed On Date in the format of <code class="codeph">YYYYMMDDHH24MISS</code>.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e721" headers="d88681e579">
+<p>X_CUSTOM</p>
+</td>
+<td class="cellalignment162" headers="d88681e721 d88681e581">
+<p>VARCHAR(10)</p>
+</td>
+<td class="cellalignment162" headers="d88681e721 d88681e583">
+<p>Null</p>
+</td>
+<td class="cellalignment154" headers="d88681e721 d88681e585">
+<p>ETL reserved. Leave null.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e734" headers="d88681e579">
+<p>CUSTOMER_ID</p>
+</td>
+<td class="cellalignment162" headers="d88681e734 d88681e581">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment162" headers="d88681e734 d88681e583">
+<p>999997551042159</p>
+</td>
+<td class="cellalignment154" headers="d88681e734 d88681e585">
+<p>Customer Party Id.</p>
+<p>Foreign key to HZ_PARTIES.PARTY_ID.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e750" headers="d88681e579">
+<p>PROD_ID</p>
+</td>
+<td class="cellalignment162" headers="d88681e750 d88681e581">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment162" headers="d88681e750 d88681e583">
+<p>999997500678718</p>
+</td>
+<td class="cellalignment154" headers="d88681e750 d88681e585">
+<p>Product Inventory Item ID.</p>
+<p>Foreign key to EGP_SYSTEM_ITEMS_B.INVENTORY_ITEM_ID.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+<a id="BIACF25428"></a>
+<div class="props_rev_3"><a id="GUID-39F50081-A661-49F7-AC3A-B2047895B4CC"></a>
+<h2 id="BIAFC-GUID-39F50081-A661-49F7-AC3A-B2047895B4CC" class="sect2">Flat file file_srvreq_ds.csv</h2>
+<div>
+<p>The columns listed below are required for SPE ETL use. The granularity of this file is each Service Request. The file is specially formatted for Fusion Sales Prediction Engine (SPE) data mining use only.</p>
+<div class="tblformal" id="GUID-39F50081-A661-49F7-AC3A-B2047895B4CC__GUID-CC44FE61-397E-4075-9A1A-98C0892C5739">
+<table class="cellalignment137" summary="File structure - refer to table header for description.">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment161" id="d88681e800">Column Name</th>
+<th class="cellalignment161" id="d88681e802">Data Type</th>
+<th class="cellalignment161" id="d88681e804">Sample Data</th>
+<th class="cellalignment152" id="d88681e806">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e810" headers="d88681e800">
+<p>DATASOURCE_NUM_ID</p>
+</td>
+<td class="cellalignment162" headers="d88681e810 d88681e802">
+<p>NUMBER(10)</p>
+</td>
+<td class="cellalignment162" headers="d88681e810 d88681e804">
+<p>200</p>
+</td>
+<td class="cellalignment154" headers="d88681e810 d88681e806">
+<p>Data source number ID. Fix this ID to 200, the same value for <span>Oracle Fusion Applications</span> data source in ETL.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e826" headers="d88681e800">
+<p>INTEGRATION_ID</p>
+</td>
+<td class="cellalignment162" headers="d88681e826 d88681e802">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment162" headers="d88681e826 d88681e804">
+<p>1-10E-5</p>
+</td>
+<td class="cellalignment154" headers="d88681e826 d88681e806">
+<p>Integration ID, unique Identifier ID for each Service Request.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e839" headers="d88681e800">
+<p>CLOSE_DT</p>
+</td>
+<td class="cellalignment162" headers="d88681e839 d88681e802">
+<p>DATE</p>
+</td>
+<td class="cellalignment162" headers="d88681e839 d88681e804">
+<p>20020516174947</p>
+</td>
+<td class="cellalignment154" headers="d88681e839 d88681e806">
+<p>Closed Date, date in the format of <code class="codeph">YYYYMMDDHH24MISS</code> when service request was closed.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e855" headers="d88681e800">
+<p>OPEN_DT</p>
+</td>
+<td class="cellalignment162" headers="d88681e855 d88681e802">
+<p>DATE</p>
+</td>
+<td class="cellalignment162" headers="d88681e855 d88681e804">
+<p>20020516174947</p>
+</td>
+<td class="cellalignment154" headers="d88681e855 d88681e806">
+<p>Open Date, date in the format of <code class="codeph">YYYYMMDDHH24MISS</code> when service request was open.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e871" headers="d88681e800">
+<p>SEV_CD</p>
+</td>
+<td class="cellalignment162" headers="d88681e871 d88681e802">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment162" headers="d88681e871 d88681e804">
+<p>SR_SEVERITY~3-Medium</p>
+</td>
+<td class="cellalignment154" headers="d88681e871 d88681e806">
+<p>Severity Code of the Service Request.</p>
+<p>Possible values are: SR_SEVERITY~1-Critical,</p>
+<p>SR_SEVERITY~2-High,</p>
+<p>SR_SEVERITY~3-Medium,</p>
+<p>SR_SEVERITY~4-Low.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e892" headers="d88681e800">
+<p>STATUS</p>
+</td>
+<td class="cellalignment162" headers="d88681e892 d88681e802">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment162" headers="d88681e892 d88681e804">
+<p>SR_STATUS~Open</p>
+</td>
+<td class="cellalignment154" headers="d88681e892 d88681e806">
+<p>Service Request Status.</p>
+<p>Possible values are: SR_STATUS~Approved, SR_STATUS~Cancelled, SR_STATUS~Closed, SR_STATUS~Completed, SR_STATUS~Open, SR_STATUS~Pending.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e907" headers="d88681e800">
+<p>DELETE_FLG</p>
+</td>
+<td class="cellalignment162" headers="d88681e907 d88681e802">
+<p>VARCHAR(1)</p>
+</td>
+<td class="cellalignment162" headers="d88681e907 d88681e804">
+<p>Null, Y or N</p>
+</td>
+<td class="cellalignment154" headers="d88681e907 d88681e806">
+<p>Delete Flag, indicates if the record is deleted since last ETL. Default to N if null.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e920" headers="d88681e800">
+<p>CREATED_BY_ID</p>
+</td>
+<td class="cellalignment162" headers="d88681e920 d88681e802">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment162" headers="d88681e920 d88681e804">
+<p>SALES_ADMIN</p>
+</td>
+<td class="cellalignment154" headers="d88681e920 d88681e806">
+<p>Created By ID, Login ID of the user who created the row.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e933" headers="d88681e800">
+<p>CREATED_ON_DT</p>
+</td>
+<td class="cellalignment162" headers="d88681e933 d88681e802">
+<p>DATE</p>
+</td>
+<td class="cellalignment162" headers="d88681e933 d88681e804">
+<p>20071231140300</p>
+</td>
+<td class="cellalignment154" headers="d88681e933 d88681e806">
+<p>Created On Date in the format of <code class="codeph">YYYYMMDDHH24MISS</code>.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e949" headers="d88681e800">
+<p>CHANGED_BY_ID</p>
+</td>
+<td class="cellalignment162" headers="d88681e949 d88681e802">
+<p>VARCHAR(80)</p>
+</td>
+<td class="cellalignment162" headers="d88681e949 d88681e804">
+<p>SALES_ADMIN</p>
+</td>
+<td class="cellalignment154" headers="d88681e949 d88681e806">
+<p>Changed By ID, Login ID of the user who modified the row.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e962" headers="d88681e800">
+<p>CHANGED_ON_DT</p>
+</td>
+<td class="cellalignment162" headers="d88681e962 d88681e802">
+<p>DATE</p>
+</td>
+<td class="cellalignment162" headers="d88681e962 d88681e804">
+<p>20071231140300</p>
+</td>
+<td class="cellalignment154" headers="d88681e962 d88681e806">
+<p>Changed On Date in the format of <code class="codeph">YYYYMMDDHH24MISS</code>.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d88681e979" headers="d88681e800">
+<p>X_CUSTOM</p>
+</td>
+<td class="cellalignment162" headers="d88681e979 d88681e802">
+<p>VARCHAR(10)</p>
+</td>
+<td class="cellalignment162" headers="d88681e979 d88681e804">
+<p>Null</p>
+</td>
+<td class="cellalignment154" headers="d88681e979 d88681e806">
+<p>ETL reserved. Leave null.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-31BDF0BE-9366-4748-8D1E-F9A425015B08.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

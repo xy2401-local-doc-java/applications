@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>About Configuring Data Load Parameter for Workforce Movement Rate Fact</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="Configure functionality in the Workforce Movement Rate Fact controls the amount of data loaded, period type, and minimum group size for rate calculation." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-A9F3A41E-FEA0-465E-9A2F-E3A1AC7E111D.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-8E541ACC-C9D1-43F8-B3BE-E443A5A09073.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-2CF172B3-1F63-4AB8-BF22-CCF44F81CBB2"></a> <span id="PAGE" style="display:none;">149/336</span> <!-- End Header -->
+<a id="IT_418"></a>
+<h1 id="BIAFC-GUID-2CF172B3-1F63-4AB8-BF22-CCF44F81CBB2" class="sect1">About Configuring Data Load Parameter for Workforce Movement Rate Fact</h1>
+<div>
+<p>Configure functionality in the Workforce Movement Rate Fact controls the amount of data loaded, period type, and minimum group size for rate calculation.</p>
+<p>This task applies to all adaptors and is optional as the default settings for these parameters give reasonable results most of the time.</p>
+<div class="p">The Workforce Movement Rate Fact calculates the gains and losses against the Generic Hierarchy, from the perspective of each node in the hierarchy. The calculations are done globally (from each node&rsquo;s perspective) and also within each dimension separately. This allows movement rates to be compared for different dimensions against the overall movement rates, which has some interesting applications:
+<ul style="list-style-type: disc;">
+<li>
+<p>Which dimension groups have the highest turnover rates?</p>
+</li>
+<li>
+<p>What is the trend of gains/losses by demographic, for example, age band?</p>
+</li>
+<li>
+<p>What is the future demographic makeup of an organization likely to be?</p>
+</li>
+</ul>
+</div>
+<div class="section">
+<p class="subhead1">Parameter: Workforce Movement Period</p>
+<p>This parameter pertains to the period in which to calculate gains and losses. This can be Year, Quarter, or Month, and in conjunction with the number of periods (Workforce Movement Number of Periods) it defines the amount of workforce movement history to include. The default is 3 years.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Parameter: Workforce Movement Number of Periods</p>
+<p>The number of periods to process in the workforce movement rate fact. Together with the period type (Workforce Movement Period) it defines the amount of workforce movement history to include. The default is 3 years.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Parameter: Workforce Movement Minimum Group</p>
+<p>The minimum group size to calculate movement rates for. If this is set too low then individual movements may have a disproportionate effect on the movement rate. For example, a termination rate of 25% may be a problem if it was discovered in the 18-25 age band which has on average 1000 headcount over the last year. That would be calculated as 250 / 1000 = 25%. However, this may be masked by a single termination in the 55+ age band where there were only 2 employees. In this age band, the termination rate is calculated as 1 / 2 = 50%. By default the minimum group is set to 20, which excludes any smaller groups from the rate calculation, and in the above example there would be no rate displayed for the 55+ age band, which allows the problem in the 18-25 age band to be more significant.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-A9F3A41E-FEA0-465E-9A2F-E3A1AC7E111D.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-8E541ACC-C9D1-43F8-B3BE-E443A5A09073.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

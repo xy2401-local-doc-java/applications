@@ -1,0 +1,2817 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Preparing to Use HCM Data Loader (Chapter 4) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:15 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM Data Loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM2121438.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM2127585.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="See the Initiate Data Load page in the Data Exchange work area. This page shows the module for each business object. The module
+      equates to the server, as shown in this table."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">7/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM2126423" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">4</span>Preparing to Use HCM Data Loader
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM996991">HCM Data Loader Configuration Parameters</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2125726">Setting Configuration Parameters for Performance: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2049232">HCM Data Loader Scope: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2034592">Defining Referenced Objects: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2034977">Reviewing Lists of Values: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2030634">Defining the Source-System Owner: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2176353">Finding Business-Object Information: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2049625">Preparing to Load Workers: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2126422">FAQs for Preparing to Use HCM Data Loader</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM996991">
+                  <h2>HCM Data Loader Configuration Parameters</h2>
+                  
+                  
+                  
+                  
+                  <p>The HCM Data Loader configuration parameters
+                     control the HCM Data Loader import and load processes. The default
+                     settings of the parameters suit most requirements. However, you can
+                     change these settings to suit the configuration of your environment
+                     and the amount of data being loaded. Users can also override the enterprise
+                     settings when loading files either on the Schedule Request page or
+                     when using the HCM Data Loader web service.
+                  </p>
+                  
+                  
+                  <p>To review or update the delivered settings for the
+                     enterprise, perform the Configure HCM Data Loader task in the Setup
+                     and Maintenance work area. This table shows the default value for
+                     each parameter.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="This two-column table with 17&#xA;data rows shows, from left to right, the parameter name and its default&#xA;value.">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Parameter
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Default Value
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Complex Error Stack Trace Occurrences by Thread</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>5</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Data Error Stack Trace Occurrences by Thread</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>2</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Delete Source File</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Y</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Enable Load Group Size Calculation</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>File Action</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Import and load</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>File Character Set</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>UTF-8</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>File Encryption</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>None</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>HCM Data Loader Scope</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Full</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Import Cache Clear Limit</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>2400</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Import Commit Size</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>100</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Load Cache Clear Limit</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>500</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Load Group Size</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>100</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Maximum Concurrent Threads for Import</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>8</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Maximum Concurrent Threads for Load</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>8</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Maximum Percentage of Import Errors</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>100</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Maximum Percentage of Load Errors</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>100</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Transfer Group Size</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>100000</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  
+                  <div class="sect2" id="">
+                     <dl class="reference">
+                        <h3 class="parameterGroupTitle">HCM Data Loader Configuration Parameters</h3>
+                        
+                        
+                        
+                        <dt>Complex Error Stack Trace Occurrences by Thread </dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Maximum number of complex error message occurrences
+                              on a processing thread for which stack trace is recorded.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Data Error Stack Trace Occurrences by Thread</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Maximum number of data error message occurrences on
+                              a processing thread for which stack trace is recorded.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Delete Source File</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Delete the source file from the Oracle WebCenter Content
+                              server once it's been processed. Set to N (No) to retain source files
+                              by default.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Enable Load Group Size Calculation</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Specifies whether the load-group size is to be calculated
+                              automatically. Set to <span class="uicontrol">Yes</span> to
+                              enable the optimal load-group size to be calculated based on the number
+                              of objects to process and the available concurrent threads. When <span class="uicontrol">Enable Load Group Size Calculation</span> is <span class="uicontrol">Yes</span>, the <span class="uicontrol">Load Group
+                                 Size</span> parameter doesn’t appear on the Schedule Request
+                              page. Also, the default value of the <span class="uicontrol">Load
+                                 Group Size</span> parameter is ignored.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>File Action</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Default file-processing action.</p>
+                           
+                           <p><span class="uicontrol">Import and load</span> means that valid objects are loaded automatically once import completes. <span class="uicontrol">Import only</span> means that your data is imported
+                              to the stage tables but load isn't initiated.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>File Character Set</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Character set used for business object and attachment
+                              files.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>File Encryption</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Default file encryption.</p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>HCM Data Loader Scope</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Specifies whether HCM Data Loader is used for all
+                              data loading.
+                           </p>
+                           
+                           <p>From Release 10, the default value of the <span class="uicontrol">HCM Data Loader Scope</span> parameter is <span class="uicontrol">Full</span> for new customers only. You can't change
+                              this setting.
+                           </p>
+                           
+                           <p>For existing customers upgrading from Release 9,
+                              the default value of this parameter is <span class="uicontrol">Limited</span>. If you set it to <span class="uicontrol">Full</span>, then
+                              you can't change the setting back to <span class="uicontrol">Limited</span>.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Import Cache Clear Limit</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Number of database rows to be processed before the
+                              cache is cleared.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Import Commit Size</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Number of file lines to import between each commit.</p>
+                           
+                           <p>Don't change this value unless Oracle requests the
+                              change.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Load Cache Clear Limit </dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Number of business-object instances to be loaded
+                              from the stage tables before the cache is cleared. 
+                           </p>
+                           
+                           <p>Don't change this value unless Oracle requests the
+                              change.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Load Group Size</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Number of business objects processed as a single
+                              unit of work by a single thread.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Maximum Concurrent Threads for Import</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Maximum number of threads to run concurrently when
+                              importing data to the stage tables.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Maximum Concurrent Threads for Load </dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Maximum number of threads to run concurrently when
+                              validating data or loading data from the stage tables to the application
+                              tables.
+                           </p>
+                           
+                           <p>This parameter is used in conjunction with the <span class="uicontrol">Load Group Size</span> parameter. Only the threads
+                              required to load your objects based on the <span class="uicontrol">Load Group Size</span> parameter are created.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Maximum Percentage of Import Errors</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Percentage of file lines in error that can occur in
+                              a business object before the import process stops for the object.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Maximum Percentage of Load Errors</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Percentage of business-object instances in error that
+                              can occur for a business object before the load process stops.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Transfer Group Size</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Number of file lines processed as a single unit of
+                              work by a concurrent thread.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                     </dl>
+                  </div>
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2125726">
+                  <h2>Setting Configuration Parameters for Performance: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>The HCM Data Loader configuration parameters
+                     control the HCM Data Loader import and load processes. This topic
+                     describes how to set these parameters to optimize multithreaded processing
+                     of your files. The examples in this topic provide general guidance.
+                     However, you can still load data successfully with parameter values
+                     that differ from those suggested here.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2125723">
+                     <h3 class="topictitle">Maximum Concurrent Threads for Load</h3>
+                     
+                     <p>The maximum number of threads that can be used to
+                        load a business object depends on the number of servers configured
+                        in your environment. Each server supplies 8 threads. Therefore, the
+                        maximum number of threads available is 8 multiplied by the number
+                        of servers. Business objects are hosted across various servers. Therefore,
+                        you must understand not only how many servers are available but also
+                        where the business object that you're loading is hosted. 
+                     </p>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        The Initiate Data Load page in the Data Exchange
+                        work area shows the server that hosts each business object.
+                        
+                     </div>
+                     
+                     <p>This table identifies the available servers and maximum
+                        threads in a typical environment.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Server
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Number of Servers
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Maximum Threads Available
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Core Setup</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>8</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>64</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Core Processes</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>2</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>16</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Talent</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>8</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Global Payroll</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>4</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>32</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Workforce Management</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>8</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Compensation</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>8</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>You can set <span class="uicontrol">Maximum Concurrent
+                           Threads for Load</span> to the maximum threads available value.
+                        For example, if your environment has 8 Core Setup servers, then the
+                        maximum threads available is 64 (8 threads multiplied by 8 servers).
+                        Therefore, you can load objects that are hosted on the Core Setup
+                        server with the <span class="uicontrol">Maximum Concurrent Threads
+                           for Load</span> parameter set to <span class="uicontrol">64</span>.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Regardless of <span class="uicontrol">Maximum Concurrent
+                           Threads for Load</span>, your file uses only the threads that
+                        it needs, which depends on the <span class="uicontrol">Load Group
+                           Size</span> parameter. For example, if <span class="uicontrol">Load Group Size</span> is set to <span class="uicontrol">100</span>, then a file containing 500 location objects needs only 5 threads.
+                        
+                     </div>
+                     
+                     <p>This table provides recommended values for the <span class="uicontrol">Maximum Concurrent Threads for Load</span> parameter.
+                        These values are based on the number of objects that you're loading
+                        and the number of servers available for the object that you're loading.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Number of Servers
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Number of Objects
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Maximum Concurrent Threads for Load
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>1</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>10,000</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>8</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>50,000</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>16</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>5</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>More than 100,000</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2125774">
+                     <h3 class="topictitle">Load Group Size</h3>
+                     
+                     <p>The<span class="uicontrol"> Load Group Size</span> parameter controls the number of business objects that a thread
+                        processes at a time. Each concurrent thread processes multiple groups
+                        until all objects are processed. By default, the <span class="uicontrol">Load Group Size</span> parameter doesn't appear
+                        on the Schedule Request page when you submit a file for processing.
+                        Instead, at the beginning of the load process, HCM Data Loader calculates
+                        the optimal load group size. This calculation is based on the available
+                        threads and the number of objects being loaded. You're recommended
+                        to leave HCM Data Loader to calculate the load group size. However,
+                        you can disable this calculation by setting the <span class="uicontrol">Enable Load Group Size Calculation</span> configuration parameter
+                        to <span class="uicontrol">No</span>. In this case, the <span class="uicontrol">Load Group Size</span> parameter appears on the
+                        Schedule Request page.
+                     </p>
+                     
+                     <p>If you disable automatic calculation of the load
+                        group size and instead specify a fixed value, then consider these
+                        points:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The recommended setting for this
+                              parameter is 100, which is its default value.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Initiating each group of objects
+                              incurs an overhead. Therefore, <span class="uicontrol">Load Group
+                                 Size</span> should not be too small.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The statistics and status details
+                              on the Import and Load Data page are updated only at the end of every
+                              group. Therefore, <span class="uicontrol">Load Group Size</span> should not be too large for you to monitor progress.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        Change this parameter from the default value only
+                        when loading smaller groups of workers. Worker is a particularly complex
+                        object with many file lines.
+                        
+                     </div>
+                     
+                     <p>To optimize the bulk loading of worker objects, these <span class="uicontrol">Load Group Size</span> values are recommended:
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Number of Workers to Load
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Load Group Size
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>More than 100,000</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>100</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Between 50,000 and 100,000</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>50</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Fewer than 50,000</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>20</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2125785">
+                     <h3 class="topictitle">Maximum Concurrent Threads for Import</h3>
+                     
+                     <p>The <span class="uicontrol">Maximum Concurrent Threads
+                           for Import</span> parameter controls the number of threads available
+                        for the import phase of data loading. Set it to the same value as
+                        the <span class="uicontrol">Maximum Concurrent Threads for Load</span> parameter. By default, both parameters are set to <span class="uicontrol">8</span>.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2125786">
+                     <h3 class="topictitle">Processing Files in Parallel on a Single Server</h3>
+                     
+                     <p>Regardless of the maximum number of threads you specify
+                        when submitting a file, HCM Data Loader can use only available threads.
+                        If other activities are using threads, then HCM Data Loader processing
+                        must use fewer threads.  If you're processing .zip files in parallel
+                        for objects hosted on the same server, then consider reducing the
+                        maximum concurrent threads value. This approach shares the maximum
+                        available threads among your files. Alternatively, supply the business
+                        object files in the same .zip file.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        When you process in parallel files that contain business
+                        objects hosted on separate servers, they each use the maximum threads
+                        available.
+                        
+                     </div>
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2049232">
+                  <h2>HCM Data Loader Scope: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The HCM Data Loader Scope parameter determines
+                     which business objects you can load using HCM Data Loader and which
+                     other data loaders you can use. The HCM Data Loader Scope parameter
+                     has two possible values:
+                  </p>
+                  
+                  
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              HCM Data Loader Scope Value
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Description
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Limited</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>You can use HCM Data Loader to load only those business
+                                 objects that aren't supported by its predecessor, HCM File-Based Loader.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Full</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>You can use HCM Data Loader to load all supported
+                                 business objects. You can't use HCM File Based Loader, which is disabled.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  <p>For customers who upgraded from an earlier release
+                     to Release 10, the default value of this parameter is <span class="uicontrol">Limited</span>. While you continue to use HCM File-Based
+                     Loader, leave <span class="uicontrol">HCM Data Loader Scope</span> set to <span class="uicontrol">Limited</span>. However, you
+                     should plan to use HCM Data Loader in place of HCM File-Based Loader.
+                     To ensure complete business-object support when using HCM Data Loader,
+                     you set <span class="uicontrol">HCM Data Loader Scope</span> to <span class="uicontrol">Full</span>.
+                  </p>
+                  
+                  <p>For new customers, the default value of this parameter
+                     has been <span class="uicontrol">Full</span> since Release 10.
+                  </p>
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     You can't change <span class="uicontrol">HCM Data
+                        Loader Scope</span> from <span class="uicontrol">Full</span> to <span class="uicontrol">Limited</span>.
+                     
+                  </div>
+                  
+                  
+                  <div class="sect2" id="FAIHM2049229">
+                     <h3 class="topictitle">Restricted Objects</h3>
+                     
+                     <p>If <span class="uicontrol">HCM Data Loader Scope</span> is set to <span class="uicontrol">Limited</span>, then you
+                        can't load these objects using HCM Data Loader. You can load them
+                        using HCM Data Loader only if <span class="uicontrol">HCM Data Loader
+                           Scope</span> is set to <span class="uicontrol">Full</span>. 
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Module
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Business Object
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Business Object Translation
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Absence Management</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Person Absence Entry</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Person Entitlement Detail</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Compensation</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Salary</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Salary Basis</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Global HR</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Actions</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Actions Translation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Action Reasons</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Action Reasons Translation </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Content Item</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Content Item Translation, Content Item Rating Description
+                                    Translation
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Content Items Relationship</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Department Tree</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Department Tree Node</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Education Establishment</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Education Establishment Translation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grade</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Grade Translation, Grade Step Translation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grade Ladder</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Grade Ladder Translation, Step Rate Translation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grade Rate</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Grade Rate Translation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Job Translation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job Family</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Job Family Translation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Location</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Location Translation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Organization</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Organization Translation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Person Contact</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Person Contact Relationship</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Position</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Position Translation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Rating Model</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Rating Model Translation, Rating Category Translation,
+                                    Rating Level Translation
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Talent Profile</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Talent Profile Translation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Worker</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Global Payroll</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Element Entry</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p> If you try to load data for a business object that
+                        isn't supported in <span class="uicontrol">Limited</span> mode,
+                        then your whole data set fails to process.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2049399">
+                     <h3 class="topictitle">Using HCM Spreadsheet Data Loader</h3>
+                     
+                     <p>The version of HCM Spreadsheet Data Loader that you
+                        can use depends on the value of the <span class="uicontrol">HCM Data
+                           Loader Scope </span> configuration parameter. If <span class="uicontrol">HCM Data Loader Scope</span> is set to:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p><span class="uicontrol">Full</span>, then you can use HCM Spreadsheet Data Loader to load most objects
+                              that HCM Data Loader supports. All HCM Spreadsheet Data Loader Release
+                              12 functions are available. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p><span class="uicontrol">Limited</span>, then you can use the version of HCM Spreadsheet Data Loader that
+                              was available in Release 11 and earlier. This version provides a static
+                              list of predefined spreadsheets
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Spreadsheet data loaders other than HCM Spreadsheet
+                        Data Loader are unaffected by the setting of the <span class="uicontrol">HCM Data Loader Scope</span> configuration parameter.
+                        For example, you can use the payroll batch loader regardless of the
+                        value of <span class="uicontrol">HCM Data Loader Scope</span>.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2034592">
+                  <h2>Defining Referenced Objects: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Business objects that you're loading may
+                     reference a few business objects that you can't load using HCM Data
+                     Loader because they're not integration enabled. You define or review
+                     these objects in the target Oracle HCM Cloud environment before you
+                     load data that references them. You may have performed this step during
+                     implementation of Oracle HCM Cloud.
+                  </p>
+                  
+                  
+                  
+                  <p>This table identifies the main objects of this type
+                     and the tasks that you use to review or create them. You perform these
+                     tasks in the Setup and Maintenance work area.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Business Object
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Task
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Application Reference Data Set</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Manage Reference Data Sets</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Assignment Status Type</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Manage Assignment Status </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Business Unit</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Manage Business Unit</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Content Type</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Manage Profile Content Types</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Currency Code</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Manage Currencies</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Element Type</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Manage Elements</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Legal Entity</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Manage Legal Entity</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Official Language Code</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Manage Languages</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Profile Type</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Manage Profile Types</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Schedule</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Manage Work Schedules</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2121911">
+                     <h3 class="topictitle">Foreign-Object References</h3>
+                     
+                     <p>When you refer to these objects from objects that
+                        you're loading, you use their user keys. (Alternatively, you can use
+                        their surrogate IDs, if available.) HCM Data Loader provides business-object
+                        documentation for all supported objects. This documentation identifies
+                        the user key that you can use for foreign-object references. For example,
+                        the position object includes a reference to the business unit, which
+                        isn't integration enabled. The position documentation identifies the
+                        business-unit name as its user key. Therefore, when loading a position
+                        object, you can refer to the associated business unit using the business-unit
+                        name. To see the supplied documentation for a business object, click
+                        the object name on the Initiate Data Load page.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2034977">
+                  <h2>Reviewing Lists of Values: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The permitted values of many object attributes
+                     are defined in lists of values. Some lists of values are predefined
+                     and can't be updated in any way. Others contain some values, but you
+                     can also add your own. In some cases, you can edit or remove predefined
+                     values. In Oracle HCM Cloud, lists of values are defined as lookup types. You're
+                     recommended to review the predefined lookup types and make any updates
+                     before you attempt to load data that uses them. You may have completed
+                     this process during implementation of Oracle HCM Cloud.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2034976">
+                     <h3 class="topictitle">Reviewing Lookup Types</h3>
+                     
+                     <p>To manage lookup types, search for relevant tasks
+                        by entering <span class="uicontrol">Manage % Lookups</span> in
+                        the Setup and Maintenance work area. All available lookup-type tasks
+                        are listed. For example, to manage person lookup types, select the
+                        Manage Person Lookups task.  On the Manage Person Lookups page, select
+                        a lookup type to edit. The list includes:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Address types</p>
+                        </li>
+                        
+                        <li>
+                           <p>Contact relationships</p>
+                        </li>
+                        
+                        <li>
+                           <p>Ethnicity</p>
+                        </li>
+                        
+                        <li>
+                           <p>Highest education level</p>
+                        </li>
+                        
+                        <li>
+                           <p>Honors</p>
+                        </li>
+                        
+                        <li>
+                           <p>Marital status</p>
+                        </li>
+                        
+                        <li>
+                           <p>Military rank</p>
+                        </li>
+                        
+                        <li>
+                           <p>Phone types</p>
+                        </li>
+                        
+                        <li>
+                           <p>Religion</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Ensure that the defined lookup values support the
+                        data that you're planning to load.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=952F228A24437FF2E040D30A6881577F">Lookups: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2030634">
+                  <h2>Defining the Source-System Owner: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>If you plan to use source keys, then you
+                     must add your source-system owner values to the HRC_SOURCE_SYSTEM_OWNER lookup type before
+                     you load data. You must have the Application Implementation Consultant
+                     or Human Capital Management Application Administrator job role or privileges
+                     to perform this task.
+                  </p>
+                  
+                  
+                  
+                  <p>Follow these steps:</p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>In the Setup and Maintenance work
+                           area, search for and select the Manage Common Lookups task.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>On the Manage Common Lookups page,
+                           search for the lookup type <span class="uicontrol">HRC_SOURCE_SYSTEM_OWNER</span>.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In the search results, select the
+                           lookup type to display its lookup codes.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In the Lookup Codes section of
+                           the page, click the <span class="uicontrol">New</span> icon
+                           to add a lookup-code row. 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Complete the fields in the row.
+                           Ensure that the new code is enabled and the dates are valid for the
+                           data that you're loading.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Repeat steps 4 and 5 for additional
+                           source-system owner values.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Click <span class="uicontrol">Save and Close</span>.
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM1672963.htm#FAIHM2012584">Source Keys: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2176353">
+                  <h2>Finding Business-Object Information: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>To load a business object or component successfully
+                     using HCM Data Loader, you must understand its structure, supported
+                     key systems, data formats, and required attributes. You must also
+                     understand any business rules that apply to the object. This topic
+                     identifies where you can find this information.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2176352">
+                     <h3 class="topictitle">Business-Object Details</h3>
+                     
+                     <p>On the Initiate Data Load page, you can generate
+                        data-file templates. When you click the name of a business object
+                        in the <span class="uicontrol">Business Object</span> column
+                        in the Search Results table, you access information about the object.
+                        This information includes:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The component hierarchy of the
+                              object
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Component details for the currently
+                              selected component in the hierarchy. These include:
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Its parent component, file discriminator,
+                                    data-file name, and the name of any translation object 
+                                 </p>
+                                 <div class="infobox-tip"><span class="notep1">Tip: </span>
+                                    Click the name of the translation object to see its
+                                    details.
+                                    
+                                 </div>
+                              </li>
+                              
+                              <li>
+                                 <p>Whether it supports integration
+                                    keys
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Whether it's date effective and,
+                                    if so, whether you can change the component's first start date and
+                                    last end date
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>The descriptive flexfields that
+                                    you can upload for the component
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>For each attribute of the component,
+                              you can see:
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Its name, type, and length </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Whether it's required</p>
+                              </li>
+                              
+                              <li>
+                                 <p>Whether it's a key value or can
+                                    be used as a key value and, if so, the key type
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>The names of any alternate user
+                                    key attributes, which you can use in place of surrogate IDs
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        Select <span><span class="uicontrol">Actions</span> - <span class="uicontrol">Export to Excel</span></span> to export the attribute details to a spreadsheet.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2176403">
+                     <h3 class="topictitle">Business Rules</h3>
+                     
+                     <p>Business-rules information exists in Oracle Applications
+                        Help and in the Integrating with Oracle HCM Cloud guide for these business objects:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Setup objects</p>
+                        </li>
+                        
+                        <li>
+                           <p>Work structures</p>
+                        </li>
+                        
+                        <li>
+                           <p>Worker and user-update requests</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Goals, goal plans, and goal plan
+                              sets
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For objects that aren't listed here, see HCM Data
+                        Loader: Business Object Documentation (2020600.1) on My Oracle Support
+                        at https://support.oracle.com. This document
+                        also provides attribute descriptions and example data (.dat) files
+                        for supported business objects.
+                     </p>
+                     
+                     <p>Other documents on My Oracle Support provide information
+                        about business objects for specific localizations. Many are linked
+                        from the document All White Papers for Oracle Fusion HCM (1504483.1).
+                        For example:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Oracle Fusion HCM: HCM Address
+                              Validation (2140848.1)
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Oracle Fusion HCM: Person Name
+                              Validation (2146270.1)
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Validating National Identifier
+                              Numbers in Oracle Fusion Human Capital Management (2159758.1)
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="http://support.oracle.com/epmos/faces/DocumentDisplay?id=2020600.1">HCM Data Loader: Business Object Documentation
+                              (2020600.1)</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2049625">
+                  <h2>Preparing to Load Workers: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>Before you load worker objects, you must
+                     decide:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Whether you want user accounts
+                           to be created automatically for those workers.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Whether user credentials are to
+                           be sent automatically to new users.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Which roles are to be provisioned
+                           automatically to new users. User accounts created without at least
+                           one role are automatically suspended.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>This topic describes each of these decisions.</p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2049621">
+                     <h3 class="topictitle">Creating User Accounts Automatically</h3>
+                     
+                     <p>The enterprise option <span class="uicontrol">User
+                           Account Creation</span> controls whether user accounts are created
+                        automatically for new workers, regardless of how those workers are
+                        created. If user accounts are created automatically in your enterprise,
+                        then you can prevent accounts being created for individual workers.
+                        To prevent account creation, include the <span class="uicontrol">GeneratedUserAccountFlag</span> attribute of the user information
+                        component and set it to <span class="uicontrol">N</span>.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        If <span class="uicontrol">User Account Creation</span> is set to <span class="uicontrol">None</span>, then you can't
+                        override it for individual workers.
+                        
+                     </div>
+                     
+                     <p>You can supply a user name in the user information
+                        component of the worker object that you upload. Otherwise, user names
+                        are in the default format for the enterprise, as specified on the
+                        Security Console. The default user-name format is the primary work
+                        email. Any changes that you make to the default format apply to all
+                        new users in the enterprise, regardless of how they're created.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2049622">
+                     <h3 class="topictitle">Sending User Credentials to New Users</h3>
+                     
+                     <p>If you create user accounts automatically for uploaded
+                        workers, then you can notify the users automatically of their user
+                        names and passwords. Set the <span class="uicontrol">SendCredentialsEmailFlag</span> attribute of the worker object to <span class="uicontrol">Y</span> for any worker who is to receive this mail. <span class="uicontrol">SendCredentialsEmailFlag</span> is set to <span class="uicontrol">N</span> by default.
+                     </p>
+                     
+                     <p>If you set <span class="uicontrol">SendCredentialsEmailFlag</span> to <span class="uicontrol">Y</span> for any worker, then you
+                        must ensure that a valid notification template is enabled for this
+                        event. Two predefined templates exist:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The <span class="uicontrol">New
+                                 Account Template</span> is for notifying the user.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The <span class="uicontrol">New
+                                 Account Manager Template</span> is for notifying the user's manager.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You can also create custom notification templates.
+                        Notification templates are managed on the Security Console. Any changes
+                        made to notification templates apply to the enterprise.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2049623">
+                     <h3 class="topictitle">Provisioning Roles to New Users</h3>
+                     
+                     <p>When a user account is created automatically for
+                        a worker, roles are provisioned automatically to the user as specified
+                        by current role-provisioning rules. Confirm that appropriate role mappings exist
+                        for users created by bulk upload.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        All user accounts must have at least one role to
+                        remain active. If appropriate role mappings don't exist and you're
+                        not loading roles for manual assignment, then the new user account
+                        is immediately suspended. To avoid this automatic suspension of the
+                        account, define role mappings for workers before you load those workers.
+                        
+                     </div>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=9633D922BF48554FE040D30A68815494">Role Mappings: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2126422">
+                  <h2>FAQs for Preparing to Use HCM Data Loader</h2>
+                  
+                  <div class="sect2" id="FAIHM2125883">
+                     <h3>How can I find out where a business object is hosted?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>See the Initiate Data Load page in the Data
+                        Exchange work area. This page shows the module for each business object.
+                        The module equates to the server, as shown in this table.
+                     </p>
+                     
+                     
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Module
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Server
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Absence Management</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Workforce Management</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Compensation</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Compensation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Global HR - Core HR</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Core Processes</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Global HR - Core Setup</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Core Setup</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Global Payroll</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Payroll</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Talent</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Talent</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Workforce Management</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Workforce Management</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2054063">
+                     <h3>Can I load data in multiple languages?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Yes. Language packs for the required languages
+                        must be installed. For cloud implementations, requested language packs
+                        may be installed before the environment is delivered. Alternatively,
+                        you can request language packs by raising a service request (SR).
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

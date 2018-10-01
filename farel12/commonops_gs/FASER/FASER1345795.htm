@@ -1,0 +1,1252 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Preparing for Application Users (Chapter 4) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle ERP Cloud" name="dcterms.title">
+      <meta content="Securing Oracle ERP Cloud" name="doctitle">
+      <meta content="E74113-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FASER" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:25:29 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="Oracle Applications Cloud security;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FASER1345794.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FASER1345796.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FASER.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FASER.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="During implementation, you prepare your Oracle Applications Cloud service for application users. Decisions made during this
+      phase determine how you manage users by default. Most of these decisions can be overridden. However, for efficient user management,
+      you're recommended to configure your environment to both reflect enterprise policy and support most or all users. Yes. Single
+      sign-on enables users to sign in once but access multiple applications, within and across product families."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">7/17</span><a name="BEGIN" id="BEGIN"></a><div id="FASER1345795" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">4</span>Preparing for Application Users
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1276184">Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER808352">User and Role-Provisioning Setup: Critical Choices</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1208164">User Account Creation Option: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1208692">User Account Role Provisioning Option: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1208589">User Account Maintenance Option: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1209086">Setting the User and Role Provisioning Options: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1217285">Provisioning Abstract Roles to Users Automatically: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1728431">FAQs for Preparing for Application Users</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FASER1276184">
+                  <h2>Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>During implementation, you prepare your Oracle
+                     Applications Cloud service for application users. Decisions made during
+                     this phase determine how you manage users by default. Most of these
+                     decisions can be overridden. However, for efficient user management,
+                     you're recommended to configure your environment to both reflect enterprise policy and
+                     support most or all users.
+                  </p>
+                  
+                  <p>Some key decisions and tasks are explained in this
+                     chapter. They include:
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="This two-column table with seven&#xA;data rows shows the task or decision (left column) and the relevant&#xA;topic (right column).">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Decision or Task
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Topic
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Whether user accounts are created automatically for
+                                 application users
+                              </p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>User Account Creation Option: Explained</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>How user names are formed</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Default User Name Format Option: Explained</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>How role provisioning is managed</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>User Account Role Provisioning Option: Explained</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Whether user accounts are maintained automatically</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>User Account Maintenance Option: Explained</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Whether and where user sign-in details are sent</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Send User Name and Password Option: Explained</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Understanding user-account password policy</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Password Policy: Explained</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Ensuring that the employee, contingent worker, and line
+                                 manager abstract roles are provisioned automatically either within a Human Capital Management
+                                 setup or by using the Create Users user interface.
+                              </p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Provisioning Abstract Roles to Users Automatically:
+                                 Procedure
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER808352">
+                  <h2>User and Role-Provisioning Setup: Critical Choices</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic introduces the user and role-provisioning options, which control the default management of some user-account
+                     features. To set these options, perform the Manage Enterprise HCM
+                     Information task in the Setup and Maintenance work area. You can edit
+                     these values as necessary and specify an effective start date for
+                     changed values.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FASER808344">
+                     <h3 class="topictitle">User Account Creation</h3>
+                     
+                     
+                     
+                     <p>The <span class="uicontrol">User Account
+                           Creation</span> option controls:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Whether user accounts are created
+                              automatically when you create a person, user, or party record
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The automatic provisioning of roles to users at account
+                              creation
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>This option may be of interest if:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Some workers don't need access
+                              to Oracle Applications Cloud.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Your existing provisioning infrastructure
+                              creates user accounts, and you plan to integrate it with Oracle Applications
+                              Cloud.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER808345">
+                     <h3 class="topictitle">User Account Role Provisioning</h3>
+                     
+                     
+                     
+                     <p>Once a user account exists, users both acquire
+                        and lose roles as specified by current role-provisioning rules. For
+                        example, managers may provision roles to users manually, and the termination
+                        process may remove roles from users automatically. You can control
+                        role provisioning by setting the <span class="uicontrol">User Account
+                           Role Provisioning</span> option.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Roles that you provision to users directly on the
+                        Security Console aren't affected by this option.
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER808346">
+                     <h3 class="topictitle">User Account Maintenance</h3>
+                     
+                     
+                     
+                     <p>The <span class="uicontrol">User Account
+                           Maintenance</span> option controls whether user accounts are
+                        suspended and reactivated automatically. By default, a user's account
+                        is suspended automatically when the user is terminated and reactivated
+                        automatically if the user is rehired.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER2306486">
+                     <h3 class="topictitle">User Account Creation for Terminated Workers</h3>
+                     
+                     
+                     
+                     <p>The <span class="uicontrol">User Account
+                           Creation for Terminated Workers</span> option controls whether
+                        user-account requests for terminated workers are processed or suppressed.
+                        This option takes effect when you run the Send Pending LDAP Requests
+                        process.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=48306C7AA92625E6E05362C3F00AF046">User Account Creation for Terminated Workers Option: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1208164">
+                  <h2>User Account Creation Option: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The <span class="uicontrol">User Account
+                        Creation</span> option controls whether user accounts are created
+                     automatically when you create a person or party record. Use the Manage Enterprise
+                     HCM Information task to set this option.
+                  </p>
+                  
+                  
+                  
+                  <p>This table describes the <span class="uicontrol">User Account Creation</span> option values.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="This two-column table with three&#xA;data rows shows the value (left column) and its description (right&#xA;column).">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Value
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Description
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p><span class="uicontrol">Both person and party users </span></p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>User accounts are created automatically for both
+                                 person and party users. 
+                              </p>
+                              
+                              <p>This value is the default value.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p><span class="uicontrol">Party users only</span></p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>User accounts are created automatically for party
+                                 users only.
+                              </p>
+                              
+                              <p>User accounts aren't created automatically when you
+                                 create person records. Instead, account requests are held in the LDAP
+                                 requests table, where they're identified as suppressed. They're not
+                                 processed.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p><span class="uicontrol">None</span></p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>User accounts aren't created automatically.</p>
+                              
+                              <p>All user account requests are held in the LDAP requests
+                                 table, where they're identified as suppressed. They're not processed.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  <p>If user accounts are created automatically, then role provisioning also occurs automatically, as specified by current role mappings when the accounts
+                     are created. If user accounts aren't created automatically, then role
+                     requests are held in the LDAP requests table, where they're identified
+                     as suppressed. They aren't processed.
+                  </p>
+                  
+                  <p>If you disable the automatic creation of user accounts
+                     for some or all users, then you can:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Create user accounts individually
+                           on the Security Console.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Link existing user accounts to
+                           person and party records using the Manage User Account or Manage Users
+                           task.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>Alternatively, you can use an external provisioning
+                     infrastructure to create and manage user accounts. In this case, you're
+                     responsible for managing the interface with Oracle Applications Cloud,
+                     including any user-account-related updates. 
+                  </p>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1208692">
+                  <h2>User Account Role Provisioning Option: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Existing users both acquire and lose roles
+                     as specified by current role-provisioning rules. For
+                     example, users may request some roles for themselves and acquire others
+                     automatically. All provisioning changes are role requests that are
+                     processed by default. You can control what happens to role requests
+                     by setting the <span class="uicontrol">User Account Role Provisioning</span> option. Use the Manage Enterprise HCM Information task to set this
+                     option.
+                  </p>
+                  
+                  
+                  
+                  <p>This table describes the <span class="uicontrol">User Account Role Provisioning</span> option values.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="This two-column table with three&#xA;data rows shows the value (left column) and its description (right&#xA;column).">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Value
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Description
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p><span class="uicontrol">Both person and party users</span></p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Role provisioning and deprovisioning occur for both
+                                 person and party users. 
+                              </p>
+                              
+                              <p>This value is the default value.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p><span class="uicontrol">Party users only</span></p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Role provisioning and deprovisioning occur for party
+                                 users only.
+                              </p>
+                              
+                              <p>For person users, role requests are held in the LDAP
+                                 requests table, where they're identified as suppressed. They're not
+                                 processed.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p><span class="uicontrol">None</span></p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>For both person and party users, role requests are
+                                 held in the LDAP requests table, where they're identified as suppressed.
+                                 They're not processed.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1208589">
+                  <h2>User Account Maintenance Option: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>By default, a user's account is suspended
+                     automatically when the user has no roles. This situation occurs typically
+                     at termination. The user account is reactivated automatically if you
+                     reverse the termination or rehire the worker. The <span class="uicontrol">User Account Maintenance</span> option controls
+                     these actions. Use the Manage Enterprise HCM Information task to set
+                     this option.
+                  </p>
+                  
+                  
+                  
+                  <p>This table describes the <span class="uicontrol">User Account Maintenance</span> option values.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="This two-column table with three&#xA;data rows shows the value (left column) and its description (right&#xA;column).">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Value
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Description
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p><span class="uicontrol">Both person and party users</span></p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>User accounts are maintained automatically for both
+                                 person and party users.
+                              </p>
+                              
+                              <p>This value is the default value.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p><span class="uicontrol">Party users only </span></p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>User accounts are maintained automatically for party
+                                 users only.
+                              </p>
+                              
+                              <p>For person users, account-maintenance requests are
+                                 held in the LDAP requests table, where they're identified as suppressed.
+                                 They're not processed.
+                              </p>
+                              
+                              <p>Select this value if you manage accounts for person
+                                 users in some other way.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p><span class="uicontrol">None</span></p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>For both person and party users, account-maintenance
+                                 requests are held in the LDAP requests table, where they're identified
+                                 as suppressed. They're not processed.
+                              </p>
+                              
+                              <p>Select this value if you manage accounts for both
+                                 person and party users in some other way.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1209086">
+                  <h2>Setting the User and Role Provisioning Options: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The user and role provisioning options control
+                     the creation and maintenance of user accounts for the enterprise. This procedure
+                     explains how to set these options. To create and maintain Oracle Applications
+                     Cloud user accounts automatically for all users, you can use the default
+                     settings.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FASER1263507">
+                     <h3 class="topictitle">Setting the User and Role Provisioning Options</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Setup
+                                    and Maintenance</span></span> to open the Setup and Maintenance
+                              work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Search for and select the Manage
+                              Enterprise HCM Information task.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Enterprise page, select <span><span class="uicontrol">Edit</span> - <span class="uicontrol">Update</span></span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Update Enterprise</span> dialog box, enter the effective date
+                              of any changes and click <span class="uicontrol">OK</span>.
+                              The Edit Enterprise page opens.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Scroll down to the User and Role
+                              Provisioning Information section.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Set the User Account Options, as
+                              appropriate. The User Account Options are:
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p><span class="uicontrol">User Account
+                                       Creation</span></p>
+                              </li>
+                              
+                              <li>
+                                 <p><span class="uicontrol">User Account
+                                       Role Provisioning</span></p>
+                              </li>
+                              
+                              <li>
+                                 <p><span class="uicontrol">User Account
+                                       Maintenance </span></p>
+                              </li>
+                              
+                              <li>
+                                 <p><span class="uicontrol">User Account
+                                       Creation for Terminated Workers</span></p>
+                              </li>
+                              
+                           </ul>
+                           
+                           <p>These options are independent of each other. For
+                              example, you can set <span class="uicontrol">User Account Creation</span> to <span class="uicontrol">None</span> and <span class="uicontrol">User Account Role Provisioning</span> to <span class="uicontrol">Yes</span>.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Submit</span> to save your changes.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the <span class="uicontrol">Confirmation</span> dialog box.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1217285">
+                  <h2>Provisioning Abstract Roles to Users Automatically: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Provisioning the Employee, Contingent Worker,
+                     and Line Manager abstract
+                     roles automatically to users is efficient, as most users have
+                     at least one of these roles. It also ensures that users have basic
+                     access to functions and data when they first sign in. This topic explains
+                     how to set up automatic role provisioning during implementation
+                     using the Manage Role Provisioning Rules task.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FASER1217345">
+                     <h3 class="topictitle">Provisioning the Employee Role Automatically to
+                     Employees</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Sign in as IT Security Manager
+                              or as the TechAdmin user.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Setup
+                                    and Maintenance</span></span> to open the Setup and Maintenance
+                              work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Search for and select the Manage
+                              Role Provisioning Rules task. The Manage Role Mappings page opens.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p> In the Search Results section
+                              of the Manage Role Mappings page, click the <span class="uicontrol">Create</span> icon. The Create Role Mapping page opens.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Mapping Name</span> field enter Employee.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Complete the fields in the Conditions
+                              section of the Create Role Mapping page as shown in the following
+                              table.
+                           </p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="This two-column table with two&#xA;data rows shows the field (left column) and its value (right column).">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Field
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Value
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">System Person Type</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Employee</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">HR Assignment Status</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Active</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>In the Associated Roles section
+                              of the Create Role Mapping page, add a row.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Role Name</span> field of the Associated Roles section, click <span class="uicontrol">Search</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Search and Select</span> dialog box, enter Employee in the <span class="uicontrol">Role Name</span> field and click <span class="uicontrol">Search</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select Employee in the search results
+                              and click <span class="uicontrol">OK</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If <span class="uicontrol">Autoprovision</span> isn't selected automatically, then select it. Ensure that the <span class="uicontrol">Requestable</span> and <span class="uicontrol">Self-Requestable</span> options aren't selected. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Save and Close</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1217395">
+                     <h3 class="topictitle">Provisioning the Contingent Worker Role Automatically
+                     to Contingent Workers</h3>
+                     
+                     <p>Repeat the steps in Provisioning the Employee Role
+                        Automatically to Employees, with the following changes:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>In step 5, enter Contingent Worker
+                              as the mapping name.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In step 6, set <span class="uicontrol">System Person Type</span> to Contingent Worker.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>In steps 9 and 10, search for and
+                              select the Contingent Worker role.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1217454">
+                     <h3 class="topictitle">Provisioning the Line Manager Role Automatically
+                     to Line Managers</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p> In the Search Results section
+                              of the Manage Role Mappings page, click the <span class="uicontrol">Create</span> icon. The Create Role Mapping page opens.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Mapping Name</span> field enter Line Manager.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Complete the fields in the Conditions
+                              section of the Create Role Mapping page as shown in the following
+                              table.
+                           </p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="This two-column table with three&#xA;data rows shows the field (left column) and its value (right column).">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Field
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Value
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">System Person Type</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Employee</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">HR Assignment Status</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Active</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Manager with Reports</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Yes</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              Setting <span class="uicontrol">Manager with Reports</span> to Yes is the same as setting <span class="uicontrol">Manager Type</span> to Line Manager. You don't need both values.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>In the Associated Roles section
+                              of the Create Role Mapping page, add a row.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Role Name</span> field of the Associated Roles section, click <span class="uicontrol">Search</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Search and Select</span> dialog box, enter Line Manager in the <span class="uicontrol">Role Name</span> field and click <span class="uicontrol">Search</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select Line Manager in the search
+                              results and click <span class="uicontrol">OK</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If <span class="uicontrol">Autoprovision</span> isn't selected automatically, then select it. Ensure that the <span class="uicontrol">Requestable</span> and <span class="uicontrol">Self-Requestable</span> options aren't selected. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Save and Close</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Manage Role Mappings page,
+                              click <span class="uicontrol">Done</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>To provision the line manager role automatically
+                        to contingent workers, follow these steps to create an additional
+                        role mapping. In step 2, use a unique mapping name (for example, Contingent
+                        Worker Line Manager). In step 3, set <span class="uicontrol">System
+                           Person Type</span> to Contingent Worker.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1728431">
+                  <h2>FAQs for Preparing for Application Users</h2>
+                  
+                  <div class="sect2" id="FASER1483745">
+                     <h3>Can I implement single sign-on in the cloud?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Yes. Single sign-on enables users to sign
+                        in once but access multiple applications, within and across product
+                        families. 
+                     </p>
+                     
+                     
+                     
+                     <p>Submit a service request for implementation of single
+                        sign-on. For more information, see Oracle Applications Cloud Service
+                        Entitlements (2004494.1) on My Oracle Support at https://support.oracle.com.
+                     </p>
+                     
+                     
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

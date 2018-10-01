@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Troubleshoot and Tune Oracle Fusion Reports</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This section describes common problems that might be encountered when using Oracle Transactional Business Intelligence and Oracle BI Publisher reports in Oracle Fusion Applications and explains how to solve them. This section also describes tuning strategies for increasing report performance." />
+<meta name="dcterms.created" content="2018-02-21T10:06:12Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Fusion Applications Administrator's Guide" />
+<meta name="dcterms.identifier" content="E66226-03" />
+<meta name="dcterms.isVersionOf" content="OASAD" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2011, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-396DFCC5-164A-498B-B93D-DF88F48312EE.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-D5F29E46-2A11-4AEA-B31D-B94CE141BA6B.htm" title="Next" type="text/html" />
+<link rel="alternate" href="OASAD.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764"></a> <span id="PAGE" style="display:none;">22/27</span> <!-- End Header -->
+<a id="OASAD4361"></a><a id="OASAD4355"></a>
+<h1 id="OASAD-GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764" class="sect1"><span class="enumeration_chapter">18</span> Troubleshoot and Tune Oracle Fusion Reports</h1>
+<div>
+<div><span>This section describes common problems that might be encountered when using Oracle Transactional Business Intelligence and Oracle BI Publisher reports in Oracle Fusion Applications and explains how to solve them. This section also describes tuning strategies for increasing report performance.</span></div>
+<p>The following topics are discussed:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-8B9699B2-BFCC-4CCB-A9BE-A0311F5B9917">Introduction to Oracle Fusion Reporting</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-FEB08D8E-9789-479F-8546-D48B48014B2D">Introduction to Troubleshooting Oracle Transactional Business Intelligence</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-C49CA503-4F33-486A-8706-89965149918F">Resolve Problems with Logical and Physical Queries Using BI Logs and Presentation Services</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-CA78077C-8459-4D87-A210-9141A0F65494">Troubleshoot ADF View Objects</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-88665B53-BE4E-429F-BF92-A9DD6B4E8AF2">Troubleshoot Oracle Transactional Business Intelligence (OTBI)</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-0D58D4B4-8683-43E3-ABCB-2AC5CE3D0856">Troubleshoot Oracle Fusion Customer Relationship Management: Data Warehouse Enabled Profile Option</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-298D295B-4AEB-4FCB-B484-8BA7D0992A9A">Troubleshoot for Oracle BI Publisher</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-06E50255-BB16-41DE-B975-30DA36C68EFE">Performance Tuning Oracle Transactional Business Intelligence (OTBI)</a></p>
+</li>
+</ul>
+</div>
+<a id="OASAD6509"></a>
+<div class="props_rev_3"><a id="GUID-8B9699B2-BFCC-4CCB-A9BE-A0311F5B9917"></a>
+<h2 id="OASAD-GUID-8B9699B2-BFCC-4CCB-A9BE-A0311F5B9917" class="sect2"><span class="enumeration_section">18.1</span> Introduction to Oracle Fusion Reporting</h2>
+<div>
+<p>Oracle Fusion Reporting is supported by the Oracle Business Intelligence Enterprise Edition (OBIEE) platform, including the Oracle Business Intelligence Server and Oracle BI Presentation Services, which use Oracle Fusion database data and metadata to support business insight. Oracle Transactional Business Intelligence (OTBI), based on OBIEE, provides real-time business analysis and reporting and ad-hoc query capability for data in the Fusion transactional database. In addition to this reporting capability, Oracle Business Intelligence Publisher provides the ability to format, schedule, and distribute pixel-perfect reports and other output in a variety of standard output types to support distributed reporting and forms, for example invoices or purchase orders. Oracle BI Publisher outputs reports and other content in standards including Microsoft Word and Excel, PowerPoint, and Adobe PDF, for ease of access by a wide variety of business audiences.</p>
+<p>In addition to OTBI, which is part of Oracle Fusion Applications, you may license Oracle BI Applications, which includes a pre-built data warehouse and extract, transform, and load platforms and routines which load it periodically to support additional historical BI reporting.</p>
+</div>
+<a id="OASAD6510"></a>
+<div class="props_rev_3"><a id="GUID-01CB7B30-112E-49EC-89B2-F31E2F316E1C"></a>
+<h3 id="OASAD-GUID-01CB7B30-112E-49EC-89B2-F31E2F316E1C" class="sect3"><span class="enumeration_section">18.1.1</span> Oracle BI Technologies</h3>
+<div>
+<p>To properly troubleshoot a reporting issue, identify which underlying platform or content is being used in the <span id="GUID-01CB7B30-112E-49EC-89B2-F31E2F316E1C__FAAPP">Oracle Fusion application</span> user interface. When the source of an issue is identified, consider the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Oracle Transactional Business Intelligence (OTBI) provides packaged analytical content in real time. Supported by the Oracle Business Intelligence platform, OTBI can be referred to as real-time, current-state, or transactional business intelligence.</p>
+</li>
+<li>
+<p>Oracle Fusion Financials also uses Financial Reporting technology.</p>
+</li>
+<li>
+<p>Some analyses use Essbase, Real Time Decisions, or Oracle BI Publisher reports.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<a id="OASAD6511"></a>
+<div class="props_rev_3"><a id="GUID-FEB08D8E-9789-479F-8546-D48B48014B2D"></a>
+<h2 id="OASAD-GUID-FEB08D8E-9789-479F-8546-D48B48014B2D" class="sect2"><span class="enumeration_section">18.2</span> Introduction to Troubleshooting Oracle Transactional Business Intelligence</h2>
+<div>
+<p>This section provides an overview of the Oracle Transactional Business Intelligence (OTBI) and its architecture, identifies common areas of failure and the errors associated with them, and introduces the tools used to resolve issues in OTBI.</p>
+<p>This section contains the following topics:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-5968A316-B743-436A-BC05-4315A4EFAC7C">About OTBI Architecture</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-D6E8DEF6-136C-4476-93F7-DC077B03B095">Introduction to OTBI Troubleshooting Tools</a></p>
+</li>
+</ul>
+</div>
+<a id="OASAD65854"></a><a id="OASAD6512"></a>
+<div class="props_rev_3"><a id="GUID-5968A316-B743-436A-BC05-4315A4EFAC7C"></a>
+<h3 id="OASAD-GUID-5968A316-B743-436A-BC05-4315A4EFAC7C" class="sect3"><span class="enumeration_section">18.2.1</span> About OTBI Architecture</h3>
+<div>
+<p>OTBI is based on the Oracle Business Intelligence platform and can be referred to as real-time, current-state, or transactional business intelligence. OTBI objects analyze very recent data such as today's data or this week's data.</p>
+<p>To provide this up-to-the-minute reporting, OTBI provides prebuilt analytical reports and ad-hoc reporting on current transactional data in Fusion applications. OTBI provides the BI Server access to Fusion transactional database schema objects through Oracle Application Development Framework (ADF) View Objects, which are modeled in its repository metadata. Potential points of failure for OTBI include:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>BI Server</p>
+</li>
+<li>
+<p>Logical queries</p>
+</li>
+<li>
+<p>Physical queries</p>
+</li>
+<li>
+<p>ADF View Objects</p>
+</li>
+<li>
+<p>ADF View Objects in Oracle BI repository metadata</p>
+</li>
+</ul>
+<div class="figure" id="GUID-5968A316-B743-436A-BC05-4315A4EFAC7C__GUID-0B683786-73DE-4A51-BE45-450B09830B6A">
+<p class="titleinfigure">Figure 18-1 Oracle OTBI Architecture and Common Troubleshooting Areas</p>
+<img width="450" height="183" src="img/GUID-2A5CD5F7-AD02-48C1-A860-24EC23E6D384-default.png" alt="This image is described in surrounding text." title="This image is described in surrounding text." /></div>
+<!-- class="figure" --></div>
+</div>
+<a id="OASAD6517"></a><a id="OASAD6516"></a>
+<div class="props_rev_3"><a id="GUID-D6E8DEF6-136C-4476-93F7-DC077B03B095"></a>
+<h3 id="OASAD-GUID-D6E8DEF6-136C-4476-93F7-DC077B03B095" class="sect3"><span class="enumeration_section">18.2.2</span> Introduction to OTBI Troubleshooting Tools</h3>
+<div>
+<p>Most diagnosis of issues encountered in OTBI is performed using the Oracle BI query log. This and the other tools and utilities described in <a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-D6E8DEF6-136C-4476-93F7-DC077B03B095__BABFGJAG" title="OTBI Troubleshooting Tools">Table 18-1</a> may be used to troubleshoot issues across possible points of failure in OTBI.</p>
+<div class="tblformal" id="GUID-D6E8DEF6-136C-4476-93F7-DC077B03B095__BABFGJAG">
+<p class="titleintable">Table 18-1 OTBI Troubleshooting Tools</p>
+<table class="cellalignment32" title="OTBI Troubleshooting Tools" summary="OTBI Troubleshooting Tools">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment28" id="d166792e223">Tool</th>
+<th class="cellalignment29" id="d166792e226">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d166792e231" headers="d166792e223">
+<p>NQQuery.log</p>
+</td>
+<td class="cellalignment31" headers="d166792e231 d166792e226">
+<p>Used to diagnose security and definition issues with ADF View Objects, which affect connectivity to the Fusion transactional tables.</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d166792e238" headers="d166792e223">
+<p>AdminServer-diagnostic.log</p>
+</td>
+<td class="cellalignment31" headers="d166792e238 d166792e226">
+<p>Used to diagnose security and definition issues with ADF View Objects, which affect connectivity to the Fusion transactional tables.</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d166792e245" headers="d166792e223">
+<p><span id="GUID-D6E8DEF6-136C-4476-93F7-DC077B03B095__FAOEMFRAME">Oracle Enterprise Manager Fusion Applications Control</span></p>
+</td>
+<td class="cellalignment31" headers="d166792e245 d166792e226">
+<p>Used to start and restart the Oracle BI Server. For more information, see the <a href="GUID-8F3F9B9C-C5CD-4625-8201-EAAB5CD5B5BC.htm#GUID-C90A30F4-859A-46B0-8DB0-69FB8D415299">Use Oracle WebLogic Server Administration Console</a> section. This tool can also be used to view, but not search, the <code class="codeph">NQQuery.log</code> entries.</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d166792e259" headers="d166792e223">
+<p>Presentation Services</p>
+</td>
+<td class="cellalignment31" headers="d166792e259 d166792e226">
+<p>Administrative view may be used to view OTBI logical queries.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+</div>
+<a id="OASAD6518"></a>
+<div class="props_rev_3"><a id="GUID-C49CA503-4F33-486A-8706-89965149918F"></a>
+<h2 id="OASAD-GUID-C49CA503-4F33-486A-8706-89965149918F" class="sect2"><span class="enumeration_section">18.3</span> Resolve Problems with Logical and Physical Queries Using BI Logs and Presentation Services</h2>
+<div>
+<p>The Oracle BI query log file <code class="codeph">NQQuery.log</code>, provides information to help diagnose and fix problems with the transactional datasource, connectivity, and datasource objects such as table names and column names. Most diagnosis of issues encountered in OTBI is performed using the Oracle BI query log. This section describes how to set up and use the log file that records the logical SQL sent by the Oracle BI Presentation layer to the BI Server layer, and the physical or ANSI SQL sent by the BI Server to the datasource.</p>
+<p>This section describes how to use the <code class="codeph">NQQuery.log</code> file to diagnose OTBI query issues such as ODBC errors, ORA-errors, other database errors, and to resolve query performance issues. This section contains the following topics:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-30A6FC88-54A3-47FC-A9A3-FDC8ED1C6FEF">Enable the NQQuery.log File</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-528F8732-E516-4136-B85A-BEE81A5F6A71">View the Presentation Services Logical Query In the Log</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-FAC09C57-8123-46B5-BD16-F1DC00F25D37">View the Logical Query In Presentation Services</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-8665C6E0-E96A-4EDA-A2A2-6390EC1F5E95">View the Query Trace</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-96BA2342-3895-41A1-80EF-7415C1694637">View the Physical Query</a></p>
+</li>
+</ul>
+</div>
+<a id="OASAD6519"></a>
+<div class="props_rev_3"><a id="GUID-30A6FC88-54A3-47FC-A9A3-FDC8ED1C6FEF"></a>
+<h3 id="OASAD-GUID-30A6FC88-54A3-47FC-A9A3-FDC8ED1C6FEF" class="sect3"><span class="enumeration_section">18.3.1</span> Enable the NQQuery.log File</h3>
+<div>
+<p>Enable the <code class="codeph">NQQuery.log</code> file to diagnose issues encountered in OTBI physical and logical queries. Use one of the following methods to enable the <code class="codeph">NQQuery.log</code> file:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Enable query logging from the Oracle BI Administration Tool. For information about enabling the query log file, see section Managing the Query Log in the <span class="italic"><span id="GUID-30A6FC88-54A3-47FC-A9A3-FDC8ED1C6FEF__BIESG"><cite>System Administrator's Guide for Oracle Business Intelligence Enterprise Edition</cite></span></span>.</p>
+</li>
+<li>
+<p>Enable the <code class="codeph">LogLevel</code> system session variable for the repository by accessing the repository and setting the <code class="codeph">LogLevel</code> system variable to 7. For information about setting this variable, see section About System Session Variables in the <span class="italic"><span id="GUID-30A6FC88-54A3-47FC-A9A3-FDC8ED1C6FEF__BIEMG"><cite>Metadata Repository Builder's Guide for Oracle Business Intelligence Enterprise Edition</cite></span></span>.</p>
+</li>
+<li>
+<p>If you have administrator permissions, log into Presentation Services, access the analysis to troubleshoot, and temporarily change its logging level to 2. This will turn on logging for the analysis even when logging is turned off for all analyses. For more information, see section Setting the Query Logging Level in <span class="italic"><span><cite>System Administrator's Guide for Oracle Business Intelligence Enterprise Edition</cite></span></span>.</p>
+<p>If this method is used to enable the <code class="codeph">NQQuery.log</code> file, look for the following items:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>An error like "<code class="codeph">no log found</code>." An error like this indicates that there is a known error. Look in the <code class="codeph">NQQuery.log</code> file, which contains additional logging</p>
+</li>
+<li>
+<p>The timestamp to locate the log entry</p>
+</li>
+<li>
+<p>The logical SQL as shown in the error message. This is the SQL sent by Presentation Services to the BI Server layer</p>
+</li>
+<li>
+<p>The physical SQL related to the above-mentioned logical SQL. Search for <code class="codeph">physical</code>. The physical SQL is the SQL sent by BI Server through ODBC to the database</p>
+</li>
+<li>
+<p>More detailed errors</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>Note that the <code class="codeph">NQQuery.log</code> file is visible but <span class="italic">not</span> searchable in the Fusion Applications Control Log Viewer.</p>
+</div>
+<a id="OASAD66039"></a>
+<div class="props_rev_3"><a id="GUID-C70CD6EB-675F-4D2F-8FD3-5010435D4413"></a>
+<h4 id="OASAD-GUID-C70CD6EB-675F-4D2F-8FD3-5010435D4413" class="sect4"><span class="enumeration_section">18.3.1.1</span> Clear the BI Server Cache</h4>
+<div>
+<div class="section">
+<p>After enabling query logging, if BI Server caching is enabled, clear the cache before re-executing the analysis so that the <code class="codeph">NQQuery.log</code> file will contain the correct information.</p>
+<p>To clear the BI Server cache, perform the following steps:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li><span>Log into Presentation Services as an administrator.</span></li>
+<li><span>In the <span class="bold">Global Header</span>, click <span class="bold">Administration</span>. The Administration page displays.</span></li>
+<li><span>Click <span class="bold">Manage Sessions</span>. The Manage Sessions page displays.</span></li>
+<li><span>Scroll to the Cursor Cache section of the page and click the <span class="bold">Close All Cursors</span> button.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OASAD6520"></a>
+<div class="props_rev_3"><a id="GUID-528F8732-E516-4136-B85A-BEE81A5F6A71"></a>
+<h3 id="OASAD-GUID-528F8732-E516-4136-B85A-BEE81A5F6A71" class="sect3"><span class="enumeration_section">18.3.2</span> View the Presentation Services Logical Query In the Log</h3>
+<div>
+<p>The request query executed from Presentation Services will be shown in the <code class="codeph">NQQuery.log</code> file as follows:</p>
+<pre dir="ltr">
+RqList     0 as c1 GB,    Dim - Procurement Item.Category Name as c2 GB,    Dim
+ - Procurement Item.Item Description as c3 GB,    # of PO Lines:[DAggr(Fact -
+ Purchasing - Order.# of PO Lines by [ Dim - Procurement Item.Category Name, Dim
+ - Procurement Item.Item Description] )] as c4 GBOrderBy: c1 asc, c2 asc, c3 asc
+</pre>
+<p>This query trace explains how a measure is calculated. It also shows the logical table source used to render the data.</p>
+</div>
+</div>
+<a id="OASAD6521"></a>
+<div class="props_rev_3"><a id="GUID-FAC09C57-8123-46B5-BD16-F1DC00F25D37"></a>
+<h3 id="OASAD-GUID-FAC09C57-8123-46B5-BD16-F1DC00F25D37" class="sect3"><span class="enumeration_section">18.3.3</span> View the Logical Query In Presentation Services</h3>
+<div>
+<div class="section">
+<p>With administrative privileges, it is possible to view the logical query executed by Presentation Services for a request in Oracle BI Answers. This provides a quick way to see which requests are currently running to isolate problematic queries before consulting the BI query logs for detailed query information.</p>
+<p>To view the logical query, perform the following steps:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li><span>Open the analysis in Oracle BI Answers.</span></li>
+<li><span>Click the <span class="bold">Administration</span> link.</span></li>
+<li><span>Under Session Management, click the <span class="bold">Manage Sessions</span> link.</span></li>
+<li><span>Locate the relevant session in the list, and view its recent Presentation Services logical request in the Statement column.</span></li>
+</ol>
+</div>
+</div>
+<a id="OASAD6522"></a>
+<div class="props_rev_3"><a id="GUID-8665C6E0-E96A-4EDA-A2A2-6390EC1F5E95"></a>
+<h3 id="OASAD-GUID-8665C6E0-E96A-4EDA-A2A2-6390EC1F5E95" class="sect3"><span class="enumeration_section">18.3.4</span> View the Query Trace</h3>
+<div>
+<p>The query trace shows the view object, its view criteria, and its view links that are used to execute the request. See the following:</p>
+<pre dir="ltr">
+&lt;ADFQuery mode="SQLBypass" queryid="14604-3902" locale="en"&gt;&lt;Parameters&gt;&lt;/Parameters&gt;
+&lt;Projection&gt;
+&lt;Attribute&gt;&lt;Name&gt;&lt;![CDATA[CategoryName]]&gt;&lt;/Name&gt;
+   &lt;ViewObject&gt;&lt;![CDATA[FscmTopModelAM.PrcPoPublicViewAM.
+   PurchasingItemP]]&gt;&lt;/ViewObject&gt;
+&lt;/Attribute&gt;
+&lt;Attribute&gt;&lt;Name&gt;&lt;![CDATA[ItemDescription]]&gt;&lt;/Name&gt;
+   &lt;ViewObject&gt;&lt;![CDATA[FscmTopModelAM.PrcPoPublicViewAM.
+   PurchasingItemP]]&gt;&lt;/ViewObject&gt;
+&lt;/Attribute&gt;           
+&lt;Attribute&gt;&lt;Name&gt;&lt;![CDATA[PurchasingDocumentHeaderTypeLookupCode]]&gt;&lt;/Name&gt;
+   &lt;ViewObject&gt;&lt;![CDATA[FscmTopModelAM.PrcPoPublicViewAM.StandardLinePVO]]&gt;
+   &lt;/ViewObject&gt;
+&lt;/Attribute&gt;
+&lt;Attribute&gt;&lt;Name&gt;&lt;![CDATA[PoLineId]]&gt;&lt;/Name&gt;
+   &lt;ViewObject&gt;&lt;![CDATA[FscmTopModelAM.PrcPoPublicViewAM.StandardLinePVO]&gt;]
+   &lt;/ViewObject&gt;
+&lt;/Attribute&gt;
+&lt;Attribute&gt;&lt;Name&gt;&lt;![CDATA[ItemNumber]]&gt;&lt;/Name&gt; 
+   &lt;ViewObject&gt;&lt;![CDATA[FscmTopModelAM.PrcPoPublicViewAM.PurchasingItemP]]&gt;
+   &lt;/ViewObject&gt;
+&lt;/Attribute&gt;
+&lt;/Projection&gt;
+JoinSpec&gt;
+   &lt;ViewObject&gt;
+       &lt;Name&gt;&lt;![CDATA[FscmTopModelAM.PrcPoPublicViewAM.PurchasingItemP]]&gt;&lt;/Name&gt;       
+       &lt;ViewLink&gt;&lt;Name&gt;&lt;![CDATA[oracle.apps.prc.po.publicView.analytics.link.
+         PurchasingDocumentLinePVOToPurchasingItemPVO]]&gt;&lt;/Name&gt;&lt;/ViewLink&gt;
+   &lt;/ViewObject&gt; 
+   &lt;ViewObject&gt; 
+       &lt;Name&gt;&lt;![CDATA[FscmTopModelAM.PrcPoPublicViewAM.StandardLinePVO]]&gt;&lt;/Name&gt;        
+       &lt;ViewLink&gt;&lt;Name&gt;&lt;![CDATA[oracle.apps.prc.po.publicView.analytics.link.
+         PurchasingDocumentLinePVOToPurchasingItemPVO]]&gt;&lt;/Name&gt;&lt;/ViewLink&gt;
+   &lt;/ViewObject&gt;
+&lt;/JoinSpec&gt;
+&lt;DetailFilter&gt;
+&lt;ViewCriteria&gt;
+   &lt;ViewCriteriaRow conjunction="VC_CONJ_AND"&gt; 
+   &lt;Attribute&gt;&lt;Name&gt;&lt;![CDATA[PurchasingDocumentVersionCoSequence]]&gt;&lt;/Name&gt;
+     &lt;ViewObject&gt;&lt;![CDATA[FscmTopModelAM.PrcPoPublicViewAM.StandardLinePVO]]&gt;
+     &lt;/ViewObject&gt;
+   &lt;/Attribute&gt;
+       &lt;Value&gt;&lt;![CDATA[0]]&gt;&lt;/Value&gt;
+       &lt;Predicate operator="OPER_EQ"/&gt; 
+   &lt;/ViewCriteriaRow&gt;
+   &lt;ViewCriteriaRow conjunction="VC_CONJ_AND" negated="true"&gt;
+   &lt;Attribute&gt;&lt;Name&gt;&lt;![CDATA[PurchasingDocumentVersionCoCanceledFlag]]&gt;&lt;/Name&gt;
+     &lt;ViewObject&gt;&lt;![CDATA[FscmTopModelAM.PrcPoPublicViewAM.StandardLinePVO]]&gt;
+     &lt;/ViewObject&gt;
+   &lt;/Attribute&gt; 
+   &lt;Value&gt;&lt;![CDATA[Y]]&gt;&lt;/Value&gt; 
+   &lt;Predicate operator="OPER_EQ"/&gt; 
+   &lt;/ViewCriteriaRow&gt;
+&lt;/ViewCriteria&gt;
+&lt;/DetailFilter&gt;
+&lt;/ADFQuery&gt;
+</pre>
+<p>Both the user and the administrator can review the query trace to check that the desired ADF View Objects and View Links are executed. The execution of the view objects and view must be based on the Logical model code to render the measure or attributes executed in the request.</p>
+</div>
+</div>
+<a id="OASAD6523"></a>
+<div class="props_rev_3"><a id="GUID-96BA2342-3895-41A1-80EF-7415C1694637"></a>
+<h3 id="OASAD-GUID-96BA2342-3895-41A1-80EF-7415C1694637" class="sect3"><span class="enumeration_section">18.3.5</span> View the Physical Query</h3>
+<div>
+<p>The SQL Bypass database should be set up in the repository to send the physical query to the database directly, rather than through the ADF Server. If the SQL Bypass database is enabled, the <code class="codeph">NQQuery.log</code> file shows the physical query sent to the database. The following log file excerpt provides an example of a physical query:</p>
+<pre dir="ltr">
+WITH
+SAWITH0 AS (select T744257.C501728333 as c1,
+   T744257.C281594243 as c2,
+   T744257.C469784899 as c3,
+   T744257.C168071223 as c4
+from
+   (SELECT V110617254.CATEGORY_NAME AS C501728333,         V110617254.
+    ITEM_DESCRIPTION
+ AS C281594243,         V278099157.TYPE_LOOKUP_CODE263 AS C469784899,
+V278099157.PO_LINE_ID AS C168071223,         V110617254.ITEM_NUMBER AS
+C348883104,         V278099157.CO_SEQUENCE AS C78750419,         V278099157.CO_
+CANCELED_FLAG AS C443371219,         V278099157.PO_HEADER_ID1 AS PKA_
+PurchasingDocumentHeaderP0,         V278099157.VERSION_ID AS PKA_
+PurchasingDocumentVersion0 FROM (SELECT PurchasingDocumentLine.PO_LINE_ID,
+PurchasingDocumentHeader.PO_HEADER_ID AS PO_HEADER_ID1,
+PurchasingDocumentHeader.TYPE_LOOKUP_CODE AS TYPE_LOOKUP_CODE263,
+PurchasingDocumentVersion.CO_CANCELED_FLAG,
+PurchasingDocumentVersion.CO_SEQUENCE,
+PurchasingDocumentVersion.VERSION_ID,
+(DECODE(PurchasingDocumentLine.ITEM_ID, NULL,
+DECODE(PurchasingDocumentLine.VENDOR_PRODUCT_NUM, NULL,
+(PurchasingDocumentLine.ITEM_DESCRIPTION || '[' || CategoryTranslation.
+CATEGORY_NAME || ']'),(PurchasingDocumentLine.VENDOR_PRODUCT_NUM || '[' ||
+PurchasingDocumentHeader.VENDOR_ID || ']')),TO_CHAR(PurchasingDocumentLine.
+ITEM_ID))) AS ITEM_NAME FROM PO_LINES_ALL PurchasingDocumentLine, 
+PO_HEADERS_ALL PurchasingDocumentHeader, PO_VERSIONS PurchasingDocumentVersion
+ WHERE (PurchasingDocumentLine.PO_HEADER_ID = PurchasingDocumentHeader.
+PO_HEADER_ID AND PurchasingDocumentHeader.PO_HEADER_ID =
+PurchasingDocumentVersion.PO_HEADER_ID) AND ( (
+(UPPER(PurchasingDocumentHeader.TYPE_LOOKUP_CODE) = UPPER('STANDARD') ) ) ))
+ V278099157, (SELECT DISTINCT ( DECODE(PL.ITEM_ID,NULL,DECODE(PL.
+VENDOR_PRODUCT_NUM, NULL,(PL.ITEM_DESCRIPTION || '[' || TL1.CATEGORY
+_NAME||']'),(PL.VENDOR_PRODUCT_NUM || '[' || PH.VENDOR_ID ||']')), TO
+_CHAR(I.ITEM_NUMBER))) AS ITEM_NUMBER,  PL.ITEM_DESCRIPTION, 
+PL.CATEGORY_ID,TL1.CATEGORY_NAME, DECODE(PL.ITEM_ID, NULL,DECODE
+(PL.VENDOR_PRODUCT_NUM, NULL, 'DESCRIPTION BASED ITEMS','SUPPLIER
+ ITEMS'),'INVENTORY_ITEMS') AS ITEMTYPE  FROM PO_LINES_ALL PL, 
+EGP_CATEGORIES_TL TL1, PO_HEADERS_ALL PH, PO_SYSTEM_PARAMETERS_ALL SP, 
+EGP_SYSTEM_ITEMS_B I WHERE PL.CATEGORY_ID=TL1.CATEGORY_ID AND PL.CATEGORY_ID IS
+NOT NULL AND PL.PO_HEADER_ID=PH.PO_HEADER_ID AND PL.PRC_BU_ID=SP.PRC_BU_ID AND
+I.INVENTORY_ITEM_ID=PL.ITEM_ID) V110617254 WHERE V278099157.ITEM_NAME =
+ V110617254.ITEM_NUMBER( + ) AND ( ( (V278099157.CO_SEQUENCE = 0 ) )  AND 
+( NOT ( (V278099157.CO_CANCELED_FLAG = 'Y' ) ) ) )) T744257),
+SAWITH1 AS (select D1.c1 as c2,     D1.c2 as c3,
+   case when D1.c3 = 'STANDARD' then D1.c4 end  as c4
+from
+   SAWITH0 D1), SAWITH2 AS (select D1.c2 as c2,     D1.c3 as c3,
+   D1.c4 as c4,
+   ROW_NUMBER() OVER (PARTITION BY D1.c2, D1.c3, D1.c4 ORDER BY D1.c2 DESC,
+   D1.c3 DESC, D1.c4 DESC) as c5from      SAWITH1 D1),SAWITH3 AS (select
+   count(distinct case D1.c5 when 1 then D1.c4 else NULL end ) 
+   as c1,     D1.c2 as c2,     D1.c3 as c3from SAWITH2 D1
+group by D1.c2, D1.c3)
+select distinct 0 as c1,     D1.c2 as c2,     D1.c3 as c3,     D1.c1 as c4 from
+   SAWITH3 D1
+order by c2, c3
+</pre></div>
+<a id="OASAD66040"></a>
+<div class="props_rev_3"><a id="GUID-6EC2CE4C-ECB6-400A-B95A-763A702EFEEA"></a>
+<h4 id="OASAD-GUID-6EC2CE4C-ECB6-400A-B95A-763A702EFEEA" class="sect4"><span class="enumeration_section">18.3.5.1</span> Troubleshoot and Performance Guidelines for Physical Queries</h4>
+<div>
+<p>Use this physical SQL to diagnose which tables, columns, joins, and filters are being used by the BI Server to retrieve data. Table names are aliased (for example, T744257). To find the actual table name, search for the table alias in the RPD, and then run the SQL to check if it works in SQL*Plus.</p>
+<p>For performance issues, look for filter columns that are not indexed, and known database performance bottlenecks, such as NOT IN clauses. For performance advice, Oracle Database Control can be used, too. For more information about performance tuning in OTBI, see <a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-06E50255-BB16-41DE-B975-30DA36C68EFE">Performance Tuning Oracle Transactional Business Intelligence (OTBI)</a>.</p>
+<p>The <code class="codeph">NQQuery.log</code> file also indicates the user who executed the analysis, the timestamp, and the OBI Connection Object used for the analysis. From the Connection Object name, refer back to the Oracle BI repository to find the set up properties of the connection, such as whether it uses a native connection or ODBC.</p>
+<p>The Oracle BI <code class="codeph">NQQuery.log</code> file contains detailed BI Server errors, so it is recommended to check this log file. It is possible to access this log file with the Fusion Application Control. The <code class="codeph">NQQuery.log</code> file shows queries executed at the time of starting the BI Server service. Be sure to check this log for any query failures.</p>
+</div>
+</div>
+</div>
+</div>
+<a id="OASAD6525"></a>
+<div class="props_rev_3"><a id="GUID-CA78077C-8459-4D87-A210-9141A0F65494"></a>
+<h2 id="OASAD-GUID-CA78077C-8459-4D87-A210-9141A0F65494" class="sect2"><span class="enumeration_section">18.4</span> Troubleshoot ADF View Objects</h2>
+<div>
+<p>For OTBI queries, the BI Server accesses Fusion transactional database schema objects through ADF View Objects. The tools and strategies used to troubleshoot ADF View Object connectivity include the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-7390583D-2703-4D9B-B811-8D56C37DBF15">Use AdminServer-diagnostic.log File to Troubleshoot ADF View Objects</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-F0CC152D-0CF3-4CD5-A2F5-43B974153C77">Use View Data to Check the Datasource Connectivity</a></p>
+</li>
+</ul>
+</div>
+<a id="OASAD6526"></a>
+<div class="props_rev_3"><a id="GUID-7390583D-2703-4D9B-B811-8D56C37DBF15"></a>
+<h3 id="OASAD-GUID-7390583D-2703-4D9B-B811-8D56C37DBF15" class="sect3"><span class="enumeration_section">18.4.1</span> Use AdminServer-diagnostic.log File to Troubleshoot ADF View Objects</h3>
+<div>
+<p>The Oracle BI Server gets the view object physical query from the Oracle ADF Server. This query involves the view object query and the security predicate associated to it. Research the WebLogic Server log file, <code class="codeph">AdminServer-diagnostic.log</code>, if there is an issue in the view object query. This file is located in the WebLogic Server domain associated to Oracle JDeveloper 11<span class="italic">g</span>.</p>
+<p>The <code class="codeph">AdminServer-diagnostic.log</code> file shows: the user name, view object, and attributes; the view link source and destination entities; and the view criteria for view objects, including security view criteria. It also contains the roles associated with the user and the security predicate associated with those roles, as well as the composite view object API called for the view object and view links and criteria.</p>
+</div>
+</div>
+<a id="OASAD6527"></a>
+<div class="props_rev_3"><a id="GUID-F0CC152D-0CF3-4CD5-A2F5-43B974153C77"></a>
+<h3 id="OASAD-GUID-F0CC152D-0CF3-4CD5-A2F5-43B974153C77" class="sect3"><span class="enumeration_section">18.4.2</span> Use View Data to Check the Datasource Connectivity</h3>
+<div>
+<div class="section">
+<p>The BI Server uses the properties in the connection pool object, which is located in the Oracle BI repository, to connect to Oracle Fusion Datasources. Use the following procedure to confirm that your connectivity is set up correctly.</p>
+<p>To confirm that your connectivity is set up correctly, perform the following steps:</p>
+<p>This procedure uses the ADF BC Datasource as an example.</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li><span>In the Physical layer of the Administration Tool, expand the database object for the ADF Business Component data source.</span></li>
+<li><span>Right-click a physical table and click <span class="bold">View Data</span>.</span></li>
+<li><span>Check that the appropriate data displays. Note that if you have just imported, check in the new objects before performing this test.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OASAD6528"></a>
+<div class="props_rev_3"><a id="GUID-88665B53-BE4E-429F-BF92-A9DD6B4E8AF2"></a>
+<h2 id="OASAD-GUID-88665B53-BE4E-429F-BF92-A9DD6B4E8AF2" class="sect2"><span class="enumeration_section">18.5</span> Troubleshoot Oracle Transactional Business Intelligence (OTBI)</h2>
+<div>
+<p>This section describes common problems and solutions for Oracle Transactional Business Intelligence (OTBI). This section contains the following topics:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-F09044F1-AE47-4E62-8315-E4D6DB3AC06F">Oracle BI Presentation Services Fails to Start: Check if BI Server is Running</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-66926E78-B625-4D9B-A629-675C978DD6A1">The BI Server Is Not Running: Check Log Files for Hints</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-27731B4F-92C5-46EE-8505-C6B872DC090A">Oracle Business Intelligence Requests Stop Responding: Check Authentication</a></p>
+</li>
+</ul>
+</div>
+<a id="OASAD6529"></a>
+<div class="props_rev_3"><a id="GUID-F09044F1-AE47-4E62-8315-E4D6DB3AC06F"></a>
+<h3 id="OASAD-GUID-F09044F1-AE47-4E62-8315-E4D6DB3AC06F" class="sect3"><span class="enumeration_section">18.5.1</span> Oracle BI Presentation Services Fails to Start: Check if BI Server is Running</h3>
+<div>
+<div class="section">
+<p>In most cases, Presentation Services fails because the BI Server is not running. Note that if you are using a script to start services and the services fail to start, you should manually stop and then restart all services, making sure that one service has completed before you start the next service.</p>
+<p>To determine if the BI Server is running:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li><span>Log in to Fusion Applications Control.</span></li>
+<li><span>Open the Business Intelligence node and select <span class="bold">coreapplication</span>.</span></li>
+<li><span>Click the <span class="bold">Capacity Management</span> page, and then click the <span class="bold">Availability</span> tab.</span></li>
+<li><span>Under <span class="bold">BI Server</span>, locate <span class="bold">coreapplication_obis1</span> and check its status.</span></li>
+<li><span>If you discover that the BI Server is not running, use the Oracle BI log files to determine the cause of this issue. For more information about checking the Oracle BI log files, see <a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-C49CA503-4F33-486A-8706-89965149918F">Resolve Problems with Logical and Physical Queries Using BI Logs and Presentation Services</a> and <a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-66926E78-B625-4D9B-A629-675C978DD6A1">The BI Server Is Not Running: Check Log Files for Hints</a>.</span></li>
+</ol>
+</div>
+</div>
+<a id="OASAD6532"></a>
+<div class="props_rev_3"><a id="GUID-66926E78-B625-4D9B-A629-675C978DD6A1"></a>
+<h3 id="OASAD-GUID-66926E78-B625-4D9B-A629-675C978DD6A1" class="sect3"><span class="enumeration_section">18.5.2</span> The BI Server Is Not Running: Check Log Files for Hints</h3>
+<div>
+<div class="section">
+<p>If the BI Server has failed to start or has stopped running, the Cluster Controller might not be communicating with the BI Server and the BI Server log might contain information describing why it cannot communicate.</p>
+<p>To check the Cluster Controller log files in Fusion Applications Control, perform the following steps:</p>
+<ol>
+<li>
+<p>Log in to Fusion Applications Control.</p>
+</li>
+<li>
+<p>Open the <span class="bold">Business Intelligence</span> node and select <span class="bold">coreapplication</span>.</p>
+</li>
+<li>
+<p>Click the <span class="bold">Diagnostics</span> tab, and then click the <span class="bold">Log Messages</span> subtab.</p>
+</li>
+<li>
+<p>Go to the <span class="bold">View/Search Log Files</span> section and click <span class="bold">Cluster Controller Log</span>. The Log Messages page displays.</p>
+</li>
+<li>
+<p>Search for an entry similar to the following entry:</p>
+<pre dir="ltr">
+[2011-02-28T12:54:51.000+00:00] [OracleBIServerComponent] [NOTIFICATION:1] [] [] 
+[ecid: 004bLSdkE549Xb9LJe_Aif0000Zg000000] [tid: b7f686c0] nqsserver:
+Clustered Oracle BI Server started.  Version: 11.1.1.4.0.110109.0239.000.
+[2011-02-28T12:54:52.000+00:00] [OracleBIServerComponent] [NOTIFICATION:1]
+[] [] [ecid: 004bLSdkE549Xb9LJe_Aif0000Zg000000] [tid: 66f6ba0]  [43071] 
+A connection with Cluster Controller somemachine.example.com:7001 was
+established.
+</pre>
+<p>If this entry does not exist, then the Cluster Controller is <span class="italic">not</span> communicating correctly with the BI Server. If the Cluster Controller is not communicating with the BI Server, then check the BI Server log file in Fusion Applications Control.</p>
+</li>
+</ol>
+<p>To check the BI Server log file in Fusion Applications Control, perform the following steps:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Log in to Fusion Applications Control.</span></li>
+<li class="stepexpand"><span>Open the <span class="bold">Business Intelligence</span> node and select <span class="bold">coreapplication</span>.</span></li>
+<li class="stepexpand"><span>Click the <span class="bold">Diagnostics</span> tab, and then click the <span class="bold">Log Messages</span> subtab.</span></li>
+<li class="stepexpand"><span>Go to the <span class="bold">View/Search Log Files</span> section and click <span class="bold">BI Server Log</span>. The Log Messages page displays.</span></li>
+<li class="stepexpand"><span>Search for an entry similar to the following entry:</span>
+<div>
+<pre dir="ltr">
+[2011-01-31T20:47:38.000-08:00] [OBIPS] [ERROR:10] [] 
+[saw.security.odbcuserpopulationimpl.initialize] [ecid: ] [tid: ] 
+Odbc driver returned an error (SQLDriverConnectW).State: HY000.  Code: 10058.  
+[NQODBC] [SQL_STATE: HY000] [nQSError: 10058] 
+A general error has occurred.
+[nQSError: 73006] Cannot obtain Oracle BI Servers from either
+the primary Cluster Controller (somemachine.example.com)
+or the secondary Cluster Controller () specified for the
+clustered DSN. (HY000)[[File:odbcuserpoploaderimpl.cpp Line:282
+[2011-01-31T20:47:38.000-08:00] [OBIPS] [ERROR:16] []
+[saw.security.odbcuserpopulationimpl.initialize] [ecid: ]
+[tid: ] Unable to create a system user connection to BI Server during start up. Trying again.
+[[File:odbcuserpoploaderimpl.cpp
+Line:283
+</pre></div>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD6535"></a>
+<div class="props_rev_3"><a id="GUID-27731B4F-92C5-46EE-8505-C6B872DC090A"></a>
+<h3 id="OASAD-GUID-27731B4F-92C5-46EE-8505-C6B872DC090A" class="sect3"><span class="enumeration_section">18.5.3</span> Oracle Business Intelligence Requests Stop Responding: Check Authentication</h3>
+<div>
+<div class="section">
+<p>Oracle Fusion Applications pages that integrate charts, reports, and dashboards must be authenticated by Presentation Services. If the authentication is slow, these pages may stop responding. The <code class="codeph">SyncLogonTimeoutSecs</code> timeout parameter helps in timing out the Oracle Business Intelligence request so that the Oracle Fusion Applications page can return quickly.</p>
+<p>To locate the Oracle Business Intelligence Presentation Services server properties to modify in Fusion Applications Control:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>From the navigation pane, expand the <code class="codeph">BIDomain</code> farm and select WebLogic Domain.</span></li>
+<li class="stepexpand"><span>Click <span class="bold">BIDomain</span> to display the WebLogic Domain page.</span></li>
+<li class="stepexpand"><span>From the WebLogic Domain menu, choose <span class="bold">System MBean Browser</span>.</span></li>
+<li class="stepexpand"><span>In the System MBean Browser page, expand <span class="bold">Application Defined MBeans</span>.</span></li>
+<li class="stepexpand"><span>Expand <span class="bold">Application Defined MBeans</span>, <span class="bold">oracle.biee.admin</span>, <span class="bold">Domain: BIDomain</span>, <span class="bold">BIDomain.BIInstance.PresentationServerConfiguration</span>.</span></li>
+<li class="stepexpand"><span>Click <span class="bold">BIDomain.BIInstance.PresentationServerConfiguration</span>.</span>
+<div>
+<div class="figure" id="GUID-27731B4F-92C5-46EE-8505-C6B872DC090A__GUID-B2B8798F-8AA6-4E97-A8A4-4CD56112EF80">
+<p class="titleinfigure">Figure 18-2 System MBean Browser</p>
+<img width="385" height="415" src="img/GUID-88F50BA9-E8DA-4B3E-AB68-B0DDCD18C56E-default.gif" alt="Description of Figure 18-2 follows" title="Description of Figure 18-2 follows" /><br />
+<a href="img_text/GUID-88F50BA9-E8DA-4B3E-AB68-B0DDCD18C56E-default.htm">Description of "Figure 18-2 System MBean Browser"</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>In the Application Defined MBeans: BIDomain.BIInstance.PresentationServerConfiguration page, click the <span class="bold">SyncLogonTimeoutSecs</span> attribute.</span></li>
+<li class="stepexpand"><span>Change the value from 900 to 60 in the <span class="bold">Value</span> field and click <span class="bold">Apply</span>.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OASAD6549"></a><a id="OASAD6538"></a>
+<div class="props_rev_3"><a id="GUID-0D58D4B4-8683-43E3-ABCB-2AC5CE3D0856"></a>
+<h2 id="OASAD-GUID-0D58D4B4-8683-43E3-ABCB-2AC5CE3D0856" class="sect2"><span class="enumeration_section">18.6</span> Troubleshoot Oracle Fusion Customer Relationship Management: Data Warehouse Enabled Profile Option</h2>
+<div>
+<p>The Data Warehouse Enabled Profile option only applies to users who have implemented <span id="GUID-0D58D4B4-8683-43E3-ABCB-2AC5CE3D0856__FACRM">Oracle Fusion Customer Relationship Management</span>. When troubleshooting, check if the Data Warehouse Enabled profile was set to Yes, No, or NA. For information about how to check this profile's value, see the Oracle Fusion Applications documentation.</p>
+<p>The Data Warehouse Enabled Profile option indicates whether the <span>Oracle Fusion Customer Relationship Management</span> implementation uses a Data Warehouse (Yes) or employs a "No Warehouse" solution (No) and therefore tries to retrieve data from the transactional (OTBI) database. For more information, see <a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-0D58D4B4-8683-43E3-ABCB-2AC5CE3D0856__BABFECID" title="This table lists each Warehouse Enablement setting and whether the warehouse source or the OTBI source services the subject areas.">Table 18-2</a>.</p>
+<div class="tblformal" id="GUID-0D58D4B4-8683-43E3-ABCB-2AC5CE3D0856__BABFECID">
+<p class="titleintable">Table 18-2 Warehouse Enablement Settings</p>
+<table class="cellalignment32" title="Warehouse Enablement Settings" summary="This table lists each Warehouse Enablement setting and whether the warehouse source or the OTBI source services the subject areas.">
+<thead>
+<tr class="cellalignment11">
+<th class="cellalignment28" id="d166792e1050">Setting</th>
+<th class="cellalignment29" id="d166792e1053">Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d166792e1058" headers="d166792e1050">
+<p>Yes</p>
+</td>
+<td class="cellalignment31" headers="d166792e1058 d166792e1053">
+<p>Real-Time Subject Area is serviced by OTBI source.</p>
+<p>Common Subject Area is serviced by data warehouse source.</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d166792e1067" headers="d166792e1050">
+<p>No</p>
+</td>
+<td class="cellalignment31" headers="d166792e1067 d166792e1053">
+<p>Real-Time Subject Area is serviced by OTBI source.</p>
+<p>Common Subject Area is serviced by OTBI source.</p>
+<p>Some measures are not available.</p>
+<p>Some measures return zero.</p>
+</td>
+</tr>
+<tr class="cellalignment11">
+<td class="cellalignment30" id="d166792e1080" headers="d166792e1050">
+<p>NA</p>
+</td>
+<td class="cellalignment31" headers="d166792e1080 d166792e1053">
+<p>NA</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+<a id="OASAD6553"></a>
+<div class="props_rev_3"><a id="GUID-298D295B-4AEB-4FCB-B484-8BA7D0992A9A"></a>
+<h2 id="OASAD-GUID-298D295B-4AEB-4FCB-B484-8BA7D0992A9A" class="sect2"><span class="enumeration_section">18.7</span> Troubleshoot for <span id="BIPUBSHORT">Oracle BI Publisher</span></h2>
+<div>
+<p>This section describes common problems and solutions for Oracle BI Publisher and its Fusion Applications reports. It contains the following topics:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-943F8410-63A1-49F9-AA6B-67B4DDCCFDE2">Oracle BI Publisher Reports Are Missing from the Presentation Services Shared Folders</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-4E1E37BE-75E3-41A5-93F1-1B889AA17982">Oracle BI Publisher Reports Are Missing from the Oracle BI Publisher Server Shared Folders</a></p>
+</li>
+</ul>
+</div>
+<a id="OASAD6554"></a>
+<div class="props_rev_3"><a id="GUID-943F8410-63A1-49F9-AA6B-67B4DDCCFDE2"></a>
+<h3 id="OASAD-GUID-943F8410-63A1-49F9-AA6B-67B4DDCCFDE2" class="sect3"><span class="enumeration_section">18.7.1</span> Oracle BI Publisher Reports Are Missing from the Presentation Services Shared Folders</h3>
+<div>
+<p>When users log in to Presentation Services and access the Oracle BI Presentation Catalog to browse the shared folders for their reports, the shared folders do not contain any reports. To resolve this issue, consider the following options:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-18100C7C-5326-4975-A62F-90C9BE0217AD">Confirm that Items Exist on the File System</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-6FE9BC2C-915C-4AA0-A161-6301BC9F3064">Refresh the GUIDs</a></p>
+</li>
+</ul>
+</div>
+<a id="OASAD66041"></a>
+<div class="props_rev_3"><a id="GUID-18100C7C-5326-4975-A62F-90C9BE0217AD"></a>
+<h4 id="OASAD-GUID-18100C7C-5326-4975-A62F-90C9BE0217AD" class="sect4"><span class="enumeration_section">18.7.1.1</span> Confirm that Items Exist on the File System</h4>
+<div>
+<div class="section">
+<p>To confirm that the items exist on the file system, perform the following steps:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Log in to Fusion Applications Control.</span></li>
+<li class="stepexpand"><span>Open the <span class="bold">Business Intelligence</span> node and select <span class="bold">coreapplication</span>.</span></li>
+<li class="stepexpand"><span>Click the <span class="bold">Deployment</span> tab, and then click the <span class="bold">Repository</span> subtab.</span></li>
+<li class="stepexpand"><span>Go to the <span class="bold">BI Presentation Catalog</span> section of the page and note the catalog path.</span></li>
+<li class="stepexpand"><span>Use OS commands or a file explorer to navigate to the catalog path.</span></li>
+<li class="stepexpand"><span>Browse the catalog for reports. Depending upon the outcome of this step, you may do one of the following:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>If the reports do not exist in the catalog, it is probably because of a GUID refresh issue. See the <a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-6FE9BC2C-915C-4AA0-A161-6301BC9F3064">Refresh the GUIDs</a>section.</p>
+</li>
+<li>
+<p>If the reports are not in the catalog, then it may be that an unsuccessful catalog merge was completed recently. Note that even if the last statement of the merge indicated success, the merge still might not have completed successfully. If your catalog merge was not successful, then repeat the catalog merge.</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<a id="OASAD66042"></a>
+<div class="props_rev_3"><a id="GUID-6FE9BC2C-915C-4AA0-A161-6301BC9F3064"></a>
+<h4 id="OASAD-GUID-6FE9BC2C-915C-4AA0-A161-6301BC9F3064" class="sect4"><span class="enumeration_section">18.7.1.2</span> Refresh the GUIDs</h4>
+<div>
+<div class="section">
+<p id="GUID-6FE9BC2C-915C-4AA0-A161-6301BC9F3064__BABCCGGI">To refresh the GUIDs, perform the following steps:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Start a command prompt.</span></li>
+<li class="stepexpand"><span>Enter the following command:</span>
+<div>
+<pre dir="ltr">
+cd &lt;Oracle_bi_Instance&gt;/config/OracleBIServerComponent/coreapplication_obis1/
+</pre></div>
+</li>
+<li class="stepexpand"><span>Open <code class="codeph">NQSconfig.ini</code> and set the <code class="codeph">FMW_UPDATE_ROLE_AND_USER_REF_GUIDS</code> parameter to YES, as shown in the following example:</span>
+<div>
+<pre dir="ltr">
+FMW_UPDATE_ROLE_AND_USER_REF_GUIDS=YES
+</pre>
+<p>Before modifying <code class="codeph">NQSconfig.ini</code>, make a copy of the file for back up purposes.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Save and close <code class="codeph">NQSconfig.ini</code>.</span></li>
+<li class="stepexpand"><span>Repeat the previous two steps and set the <code class="codeph">FMW_UPDATE_ROLE_AND_USER_REF_GUIDS</code> parameter in <code class="codeph">NQSConfig.ini</code> back to NO.</span>
+<div>
+<p>Perform this step to ensure that your system is secure.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Restart the BI Server.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OASAD6557"></a>
+<div class="props_rev_3"><a id="GUID-4E1E37BE-75E3-41A5-93F1-1B889AA17982"></a>
+<h3 id="OASAD-GUID-4E1E37BE-75E3-41A5-93F1-1B889AA17982" class="sect3"><span class="enumeration_section">18.7.2</span> Oracle BI Publisher Reports Are Missing from the Oracle BI Publisher Server Shared Folders</h3>
+<div>
+<p>When users log in to Oracle BI Publisher and access the shared folders containing their reports, they see no reports. This problem can occur even though users can locate their reports in the Presentation Services Catalog's shared folders. To resolve this issue, consider the following options:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-917CE15C-C35F-4519-99C7-D77803934BC0">Check User Privileges</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-F0B0401B-EABB-4DEE-8234-FBB0B9F7BA06">Adjust the BI Publisher Connection to Presentation Services</a></p>
+</li>
+<li>
+<p><a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-0E4F82D1-7390-42DA-958F-5BFDB5B00AA8">Check for Catalog Corruption and Resolve as Needed</a></p>
+</li>
+</ul>
+</div>
+<a id="OASAD66043"></a>
+<div class="props_rev_3"><a id="GUID-917CE15C-C35F-4519-99C7-D77803934BC0"></a>
+<h4 id="OASAD-GUID-917CE15C-C35F-4519-99C7-D77803934BC0" class="sect4"><span class="enumeration_section">18.7.2.1</span> Check User Privileges</h4>
+<div>
+<div class="section">
+<p>The user may not have the proper privileges to view the report.</p>
+<p>To access Presentation Services and check the privileges required to access reports, perform the following steps:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li><span>Log in to Presentation Services as a user with administrator privileges.</span></li>
+<li><span>Go to the <span class="bold">Global Header</span> and click the <span class="bold">Signed In As</span> list.</span></li>
+<li><span>Click <span class="bold">My Account</span>. The My Account page displays.</span></li>
+<li><span>Click the <span class="bold">Roles and Catalog Groups</span> tab and note the roles and groups in this page. Click <span class="bold">OK</span> to exit this page.</span></li>
+<li><span>Go to the <span class="bold">Global Header</span> and click <span class="bold">Sign Out</span> to log out of Presentation Services.</span></li>
+<li><span>Log back into Presentation Services using the log in credentials of the user who cannot view the reports in the Oracle BI Publisher Server shared folders.</span></li>
+<li><span>Access the user's privileges using the previous steps.</span></li>
+<li><span>If the user does not have the proper privileges, log in to Presentation Services as a user with administrator privileges and navigate to the Manage Privileges page to assign the proper privileges to the user.</span></li>
+</ol>
+</div>
+</div>
+<a id="OASAD66044"></a>
+<div class="props_rev_3"><a id="GUID-F0B0401B-EABB-4DEE-8234-FBB0B9F7BA06"></a>
+<h4 id="OASAD-GUID-F0B0401B-EABB-4DEE-8234-FBB0B9F7BA06" class="sect4"><span class="enumeration_section">18.7.2.2</span> Adjust the BI Publisher Connection to Presentation Services</h4>
+<div>
+<div class="section">
+<p>An error may have occurred when Oracle BI Publisher connected to Presentation Services. By default Oracle BI Publisher connects to Presentation Services using the <code class="codeph">BISystemUser</code> account that is stored in the credential store. However, it is possible for users to override this account.</p>
+<p>To override the <code class="codeph">BISystemUser</code> account, perform the following steps:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Open the <code class="codeph">xmlp-server-config.xml</code> file in the following directory:</span>
+<div>
+<pre dir="ltr">
+<span class="italic">BI_DOMAIN_HOME</span>/config/bipublisher/repository/Admin/Configuration
+</pre></div>
+</li>
+<li class="stepexpand"><span>Confirm that the <code class="codeph">SAW_USERNAME</code> and <code class="codeph">SAW_PASSWORD</code> properties are not set. Note that if these properties have been set, it will cause an error. Before changing these properties, ask your administrator why they have been set.</span></li>
+<li class="stepexpand"><span>To un-set these properties, set their values to "".</span>
+<div>
+<p>Before modifying <code class="codeph">xmlp-server-config.xml</code>, make a copy of the file for back up purposes.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Restart the WebLogic domain.</span></li>
+</ol>
+</div>
+</div>
+<a id="OASAD66045"></a>
+<div class="props_rev_3"><a id="GUID-0E4F82D1-7390-42DA-958F-5BFDB5B00AA8"></a>
+<h4 id="OASAD-GUID-0E4F82D1-7390-42DA-958F-5BFDB5B00AA8" class="sect4"><span class="enumeration_section">18.7.2.3</span> Check for Catalog Corruption and Resolve as Needed</h4>
+<div>
+<div class="section">
+<p>The catalog may be corrupted. To check if this is the case, perform the following steps:</p>
+<ol>
+<li>
+<p>Log in to Presentation Services as a user with administrator privileges.</p>
+</li>
+<li>
+<p>Go to the <span class="bold">Global Header</span> and click <span class="bold">Catalog</span>. The Catalog page displays.</p>
+</li>
+<li>
+<p>In the <span class="bold">Search</span> pane, enter the following search criteria:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>In the <span class="bold">Name</span> field, type *.</p>
+</li>
+<li>
+<p>In the <span class="bold">Location</span> field, click the list and choose <span class="bold">All</span>.</p>
+</li>
+<li>
+<p>In the <span class="bold">Type</span> field, click the list and choose <span class="bold">Data Model</span>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Click <span class="bold">Search</span>. If the search results include the <span class="bold">Shared Folder</span>, then the catalog is corrupt. Note that if the Shared Folder is included in your search results, Oracle BI Enterprise Edition has classified it as a data model rather than a folder.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" -->
+<div class="section">To fix the corrupted catalog, perform the following steps:</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Open Catalog Manager and open the catalog in offline mode.</span></li>
+<li class="stepexpand"><span>Navigate to <span class="bold">Shared Folders</span>.</span></li>
+<li class="stepexpand"><span>Right-click the object in the <code class="codeph">Name</code> column and select <code class="codeph">Properties</code>.</span></li>
+<li class="stepexpand"><span>Set the following properties to null:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">bip:DisplayName</span></p>
+</li>
+<li>
+<p><span class="bold">Caption</span></p>
+</li>
+<li>
+<p><span class="bold">compositeSignature</span></p>
+</li>
+<li>
+<p><span class="bold">DESCRIPTION</span></p>
+</li>
+<li>
+<p><span class="bold">objectName</span></p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>Save the changes.</span></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<a id="OASAD65855"></a>
+<div class="props_rev_3"><a id="GUID-06E50255-BB16-41DE-B975-30DA36C68EFE"></a>
+<h2 id="OASAD-GUID-06E50255-BB16-41DE-B975-30DA36C68EFE" class="sect2"><span class="enumeration_section">18.8</span> Performance Tuning Oracle Transactional Business Intelligence (OTBI)</h2>
+<div>
+<p>OTBI is the real-time reporting solution for Oracle Fusion Applications. Oracle Transactional Business Intelligence (OTBI) analyses query data directly from the transactional tables to ensure real time analysis. If the transactional data is not changing constantly, or if up-to-the-minute analysis is not required, then query performance can be improved by changing the caching options available in OBIEE. OBIEE can cache at two levels. BI Server can cache query result sets and use this to service additional queries on the same data set. By default, this option is disabled for OTBI.</p>
+<p>All OTBI queries execute directly against the Oracle Fusion applications transactional tables, unless the query data is retrieved from the cache. This architecture supports up-to-the-minute BI analysis on the state of your business.</p>
+<p>OTBI queries should focus on operational analysis. Because most OTBI queries do not execute against pre-aggregated sources, they should not be used for querying very large volumes of historical data or generating trend analyses that span multiple years. Use the Oracle Business Intelligence Applications, which query the Oracle Business Analytics Warehouse, for any such complex and historical analysis.</p>
+<p>For detailed information on performance tuning, see the <span class="italic">Fusion Applications Performance and Tuning Guide</span>.</p>
+</div>
+<a id="OASAD65856"></a>
+<div class="props_rev_3"><a id="GUID-08EF88BE-9F7C-48CD-9B54-38CD4C65173D"></a>
+<h3 id="OASAD-GUID-08EF88BE-9F7C-48CD-9B54-38CD4C65173D" class="sect3"><span class="enumeration_section">18.8.1</span> Query Governance</h3>
+<div>
+<p>To manage the query environment, set query limits (governors) in the Oracle BI repository for users or application roles. See Perform Post-Installation Configuration in the <span class="italic">Oracle Fusion Applications Documentation Library</span>.</p>
+</div>
+</div>
+<a id="OASAD65857"></a>
+<div class="props_rev_3"><a id="GUID-6AF35E71-D919-422B-8C32-9DE588603EAF"></a>
+<h3 id="OASAD-GUID-6AF35E71-D919-422B-8C32-9DE588603EAF" class="sect3"><span class="enumeration_section">18.8.2</span> Debug Slow-Running Queries</h3>
+<div>
+<p>It is possible to debug and fix OTBI slow-running queries that are not performing well. OTBI is for real-time operations analysis and Oracle does not recommend running queries that do not fall into this category, or to query very large volumes of historical data.</p>
+<div class="p">
+<ul style="list-style-type: disc;">
+<li>
+<p>If the query is not performing well, check the filters first. Blind queries on very large tables can be difficult to tune.</p>
+</li>
+</ul>
+<ul style="list-style-type: disc;">
+<li>
+<p>When querying large transaction tables, ensure that good time dimension filters restrict data to a few days, weeks, or months.</p>
+</li>
+</ul>
+<ul style="list-style-type: disc;">
+<li>
+<p>Additionally, ensure that good filters on the dimensions being used to analyze the fact data exist. Add filters to restrict queries.</p>
+</li>
+</ul>
+<ul style="list-style-type: disc;">
+<li>
+<p>Next, examine the physical query in the Oracle BI query log.</p>
+</li>
+</ul>
+</div>
+<p>Issues encountered in OTBI queries can be diagnosed in as described in <a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-C49CA503-4F33-486A-8706-89965149918F">Resolve Problems with Logical and Physical Queries Using BI Logs and Presentation Services</a>.</p>
+<p>Additional filters might be added by the application logic and security. Ask your database administrator to help tune the execution plan for this query to see which joins are causing performance issues. Avoid full table scans and hash table joins on large transaction tables. If these tables are seen, attempt to add specific filters for these tables which use existing indexes.</p>
+<div class="p">
+<ul style="list-style-type: disc;">
+<li>
+<p>To improve query performance, enable query caching.</p>
+</li>
+</ul>
+</div>
+<p>Query caching enablement can dramatically improve query performance on cached queries.</p>
+<p>See <a href="GUID-77D60DFC-93D4-4A7E-9CBD-3B2956C0F764.htm#GUID-25BF3C88-4949-4B5C-94C5-D12E9A855918">Caching Options in Oracle Transactional Business Intelligence (OTBI)</a> for information about how to enable caching.</p>
+</div>
+</div>
+<a id="OASAD65858"></a>
+<div class="props_rev_3"><a id="GUID-E83769F1-CDA9-43BB-86B5-C751BD1532CA"></a>
+<h3 id="OASAD-GUID-E83769F1-CDA9-43BB-86B5-C751BD1532CA" class="sect3"><span class="enumeration_section">18.8.3</span> BIAnalytics Data Source Suspended</h3>
+<div>
+<p>If your Customer Relationship Management (CRM) Performance Servers are servicing requests, the BIAnalytics data source will get suspended if there is a bounce of the bi_server1. If this occurs, you will get a "Resource Dead Exception" error and possibly a "stuck thread" error.</p>
+<p>To correct this error, resume the BIAnalytics data source manually.</p>
+</div>
+</div>
+<a id="OASAD65859"></a>
+<div class="props_rev_3"><a id="GUID-25BF3C88-4949-4B5C-94C5-D12E9A855918"></a>
+<h3 id="OASAD-GUID-25BF3C88-4949-4B5C-94C5-D12E9A855918" class="sect3"><span class="enumeration_section">18.8.4</span> Caching Options in Oracle Transactional Business Intelligence (OTBI)</h3>
+<div>
+<p>Caching is turned off by default for the Oracle Transactional Business Intelligence (OTBI) content to ensure the OTBI analyses always return real-time data. If not absolutely necessary, then enable caching to obtain better query performance.</p>
+<p>To enable caching and set a cache timeout in OTBI, choose one of the following options:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Use the Cache Manager to manually manage the cache entries after enabling caching for OTBI view objects. Enable view object level caching by using the Oracle BI Administration tool and editing the master Oracle BI repository as follows:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Edit the view object properties and check the Cacheable check box.</p>
+<p>Do not edit the properties for aliases if the source view object property has already been changed. It is reflected in the alias automatically.</p>
+</li>
+<li>
+<p>Set the Cache Persistence Time property to determine how frequently the cache should expire.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Additionally, use the following options for automating the cache management process:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Use the Oracle BI Administration Tool to set the Cacheable and Cache Persistence Time properties for any view object that you want cached.</p>
+</li>
+<li>
+<p>Use the Configure Oracle BI Server Event Polling Tables to purge the cache. Doing so requires a trigger that you would have to implement to populate this table when there are changes to the application's transaction tables, ensuring that you always avoid hitting a stale cache.</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment10">
+<tr>
+<td class="cellalignment17">
+<table class="cellalignment15">
+<tr>
+<td class="cellalignment14"><a href="GUID-396DFCC5-164A-498B-B93D-DF88F48312EE.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment14"><a href="GUID-D5F29E46-2A11-4AEA-B31D-B94CE141BA6B.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2011, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment19">
+<table class="cellalignment13">
+<tr>
+<td class="cellalignment14"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment14"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

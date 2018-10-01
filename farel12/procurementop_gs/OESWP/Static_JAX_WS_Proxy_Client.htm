@@ -1,0 +1,468 @@
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+
+<meta name="DC.Type" content="topic">
+<meta name="description" content="Oracle JDeveloper provides design-time support to generate a static JAX-WS proxy client to invoke a web service. In JDeveloper, you can create an application with a project and then create a new Web Service Proxy by selecting Business Tier &gt; Web Services in the New Gallery page. Creating the proxy generates client-side proxy classes. You can then write client-side code to invoke the required service."><meta content="all" name="robots">
+<meta content="yes" name="mos_crawl">
+<meta content="SOAP Web Services for Oracle Procurement Cloud " name="dcterms.title">
+<meta content="SOAP Web Services for Oracle Procurement Cloud " name="doctitle">
+<meta content="E74440-01" name="dcterms.identifier">
+<meta content="E67967-01" name="partno">
+<meta content="OESWP" name="dcterms.isVersionOf">
+<meta content="Fusion Publishing Server, UAE Print Staging" name="generator">
+<meta content="Fri Dec 09 12:40:19 MST 2016" name="dcterms.created">
+<meta name="relnum" content="Release 12">
+<meta name="rel_num" content="Release 12"><link type="text/html" title="Previous" href="HTTP_Client.htm" rel="Prev">
+<link type="text/html" title="Next" href="Dynamic_Dispatch_Client.htm" rel="Next">
+<link type="text/html" title="Home" href="../../index.html" rel="Start">
+<link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+<script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+<script src="../nav/js/doccd.js" type="application/javascript"></script>
+<link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+<link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+<link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+<script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+<script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+<script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+<script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+<script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+<script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+<meta class="foundation-mq-topbar">
+<link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/oer.css" rel="stylesheet">
+StaticJAX-WSProxyClient-62D9D594<meta name="DC.Language" content="en">
+<title>Static JAX-WS Proxy Client</title>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header><div class="row" id="CONTENT"><div class="IND large-9 medium-8 columns"><div id="EXTRATOC"></div><span id="PAGE" style="display:none;">44/166</span><a name="BEGIN" id="BEGIN"></a><div class="fusiondoc" id="StaticJAX-WSProxyClient-62D9D594">
+
+   <h1 class="title topictitle1" id="StaticJAX-WSProxyClient-62D9D594__topic-126-62DA19B5">Static JAX-WS Proxy Client</h1>
+
+   
+   
+   <div class="body" id="topic-138-62DA19BE"><p class="shortdesc">Oracle JDeveloper provides design-time
+support to generate a static JAX-WS proxy client to invoke a web service.
+In JDeveloper, you can create an application with a project and then
+create a new <span class="ph uicontrol" id="topic-108-07B47689">Web Service Proxy</span> by selecting <span class="ph uicontrol" id="topic-100-07B39F45">Business Tier</span> &gt; <span class="ph uicontrol" id="topic-102-07B39F47">Web Services</span> in
+the<span class="ph uicontrol" id="topic-104-07B39F47"> New Gallery</span> page.
+Creating the proxy generates client-side proxy classes. You can then
+write client-side code to invoke the required service.</p>
+
+      <div class="p" id="topic-140-62DA19BF">For more information, see <a class="xref" href="http://docs.oracle.com/cd/E18941_01/tutorials/jdtut_11r2_52/jdtut_11r2_52_5.html" target="_blank">Creating a Web Service Proxy</a>.<pre class="pre codeblock" id="topic-152-017AE86F">public class SvcInvoker {
+    @WebServiceRef
+    private static ExpenseService_Service expenseService_Service;
+	
+
+    public static void main(String[] args) throws ServiceException, Exception {
+        expenseService_Service = new ExpenseService_Service();
+        SecurityPolicyFeature[] features =
+            new SecurityPolicyFeature[] { new SecurityPolicyFeature("policy:oracle/wss_username_token_over_ssl_client_policy") }; 
+			//or any other policy, as required 
+        ExpenseService expenseService =
+            expenseService_Service.getExpenseServiceSoapHttpPort(features);
+        ……//security setting code goes here
+        //invoke the service
+        FindCriteria fc = new FindCriteria();
+        fc.setFetchSize(1);
+        List&lt;Expense&gt; exps = expenseService.findExpense(fc, null);
+        if (exps != null &amp;&amp; !exps.isEmpty()) {
+            Expense exp = exps.get(0);
+            //access the expenses
+        } else
+            System.out.println("No expenses");
+    }
+}</pre>
+
+      </div>
+
+      <section class="section" id="topic-142-62DA19C1"><h2 class="title sectiontitle">Client-Side
+Security Policy</h2>
+         
+         <div class="p" id="topic-118-051E5400">You must configure
+the security setting based on the client-side security policy used
+to invoke a service.<ul class="ul" id="topic-110-08A744CE">
+               <li class="li" id="topic-122-08A8EB0F"><p>Transport Layer security policies: <ul class="ul" id="topic-124-08A8EB11">
+                     <li class="li" id="topic-126-08A8EB11"><p>
+                        <samp class="ph codeph" id="topic-150-08B08C99">oracle/wss_username_token_over_ssl_client_policy</samp>
+                     </p></li>
+
+                     <li class="li" id="topic-128-08A8EB12"><p>
+                        <samp class="ph codeph" id="topic-152-08B08C99">oracle/wss_http_token_over_ssl_client_policy</samp>
+                     </p></li>
+
+                     <li class="li" id="topic-130-08A8EB14"><p>
+                        <samp class="ph codeph" id="topic-154-08B08C9B">oracle/wss_saml_token_bearer_over_ssl_client_policy</samp>
+                     </p></li>
+
+                  </ul>
+
+               </p></li>
+
+               <li class="li" id="topic-132-08A8EB15"><p>Message protection policies: <ul class="ul" id="topic-134-08A8EB15">
+                     <li class="li" id="topic-136-08A8EB17"><p>
+                        <samp class="ph codeph" id="topic-156-08B08C9B">oracle/wss11_username_token_with_message_protection_client_policy</samp>
+                     </p></li>
+
+                     <li class="li" id="topic-138-08A8EB19"><p>
+                        <samp class="ph codeph" id="topic-162-08B09426">oracle/wss11_saml_token_with_message_protection_client_policy</samp>
+                     </p></li>
+
+                  </ul>
+
+               </p></li>
+
+            </ul>
+
+         </div>
+
+         <p class="p" id="topic-122-634CD2EE">For the transport layer security
+policies, the client uses the Secure Socket Layer (SSL) protocol on
+the server to invoke a web service. In Oracle Applications Cloud,
+the SSL protocol is enabled on the server by default.  To use the
+message protection policies, the client imports the public key certificate
+from the server.</p>
+
+         <div class="p" id="topic-140-08ACA15D">If the client side
+maintains the user identity to invoke a service, the username token
+policies are easier to use than the SAML token policies. The SAML
+token policies support identity propagation, but require certificate
+exchange between the server and the client, unless all of the following
+are true:<ul class="ul" id="topic-142-08AE312B">
+               <li class="li" id="topic-144-08AE312E"><p>Client signing certificate is issued from
+a Certificate Authority (CA)</p></li>
+
+               <li class="li" id="topic-146-08AE3130"><p>CA certificate is in the server trust
+store</p></li>
+
+               <li class="li" id="topic-148-08AE3132"><p>SAML assertion carry the signing certificate</p></li>
+
+            </ul>
+ 
+         </div>
+
+         <p class="p" id="topic-146-62DA19C3">If the client-side is on the
+Oracle Applications Cloud, for example, when the client is deployed
+in Java Cloud Service, and linked to the corresponding Oracle Applications
+Cloud instance, the certificate exchange is already configured. You
+need to decide which client-side policy to use, based on the nature
+of the client and the requirements of each policy.</p>
+
+      </section>
+
+      <section class="section" id="topic-148-62DAA4BD"><h2 class="title sectiontitle">Security
+Configuration</h2>
+         
+         <p class="p" id="topic-118-1364702F">The security configuration
+required for different client-side security policies are as follows:</p>
+
+      </section>
+
+      <section class="section" id="topic-162-62DB0AE1"><h2 class="title sectiontitle">oracle/wss_username_token_over_ssl_client_policy</h2>
+         
+         <p class="p" id="topic-154-62DAA4C0">For this policy, the service endpoint
+URL must use HTTPS protocol, and no configuration is required. The
+static proxy client-side code specifies the user name and password:</p>
+
+         <pre class="pre codeblock" id="WSBindingProviderWsbpWSBindingProvi-08B30F77">WSBindingProvider wsbp = (WSBindingProvider)expenseService;
+Map&lt;String, Object&gt; requestContext = wsbp.getRequestContext();
+
+requestContext.put(com.sun.xml.ws.developer.WSBindingProvider.USERNAME_PROPERTY,
+"user");
+
+requestContext.put(com.sun.xml.ws.developer.WSBindingProvider.PASSWORD_PROPERTY, "pwd");</pre>
+
+         <p class="p" id="topic-156-62DAA4C0">Though this is the simplest method, the
+recommended method is to store the user name and password in a credential
+store, and use a <samp class="ph codeph" id="topic-222-08BCECBF">csf-key</samp> to
+refer to the entry in the credential store. Use Oracle JDeveloper
+to create a credential store when you are generating the web service
+proxy. You can also edit the properties of the proxy object after
+it is generated by selecting <span class="ph uicontrol" id="topic-184-08B72E70">Override
+Properties</span> &gt; <span class="ph uicontrol" id="topic-186-08B72E75">New Key</span>.</p>
+
+         <ul class="ul" id="topic-188-08B7F321">
+            <li class="li" id="topic-190-08B7F326"><p>
+               <samp class="ph codeph" id="topic-194-08B81E9B">cwallet.sso</samp> file: Credential store</p></li>
+
+            <li class="li" id="topic-192-08B7F329"><p>
+               <samp class="ph codeph" id="topic-196-08B81EA0">jps-config.xml </samp>file: Security context of your program. It contains the entry pointing
+to the <samp class="ph codeph" id="topic-198-08B81EA3">cwallet.sso</samp> credential
+store.</p></li>
+
+         </ul>
+
+         <p class="p" id="topic-158-62DAA4C1">The client-side code must specify
+the location of the <samp class="ph codeph" id="topic-200-08B84ED8">jps-config.xml</samp> file and the <samp class="ph codeph" id="topic-202-08B84ED9">csf-key</samp> value.</p>
+
+         <pre class="pre codeblock" id="topic-204-08B868D2">System.setProperty("oracle.security.jps.config", "path_to_jps-config.xml");
+expenseService_Service = new ExpenseService_Service();
+SecurityPolicyFeature[] features = new SecurityPolicyFeature[] {
+	new SecurityPolicyFeature("policy: oracle/wss_username_token_over_ssl_client_policy " };
+ExpenseService expenseService =
+	expenseService_Service.getExpenseServiceSoapHttpPort(features);
+WSBindingProvider wsbp = (WSBindingProvider)expenseService;
+Map&lt;String, Object&gt; requestContext = wsbp.getRequestContext();
+requestContext.put(SecurityConstants.ClientConstants.WSS_CSF_KEY, "csf-key");</pre>
+
+      </section>
+
+      <section class="section" id="topic-164-62DB0AE4"><h2 class="title sectiontitle">oracle/wss_http_token_over_ssl_client_policy</h2>
+         
+         <p class="p" id="topic-168-62DB7673">The requirements for this policy are same
+as the <samp class="ph codeph" id="Oraclewss_username_token_over_ssl_c-092AFCE3">oracle/wss_username_token_over_ssl_client_policy</samp> policy. While this policy sets the authentication information in
+the HTTP header, the <samp class="ph codeph" id="Oraclewss_username_token_over_ssl_c-62DB59FB">oracle/wss_username_token_over_ssl_client_policy</samp> policy sets the authentication information in the SOAP header.</p>
+
+      </section>
+
+      <section class="section" id="topic-170-62DBD17B"><h2 class="title sectiontitle">oracle/wss_saml_token_bearer_over_ssl_client_polic</h2>
+         
+         <p class="p" id="topic-174-62DC2639">This policy uses SAML token, and requires
+a keystore in the client that contains the client signing and encryption
+keys. The server needs to import the public key certificate from the
+client.</p>
+
+         <ul class="ul" id="topic-236-092D46B4">
+            <li class="li" id="topic-238-092D46BA"><p>Generate keystore in the client: Use keytool
+provided by JDK to generate the keystore, which stores the security
+certificate. To generate a <samp class="ph codeph" id="jks-092D1E9A">.jks</samp> file, which is the keystore:<pre class="pre codeblock" id="Keytool-genkeypair-keyalgRSA-aliasM-092D2402">keytool -genkeypair -keyalg RSA -alias mycompkey -keypass password -keystore
+mycompclient-keystore.jks -storepass password -validity 3600</pre>
+
+            </p></li>
+
+            <li class="li" id="topic-240-092D46BF"><p>Export certificate from the client: Use
+the following keytool command to export the certificate:<pre class="pre codeblock" id="topic-242-092D46C5">keytool -exportcert -alias mycompkey -file clientpubkey.cer -keystore mycompclient-keystore.jks -storepass password</pre>
+
+            </p></li>
+
+            <li class="li" id="topic-244-092D7035"><p>Import certificate to the server: Use
+the following keytool command to import the certificate generated
+by the client to the server keystore as a trusted certificate entry:<pre class="pre codeblock" id="topic-246-092D703B">keytool -importcert -alias clientkey -file clientpubkey.cer -keystore default-keystore.jks -storepass password</pre>
+
+            </p></li>
+
+            <li class="li" id="topic-248-092DA34C"><p>Add keystore to the client security context:
+The proxy client-side code must provide the keystore, signing key
+and encryption key that are protected by passwords. Use Oracle JDeveloper
+to import the keystore, set the password, and set the keystore in
+the client-side security context.</p></li>
+
+            <li class="li" id="topic-250-092F84C9"><p>Proxy client-side code: The <samp class="ph codeph" id="topic-268-09342CC4">WSSEC_SIG_KEY_ALIAS</samp> and <samp class="ph codeph" id="topic-270-09342CCE">WSSEC_ENC_KEY_ALIAS</samp> are used to specify
+the signing and encrypting private keys on the client side. This private
+key must be the same as the one used to generate the certificate.
+This code request uses SAML token, so the user name is passed but
+not the password. The client-side code can configure the security
+as:<pre class="pre codeblock" id="topic-252-092FE141">System.setProperty("oracle.security.jps.config", " path_to_jps-config.xml");
+String policy = "oracle/wss_saml_token_bearer_over_ssl_client_policy";
+expenseService_Service = new ExpenseService_Service();
+SecurityPolicyFeature[] features =
+	new SecurityPolicyFeature[] { new SecurityPolicyFeature("policy:" + policy) };
+ExpenseService expenseService =
+	expenseService_Service.getExpenseServiceSoapHttpPort(features);
+	
+WSBindingProvider wsbp = (WSBindingProvider)expenseService;
+Map&lt;String, Object&gt; requestContext = wsbp.getRequestContext();
+//client-side private signing key
+requestContext.put(ClientConstants.WSSEC_SIG_KEY_ALIAS, "mycompkey");
+//client-side private encryption key
+requestContext.put(ClientConstants.WSSEC_ENC_KEY_ALIAS, "mycompkey");
+//location of the keystore file
+requestContext.put(ClientConstants.WSSEC_KEYSTORE_LOCATION,
+	"path_to_ mycompclient-keystore.jks");
+requestContext.put(WSBindingProvider.USERNAME_PROPERTY, "FIN_USER2");</pre>
+
+            </p></li>
+
+         </ul>
+
+      </section>
+
+      <section class="section" id="topic-176-62DC2639"><h2 class="title sectiontitle">oracle/wss11_username_token_with_message_protection_client_policy</h2>
+         
+         <p class="p" id="topic-182-62DC263C">Using this policy, the web service consumer
+inserts username and password credentials, and signs and encrypts
+the outgoing SOAP message. The web service provider decrypts and verifies
+the message and the signature. This policy requires that the client
+imports the public key from the server.</p>
+
+         <ul class="ul" id="GenerateKeystoreInTheClientUseKeyto-0936AF94">
+            <li class="li" id="GenerateKeystoreInTheClientUseKeyto-0936AF9F"><p>Generate keystore
+in the client: Use keytool provided by JDK to generate the keystore,
+which stores the security certificate. To generate a <samp class="ph codeph" id="jks-0936AFE8">.jks</samp> file, which is the keystore:<pre class="pre codeblock" id="Keytool-genkeypair-keyalgRSA-aliasM-0936AFDF">keytool -genkeypair -keyalg RSA -alias mycompkey -keypass password -keystore
+mycompclient-keystore.jks -storepass password -validity 3600</pre>
+
+            </p></li>
+
+            <li class="li" id="topic-272-09392039"><p>Generate public key certificate: The client
+requires the public key from the server. The WSDL file contains the
+certificate in the <samp class="ph codeph" id="topic-280-0939291C">wsdl:service/wsdl:port/wsa:EndpointReference/wsid:Identity/dsig:keyInfo/dsig:X509Data/dsig:X509Certificate </samp>element. Create a text file and enclose the certificate element with
+---- BEGIN CERTIFICATE ---- and ---- END CERTIFICATE ----  statements.
+Save this text file as <samp class="ph codeph" id="Pk.cer-136F6005">pk.cer</samp>.<pre class="pre codeblock" id="topic-274-0939203E">&lt;wsdl:service name="ExpenseService"&gt;
+	&lt;wsdl:port name="ExpenseServiceSoapHttpPort" binding="tns:ExpenseServiceSoapHttp"&gt;
+	....
+	&lt;wsa:EndpointReference xmlns:wsa="http://www.w3.org/2005/08/addressing"&gt;
+		&lt;wsid:Identity xmlns:wsid="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity"&gt;
+			&lt;dsig:KeyInfo xmlns:dsig="http://www.w3.org/2000/09/xmldsig#"&gt;
+				&lt;dsig:X509Data&gt;
+&lt;dsig:X509Certificate&gt;<span class="ph uicontrol" id="topic-282-0939398A">MIICHTCCAYagAwIBAgIEUG1GfDANBgkqhkiG9w0BAQUFADBTMR
+MwEQYKCZImiZPyLGQBGRYDY29tMRYwFAYKCZImiZPyLGQBGRYGb3JhY2xlMRIwEA
+YKCZImiZPyLGQBGRYCdXMxEDAOBgNVBAMTB3NlcnZpY2UwHhcNMTIxMDA0MDgx
+OTA4WhcNMTUxMDA0MDgxOTA4WjBTMRMwEQYKCZImiZPyLGQBGRYDY29tMRYw
+FAYKCZImiZPyLGQBGRYGb3JhY2xlMRIwEAYKCZImiZPyLGQBGRYCdXMxEDAOBgN
+VBAMTB3NlcnZpY2UwgZ8wDQYJKoZIhvcNAQEBBQADgY0AMIGJAoGBAMvYgi3PpA9T
+vD6YptxWZDy6nusDfJYrQe5Q3cYjtR54exM8Ju29z2Mtk98HEZXMs2+GqNO7Ms8QZQ2Owl
+nuS0VZNMUQu3MkjM4UKyK+37H32jud3HP5jigpJARgtxfH1Z1RK4VovU1VFPeRULG+7em
+CvdfOks5o6dTPmH1xpsXLAgMBAAEwDQYJKoZIhvcNAQEFBQADgYEAguzjcfLzQUH5d
+O4jER9g4xrmjxZrKo8YC2xxGKzpxuMSg3EUhUPOznzZFv09+sIO2UFGpPV5NqNWlvFqej3
+VBSal2HfGUQgMRe+kPV6ysAWvZ4T1pOxj4NDeWRUMjgjt14OXEOxifPbLhvOmiC8dD9d
+FwcdWh7lMMcwz0VM9F0M=</span>&lt;/dsig:X509Certificate&gt;
+&lt;/dsig:X509Certificate&gt;
+......
+</pre>
+
+            </p></li>
+
+            <li class="li" id="topic-276-09392044"><p>Import certificate to the client:  Use
+the following keytool command to import the certificate to the client
+keystore:<pre class="pre codeblock" id="topic-292-093A3A01">keytool -importcert -alias pubkey -file pk.cer -keystore mycompclient-keystore.jks -storepass password</pre>
+
+            </p></li>
+
+            <li class="li" id="topic-278-093920AE"><p>Configure client security context: The
+proxy client-side code must provide the keystore, signing key and
+encryption key that are protected by password. Use Oracle JDeveloper
+to create the <samp class="ph codeph" id="topic-294-093AAE51">csf-key</samp> that
+stores the user/password, import the keystore, and then set the password
+and keystore in the client-side security context.</p></li>
+
+            <li class="li" id="ProxyClient-sideCodeTheClient-sideC-0936B044"><p>Proxy client-side
+code: The client-side code can now configure the security as:<pre class="pre codeblock" id="System.setPropertyoracle.security.j-0936B051">System.setProperty("oracle.security.jps.config", “ path_to_jps-config.xml");
+String policy = "oracle/wss11_username_token_with_message_protection_client_policy";
+expenseService_Service = new ExpenseService_Service();
+
+SecurityPolicyFeature[] features =
+	new SecurityPolicyFeature[] { new SecurityPolicyFeature("policy:" + policy) };
+ExpenseService expenseService =
+	expenseService_Service.getExpenseServiceSoapHttpPort(features);
+	
+WSBindingProvider wsbp = (WSBindingProvider)expenseService;
+Map&lt;String, Object&gt; requestContext = wsbp.getRequestContext();
+
+//location of the keystore file
+requestContext.put(ClientConstants.WSSEC_KEYSTORE_LOCATION,
+	"path_to_mycomp-keystore.jks");
+	
+requestContext.put(SecurityConstants.ClientConstants.WSS_CSF_KEY, "csf-key");</pre>
+
+            </p></li>
+
+         </ul>
+
+      </section>
+
+      <section class="section" id="topic-184-62DC263E"><h2 class="title sectiontitle">oracle/wss11_saml_token_with_message_protection_client_policy</h2>
+         
+         <p class="p" id="topic-190-62DC263E">This policy uses both message protection
+and SAML token. To configure message protection, the client-side keystore
+must import the public key certificate from the server. To use SAML
+token, the server must import the certificate from the client.</p>
+
+         <ul class="ul" id="topic-306-093F1371">
+            <li class="li" id="topic-308-093F137A"><p>Generate keystore in the client: Use keytool
+to generate the keystore, which manages the private and public keys:<pre class="pre codeblock" id="Keytool-genkeypair-keyalgRSA-aliasM-093E65C2">keytool -genkeypair -keyalg RSA -alias mycompkey -keypass password -keystore
+mycompclient-keystore.jks -storepass password -validity 3600</pre>
+
+            </p></li>
+
+            <li class="li" id="topic-310-093F13E6"><p>Generate server-side public key certificate:
+For this policy, the client requires the public key generated on the
+server side. The WSDL file contains the certificate in the <samp class="ph codeph" id="topic-312-093F13EF">wsdl:service/wsdl:port/wsa:EndpointReference/wsid:Identity/dsig:keyInfo/dsig:X509Data/dsig:X509Certificate</samp> element. Create a text file and enclose the certificate element
+with ---- BEGIN CERTIFICATE ---- and ---- END CERTIFICATE ----  statements.
+Save this text file as <samp class="ph codeph" id="Pk.cer-093EDB10">pk.cer</samp>.</p></li>
+
+            <li class="li" id="topic-314-093F13F9"><p>Import certificate to the client:  Use
+the following keytool command to import the certificate generated
+by the server to the client keystore:<samp class="ph codeph" id="topic-316-093F1402">keytool -importcert -alias pubkey -file pk.cer -keystore mycompclient-keystore.jks
+-storepass password</samp>
+            </p></li>
+
+            <li class="li" id="topic-318-093F4523"><p>Export certificate from the client: Use
+the following keytool command to export the certificate:<samp class="ph codeph" id="topic-320-093F452C">keytool -exportcert -alias mycompkey -file
+clientpubkey.cer -keystore mycompclient-keystore.jks -storepass password</samp>
+            </p></li>
+
+            <li class="li" id="topic-322-093F4535"><p>Import client-side certificate to server:
+Use the following keytool command to import the certificate generated
+by the client to the server keystore as a trusted certificate entry:<samp class="ph codeph" id="topic-324-093F741F">keytool -importcert -alias clientkey -file
+clientpubkey.cer -keystore default-keystore.jks -storepass password</samp>
+            </p></li>
+
+            <li class="li" id="ConfigureClientSecurityContextThePr-093F8FF8"><p>Configure client
+security context: The proxy client-side code must provide the keystore,
+signing key, and encryption key that are protected by password. Use
+Oracle JDeveloper to import the keystore, and then set the password
+and keystore in the client-side security context.</p></li>
+
+            <li class="li" id="topic-326-093FE81E"><p>Proxy client-side code: The <samp class="ph codeph" id="WSSEC_SIG_KEY_ALIAS-136E4B51">WSSEC_SIG_KEY_ALIAS</samp> and <samp class="ph codeph" id="WSSEC_ENC_KEY_ALIAS-136E4B51">WSSEC_ENC_KEY_ALIAS</samp> are
+used to specify the signing and encrypting private keys on the client
+side. This private key must be the same as the one used to generate
+the certificate. This code request uses SAML token, so the user name
+is passed but not the password. The client-side code can configure
+the security as:<div class="note note" id="topic-100-09563418"><span class="notetitle">Note:</span> This sample code works
+only in a JSE environment. In JEE environment, usually the current
+user is propagated to the server. The client and server need to share
+identity store, use identity federation, or the client side uses Security
+Token Service (STS) to map the client credential to the server credential.</div>
+
+               <pre class="pre codeblock" id="topic-328-093FE823">System.setProperty("oracle.security.jps.config", "path_to_jps-config.xml");
+String policy = "oracle/wss11_saml_token_with_message_protection_client_policy";
+expenseService_Service = new ExpenseService_Service();
+SecurityPolicyFeature[] features =
+	new SecurityPolicyFeature[] { new SecurityPolicyFeature("policy:" +policy)};
+ExpenseService expenseService =
+	expenseService_Service.getExpenseServiceSoapHttpPort(features);
+	
+WSBindingProvider wsbp = (WSBindingProvider)expenseService;
+Map&lt;String, Object&gt; requestContext = wsbp.getRequestContext();
+
+requestContext.put(ClientConstants.WSSEC_SIG_KEY_ALIAS, "mycompkey");
+requestContext.put(ClientConstants.WSSEC_ENC_KEY_ALIAS, "mycompkey");
+//location of the keystore file
+requestContext.put(ClientConstants.WSSEC_KEYSTORE_LOCATION,
+	“ path_to_mycomp-keystore.jks");
+requestContext.put(WSBindingProvider.USERNAME_PROPERTY, "username");</pre>
+
+            </p></li>
+
+         </ul>
+
+      </section>
+
+   </div>
+
+   <nav role="navigation" class="related-links">
+<div class="linklist linklist"><h5 class="relatedlinks">Related Topics</h5>
+<ul>
+<li><p><a class="link" href="HTTP_Client.htm">HTTP
+Client</a></p></li>
+<li><p><a class="link" href="Dynamic_Dispatch_Client.htm">Dynamic Dispatch Client</a></p></li>
+<li><p><a class="link" href="Java_Client.htm">Java
+Client</a></p></li>
+<li><p><a class="link" href="Invoking_SOAP_Web_Services.htm">Invoking SOAP Web Services</a></p></li></ul></div>
+</nav>
+</div></div></div><footer></footer><noscript><p>Scripting on this page enhances content navigation, but does not change the content in any way.</p></noscript>
+<!-- Start SiteCatalyst code -->
+<script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+<!-- End SiteCatalyst code -->
+</body>
+</html>

@@ -1,0 +1,2246 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Importing and Loading Data Using HCM Data Loader (Chapter 15) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:17 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM Data Loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM2305097.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM1434012.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="A set of data supplied together to be loaded into Oracle HCM Cloud. The source of a data set is either a compressed data file
+      containing delimited business-object-specific data files or an HCM Spreadsheet Data Loader spreadsheet."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">18/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM2139760" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">15</span>Importing and Loading Data Using HCM Data Loader
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2078306">Importing and Loading Data: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2054814">Importing and Loading Data: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1328221">Import and Load Data Search Results</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1909867">Uploading Data Using HCM Data Loader: Worked Example</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2055307">Reviewing and Correcting Errors: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2049799">Stopping HCM Data Loader Processing: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2245856">Automating Data Loading: Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2139850">FAQs for Importing and Loading Data Using HCM Data Loader</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM2078306">
+                  <h2>Importing and Loading Data: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>HCM Data Loader imports data initially to stage tables, where
+                     some validation occurs. HCM Data Loader then loads valid logical objects
+                     from the stage tables to the application tables. You can perform the
+                     import and load steps either separately or as one step. This topic
+                     summarizes the processing that occurs in each step. It also describes
+                     how you specify import and load options.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2078300">
+                     <h3 class="topictitle">Importing Records to the Stage Tables</h3>
+                     
+                     <p>In the import stage, HCM Data Loader:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Extracts the business-object data
+                              from your .zip file on the Oracle WebCenter Content server and decrypts
+                              it, if the file is encrypted.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Validates the business-object file
+                              name and METADATA definitions and raises any errors.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Imports records from the data files
+                              into the HCM Data Loader stage tables.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Validates the data against attribute
+                              data types and raises any errors.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Groups the data by local key values
+                              to form logical records of related date-effective file lines. For
+                              example, all date-effective file lines supplied for a job object are
+                              grouped into a logical occurrence of a job, such as the Accountant
+                              job.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Forms logical objects by resolving
+                              references to parent components. For example, the logical record for
+                              a valid grade is associated with its parent job object.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2078301">
+                     <h3 class="topictitle">Loading Objects to the Application Tables</h3>
+                     
+                     <p>HCM Data Loader doesn't load valid logical objects
+                        directly into the application tables. Instead, it passes valid object
+                        data to business-object-specific services. For example, to load worker
+                        objects, HCM Data Loader passes them to the worker service. These
+                        services perform the validation that's specific to the business object,
+                        raise any errors, and load valid objects to the application tables.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2078302">
+                     <h3 class="topictitle">Setting the File Action Parameter</h3>
+                     
+                     <p>When you import a file on the Import and Load data
+                        page, you can set the <span class="uicontrol">File Action</span> parameter on the Schedule Request page. The value that you specify
+                        here overrides the enterprise default setting. This table describes
+                        how the <span class="uicontrol">File Action</span> parameter
+                        controls import and load.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 File Action Value
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Import and load</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>HCM Data Loader imports the contents of the .zip
+                                    file to the stage tables and calls object services to load valid logical
+                                    objects to the application tables.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Import only</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>HCM Data Loader imports the contents of the .zip
+                                    file to the stage tables but doesn't pass valid logical objects to
+                                    the relevant object service. Instead, you perform that step separately
+                                    on the Import and Load data page by selecting the <span class="uicontrol">Load</span> action for each business object.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>You may want to select <span class="uicontrol">Import
+                           only</span> when you start to load data to enable you to fix
+                        import errors before attempting to load objects. Once your data loading
+                        is routine, the <span class="uicontrol">Import and load</span> option is more appropriate.
+                     </p>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        You can validate your data file before you load it.
+                        Use the Data File Validator tool for HCM Data Loader. For more information,
+                        see Data File Validator Tool for HCM Data Loader (2022617.1) on My
+                        Oracle Support at https://support.oracle.com.
+                        
+                     </div>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2078303">
+                     <h3 class="topictitle">Automating Data Loading  </h3>
+                     
+                     <p>When you automate data loading using the HCM Data
+                        Loader web service, you can set <span class="uicontrol">File Action</span> to <span class="uicontrol">Import only</span> or <span class="uicontrol">Import and load</span>. If you select <span class="uicontrol">Import only</span>, then you load the imported
+                        objects manually on the Import and Load Data page.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2312443">
+                     <h3 class="topictitle">Reviewing Object History</h3>
+                     
+                     <p>For some objects, such as worker assignment, you can review the object
+                        history to see who last updated the object. When the object was last
+                        updated using HCM Data Loader, the <span class="uicontrol">Last Updated
+                           By</span> value is FUSION_APPS_HCM_ESS_LOADER_APPID. You don't
+                        see the user name of the user who uploaded the changes.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2054814">
+                  <h2>Importing and Loading Data: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The file of data that you're preparing to
+                     import and load using HCM Data Loader may exist locally on your desktop.
+                     Alternatively, you may already have loaded it to the Oracle WebCenter
+                     Content server. This topic provides steps for importing and loading
+                     your data interactively on the Import and Load Data page. It also
+                     describes how to load data to the application tables if you imported
+                     it separately to the stage tables.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2054812">
+                     <h3 class="topictitle">Importing and Loading a Local File</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Data Exchange</span></span> to open the Data Exchange work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Tasks panel tab, select <span class="uicontrol">Import and Load Data</span> to open the Import
+                              and Load Data page.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Import File</span> - <span class="uicontrol">Import
+                                    Local File</span></span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Select File</span> dialog box, click <span class="uicontrol">Browse</span> to search for and select your file. Alternatively,
+                              drag the file from your local file browser to the <span class="uicontrol">Browse</span> button. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Submit</span> to upload your file to the Oracle WebCenter Content
+                              server. The file is loaded automatically to the HCM Data Loader import
+                              account hcm/dataloader/import and
+                              allocated a unique content ID. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Schedule Request page, review
+                              the parameter values and update them as required. Most of these values
+                              are set for the enterprise on the Configure HCM Data Loader page and
+                              can be left unchanged. The parameters are:
+                           </p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Parameter
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Description
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>File Name</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Name of the file on the WebCenter Content server.</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Content ID</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>WebCenter Content ID for the file on the WebCenter
+                                          Content server.   
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>File Action</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>The <span class="uicontrol">Import only</span> option imports the business object data into the stage tables but
+                                          doesn't load it to the application tables. You can start the load
+                                          process manually from the user interface.
+                                       </p>
+                                       
+                                       <p>The <span class="uicontrol">Import and load</span> option automatically loads to the application tables any business
+                                          object that loads successfully to the stage tables.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>File Encryption</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Encryption type for the file.</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Delete Source File</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Indicates whether the source file is to be purged
+                                          from the WebCenter Content server after processing.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Maximum Percentage of Import Errors</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Percentage of file lines in error that can occur
+                                          in a business object before the import process stops for the object.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Maximum Percentage of Load Errors</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Percentage of business-object instances in error
+                                          that can occur for a business object before the load process stops.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Maximum Concurrent Threads for Load</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>The maximum number of concurrent process threads
+                                          to use for loading your data set.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Load Group Size</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>The number of objects to process at a time on each
+                                          thread.  The record counts are updated only when processing completes
+                                          for each group.
+                                       </p>
+                                       
+                                       <div class="infobox-"><span class="notep1">Note: </span>
+                                          This parameter appears on the Schedule Request page
+                                          only if the <span class="uicontrol">Enable Load Group Size Calculation</span> configuration parameter is set to <span class="uicontrol">No</span>. Otherwise, the load-group size is calculated automatically.
+                                          
+                                       </div>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Submit</span>. A confirmation message showing the process ID
+                              appears. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Note the process ID and click <span class="uicontrol">OK</span> to close the <span class="uicontrol">Confirmation</span> dialog box. 
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2054862">
+                     <h3 class="topictitle">Importing a File from the Oracle WebCenter Content
+                     Server</h3>
+                     
+                     <p>You can load a .zip file to the Oracle WebCenter
+                        Content Server if you prefer. Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">File Import and Export</span></span> and upload the file to the hcm/dataloader/import account. To import and load a file
+                        that's already on the WebCenter Content server, follow these steps:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>On the Tasks panel tab in the Data
+                              Exchange work area, select <span class="uicontrol">Import and Load
+                                 Data</span> to open the Import and Load Data page.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Import and Load Data page,
+                              click <span class="uicontrol">Import File</span>.
+                           </p>
+                           <p>In the <span class="uicontrol">WebCenter Content Files</span> dialog box, any files in the hcm/dataloader/import account that haven't been processed are listed. You can filter the
+                              list to reduce it. For example, you can enter the file creation date. 
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Select your file in the <span class="uicontrol">WebCenter Content Files</span> dialog box and click <span class="uicontrol">Submit</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Schedule Request page, review
+                              the parameters, edit them as necessary, and click <span class="uicontrol">Submit</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2054863">
+                     <h3 class="topictitle">Starting or Resubmitting a Load</h3>
+                     
+                     <p>You can start the load process directly for a business
+                        object. You may want to do this because you submitted your data set
+                        in <span class="uicontrol">Import only</span> mode. Alternatively,
+                        you may want to resubmit a failed load process. Follow these steps:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>In the Business Objects table on
+                              the Import and Load Data page, select the business object and click <span class="uicontrol">Load</span>. 
+                           </p>
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              The <span class="uicontrol">Load</span> button
+                              is enabled only for business objects with a <span class="uicontrol">Loaded</span> status of <span class="uicontrol">Ready</span>, <span class="uicontrol">Error</span>, or <span class="uicontrol">Stopped</span>.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>On the Schedule Request page, review
+                              the parameter values, edit them if necessary, and click <span class="uicontrol">Submit</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1328221">
+                  <h2>Import and Load Data Search Results</h2>
+                  
+                  
+                  
+                  
+                  <p>This topic describes the values in the search
+                     results on the Import and Load Data page. When you open the page,
+                     it contains details of any import and load processes that you ran
+                     during the last 7 days. You can enter search values to update the
+                     search results. Use the information on this page to monitor the progress
+                     of your data loads.
+                  </p>
+                  
+                  
+                  
+                  <p>To open the page, select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">My Workforce</span> - <span class="uicontrol">Data Exchange</span></span>.
+                     In the Tasks panel tab of the Data Exchange work area, select <span class="uicontrol">Import and Load Data</span>. Not all values described
+                     in this topic appear by default. Select <span><span class="uicontrol">View</span> - <span class="uicontrol">Columns</span></span> to manage column display.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="">
+                     <dl class="reference">
+                        <h3 class="parameterGroupTitle">Values in the Import and Load Data Search Results</h3>
+                        
+                        
+                        
+                        <dt>Data Set</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Name of the compressed data file or spreadsheet containing
+                              business objects to be imported and loaded.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>File Type</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>File type of the data set. Is either <span class="uicontrol">Compressed DAT File</span> or <span class="uicontrol">Spreadsheet</span>.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Integration Type</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Identifier of the associated integration type when
+                              the file is loaded from another application. Otherwise, this value
+                              is blank. 
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Content ID</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Oracle WebCenter Content identifier for the data
+                              set.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Progress</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Summary of the import and load stages for logical
+                              objects.
+                           </p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="This two-column table with three&#xA;data rows shows the value (left column) and its description (right&#xA;column).">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Value
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Description
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Imported</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Status of logical object import.</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Loaded</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Status of logical object load.</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Messages</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Errors and warnings that occurred during either import
+                                          or load.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Imported Physical Rows</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Records imported to the HCM Data Loader stage tables.</p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="This two-column table with four&#xA;data rows shows the value (left column) and its description (right&#xA;column).">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Value
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Description
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Imported (%)</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Percentage of records in the data set that have been
+                                          imported. 
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Total</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Number of records in the data set.</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Complete</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Number of records imported either successfully or
+                                          with warnings.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Failed</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Number of records that failed to import.</p>
+                                       
+                                       <p>Positive numbers in this column link to more information
+                                          about the failures.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Objects</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Objects imported to the application tables.</p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="This two-column table with six&#xA;data rows shows the value (left column) and its description (right&#xA;column).">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Value
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Description
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Loaded (%)</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Percentage of objects in the data set that loaded
+                                          either successfully or with warnings.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Total</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Number of logical objects in the data set.</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Pending</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Number of logical objects imported to the stage tables
+                                          but not yet loaded.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Complete</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Number of logical objects loaded either successfully
+                                          or with warnings.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Failed</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Number of logical objects that failed during either
+                                          import or load.
+                                       </p>
+                                       
+                                       <p>As objects are constructed during the import phase,
+                                          you may see failed objects before the load starts.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Corrected</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Number of logical objects corrected manually on the
+                                          Error Management page.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Created By</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>User name of the worker who imported and loaded the
+                              data set.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Process ID</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Process ID of the import and load process. You can
+                              see process details on the Processes tab in the Details section of
+                              the page for a selected data set.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Creation Date</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Date when the data set was created.</p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Last Updated Date</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Date when the data set was last updated.</p>
+                           
+                        </dd>
+                        
+                        
+                     </dl>
+                  </div>
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1909867">
+                  <h2>Uploading Data Using HCM Data Loader: Worked Example</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This example shows how to import and load
+                     objects manually to Oracle HCM Cloud. Import and load are performed
+                     separately.
+                  </p>
+                  
+                  
+                  
+                  <p>The following table summarizes key decisions for
+                     this scenario.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="">
+                        
+                        
+                        <tr class="header">
+                           <th scope="col">
+                              Decisions to Consider
+                              
+                           </th>
+                           <th scope="col">
+                              In This Example
+                              
+                           </th>
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Which business object am I loading?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Job. The child components of the job object aren't
+                                 being loaded. These components are:
+                              </p>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>Job evaluation</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Job extra information</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Job legislative extra information</p>
+                                    
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Job valid grade</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>What's the template name?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Job.dat</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>What's the name of the file that I am uploading?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Sales_Jobs.zip</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>What's the value of the File Action parameter?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p><span class="uicontrol">Import only</span>.
+                                 You have decided to manage the load step separately.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  <div class="sect2" id="FAIHM1912328">
+                     <h3 class="topictitle">Summary of Tasks</h3>
+                     
+                     <p>Upload the jobs data by:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Generating the jobs template</p>
+                        </li>
+                        
+                        <li>
+                           <p>Entering data in the jobs template</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Importing jobs to the stage tables</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Loading jobs to the application
+                              tables
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                  </div>
+                  
+                  
+                  <h3 class="topictitle">Generating the Job Template</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">My Workforce</span> - <span class="uicontrol">Data Exchange</span></span> to open the
+                           Data Exchange work area.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Tasks panel tab, click <span class="uicontrol">Initiate Data Load</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Initiate Data Load page, select the row
+                           for job in the Search Results section.
+                        </p>
+                        
+                        <p>
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              To locate the row, enter <span class="uicontrol">Job</span> in the <span class="uicontrol">Business Object</span> field of the Search section and click <span class="uicontrol">Search</span>.
+                              
+                           </div>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Generate Template</span> on the table toolbar.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Schedule page, click <span class="uicontrol">Submit</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">OK</span> to
+                           close the confirmation message.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Refresh</span> on the table toolbar to view the <span class="uicontrol">Download
+                              File</span> icon in the <span class="uicontrol">File</span> column for the job row.
+                        </p>
+                        
+                        <p>
+                           <p>You may have to refresh more than once before
+                              the icon appears.
+                           </p>
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              If the icon already exists, then you can download
+                              the existing template. The <span class="uicontrol">Last Generated</span> column shows when the template was generated.
+                              
+                           </div>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click the <span class="uicontrol">Download File</span> icon.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Save the Job.dat template locally.</p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Entering Data in the Job Template</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>Open the Job.dat template.</p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Edit the template file as follows:</p>
+                        
+                        <p>
+                           <ul>
+                              
+                              <li>
+                                 <p>Remove METADATA lines for these
+                                    unwanted child components: job evaluation, job extra information,
+                                    job legislative extra information, and job valid grade.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Edit the job METADATA line to remove
+                                    unwanted attributes.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Make any required changes to the
+                                    attribute order.
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Enter jobs data in the configured template. For
+                           example:
+                        </p>
+                        
+                        <p><pre><code>METADATA|Job|SourceSystemOwner|SourceSystemId|EffectiveStartDate|SetCode|JobCode|Name|ActiveStatus|FullPartTime|RegularTemporary|JobFamilyId(SourceSystemId)|JobFunctionCode|ManagerLevel
+MERGE|Job|VISION|SALES_CONS|2000/01/01|COMMON|SALES_CONS|Sales Consultant|A|FULL_TIME|R|CONSULT||9
+MERGE|Job|VISION|SALES_MGR|2000/01/01|COMMON|SALES_MGR|Sales Manager|A|FULL_TIME|R|MANAGEMENT|MANAG|6
+MERGE|Job|VISION|SALES_DIR|2000/01/01|COMMON|SALES_DIR|Sales Director|A|FULL_TIME|R|MANAGEMENT|MANAG|1
+MERGE|Job|VISION|MRKT_CONS|2000/01/01|COMMON|MRKT_CONS|Marketing Consultant|A|FULL_TIME|R|CONSULT||9
+MERGE|Job|VISION|MRKT_MGR|2000/01/01|COMMON|MRKT_MGR|Marketing Manager|A|FULL_TIME|R|MANAGEMENT|MANAG|6
+MERGE|Job|VISION|MRKT_DIR|2000/01/01|COMMON|MRKT_DIR|Marketing Director|A|FULL_TIME|R|MANAGEMENT|MANAG|1<br></code></pre></p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Save and close the template file.</p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Compress the template file. Name the compressed
+                           file Sales_Jobs.zip and save it locally.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Importing Data to the Stage Tables</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>On the Tasks panel tab in the Data Exchange work
+                           area, click <span class="uicontrol">Import and Load Data</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Import and Load Data page, select <span><span class="uicontrol">Import File</span> - <span class="uicontrol">Import Local File</span></span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the <span class="uicontrol">Select File</span> dialog box, click <span class="uicontrol">Browse</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Select the Sales_Jobs.zip file.</p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Submit</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Schedule Request page, select <span class="uicontrol">Import only</span> in the <span class="uicontrol">File Action</span> field.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Submit</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">OK</span> to
+                           close the confirmation message.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Import and Load Data page, click <span class="uicontrol">Refresh</span> in the <span class="uicontrol">Search Results</span> table.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Review the status of the Sales_Jobs.zip data set
+                           that you uploaded.
+                        </p>
+                        
+                        <p>
+                           <p>When the <span class="uicontrol">Imported</span> column shows <span class="uicontrol">Success</span> and the <span class="uicontrol">Imported(%)</span> column displays <span class="uicontrol">100</span>, you're ready to load the data to the
+                              application tables.
+                           </p>
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Loading Data to the Application Tables</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>In the Search Results table on the Import and Load
+                           page, select the Sales_Jobs.zip data set.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Details table on the Import and Load Data
+                           page, select the job row and click <span class="uicontrol">Load</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the <span class="uicontrol">Schedule Request</span> dialog box, click <span class="uicontrol">Submit</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">OK</span> to
+                           close the confirmation message.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Refresh</span> in the Details table toolbar to check the status of the load.
+                        </p>
+                        
+                        <p>
+                           <p>When the <span class="uicontrol">Loaded</span> column shows <span class="uicontrol">Success</span> and the <span class="uicontrol">Loaded (%)</span> column displays 100, the job
+                              data has successfully loaded to the application tables.
+                           </p>
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2055307">
+                  <h2>Reviewing and Correcting Errors: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Errors that occur during the import and load stages
+                     of data loading are reported automatically on the Import and Load
+                     Data page. This topic describes how to review and correct reported
+                     errors.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2055306">
+                     <h3 class="topictitle">Reviewing Physical Row Errors</h3>
+                     
+                     <p>The <span class="uicontrol">Failed</span> column
+                        for <span class="uicontrol">Imported Physical Rows</span> shows
+                        the number of records that failed to import. Follow these steps to
+                        review the errors when the <span class="uicontrol">Failed</span> column contains a positive number:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click the number in the <span class="uicontrol">Failed</span> column to open the File Line Errors
+                              page. 
+                           </p>
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              You can also open this page from the <span class="uicontrol">Number of Messages</span> column on the Messages
+                              page. You open the Messages page when you select a message in the <span class="uicontrol">Messages</span> column on the Import and Load Data
+                              page. 
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>In the File Structure section of
+                              the File Line Errors page, expand any folders to see file lines with
+                              import errors.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>When you select a line with errors
+                              in the File Structure section of the page: 
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>The Messages section of the page
+                                    shows the associated error message.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>The File Line tab in the Details
+                                    section of the page shows the contents of the physical row.
+                                 </p>
+                                 <p>Using this information, you can determine how to correct
+                                    the import errors.
+                                 </p>
+                                 
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>Examples of physical row errors are:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The instruction or discriminator
+                              isn't recognized.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The number of values in a data
+                              line doesn't match those defined in the METADATA line.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>A unique reference for the component
+                              wasn't supplied.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The parent of a child component
+                              wasn't found, either in the file or in Oracle HCM Cloud.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>A required attribute is missing.</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You must import and load the corrected data again,
+                        and you must add the corrected data file to a new compressed data
+                        file. You can't process the existing file again.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2055378">
+                     <h3 class="topictitle">Reviewing Object Errors</h3>
+                     
+                     <p>The <span class="uicontrol">Failed</span> column
+                        for <span class="uicontrol">Objects</span> shows the number
+                        of objects that failed to load. Follow these steps to review the errors
+                        when the <span class="uicontrol">Failed</span> column contains
+                        a positive number.
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click the number in the <span class="uicontrol">Failed</span> column to open the Object Errors
+                              page.
+                           </p>
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              You can also open this page from the <span class="uicontrol">Number of Messages</span> column on the Messages
+                              page. You open the Messages page when you select a message in the <span class="uicontrol">Messages</span> column on the Import and Load Data
+                              page. 
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>In the Data Structure section of
+                              the Object Errors page, expand any folders to see objects with errors.
+                              When you select an object with errors, the Details section of the
+                              Object Errors page shows:
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>On the Attributes tab, the object
+                                    attributes and the values that you supplied for those attributes.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>On the Source System Reference
+                                    tab, any source-system references supplied in the METADATA and data
+                                    lines in your file. Source system references enable you easily to
+                                    identify the data source.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>On the File Line tab, the contents
+                                    of the physical row.
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>The Messages section of the Object Errors page displays
+                        error messages for the selected object. Using this information, you
+                        can determine how to correct the errors. 
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2055379">
+                     <h3 class="topictitle">Correcting Objects in Error</h3>
+                     
+                     <p>If you prefer to correct object errors in the source
+                        data, then you must import and load the corrected data again. You
+                        must add the corrected data file to a new compressed data file.  You
+                        can't process the existing file again. Alternatively, you can correct
+                        individual attribute values for objects that are in error on the Object
+                        Errors page. Follow these steps:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>In the Data Structure section of
+                              the Object Errors page, select the record that you want to correct.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>On the Attributes tab in the Details
+                              section, click <span class="uicontrol">Edit</span>. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Enter a value in the <span class="uicontrol">Current Value</span> column for each attribute
+                              that you're correcting. To reset any corrected attribute value to
+                              the value supplied in the file, select the attribute and click <span class="uicontrol">Reset</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Save your changes.</p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>You can resubmit the load process for corrected objects
+                        on the Import and Load Data page. You can also see how many objects
+                        you corrected in the <span class="uicontrol">Corrected</span> columns of the tables on the Import and Load Data page. When you click
+                        the number in the <span class="uicontrol">Corrected</span> column,
+                        the Object Errors page opens showing relevant corrections. Corrected
+                        records and attributes are identified by the <span class="uicontrol">Updated</span> icon, which is a blue sphere.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2049799">
+                  <h2>Stopping HCM Data Loader Processing: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can stop the processing of either a data set or an individual business object. This topic explains how to stop
+                     processing.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2049796">
+                     <h3 class="topictitle"> Stopping the Processing of a Data Set</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>In the Search Results section of
+                              the Import and Load Data page, select the data set that you want to
+                              stop.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Refresh</span> to update the status and confirm that the data
+                              set is still processing.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Stop</span>.
+                           </p>
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              The <span class="uicontrol">Stop</span> button
+                              is active only if either the import or the load is still in progress.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Warning</span> dialog box, click <span class="uicontrol">Yes</span> to confirm the stop request.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>The status of the import or load process that was
+                        stopped is updated to <span class="uicontrol">Stopped</span>. A large data set may take a few minutes to stop processing completely.
+                        For efficiency in import and load processing, HCM Data Loader checks
+                        at intervals for stop requests.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2049797">
+                     <h3 class="topictitle">Stopping the Processing of a Business Object</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>In the Details section of the Import
+                              and Load Data page, select the business object that you want to stop
+                              processing.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Refresh</span> to update the status and confirm that the business
+                              object is still processing.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Stop</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Warning</span> dialog box, click <span class="uicontrol">Yes</span> to confirm the stop request.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>The status of the import or load process that was
+                        stopped is updated to <span class="uicontrol">Stopped</span>.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2049798">
+                     <h3 class="topictitle">Restarting Stopped Processes</h3>
+                     
+                     <p>You can't restart a stopped import process for a
+                        business object. However, you can restart a stopped load process for
+                        a business object. Select the stopped business object in the Details
+                        section of the Import and Load Data page and click <span class="uicontrol">Load</span>. The status of both the business object
+                        and the associated data-set load processes changes to<span class="uicontrol"> In Progress</span>.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2245856">
+                  <h2>Automating Data Loading: Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can automate HCM Data Loader processes
+                     to load data to Oracle HCM Cloud and extract both status and error
+                     information. This topic provides an introduction to the automation
+                     processes.
+                  </p>
+                  
+                  <p>The processes that you can automate are:</p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Delivery of .zip files to the Oracle
+                           WebCenter Content server
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Initiation of HCM Data Loader to
+                           process files on the WebCenter Content server
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Initiation of the HCM Data Loader
+                           Data Set Summary extract and retrieval of its output
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>Complete instructions are provided in Automating
+                     HCM Data Loader (1664133.1) on My Oracle Support at https://support.oracle.com.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2245837">
+                     <h3 class="topictitle">Delivering Files to Oracle WebCenter Content
+                     Automatically</h3>
+                     
+                     <p>To automate the delivery of .zip files to
+                        the WebCenter Content server, you can use:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The WebCenter Content Document
+                              Transfer Utility, a feature-rich Java library that provides content
+                              import and export capabilities
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>WebCenter Content Generic SOAP
+                              Web Service, which exposes a SOAP web service interface (GenericSoapPort)
+                              that supports various operations, including file upload
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2245863">
+                     <h3 class="topictitle">Initiating HCM Data Loader Automatically</h3>
+                     
+                     <p>You can initiate HCM Data Loader automatically
+                        to process multiple files on the Oracle WebCenter Content server using
+                        the HCM Data Loader Integration Service. This web service provides
+                        two methods:
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Method
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>importAndLoadData</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Initiates the processing of a data file</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>getDataSetStatus</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Returns the current status of a data file</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>Several ways exist of running the web service. For
+                        example, you can use generated proxy classes.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2245880">
+                     <h3 class="topictitle">Initiating the HCM Data Loader Data Set Summary
+                     Extract Automatically</h3>
+                     
+                     <p>HCM Extracts is a tool for reporting and
+                        outbound integrations. When you use HCM Extracts as part of an integrated
+                        process, you can initiate it automatically from an automated flow.
+                        The Payroll Flow Engine is the generic processing engine that you
+                        use for this purpose.
+                     </p>
+                     
+                     <p>When you save a copy of the predefined HCM Data Loader
+                        Data Set Summary extract, you also create a payroll flow of type Extract.
+                        You can initiate this payroll flow using the FlowActionsService, which
+                        you use to automate and monitor the extract. You use the payrollProcessingActionService.fetchExtractOutput
+                        method to download the extract output. When the extract is associated
+                        with a BI template, the payroll flow ensures that the BI report is
+                        generated and written to the BI server.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="http://support.oracle.com/epmos/faces/DocumentDisplay?id=1664133.1">Automating HCM Data Loader (1664133.1)</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM2141648.htm#FAIHM2051675">HCM Data Loader Extracts: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2139850">
+                  <h2>FAQs for Importing and Loading Data Using HCM Data Loader</h2>
+                  
+                  <div class="sect2" id="FAIHM996912">
+                     <h3>What's an HCM Data Loader data set?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>A set of data supplied together to be loaded
+                        into Oracle HCM Cloud. The source of a data set is either a compressed
+                        data file containing delimited business-object-specific data files
+                        or an HCM Spreadsheet Data Loader spreadsheet.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1281962">
+                     <h3>What happens in the import stage?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>The application imports individual file lines
+                        from your compressed data file to the HCM Data Loader stage tables. Related
+                        file lines are grouped to form logical business objects, and some
+                        preliminary validation occurs. Errors reported at this stage are specific
+                        to the object itself. The object's dependencies on other objects aren't
+                        assessed.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1282093">
+                     <h3>What happens in the load stage?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>The application validates foreign-object
+                        references and applies business-object-specific validation rules.
+                        If the object passes all validation, then it's loaded to the Oracle
+                        HCM Cloud application tables. If any component of the object fails
+                        validation, then the whole logical object fails to load. You can monitor
+                        object status on the Import and Load Data page. Errors reported at
+                        this stage may relate to either the object itself or its dependencies
+                        on other objects.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1274057">
+                     <h3>How can I view the data in error for a data set or business object?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Click the number in the relevant <span class="uicontrol">Failed</span> column on the Import and Load Data
+                        page. Alternatively, click the number in the <span class="uicontrol">Number of Messages</span> column on the Messages page. Numbers
+                        greater than zero in these columns become active links. The Error
+                        Management page that opens has different views based on how you navigate
+                        to it. If you navigate from the <span class="uicontrol">Failed</span> column for imported physical rows, then you can review the file
+                        lines in error. If you navigate from the <span class="uicontrol">Failed</span> column for objects, then you can review the objects
+                        in error.
+                     </p>
+                     
+                     
+                     
+                     <p></p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM997732">
+                     <h3>How do I fix errors?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>You must fix errors identified during import
+                        to the stage tables in the source data. Upload the corrected data again in a new compressed
+                        data file. You can't process the existing file again.
+                     </p>
+                     
+                     
+                     
+                     <p>You can also fix errors identified during load to
+                        the application tables in the source data and upload the corrected
+                        data again. Alternatively, you can correct individual errors on the
+                        Object Errors page. In this case, you resubmit the load process for
+                        corrected objects on the Import and Load Data page.
+                     </p>
+                     
+                     
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

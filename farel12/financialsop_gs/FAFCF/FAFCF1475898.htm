@@ -1,0 +1,1512 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Importing and Exporting Setup Data (Chapter 11) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Implementing Common Features" name="dcterms.title">
+      <meta content="Implementing Common Features" name="doctitle">
+      <meta content="E73063-02" name="dcterms.identifier">
+      <meta content="E67969-01" name="partno">
+      <meta content="FAFCF" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Mon Mar 06 10:35:08 PST 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="configuration package;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAFCF2241429.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="glossary.htm" rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAFCF.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAFCF.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="A Configuration Package contains the setup import and export definition. The setup import and export definition is the list
+      of setup tasks and their associated business objects that identifies the setup data for export as well as the data itself.
+      When you create a configuration package only the setup export and import definition exists. Once you submit export, a snapshot
+      of the appropriate setup data is added to the configuration package using the definition. You can continue making modifications
+      to the setup data in the environment and create a new configuration package any time you need it. The common reference objects
+      are used by several setup tasks in the Setup and Maintenance work area. The common reference objects become a part of the
+      configuration package that is created for an implementation project. While moving the application content, for example, moving
+      from test to the production phase of an implementation, attend to the nuances of these common reference objects. The common
+      reference objects are represented as business objects. A single object can be referenced in multiple setup tasks with different
+      parameters. In the configuration package created for the implementation project, parameters passed to a setup task are also
+      passed to the business objects being moved. As a result, the scope of the setup tasks is maintained intact during the movement.
+      Common reference objects may have internal references or dependencies among other common reference objects. Therefore, you
+      must note all the dependencies before moving the objects so that there are no broken references among them."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">14/15</span><a name="BEGIN" id="BEGIN"></a><div id="FAFCF1475898" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">11</span>Importing and Exporting Setup Data
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAFCF529756">Configuration Packages: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAFCF529648">Implementation Project Based Export and Import: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAFCF1475896">Moving Common Reference Objects</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAFCF529756">
+                  <h2>Configuration Packages: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>A Configuration Package contains the setup
+                     import and export definition. The setup import and export definition
+                     is the list of setup tasks and their associated business objects that
+                     identifies the setup data for export as well as the data itself. When
+                     you create a configuration package only the setup export and import
+                     definition exists. Once you submit export, a snapshot of the appropriate
+                     setup data is added to the configuration package using the definition.
+                     You can continue making modifications to the setup data in the environment
+                     and create a new configuration package any time you need it.
+                  </p>
+                  
+                  
+                  
+                  <p>You can generate the setup export and import definition
+                     implicitly or explicitly:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>A configuration package is created
+                           implicitly when you export setup data for an entire offering or any
+                           functional area from the Applications Administration page. 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>A configuration package is created
+                           explicitly when you export setup data based on an implementation project.
+                           This method enables further customization of the configuration packages.
+                        </p>
+                        
+                     </li>
+                     
+                  </ul>
+                  
+                  <p> You generate the setup export and import definition
+                     by selecting an implementation project and creating a configuration
+                     package. The tasks and their associated business objects in the selected
+                     implementation project define the setup export and import definition
+                     for the configuration package. In addition, the sequence of the tasks
+                     in the implementation project determines the export and import sequence.
+                  </p>
+                  
+                  <p>The tasks and their associated business objects in
+                     the selected configuration (offering, functional area or implementation
+                     project) define the setup export and import definition for the configuration
+                     package. In addition, the sequence of the tasks in the implementation
+                     project determines the export and import sequence.
+                  </p>
+                  
+                  
+                  
+                  <p>Once a configuration package is exported, the setup
+                     export and import definition is locked and cannot be changed; that
+                     is, you cannot change the selection (add or remove) of tasks and their
+                     associated business objects, change their export and import sequence,
+                     nor the scope value selection. However, you can create a new configuration
+                     package with such modifications at any time.
+                  </p>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAFCF529648">
+                  <h2>Implementation Project Based Export and Import: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Use an implementation project as the source
+                     for exporting setup data when you are required to customize the list
+                     of tasks or of objects you want to export setup data for.
+                  </p>
+                  
+                  
+                  
+                  <p>You must explicitly create a configuration package
+                     from the Manage Configuration Packages page to export setup data for
+                     an implementation project. You generate the setup export and import
+                     definition by selecting an implementation project and creating a configuration
+                     package. The tasks and their associated business objects in the selected
+                     implementation project define the setup export and import definition
+                     for the configuration package.  Depending on your needs, when you
+                     create a configuration package based on an implementation project,
+                     you can also customize some additional aspects, as explained here.
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Exclude some of the business objects
+                           from the configuration you selected to export setup data for.  
+                        </p>
+                        <p>You should limit to use this option when the corresponding
+                           setup data is already available in the target instance and therefore
+                           no data dependency issues appear during import.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Change the default import sequence
+                           of the business objects
+                        </p>
+                        <p>Change the default import
+                           sequence of the business objects. It's strongly recommended that you
+                           limit using this option when you need to correct a data dependency
+                           issue and you fully understand the data relationships between the
+                           business objects of your configuration.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Filter the setup data to export</p>
+                        
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="FAFCF529645">
+                     <h3 class="topictitle">Export</h3>
+                     
+                     <p> During export, appropriate setup data is identified
+                        based on the tasks in the implementation project used as source for
+                        the configuration package.  The setup data in the configuration package
+                        is a snapshot of the data in the source application instance at the
+                        time of export. Once export completes, you can download the configuration
+                        package file as a zipped archive of multiple XML files, move it to
+                        the target application instance, and upload and import it. After exporting
+                        the setup data you may continue entering new or modifying existing
+                        setup data for your configuration. Since the configuration package
+                        is a snapshot of the setup data taken at the time export is initiated,
+                        you may need to take another snapshot of the same configuration or
+                        set of data later. Although you can always create a different configuration
+                        package, FSM provides you the ability to take another snapshot of
+                        the setup data using the same customized export and import definition
+                        by exporting the configuration package multiple times and creating
+                        multiple versions. While the export definition remains the same in
+                        each version, the setup data can be different if you modified the
+                        data in the time period between the different runs of the export process.
+                        Since each version of the configuration package has a snapshot of
+                        the data in the source instance, you can compare and analyze various
+                        versions of the configuration package to see how the setup data changed.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAFCF529646">
+                     <h3 class="topictitle">Import</h3>
+                     
+                     <p>During import, you first upload a configuration package
+                        created by the export process and then import the setup data. All
+                        setup data contained in the configuration package is imported into
+                        the environment you initiate the setup data import from. In the target
+                        application instance, the setup import process inserts all new data
+                        from the source configuration package that does not already exist,
+                        and update any existing data with changes from the source. Setup data
+                        that exists in the target instance but not in source will remain unchanged.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAFCF1475896">
+                  <h2>Moving Common Reference Objects</h2>
+                  
+                  <div class="sect2" id="FAFCF270172">
+                     <h3>Moving Common Reference Objects: Overview</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>The common reference objects are used by several
+                        setup tasks in the Setup and Maintenance work area. The common reference
+                        objects become a part of the configuration package that is created
+                        for an implementation project. While moving the application content,
+                        for example, moving from test to the production phase of an implementation,
+                        attend to the nuances of these common reference objects.
+                     </p>
+                     
+                     
+                     <div class="sect3" id="FAFCF270165">
+                        <h4 class="topictitle">Parameters</h4>
+                        
+                        <p>The common reference objects are represented
+                           as business objects. A single object can be referenced in multiple
+                           setup tasks with different parameters. In the configuration package
+                           created for the implementation project, parameters passed to a setup
+                           task are also passed to the business objects being moved. As a result,
+                           the scope of the setup tasks is maintained intact during the movement.
+                        </p>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FAFCF270166">
+                        <h4 class="topictitle">Dependencies</h4>
+                        
+                        <p>Common reference objects may have internal
+                           references or dependencies among other common reference objects. Therefore,
+                           you must note all the dependencies before moving the objects so that
+                           there are no broken references among them.
+                        </p>
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAFCF273878">
+                     <h3>Business Objects for Moving Common Reference Objects: Points to Consider</h3>
+                     
+                     
+                     
+                     
+                     
+                     
+                     <p>Common reference objects in Oracle Fusion
+                        Functional Setup Manager are used to move application setup content
+                        from one environment to another. For example, from a test environment
+                        to a production environment.
+                     </p>
+                     
+                     
+                     
+                     <div class="sect3" id="FAFCF273875">
+                        <h4 class="topictitle">Choice of Parameters</h4>
+                        
+                        <p>The following table lists the business objects, the
+                           movement details, and the effect of the setup task parameter on the
+                           scope of the movement.
+                        </p>
+                        
+                        <div class="infobox-"><span class="notep1">Note: </span>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>You can move only the translations
+                                    in the current user language.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>You can move the Oracle Social Network
+                                    business objects and the Navigator menu customizations using the customization
+                                    sets on the Customization Migration page.
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </div>
+                        
+                        <div class="simpletable-margin">
+                           <table class="customlayout" summary="Business objects in Oracle Fusion&#xA;Middleware Extensions for Applications">
+                              
+                              
+                              <tr class="header">
+                                 
+                                 <th scope="col">
+                                    Business Object Name
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Moved Functional Item
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Effect on the Scope of Movement
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Message</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Messages and associated tokens</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All messages are moved.</p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only messages belonging to the specified module and its descendant
+                                       modules in the taxonomy hierarchy are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>messageName/applicationId</code>: Only the specified message is moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Taxonomy</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Application taxonomy modules and components</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All taxonomy modules and components
+                                       are moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Attachment Entity</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Attachment entities</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All attachment entities are moved.</p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only attachment entities belonging to the specified module and
+                                       its descendant modules in the taxonomy hierarchy are moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Attachment Category</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Attachment categories and category-to-entity mappings</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All attachment categories and category-to-entity
+                                       mappings are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only attachment categories belonging to the specified module and
+                                       its descendant modules in the taxonomy hierarchy along with the respective
+                                       category-to-entity mappings are moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Document Sequence Category</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Document sequence categories</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All categories are moved.</p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only categories belonging to the specified module and its descendant
+                                       modules in the taxonomy hierarchy are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>code/applicationId</code>: Only the specified document sequence category code is moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Document Sequence</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Document sequences and their assignments</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All sequences are moved.</p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only document sequences belonging to the specified module and its
+                                       descendant modules in the taxonomy hierarchy are moved
+                                    </p>
+                                    
+                                    <p>Parameter <code>name</code>: Only
+                                       the specified document sequence is moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Descriptive Flexfield</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Descriptive flexfield registration data and setup
+                                       data
+                                    </p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All descriptive flexfields are moved.</p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only descriptive flexfields belonging to the specified module and
+                                       its descendant modules in the taxonomy hierarchy are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>descriptiveFlexfieldCode/applicationId</code>: Only the specified descriptive flexfield is moved. Importing the
+                                       metadata of a flexfield can change its deployment status. Therefore,
+                                       you must redeploy if there are any affected flexfields. The import
+                                       process automatically submits affected flexfields for redeployment.
+                                       Also, only flexfields with a deployment status of Deployed or Deployed
+                                       to Sandbox are eligible to be moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Extensible Flexfield</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Extensible flexfield registration data and setup data,
+                                       including categories
+                                    </p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All extensible flexfields are moved</p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only extensible flexfields belonging to the specified module and
+                                       its descendant modules in the taxonomy hierarchy are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>extensibleFlexfieldCode/applicationId</code>: Only the specified extensible flexfield is moved. Importing the
+                                       metadata of a flexfield can change its deployment status and therefore,
+                                       the affected flexfields must be redeployed. The import process automatically
+                                       submits affected flexfields for redeployment.
+                                    </p>
+                                    
+                                    <p>Also, only flexfields with a deployment status of
+                                       Deployed or Deployed to Sandbox are eligible to be moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Key Flexfield</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Key flexfield registration data and setup data</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All key flexfields are moved.</p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only key flexfields belonging to the specified module and its descendant
+                                       modules in the taxonomy hierarchy are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>keyFlexfieldCode/applicationId</code>: Only the specified key flexfield is moved.
+                                    </p>
+                                    
+                                    <p>Importing the metadata of a flexfield can change its
+                                       deployment status and therefore, the affected flexfields must be redeployed.
+                                       The import process automatically submits affected flexfields for redeployment.
+                                       Only flexfields with a deployment status of Deployed or Deployed to
+                                       Sandbox are eligible to be moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Flexfield Value Set</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Value set setup data</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All value sets are moved.</p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only value sets belonging to the specified module and its descendant
+                                       modules in the taxonomy hierarchy are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>valueSetCode</code>: Only the specified value set is moved.
+                                    </p>
+                                    
+                                    <p>Importing the metadata of a value set can change the
+                                       deployment status of flexfields that use the value set. Therefore,
+                                       you must redeploy if there are any affected flexfields. The import
+                                       process automatically submits affected flexfields for redeployment.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Reference Currency</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Currency data</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All currencies are moved.</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Reference ISO Language</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>ISO language data</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All ISO languages are moved.</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Reference Industry</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Industry data including industries in territories
+                                       data
+                                    </p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All industries are moved.</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Reference Language</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Language data</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All languages are moved.</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Reference Natural Language</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Natural language data</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All natural languages are moved.</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Reference Territory</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Territory data</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All territories are moved.</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Reference Time zone</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Time zone data</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All time zones are moved.</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Standard Lookup</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Standard lookup types and their lookup codes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All standard lookups are moved.</p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only standard lookups belonging to the specified module and its
+                                       descendant modules in the taxonomy hierarchy are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>lookupType</code>: Only the specified common lookup is moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Common Lookup</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Common lookup types and their lookup codes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All common lookups are moved.</p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only common lookups belonging to the specified module and its descendant
+                                       modules in the taxonomy hierarchy are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>lookupType</code>: Only the specified common lookup is moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Set-Enabled Lookup</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Set-enabled lookup types and their lookup codes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All set-enabled lookups are moved.</p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only set-enabled lookups belonging to the specified module and
+                                       its descendant modules in the taxonomy hierarchy are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>lookupType</code>: Only the specified set-enabled lookup is moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Profile Category</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Profile categories</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All profile categories are moved.</p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only categories belonging to the specified module and its descendant
+                                       modules in the taxonomy hierarchy are moved.
+                                    </p>
+                                    
+                                    <p><code>name/applicationId</code>:
+                                       Only the specified category is moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Profile Option</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Profile options and their values</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All profile options and their values
+                                       are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only profile options and their values belonging to the specified
+                                       module are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>profileOptionName</code>: Only the specified profile option and its values are moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Profile Value</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Profile options and their values</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All profiles and their values are moved.</p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only profiles and their values belonging to the specified module
+                                       are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>categoryName/categoryApplicationId</code>: Only profiles and their values belonging to the specified category
+                                       are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>profileOptionName</code>: Only the specified profile and its values are moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Reference Data Set</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Reference data sets</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All sets are moved.</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Reference Data Set Assignment</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Reference data set assignments</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Parameter <code>determinantType</code>: Only assignments for the specified determinant type are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>determinantType/referenceGroupName</code>: Only assignments for the specified determinant type and reference
+                                       group are moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Tree Structure</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Tree structures and any labels assigned to the tree
+                                       structure
+                                    </p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All tree structures (and their labels)
+                                       are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only tree structures (and their labels) belonging to the specified
+                                       module are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>treeStructureCode</code>: Only the specified tree structure (with its labels) is moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Tree</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Tree codes and versions</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All trees are moved.</p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only trees belonging to the specified module are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>treeStructureCode</code>: Only trees belonging to the specified tree structure are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>TreeStructureCode/TreeCode</code>: Only trees belonging to the specified tree structure and tree code
+                                       are moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Tree Label</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Tree structures and any labels assigned to the tree
+                                       structure
+                                    </p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All tree structures (and their labels)
+                                       are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only tree structures (and their labels) belonging to the specified
+                                       module and its descendant modules in the taxonomy hierarchy are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>treeStructureCode</code>: Only the specified tree structure (with its labels) is moved.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Application Data Security Policy</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Database resources, actions, conditions, and data
+                                       security policies
+                                    </p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No parameters: All database resources/actions/conditions/policies
+                                       are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>moduleType/moduleKey</code>: Only database resources/actions/conditions/policies belonging to
+                                       the specified module and its descendant modules in the taxonomy hierarchy
+                                       are moved.
+                                    </p>
+                                    
+                                    <p>Parameter <code>objName</code>: Only
+                                       the specified database resource along with its actions/conditions/policies
+                                       is moved.
+                                    </p>
+                                    
+                                    <p>If the policies being moved contain reference to newly
+                                       created roles, move the roles before moving the policies. If the source
+                                       and target systems use different LDAPs, manually perform the GUID
+                                       reconciliation after moving the data security policies.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        <p></p>
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAFCF274129">
+                     <h3>Moving Related Common Reference Objects: Points to Consider</h3>
+                     
+                     
+                     
+                     
+                     
+                     
+                     <p>Certain common reference objects may use other
+                        common reference objects creating dependencies among the objects.
+                        During the movement of common reference objects, ensure that these
+                        dependencies or references aren't broken or lost.
+                     </p>
+                     
+                     
+                     
+                     <div class="sect3" id="FAFCF274127">
+                        <h4 class="topictitle">Dependencies</h4>
+                        
+                        <p>The dependencies among the common reference objects
+                           may be caused by any of the following conditions.
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Flexfield segments use value sets</p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Value sets may make use of standard,
+                                 common, or set-enabled lookups
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Key flexfields may have an associated
+                                 tree structure and key flexfield segments may have an associated tree
+                                 code
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Tree codes and versions may be defined
+                                 over values of a value set
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Data security policies may be defined
+                                 for value sets that have been enabled for data security
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>You may decide to move one, some, or all of the business
+                           objects by including the ones you want to move in your configuration
+                           package. For example, you may decide to move only value sets, or move
+                           both value sets and their lookups as part of the same package. Whatever
+                           be the combination, Oracle recommends that during the movement of
+                           objects, you follow an order that maintains the dependencies among
+                           the objects.
+                        </p>
+                        
+                        <p>While moving the business objects, adhere to the following
+                           order:
+                        </p>
+                        
+                        <ol>
+                           
+                           <li>
+                              <p>Move created taxonomy modules before
+                                 moving any objects that reference them, such as flexfields, lookups,
+                                 profiles, messages, and so on.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Move created currencies before moving
+                                 any objects that reference them, such as territories.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Move created territories before moving
+                                 any objects that reference them, such as languages and natural languages.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Move created ISO languages before
+                                 moving any objects that reference them, such as languages, natural
+                                 languages, and industries.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Move created tree structures before
+                                 moving any objects that reference them, such as trees or tree labels.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Move created profile options before
+                                 moving any objects that reference them, such as profile categories
+                                 or profile values.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Move created attachment entities
+                                 before moving any objects that reference them, such as attachment
+                                 categories that reference them.
+                              </p>
+                           </li>
+                           
+                        </ol>
+                        
+                        <div class="infobox-"><span class="notep1">Note: </span>
+                           In scenarios where there may be dependencies on other
+                           objects, you must move the dependencies before moving the referencing
+                           object. For example, if data security policies have dependencies on
+                           newly created security roles, you must move the security roles before
+                           moving the security policies.
+                           
+                        </div>
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAFCF274441">
+                     <h3>Using Seed Data Framework to Move Common Reference Objects: Points to Consider</h3>
+                     
+                     
+                     
+                     
+                     
+                     
+                     <p>To move the common reference objects, you
+                        can use the Seed Data Framework (SDF). You can also use the command
+                        line interface of SDF to move the object setup data. For more information
+                        about seed data loaders including common reference object loaders,
+                        see Oracle Fusion Applications Developer's Guide.
+                     </p>
+                     
+                     
+                     
+                     <div class="sect3" id="FAFCF274439">
+                        <h4 class="topictitle">Movement Dependencies</h4>
+                        
+                        <p>The seed data interface moves only the setup metadata.
+                           For example, if you use SDF to import flexfield metadata, the flexfield
+                           setup metadata is imported into your database. However, you must initiate
+                           the flexfield deployment process separately after seed data import
+                           to regenerate the runtime flexfield artifacts in the target environment.
+                           Similarly, if you use SDF to import data security metadata, you must
+                           first move any new referenced roles and then manually run the GUID
+                           reconciliation where required.
+                        </p>
+                        
+                        <p>To ensure that the reference data is not lost during
+                           the movement, certain guidelines are prescribed. It is recommended
+                           that you perform the movement of object data exactly in the order
+                           given below.
+                        </p>
+                        
+                        <div class="infobox-note"><span class="notep1">Note: </span>
+                           Only the translation in the current user language
+                           is moved.
+                           
+                        </div>
+                        
+                        <ol>
+                           
+                           <li>
+                              <p>Move created taxonomy modules before
+                                 moving any objects that reference them, such as flexfields, lookups,
+                                 profiles, attachments, reference data sets, document sequences, messages,
+                                 and data security.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Move created currencies before moving
+                                 any objects that reference them, such as territories.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Move created territories before moving
+                                 any objects that reference them, such as languages and natural languages.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Move created ISO languages before
+                                 moving any objects that reference them, such as languages, natural
+                                 languages, and industries.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Move created tree structures before
+                                 moving any objects that reference them, such as trees or tree labels.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Move created profile options before
+                                 moving any objects that reference them, such as profile categories
+                                 or profile values.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Move created attachment entities
+                                 before moving any objects that reference them, such as attachment
+                                 categories that reference them.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Move created reference data sets
+                                 before moving any objects that reference them, such as reference data
+                                 set assignments and set-enabled lookups.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Move created document sequence categories
+                                 before moving any objects that reference them, such as document sequences.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Move created tree labels before moving
+                                 any objects that reference them, such as trees.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Move created data security objects
+                                 and policies before moving any objects that reference them, such as
+                                 value sets.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Move created value sets before moving
+                                 any objects that reference them, such as flexfields.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Move created trees before moving
+                                 any objects that reference them, such as key flexfields.
+                              </p>
+                           </li>
+                           
+                        </ol>
+                        
+                     </div>
+                     
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

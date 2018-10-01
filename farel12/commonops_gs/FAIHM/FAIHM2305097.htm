@@ -1,0 +1,1555 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Loading Talent Objects (Chapter 14) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:17 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM Data Loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM2306740.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM2139760.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="You can load goals, goal plans, and goal plan sets using HCM Data Loader. Most of these objects have dependencies on other
+      objects. This table identifies the other objects that must exist in the target environment. If you're loading some or all
+      of those objects with goals, goal plans, or goal plan sets, then follow the load order shown here."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">17/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM2305097" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">14</span>Loading Talent Objects
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2312222">Loading Goals, Goal Plans, and Goal Plan Sets: Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2312015">Loading Goals: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2311812">Loading Goals: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2312919">Loading Goal Plans: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2313258">Loading Goal Plans: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2314238">Loading Goal Plan Sets: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2314341">Loading Goal Plan Sets: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2572950">Loading Talent Pools: Examples</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM2312222">
+                  <h2>Loading Goals, Goal Plans, and Goal Plan Sets: Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can load goals, goal plans, and goal plan sets using HCM Data Loader.
+                     Most of these objects have dependencies on other objects. This table
+                     identifies the other objects that must exist in the target environment.
+                     If you're loading some or all of those objects with goals, goal plans,
+                     or goal plan sets, then follow the load order shown here. 
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Object
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Object Load Order
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Notes
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Goal plan</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ol>
+                                 
+                                 <li>
+                                    <p>Worker and primary assignment</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Eligibility profile</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Organization</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Goal plan document type</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Goal plan</p>
+                                 </li>
+                                 
+                              </ol>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>Review periods must exist in the
+                                       target environment before you upload associated goal plans.
+                                    </p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Organizations are required for
+                                       organization goal plans.
+                                    </p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>A goal plan document type component
+                                       is required when the <span class="uicontrol">IncludeInPerfDoc</span> attribute is set to <span class="uicontrol">Y</span>.
+                                    </p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Goal plan set</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ol>
+                                 
+                                 <li>
+                                    <p>Goal plan</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Worker and primary assignment</p>
+                                    
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Eligibility profile</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Goal plan set</p>
+                                 </li>
+                                 
+                              </ol>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>Review periods must exist in the
+                                       target environment before you upload associated goal plan sets.
+                                    </p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Goal plan set objects can refer
+                                       to goal plans.
+                                    </p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Library goal</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ol>
+                                 
+                                 <li>
+                                    <p>Content item</p>
+                                 </li>
+                                 
+                              </ol>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Library goals are loaded as content items.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Organization goal</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ol>
+                                 
+                                 <li>
+                                    <p>Worker (line manager)</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Organization</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Goal plan</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Goal</p>
+                                 </li>
+                                 
+                              </ol>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>For organization goals:</p>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>The line manager is the organization
+                                       owner.
+                                    </p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Goal plans are required.</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Template goal</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ol>
+                                 
+                                 <li>
+                                    <p>Worker (human resource specialist)
+                                       and assignment
+                                    </p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Goal plan</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Goal</p>
+                                 </li>
+                                 
+                              </ol>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Goal plans are required.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Worker development goal</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ol>
+                                 
+                                 <li>
+                                    <p>Worker</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Content item</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Goal</p>
+                                 </li>
+                                 
+                              </ol>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Worker development goals aren't associated with goal
+                                 plans.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Worker performance goal</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ol>
+                                 
+                                 <li>
+                                    <p>Worker and assignment</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Goal plan</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Content item</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Goal</p>
+                                 </li>
+                                 
+                              </ol>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Worker performance goals must be associated with
+                                 goal plans.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=6D126FF6C7502E56E040D30A68810FAF">Goal Management: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2312015">
+                  <h2>Loading Goals: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Goals represent the objectives of employees
+                     and organizations. This topic describes aspects of the goal object
+                     that you must understand to load goals successfully.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2312013">
+                     <h3 class="topictitle">Goal Types</h3>
+                     
+                     <p>This table identifies the types of goals that you
+                        can load using HCM Data Loader.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Goal Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Organization goal</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Created by a manager for a specific organization.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Template goal</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Used in goal plans.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Worker goal</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Assigned to a worker by a manager or human resource
+                                    specialist. Two types of worker goals exist:
+                                 </p>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>Development goals</p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Performance goals</p>
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        You can also load library goals using HCM Data Loader.
+                        You load library goals as profile content items. You can refer to
+                        library goals from other goal objects.
+                        
+                     </div>
+                     
+                     <p>When you load goals in the Goal.dat file, you can
+                        include the <span class="uicontrol">GoalTypeCode</span> attribute.
+                        This value is validated using the HRG_GOAL_TYPE lookup type. For organization goals, <span class="uicontrol">GoalTypeCode</span> must be PERFORMANCE, which
+                        is the default value.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2312079">
+                     <h3 class="topictitle">Goal Components</h3>
+                     
+                     <p>The components that you can supply when loading goals
+                        depend on the goal type. This table identifies when you can provide
+                        each component.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Goal Component
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Goal Type
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Goal</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Goal action</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Goal plan goal</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>Worker performance goals</p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Organization goals</p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Template goals</p>
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Goal target outcome</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>Worker goals</p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Template goals</p>
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Goal measurement</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All</p>
+                                 
+                                 <div class="infobox-"><span class="notep1">Note: </span>
+                                    You can specify only one goal measurement component
+                                    for a development
+                                    goal.
+                                    
+                                 </div>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Goal access</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>Worker goals</p>
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Goal alignment</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>Worker performance goals</p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Organization goals</p>
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2315461">
+                     <h3 class="topictitle">User Keys</h3>
+                     
+                     <p>You can't supply a user key as the unique identifier
+                        for a goal or its child components when you load them using HCM Data
+                        Loader. You must supply source keys when loading goals.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2312146">
+                     <h3 class="topictitle">Profile Options</h3>
+                     
+                     <p>This table identifies profile options that must be
+                        both enabled and set to <span class="uicontrol">Y</span> for
+                        successful loading of goal components.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Profile Option
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 What the Option Enables
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HRG_ENABLE_GOAL_ALIGN</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Alignment of goals in the goal alignment component</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HRG_ENABLE_GRANT_ACCESS</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Shared goals in the goal access component</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HRG_ENABLE_OUTCOMES</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Creation of goal target outcomes in the goal target
+                                    outcome component 
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HRG_ENABLE_TASK</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Creation of goal tasks in the goal action component</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>To enable profile options, use
+                              the Manage Profile Options task.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>To set the value of a profile option,
+                              use the Manage Administrator Profile Values task.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Perform both tasks in the Setup and Maintenance work
+                        area.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2312172">
+                     <h3 class="topictitle">Deleting Goals</h3>
+                     
+                     <p>You can delete goals using HCM Data Loader. When
+                        you delete a parent goal object, these child components are also deleted
+                        automatically:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Goal access</p>
+                        </li>
+                        
+                        <li>
+                           <p>Goal action</p>
+                        </li>
+                        
+                        <li>
+                           <p>Goal alignment, where <span class="uicontrol">GoalId</span> or <span class="uicontrol">AlignedGoalId</span> identifies the goal that you're deleting
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Goal plan goal</p>
+                        </li>
+                        
+                        <li>
+                           <p>Goal target outcome</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You can also delete child components individually,
+                        if required.
+                     </p>
+                     
+                     <p>Goal measurement components aren't deleted automatically
+                        when you delete the parent goal using HCM Data Loader. You must delete
+                        goal measurement components explicitly before deleting the parent
+                        goal. This example Goal.dat file deletes a goal measurement component.
+                        The parent goal is identified by its source key.
+                     </p>
+                     <pre><code>METADATA|GoalMeasurement|SourceSystemId|SourceSystemOwner|GoalId(SourceSystemId)
+DELETE|GoalMeasurement|GoalMeasurement_001_SSID|VISION|WorkerGoal_001_SSID<br></code></pre>
+                     <p>This example Goal.dat file deletes a goal and its
+                        child components, other than goal measurement. The goal is identified
+                        by its source key.
+                     </p>
+                     <pre><code>METADATA|Goal|SourceSystemId|SourceSystemOwner
+DELETE|Goal|WorkerGoal_001_SSID|VISION<br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2311812">
+                  <h2>Loading Goals: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic provides examples showing how
+                     to load worker goals and organization goals using HCM
+                     Data Loader.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2311799"><h3 class="OracleScenario">Creating a Worker Goal</h3>
+                     <p>This example Goal.dat file creates an active performance goal for a worker. In this file:</p>
+                     <ul>
+                        
+                        <li>
+                           <p>The user-key attributes <span class="uicontrol">WorkerPersonNumber</span> and <span class="uicontrol">WorkerAssignmentNumber</span> identify the worker
+                              and the relevant assignment. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The user-key attribute <span class="uicontrol">AssignedByPersonNumber</span> identifies the human
+                              resource specialist or line manager who's creating the goal.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>A goal plan goal component must
+                              be provided.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        For development goals, a goal plan goal component isn't required.
+                        
+                     </div><pre><code>METADATA|Goal|SourceSystemId|SourceSystemOwner|GoalName|Description|StartDate|TargetCompletionDate|WorkerPersonNumber|WorkerAssignmentNumber|StatusCode|GoalSourceCode|AllowKeyAttrUpdateFlag|IncludeInPerfdocFlag|AssignedByPersonNumber
+MERGE|Goal|WorkerGoal_001_SSID|VISION|WorkerGoal_001|WorkerGoal_001_Desc|2015/01/01|2015/12/31|8153787|EEEE8153787|Not started|HR|Y|Y|8153756
+METADATA|GoalPlanGoal|SourceSystemId|SourceSystemOwner|GoalId(SourceSystemId)|GoalPlanName|GoalPlanStartDate|GoalPlanEndDate|PriorityCode
+MERGE|GoalPlanGoal|GoalPlanGoal_001_SSID|VISION|WorkerGoal_001_SSID|GP_009_01|2015/01/01|2015/12/31|Medium<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2311821"><h3 class="OracleScenario">Creating a Worker Goal Against a Library Goal</h3>
+                     <p>This example Goal.dat file creates an active performance
+                        goal against a library goal for a worker. HCM Data Loader doesn't
+                        take values from the library goal. Instead, you must supply these
+                        values when you load the worker goal. The <span class="uicontrol">ReferenceContentItemName</span> attribute is the user key for
+                        the library goal, which must exist.
+                     </p><pre><code>METADATA|Goal|SourceSystemId|SourceSystemOwner|GoalName|Description|StartDate|TargetCompletionDate|WorkerPersonNumber|WorkerAssignmentNumber|StatusCode|GoalSourceCode|AllowKeyAttrUpdateFlag|IncludeInPerfdocFlag|AssignedByPersonNumber|ReferenceContentItemName
+MERGE|Goal|WorkerGoal_002_SSID|VISION|WorkerGoal_002|WorkerGoal_002_Desc|2015/01/01|2015/12/31|8153787|EEEE8153787|Not started|HR|Y|Y|8153756|ZHRG-Completing Learning Path<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2311948"><h3 class="OracleScenario">Creating an Organization Goal</h3>
+                     <p>This example Goal.dat file creates and publishes
+                        an organization goal for a line manager. In this file:
+                     </p>
+                     <ul>
+                        
+                        <li>
+                           <p>The user-key attribute <span class="uicontrol">AssignedByPersonNumber</span> identifies the line
+                              manager who owns the organization goal. To publish the organization
+                              goal to the organization, set the <span class="uicontrol">PublishedFlag</span> attribute to <span class="uicontrol">Y</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The <span class="uicontrol">GoalSourceCode</span> attribute is set to <span class="uicontrol">Organization owner</span>. This value is required for organization goals.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>A goal plan goal component must
+                              be provided.
+                           </p>
+                        </li>
+                        
+                     </ul><pre><code>METADATA|Goal|SourceSystemId|SourceSystemOwner|GoalName|Description|StartDate|TargetCompletionDate|OrganizationName|StatusCode|GoalSourceCode|AllowKeyAttrUpdateFlag|AssignedByPersonNumber|PublishedFlag
+MERGE|Goal|OrganizationGoal_001_SSID|VISION|OrganizationGoal_001|OrganizationGoal_001_Desc|2015/01/01|2015/12/31|Vision Corporation Enterprise|Not started|Organization owner|Y|8153786|Y
+METADATA|GoalPlanGoal|SourceSystemId|SourceSystemOwner|GoalId(SourceSystemId)|GoalPlanName|GoalPlanStartDate|GoalPlanEndDate|PriorityCode
+MERGE|GoalPlanGoal|GoalPlanGoal_002_SSID|VISION|OrganizationGoal_001_SSID |GP_009_01|2015/01/01|2015/12/31|Medium<br></code></pre></div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2312919">
+                  <h2>Loading Goal Plans: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Goal plans are used for the mass assignment
+                     of goals to worker populations. This topic describes aspects of the goal plan object that
+                     you must understand to load goal plans successfully.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2312918">
+                     <h3 class="topictitle">Assigning Goals to Workers</h3>
+                     
+                     <p>When you load a goal plan object, it's not automatically
+                        assigned to workers. You can assign the goal plan to workers in either
+                        of these ways:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Schedule goal plan assignments
+                              using the Manage Goal Plans task.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Load the goal plan assignment component
+                              of the goal plan.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2313021">
+                     <h3 class="topictitle">The Mass Request Component</h3>
+                     
+                     <p>The mass request component identifies who's requesting
+                        the goal plan. You can identify the plan requester on the goal plan
+                        itself by supplying the <span class="uicontrol">RequestSubmissionDate</span> and <span class="uicontrol">ReqSubmittedByPersonNumber</span> attributes, for example. In this case, the mass request component
+                        is created automatically and you don't have to supply it. However,
+                        you must supply a mass request component when you create a goal plan:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>If you don't identify the plan
+                              requester on the goal plan object.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>To associate a source key with
+                              the mass request record.
+                           </p>
+                           <p>Alternatively, you can
+                              update the default source key later using the source key object.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>If you're loading child components
+                              of the mass request component.
+                           </p>
+                           <p>The child components
+                              of the mass request component identify the employee population to
+                              which the goal plan is to be assigned.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2313070">
+                     <h3 class="topictitle">Deleting Goal Plans</h3>
+                     
+                     <p>You can delete goal plans using HCM Data Loader.
+                        However, don't delete goal plans that have been assigned to workers.
+                        When you delete a parent goal plan object, these child components
+                        are also deleted automatically:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Goal plan document type</p>
+                        </li>
+                        
+                        <li>
+                           <p>Mass request</p>
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              When you delete a mass request component, its child
+                              components are deleted automatically.
+                              
+                           </div>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You can also delete child components individually,
+                        if required.
+                     </p>
+                     
+                     <p>Goal plan goal and goal plan assignment components
+                        aren't deleted automatically when you delete the parent goal plan
+                        using HCM Data Loader. You must delete those components explicitly
+                        before you delete the parent goal plan. This example GoalPlan.dat
+                        file deletes the goal plan goal record that links goal plan GP_001_01
+                        with template goal TemplateGoal_001.
+                     </p>
+                     <pre><code>METADATA|GoalPlanGoal|SourceSystemId|SourceSystemOwner|GoalPlanExternalId
+DELETE|GoalPlanGoal|GPG_001_01_SSID|VISION|GP_001_01<br></code></pre>
+                     <p>This example Goal.dat file deletes the template goal
+                        TemplateGoal_001 (SourceSystemId: TemplateGoal_001_SSID).
+                     </p>
+                     <pre><code>METADATA|Goal|SourceSystemId|SourceSystemOwner
+DELETE|Goal|TemplateGoal_001_SSID|VISION<br></code></pre>
+                     <p>This example GoalPlan.dat file deletes the goal plan
+                        GP_001_01 and relevant child records.
+                     </p>
+                     <pre><code>METADATA|GoalPlan|GoalPlanExternalId
+DELETE|GoalPlan|GP_001_01<br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=708ACBFA1D43D985E040D30A68817B37">Goal Plans: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2313258">
+                  <h2>Loading Goal Plans: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic provides examples showing how
+                     to load goal plans using HCM Data Loader.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2313250"><h3 class="OracleScenario">Creating a Goal Plan</h3>
+                     <p>This example GoalPlan.dat file loads a goal plan
+                        without a mass request component. In this case, a mass request record
+                        for the goal plan is created automatically using the values passed
+                        for the <span class="uicontrol">ReqSubmittedByPersonNumber</span> and <span class="uicontrol">RequestSubmissionDate</span> attributes.
+                     </p><pre><code>METADATA|GoalPlan|GoalPlanExternalId|GoalPlanName|GoalPlanTypeCode|GoalPlanActiveFlag|EnableWeightingFlag|StartDate|EndDate|EnforceGoalWeightFlag|GoalAccessLevelCode|IncludeInPerfdocFlag|ReqSubmittedByPersonNumber|RequestSubmissionDate|ReviewPeriodName
+MERGE|GoalPlan|GP_001_01|GP_001_01|Performance|A|Y|2015/01/01|2015/12/31|Y|HR specialist and manager|N|8153756|2015/09/20|Default Review Period - Vision Corporation Enterprise<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2313265"><h3 class="OracleScenario">Creating a Goal Plan with Document Types</h3>
+                     <p>This example GoalPlan.dat file creates a goal plan
+                        with the <span class="uicontrol">IncludeInPerfdocFlag</span> attribute set to <span class="uicontrol">Y</span> and assigns
+                        a document type.
+                     </p><pre><code>METADATA|GoalPlan|GoalPlanExternalId|GoalPlanName|GoalPlanTypeCode|GoalPlanActiveFlag|EnableWeightingFlag|StartDate|EndDate|EnforceGoalWeightFlag|GoalAccessLevelCode|IncludeInPerfdocFlag|ReqSubmittedByPersonNumber|RequestSubmissionDate|ReviewPeriodName
+MERGE|GoalPlan|GP_001_02|GP_001_02|Performance|A|Y|2016/01/01|2016/12/31|Y|HR specialist and manager|Y|8153756|2016/10/04|Default Review Period - Vision Corporation Enterprise
+METADATA|GoalPlanDocTypes|GoalPlanExternalId|DocTypeName
+MERGE|GoalPlanDocTypes|GP_001_02|Annual Evaluations<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2313272"><h3 class="OracleScenario">Creating a Goal Plan with Eligibility Criteria</h3>
+                     <p>This example GoalPlan.dat file creates a goal plan
+                        with mass request and eligibility profile object
+                        components.
+                     </p><pre><code>METADATA|GoalPlan|GoalPlanExternalId|GoalPlanName|GoalPlanTypeCode|GoalPlanActiveFlag|EnableWeightingFlag|StartDate|EndDate|EnforceGoalWeightFlag|GoalAccessLevelCode|IncludeInPerfdocFlag|ReviewPeriodName
+MERGE|GoalPlan|GP_001_04|GP_001_04|Performance|A|Y|2016/01/01|2016/12/31|Y|HR specialist and manager|N|Default Review Period - Vision Corporation Enterprise
+METADATA|MassRequest|GoalPlanExternalId|ReqSubmittedByPersonNumber
+MERGE|MassRequest|GP_001_04|8153756
+METADATA|EligibilityProfileObject|GoalPlanExternalId|EligibilityProfileName|RequiredFlag
+MERGE|EligibilityProfileObject|GP_001_04|Goals_EligibilityProfile_Software Developer 4|Y<br></code></pre></div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2314238">
+                  <h2>Loading Goal Plan Sets: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Goal plan sets are used for the mass assignment
+                     of related goal plans to worker populations. This topic describes aspects of the goal plan set object
+                     that you must understand to load goal plan sets successfully.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2314236">
+                     <h3 class="topictitle">Assigning Goal Plan Sets to Workers</h3>
+                     
+                     <p>When you load a goal plan set, it's not automatically
+                        assigned to workers. You can assign the goal plan set to workers in
+                        either of these ways:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Schedule goal plan set assignments
+                              using the Manage Goal Plan Sets task.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Load the goal plan assignment component
+                              of the goal plan object. You may use this approach, for example, to
+                              assign goals following the transfer of workers from one legal entity
+                              to another.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2314237">
+                     <h3 class="topictitle">The Mass Request Component</h3>
+                     
+                     <p>The mass request component identifies who's requesting
+                        the goal plan set. You can identify the plan requester on the goal
+                        plan set itself by supplying the <span class="uicontrol">RequestSubmissionDate</span> and <span class="uicontrol">ReqSubmittedByPersonNumber</span> attributes, for example. In this case, the mass request component
+                        is created automatically and you don't have to supply it. However,
+                        you must supply a mass request component when you create a goal plan
+                        set:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>If you don't identify the plan
+                              requester on the goal plan set object.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>To associate a source key with
+                              the mass request record.
+                           </p>
+                           <p>Alternatively, you can
+                              update the default source key later using the source key object.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>If you're loading child components
+                              of the mass request component.
+                           </p>
+                           <p>The child components
+                              of the mass request component identify the employee population to
+                              which the goal plan set is to be assigned.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2314328">
+                     <h3 class="topictitle">Deleting Goal Plan Sets</h3>
+                     
+                     <p>You can delete goal plan sets using HCM Data Loader.
+                        When you delete a parent goal plan set, these child components are
+                        also deleted automatically:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Goal plan set plan</p>
+                        </li>
+                        
+                        <li>
+                           <p>Mass request</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        When you delete a mass request component, its child
+                        components are deleted automatically.
+                        
+                     </div>
+                     
+                     <p>Don't delete goal plan sets that have already been
+                        assigned to workers.
+                     </p>
+                     
+                     <p>This example GoalPlanSet.dat file deletes a goal
+                        plan set and its child components.
+                     </p>
+                     <pre><code>METADATA|GoalPlanSet|GoalPlanSetExternalId
+DELETE|GoalPlanSet|GPS_006_01<br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=F44003BEC15D629CE040D30A68813148">Goal Plan Sets: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2314341">
+                  <h2>Loading Goal Plan Sets: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic provides examples showing how
+                     to load goal plan
+                     sets using HCM Data Loader.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2314333"><h3 class="OracleScenario">Creating a Goal Plan Set with Goal Plans</h3>
+                     <p>This example GoalPlanSet.dat file creates a goal
+                        plan set and includes two goal plans.
+                     </p><pre><code>METADATA|GoalPlanSet|GoalPlanSetExternalId|GoalPlanSetName|Description|GoalPlanSetActiveFlag|StartDate|EndDate|ReqSubmittedByPersonNumber|RequestSubmissionDate| ReviewPeriodName
+MERGE|GoalPlanSet|GPS_002_01|GPS_002_01|GPS_002_01|A|2015/01/01|2015/12/31|8153756|2015/09/28|Default Review Period - Vision Corporation Enterprise
+COMMENT Assign two goal plans without worker or eligibility profile assignment to the goal plan set
+METADATA|GoalPlanSetPlan|GoalPlanSetExternalId|GoalPlanExternalId|Weighting
+MERGE|GoalPlanSetPlan|GPS_002_01|GP_001_02|60
+MERGE|GoalPlanSetPlan|GPS_002_01|GP_001_03|40<br></code></pre><p>In this example, the goal plan set has no mass request
+                        component. Therefore, the mass request record for the goal plan set
+                        is created automatically using the <span class="uicontrol">ReqSubmittedByPersonNumber</span> and <span class="uicontrol">RequestSubmissionDate</span> attribute
+                        values.
+                     </p>
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2314351"><h3 class="OracleScenario">Creating a Goal Plan Set with a Mass Request
+                     Component</h3>
+                     <p>This example GoalPlanSet.dat file creates a goal
+                        plan set with a mass request component. You don't provide the <span class="uicontrol">ReqSubmittedByPersonNumber</span> and <span class="uicontrol">RequestSubmissionDate</span> attributes for the
+                        goal plan set component in this case.
+                     </p><pre><code>METADATA|GoalPlanSet|GoalPlanSetExternalId|GoalPlanSetName|Description|GoalPlanSetActiveFlag|StartDate|EndDate|ReviewPeriodName
+MERGE|GoalPlanSet|GPS_001_02|GPS_001_02|GPS_001_02|A|2016/01/01|2016/12/31|Default Review Period - Vision Corporation Enterprise
+METADATA|MassRequest|GoalPlanSetExternalId|ReqSubmittedByPersonNumber
+MERGE|MassRequest|GPS_001_02|8153756<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2314355"><h3 class="OracleScenario">Creating a Goal Plan Set with Mass Request and
+                     Mass Request Hierarchy Components</h3>
+                     <p>This example GoalPlanSet.dat file creates a goal
+                        plan set with mass request and mass request hierarchy components.
+                     </p><pre><code>METADATA|GoalPlanSet|GoalPlanSetExternalId|GoalPlanSetName|Description|GoalPlanSetActiveFlag|StartDate|EndDate|ReviewPeriodName
+MERGE|GoalPlanSet|GPS_001_04|GPS_001_04|GPS_001_04|A|2016/01/01|2016/12/31|Default Review Period - Vision Corporation Enterprise
+METADATA|MassRequest|GoalPlanSetExternalId|ReqSubmittedByPersonNumber
+MERGE|MassRequest|GPS_001_04|8153756
+COMMENT Assigning goal plan set GPS_001_04 to manager and reports
+METADATA|MassRequestHierarchy|GoalPlanSetExternalId|ManagerAssignmentNumber|CascadingLevel
+MERGE|MassRequestHierarchy|GPS_001_04|EEEE8153786|999999<br></code></pre></div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2572950">
+                  <h2>Loading Talent Pools: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>A talent pool is a group of workers. You
+                     use talent pools to manage the development of the pool members for
+                     specific purposes. For example, you can track potential candidates
+                     for a succession
+                     plan in a talent pool or create a talent review meeting based on
+                     a talent pool. This topic provides examples showing how to create
+                     and manage talent pools using HCM Data Loader.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2572942"><h3 class="OracleScenario">Creating a Talent Pool</h3>
+                     <p>A talent pool can reference any combination of job, job family, model profile, position, department, and grade. These objects, which
+                        can define the purpose of the talent pool, have no effect on its processing.
+                        However, they must exist in the target environment before you load
+                        a talent pool that references them. This example TalentPool.dat file
+                        creates a talent pool for a job. Source keys are used to identify
+                        both the talent pool and the associated job.
+                     </p><pre><code>METADATA|TalentPool|SourceSystemOwner|SourceSystemId|PoolName|PoolTypeCode|Description|OwnerPersonId(SourceSystemId)|Status|JobId(SourceSystemId)
+MERGE|TalentPool|VISION|TP_T1|Job Chief Exec|TALENT|Talent pool description|1008|A|93079<br></code></pre><p>Always set the <span class="uicontrol">PoolTypeCode</span> attribute to <span class="uicontrol">TALENT</span>. You must
+                        include the <span class="uicontrol">Status</span> attribute.
+                        If you supply no value, then the default status is <span class="uicontrol">A</span> (Active). Set the status to <span class="uicontrol">I</span> (Inactive) to inactivate the talent pool. 
+                     </p>
+                     <p>The Talent Pool component defines the talent pool
+                        and the initial pool owner. To identify additional pool owners, you use the
+                        Talent Pool Owner component. Additional pool owners are optional,
+                        but multiple owners are recommended. Talent pool owners can see talent
+                        pools in the application. Use the Talent Pool Member component to
+                        define the pool members. This example TalentPool.dat file creates
+                        a talent pool with pool members. Source keys are used to identify
+                        the talent pool and reference foreign objects.
+                     </p><pre><code>METADATA|TalentPool|SourceSystemOwner|SourceSystemId|PoolName|PoolTypeCode|Description|OwnerPersonId(SourceSystemId)|Status
+MERGE|TalentPool|VISION|TP_T2|Member Talent Pool|TALENT|Talent pool description|1011|A
+METADATA|PoolMember|SourceSystemOwner|SourceSystemId|PoolId(SourceSystemId)|MemberId(SourceSystemId)
+MERGE|PoolMember|VISION|TP_PM_T2_1012|TP_T2|1012
+MERGE|PoolMember|VISION|TP_PM_T2_1013|TP_T2|1013<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2572963"><h3 class="OracleScenario">Translating a Talent Pool Name</h3>
+                     <p>This example TalentPoolTranslation.dat file translates
+                        the name of an existing talent pool. It identifies the existing record
+                        by its source key.
+                     </p><pre><code>METADATA|TalentPoolTranslation|SourceSystemOwner|SourceSystemId|PoolName|Language
+MERGE|TalentPoolTranslation|VISION|TP_T1|Spanish Translated Pool Name|ES
+MERGE|TalentPoolTranslation|VISION|TP_T1|French Translated Pool Name|FR<br></code></pre><p>This example TalentPoolTranslation.dat file translates
+                        the name of an existing talent pool. It identifies the existing record
+                        by its user key.
+                     </p><pre><code>METADATA|TalentPoolTranslation|BasePoolName|PoolStatus|PoolName|Language
+MERGE|TalentPoolTranslation|Job Chief Exec|A|Spanish Translated Pool Name|ES
+MERGE|TalentPoolTranslation|Job Chief Exec|A|French Translated Pool Name|FR<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2572968"><h3 class="OracleScenario">Deleting Talent Pools</h3>
+                     <p>You can't delete a talent pool using HCM Data Loader.
+                        However, you can:
+                     </p>
+                     <ul>
+                        
+                        <li>
+                           <p>Make the talent pool inactive.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Delete talent pool owners, provided
+                              that at least one pool owner remains.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Delete Talent Pool Member components.</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     <p>This example TalentPool.dat file deletes an existing
+                        Talent Pool Owner component. It identifies the pool owner record by
+                        its source key.
+                     </p><pre><code>METADATA|PoolOwner|SourceSystemOwner|SourceSystemId
+DELETE|PoolOwner|VISION|TP_PO_T2_3423|TP_PM_T2_1013<br></code></pre></div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=C5C306EA4FB1B343E040D30A688109A0">Talent Pools: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

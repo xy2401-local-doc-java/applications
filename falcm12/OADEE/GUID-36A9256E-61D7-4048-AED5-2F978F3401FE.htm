@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Run and Deploy Applications on Oracle WebLogic Server</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This chapter provides a basic overview of the Oracle WebLogic Server environment and information about how to run your applications on Integrated WebLogic Server. It also provides information about how to deploy your applications to the Administration Server instance of WebLogic Server to perform end-to end testing of new applications. If you are deploying customizations or extensions, see the Oracle Fusion Applications Extensibility Guide for Developers." />
+<meta name="dcterms.created" content="2017-04-13T08:16:31Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Fusion Applications Developer's Guide" />
+<meta name="dcterms.identifier" content="E70512-02" />
+<meta name="dcterms.isVersionOf" content="OADEE" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2011, 2016, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-2D2B5DBF-4B65-457F-A993-BC07293D17E2.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-C626FC6D-710F-4519-97F6-2412B217583E.htm" title="Next" type="text/html" />
+<link rel="alternate" href="OADEE.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE"></a> <span id="PAGE" style="display:none;">66/82</span> <!-- End Header -->
+<a id="OADEV58432"></a><a id="OADEV66164"></a><a id="OADEV66165"></a><a id="OADEV58130"></a>
+<h1 id="OADEE-GUID-36A9256E-61D7-4048-AED5-2F978F3401FE" class="sect1"><span class="enumeration_chapter">55</span> Run and Deploy Applications on Oracle WebLogic Server</h1>
+<div>
+<div><span>This chapter provides a basic overview of the Oracle WebLogic Server environment and information about how to run your applications on Integrated WebLogic Server. It also provides information about how to deploy your applications to the Administration Server instance of WebLogic Server to perform end-to end testing of new applications. If you are deploying customizations or extensions, see the <span><span class="italic">Oracle Fusion Applications Extensibility Guide for Developers</span></span>.</span></div>
+<p>This chapter includes the following sections:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-AAE885A1-61C2-4DBB-80AC-141969EC341D">Introduction to Deploying Applications to Oracle WebLogic Server</a></p>
+</li>
+<li>
+<p><a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-C4B29CAC-9EB7-4AF3-B4D9-8B4AF81D05F7">Running Applications on Integrated WebLogic Server</a></p>
+</li>
+<li>
+<p><a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-CC158800-AB44-4789-8DD5-B1C3C9AFA078">Preparing to Deploy Oracle ADF Applications to an Instance of Standalone WebLogic Server</a></p>
+</li>
+<li>
+<p><a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-995D45B2-1B94-459B-879D-2A6E7D615436">Deploying Your Oracle ADF Applications to an Administration Server Instance of WebLogic Server</a></p>
+</li>
+<li>
+<p><a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-17C05D8C-5F35-4A34-BC21-5DFB321B2A24">Deploying Your SOA Projects to an Administration Server Instance of WebLogic Server</a></p>
+</li>
+</ul>
+<p>The scope of this chapter is limited to what is unique in the Oracle Fusion Applications environment. For general details about Oracle WebLogic Server, references are made to the generic Oracle Fusion Middleware guides.</p>
+</div>
+<a id="OADEV66166"></a>
+<div class="props_rev_3"><a id="GUID-AAE885A1-61C2-4DBB-80AC-141969EC341D"></a>
+<h2 id="OADEE-GUID-AAE885A1-61C2-4DBB-80AC-141969EC341D" class="sect2"><span class="enumeration_section">55.1</span> Introduction to Deploying Applications to Oracle WebLogic Server</h2>
+<div>
+<p>Deployment is the process of packaging application files as an archive file and installing it to a target application server. You can use JDeveloper to deploy your Oracle Applications Development Framework (Oracle ADF) applications or SOA applications directly to Oracle WebLogic Server or indirectly to an archive file as the deployment target, and then install this archive file to the target server. You also can run Oracle ADF applications (but not SOA applications) in JDeveloper using Integrated WebLogic Server.</p>
+<p>JDeveloper contains Integrated WebLogic Server that allows the developer to run the application using the Run command. You do not need to manually create deployment descriptors or WebLogic Server domains, as you would if you were deploying the application to an instance of Standalone WebLogic Server. However, Standalone WebLogic Server allows more configuration options, such as support for SOA. For more information on using Integrated WebLogic Server, see <a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-C4B29CAC-9EB7-4AF3-B4D9-8B4AF81D05F7">Running Applications on Integrated WebLogic Server</a>.</p>
+<p>If you are deploying the application to a standalone WebLogic Server instance, you may need to perform security-related configuration to prepare the application for deployment. You may need to create or edit deployment descriptors and deployment profiles to prepare the application.</p>
+<p>Whether you are using standalone or Integrated WebLogic servers to host the application, you will need to configure the WebLogic domains for Oracle Fusion Applications. You must run the Configure Fusion Domain Wizard from JDeveloper to configure the Integrated WebLogic Server or create a property file that is used to configure standalone WebLogic Server instances. For more information about the wizard, see <a href="GUID-2941EDE7-222A-4B38-A66C-5F65FCFB013B.htm#GUID-2941EDE7-222A-4B38-A66C-5F65FCFB013B" title="This chapter describes how to configure and test your development environment. It includes the steps for setting up your JDeveloper environment and Oracle Application Development Framework (Oracle ADF) installation, running and deploying applications on Integrated WebLogic Server, and the basic steps for setting up your Oracle SOA Suite development environment.">Setting Up Your Development Environment</a>.</p>
+<p><a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-AAE885A1-61C2-4DBB-80AC-141969EC341D__CDEGACAA" title="Deployment techniques">Table 55-1</a> describes some common deployment techniques that you can use during the application development and deployment cycle.</p>
+<div class="tblformalwide" id="GUID-AAE885A1-61C2-4DBB-80AC-141969EC341D__CDEGACAA">
+<p class="titleintable">Table 55-1 Deployment Techniques for Development Environments</p>
+<table class="cellalignment545" title="Deployment Techniques for Development Environments" summary="Deployment techniques">
+<thead>
+<tr class="cellalignment534">
+<th class="cellalignment586" id="d337164e110">Deployment Technique</th>
+<th class="cellalignment584" id="d337164e113">Environment</th>
+<th class="cellalignment662" id="d337164e116">When to Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment534">
+<td class="cellalignment589" id="d337164e121" headers="d337164e110">
+<p>Run directly from JDeveloper</p>
+</td>
+<td class="cellalignment585" headers="d337164e121 d337164e113">
+<p>Test or Development</p>
+</td>
+<td class="cellalignment663" headers="d337164e121 d337164e116">
+<p>When you are developing your application. You want deployment to be quick because you will be repeating the editing and deploying process many times.</p>
+<p>JDe<a id="d337164e132" class="indexterm-anchor"></a>veloper contains Integrated WebLogic Server, on which you can run and test your application.</p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment589" id="d337164e138" headers="d337164e110">
+<p>Use JDeveloper to directly deploy to the target application server</p>
+</td>
+<td class="cellalignment585" headers="d337164e138 d337164e113">
+<p>Test or Development</p>
+</td>
+<td class="cellalignment663" headers="d337164e138 d337164e116">
+<p>When you are ready to deploy and test your application on an application server in a test environment.</p>
+<p>This also can be done on Integrated WebLogic Server, and it may be required in cases where there may be nothing to Run, such as deploying an ADFbc service.</p>
+<p>For example, you can also use the test environment to develop your deployment scripts.</p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment589" id="d337164e152" headers="d337164e110">
+<p>Use JDeveloper to deploy to an EAR file, then use the Oracle WebLogic Server Administration console, WLST commands, or Enterprise Manager for deployment.<a id="d337164e155" class="indexterm-anchor"></a><a id="d337164e159" class="indexterm-anchor"></a></p>
+</td>
+<td class="cellalignment585" headers="d337164e152 d337164e113">
+<p>Test or Development</p>
+</td>
+<td class="cellalignment663" headers="d337164e152 d337164e116">
+<p>When you are ready to deploy and test your application on an application server in a test environment. As an alternative to deploying directly from JDeveloper, you can deploy to an EAR file. and then use other tools to deploy to the WebLogic Server instance.</p>
+<p>This also can be done on Integrated WebLogic Server.</p>
+<p>You can also use the test environment to develop your deployment scripts.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>After you have performed the tasks required for standalone deployment, you can use JDeveloper to deploy directly to a WebLogic Server instance or to create an Enterprise Archive (EAR) file and deploy the EAR file using WebLogic Server Administration Console, Enterprise Manager, or WebLogic Scripting Tool (WLST) commands.</p>
+<p>For more information on how to deploy an application directly using JDeveloper, see <a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-995D45B2-1B94-459B-879D-2A6E7D615436">Deploying Your Oracle ADF Applications to an Administration Server Instance of WebLogic Server</a>.</p>
+<p>For more information about deploying the application using WebLogic Server Administration Console, or WLST, see the <span class="italic">Oracle Fusion Middleware Administering Oracle Fusion Middleware</span> guide and the <span class="italic">Oracle Fusion Middleware Administering Oracle ADF Applications</span> guide.</p>
+<div class="infobox-note" id="GUID-AAE885A1-61C2-4DBB-80AC-141969EC341D__GUID-6DF3BA9D-9F60-4A77-8845-77600F15A2BB">
+<p class="notep1">Note:</p>
+<p>This chapter discusses deploying applications. If you are deploying customizations or extensions, see the "<a class="olink OADTC406" target="_blank" href="../OADTC/GUID-D799CA7B-365F-411E-8027-9F7413B66787.htm#OADTC406">Deploying Oracle ADF Customizations and Extensions</a>" and the "<a class="olink OADTC425" target="_blank" href="../OADTC/GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#OADTC425">Deploying SOA Composite Applications Customizations and Extensions</a>" sections of the <span class="italic"><span id="GUID-AAE885A1-61C2-4DBB-80AC-141969EC341D__OADTC"><cite>Extensibility Guide for Developers</cite></span></span>.</p>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-7F959BC2-4699-4FB3-A0CD-4B1F76B0EDF3"></a>
+<h3 id="OADEE-GUID-7F959BC2-4699-4FB3-A0CD-4B1F76B0EDF3" class="sect3"><span class="enumeration_section">55.1.1</span> Prerequisites for Deployment</h3>
+<div>
+<div class="section">
+<p>Before you deploy an application, you should perform the following tasks:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>You must run the Configure Fusion Domain Wizard to set up the Integrated WebLogic Server domain or create a property file to be used to set up the standalone WebLogic Server domain. For instructions, see <a href="GUID-2941EDE7-222A-4B38-A66C-5F65FCFB013B.htm#GUID-2941EDE7-222A-4B38-A66C-5F65FCFB013B" title="This chapter describes how to configure and test your development environment. It includes the steps for setting up your JDeveloper environment and Oracle Application Development Framework (Oracle ADF) installation, running and deploying applications on Integrated WebLogic Server, and the basic steps for setting up your Oracle SOA Suite development environment.">Setting Up Your Development Environment</a>.</span></li>
+<li class="stepexpand"><span>If you want more debugging output, set the environment variable using one of the shell commands as shown in <a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-7F959BC2-4699-4FB3-A0CD-4B1F76B0EDF3__CHDFDAFF">Example 55-1</a>, before starting the Administration Server instance of WebLogic Server or before starting JDeveloper if you are going to run Integrated WebLogic Server.</span>
+<div>
+<p><span class="bold">Note:</span> If using Integrated WebLogic Server, you might want to set this on run-time properties so that this can be controlled directly from JDeveloper.</p>
+</div>
+</li>
+<li class="stepexpand"><span>You must disable the <span class="bold">Auto Generate and Synchronize weblogic-jdbc.xml Descriptors During Deployment</span> option to use the Global Java Database Connectivity (JDBC) datasource. To do this, open <span class="bold">Application Properties</span> and choose the <span class="bold">Deployment</span> category as shown in <a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-7F959BC2-4699-4FB3-A0CD-4B1F76B0EDF3__CBBCAJEH">Figure 55-1</a>. Unselect the <span class="bold">Auto Generate and Synchronize weblogic-jdbc.xml Descriptors During Deployment</span> option and click <span class="bold">OK</span>.</span>
+<div>
+<p>For additional details, see <a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-B81BDC24-7E55-4E0B-BC1D-6E8E07A3E513">Setting Up JDBC Data Sources on Oracle WebLogic Server</a>.</p>
+<div class="figure" id="GUID-7F959BC2-4699-4FB3-A0CD-4B1F76B0EDF3__CBBCAJEH">
+<p class="titleinfigure">Figure 55-1 Application Properties &mdash; Deployment Dialog</p>
+<img width="700" height="500" src="img/GUID-06553F28-5A53-44D5-B4A2-DF238BAB197D-default.gif" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" --></div>
+</li>
+</ol>
+<div class="example" id="GUID-7F959BC2-4699-4FB3-A0CD-4B1F76B0EDF3__CHDFDAFF">
+<p class="titleinexample">Example 55-1 Setting Environment Variable</p>
+<pre dir="ltr">
+# For csh shell
+setenv JAVA_OPTIONS "$JAVA_OPTIONS -Djbo.debugoutput=console"
+
+# For bash shell
+export JAVA_OPTIONS="$JAVA_OPTIONS -Djbo.debugoutput=console"
+
+For Windows
+set JAVA_OPTIONS=%JAVA_OPTIONS% -Djbo.debugoutput=console
+</pre></div>
+<!-- class="example" -->
+<div class="section"></div>
+<!-- class="section" --></div>
+<div class="props_rev_3"><a id="GUID-B81BDC24-7E55-4E0B-BC1D-6E8E07A3E513"></a>
+<h4 id="OADEE-GUID-B81BDC24-7E55-4E0B-BC1D-6E8E07A3E513" class="sect4"><span class="enumeration_section">55.1.1.1</span> Setting Up JDBC Data Sources on Oracle WebLogic Server</h4>
+<div>
+<p>To avoid passwords being present in plain text in deployed files, JDeveloper uses password indirection, which means that passwords for the data sources must be set on the server before the application will run correctly.</p>
+<p>You do this using global data sources, which are set up in the Oracle WebLogic Server Administration Console using the Data Sources link under JDBC.</p>
+<p>JDeveloper ensures that your web application web.xml, or EJB application <code class="codeph">ejb-jar.xml</code>, contains the necessary <code class="codeph">&lt;resource-ref&gt;</code> entry to identify an application resource name. The name is jdbc/connection-nameDS, where connection-name is the name of the application resources connection.</p>
+<p>The application looks up this data source using the application-specific resource JNDI namespace of java:comp/env/jdbc/connection-nameDS, and it finds this resource because <code class="codeph">web.xml</code> contains the <code class="codeph">&lt;resource-ref&gt;</code> entry for jdbc/connection-nameDS.</p>
+<p>An important control for the files that are generated is the <span class="bold">Auto Generate and Synchronize weblogic-jdbc.xml Descriptors During Deployment</span> field on the WebLogic page of the Application Properties dialog.</p>
+<p>When the <span class="bold">Auto Generate</span> field is selected, JDeveloper does the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Generates an application-name-jdbc.xml file for each connection in the application resources, and sets the indirect password attribute.</p>
+<pre dir="ltr">
+&lt;jdbc-driver-params&gt;
+&lt;use-password-indirection&gt;true&lt;/use-password-indirection&gt;
+&lt;/jdbc-driver-params&gt;
+</pre>
+<p>Upon deployment, JDeveloper determines the JDBC connection password from the username in application-name-jdbc.xml, and populates the JDBC connection password using an Mbean.</p>
+</li>
+<li>
+<p><code class="codeph">weblogic-application.xml</code> is updated to add each application-name-jdbc.xml as a module.</p>
+</li>
+<li>
+<p><code class="codeph">web.xml</code> (if it exists) has a resource reference to each JDBC JNDI name.</p>
+</li>
+</ul>
+</div>
+<div class="sect5"><a id="GUID-CEAAC7EF-08E7-49EC-9240-EA47D9B4CA56"></a>
+<h5 id="OADEE-GUID-CEAAC7EF-08E7-49EC-9240-EA47D9B4CA56" class="sect5"><span class="enumeration_section">55.1.1.1.1</span> How to Create a Global Data Source on Oracle WebLogic Server</h5>
+<div>
+<p>You create a global data source on Oracle WebLogic Server Administration Console.</p>
+<p>To set up a global data source:</p>
+<ol>
+<li>
+<p>Login to the Oracle WebLogic Server Administration Console.</p>
+</li>
+<li>
+<p>Click the <span class="bold">Data Sources</span> link under <span class="bold">JDBC</span>.</p>
+</li>
+<li>
+<p>On the Summary of JDBC Data Sources page, click <span class="bold">New</span>.</p>
+</li>
+<li>
+<p>In the Create a New JDBC Data Source page, enter details of the data source.</p>
+<p>The name can be anything.</p>
+<p>The JNDI name must be of the form <code class="codeph">jdbc/connection-nameDS</code>. For example, if the application has a connection name <code class="codeph">connection1</code>, the JNDI name is <code class="codeph">jdbc/connection1DS</code>.</p>
+</li>
+<li>
+<p>Ensure that the database type is Oracle and that the driver is <code class="codeph">Oracle's Driver (Thin) for Service Connections;Version 9.0.1,9.2.0,10,11</code>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Next</span> twice to navigate to the Create a New JDBC Data Source page, where you enter the connection details.</p>
+<p>The database name is the Oracle SID.</p>
+<p>The host name is the name of the machine the database is on.</p>
+<p>The default port is 1521.</p>
+</li>
+<li>
+<p>Enter the user name and password, for example <code class="codeph">hr/hr</code>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Next</span> and click <span class="bold">Test Configuration</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Next</span> to navigate to the Select Targets page, where you select a target for this data source. If you fail to select a target, the data source is created but not deployed.</p>
+</li>
+<li>
+<p>Click <span class="bold">Finish</span>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5"><a id="GUID-32DBA462-C28C-42E8-9A29-CC6AFB2E80E5"></a>
+<h5 id="OADEE-GUID-32DBA462-C28C-42E8-9A29-CC6AFB2E80E5" class="sect5"><span class="enumeration_section">55.1.1.1.2</span> Deploy to an EAR File to Run on Oracle WebLogic Server</h5>
+<div>
+<p>To deploy an application to an EAR file to run on Oracle WebLogic Server, you can:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Select the <span class="bold">Auto Generate and Synchronize weblogic-jdbc.xml Descriptors During Deployment</span> field, and set up passwords using application level credential mapping.</p>
+</li>
+<li>
+<p>Alternatively, you can deselect the <span class="bold">Auto Generate and Synchronize weblogic-jdbc.xml Descriptors During Deployment</span> field and set up passwords by creating a global data source on Oracle WebLogic Server.</p>
+</li>
+</ul>
+<p>If you are deploying using ojdeploy:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>You can use the <code class="codeph">-nodatasources</code> switch, in which case you can set up passwords on Oracle WebLogic Server by either:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Creating a global data source.</p>
+</li>
+<li>
+<p>Manually creating application level data sources.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>If you do not use the <code class="codeph">-nodatasources</code> switch, you can only set up passwords using application level credential mapping.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<a id="OADEV66167"></a><a id="OADEV66168"></a><a id="OADEV66169"></a><a id="OADEV64007"></a>
+<div class="props_rev_3"><a id="GUID-D5DFA672-35BB-466F-BFAC-4985FC0FD69C"></a>
+<h3 id="OADEE-GUID-D5DFA672-35BB-466F-BFAC-4985FC0FD69C" class="sect3"><span class="enumeration_section">55.1.2</span> Introduction to the Standalone Administration Server WebLogic Server Instance</h3>
+<div>
+<p>A Weblogic Server instance is a configured instance to host applications, such as Web applications, Enterprise applications, and Web services, and resources, such as Java Message Service (JMS), and JDBC, Diagnostics.</p>
+<p>There are two types of WebLogic Server instances: Administration Server and Managed Server.</p>
+<p>The Administration Server instance is the central configuration controller for the entire domain. Its purpose is to:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Host the Administration Console.</p>
+</li>
+<li>
+<p>Enable you to start and stop the servers from a central location.</p>
+</li>
+<li>
+<p>Enable you to migrate servers and services within the domain.</p>
+</li>
+<li>
+<p>Enable you to deploy applications within the domain.</p>
+</li>
+</ul>
+<div class="figure" id="GUID-D5DFA672-35BB-466F-BFAC-4985FC0FD69C__GUID-50986C92-32C4-45B5-B87A-35ED713511AC">
+<p class="titleinfigure">Figure 55-2 Administration Server Configuration</p>
+<img width="389" height="311" src="img/GUID-56478915-892E-4F2A-8385-196231FBF3B6-default.gif" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" -->
+<p>There is only one Administration Server instance of WebLogic Server in a domain, and an Administration Server instance of WebLogic Server controls only one domain.</p>
+<p>A Managed Server WebLogic Server instance is a running instance that hosts the applications and the resources that are needed by those applications. Each Managed Server WebLogic Server instance is independent of all other Managed Server WebLogic Server instances in the domain, unless they are in a cluster. You can have as many Managed Server WebLogic Server instances as you need in a domain.</p>
+<p>The Administration Server instance of WebLogic Server stores the master copy of the domain configuration, including the configuration for all Managed Server WebLogic Server instances in the domain. Each Managed Server WebLogic Server instance stores a local copy of its configuration. When a Managed Server WebLogic Server instance starts, it connects to the Administration Server instance of WebLogic Server to synchronize the configuration.</p>
+<p>In most cases, a single server environment is used for development purposes. This is where a single server acts as the Administration Server instance of WebLogic Server and as the host for applications, as illustrated in <a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-D5DFA672-35BB-466F-BFAC-4985FC0FD69C__CHDEEHJJ">Figure 55-3</a>.</p>
+<p>However, there are some teams that use a Managed Server for either Oracle Enterprise Scheduler (ESS) runtime or Service-Oriented Architecture (SOA). When you are setting up your standalone WebLogic server, you can choose one of the following options:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Administration Server - Oracle ADF (includes ESS libraries)</p>
+</li>
+<li>
+<p>Administration Server - Oracle ADF + ESS Runtime</p>
+</li>
+<li>
+<p>Administration Server - Oracle ADF and Managed Server - ESS Runtime</p>
+</li>
+<li>
+<p>Administration Server - Oracle ADF and Managed Server - SOA</p>
+</li>
+<li>
+<p>Administration Server and Managed Server - SOA</p>
+</li>
+</ul>
+<div class="figure" id="GUID-D5DFA672-35BB-466F-BFAC-4985FC0FD69C__CHDEEHJJ">
+<p class="titleinfigure">Figure 55-3 Single Server Environment</p>
+<img width="330" height="273" src="img/GUID-93C21264-21A1-4598-A8B5-F22561FB9149-default.gif" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" -->
+<p><a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-D5DFA672-35BB-466F-BFAC-4985FC0FD69C__CDECJHGH">Figure 55-4</a> illustrates the structure of the domain directory:</p>
+<div class="figure" id="GUID-D5DFA672-35BB-466F-BFAC-4985FC0FD69C__CDECJHGH">
+<p class="titleinfigure">Figure 55-4 Domain Directory Structure</p>
+<img width="325" height="470" src="img/GUID-BA3F90EB-C61D-4D3B-AA97-B6DB795264D6-default.gif" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" -->
+<p>You deploy applications to the Administration Server instance of WebLogic Server.</p>
+<p>There are two configurations for Administration Servers:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Non-SOA</p>
+</li>
+<li>
+<p>SOA</p>
+</li>
+</ul>
+<p>Not all components are available in both. For example, WebCenter libraries are not available in SOA and SOA libraries are not available in non-SOA. Oracle ADF applications containing UI must be deployed to the non-SOA WebLogic server, and SOA composites must be deployed to the SOA-configured WebLogic Server.</p>
+<p>Some services have a Service Data Object (SDO) co-location requirement and need to be deployed to the SOA container. To deploy the service to the SOA-configured WebLogic Server, create a new EAR profile containing only that service or services from your application workspace.</p>
+<p>For more information about SDO and SOA, see the <span class="italic">Developing SOA Applications with Oracle SOA Suite</span> guide.</p>
+<p>For information about how to configure the SOA WebLogic Server, see <a href="GUID-2941EDE7-222A-4B38-A66C-5F65FCFB013B.htm#GUID-D6BFD057-561A-45B5-B082-C6512DCFD26A">How to Set Up the Personal Environment for Standalone WebLogic Server</a>.</p>
+</div>
+</div>
+</div>
+<a id="OADEV58436"></a><a id="OADEV58435"></a>
+<div class="props_rev_3"><a id="GUID-C4B29CAC-9EB7-4AF3-B4D9-8B4AF81D05F7"></a>
+<h2 id="OADEE-GUID-C4B29CAC-9EB7-4AF3-B4D9-8B4AF81D05F7" class="sect2"><span class="enumeration_section">55.2</span> Running Applications on Integrated WebLogic Server</h2>
+<div>
+<p>Integrated WebLogic Server is a single server that is included within JDeveloper. This server automates deploying your applications. Integrated WebLogic Server is sufficient to run your application to make sure it displays correctly in browsers, or for testing and debugging portions of the application.</p>
+<div class="infobox-note" id="GUID-C4B29CAC-9EB7-4AF3-B4D9-8B4AF81D05F7__GUID-A367A1E7-DF83-45E0-B729-9A9126B3CC38">
+<p class="notep1">Note:</p>
+<p>You cannot use Integrated WebLogic Server to run SOA applications. You must deploy SOA applications to a standalone WebLogic Server instance. For more information, see <a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-17C05D8C-5F35-4A34-BC21-5DFB321B2A24">Deploying Your SOA Projects to an Administration Server Instance of WebLogic Server</a>.</p>
+</div>
+<p>Integrated WebLogic Server has already been configured with the <span id="GUID-C4B29CAC-9EB7-4AF3-B4D9-8B4AF81D05F7__APPLCORE">Oracle Fusion Middleware Extensions for Applications</span> domain extension templates. When the scripts are used to create the Integrated WebLogic Server and Standalone Weblogic Server domains, the <span id="GUID-C4B29CAC-9EB7-4AF3-B4D9-8B4AF81D05F7__APPLCORESHORT">Applications Core</span> templates are configured. These templates are required for deploying and running applications using <span>Applications Core</span> functionality. So all of the <span id="GUID-C4B29CAC-9EB7-4AF3-B4D9-8B4AF81D05F7__FAAPPS">Oracle Fusion applications</span> will run on instances of both servers.</p>
+<p>JDeveloper has a default connection to Integrated WebLogic Server and does not require you to manually create any deployment profiles or descriptors. Integrated WebLogic Server automates creating the same EAR that is used by Standalone WebLogic Server. You can see this when running the application. The run log shows the steps done by JDeveloper, including creating an EAR and deploying it.</p>
+<p>When you run your application in JDeveloper using the <span class="bold">run</span> or <span class="bold">debug</span> commands, Integrated WebLogic Server automatically starts the server, packages the application to an EAR file, deploys the EAR, opens the browser, and accesses the URL for the deployed application.</p>
+<p>When you use JDeveloper to run an application for the first time, it automatically creates the Integrated WebLogic Server instance. Make sure you have configured the domain, following the steps in <a href="GUID-2941EDE7-222A-4B38-A66C-5F65FCFB013B.htm#GUID-6A689EB5-4633-4A7B-B47B-C26A0990ECA0">How to Use the Oracle Fusion Domain Wizard</a>.</p>
+<p>You can also start the server directly from within JDeveloper. To do this, go to the main menu and select <span class="bold">Run &gt; Start Server Instance</span>.</p>
+<div class="infoboxnotealso" id="GUID-C4B29CAC-9EB7-4AF3-B4D9-8B4AF81D05F7__GUID-56FB0C26-B9C7-43A1-A345-43380F598BCD">
+<p class="notep1">Tip:</p>
+<p>The first time Integrated WebLogic Server starts, it tries to use the first available port in the 7101 - 7105 range. The following message appears as the first line in the Default server log in JDeveloper. You should use the alternate port for all access:</p>
+<p><span class="italic">HTTP port conflict detected. The HTTP port will be reassigned to port 7102.</span></p>
+</div>
+<p>The server and the application are considered separate entities, so even if you stop the application, it does not stop the server. To terminate the application, select the application name from the terminate button dropdown menu in the Server Instance Log page, as shown in <a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-C4B29CAC-9EB7-4AF3-B4D9-8B4AF81D05F7__CBBEFBHE">Figure 55-5</a>.</p>
+<div class="figure" id="GUID-C4B29CAC-9EB7-4AF3-B4D9-8B4AF81D05F7__CBBEFBHE">
+<p class="titleinfigure">Figure 55-5 Terminating the Application</p>
+<img width="558" height="87" src="img/GUID-E1362D8C-132D-4656-969A-467C4268C3B4-default.png" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" -->
+<p>To terminate the server, select the server name, as shown in <a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-C4B29CAC-9EB7-4AF3-B4D9-8B4AF81D05F7__CDEHBCAG">Figure 55-6</a>.</p>
+<div class="figure" id="GUID-C4B29CAC-9EB7-4AF3-B4D9-8B4AF81D05F7__CDEHBCAG">
+<p class="titleinfigure">Figure 55-6 Terminating the Integrated WebLogic Server Instance</p>
+<img width="429" height="69" src="img/GUID-33051EB1-297E-418F-9C94-7D6747E3BB46-default.png" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" --></div>
+<div class="props_rev_3"><a id="GUID-372DE9CB-A0CD-4FED-BEDB-5598523D2BFA"></a>
+<h3 id="OADEE-GUID-372DE9CB-A0CD-4FED-BEDB-5598523D2BFA" class="sect3"><span class="enumeration_section">55.2.1</span> How to Deploy an Application with Metadata to Integrated WebLogic Server</h3>
+<div>
+<div class="section">
+<p>When an application is running in Integrated WebLogic Server, the Metadata Archive (MAR) profile itself will not be deployed to a repository. Instead, a simulated Oracle Metadata Services (MDS) repository will be configured for the application that reflects the metadata information contained in the MAR. This metadata information is simulated and the application runs based on their location in source control.</p>
+<p>Any customizations or documents created by the application are written to this simulated MDS repository directory. You can keep the default location for this directory or you can set it to a different directory. You also have the option to preserve customizations across different application runs or to delete the customizations before each application run.</p>
+<p>Before you begin, you must first create your MAR deployment profile. For information about how to create a MAR deployment profile, see <a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-54480522-A5BD-4DA6-B9E5-C77C8A1651C1">How to Create Deployment Profiles for Standalone WebLogic Server Deployment</a>.</p>
+<p>To deploy a MAR deployment profile to Integrated WebLogic Server:</p>
+<ol>
+<li>
+<p>Go to the <span class="bold">Application Navigator</span>, right-click the application and select <span class="bold">Application Properties</span>.</p>
+</li>
+<li>
+<p>In the Application Properties dialog, expand <span class="bold">Run</span> and choose <span class="bold">MDS</span>. See <a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-372DE9CB-A0CD-4FED-BEDB-5598523D2BFA__CBBECFFF">Figure 55-7</a>.</p>
+<div class="figure" id="GUID-372DE9CB-A0CD-4FED-BEDB-5598523D2BFA__CBBECFFF">
+<p class="titleinfigure">Figure 55-7 Setting the Run MDS Options</p>
+<img width="697" height="498" src="img/GUID-0BF02F24-4DD4-41AD-9C05-4EFF9A120BAC-default.gif" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" --></li>
+<li>
+<p>In the Run MDS page:</p>
+<ol>
+<li>
+<p>Select the MAR profile from the <span class="bold">MAR Profile</span> dropdown list.</p>
+</li>
+<li>
+<p>Enter a directory path in <span class="bold">Override Location</span> if you want to customize the location of the simulated repository.</p>
+</li>
+<li>
+<p>Select the <span class="bold">Directory Content</span> option. You can choose to preserve the customizations across application runs or delete customizations before each run.</p>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-CC158800-AB44-4789-8DD5-B1C3C9AFA078"></a>
+<h2 id="OADEE-GUID-CC158800-AB44-4789-8DD5-B1C3C9AFA078" class="sect2"><span class="enumeration_section">55.3</span> Prepare to Deploy Oracle ADF Applications to an Instance of Standalone WebLogic Server</h2>
+<div>
+<div class="section">
+<p>You must prepare the application and the WebLogic Server instance before you deploy applications to an instance of Standalone WebLogic Server.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead2">Before you begin:</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>Before you deploy the application to a Standalone WebLogic Server instance, you need to:</p>
+<ol>
+<li>
+<p>Create and configure the WebLogic Server domains using the Configure Fusion Domain wizard as described in <a href="GUID-2941EDE7-222A-4B38-A66C-5F65FCFB013B.htm#GUID-2941EDE7-222A-4B38-A66C-5F65FCFB013B" title="This chapter describes how to configure and test your development environment. It includes the steps for setting up your JDeveloper environment and Oracle Application Development Framework (Oracle ADF) installation, running and deploying applications on Integrated WebLogic Server, and the basic steps for setting up your Oracle SOA Suite development environment.">Setting Up Your Development Environment</a>.</p>
+</li>
+<li>
+<p>If the application is using ADF Security, you may need to:</p>
+<ol>
+<li>
+<p>Configure for Oracle Single Sign-on using Oracle Access Manager (OAM). For more information, see the "<a class="olink ADFFD22281" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ADFFD22281">Applications That Will Run Using Oracle Single Sign-On (SSO)</a>" section in the <span class="italic"><span id="GUID-CC158800-AB44-4789-8DD5-B1C3C9AFA078__ADFFD"><cite>Developing Fusion Web Applications with Oracle Application Development Framework</cite></span></span>.</p>
+</li>
+<li>
+<p>Migrate application-level security information to the WebLogic Server instance. For more information, see the "<a class="olink ADFFD22998" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ADFFD22998">Configuring Security for WebLogic Server</a>" section in the <span class="italic"><span><cite>Developing Fusion Web Applications with Oracle Application Development Framework</cite></span></span>.</p>
+</li>
+<li>
+<p>Set up JDBC URL for WebLogic Server. For more information, see the "<a class="olink ADFFD22999" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ADFFD22999">Applications with JDBC URL for WebLogic</a>" section in the <span class="italic"><span><cite>Developing Fusion Web Applications with Oracle Application Development Framework</cite></span></span>.</p>
+</li>
+<li>
+<p>Set up JDBC datasource for WebLogic Server. For more information, see the <a class="olink ADFFD23000" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ADFFD23000">"Applications with JDBC Data Source for WebLogic"</a> section in the <span class="italic"><span><cite>Developing Fusion Web Applications with Oracle Application Development Framework</cite></span></span>.</p>
+</li>
+<li>
+<p>Understand LDAP-based stores. For more information, see <a href="GUID-E7BD9DAD-9C98-4F4E-A212-11296A96A866.htm#GUID-73BCABD3-472C-4108-A603-2BC22FD812C3">What You May Need to Know About Testing</a>.</p>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+<div class="props_rev_3"><a id="GUID-CB790D26-BDB9-4CC7-9DBE-A4BEF38BA723"></a>
+<h3 id="OADEE-GUID-CB790D26-BDB9-4CC7-9DBE-A4BEF38BA723" class="sect3"><span class="enumeration_section">55.3.1</span> How to Reference the Shared Libraries</h3>
+<div>
+<div class="section">
+<p>Shared libraries are available in the integrated and standalone WebLogic Server container and your projects must be updated so that they can use a shared library.</p>
+<p>When you create your WebLogic Server domain, all the required shared libraries should be automatically created for you. When you choose a new technology or library in JDeveloper, the <code class="codeph">weblogic.xml</code> and <code class="codeph">weblogic-application.xml</code> files are automatically updated to reference these shared libraries. If, for some reason, the required references are not created automatically, you must update the <code class="codeph">weblogic.xml</code> and <code class="codeph">weblogic-application.xml</code> files manually.</p>
+<p>The process below shows how to reference a sample <span class="italic">oracle.shared.library</span> shared library in a project.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">To reference a shared library into a project:</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ol>
+<li>
+<p>Go to <span class="bold">Application Navigator</span>, expand <span class="bold">Application Resources &gt; Descriptors &gt; META-INF</span>.</p>
+</li>
+<li>
+<p>Add reference shared library to <code class="codeph">weblogic-application.xml</code>:</p>
+<ol>
+<li>
+<p>Click the <code class="codeph">weblogic-application.xml</code> file.</p>
+</li>
+<li>
+<p>Create a copy of the <code class="codeph">library-ref</code> element.</p>
+<p>You can either accomplish this manually in the editor, or you can right-click the existing <code class="codeph">library-ref</code> element to use the copy and paste options.</p>
+</li>
+<li>
+<p>Change the <code class="codeph">library-name</code> element to <span class="italic">oracle.shared.library</span>. Leave the specification and implementation version values blank.</p>
+<div class="infobox-note" id="GUID-CB790D26-BDB9-4CC7-9DBE-A4BEF38BA723__GUID-F66A3F16-4778-46E7-83A5-3A5C2D9FDEF0">
+<p class="notep1">Caution:</p>
+<p>Make sure that there are no blank spaces between the tag &lt;library-ref&gt; and the actual entry as they will cause problems.</p>
+</div>
+</li>
+<li>
+<p>Repeat steps 2b and 2c to reference additional libraries.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Add reference shared library to <code class="codeph">weblogic.xml</code> using the same steps.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<div class="props_rev_3"><a id="GUID-54480522-A5BD-4DA6-B9E5-C77C8A1651C1"></a>
+<h3 id="OADEE-GUID-54480522-A5BD-4DA6-B9E5-C77C8A1651C1" class="sect3"><span class="enumeration_section">55.3.2</span> How to Create Deployment Profiles for Standalone WebLogic Server Deployment</h3>
+<div>
+<p>The deployment profiles determine how the application is bundled and deployed to Standalone WebLogic Server. When running an application within JDeveloper using Integrated WebLogic Server, these deployment profiles are not used.</p>
+<div class="infoboxnotealso" id="GUID-54480522-A5BD-4DA6-B9E5-C77C8A1651C1__GUID-737ECCEA-D1C8-4BFC-9FEF-576518E1C85C">
+<p class="notep1">Tip:</p>
+<p>When you run your application in JDeveloper Integrated WebLogic Server, these deployment profiles are not used. Instead, JDeveloper scans the entire workspace or the current working set, (if the <span class="italic">Run Working Set</span> option is enabled), to construct the class loader classpaths. If the data model project is eligible to be an EJB then the Libraries and Classpath entries from that project contribute to the application root class loader. The user interface project contributes to the web application class loader.</p>
+</div>
+<p>To deploy the application, you must create deployment profiles applicable to the project or projects. The deployment profiles you need depend on your application requirements. For example, an application may include Business Components Service Interface, Web Application Archive (WAR), and MAR profiles. When you have defined these, create an EAR deployment profile for the application.</p>
+<p>You can only deploy the application as an EAR file at the application level. Creating EAR files from the project level are incomplete and this option is disabled. The project level deployment profiles should be included in the EAR deployment profile.</p>
+<p>Depending on the type of projects in your application, you may need to create the following deployment profiles:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Business Components Service deployment profile. For instructions, see the "<a class="olink ADFFD22016" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ADFFD22016">How to Deploy Web Services to Oracle WebLogic Server</a>" section of the <span class="italic"><span id="GUID-54480522-A5BD-4DA6-B9E5-C77C8A1651C1__ADFFD"><cite>Developing Fusion Web Applications with Oracle Application Development Framework</cite></span></span>.</p>
+</li>
+<li>
+<p>WAR deployment profile. For instructions, see the "<a class="olink ADFFD22054" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ADFFD22054">Creating a WAR Deployment Profile</a>" section of the <span class="italic"><span><cite>Developing Fusion Web Applications with Oracle Application Development Framework</cite></span></span></p>
+</li>
+<li>
+<p>MAR deployment profile. For instructions, see the "<a class="olink ADFFD22057" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ADFFD22057">Creating a MAR Deployment Profile</a>" section of the <span class="italic"><span><cite>Developing Fusion Web Applications with Oracle Application Development Framework</cite></span></span></p>
+</li>
+<li>
+<p>EAR deployment profile. For instructions, see the "<a class="olink ADFFD22060" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ADFFD22060">Creating an Application-Level EAR Deployment Profile</a>" section of the <span class="italic"><span><cite>Developing Fusion Web Applications with Oracle Application Development Framework</cite></span></span></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-995D45B2-1B94-459B-879D-2A6E7D615436"></a>
+<h2 id="OADEE-GUID-995D45B2-1B94-459B-879D-2A6E7D615436" class="sect2"><span class="enumeration_section">55.4</span> Deploying Your Oracle ADF Applications to an Administration Server Instance of WebLogic Server</h2>
+<div>
+<p>You can deploy your Oracle ADF applications to a standalone WebLogic Server instance using JDeveloper.</p>
+<p>Any necessary MDS repositories must be registered with the WebLogic Server instance. If the MDS repository is a database, the repository maps to a WebLogic Server system data source with MDS-specific requirements. Before you deploy the application, make sure to target this data source to the Administration Server instance of WebLogic Server. For more information about registering MDS, see the <span class="italic">Oracle Fusion Middleware Administering Oracle Fusion Middleware</span> guide.</p>
+<div class="infobox-note" id="GUID-995D45B2-1B94-459B-879D-2A6E7D615436__GUID-84511B8B-0CCE-4863-B143-7449D6345257">
+<p class="notep1">Note:</p>
+<p>If you are using the WebLogic Server Administrative Console or WLST scripts to deploy an application packaged as an EAR file that requires MDS repository configuration in <code class="codeph">adf-config.xml</code>, you must run the <code class="codeph">getMDSArchiveConfig</code> WLST command that returns a handle to the <code class="codeph">MDSArchiveConfig</code> object for the specified archive. The returned <code class="codeph">MDSArchiveConfig</code> object's <code class="codeph">setAppMetadataRepository</code> and <code class="codeph">setAppSharedMetadataRepository</code> methods can be used to change application and shared repository configuration in an archive. MDS configuration is required if the EAR file contains a MAR file or if the application is enabled for Design Time at Runtime. For more information about WLST commands, see the <span class="italic">Oracle Fusion Middleware WLST Command Reference for WebLogic Server</span> guide.</p>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-18D106AE-D1CF-48CA-BE2E-467138C4E17B"></a>
+<h3 id="OADEE-GUID-18D106AE-D1CF-48CA-BE2E-467138C4E17B" class="sect3"><span class="enumeration_section">55.4.1</span> How to Create an Application Server Connection Using JDeveloper</h3>
+<div>
+<div class="section">
+<p>To deploy your application using JDeveloper, you create a connection to the application server and then deploy the application.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">To create an application server connection:</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ol>
+<li>
+<p>Start WebLogic Server instance.</p>
+</li>
+<li>
+<p>Open your application in JDeveloper.</p>
+</li>
+<li>
+<p>Launch the Ap<a id="d337164e1144" class="indexterm-anchor"></a><a id="d337164e1146" class="indexterm-anchor"></a>plication Server Connection wizard.</p>
+<p>You can:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>In the Application Server Navigator, right-click <span class="bold">Application Servers</span> and choose <span class="bold">New Application Server Connection</span>.</p>
+</li>
+<li>
+<p>In the New Gallery, expand <span class="bold">General</span>, select <span class="bold">Connections</span> and then <span class="bold">Application Server Connection</span>, and click <span class="bold">OK</span>.</p>
+</li>
+<li>
+<p>In the Resource Palette, choose <span class="bold">New</span> &gt; <span class="bold">New Connections &gt; Application Server</span>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Complete the wizard:</p>
+<ol>
+<li>
+<p>Enter the following information as you progress through the wizard:</p>
+</li>
+<li>
+<p><span class="bold">Connection Name</span>: Enter a name for the connection.</p>
+</li>
+<li>
+<p><span class="bold">Username</span> and <span class="bold">Password</span>: Enter a user name and password for the administrative user authorized to access the application server.</p>
+</li>
+<li>
+<p><span class="bold">Weblogic Hostname Administration Server)</span>: Enter the name of the WebLogic Server instance containing the TCP/IP DNS where your application (<code class="codeph">.jar,.war,.ear</code>) will be deployed.</p>
+</li>
+<li>
+<p><span class="bold">Port</span>: Enter a port number for the Oracle WebLogic Server instance on which your application (<code class="codeph">.jar,.war,.ear</code>) will be deployed.</p>
+</li>
+<li>
+<p>In the <span class="bold">SSL Port</span> field, enter an SSL port number for the Oracle WebLogic Server instance on which your application (<code class="codeph">.jar,.war,.ear</code>) will be deployed.</p>
+</li>
+<li>
+<p>Select <span class="bold">Always Use SSL</span> to connect to the Oracle WebLogic Server instance using the SSL port.</p>
+</li>
+<li>
+<p><span class="bold">WebLogic Domain</span>: Optionally enter a domain only if Oracle WebLogic Server is configured to distinguish nonadministrative server nodes by name.</p>
+</li>
+<li>
+<p>Test the connection.</p>
+</li>
+<li>
+<p>Click <span class="bold">Finish</span> to close the wizard and create your application server connection.</p>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<div class="props_rev_3"><a id="GUID-1942BCB2-6EAB-4A34-B3FC-97980B63688A"></a>
+<h3 id="OADEE-GUID-1942BCB2-6EAB-4A34-B3FC-97980B63688A" class="sect3"><span class="enumeration_section">55.4.2</span> How to Deploy the Application Using JDeveloper</h3>
+<div>
+<div class="section">
+<p>After you have created an application server connection and an EAR deployment profile, you can deploy the application to a standalone application server.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">To deploy an application:</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ol>
+<li>
+<p>Deploy your project to the application server:</p>
+<ol>
+<li>
+<p>In the Application Navigator, right-click your application and choose <span class="bold">Deploy &gt;</span> <span class="italic"><span class="bold">deployment profile</span></span>.</p>
+</li>
+<li>
+<p>In the Deploy wizard Deployment Action page, select <span class="bold">Deploy to Application Server</span> and click <span class="bold">Next</span>.</p>
+</li>
+<li>
+<p>In the Select Server page, select the application server connection, and click <span class="bold">Next</span>.</p>
+</li>
+<li>
+<p>The WebLogic Options page appears. Select a deploy option and click <span class="bold">Next</span>.</p>
+<p>If the <code class="codeph">adf-config.xml</code> file in the EAR file requires MDS repository configuration, the Deployment Configuration dialog appears for you to choose the target metadata repository or shared metadata repositories, as shown in <a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-1942BCB2-6EAB-4A34-B3FC-97980B63688A__CBBGIFBI">Figure 55-8</a>.</p>
+<div class="figure" id="GUID-1942BCB2-6EAB-4A34-B3FC-97980B63688A__CBBGIFBI">
+<p class="titleinfigure">Figure 55-8 MDS Configuration and Customization For Deployment</p>
+<img width="677" height="597" src="img/GUID-6D2F61CE-3268-45B8-AEDA-AC7318F47466-default.gif" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" -->
+<p>The <span class="bold">Repository Name</span> dropdown list allows you to choose a target metadata repository from a list of metadata repositories registered with the Administration Server instance of WebLogic Server. The <span class="bold">Partition Name</span> dropdown list allows you to choose the metadata repository partition to which the application's metadata will be imported during deployment. For more information about managing the MDS repository, see the <span class="italic">Oracle Fusion Middleware Administering Oracle Fusion Middleware</span> guide.</p>
+<div class="infobox-note" id="GUID-1942BCB2-6EAB-4A34-B3FC-97980B63688A__GUID-5DB5F502-064E-467C-B697-E68943F22812">
+<p class="notep1">Note:</p>
+<p>If you are deploying an Oracle ADF application, do not use the <span class="bold">Deploy to all instances in the domain</span> option.</p>
+</div>
+</li>
+<li>
+<p>Click <span class="bold">Finish</span>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Verify the run-time application as:</p>
+<p><span class="italic">http://httpHost:httpPORT/&lt;CONTEXT&gt;/faces/&lt;landing jspx&gt;</span></p>
+<p>For example, <span class="italic">http://server06.us.company.com:7001/UIPatternsDemo/faces/ServiceRequest</span></p>
+<p><span class="italic">http://server12.company.com:7001/D7Build1-ViewController-context-root/faces/TreeHomePage.jspx</span></p>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<div class="props_rev_3"><a id="GUID-0678604E-462B-491E-8477-82E3174C472A"></a>
+<h3 id="OADEE-GUID-0678604E-462B-491E-8477-82E3174C472A" class="sect3"><span class="enumeration_section">55.4.3</span> How to Create an EAR File for Deployment</h3>
+<div>
+<div class="section">
+<p>You can also use the deployment profile to create an archive file (EAR file). You can then deploy the archive file using Enterprise Manager, WLST, or the Oracle WebLogic Server Administration Console.</p>
+<p>Although an application is encapsulated in an EAR file (which usually includes WAR, MAR, and JAR components), it may have parts that are not deployed with the EAR. For instance, ADF Business Services can be deployed as a JAR.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">To create an EAR archive file:</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>In the Application Navigator, right-click the application containing the deployment profile, and choose <span class="bold">Deploy &gt;</span> <span class="italic"><span class="bold">deployment profile</span></span> <span class="bold">&gt; to EAR file</span>.</p>
+<p>See <a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-54480522-A5BD-4DA6-B9E5-C77C8A1651C1">How to Create Deployment Profiles for Standalone WebLogic Server Deployment</a>.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-17C05D8C-5F35-4A34-BC21-5DFB321B2A24"></a>
+<h2 id="OADEE-GUID-17C05D8C-5F35-4A34-BC21-5DFB321B2A24" class="sect2"><span class="enumeration_section">55.5</span> Deploy Your SOA Projects to an Administration Server Instance of WebLogic Server</h2>
+<div>
+<p>You can deploy your SOA projects using either JDeveloper or the other administration tools described in <a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-AAE885A1-61C2-4DBB-80AC-141969EC341D__CDEGACAA" title="Deployment techniques">Table 55-1</a>.</p>
+</div>
+<div class="props_rev_3"><a id="GUID-FF2999AD-4F79-4CA6-8A46-89D5A6B644EE"></a>
+<h3 id="OADEE-GUID-FF2999AD-4F79-4CA6-8A46-89D5A6B644EE" class="sect3"><span class="enumeration_section">55.5.1</span> How to Deploy Your SOA Projects Using JDeveloper</h3>
+<div>
+<p>This section discusses how to deploy your SOA projects into the Administration Server instance of WebLogic Server using JDeveloper.</p>
+<div class="section">
+<p class="subhead3">The basic steps to deploying your SOA project from within JDeveloper are:</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ol>
+<li>
+<p>Define a connection. For instructions to create an application server connection, see <a class="olink SOASE85464" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE85464">"Creating an Application Server Connection"</a> in the <span class="italic"><span id="GUID-FF2999AD-4F79-4CA6-8A46-89D5A6B644EE__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</li>
+<li>
+<p>Deploy the Project. For instructions to deploy a SOA project, see "<a class="olink SOASE162" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE162">Deploying the Profile</a> " in the <span class="italic"><span><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span></p>
+</li>
+<li>
+<p>Check the deployed SOA Project.</p>
+</li>
+</ol>
+<p>For details about deploying a SOA project, see "<a class="olink SOASE002" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE002">Deploying SOA Composite Applications</a>" in the <span class="italic"><span><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</div>
+<!-- class="section" --></div>
+<div class="props_rev_3"><a id="GUID-A6BEFD2C-BAA3-4DF9-9BB2-A511C354E4AA"></a>
+<h4 id="OADEE-GUID-A6BEFD2C-BAA3-4DF9-9BB2-A511C354E4AA" class="sect4"><span class="enumeration_section">55.5.1.1</span> Check the Deployed SOA Project</h4>
+<div>
+<p>You can check and run your deployed SOA project from two locations:</p>
+<p>From Enterprise Manager on port 7001 by opening the Weblogic Hostname (Administration Server) URL for which you created the Connection, such as:</p>
+<p><code class="codeph">http://xyzzy-on.example.com:7001/em</code></p>
+<p>After you log in, a screen similar to <a href="GUID-36A9256E-61D7-4048-AED5-2F978F3401FE.htm#GUID-A6BEFD2C-BAA3-4DF9-9BB2-A511C354E4AA__CDEEEIBB">Figure 55-9</a> displays (the SOA tree in the left pane has been expanded and the first deployment has been selected):</p>
+<div class="figure" id="GUID-A6BEFD2C-BAA3-4DF9-9BB2-A511C354E4AA__CDEEEIBB">
+<p class="titleinfigure">Figure 55-9 Checking SOA Deployment from the EM</p>
+<img width="567" height="331" src="img/GUID-96E8B6DF-9DCE-47A8-A147-1FB22718FCB0-default.gif" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" --></div>
+</div>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment533">
+<tr>
+<td class="cellalignment570">
+<table class="cellalignment538">
+<tr>
+<td class="cellalignment537"><a href="GUID-2D2B5DBF-4B65-457F-A993-BC07293D17E2.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment537"><a href="GUID-C626FC6D-710F-4519-97F6-2412B217583E.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2011, 2016, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment572">
+<table class="cellalignment536">
+<tr>
+<td class="cellalignment537"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment537"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

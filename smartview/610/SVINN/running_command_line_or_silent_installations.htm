@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Running Command Line or Silent Installations</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="dcterms.created" content="2016-12-21T09:54:46Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Oracle&reg; Smart View for Office Installation and Configuration Guide" />
+<meta name="dcterms.identifier" content="E79487-02" />
+<meta name="dcterms.isVersionOf" content="SVINN" />
+<link rel="Start" href="index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="installing_from_the_obiee_analytics_home_page.htm" title="Previous" type="text/html" />
+<link rel="Next" href="downloading_help_for_local_or_web_server_installation.htm" title="Next" type="text/html" />
+<link rel="alternate" href="SVINN.pdf" title="PDF version" type="application/pdf" />
+<link rel="alternate" href="SVINN.epub" title="ePub version" type="application/epub+zip" />
+<link rel="alternate" href="SVINN.mobi" title="Mobipocket version" type="application/x-mobipocket-ebook" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a>
+<header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="installation_58"></a> <span id="PAGE" style="display:none;">23/70</span> <!-- End Header -->
+<h1 id="SVINN-installation_58" class="sect1">Running Command Line or Silent Installations</h1>
+<div>
+<div class="section">
+<p>In addition to command line installations, administrators can enable silent installations&mdash;installations that do not require settings to be specified each time&mdash;for <span>Oracle Smart View for Office</span>. The silent installation command can be included in scripts to automate installation.</p>
+<div class="infobox-note">
+<p class="notep1">Note:</p>
+<p>Silent installations are not supported for non-admin users.</p>
+</div>
+<p>The silent installer wrapper follows these rules:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>It passes the value of the <code>/v</code> parameter intact to the MSI.</p>
+</li>
+<li>
+<p>The <code>/s</code> flag is converted to <code>/qn</code> and passed to the MSI. There is no need to specify the <code>/qn</code> parameter if <code>/s</code> is already present in your script.</p>
+</li>
+<li>
+<p>Unless the <code>/v</code> parameter contains any <code>/q</code> specifier, the wrapper passes <code>/qb+</code> to the MSI.</p>
+</li>
+</ul>
+<div class="tblformal">
+<p class="titleintable">Table 2-2 Command Line Options for Client Installations</p>
+<table class="cellalignment16" title="Command Line Options for Client Installations" summary="Command Line Options for Client Installations">
+<thead>
+<tr class="cellalignment2">
+<th class="cellalignment15" id="d3563e73">Option</th>
+<th class="cellalignment15" id="d3563e75">Usage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment2">
+<td class="cellalignment2" id="d3563e79" headers="d3563e73">/v"command line options"</td>
+<td class="cellalignment2" headers="d3563e79 d3563e75">Specifies command line options to be passed to the client installer.</td>
+</tr>
+<tr class="cellalignment2">
+<td class="cellalignment2" id="d3563e84" headers="d3563e73">/s</td>
+<td class="cellalignment2" headers="d3563e84 d3563e75">Runs the client installer as a silent installer.</td>
+</tr>
+<tr class="cellalignment2">
+<td class="cellalignment2" id="d3563e89" headers="d3563e73">INSTALLDIR=</td>
+<td class="cellalignment2" headers="d3563e89 d3563e75">Specifies the installation directory.</td>
+</tr>
+<tr class="cellalignment2">
+<td class="cellalignment2" id="d3563e94" headers="d3563e73">l*v log file path and name</td>
+<td class="cellalignment2" headers="d3563e94 d3563e75">Logs installation information in the specified file.</td>
+</tr>
+<tr class="cellalignment2">
+<td class="cellalignment2" id="d3563e99" headers="d3563e73">/extensionupdatelist=</td>
+<td class="cellalignment2" headers="d3563e99 d3563e75">Path to UpdateList.xml</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>Before you begin, follow the procedure in <a href="installing_from_my_oracle_support_or_oracle_technology_network.htm#installation_2">Installing from My Oracle Support or Oracle Technology Network</a> to download the <span>Smart View</span> installation zip file and unzip it to the folder you will be working in.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>To run silent installations:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand" id="installation_58__installation_59"><span>Open a command prompt.</span></li>
+<li class="stepexpand" id="installation_58__installation_60"><span>Navigate to the directory of the <span>Smart View</span> installer.</span></li>
+<li class="stepexpand" id="installation_58__installation_61"><span>Run the installation commands; for example:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>To install in the default directory, run:</p>
+<pre dir="ltr">
+SmartView.exe /s
+</pre></li>
+<li>
+<p>To install in another directory, run:</p>
+<pre dir="ltr">
+SmartView.exe /s /v" INSTALLDIR=&lt;target path&gt;"
+</pre>
+<p>For example:</p>
+<pre dir="ltr">
+SmartView.exe /s /v" INSTALLDIR=D:\SmartView"
+</pre></li>
+<li>
+<p>To specify the location of <code>UpdateList.xml</code>, run:</p>
+<pre dir="ltr">
+SmartView.exe /s /extensionupdatelist=&lt;<span class="variable">path to UpdateList.xml</span>&gt;
+</pre></li>
+<li>
+<p>To run a silent installation and log the installation sequence:</p>
+<pre dir="ltr">
+SmartView.exe/s/v&rdquo; INSTALLDIR=D:\SmartView /L*v c:\install.log&rdquo;
+</pre></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment1">
+<tr>
+<td class="cellalignment8">
+<table class="cellalignment6">
+<tr>
+<td class="cellalignment5"><a href="installing_from_the_obiee_analytics_home_page.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment5"><a href="downloading_help_for_local_or_web_server_installation.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2004, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment10">
+<table class="cellalignment4">
+<tr>
+<td class="cellalignment5"><a href="index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment5"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment5"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

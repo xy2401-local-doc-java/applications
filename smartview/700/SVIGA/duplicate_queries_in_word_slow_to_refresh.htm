@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Duplicate Queries in Word Slow to Refresh</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="dcterms.created" content="2017-07-20T20:58:45Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Oracle&reg; Smart View for Office Installation and Configuration Guide" />
+<meta name="dcterms.identifier" content="E88791-01" />
+<meta name="dcterms.isVersionOf" content="SVIGA" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2004, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="smart_view_http_session_timeout.htm" title="Previous" type="text/html" />
+<link rel="Next" href="issues_with_dynamic_data_exchange_option_in_excel.htm" title="Next" type="text/html" />
+<link rel="alternate" href="SVIGA.pdf" title="PDF version" type="application/pdf" />
+<link rel="alternate" href="SVIGA.epub" title="ePub version" type="application/epub+zip" />
+<link rel="alternate" href="SVIGA.mobi" title="Mobipocket version" type="application/x-mobipocket-ebook" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="troubleshooting_54"></a> <span id="PAGE" style="display:none;">65/76</span> <!-- End Header -->
+<h1 id="SVIGA-troubleshooting_54" class="sect1">Duplicate Queries in Word Slow to Refresh</h1>
+<div>
+<div class="section">
+<p>In some Word documents containing a large number of queries and created prior to <span>Oracle Smart View for Office</span> release 11.1.2.5.520, performance may be an issue when refreshing the data in the document. In some cases, instead of re-using existing queries where appropriate, each <span>Smart View</span> data point in the Word document is treated as a separate query. The result is that Refresh operations can be very slow.</p>
+<p>If the document contains many duplicate queries (that is, queries with the same name), the duplicate queries are displayed in the Document Contents pane in Word. For example, Document Contents might look like this:</p>
+<br />
+<img width="327" height="759" src="img/dup_queries_before_macro.jpg" alt="Document Contents pane showing a long list of duplicate queries." title="Document Contents pane showing a long list of duplicate queries." /><br />
+<p>The duplicate queries are <code class="codeph">SmartView14446361770</code> and <code class="codeph">SmartView14446541490</code>.</p>
+<p>You can run Visual Basic macro below to remove the duplicate queries:</p>
+<pre dir="ltr">
+Sub DeleteExtraQueries() 
+ ' 
+ ' DeleteExtraQueries Macro 
+ ' 
+ Dim queriesName As Variant 
+ Dim uniqueQueriesName As New Collection 
+ Dim varName, newList As String 
+ Set vars = ActiveDocument.Variables 
+ 
+  For i = 1 To vars.Count 
+     varName = vars.Item(i).Name 
+     If Not StrComp(vars.Item(i).Name, "SV_QUERY_LIST", vbTextCompare) Then 
+         List = vars.Item(i).Value 
+         queriesName = Split(List, "&lt;|&gt;") 
+         
+         On Error Resume Next 
+         For Each queryName In queriesName 
+             uniqueQueriesName.Add queryName, queryName 
+         Next 
+         newList = "" 
+         For Each queryName In uniqueQueriesName 
+             newList = newList &amp; queryName &amp; "&lt;|&gt;" 
+         Next 
+         newList = Left(newList, Len(newList) - 3) 
+         vars.Item(i).Value = newList 
+     End If 
+     
+ Next 
+ 
+End Sub
+</pre>
+<p>After running the macro, the two queries, <code class="codeph">SmartView14446361770</code> and <code class="codeph">SmartView14446541490</code>, appear only once in Document Contents:</p>
+<br />
+<img width="331" height="216" src="img/dup_queries_after_macro.jpg" alt="Document Contents pane with each query appearing only once." title="Document Contents pane with each query appearing only once." /><br /></div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment21">
+<tr>
+<td class="cellalignment28">
+<table class="cellalignment26">
+<tr>
+<td class="cellalignment25"><a href="smart_view_http_session_timeout.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment25"><a href="issues_with_dynamic_data_exchange_option_in_excel.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2004, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment30">
+<table class="cellalignment24">
+<tr>
+<td class="cellalignment25"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment25"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

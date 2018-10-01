@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Deploying the ODI Repository for Non-Oracle Source Databases</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This section provides information about deploying the Oracle Data Integrator (ODI) repository for non-Oracle source databases." />
+<meta name="dcterms.created" content="2018-09-24T23:04:57Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Installation Guide" />
+<meta name="dcterms.identifier" content="E72034-07" />
+<meta name="dcterms.isVersionOf" content="BIAIN" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2013, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-81E0A1AF-4551-4836-9CC3-75A9FE31CDE9.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-9B36E28F-BFA6-499E-8207-5A1F8D873121.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAIN.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-7593E620-8F3B-4E4B-A57B-8C26632CA185"></a> <span id="PAGE" style="display:none;">57/119</span> <!-- End Header -->
+<h1 id="BIAIN-GUID-7593E620-8F3B-4E4B-A57B-8C26632CA185" class="sect1"><span class="enumeration_chapter">8</span> Deploying the ODI Repository for Non-Oracle Source Databases</h1>
+<div>
+<p>This section provides information about deploying the <span>Oracle Data Integrator</span> (ODI) repository for non-Oracle source databases.</p>
+<div class="section">
+<p>During installation and setup of <span>Oracle Business Intelligence Applications</span> (<span>Oracle BI Applications</span>), if your source database is Oracle, then an instance of the ODI repository is automatically deployed and no further setup steps are required. If your source database is MS SQL Server, UDB DB2, or UDB 400, then you must perform these configuration steps to deploy a new instance of the ODI repository.</p>
+<div class="p">If you have multiple sources and one or more of the source databases is non-Oracle, you must follow these procedures for all source databases, including any Oracle source databases. The following non-Oracle source databases are certified:
+<ul style="list-style-type: disc;">
+<li>
+<p>JD Edwards (JDE) 91, JDE 90 Adaptors are certified with DB2 (AS 400) , DB2 UDB (DB2 v9.7.0.5) and Microsoft SQL Server 2008 source databases.</p>
+</li>
+<li>
+<p>People Soft 92 HCM is certified with Microsoft SQL Server 2014 source databases.</p>
+</li>
+<li>
+<p>People Soft 90 SIA (Student Information Analytics) is certified with Microsoft SQL Server 2012 source databases.</p>
+</li>
+</ul>
+</div>
+<p>Perform these steps in order:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li><span><a href="GUID-9B36E28F-BFA6-499E-8207-5A1F8D873121.htm#GUID-9B36E28F-BFA6-499E-8207-5A1F8D873121" title="You need to export the security settings from the ODI Repository that were created using the Oracle Business Analytics Suite RCU.">Export Security Settings from Original ODI Repository</a>.</span></li>
+<li><span><a href="GUID-FE7C0571-7641-41D5-BA4A-C78B489AD8FF.htm" title="You need to export the topology settings from the Original ODI Repository that were created using the Oracle Business Analytics Suite RCU.">Exporting Topology Settings from Original ODI Repository</a>.</span></li>
+<li><span><a href="GUID-886178B1-2E2C-4FC1-B05F-1A01B3CC191B.htm#GUID-886178B1-2E2C-4FC1-B05F-1A01B3CC191B" title="Use ODI Studio to create a new Master Repository.">Create a New Master ODI Repository</a>.</span></li>
+<li><span><a href="GUID-10ABD4E0-BC12-4E90-9EFE-ABD440FA19F2.htm#GUID-10ABD4E0-BC12-4E90-9EFE-ABD440FA19F2" title="In this procedure, you create a new Master Repository login connection.">Connect to the New Master ODI Repository</a>.</span></li>
+<li><span><a href="GUID-857E5769-5FC4-499B-AADD-4A5F9B61377B.htm#GUID-857E5769-5FC4-499B-AADD-4A5F9B61377B" title="Use this procedure to create a new Work Repository.">Create a New Work Repository</a>.</span></li>
+<li><span><a href="GUID-F76DC7BB-32F8-4146-AC33-0433FD48B4FD.htm#GUID-F76DC7BB-32F8-4146-AC33-0433FD48B4FD" title="In this procedure, you import source-specific metadata content into the new ODI Repository by running the command line utility.">Import Source Adaptor Metadata Content into the New ODI Repository</a>.</span></li>
+<li><span><a href="GUID-82FBE801-55E3-41B1-8C30-D33B0B7DAF11.htm#GUID-82FBE801-55E3-41B1-8C30-D33B0B7DAF11" title="You can import security settings in to the ODI repository.">Import Security Settings Into the ODI Repository</a>.</span></li>
+<li><span><a href="GUID-4DD9E744-87E8-4736-B2D4-9CCBA000837F.htm#GUID-4DD9E744-87E8-4736-B2D4-9CCBA000837F" title="Use this procedure to perform post-import configurations.">Importing Connection Details Which Configures the Data Servers</a>.</span></li>
+</ol>
+<div class="section">Next Steps:
+<p>In <span>Oracle BI Applications Configuration Manager</span>, register sources, configure parameters, and generate load plans.</p>
+<div class="infobox-note" id="GUID-7593E620-8F3B-4E4B-A57B-8C26632CA185__GUID-C1BF25F8-A1BE-46CE-A55D-1E15FA0C2DCE">
+<p class="notep1">Note:</p>
+<p>After you perform these procedures for a particular source and you then want to add a new source, you only need to perform the steps in <a href="GUID-F76DC7BB-32F8-4146-AC33-0433FD48B4FD.htm#GUID-F76DC7BB-32F8-4146-AC33-0433FD48B4FD" title="In this procedure, you import source-specific metadata content into the new ODI Repository by running the command line utility.">Importing Source Adapter Metadata Content into the New ODI Repository</a>. This is true regardless of the database technology of the second source.</p>
+<p>For example, if you have a PeopleSoft 9.0 source on a SQL Server database, then you would perform the steps in <a href="GUID-9B36E28F-BFA6-499E-8207-5A1F8D873121.htm#GUID-9B36E28F-BFA6-499E-8207-5A1F8D873121" title="You need to export the security settings from the ODI Repository that were created using the Oracle Business Analytics Suite RCU.">Exporting Security Settings from Original ODI Repository</a> through <a href="GUID-4DD9E744-87E8-4736-B2D4-9CCBA000837F.htm#GUID-4DD9E744-87E8-4736-B2D4-9CCBA000837F" title="Use this procedure to perform post-import configurations.">Importing Connection Details Which Configures the Data Servers</a>. If you then wanted to add a second source, for example Siebel 8.1 (on an Oracle, DB2, or SQL Server database), you would only need to perform the steps in <a href="GUID-F76DC7BB-32F8-4146-AC33-0433FD48B4FD.htm#GUID-F76DC7BB-32F8-4146-AC33-0433FD48B4FD" title="In this procedure, you import source-specific metadata content into the new ODI Repository by running the command line utility.">Importing Source Adapter Metadata Content into the New ODI Repository</a>.</p>
+</div>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment1">
+<tr>
+<td class="cellalignment8">
+<table class="cellalignment6">
+<tr>
+<td class="cellalignment5"><a href="GUID-81E0A1AF-4551-4836-9CC3-75A9FE31CDE9.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment5"><a href="GUID-9B36E28F-BFA6-499E-8207-5A1F8D873121.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2013, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment10">
+<table class="cellalignment4">
+<tr>
+<td class="cellalignment5"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment5"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment5"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

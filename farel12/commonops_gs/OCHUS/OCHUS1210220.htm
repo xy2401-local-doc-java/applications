@@ -1,0 +1,1462 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Customizing Security (Chapter 16) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Securing Oracle HCM Cloud" name="doctitle">
+      <meta content="E73303-09" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="OCHUS" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Feb 16 01:08:37 PST 2018" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM security;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="OCHUS1632375.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="OCHUS2406120.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="OCHUS.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="OCHUS.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content=""><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">19/25</span><a name="BEGIN" id="BEGIN"></a><div id="OCHUS1210220" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">16</span>Customizing Security
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1654288">Copying HCM Roles: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1836863">Security Console Role-Copy Options: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2446969">Copying Upgraded Abstract Roles: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1304130">Copying Job or Abstract Roles: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1839114">Editing Custom Job or Abstract Roles: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1313025">Creating Job or Abstract Roles from Scratch: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1312742">Copying and Editing Duty Roles: Procedure</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="OCHUS1654288">
+                  <h2>Copying HCM Roles: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>Copying predefined roles and editing the
+                     copies is the recommended approach to creating custom roles. This
+                     topic describes what to consider when you're copying a role.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="OCHUS1836944">
+                     <h3 class="topictitle">Reviewing the Role Hierarchy</h3>
+                     
+                     
+                     
+                     <p>When you copy a predefined job, abstract,
+                        or duty role, you're recommended first to review the role hierarchy.
+                        This review is to identify the inherited roles that you want to refer
+                        to, copy, or delete in your custom role. For example, the Payroll
+                        Manager job role inherits the Payroll Administrator job role, among
+                        others. When copying the Payroll Manager role, you must decide whether
+                        to copy the Payroll Administrator role, refer to it, or remove it
+                        from your copy. You can review the role hierarchy on the Roles tab
+                        of the Security Console in either graphical or tabular format. You
+                        can also:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Export the role hierarchy to a
+                              spreadsheet from the Roles tab.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Review the role hierarchy and export
+                              it to a spreadsheet from the Analytics tab.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Run the User and Role Access Audit
+                              Report.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        Aggregate privileges are never copied. When you copy
+                        a job or abstract role, its inherited aggregate privileges are referred
+                        to from your copy.
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2161243">
+                     <h3 class="topictitle">Reviewing Privileges</h3>
+                     
+                     
+                     
+                     <p>Job and abstract roles inherit function security
+                        privileges and data security policies from the roles that they inherit.
+                        Function security privileges and data security policies may also be
+                        granted directly to a job or abstract role. You can review these directly
+                        granted privileges on the Roles tab of the Security Console, as follows:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>In the graphical view of a role,
+                              its inherited roles and function security privileges are visible at
+                              the same time.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the tabular view, you set the <span class="uicontrol">Show</span> value to switch between roles and function
+                              security privileges. You can export either view to a spreadsheet.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Once your custom role exists, edit it to add or remove
+                        directly granted function security privileges.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Data security policies are visible only when you
+                        edit your custom role. You're recommended to leave data security policies
+                        unchanged.
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1862220">
+                     <h3 class="topictitle">Transaction Analysis Duty Roles</h3>
+                     
+                     
+                     
+                     <p>Some roles, such as the Human Resource Analyst
+                        job role, inherit Transaction Analysis Duty roles, which are used
+                        in Oracle Transactional Business Intelligence report permissions.
+                        If you copy the Human Resource Analyst job role, or any other role
+                        that inherits Transaction Analysis Duty roles, then don't copy the
+                        Transaction Analysis Duty roles. If you copy the roles, then you must
+                        update the permissions for the relevant reports to secure them using
+                        your copies of the roles. Instead, add the predefined Transaction
+                        Analysis Duty roles to your copy of the relevant job role, such as
+                        Human Resource Analyst.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1661564">
+                     <h3 class="topictitle">Naming Copied Roles</h3>
+                     
+                     
+                     
+                     <p>By default, a copied role has the same name
+                        as its source role with the suffix <span class="uicontrol">Custom</span>. The role codes of copied roles have the suffix <span class="uicontrol">_CUSTOM</span>. Copied roles lose the prefix <span class="uicontrol">ORA_</span> automatically from their role codes.
+                        You can define a local naming convention for custom roles, with a
+                        prefix, suffix, or both, on the Administration tab of the Security
+                        Console.
+                     </p>
+                     
+                     <div class="infobox-note"><span class="notep1">Note: </span>
+                        Copied roles take their naming pattern from the default
+                        values specified on the Administration tab of the Security Console.
+                        You can override this pattern on the Copy Role: Basic Information
+                        page for the role that you're copying. However, the names of roles
+                        inherited by the copied role are unaffected. For example, if you perform
+                        a deep copy of the Employee role, then inherited duty roles take their
+                        naming pattern from the default values.
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2161130">
+                     <h3 class="topictitle">Duplicate Roles</h3>
+                     
+                     
+                     
+                     <p>If any role in the hierarchy already exists
+                        when you copy a role, then no copy of that role is made. For example,
+                        if you make a second copy of the Employee role, then copies of the
+                        inherited duty roles may already exist. In this case, membership is
+                        added to the existing <span class="uicontrol">copies</span> of
+                        the roles. To create unique copies of inherited roles, you must enter
+                        unique values on the Administration tab of the Security Console before
+                        performing a deep copy.
+                     </p>
+                     
+                     <p>To retain membership of the predefined job or abstract
+                        role hierarchy, perform a shallow copy of the predefined role.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="OCHUS2150631.htm#OCHUS2147116">Setting Role Preferences: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="OCHUS2155404.htm#OCHUS1883767">User and Role Access Audit Report</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1836863">
+                  <h2>Security Console Role-Copy Options: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>When you copy a role on the Security Console,
+                     you select one of the following options:
+                  </p>
+                  
+                  
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Copy top role</p>
+                     </li>
+                     
+                     <li>
+                        <p>Copy top role and inherited roles</p>
+                        
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>This topic explains the effect of each of these options
+                     on the copied role.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1836862">
+                     <h3 class="topictitle">Copy Top Role</h3>
+                     
+                     <p>If you select the <span class="uicontrol">Copy top
+                           role</span> option, then memberships are created for the copy
+                        in the roles of which the original is a member. Subsequent changes
+                        to those roles appear in your copy of the role. Therefore, you can 
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Add roles directly to the copied
+                              role without affecting the source role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Remove any role that's inherited
+                              directly by the copied role without affecting the source role.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>However, if you:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Remove any role that's inherited
+                              indirectly by the copied role, then the removal affects any role that
+                              inherits the removed role's parent role, including the source role
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Edit any inherited role, then the
+                              changes affect any role that inherits the edited role
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>These types of changes aren't limited to the copied
+                        role. This option is referred to as a shallow copy.
+                     </p>
+                     
+                     <p>To edit the inherited roles without affecting other
+                        roles, you must first make copies of those inherited roles. To copy
+                        the inherited roles, select the <span class="uicontrol">Copy top
+                           role and inherited roles</span> option. Alternatively, copy individual
+                        inherited roles separately, edit the copies, and use them to replace
+                        the existing versions.
+                     </p>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        The Copy Role: Summary and Impact Report page provides
+                        a useful summary of your changes. Review this information to ensure
+                        that you haven't accidentally made a change that affects other roles.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1836886">
+                     <h3 class="topictitle">Copy Top Role and Inherited Roles</h3>
+                     
+                     <p>Selecting <span class="uicontrol">Copy top role
+                           and inherited roles</span> is a request to copy the entire role
+                        hierarchy. If you're copying a job or abstract role, then:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Inherited aggregate privileges
+                              are never copied. Instead, membership is added to each aggregate privilege
+                              for the copied role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Inherited duty roles are copied
+                              if a copy with the same name doesn't already exist. Otherwise, membership
+                              is added to the existing <span class="uicontrol">copies</span> of the duty roles for the copied application role.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>When inherited duty roles are copied, you can edit
+                        them without affecting other roles. Equally, changes made subsequently
+                        to the source duty roles don't appear in the copied roles. This option
+                        is referred to as a deep copy.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS2446969">
+                  <h2>Copying Upgraded Abstract Roles: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic describes how to copy abstract roles with
+                     assigned security
+                     profiles that were upgraded from Oracle Human Capital Management
+                     Cloud Release 11. This information doesn't apply if you didn't upgrade
+                     abstract roles from Release 11.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS2446968">
+                     <h3 class="topictitle">Copying Abstract Roles </h3>
+                     
+                     <p>The Simplified Reference Role Model was introduced
+                        in Release 10. In Releases 10 and 11, each predefined job role and
+                        abstract role was represented as an enterprise role. The enterprise
+                        role inherited an application role. When you assigned security profiles
+                        to an abstract role before Release 12, some additional roles were
+                        generated automatically. These additional roles had the name of the
+                        abstract role with the suffix (HCM), (CRM), or (FSCM). Data security
+                        policies were generated against these roles, which were inherited
+                        directly by the abstract role's enterprise role. The presence of these
+                        roles means that the enterprise role was modified. This modification
+                        prevented the enterprise and application roles from being merged when
+                        the abstract roles were upgraded from Release 11.
+                     </p>
+                     
+                     
+                     <p>As the enterprise and application roles for such
+                        abstract roles remain separate after the upgrade from Release 11,
+                        you must take care when copying them. If you perform a shallow copy
+                        of an upgraded abstract role, then you keep membership of:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The inherited (HCM), (CRM), and
+                              (FSCM) roles.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The application role from the original
+                              role. If the application role is predefined, then you can't edit it.
+                              Otherwise, any changes you make to the application role are also inherited
+                              by the role on which the copy was based.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Therefore, always perform a deep copy of any abstract
+                        role to which security profiles were assigned before the upgrade from
+                        Release 11. Once the copy exists, you must edit it to remove the inherited
+                        (HCM), (CRM), and (FSCM) roles. Otherwise, your custom role has the
+                        data security policies from the source role in addition to any that
+                        you create specifically for the custom role. The copied role can't
+                        function as required unless you remove these roles. 
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1304130">
+                  <h2>Copying Job or Abstract Roles: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can copy any job role or abstract role and use it as the
+                     basis for a custom role. Copying roles is more efficient than creating
+                     them from scratch, especially if your changes are minor. This topic
+                     explains how to copy a role to create a custom role. You must have
+                     the IT Security Manager job role to perform this task. 
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1304175">
+                     <h3 class="topictitle">Copying a Role</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>On the Roles tab of the Security
+                              Console, search for the role to copy.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select the role in the search results.
+                              The role hierarchy appears in tabular format by default.
+                           </p>
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              Click the <span class="uicontrol">Show Graph</span> icon to show the hierarchy in graphical format.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>In the search results, click the
+                              down arrow for the selected role and select <span class="uicontrol"> Copy Role</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Copy Options</span> dialog box, select a copy option.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Copy Role</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Copy Role: Basic Information
+                              page, review and edit the <span class="uicontrol">Role Name</span>, <span class="uicontrol">Role Code</span>, and <span class="uicontrol">Description</span> values, as appropriate.
+                           </p>
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              The role name and code have the default prefix and
+                              suffix for copied roles specified on the Roles subtab of the Security
+                              Console Administration tab. You can overwrite these values for the
+                              role that you're copying. However, any roles inherited by the copied
+                              role are unaffected by any name changes that you make here.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>Click the <span class="uicontrol">Summary and Impact Report</span> train stop.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Submit and Close</span>, then <span class="uicontrol">OK</span> to close the confirmation message.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Review the progress of your copy
+                              on the Role Copy Status subtab of the Security Console Administration
+                              tab. Once the status is <span class="uicontrol">Complete</span>, you can edit the copied role.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1839114">
+                  <h2>Editing Custom Job or Abstract Roles: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can create a custom role by copying a
+                     predefined job role or abstract role and editing the copy. This topic describes how to edit a custom
+                     role on the Security Console. You must have the IT Security Manager
+                     job role to perform this task.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1839109">
+                     <h3 class="topictitle">Editing the Role</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>On the Roles tab of the Security
+                              Console, search for and select your custom role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the search results, click the
+                              down arrow for the selected role and select <span class="uicontrol">Edit Role</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Edit Role: Basic Information
+                              page, you can edit the role name and description, but not the role
+                              code.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Next</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1839110">
+                     <h3 class="topictitle">Managing Functional Security Privileges</h3>
+                     
+                     <p>On the Edit Role: Functional Security Policies page,
+                        any function security privileges granted to the copied role appear.
+                        Select a privilege to view details of the code resources that it secures
+                        in the Details section of the page.
+                     </p>
+                     
+                     
+                     <p>To remove a privilege from the role, select the privilege
+                        and click the <span class="uicontrol">Delete</span> icon. To
+                        add a privilege to the role:
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Add Function Security Policy</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Add Function Security Policy</span> dialog box, search for and
+                              select a privilege or role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If you select a role, then click <span class="uicontrol">Add Selected Privileges</span> to add all function
+                              security privileges from the selected role to your custom role. If
+                              you select a single privilege, then click <span class="uicontrol">Add Privilege to Role</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the confirmation message.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Repeat from step 2 for additional
+                              privileges.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Close the <span class="uicontrol">Add Function Security Policy</span> dialog box.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Next</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        If a function security privilege forms part of an aggregate privilege, then add the aggregate privilege to the role hierarchy. Don't grant
+                        the function security privilege directly to the role. The Security
+                        Console enforces this approach.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1839111">
+                     <h3 class="topictitle">Managing Data Security Policies</h3>
+                     
+                     <p> Make no changes on the Copy Role: Data Security
+                        Policies page.
+                     </p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Whether this page is enabled for edit depends on
+                        the current setting of the <span class="uicontrol">Enable edit of
+                           data security policies</span> option. Set this option on the
+                        Roles subtab of the Security Console Administration tab.
+                        
+                     </div>
+                     
+                     <p>Click <span class="uicontrol">Next</span>.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1839112">
+                     <h3 class="topictitle">Adding and Removing Inherited Roles</h3>
+                     
+                     <p>The Edit Role: Role Hierarchy page shows the copied
+                        role and its inherited aggregate privileges and duty roles. The hierarchy is in tabular
+                        format by default. You can add or remove roles.
+                     </p>
+                     
+                     
+                     <p>To remove a role:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select the role in the table.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click the <span class="uicontrol">Delete</span> icon.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the confirmation message.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>To add a role:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click the <span class="uicontrol">Add Role</span> icon.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Add Role Membership</span> dialog box, search for and select
+                              the role to add.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Add Role Membership</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the confirmation message.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Repeat from step 2 for additional
+                              roles.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Close the <span class="uicontrol">Add Role Membership</span> dialog box. 
+                           </p>
+                           <p>The Edit Role: Role Hierarchy page shows the updated role hierarchy.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Next</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2117613">
+                     <h3 class="topictitle">Provisioning the Role to Users</h3>
+                     
+                     <p>To provision the role to users, you must create a role mapping in the
+                        usual way. Don't provision the role to users here.
+                     </p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Whether this page is enabled for edit depends on
+                        the current setting of the <span class="uicontrol">Enable edit of
+                           user role membership</span> option. Set this option on the Roles
+                        subtab of the Security Console Administration tab.
+                        
+                     </div>
+                     
+                     <p>Click <span class="uicontrol">Next</span>.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1839113">
+                     <h3 class="topictitle">Reviewing the Role</h3>
+                     
+                     <p>On the Edit Role: Summary and Impact Report page,
+                        review the summary of changes. Click <span class="uicontrol">Back</span> to make corrections. Otherwise:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Save and Close</span> to save the role. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the confirmation message.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>The role is available immediately.</p>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1313025">
+                  <h2>Creating Job or Abstract Roles from Scratch: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>If the predefined roles aren't suitable or
+                     you need a role with few privileges, then you can create a role from
+                     scratch. This topic explains how to create a job role or abstract role. To perform this
+                     task, you must have the IT Security Manager job role.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1313023">
+                     <h3 class="topictitle">Entering Basic Information</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>On the Roles tab of the Security
+                              Console, click <span class="uicontrol">Create Role</span>.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>On the Create Role: Basic Information
+                              page, enter the role's display name in the <span class="uicontrol">Role Name</span> field. For example, enter Sales Department
+                              Administration Job Role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Complete the <span class="uicontrol">Role Code</span> field. For example, enter SALES_DEPT_ADMIN_JOB.
+                           </p>
+                           
+                           <p>Abstract roles have the suffix <span class="uicontrol">_ABSTRACT</span>, and job roles have the suffix <span class="uicontrol">_JOB</span>.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Role Category</span> field, select either <span class="uicontrol">HCM - Abstract Roles</span> or <span class="uicontrol">HCM
+                                 - Job Roles</span>, as appropriate.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Next</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1313024">
+                     <h3 class="topictitle">Adding Functional Security Policies</h3>
+                     
+                     <p>When you create a role from scratch, you're most
+                        likely to add one or more aggregate privileges or duty roles to your role.
+                        You're less likely to grant function security privileges directly
+                        to the role.
+                     </p>
+                     
+                     
+                     <p> If you aren't granting function security privileges,
+                        then click <span class="uicontrol">Next</span>. Otherwise, to
+                        grant function security privileges to the role:
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>On the Create Role: Functional
+                              Security Policies page, click <span class="uicontrol">Add Function
+                                 Security Policy</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Add Function Security Policy</span> dialog box, search for and
+                              select a privilege or role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If you select a role, then click <span class="uicontrol">Add Selected Privileges</span> to add all function
+                              security privileges from a selected role to your custom role.  If
+                              you select a single privilege, then click <span class="uicontrol">Add Privilege to Role</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the confirmation message.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Repeat from step 2 for additional
+                              privileges.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Close the <span class="uicontrol">Add Function Security Policy</span> dialog box.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Next</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        If a function security privilege forms part of an
+                        aggregate privilege, then add the aggregate privilege to the role
+                        hierarchy. Don't grant the function security privilege directly to
+                        the role. The Security Console enforces this approach.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1674867">
+                     <h3 class="topictitle">Creating Data Security Policies</h3>
+                     
+                     <p>Make no entries on the Create Role: Data Security
+                        Policies page.
+                     </p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Whether this page is enabled for edit depends on
+                        the current setting of the <span class="uicontrol">Enable edit of
+                           data security policies</span> option. Set this option on the
+                        Roles subtab of the Security Console Administration tab.
+                        
+                     </div>
+                     
+                     <p>Click <span class="uicontrol">Next</span>.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1313058">
+                     <h3 class="topictitle">Building the Role Hierarchy</h3>
+                     
+                     <p>The Create Role: Role Hierarchy page shows the hierarchy
+                        of your custom role in tabular format by default. You can add one
+                        or more aggregate privileges, job roles, abstract roles, and duty
+                        roles to the role. Typically, when creating a job or abstract role
+                        you add aggregate privileges. Roles are always added directly to the
+                        role that you're creating.
+                     </p>
+                     
+                     
+                     <p>To add a role:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click the <span class="uicontrol">Add Role</span> icon.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Add Role Membership</span> dialog box, search for and select
+                              the role to add. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Add Role Membership</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the confirmation message.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Repeat from step 2 for additional
+                              roles.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>When you finish adding roles, close
+                              the <span class="uicontrol">Add Role Membership</span> dialog
+                              box.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Next</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1674868">
+                     <h3 class="topictitle">Provisioning the Role</h3>
+                     
+                     <p>To provision the role to users, you must create a role mapping in the
+                        usual way once the role exists. Don't provision the role to users
+                        here.
+                     </p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Whether this page is enabled for edit depends on
+                        the current setting of the <span class="uicontrol">Enable edit of
+                           user role membership</span> option. Set this option on the Roles
+                        subtab of the Security Console Administration tab.
+                        
+                     </div>
+                     
+                     <p>Click <span class="uicontrol">Next</span>.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1313117">
+                     <h3 class="topictitle">Reviewing the Role</h3>
+                     
+                     <p>On the Create Role: Summary and Impact Report page,
+                        review the summary of the changes. Click <span class="uicontrol">Back</span> to make corrections. Otherwise:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Save and Close</span> to save the role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the confirmation message.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>Your custom role is available immediately.</p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1312742">
+                  <h2>Copying and Editing Duty Roles: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can copy a duty role and edit the copy to create
+                     a custom duty role. Copying duty roles is the recommended way of creating
+                     custom duty roles. This topic explains how to copy a duty role and
+                     edit the copy. You must have the IT Security Manager job role to perform
+                     these tasks.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1312741">
+                     <h3 class="topictitle">Copying a Duty Role</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>On the Roles tab of the Security
+                              Console, search for the duty role to copy.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select the role in the search results.
+                              The role hierarchy appears in tabular format by default.
+                           </p>
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              Click the <span class="uicontrol">Show Graph</span> icon to show the hierarchy in graphical format.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>In the search results, click the
+                              down arrow for the selected role and select <span class="uicontrol">Copy Role</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Copy Options</span> dialog box, select a copy option.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Copy Role</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Copy Role: Basic Information
+                              page, edit the <span class="uicontrol">Role Name</span>, <span class="uicontrol">Role Code</span>, and <span class="uicontrol">Description</span> values, as appropriate.
+                           </p>
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              The role name and code have the default prefix and
+                              suffix for copied roles specified on the Roles subtab of the Security
+                              Console Administration tab. You can overwrite these values for the
+                              role that you're copying. However, any roles inherited by the copied
+                              role are unaffected by any name changes that you make here.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>Click the <span class="uicontrol">Summary and Impact Report</span> train stop.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Submit and Close</span>, then <span class="uicontrol">OK</span> to close the confirmation message.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Review the progress of your copy
+                              on the Role Copy Status subtab of the Security Console Administration
+                              tab. Once the status is <span class="uicontrol">Complete</span>, you can edit the copied role.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1841092">
+                     <h3 class="topictitle">Editing the Copied Duty Role</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>On the Roles tab of the Security
+                              Console, search for and select your copy of the duty role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the search results, click the
+                              down arrow for the selected role and select <span class="uicontrol">Edit Role</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Edit Role: Basic Information
+                              page, you can edit the role name and description, but not the role
+                              code.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Next</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1312781">
+                     <h3 class="topictitle">Managing Functional Security Policies</h3>
+                     
+                     <p>On the Edit Role: Functional Security Policies page,
+                        any function security privileges granted to the copied role appear.
+                        Select a privilege to view details of the code resources that it secures.
+                     </p>
+                     
+                     
+                     <p>To remove a privilege from the role, select the privilege
+                        and click the <span class="uicontrol">Delete</span> icon. To
+                        add a privilege to the role:
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Add Function Security Policy</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Add Function Security Policy</span> dialog box, search for and
+                              select a privilege or role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If you select a role, then click <span class="uicontrol">Add Selected Privileges</span> to grant all function
+                              security privileges from the selected role to your custom role. If
+                              you select a single privilege, then click <span class="uicontrol">Add Privilege to Role</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the confirmation message.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Repeat from step 2 for additional
+                              privileges.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Close the <span class="uicontrol">Add Functional Security Policies</span> dialog box.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Next</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        If a function security privilege forms part of an aggregate privilege, then add the aggregate privilege to the role hierarchy. Don't grant
+                        the function security privilege directly to the role. The Security
+                        Console enforces this approach. 
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1312782">
+                     <h3 class="topictitle">Managing Data Security Policies</h3>
+                     
+                     <p>Make no changes on the Edit Role: Data Security Policies
+                        page.
+                     </p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Whether this page is enabled for edit depends on
+                        the current setting of the <span class="uicontrol">Enable edit of
+                           data security policies</span> option. Set this option on the
+                        Roles subtab of the Security Console Administration tab.
+                        
+                     </div>
+                     
+                     <p>Click <span class="uicontrol">Next</span>.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1312840">
+                     <h3 class="topictitle">Adding and Removing Inherited Roles</h3>
+                     
+                     <p>The Edit Role: Role Hierarchy page shows the copied
+                        duty role and any duty roles and aggregate privileges that it inherits.
+                        The hierarchy is in tabular format by default. You can add or remove
+                        roles.
+                     </p>
+                     
+                     
+                     <p>To remove a role:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select the role in the table.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click the <span class="uicontrol">Delete</span> icon.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the information message.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>To add a role:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Add Role</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Add Role Membership</span> dialog box, search for and select
+                              the role to add.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Add Role Membership</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the confirmation message.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Repeat from step 2 for additional
+                              roles.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Close the <span class="uicontrol">Add Role Membership</span> dialog box.
+                           </p>
+                           <p>The
+                              Edit Role: Role Hierarchy page shows the updated role hierarchy.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Next</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1623166">
+                     <h3 class="topictitle">Reviewing the Role</h3>
+                     
+                     <p>On the Edit Role: Summary and Impact Report page,
+                        review the summary of changes. Click <span class="uicontrol">Back</span> to make corrections. Otherwise:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Save and Close</span> to save the role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the confirmation message.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>The role is available immediately.</p>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

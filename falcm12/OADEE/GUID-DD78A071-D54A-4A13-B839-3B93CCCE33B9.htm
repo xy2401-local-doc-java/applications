@@ -1,0 +1,2312 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Implement Additional Functions in the UI Shell</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This chapter discusses additional functions, such as the Navigate API and how to implement the Home Page UI, that are included in the UI Shell page template used to build web pages." />
+<meta name="dcterms.created" content="2017-04-13T08:16:31Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Fusion Applications Developer's Guide" />
+<meta name="dcterms.identifier" content="E70512-02" />
+<meta name="dcterms.isVersionOf" content="OADEE" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2011, 2016, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-6693E64F-077A-4BBE-BECB-59A81565B832.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-19886EA7-0B7A-413B-95B4-BE3EE12FA6CC.htm" title="Next" type="text/html" />
+<link rel="alternate" href="OADEE.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9"></a> <span id="PAGE" style="display:none;">27/82</span> <!-- End Header -->
+<a id="OADEV65913"></a><a id="OADEV65912"></a>
+<h1 id="OADEE-GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9" class="sect1"><span class="enumeration_chapter">16</span> Implement Additional Functions in the UI Shell</h1>
+<div>
+<div><span>This chapter discusses additional functions, such as the Navigate API and how to implement the Home Page UI, that are included in the UI Shell page template used to build web pages.</span></div>
+<p>This chapter includes the following sections:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-9DB2F1A7-966B-4BA1-A429-E668000AD756">Introducing the Navigate API</a></p>
+</li>
+<li>
+<p><a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-F658C15E-292E-413D-8065-1345952A1B08">Warning of Pending Changes in the UI Shell</a></p>
+</li>
+<li>
+<p><a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-E5026845-E692-4362-8761-DD40B031B54E">Implementing the Oracle Fusion Home Page UI</a></p>
+</li>
+<li>
+<p><a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-BB9158E1-1A93-40E9-BB0D-ED3E68810F1C">Using the Single Object Context Workarea</a></p>
+</li>
+<li>
+<p><a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-BB5986DB-4F7A-4D9E-AC35-F1F15E28B6D2">Implementing the Third-Party Component Area</a></p>
+</li>
+<li>
+<p><a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-87B22421-2D6C-4499-92D6-CEC3C25F75DF">Developing an Activity Guide Client Application with the UI Shell</a></p>
+</li>
+<li>
+<p><a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-0B25EDE5-760C-44FC-ADEA-D31A68BBAE35">Implementing Touch Device Support in the UI Shell</a></p>
+</li>
+<li>
+<p><a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-C9136113-358A-4AE9-8922-9A376F0311EC">Implementing the Translation Editor</a></p>
+</li>
+<li>
+<p><a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-4EB14182-E2E6-4618-AF28-7A7014FEC337">About the Create Page Wizard</a></p>
+</li>
+<li>
+<p><a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-C3D140FB-693A-42F9-97E8-BFF20C4B938B">Troubleshooting UI Shell Issues</a></p>
+</li>
+</ul>
+<p>For more information about the features, see:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-AAACC1F7-CD9B-4BEA-85E3-85A023073C2E.htm#GUID-AAACC1F7-CD9B-4BEA-85E3-85A023073C2E" title="This chapter provides information that you may need before you begin developing your web pages. It introduces the UI Shell page template and UI patterns and features that are available in JDeveloper.">Getting Started with Your Web Interface</a></p>
+</li>
+<li>
+<p><a href="GUID-6A197DF6-6871-4184-8B79-0E2D772B4BC2.htm#GUID-6A197DF6-6871-4184-8B79-0E2D772B4BC2" title="This chapter discusses the UI Shell page template used to build web pages, and the components used to implement user interface features in Oracle JDeveloper (JDeveloper), such as menus and task flows.">Implementing the UI Shell</a></p>
+</li>
+<li>
+<p><a href="GUID-6693E64F-077A-4BBE-BECB-59A81565B832.htm#GUID-6693E64F-077A-4BBE-BECB-59A81565B832" title="This chapter discusses how to implement search functions in the UI Shell page template that is used to build web pages.">Implementing Search Functions in the UI Shell</a></p>
+</li>
+<li>
+<p><a href="GUID-19886EA7-0B7A-413B-95B4-BE3EE12FA6CC.htm#GUID-19886EA7-0B7A-413B-95B4-BE3EE12FA6CC" title="This chapter discusses the Applications Tables, Trees and Tree Tables components used to implement user interface features in JDeveloper.">Implementing UIs in JDeveloper with Application Tables_ Trees and Tree Tables</a></p>
+</li>
+<li>
+<p><a href="GUID-E174969E-6651-4D52-B0C8-4CDB5271DDDA.htm#GUID-E174969E-6651-4D52-B0C8-4CDB5271DDDA" title="This chapter discusses the Applications Panels, Master-Detail, Hover and Dialog Details components used to implement user interface features in JDeveloper.">Implementing Applications Panels_ Master-Detail_ Hover_ and Dialog Details</a></p>
+</li>
+</ul>
+</div>
+<a id="OADEV59770"></a>
+<div class="props_rev_3"><a id="GUID-9DB2F1A7-966B-4BA1-A429-E668000AD756"></a>
+<h2 id="OADEE-GUID-9DB2F1A7-966B-4BA1-A429-E668000AD756" class="sect2"><span class="enumeration_section">16.1</span> Introducing the Navigate API</h2>
+<div>
+<p>You can create a link in the task flow to open a different UI Shell page. Because navigation can occur across different web applications, a single consistent API performs browser redirect. See <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-15CF0470-9D05-41F9-863E-644F21275414__CHDIBJJJ" title="How metadata attribute is mapped to the navigate API">Table 16-1</a>. This API is exposed as the <code class="codeph">FndUIShellController.navigate</code> Data Control method.</p>
+<div class="infobox-note" id="GUID-9DB2F1A7-966B-4BA1-A429-E668000AD756__GUID-9ABBD7FB-A0D4-40AA-BD71-B2980A392E3C">
+<p class="notep1">Note:</p>
+<p>When opening a new window, whenever possible, you should use the Navigate API instead of using the ADF Controller sub-flow calls. This is because the UI Shell has no information about sub flows. For instance, if you perform a search that returns clickable results and use sub flows to display the results, and if you then choose to save the page to your Favorites, the search page is saved; <span class="italic">not</span> the results page you want. If you use the Navigate API, however, the UI Shell knows about the opened results page and saving the page to your Favorites works as you expect.</p>
+</div>
+</div>
+<a id="OADEV64305"></a><a id="OADEV64306"></a><a id="OADEV61912"></a><a id="OADEV61913"></a><a id="OADEV56078"></a><a id="OADEV63619"></a><a id="OADEV64590"></a>
+<div class="props_rev_3"><a id="GUID-15CF0470-9D05-41F9-863E-644F21275414"></a>
+<h3 id="OADEE-GUID-15CF0470-9D05-41F9-863E-644F21275414" class="sect3"><span class="enumeration_section">16.1.1</span> How to Use the Navigate API Data Control Method</h3>
+<div>
+<div class="section">
+<p>Drag and drop the Data Control method on page fragments to create links to start navigation.</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Expand the Data Controls and select the <code class="codeph">navigate</code> item, as shown in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-15CF0470-9D05-41F9-863E-644F21275414__BABGEGHD">Figure 16-1</a>.</span>
+<div>
+<div class="figure" id="GUID-15CF0470-9D05-41F9-863E-644F21275414__BABGEGHD">
+<p class="titleinfigure">Figure 16-1 Selecting navigate from Data Controls</p>
+<img width="275" height="329" src="img/GUID-9C90338C-EA95-4F51-908F-9E365704B276-default.png" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Drag <code class="codeph">navigate</code> and drop it onto the page fragment. When you do, the Applications Context menu shown in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-15CF0470-9D05-41F9-863E-644F21275414__BABFJFCA">Figure 16-2</a> is displayed so you can choose one of the options.</span>
+<div>
+<div class="figure" id="GUID-15CF0470-9D05-41F9-863E-644F21275414__BABFJFCA">
+<p class="titleinfigure">Figure 16-2 Selecting a Navigate Option from the Applications Context Menu</p>
+<img width="315" height="75" src="img/GUID-B09B0C3E-CBAB-42F9-AE6A-93334FE524F2-default.png" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" --></div>
+</li>
+</ol>
+<div class="example" id="GUID-15CF0470-9D05-41F9-863E-644F21275414__CHDFBEHF">
+<p class="titleinexample">Example 16-1 Navigating from One Work Space to Another</p>
+<pre dir="ltr">
+/**
+* Navigate from one work space to another. If the current view id is the
+* same as the viewId parameter, and if navTaskFlow is null, the current page
+* will be refreshed. If the current view id is the same as the viewId
+* parameter and if navTaskFlowId is not null, the current page will not
+* be refreshed. The Navigate API will delegate to openMainTask API to open the
+* task flow in the main area. This can be overriden by passing in
+* forcePageRefresh=true in pageParametersList to force the page refresh so
+* that openMainTask would not be used.
+*
+* @param viewId viewId of the target workspace
+* @param webApp Deployed Module Name of the target workspace.
+*        It only must be set when the target workspace is in a different 
+*        deployed module than the origin workspace. When this is null, it means 
+*        the target workspace is in the same deployed module of the origin 
+*        workspace. The webApp attribute is used to look up the host and port of
+*        the associated Workarea or Dashboard from the ASK deployment
+*        tables. These tables are populated at deployment time through
+*        <span id="GUID-15CF0470-9D05-41F9-863E-644F21275414__FSM">Oracle Fusion Functional Setup Manager</span> tasks.
+* @param pageParametersList Parameters list for the page. This is a semicolon 
+*                   delimited String of name value pairs. For example,
+*                   "param1=value1;param2=value2"
+*                   If the Expression Language expression evaluates to an Object, 
+*                   toString value of that Object will be passed as the value of 
+*                   the parameter.
+*                   When forcePageRefresh=true is added to the pageParametersList,
+*                   the current page will be refreshed even if navTaskFlowId
+*                   is not null and current view id is the same as viewId
+*                   parameter value.
+* @param navTaskFlowId Id of the taskFlow to open in the target workspace
+* @param navTaskKeyList Key list to pass in to the task flow to open in the
+*                   target workspace. This is a semicolon delimited
+*                   keys or key-value pairs. For example,
+*                   "key1;key2=value2"
+* @param navTaskParametersList Parameters list to pass in to the task flow to open
+*                   in the target workspace. This is a semicolon delimited String
+*                   of name value pairs. For example,
+*                   "param1=value1;param2=value2."
+*                   When loadDependentFlow=true is added to the
+*                   navTaskParametersList, the task flow specified in
+*                   navTaskFlowId will be loaded as dependent flow.
+* @param navTaskLabel Label for the task flow to open in the target workspace.
+* @param methodParameters Construct FndMethodParameters object for setting the 
+*                   width of the contextual area, and/or setting the disclosed 
+*                   state of the contextual area.
+* @throws IOException
+*/
+public FndMethodParameters navigate(java.lang.String viewId,
+                                    java.lang.String webApp,
+                                    java.lang.String pageParametersList,
+                                    java.lang.String navTaskFlowId,
+                                    java.lang.String navTaskKeyList,
+                                    java.lang.String navTaskParametersList,
+                                    java.lang.String navTaskLabel,
+                                    FndMethodParameters methodParameters)
+                             throws java.io.IOException
+</pre></div>
+<!-- class="example" -->
+<div class="example" id="GUID-15CF0470-9D05-41F9-863E-644F21275414__CHDHFIHD">
+<p class="titleinexample">Example 16-2 Setting contextualAreaWidth and contextualAreaCollapsed Parameters</p>
+<pre dir="ltr">
+FndMethodParameters methodParameters = new FndMethodParameters();
+  methodParameters.setContextualAreaCollapsed(Boolean.FALSE);
+  methodParameters.setContextualAreaWidth(200);
+</pre>
+<p>You can specify a task flow to load on the target page. Page level parameters also can be specified.</p>
+<div class="tblformal" id="GUID-15CF0470-9D05-41F9-863E-644F21275414__CHDIBJJJ">
+<p class="titleintable">Table 16-1 Navigate API Parameters</p>
+<table class="cellalignment540" title="Navigate API Parameters" summary="How metadata attribute is mapped to the navigate API">
+<thead>
+<tr class="cellalignment534">
+<th class="cellalignment546" id="d101704e234">Navigate API Parameter</th>
+<th class="cellalignment687" id="d101704e237">Attribute Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment534">
+<td class="cellalignment549" id="d101704e242" headers="d101704e234">
+<p><code class="codeph">viewId</code></p>
+</td>
+<td class="cellalignment688" headers="d101704e242 d101704e237">
+<p><code class="codeph">navigateViewId</code></p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment549" id="d101704e251" headers="d101704e234">
+<p><code class="codeph">webApp</code></p>
+</td>
+<td class="cellalignment688" headers="d101704e251 d101704e237">
+<p>Attribute used to look up the host and port of the associated Workarea or Dashboard from the Oracle Fusion Applications Functional Core (ASK) deployment tables. These tables are populated at deployment time through <span>Oracle Fusion Functional Setup Manager</span> tasks.</p>
+<p>You need to pass the deployed module name to the <code class="codeph">webApp</code> parameter.</p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment549" id="d101704e267" headers="d101704e234">
+<p><code class="codeph">requestContextPath</code></p>
+</td>
+<td class="cellalignment688" headers="d101704e267 d101704e237">
+<p><span class="bold">Obsolete</span>. Replaced by <code class="codeph">webApp</code>.</p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment549" id="d101704e281" headers="d101704e234">
+<p><code class="codeph">pageParametersList</code></p>
+</td>
+<td class="cellalignment688" headers="d101704e281 d101704e237">
+<p><code class="codeph">navigateParamsList</code></p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment549" id="d101704e290" headers="d101704e234">
+<p><code class="codeph">navTaskFlowId</code></p>
+</td>
+<td class="cellalignment688" headers="d101704e290 d101704e237">
+<p>Equates to the <code class="codeph">openMainTask</code> <code class="codeph">taskFlowId</code> parameter.</p>
+<p>This is the Id of the task flow to be loaded.</p>
+<p>The task flow Id is a concatenation of the file location for the task flow definition, and the task flow name. For example:</p>
+<p><code class="codeph">/WEB-INF/MyTaskFlow.xml#MyTaskFlow</code></p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment549" id="d101704e312" headers="d101704e234">
+<p><code class="codeph">navTaskKeyList</code></p>
+</td>
+<td class="cellalignment688" headers="d101704e312 d101704e237">
+<p>Equates to the <code class="codeph">openMainTask</code> <code class="codeph">keyList</code> parameter.</p>
+<p><span class="bold">Important:</span> <code class="codeph">navTaskKeyList</code> is used with the task flow Id to identify the target tab in the main area. As such, <code class="codeph">navTaskKeyList</code> is applicable only in dynamic tabs mode, and is ignored in no-tabs mode.</p>
+<p><code class="codeph">navTaskKeyList</code> provides a way to identify a task flow instance. When <code class="codeph">reuseInstance</code> is <code class="codeph">true</code>, use the specified <code class="codeph">navTaskKeyList</code> in addition to the task flow Id to identify the target tab.</p>
+<p>The <code class="codeph">navTaskKeyList</code> parameter has been implemented for the following <code class="codeph">FndUIShellController</code> data control methods:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">openMainTask</code></p>
+</li>
+<li>
+<p><code class="codeph">discloseRegionalTask</code></p>
+</li>
+<li>
+<p><code class="codeph">collapseRegionalTask</code></p>
+</li>
+<li>
+<p><code class="codeph">navigate</code></p>
+</li>
+<li>
+<p><code class="codeph">openSubTask</code></p>
+</li>
+</ul>
+<p>In dynamic tabs mode, when looking for a match of an existing tab, these APIs will first look for any instances of the task flow that is already open, which has the same task flow Id as the one passed into them as the parameter. In addition, it will compare the <code class="codeph">navTaskKeyList</code> values, such that the existing task flow will be picked only if its <code class="codeph">navTaskKeyList</code> values match the ones specified in the <code class="codeph">navTaskKeyList</code> parameter.</p>
+<p>It does not matter if the task flow parameters are the same or different. If the <code class="codeph">keyList</code> is not set in the menu metadata, you can reuse a tab only if you pass in a null <code class="codeph">keyList</code>.</p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment549" id="d101704e398" headers="d101704e234">
+<p><code class="codeph">navTaskParametersList</code></p>
+</td>
+<td class="cellalignment688" headers="d101704e398 d101704e237">
+<p>You can load the task flow specified in the <code class="codeph">navTaskFlowId</code> parameter of the Navigate API as a dependent flow if the destination page is in no-tab mode by adding a name-value pair of "<code class="codeph">loadDependentFlow=true</code>" to <code class="codeph">navTaskParametersList</code>. For example: "<code class="codeph">customerId=123;loadDependentFlow=true</code>"</p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment549" id="d101704e419" headers="d101704e234">
+<p><code class="codeph">navTaskLabel</code></p>
+</td>
+<td class="cellalignment688" headers="d101704e419 d101704e237">
+<p>Equates to the <code class="codeph">openMainTask</code> <code class="codeph">label</code> parameter.</p>
+<p><span class="bold">Note:</span> When passing parameters, do not leave the <code class="codeph">navTaskLabel</code> field null. This is the label that would appear in the tab header when in a tabs page. Even if you are in a no-tabs page (see <a href="GUID-6A197DF6-6871-4184-8B79-0E2D772B4BC2.htm#GUID-8E71B88B-18F8-49CA-86DC-5D4BCF223C0D">Supporting No-Tab Work Areas</a> ), do not leave it blank because this label will be used in other ways, such as Add to Favorites, or when the system tracks the Recent Items.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>Certain parameters, summarized in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-15CF0470-9D05-41F9-863E-644F21275414__CHDIHDID" title="Parameters Passed Using Navigate API Arguments">Table 16-2</a>, can be passed using the Navigate API's argument list.</p>
+<div class="tblformalwide" id="GUID-15CF0470-9D05-41F9-863E-644F21275414__CHDIHDID">
+<p class="titleintable">Table 16-2 Parameters Passed Using Navigate API Arguments</p>
+<table class="cellalignment545" title="Parameters Passed Using Navigate API Arguments" summary="Parameters Passed Using Navigate API Arguments">
+<thead>
+<tr class="cellalignment534">
+<th class="cellalignment564" id="d101704e462">Parameter Name</th>
+<th class="cellalignment594" id="d101704e465">Passed Using</th>
+<th class="cellalignment646" id="d101704e468">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment534">
+<td class="cellalignment567" id="d101704e473" headers="d101704e462">
+<p><code class="codeph">forcePageRefresh</code></p>
+</td>
+<td class="cellalignment596" headers="d101704e473 d101704e465">
+<p><code class="codeph">pageParametersList</code></p>
+</td>
+<td class="cellalignment647" headers="d101704e473 d101704e468">
+<p>Default: <code class="codeph">false</code></p>
+<p>The Navigate API is used to navigate from one work space to another. If the current view Id is the same as the <code class="codeph">viewId</code> parameter, and if <code class="codeph">navTaskFlow</code> is null, the current page will be refreshed. If the current view Id is the same as the <code class="codeph">viewId</code> parameter, and if <code class="codeph">navTaskFlowId</code> is not null, the current page will not be refreshed, and the Navigate API will delegate to the <code class="codeph">openMainTask</code> API to open the task flow in the main area. This can be overridden by passing in <code class="codeph">forcePageRefresh=true</code> in <code class="codeph">pageParametersList</code> to force the page refresh so that <code class="codeph">openMainTask</code> would not be used.</p>
+<p>Example:</p>
+<p><code class="codeph">pageParametersList = "forcePageRefresh=true;param2=value2";</code></p>
+<p>Details:</p>
+<p><code class="codeph">pageParametersList</code> is a semicolon delimited string of name-value pairs.</p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment567" id="d101704e525" headers="d101704e462">
+<p><code class="codeph">ContextualAreaCollapsed</code></p>
+</td>
+<td class="cellalignment596" headers="d101704e525 d101704e465">
+<p><code class="codeph">methodParameters</code></p>
+</td>
+<td class="cellalignment647" headers="d101704e525 d101704e468">
+<p>Default: <code class="codeph">false</code></p>
+<p>Example:</p>
+<pre dir="ltr">
+FndMethodParameters methodParameters = new FndMethodParameters();
+methodParameters.setContextualAreaCollapsed(Boolean.TRUE);
+methodParameters.setContextualAreaWidth(200);
+</pre></td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment567" id="d101704e543" headers="d101704e462">
+<p><code class="codeph">contextualAreaWidth</code></p>
+</td>
+<td class="cellalignment596" headers="d101704e543 d101704e465">
+<p><code class="codeph">methodParameters</code></p>
+</td>
+<td class="cellalignment647" headers="d101704e543 d101704e468">
+<p>Default: 256</p>
+<p>Example:</p>
+<pre dir="ltr">
+FndMethodParameters methodParameters = new FndMethodParameters();
+methodParameters.setContextualAreaCollapsed(Boolean.TRUE);
+methodParameters.setContextualAreaWidth(200);
+</pre></td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment567" id="d101704e559" headers="d101704e462">
+<p><code class="codeph">loadDependentFlow</code></p>
+</td>
+<td class="cellalignment596" headers="d101704e559 d101704e465">
+<p><code class="codeph">navTaskParametersList</code></p>
+</td>
+<td class="cellalignment647" headers="d101704e559 d101704e468">
+<p>Default: <code class="codeph">false</code></p>
+<p>Example:</p>
+<p><code class="codeph">navTaskParametersList = "loadDependentFlow=true;param2=value2";</code></p>
+<p>Note that the value for <code class="codeph">loadDependentFlow</code> is <span class="italic">case sensitive</span>.</p>
+<p>Details:</p>
+<p><code class="codeph">navTaskParametersList</code> is a parameter list to pass in to the task flow to open in the target workspace. This is a semicolon delimited string of name-value pairs.</p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment567" id="d101704e592" headers="d101704e462">
+<p><code class="codeph">contextCode</code></p>
+</td>
+<td class="cellalignment596" headers="d101704e592 d101704e465">
+<p><code class="codeph">methodParameters</code></p>
+</td>
+<td class="cellalignment647" headers="d101704e592 d101704e468">
+<p>This value should be passed only when the <code class="codeph">navTaskFlowId</code> input parameter has a value.</p>
+<p><span class="bold">Example:</span></p>
+<pre dir="ltr">
+FndMethodParameters methodParameters = new FndMethodParameters();
+methodParameters.setContextCode("CRM");
+</pre></td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment567" id="d101704e612" headers="d101704e462">
+<p><code class="codeph">objectType</code></p>
+</td>
+<td class="cellalignment596" headers="d101704e612 d101704e465">
+<p><code class="codeph">methodParameters</code></p>
+</td>
+<td class="cellalignment647" headers="d101704e612 d101704e468">
+<p>This value should be passed only when the <code class="codeph">navTaskFlowId</code> input parameter has a value.</p>
+<p><span class="bold">Example:</span></p>
+<pre dir="ltr">
+FndMethodParameters methodParameters = new FndMethodParameters();
+methodParameters.setContextCode("CRM");
+methodParameters.setObjectType("Opportunity");
+</pre></td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment567" id="d101704e632" headers="d101704e462">
+<p><code class="codeph">objectName</code></p>
+</td>
+<td class="cellalignment596" headers="d101704e632 d101704e465">
+<p><code class="codeph">methodParameters</code></p>
+</td>
+<td class="cellalignment647" headers="d101704e632 d101704e468">
+<p>This value should be passed only when the navTaskFlowId input parameter has a value.</p>
+<p><span class="bold">Example:</span></p>
+<pre dir="ltr">
+FndMethodParameters methodParameters = new FndMethodParameters();
+methodParameters.setContextCode("CRM");
+methodParameters.setObjectType("Opportunity");
+methodParameters.setObjectName("Opportunity 123");
+</pre></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="infobox-note" id="GUID-15CF0470-9D05-41F9-863E-644F21275414__GUID-759800C1-5614-494A-831A-9E72727E7C26">
+<p class="notep1">Note:</p>
+<p>When passing parameters, <span class="italic">do not</span> leave the <code class="codeph">label</code> field null. This is the label that would appear in the tab header when in a tabs page. Even if you are in a no-tabs page (see <a href="GUID-6A197DF6-6871-4184-8B79-0E2D772B4BC2.htm#GUID-8E71B88B-18F8-49CA-86DC-5D4BCF223C0D">Supporting No-Tab Work Areas</a> ), do not leave it blank because this label will be used in other ways, such as Add to Favorites, or when the system tracks the Recent Items.</p>
+</div>
+<p>The signature and Javadoc of the method are shown in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-15CF0470-9D05-41F9-863E-644F21275414__CHDFBEHF">Example 16-1</a>.</p>
+<p>The main navigation is driven by two attributes: <code class="codeph">viewId</code> and <code class="codeph">webApp</code>.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">webApp</code> determines which web application to open.</p>
+</li>
+<li>
+<p><code class="codeph">viewId</code> determines the view activity within the target web application.</p>
+</li>
+</ul>
+<p><code class="codeph">pageParametersList</code> defines custom URL parameters that you can define.</p>
+<p>The three parameters <code class="codeph">navTaskFlowId</code>, <code class="codeph">navTaskParametersList</code>, and <code class="codeph">navTaskLabel</code>, provide support for loading a task flow on the target page, in addition to the default Main Tasks of the target page.</p>
+<p><code class="codeph">FndMethodParameters</code> are placed as a future extension mechanism. The parameters that can be set through <code class="codeph">FndMethodParameters</code> are: <code class="codeph">contextualAreaWidth</code> and <code class="codeph">contextualAreaCollapsed</code>. <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-15CF0470-9D05-41F9-863E-644F21275414__CHDHFIHD">Example 16-2</a> shows how to set up these two parameters.</p>
+<div class="infobox-note" id="GUID-15CF0470-9D05-41F9-863E-644F21275414__GUID-05DDD9CB-7D76-4E41-871D-0B42D17BFA0B">
+<p class="notep1">Note:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>The task flow to be opened in the target Work Area does not need to be pre-registered as a <code class="codeph">defaultMain</code> or <code class="codeph">dynamicMain</code> task for that page. The TaskFlow Id, parameters for it, and the label are all explicitly passed to the target page, and the target page does not perform any validation.</p>
+</li>
+<li>
+<p>The <code class="codeph">webApp</code> value that is passed into the Navigate API is used to look up the host and port of the associated WorkArea or Dashboard from the Oracle Fusion Applications Functional Core (ASK) deployment tables. These tables are populated at deployment time through <span id="GUID-15CF0470-9D05-41F9-863E-644F21275414__FSMSHORT">Functional Setup Manager</span> tasks.</p>
+</li>
+<li>
+<p>Because the Navigate API is based on URL redirect, only string representations of the parameter values can be passed to the target page. It is not possible to pass an object as a parameter value. For example, a Java map that is set as a <code class="codeph">customObject</code> on <code class="codeph">FndMethodParameters</code> cannot be passed as a parameter (this is only supported in <code class="codeph">openMainTask</code> API).</p>
+</li>
+<li>
+<p>When navigating to the current page with the <code class="codeph">forcePageRefresh=true</code> option using this API, the ADF Controller state of the source page is not cleaned up.</p>
+</li>
+</ul>
+</div>
+</div>
+<!-- class="example" --></div>
+</div>
+<a id="OADEV59802"></a>
+<div class="props_rev_3"><a id="GUID-8931D79D-AD0A-4DE3-8159-9E29214587D2"></a>
+<h3 id="OADEE-GUID-8931D79D-AD0A-4DE3-8159-9E29214587D2" class="sect3"><span class="enumeration_section">16.1.2</span> How to Implement Navigation Across Web Applications</h3>
+<div>
+<p>Navigating across web applications requires the <code class="codeph">webApp</code> parameter in the menu meta data. For this parameter to work properly, the <code class="codeph">ApplicationDB</code> and the <code class="codeph">AppMasterDB</code> connections must be set. The <code class="codeph">webApp</code> parameter must be specified for each parent node in the menu meta data. Child nodes inherit the value of this parameter from the parent node if not specified. The <code class="codeph">Navigate</code> API is also modified to add the <code class="codeph">webApp</code> parameter. Similarly, when using the <code class="codeph">openSubTask</code> API, you must specify the <code class="codeph">webApp</code> parameter correctly. There are no design or compile time checks that can catch an invalid value for the <code class="codeph">webApp</code> parameter. It will throw null pointer exceptions at runtime only.</p>
+<p>Note that you need to pass the <code class="codeph">DEPLOYED_MODULE_NAME</code> in the <code class="codeph">ASK_DEPLOYED_MODULES</code> table as the <code class="codeph">webApp</code> parameter. The <code class="codeph">DEPLOYED_MODULE_NAME</code>, by standard, should be the same as the context root of the application you are trying to open.</p>
+</div>
+</div>
+</div>
+<a id="OADEV64592"></a><a id="OADEV65161"></a>
+<div class="props_rev_3"><a id="GUID-F658C15E-292E-413D-8065-1345952A1B08"></a>
+<h2 id="OADEE-GUID-F658C15E-292E-413D-8065-1345952A1B08" class="sect2"><span class="enumeration_section">16.2</span> Warning of Pending Changes in the UI Shell</h2>
+<div>
+<p>When there are pending changes in the UI Shell main area, and the user is leaving the page, or is refreshing the tab or task flow, or is closing the tab, the UI Shell will provide a modal confirmation dialog to the user. If confirmed, the operation will be allowed to proceed. Otherwise, the user will remain on the original page or tab.</p>
+<p>Cases where pending changes are checked in the UI Shell main area include:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>TaskList links in regional area relaunch a task flow in the main area (with <code class="codeph">reuseInstance=true</code> and either <code class="codeph">forceRefresh=true</code> or with different parameters).</p>
+</li>
+<li>
+<p>Closing a tab by clicking the Close icon on the tab.</p>
+</li>
+<li>
+<p>Closing the currently focused tab by using <code class="codeph">closeMainTask</code>.</p>
+</li>
+<li>
+<p>Relaunching a task flow by using <code class="codeph">openMainTask</code> (with <code class="codeph">reuseInstance=true</code> and either <code class="codeph">forceRefresh=true</code> or with different parameters).</p>
+</li>
+<li>
+<p>Relaunching a task flow using <code class="codeph">navigate</code> (navigating within the same web application and <code class="codeph">viewId</code>).</p>
+</li>
+<li>
+<p>Opening a different work area or web application using <code class="codeph">navigate</code>.</p>
+</li>
+</ul>
+<div class="section">
+<p class="subhead2">Search Panel and Warning of Pending Changes</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>Search is treated as a special case and no warning for pending changes is shown when a user enters some data in a query panel provided by the Oracle Application Development Framework. But, from the search results page, drilling down to a sub flow and making the flow dirty marks the sub flow as a candidate for warn about changes.</p>
+</div>
+<!-- class="section" --></div>
+<a id="OADEV64594"></a><a id="OADEV64595"></a><a id="OADEV64596"></a><a id="OADEV64593"></a>
+<div class="props_rev_3"><a id="GUID-9D2DE008-FC90-401F-93E7-B26D9D080C42"></a>
+<h3 id="OADEE-GUID-9D2DE008-FC90-401F-93E7-B26D9D080C42" class="sect3"><span class="enumeration_section">16.2.1</span> How to Implement Warning of Pending Changes</h3>
+<div>
+<p>To implement warning of pending changes, developers need to follow these steps.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>All the main taskflows that render in MainArea should have the <code class="codeph">data-control-scope</code> set to <code class="codeph">isolated</code>.</p>
+<pre dir="ltr">
+&lt;data-control-scope id="dc"&gt;
+  &lt;isolated/&gt;
+&lt;/data-control-scope&gt;
+</pre></li>
+<li>
+<p>Make changes to the main area.</p>
+<p>Note that inner taskflows and regions inside the main flow can have the <code class="codeph">data-control-scope</code> set to shared.</p>
+<p>Other than tasklist, if developers are using Data Control APIs, such as <code class="codeph">openMainTask</code>, <code class="codeph">closeMainTask</code> or <code class="codeph">navigate</code>, to relaunch or close a flow in the MainArea, they should add the <code class="codeph">clientListener</code> to post the changes. Adding the <code class="codeph">clientListener</code> on a <code class="codeph">commandButton</code> that is bound to <code class="codeph">closeMainTask</code> to post pending changes before the currently focused tab/flow is closed is shown in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-9D2DE008-FC90-401F-93E7-B26D9D080C42__CHDDJIIJ">Example 16-3</a>.</p>
+<p>When a command link/button invokes Data Control APIs programmatically, developers should add a client listener on the command link/button, as shown in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-9D2DE008-FC90-401F-93E7-B26D9D080C42__CHDCHDFF">Example 16-4</a>.</p>
+<p>In addition to adding the <code class="codeph">clientListener</code>, when Data Control APIs are executed from within the MainArea, developers must add the <code class="codeph">methodAction</code> shown in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-9D2DE008-FC90-401F-93E7-B26D9D080C42__CHDHECFC">Example 16-5</a> to their main page fragment's pageDef whose taskflow is attached to the tab in MainArea.</p>
+<p>The Data Control API shown in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-9D2DE008-FC90-401F-93E7-B26D9D080C42__CHDHECFC">Example 16-5</a> lets you check for data dirty from within the child region and identify any pending changes in the child region.</p>
+<p>After adding above API to the main page fragment's pageDef, developers should let the UI Shell know about that by sending the parameter <code class="codeph">"fndCheckDataDirty=true"</code> in the <code class="codeph">parametersList</code> or <code class="codeph">navTaskParametersList</code>.</p>
+</li>
+</ul>
+<div class="example" id="GUID-9D2DE008-FC90-401F-93E7-B26D9D080C42__CHDDJIIJ">
+<p class="titleinexample">Example 16-3 Adding the clientListener on a commandButton</p>
+<pre dir="ltr">
+&lt;af:commandButton actionListener="#{bindings.closeMainTask.execute}"
+             text="closeMainTask- with - CL"
+             disabled="false"
+             id="cb1"&gt;
+      &lt;af:clientListener method="queueActionEventOnMainArea" type="action"/&gt;
+&lt;/af:commandButton&gt;
+</pre></div>
+<!-- class="example" -->
+<div class="example" id="GUID-9D2DE008-FC90-401F-93E7-B26D9D080C42__CHDCHDFF">
+<p class="titleinexample">Example 16-4 Adding a client listener when a command link/button invokes Data Control APIs programmatically</p>
+<pre dir="ltr">
+&lt;af:commandButton text="Calling datacontrol api programmatically"
+         binding="#{backingBeanScope.backing_Navigateviaprogramatically.cb1}"
+         id="cb1" action="go"&gt;
+  &lt;af:clientListener method="queueActionEventOnMainArea" type="action"/&gt;
+&lt;/af:commandButton&gt;
+</pre></div>
+<!-- class="example" -->
+<div class="example" id="GUID-9D2DE008-FC90-401F-93E7-B26D9D080C42__CHDHECFC">
+<p class="titleinexample">Example 16-5 Adding the checkDataDirty methodAction</p>
+<pre dir="ltr">
+&lt;methodAction id="checkDataDirty"
+     InstanceName="FndUIShellController.dataProvider"
+     DataControl="FndUIShellController" RequiresUpdateModel="true"
+     Action="invokeMethod" MethodName="checkDataDirty"
+     IsViewObjectMethod="false"
+     ReturnName="FndUIShellController.methodResults.checkDataDirty_FndUIShellController_dataProvider_checkDataDirty_result"/&gt;
+</pre></div>
+<!-- class="example" --></div>
+</div>
+<a id="OADEV64598"></a><a id="OADEV64597"></a>
+<div class="props_rev_3"><a id="GUID-F8A2305F-E170-4B39-B1C2-B9B6C6F857A4"></a>
+<h3 id="OADEE-GUID-F8A2305F-E170-4B39-B1C2-B9B6C6F857A4" class="sect3"><span class="enumeration_section">16.2.2</span> How to Suppress Warning of Pending Changes</h3>
+<div>
+<p>Developers can suppress warning of pending changes for a particular flow by sending the parameter <code class="codeph">"fndWarnChanges=false"</code> to the <code class="codeph">parametersList</code> or <code class="codeph">navTaskParametersList</code>, as shown in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-F8A2305F-E170-4B39-B1C2-B9B6C6F857A4__CHDIBIEE">Example 16-6</a>.</p>
+<div class="example" id="GUID-F8A2305F-E170-4B39-B1C2-B9B6C6F857A4__CHDIBIEE">
+<p class="titleinexample">Example 16-6 Suppressing warning of pending changes for a flow</p>
+<pre dir="ltr">
+&lt;methodAction id="openMainTask" RequiresUpdateModel="true"
+              Action="invokeMethod" MethodName="openMainTask"
+              IsViewObjectMethod="false" DataControl="FndUIShellController"
+              InstanceName="FndUIShellController.dataProvider"
+              ReturnName="FndUIShellController.methodResults.openMainTask_FndUIShellController_dataProvider_openMainTask_result"&gt;
+  &lt;NamedData NDName="taskFlowId" NDValue="/WEB-INF/task-flow-definition.xml#task-flow-definition" NDType="java.lang.String"/&gt;
+  &lt;NamedData NDName="keyList" NDType="java.lang.String"/&gt;
+  &lt;NamedData NDName="parametersList" NDValue="fndWarnChanges=false" NDType="java.lang.String"/&gt;
+  &lt;NamedData NDName="label" NDValue="Suppress Warn About Msg" NDType="java.lang.String"/&gt;
+  &lt;NamedData NDName="reuseInstance" NDValue="true" NDType="java.lang.Boolean"/&gt;
+  &lt;NamedData NDName="forceRefresh" NDValue="true" NDType="java.lang.Boolean"/&gt;
+  &lt;NamedData NDName="loadDependentFlow" NDType="java.lang.Boolean"/&gt;
+  &lt;NamedData NDName="methodParameters"
+  NDType="oracle.apps.fnd.applcore.patterns.uishell.ui.bean.FndMethodParameters"/&gt;
+&lt;/methodAction&gt;
+</pre></div>
+<!-- class="example" --></div>
+</div>
+</div>
+<a id="OADEV56135"></a><a id="OADEV56134"></a>
+<div class="props_rev_3"><a id="GUID-E5026845-E692-4362-8761-DD40B031B54E"></a>
+<h2 id="OADEE-GUID-E5026845-E692-4362-8761-DD40B031B54E" class="sect2"><span class="enumeration_section">16.3</span> Implementing the Oracle Fusion Home Page UI</h2>
+<div>
+<p>The Oracle Fusion Home Page UI consists of a series of JSPX pages, each of which provides product- or role-specific content, that are visually tied together using a tabbed navigation interface.</p>
+<div class="section">
+<p class="subhead2">Terms</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p><span class="bold">Home page:</span> any one of these JSPX pages.</p>
+<p><span class="bold">Oracle Fusion Home:</span> the overall Oracle Fusion Home Page UI.</p>
+</div>
+<!-- class="section" --></div>
+<a id="OADEV56136"></a>
+<div class="props_rev_3"><a id="GUID-AC9FE2E0-899B-4560-B2AE-E7330DABA399"></a>
+<h3 id="OADEE-GUID-AC9FE2E0-899B-4560-B2AE-E7330DABA399" class="sect3"><span class="enumeration_section">16.3.1</span> Supported Behavior</h3>
+<div>
+<p>The following key requirements are supported by the Oracle Fusion UI Shell:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>To conform to <span id="GUID-AC9FE2E0-899B-4560-B2AE-E7330DABA399__FA">Oracle Fusion Applications</span> modularity requirements, the Oracle Fusion Home provides a common entry point across multiple Java EE web applications. A given home page can be hosted on any one of these distinct Java EE web applications. A tab click on a given home page therefore must issue a request for another home page that may be hosted on a different web application. When the new page is displayed, its tab must be visually selected.</p>
+</li>
+<li>
+<p>Each home page should display content that includes navigation means to resources that may be hosted on a different web application. For example, a command navigation link on a home page may target a bounded task flow located on a different web application and designed to run on a Workarea or Dashboard page located on that web application.</p>
+</li>
+<li>
+<p>A given home page may include content from a bounded task flow (presumably displayed within an ADF region or portlet) that has command navigation links within its view activities. These links or other navigation means must work correctly on the home page. For example, on click, navigate to the correct Workarea page and launch the intended task flow.</p>
+</li>
+<li>
+<p>The Home icon in the Global Area will be disabled on all home pages.</p>
+</li>
+<li>
+<p>By default, clicking the Home icon will open the Welcome tab and, if a different tab is selected, clicking the Home icon will go back to the last tab that was selected for that session. If, however, the user navigates to any Oracle Fusion page through a direct URL navigation, such as an email that contains a link to a Workarea, the Home icon will again return to the Welcome tab. By default, the Welcome tab will be the first itemNode defined.</p>
+</li>
+<li>
+<p>A home page will display the same layout and content in the Global Area and for the page footer as other pages that extend the UI Shell page template. Unlike a Workarea page, however, the intervening content and its layout between the Global (top) and footer (bottom) sections of the page will be determined and provided by product teams.</p>
+</li>
+</ul>
+</div>
+</div>
+<a id="OADEV56139"></a><a id="OADEV56138"></a>
+<div class="props_rev_3"><a id="GUID-3D81C601-143A-4398-AAF2-C593A09AE861"></a>
+<h3 id="OADEE-GUID-3D81C601-143A-4398-AAF2-C593A09AE861" class="sect3"><span class="enumeration_section">16.3.2</span> How to Create a Home Page</h3>
+<div>
+<div class="section">
+<p>To create a home page, follow these basic steps.</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li><span>Create a JSPX page that extends UIShell.jspx.</span></li>
+<li><span>From the JSPX page, select the <code class="codeph">&lt;af:pageTemplate&gt;</code> tag. On the property inspector, set the <code class="codeph">isHomePage</code> attribute to <code class="codeph">true</code>. Note that when <code class="codeph">isHomePage</code> is set to true, the Regional, Local and Contextual Areas of the UI Shell will not be rendered.</span></li>
+<li><span>Add content to the <code class="codeph">HomePageContent</code> facet, following the ADF Layout Basics guideline for laying out the components.</span></li>
+<li><span>Drop the JSPX to <code class="codeph">adfc-config.xml</code>.</span></li>
+<li><span>Repeat Steps1 through 4 for all home page JSPX pages.</span></li>
+<li><span>Create the Home Page menu. See <a href="GUID-6A197DF6-6871-4184-8B79-0E2D772B4BC2.htm#GUID-E848BA5F-3A6B-436C-9228-DB832F4B80D1">Working with the Global Menu Model</a>.</span></li>
+<li><span>When running a home page JSPX, the page should look similar to <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-3D81C601-143A-4398-AAF2-C593A09AE861__CHDBBIDJ">Figure 16-3</a>.</span></li>
+</ol>
+<div class="section">
+<div class="figure" id="GUID-3D81C601-143A-4398-AAF2-C593A09AE861__CHDBBIDJ">
+<p class="titleinfigure">Figure 16-3 Home Page Example</p>
+<img width="661" height="98" src="img/GUID-CA270E4A-A3A7-4F46-994C-A7A4DC10D4F8-default.gif" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" -->
+<p>See <a href="GUID-6A197DF6-6871-4184-8B79-0E2D772B4BC2.htm#GUID-05ED5B35-59A0-414F-AC73-68DBF546D47F">Global Area Standard Icons</a> for a description of the icons.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OADEV61828"></a><a id="OADEV61829"></a><a id="OADEV59729"></a>
+<div class="props_rev_3"><a id="GUID-5B280915-8AE1-4793-9E58-F4E9113BF306"></a>
+<h3 id="OADEE-GUID-5B280915-8AE1-4793-9E58-F4E9113BF306" class="sect3"><span class="enumeration_section">16.3.3</span> Getting the URL</h3>
+<div>
+<p>There are two APIs located in the UIShellContext class that you can use to return a URL without actually performing the navigation to the URL:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">getURL</span> : getURL is the same as a navigate call, but it returns the URL as a string instead of doing the navigation. See <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-5B280915-8AE1-4793-9E58-F4E9113BF306__CHDHEAAB">Example 16-7</a>.</p>
+</li>
+<li>
+<p><span class="bold">getURLForCurrentTask</span> : getURLForCurrentTask, shown in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-5B280915-8AE1-4793-9E58-F4E9113BF306__CHDJDJIF">Example 16-8</a>, is good for getting the URL of the main area flow in focus so you could send it in an email to someone else. When clicked, it would open the correct workarea (.jspx page) and the correct flow with the correct parameters. If you did have other dynamic tabs open when you called getURLForCurrentTask, it would not open those when clicked.</p>
+</li>
+</ul>
+<div class="example" id="GUID-5B280915-8AE1-4793-9E58-F4E9113BF306__CHDHEAAB">
+<p class="titleinexample">Example 16-7 Example Use of getURL</p>
+<pre dir="ltr">
+public java.lang.String getURL(        java.lang.String    viewId,
+   java.lang.String webApp,
+   java.lang.String pageParametersList,
+   java.lang.String navTaskFlowId,
+   java.lang.String navTaskKeyList,
+   java.lang.String navTaskParametersList,
+   java.lang.String navTaskLabel,
+FndMethodParameters methodParameters)
+throws  java.io.IOException
+</pre></div>
+<!-- class="example" -->
+<div class="example" id="GUID-5B280915-8AE1-4793-9E58-F4E9113BF306__CHDJDJIF">
+<p class="titleinexample">Example 16-8 Example Use of getURLForCurrentTask</p>
+<pre dir="ltr">
+public java.lang.String getURLForCurrentTask( )
+throws  java.io.IOException
+</pre></div>
+<!-- class="example" --></div>
+</div>
+</div>
+<a id="OADEV56133"></a><a id="OADEV56132"></a>
+<div class="props_rev_3"><a id="GUID-BB9158E1-1A93-40E9-BB0D-ED3E68810F1C"></a>
+<h2 id="OADEE-GUID-BB9158E1-1A93-40E9-BB0D-ED3E68810F1C" class="sect2"><span class="enumeration_section">16.4</span> Using the Single Object Context Workarea</h2>
+<div>
+<p>The Single Object Context Workarea is a facet that defines an area between the Global Area and the Main and Regional areas into which developers can add what they want. If the facet is empty, the area does not appear. You also can create a view scope parameter so other flows on the page can get the context. See <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-BB9158E1-1A93-40E9-BB0D-ED3E68810F1C__CHDFEBJF">Figure 16-4</a>.</p>
+<div class="figure" id="GUID-BB9158E1-1A93-40E9-BB0D-ED3E68810F1C__CHDFEBJF">
+<p class="titleinfigure">Figure 16-4 Context Area Example</p>
+<img width="989" height="469" src="img/GUID-4F9A66ED-65C8-4A41-A9EA-53120BD192B3-default.gif" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" -->
+<p>This area is useful for creating Single Object Workareas, which are particularly useful in tabbed page mode. A Single Object Workarea is a page that is devoted to one object so the information of that one object can be put above the Workarea.</p>
+<p>Single Object Workareas provide a context for addressing the tasks and processes for the business process of a single complex object instance at a time. Usually, single object workareas will use multiple defaultMain flows. Each flow can be about a different aspect of the same object. For instance, you could have one tab showing recent activity, and another tab showing payments.</p>
+</div>
+<a id="OADEV61878"></a><a id="OADEV58238"></a>
+<div class="props_rev_3"><a id="GUID-B9FDD5D8-FED5-4393-A3DB-BAA66B176976"></a>
+<h3 id="OADEE-GUID-B9FDD5D8-FED5-4393-A3DB-BAA66B176976" class="sect3"><span class="enumeration_section">16.4.1</span> Implementation Notes</h3>
+<div>
+<p>The SingleObjectContextArea facet has been added to the UI Shell template for Context Area task flow.</p>
+<p>A managed bean entry, shown in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-B9FDD5D8-FED5-4393-A3DB-BAA66B176976__CHDCGDFG">Example 16-9</a>, has been added to adfc-config.xml for viewScope Hashmap.</p>
+<p>Support for URL parameters defined in the view activity for the page (JSPX) in <code class="codeph">adfc-config</code> is to be set in the fndPageParams Hashmap defined in viewScope. This Hashmap is also passed onto the pageFlowScope of the task flows in the context area, regional area and main area.</p>
+<p>This is accomplished by enabling the Bookmarkable property on the view activity for the page and specifying the URL parameter names with the value set to be added to the fndPageParams Hashmap defined in viewScope. See the <a class="olink ADFFD1670" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ADFFD1670">"How to Create a Bookmarkable View Activity"</a> section in the <span class="italic"><span id="GUID-B9FDD5D8-FED5-4393-A3DB-BAA66B176976__ADFFD"><cite>Developing Fusion Web Applications with Oracle Application Development Framework</cite></span></span>.</p>
+<p>Product team task flows running in the Single Object Context Workarea must be designed to take in the appropriate context values as input parameters. The pageFlowScope values must be passed to the appropriate input parameters through the parametersList for the item node in the menu or the openMainTask API.</p>
+<p>Product teams can cause URL navigation (using the navigate data control method provided by UI Shell by passing required parameters in the pageParametersList) for changing context or updating context information. This will cause the entire page to be refreshed based on new context parameter values.</p>
+<p>Product teams can also check for the input parameter values (the context) within the context area task flow. If invalid, a modal dialog can be launched for the end user to choose a context (rendered as links based on the navigate data control method provided by UI Shell) before proceeding.</p>
+<div class="example" id="GUID-B9FDD5D8-FED5-4393-A3DB-BAA66B176976__CHDCGDFG">
+<p class="titleinexample">Example 16-9 Managed Bean viewScope Hashmap Entry in adfc-config.xml</p>
+<pre dir="ltr">
+&lt;managed-bean&gt;
+    &lt;managed-bean-name&gt;fndPageParams&lt;/managed-bean-name&gt;
+    &lt;managed-bean-class&gt;java.util.HashMap&lt;/managed-bean-class&gt;
+    &lt;managed-bean-scope&gt;view&lt;/managed-bean-scope&gt;
+  &lt;/managed-bean&gt;
+</pre></div>
+<!-- class="example" --></div>
+<a id="OADEV61879"></a><a id="OADEV61880"></a><a id="OADEV61881"></a><a id="OADEV58239"></a>
+<div class="props_rev_3"><a id="GUID-5F33F09C-BD73-485F-9078-1468ADD0FCFC"></a>
+<h4 id="OADEE-GUID-5F33F09C-BD73-485F-9078-1468ADD0FCFC" class="sect4"><span class="enumeration_section">16.4.1.1</span> Developer Implementation</h4>
+<div>
+<p>Enable the Bookmarkable property on the view activity for the single object context page and specify the URL parameter names with the corresponding fndPageParams viewScope Hashmap key where the value should be stored. See the <a class="olink ADFFD1670" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ADFFD1670">"How to Create a Bookmarkable View Activity"</a> section in the <span class="italic"><span id="GUID-5F33F09C-BD73-485F-9078-1468ADD0FCFC__ADFFD"><cite>Developing Fusion Web Applications with Oracle Application Development Framework</cite></span></span>.</p>
+<p><a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-5F33F09C-BD73-485F-9078-1468ADD0FCFC__CHDDCDIB">Example 16-10</a> shows a sample entry in adfc-config.xml for such a view activity.</p>
+<p>Product teams must create a bounded task flow for the Context Area that appears at the top of the page. This task flow must accept the context values as input parameters. This task flow is dropped as a static region onto the Context Area facet in the JSPX page based on the UI Shell template. In the task flow binding, set the input parameter values to the corresponding key in fndPageParms viewScope Hashmap.</p>
+<p><a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-5F33F09C-BD73-485F-9078-1468ADD0FCFC__CHDEADII">Example 16-11</a> shows a sample entry in the page definition for the JSPX file for passing the viewScope values into the Context Area task flow as input parameter.</p>
+<p>The UI Shell code passes this <code class="codeph">viewScope</code> hashmap onto the <code class="codeph">pageFlowScope</code> of the main area and regional area task flows. Product team task flows, which are initialized in the regional area and main area, can access this in <code class="codeph">pageFlowScope</code> (of a main area or regional area container task flow owned by <span id="GUID-5F33F09C-BD73-485F-9078-1468ADD0FCFC__APPLCORESHORT">Applications Core</span>) for the appropriate input parameters through the menu model and <code class="codeph">openMainTask</code> API.</p>
+<p><a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-5F33F09C-BD73-485F-9078-1468ADD0FCFC__CHDDEIBE">Example 16-12</a> shows a sample entry for a child item node for <code class="codeph">defaultMain</code> task in the <code class="codeph">menu.xml</code> file to pass the appropriate <span class="bold">deptno</span> in the single object context to a task flow that is initialized based on this input value.</p>
+<p>Product teams can cause URL navigation (through the navigate data control method provided by UI Shell) for changing context or after updating context information. This will cause the entire page to be refreshed based on new context parameter values.</p>
+<p>Product teams can also check for the input parameter values within the pageFlowScope of the context area task flow. If invalid, a modal dialog can be launched for the end user to choose a context (by providing links based on the navigate data control method provided by the UI Shell by passing required parameters in the pageParametersList) before proceeding. This can be achieved by defining an invoke action executable in the page def for the context area page fragment which checks for existence of the pageFlowScope value and programmatically shows a modal dialog for the user to choose the context. The other alternative is to use this approach to cause navigation to a completely different page where the user can select the context.</p>
+<p>Also, it is important to note that all the bounded task flows that will be initialized in the Single Object Context Workarea need to check for input parameter values and show/query data <span class="italic">only</span> if the input parameter values are passed. Basically, if the input parameter values are empty, the task flows handle that, such as in a router activity, and avoid showing any transaction data to the end user.</p>
+<div class="example" id="GUID-5F33F09C-BD73-485F-9078-1468ADD0FCFC__CHDDCDIB">
+<p class="titleinexample">Example 16-10 Sample Entry in adfc-config.xml for a View Activity</p>
+<pre dir="ltr">
+&lt;view id="SingleDeptContextPage"&gt;
+ &lt;page&gt;/oracle/apps/empdeptdemo/ui/page/SingleDeptContextPage.jspx&lt;/page&gt;
+ &lt;bookmark&gt;
+  &lt;url-parameter&gt;
+   &lt;name&gt;Deptno&lt;/name&gt;
+   &lt;value&gt;#{viewScope.fndPageParams.Deptno}&lt;/value&gt;
+  &lt;/url-parameter&gt;
+ &lt;/bookmark&gt;
+&lt;/view&gt;
+</pre></div>
+<!-- class="example" -->
+<div class="example" id="GUID-5F33F09C-BD73-485F-9078-1468ADD0FCFC__CHDEADII">
+<p class="titleinexample">Example 16-11 Sample Page Definition for Passing viewScope Values into Context Area Task Flow</p>
+<pre dir="ltr">
+&lt;taskFlow id="ContextDeptSummary1"
+              taskFlowId="/WEB-INF/oracle/apps/empdeptdemo/ui/flow/ContextDeptSummary.xml#ContextDeptSummary"
+              xmlns="http://xmlns.oracle.com/adf/controller/binding"&gt;
+      &lt;parameters&gt;
+        &lt;parameter id="Deptno" value="#{viewScope.fndPageParams['Deptno']}"
+                   xmlns="http://xmlns.oracle.com/adfm/uimodel"/&gt;
+      &lt;/parameters&gt;
+    &lt;/taskFlow&gt;
+</pre></div>
+<!-- class="example" -->
+<div class="example" id="GUID-5F33F09C-BD73-485F-9078-1468ADD0FCFC__CHDDEIBE">
+<p class="titleinexample">Example 16-12 Sample Child Item Node for defaultMain Task</p>
+<pre dir="ltr">
+&lt;itemNode id="SingleDeptContextPage_EmpListingDefaultTab"
+              focusViewId="/SingleDeptContextPage"
+              label="#{adfBundle['oracle.apps.empdeptdemo.ui.test_menuBundle'].EMPLOYEE_LISTING}"
+              taskType="defaultMain" reuseInstance="false"
+              taskFlowId="/WEB-INF/oracle/apps/empdeptdemo/ui/flow/ContainerTF.xml#ContainerTF"
+              parametersList="Deptno=#{pageFlowScope.fndPageParams['Deptno']}"/&gt;
+</pre></div>
+<!-- class="example" --></div>
+</div>
+</div>
+</div>
+<a id="OADEV61883"></a><a id="OADEV61882"></a>
+<div class="props_rev_3"><a id="GUID-BB5986DB-4F7A-4D9E-AC35-F1F15E28B6D2"></a>
+<h2 id="OADEE-GUID-BB5986DB-4F7A-4D9E-AC35-F1F15E28B6D2" class="sect2"><span class="enumeration_section">16.5</span> Implementing the Third-Party Component Area</h2>
+<div>
+<p>The Third-Party Component Area, shown in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-BB5986DB-4F7A-4D9E-AC35-F1F15E28B6D2__CHDEECHC">Figure 16-5</a>, is a facet in the UI Shell template for showing content just above the Single Context Workarea in the global area. Although originally designed to contain a Call Telephony Interface (CTI) showing incoming calls in a call center operation, the facet can contain anything.</p>
+<div class="figure" id="GUID-BB5986DB-4F7A-4D9E-AC35-F1F15E28B6D2__CHDEECHC">
+<p class="titleinfigure">Figure 16-5 Third Party Component Area Facet Containing A CTI</p>
+<img width="860" height="157" src="img/GUID-FF07557E-BA41-418A-8400-DA5E540C8F75-default.png" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" --></div>
+<a id="OADEV61884"></a>
+<div class="props_rev_3"><a id="GUID-D94AAD49-096A-4A4C-B287-66A78B5BD7EA"></a>
+<h3 id="OADEE-GUID-D94AAD49-096A-4A4C-B287-66A78B5BD7EA" class="sect3"><span class="enumeration_section">16.5.1</span> How to Implement the ThirdPartyComponentArea Facet Developer</h3>
+<div>
+<p>The ThirdPartyComponentArea facet should be added within a flexible layout component that will allow you to control the amount of screen real estate that the content added to the facet can consume.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>A facet reference is under the global area content with its width set to 100 percent.</p>
+</li>
+<li>
+<p>Add content to this facet.</p>
+</li>
+<li>
+<p>You should create a bounded task flow with page fragment for the content and drop it into this facet as a static region. This supports personalization through web composer since the content is within a page template.</p>
+</li>
+<li>
+<p>The height property of the <code class="codeph">panelStretchLayout</code> in the UI Shell template defaults to 33 px. To view or enable the third party component area (see the dark blue area at the top of <a href="GUID-6A197DF6-6871-4184-8B79-0E2D772B4BC2.htm#GUID-FAE21508-A16E-458C-86EA-B937C9890558__CHDCEBEB">Figure 14-1</a>), specify the <code class="codeph">globalAreaHeight</code> property as <span class="bold">auto</span> in the <code class="codeph">pageTemplate</code> property Inspector.</p>
+<p>When the height of the top facet is specified as a CSS length or as <span class="bold">auto</span>, this facet will no longer be stretched and instead will consume the initial <code class="codeph">offsetHeight</code> given to its children by the browser. It is important to note that in an average page, a switch to a layout using automatic heights exhibited a 5- to 10-percent degradation in initial layout speed. Also, an automatic height will cause the facet child to not be stretched both vertically and horizontally.</p>
+</li>
+<li>
+<p>You can set the height of the root layout component within the facet to auto to ensure auto-resizing of contents within the facet. Consider a showDetailHeader that is the root element within the facet (in the default view activity for the bounded task flow dropped in as a region). If the height property for this showDetailHeader component is set to auto, collapsing the header would resize the contents and open more real estate in the screen for showing other components in the page.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<a id="OADEV61966"></a><a id="OADEV61965"></a>
+<div class="props_rev_3"><a id="GUID-87B22421-2D6C-4499-92D6-CEC3C25F75DF"></a>
+<h2 id="OADEE-GUID-87B22421-2D6C-4499-92D6-CEC3C25F75DF" class="sect2"><span class="enumeration_section">16.6</span> Developing an Activity Guide Client Application with the UI Shell</h2>
+<div>
+<p>The Oracle UI Shell can be used to develop an Activity Guide client application.</p>
+<div class="section">
+<p class="subhead2">Before you begin:</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>Copy the file <code class="codeph">oracle.bpm.activityguide-ui_11.1.1.jar</code> to a local directory from the following location in the <code class="codeph">bpm-jdev-extension.zip</code> file:</p>
+<pre dir="ltr">
+<span class="italic">jdev_install</span>/jdeveloper/soa/modules/oracle.bpm.activityguide-ui_11.1.1.jar
+</pre></div>
+<!-- class="section" --></div>
+<a id="OADEV61970"></a><a id="OADEV61971"></a><a id="OADEV61972"></a><a id="OADEV61973"></a><a id="OADEV67257"></a>
+<div class="props_rev_3"><a id="GUID-BD9B20CF-9037-4837-B4CC-CE5765577553"></a>
+<h3 id="OADEE-GUID-BD9B20CF-9037-4837-B4CC-CE5765577553" class="sect3"><span class="enumeration_section">16.6.1</span> How to Develop an Activity Guide Client Application Using Oracle UI Shell</h3>
+<div>
+<div class="section">
+<p>To develop an activity guide client application using Oracle UI Shell, follow these steps:</p>
+<ol>
+<li>
+<p>Create a new application. In the Application Package Prefix field, enter <code class="codeph">oracle.ag</code>.</p>
+<div class="figure" id="GUID-BD9B20CF-9037-4837-B4CC-CE5765577553__GUID-80F8E5CF-5800-49B0-A181-3889602177C2">
+<p class="titleinfigure">Figure 16-6 Filling-in the Application Package Prefix Field</p>
+<img width="343" height="416" src="img/GUID-7C907ED9-F02E-4E72-B46C-E5B9A551F7FE-default.gif" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" -->
+<p>When prompted to create a new project, click <span class="bold">Cancel</span>.</p>
+</li>
+<li>
+<p>In the new application, create a new project using the Web Project template by right-clicking the application and selecting <span class="bold">New Project</span> &gt; <span class="bold">Project</span> &gt; <span class="bold">Web Project</span>. Select <span class="bold">Servlet 2.5/JSP 2.1 (Java EE 1.5)</span>. Click through the wizard, accepting all default values.</p>
+</li>
+<li>
+<p>Add the <span class="bold">ADF Faces</span> and <span class="bold">ADF Page Flow</span> technologies to the client application project. Right-click the project and select <span class="bold">Project Properties</span> &gt; <span class="bold">Technology Scope</span>. Shuttle <span class="bold">ADF Faces</span> and <span class="bold">ADF Page Flow</span> from the Available Technologies list to the Selected Technologies list.</p>
+<p>Make sure the following technologies are also selected: HTML, Java, JSP and JSF and Servlets.</p>
+<div class="figure" id="GUID-BD9B20CF-9037-4837-B4CC-CE5765577553__GUID-5535D278-370C-4EC4-9E65-EF07974A898F">
+<p class="titleinfigure">Figure 16-7 Adding the ADF Faces and ADF Page Flow Technologies to the Client Application</p>
+<img width="700" height="500" src="img/GUID-F63C6063-1BC7-4ED8-ADF8-0BDD0B1EDE1F-default.gif" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" --></li>
+<li>
+<p>Right-click the client application and select <span class="bold">Project Properties</span> &gt; <span class="bold">JSP Tag Libraries</span>. Select the <span class="bold">Distributed Libraries</span> folder and click <span class="bold">Add</span>. In the Choose Tag Libraries window, select the tag library <span class="bold">Applications Core (ViewController) 11.1.1.0.0</span> and click <span class="bold">OK</span>.</p>
+<div class="figure" id="GUID-BD9B20CF-9037-4837-B4CC-CE5765577553__GUID-548C628F-914E-47E5-9FE4-6CD7D9A91DD7">
+<p class="titleinfigure">Figure 16-8 Select the Tag Library Applications Core (ViewController) 11.1.1.00</p>
+<img width="338" height="491" src="img/GUID-8D7D39FF-E641-45F5-827C-73C45A4EDCA3-default.gif" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" --></li>
+<li>
+<p>In the Project Properties window, select <span class="bold">Libraries and Classpath</span> and click the <span class="bold">Add Library</span> button. From the window that is displayed, select the <span class="bold">Applications Core</span> library and click <span class="bold">OK</span>.</p>
+<div class="figure" id="GUID-BD9B20CF-9037-4837-B4CC-CE5765577553__GUID-60D71D1C-931E-4273-8D8E-6DA4F9E82D36">
+<p class="titleinfigure">Figure 16-9 Add the Applications Core Library to the Project</p>
+<img width="348" height="456" src="img/GUID-4867A51D-9B2C-42B0-A14B-A110A03215E0-default.gif" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" --></li>
+<li>
+<p>In the Project Properties window, click the <span class="bold">Add JAR/Directory</span> button and browse for the file <code class="codeph">oracle.bpm.activityguide-ui_11.1.1.jar</code>. The file is located under <span class="italic">jdev_install</span><code class="codeph">/jdeveloper/soa/modules/oracle.bpm.activityguide-ui_11.1.1.jar.</code></p>
+<p>Click <span class="bold">Select</span> to add the JAR to the project classpath.</p>
+</li>
+<li>
+<p>Add Activity Guide runtime libraries or JAR files to the classpath. Use either shared libraries or JAR files; do not use both.</p>
+<ol>
+<li>
+<p>Using shared libraries for Activity Guide runtime JAR files</p>
+<p>Add the shared library references oracle.soa.bpel and oracle.soa.workflow.wc to the <code class="codeph">weblogic-application.xml</code> file.</p>
+<pre dir="ltr">
+&lt;library-ref&gt;
+   &lt;library-name&gt;oracle.soa.bpel&lt;/library-name&gt;
+&lt;/library-ref&gt;
+&lt;library-ref&gt;
+   &lt;library-name&gt;oracle.soa.workflow.wc&lt;/library-name&gt;
+&lt;/library-ref&gt;
+</pre></li>
+<li>
+<p>Using JAR files for Activity Guide runtime</p>
+<p>Add the following JAR files to the classpath:</p>
+<pre dir="ltr">
+<span class="italic">FMW_home</span>/AS11gR1SOA/soa/modules/oracle.soa.workflow_11.1.1/bpm-services.jar
+<span class="italic">FMW_home</span>/AS11gR1SOA/soa/modules/oracle.soa.bpel_11.1.1/orabpel-common.jar
+<span class="italic">FMW_home</span>/AS11gR1SOA/soa/modules/oracle.soa.bpel_11.1.1/orabpel.jar
+<span class="italic">FMW_home</span>/AS11gR1SOA/soa/modules/oracle.soa.fabric_11.1.1/bpm-infra.jar
+<span class="italic">FMW_home</span>/AS11gR1SOA/soa/modules/oracle.soa.fabric_11.1.1/fabric-runtime.jar
+<span class="italic">FMW_home</span>/oracle_common/modules/oracle.webservices_11.1.1/wsclient.jar
+<span class="italic">FMW_home</span>/oracle_common/modules/oracle.xdk_11.1.1/xml.jar
+</pre></li>
+</ol>
+</li>
+<li>
+<p>Create a file called <code class="codeph">Config.jar</code> using the <code class="codeph">wf_client_config.xml</code> file and add it to the application classpath. The <code class="codeph">wf_client_config.xml</code> file should include the host name and port of the WLS instance running the Activity Guide instances.</p>
+</li>
+<li>
+<p>Create a JSF page. Right-click the application name and click <span class="bold">New</span>. In the New Gallery, select <span class="bold">JSF</span> &gt; <span class="bold">JSF Page</span> and click <span class="bold">OK</span>. Use <span class="bold">UIShell</span> as a page template and select the checkbox <span class="bold">Create as XML Document (*.jspx)</span>.</p>
+<p>If a dialog box displays the message "Confirm Add Form Element," click <span class="bold">No</span>.</p>
+</li>
+<li>
+<p>Create Application menu metadata. See <a href="GUID-6A197DF6-6871-4184-8B79-0E2D772B4BC2.htm#GUID-F1C3B099-97A9-44CB-9C8B-43667A2400F1">Implementing Application Menu Security</a>..</p>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OADEV66885"></a><a id="OADEV66886"></a><a id="OADEV61978"></a><a id="OADEV61979"></a><a id="OADEV67258"></a>
+<div class="props_rev_3"><a id="GUID-BCF27B1A-6BCE-4EEE-BF00-4975D0A0568A"></a>
+<h3 id="OADEE-GUID-BCF27B1A-6BCE-4EEE-BF00-4975D0A0568A" class="sect3"><span class="enumeration_section">16.6.2</span> How to add a task flow to the Oracle UI Shell client application</h3>
+<div>
+<div class="section">
+<p>Follow these steps to add a task flow to the Oracle UI Shell client application:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Open the menu metadata menu XML file created in <span class="q">"<a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-BD9B20CF-9037-4837-B4CC-CE5765577553">How to Develop an Activity Guide Client Application Using Oracle UI Shell</a>"</span>.</span></li>
+<li class="stepexpand"><span>Right-click itemNode_&lt;JSF page name&gt; and select <span class="bold">Insert inside itemNode_&lt;JSF page name&gt; &gt; itemNode</span>.</span></li>
+<li class="stepexpand"><span>In the Common Properties window, browse for the name of the JSF page and enter a unique Id for the <code class="codeph">itemNode</code> property using the standard format <code class="codeph">&lt;pageID&gt;_&lt;taskFlowName&gt;</code>. For example: <code class="codeph">ItemNode_MainArea_TaskFlow</code>.</span></li>
+<li class="stepexpand"><span>Click the <span class="bold">Browse</span> button to the right of the <code class="codeph">focusViewId</code> field. In the Edit Property window that is displayed, select the <code class="codeph">focusViewId</code> of the page under which you are registering the task flow. Click <span class="bold">OK</span>.</span></li>
+<li class="stepexpand"><span>In the Property Inspector, select the Applications tab and enter a label for the <code class="codeph">itemNode</code> such as <span class="bold">Main Taskflow</span>.</span></li>
+<li class="stepexpand"><span>From the Project Navigator, select the menu metadata XML file. In the Structure view, select the task flow <code class="codeph">itemNode &ndash; Main Taskflow</code>. In the Property Inspector, enter the following values under the Advanced section:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Task Type</span>: defaultMain</p>
+</li>
+<li>
+<p><span class="bold">Task Flow ID</span>: Click the <span class="bold">Browse</span> button to display the Select Task Flow ID window and select the location of the task flow definition: <code class="codeph">/WEB-INF/oracle/bpel/activityguide/ui/taskflows/ag-humantask-task-flow.xml#ag-humantask-task-flow</code>. This is the Id of the main area task flow.</p>
+</li>
+<li>
+<p><span class="bold">Disclosed</span>: Optionally, set this value to <code class="codeph">false</code>. This property enables opening a new tab when clicking the relevant task link at run time. For tabs, the first <code class="codeph">defaultMain</code> with <code class="codeph">disclosed=true</code> is the one that will be in focus.</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>Repeat Steps 1 through 6 for the regional task flow, naming the label and Id accordingly. Provide the following values for the regional task flow in step 6:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Task Type</span>: <code class="codeph">defaultRegional</code></p>
+</li>
+<li>
+<p><span class="bold">Task Flow ID</span>: Click the <span class="bold">Browse</span> button to display the Select Task Flow ID window and select the location of the task flow definition: <code class="codeph">'/WEB-INF/oracle/bpel/activityguide/ui/taskflows/ag-tasktree-task-flow.xml#ag-tasktree-task-flow</code>. This is the Id of the regional area task flow.</p>
+</li>
+<li>
+<p><span class="bold">Disclosed</span>: Set this value to <code class="codeph">true</code> for the regional task flow. This property enables opening a new tab when clicking the relevant task link at run time.</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>Create a file called <code class="codeph">activityguide.properties</code>. If you choose another name then you must provide its value to the ag-tasktree-task-flow using the parameter <code class="codeph">AGPropsBeanName</code>.</span>
+<div>
+<p>If using identity propagation to secure the Activity Guide, the properties <code class="codeph">WorkflowAdminUser</code> and <code class="codeph">WorkflowAdminPassword</code> are not required.</p>
+<p>You can customize Activity Guides behavior by configuring their properties. To configure these properties you must edit the Activity Guide properties file.</p>
+<p><a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-BCF27B1A-6BCE-4EEE-BF00-4975D0A0568A__BABFAABD" title="This table describes the properties you can configure using the activityguide.properties file.">Table 16-3</a> shows the properties you can specify in this file.</p>
+<p><a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-BCF27B1A-6BCE-4EEE-BF00-4975D0A0568A__BABGJGBJ">Example 16-13</a> shows a typical Activity Guide properties file:</p>
+<div class="tblformalwide" id="GUID-BCF27B1A-6BCE-4EEE-BF00-4975D0A0568A__BABFAABD">
+<p class="titleintable">Table 16-3 Activity Guide Properties</p>
+<table class="cellalignment664" title="Activity Guide Properties" summary="This table describes the properties you can configure using the activityguide.properties file.">
+<thead>
+<tr class="cellalignment534">
+<th class="cellalignment600" id="d101704e1977">Property</th>
+<th class="cellalignment553" id="d101704e1980">Description</th>
+<th class="cellalignment603" id="d101704e1983">Possible Values</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment534">
+<td class="cellalignment601" id="d101704e1988" headers="d101704e1977">
+<p>ServerConnectionMode</p>
+</td>
+<td class="cellalignment556" headers="d101704e1988 d101704e1980">
+<p>Specifies the mode for the transmission of data.</p>
+</td>
+<td class="cellalignment605" headers="d101704e1988 d101704e1983">
+<ul style="list-style-type: disc;">
+<li>
+<p>SOAP</p>
+</li>
+<li>
+<p>REMOTE</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment601" id="d101704e2003" headers="d101704e1977">
+<p>WorklistHttpURL</p>
+</td>
+<td class="cellalignment556" headers="d101704e2003 d101704e1980">
+<p>Only required when using digital signatures. Specifies the URL to access the <span id="GUID-BCF27B1A-6BCE-4EEE-BF00-4975D0A0568A__BPEL_WORKLIST">Oracle BPM Worklist</span> application.</p>
+</td>
+<td class="cellalignment605" headers="d101704e2003 d101704e1983">
+<p>http://<span class="italic">host:port</span>/integration/worklistapp</p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment601" id="d101704e2019" headers="d101704e1977">
+<p>SelectionFilter</p>
+</td>
+<td class="cellalignment556" headers="d101704e2019 d101704e1980">
+<p>Specifies the filter used to filter the processes in an activity guide.</p>
+</td>
+<td class="cellalignment605" headers="d101704e2019 d101704e1983">
+<ul style="list-style-type: disc;">
+<li>
+<p>MY</p>
+</li>
+<li>
+<p>PREVIOUS</p>
+</li>
+<li>
+<p>REPORTEES</p>
+</li>
+<li>
+<p>ADMIN</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment601" id="d101704e2040" headers="d101704e1977">
+<p>AGDefinitionFilter</p>
+</td>
+<td class="cellalignment556" headers="d101704e2040 d101704e1980">
+<p>Specifies the definition ID used to filter the process in an activity guide. The activity guide only displays those processes that match this ID.</p>
+</td>
+<td class="cellalignment605" headers="d101704e2040 d101704e1983">
+<p><span class="italic">activity guide definition ID</span></p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment601" id="d101704e2051" headers="d101704e1977">
+<p>AGInstanceOrdering</p>
+</td>
+<td class="cellalignment556" headers="d101704e2051 d101704e1980">
+<p>Specifies the order used to display the processes in the activity guide.</p>
+<p>For example: CREATION_DATE:ASC</p>
+</td>
+<td class="cellalignment605" headers="d101704e2051 d101704e1983">
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="italic">column_name</span>:ASC</p>
+</li>
+<li>
+<p><span class="italic">column_name</span>:DESC</p>
+</li>
+</ul>
+<p>Default value: ASC</p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment601" id="d101704e2074" headers="d101704e1977">
+<p>AGInstanceID</p>
+</td>
+<td class="cellalignment556" headers="d101704e2074 d101704e1980">
+<p>Specifies the instance ID used to display the activity guide tree.</p>
+<p>For example: 10001</p>
+</td>
+<td class="cellalignment605" headers="d101704e2074 d101704e1983">
+<p><span class="italic">activity guide instance ID</span></p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment601" id="d101704e2087" headers="d101704e1977">
+<p>CustomPredicate1</p>
+</td>
+<td class="cellalignment556" headers="d101704e2087 d101704e1980">
+<p>Specifies an additional predicate to filter the list of processes in an activity guide.</p>
+<p>For example: CREATOR, EQ, jstein</p>
+</td>
+<td class="cellalignment605" headers="d101704e2087 d101704e1983">
+<p><span class="italic">column name</span>, <span class="italic">operator</span>, <span class="italic">value</span></p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment601" id="d101704e2106" headers="d101704e1977">
+<p>CustomPredicate2</p>
+</td>
+<td class="cellalignment556" headers="d101704e2106 d101704e1980">
+<p>Specifies a different additional predicate to filter the list of processes in an activity guide. This predicate is used with CustomPredicate1</p>
+</td>
+<td class="cellalignment605" headers="d101704e2106 d101704e1983">
+<p><span class="italic">column name</span>, <span class="italic">operator</span>, <span class="italic">value</span></p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment601" id="d101704e2123" headers="d101704e1977">
+<p>ShowAllAGTreeNodesProperties</p>
+</td>
+<td class="cellalignment556" headers="d101704e2123 d101704e1980">
+<p>Specifies if the activity guide shows a section at the top that describes the properties of activity guides, milestones and tasks.</p>
+</td>
+<td class="cellalignment605" headers="d101704e2123 d101704e1983">
+<ul style="list-style-type: disc;">
+<li>
+<p>true</p>
+</li>
+<li>
+<p>false</p>
+</li>
+</ul>
+<p>Default value: true</p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment601" id="d101704e2140" headers="d101704e1977">
+<p>ShowRefreshButton</p>
+</td>
+<td class="cellalignment556" headers="d101704e2140 d101704e1980">
+<p>Specifies if the regional area displays a refresh button.</p>
+</td>
+<td class="cellalignment605" headers="d101704e2140 d101704e1983">
+<ul style="list-style-type: disc;">
+<li>
+<p>true</p>
+</li>
+<li>
+<p>false</p>
+</li>
+</ul>
+<p>Default value: false</p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment601" id="d101704e2157" headers="d101704e1977">
+<p>AGTasksPopupTaskFlowID</p>
+</td>
+<td class="cellalignment556" headers="d101704e2157 d101704e1980">
+<p>Specifies the content to display in the task pop-up.</p>
+</td>
+<td class="cellalignment605" headers="d101704e2157 d101704e1983">
+<p><span class="italic">fully qualified TaskFlow ID</span></p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment601" id="d101704e2169" headers="d101704e1977">
+<p>HideAGTreeRootNode</p>
+</td>
+<td class="cellalignment556" headers="d101704e2169 d101704e1980">
+<p>Hides the Guided Business Process title on the Activity Guide Tree root node.</p>
+</td>
+<td class="cellalignment605" headers="d101704e2169 d101704e1983">
+<ul style="list-style-type: disc;">
+<li>
+<p>true</p>
+</li>
+<li>
+<p>false</p>
+</li>
+</ul>
+<p>Default value: false</p>
+</td>
+</tr>
+<tr class="cellalignment534">
+<td class="cellalignment601" id="d101704e2186" headers="d101704e1977">
+<p>ShowCustomBlockedIcon</p>
+</td>
+<td class="cellalignment556" headers="d101704e2186 d101704e1980">
+<p>Specifies if the Guided Business Process shows the custom task blocked icon.</p>
+</td>
+<td class="cellalignment605" headers="d101704e2186 d101704e1983">
+<ul style="list-style-type: disc;">
+<li>
+<p>true</p>
+</li>
+<li>
+<p>false</p>
+</li>
+</ul>
+<p>Default value: false</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</li>
+<li class="stepexpand"><span>In the page definition of Oracle UI Shell JSF fragment page, navigate to <code class="codeph">pageTemplateBinding</code> and set the Refresh property to <code class="codeph">ifNeeded</code>.</span></li>
+<li class="stepexpand"><span>Open the file <code class="codeph">adfc-config.xml</code>.</span></li>
+<li class="stepexpand"><span>Edit the file <code class="codeph">adfc-config.xml</code> to include the location of the <code class="codeph">activity.properties</code> file. This should be the absolute path to the activityguide.properties file.</span>
+<div>
+<p>An example <code class="codeph">adfc-config.xml</code> is shown in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-BCF27B1A-6BCE-4EEE-BF00-4975D0A0568A__CHDDAIGB">Example 16-14</a>.</p>
+</div>
+</li>
+<li class="stepexpand"><span>To enable a task flow popup with summary information, add the property <code class="codeph">AGTasksPopupTaskFlowID</code> to the <code class="codeph">activityguide.properties</code> file.</span>
+<div>
+<p>Use this parameter to display a task flow summary in dynamic regions. Enter the relevant task flow Id. If this parameter is not set, the value of <code class="codeph">OutputText</code> is shown as the default task summary.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Create a Workflow Service client configuration file. An example is shown in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-BCF27B1A-6BCE-4EEE-BF00-4975D0A0568A__CHDGAEEH">Example 16-15</a>.</span></li>
+<li class="stepexpand"><span>Deploy the Activity Guide client application with Oracle UI Shell as described in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-073A1D2D-D921-4E14-A4FB-0A7A0193A3D0">Deploying an Activity Guide Client Application with Oracle UI Shell to Integrated</a> or in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-F1865FB8-13F2-45D3-9C6D-C4734214E628">Deploying an Activity Guide Client Application with Oracle UI Shell to Standalone</a> .</span></li>
+</ol>
+<div class="example" id="GUID-BCF27B1A-6BCE-4EEE-BF00-4975D0A0568A__BABGJGBJ">
+<p class="titleinexample">Example 16-13 An Activity Guide Properties File</p>
+<pre dir="ltr">
+#ActivityGuide Properties
+ServerConnectionMode=SOAP
+SelectionFilter=MY
+ShowRefreshButton=true
+#ShowAllAGTreeNodesProperties=true
+## Sample value for AGDefinitionFilter: default/BPMAGPrj2!2.0*31fcd931-6263-4b58-97cf-6fb084addabc
+#AGDefinitionFilter=
+#AGInstanceID=110003
+#AGInstanceOrdering=CIKEY:DESC
+#CustomPredicate1=STATE,EQ,OPEN
+#CustomPredicate2=STATUS,EQ,In Progress
+## Example Value for  AGTasksPopupTaskflowID is /WEB-INF/ag-popup-task-flow.xml#ag-popup-task-flow
+#AGTasksPopupTaskflowID=
+#ShowCustomBlockedIcon=true
+#HideAGTreeRootNode=false
+##WorklistHttpURL is required only for digital signatures
+#WorklistHttpURL=http://host:port/integration/worklistapp
+</pre></div>
+<!-- class="example" -->
+<div class="example" id="GUID-BCF27B1A-6BCE-4EEE-BF00-4975D0A0568A__CHDDAIGB">
+<p class="titleinexample">Example 16-14 <span class="bold"><code class="codeph">adfc-config.xml</code></span> File with Reference to <span class="bold"><code class="codeph">activityguide.properties</code></span> File</p>
+<pre dir="ltr">
+&lt;managed-bean&gt;
+&lt;managed-bean-name&gt;agProps&lt;/managed-bean-name&gt;
+&lt;managed-bean-class&gt;
+   oracle.bpel.activityguide.ui.beans.model.AGProperties
+&lt;/managed-bean-class&gt;
+&lt;managed-bean-scope&gt;request&lt;/managed-bean-scope&gt;
+&lt;managed-property&gt;
+&lt;property-name&gt;absAgPropsFileName&lt;/property-name&gt;
+&lt;property-class&gt;java.lang.String&lt;/property-class&gt;
+&lt;value&gt; &lt;!---absolute path on your machine should be given here--&gt;/activityguide.properties&lt;/value&gt;
+   &lt;!-- For example:
+   Windows: C:\AG\activityguide.properties
+   Linux: /scratch/&lt;user&gt;/AG/activityguide.properties
+   --&gt;
+&lt;/managed-property&gt;
+&lt;/managed-bean&gt;
+</pre></div>
+<!-- class="example" -->
+<div class="example" id="GUID-BCF27B1A-6BCE-4EEE-BF00-4975D0A0568A__CHDGAEEH">
+<p class="titleinexample">Example 16-15 Workflow Services Client Configuration File</p>
+<pre dir="ltr">
+&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;
+&lt;workflowServicesClientConfiguration xmlns="http://xmlns.oracle.com/bpel/services/client"&gt;
+  &lt;server default="true" name="default"&gt;
+      &lt;localClient&gt;
+          &lt;participateInClientTransaction&gt;false&lt;/participateInClientTransaction&gt;
+      &lt;/localClient&gt;
+      &lt;remoteClient&gt;
+          t3://host:port
+          &lt;initialContextFactory&gt;weblogic.jndi.WLInitialContextFactory&lt;/initialContextFactory&gt;
+          &lt;participateInClientTransaction&gt;false&lt;/participateInClientTransaction&gt;
+      &lt;/remoteClient&gt;
+      &lt;soapClient&gt;
+          http://host:port
+          &lt;identityPropagation mode="dynamic" type="saml"&gt;
+              &lt;policy-references&gt;
+                  &lt;policy-reference enabled="true" category="security" uri="oracle/wss10_saml_token_client_policy"/&gt;
+              &lt;/policy-references&gt;
+          &lt;/identityPropagation&gt;
+     &lt;/soapClient&gt;
+  &lt;/server&gt;
+&lt;/workflowServicesClientConfiguration&gt;
+</pre></div>
+<!-- class="example" --></div>
+</div>
+<a id="OADEV67259"></a>
+<div class="props_rev_3"><a id="GUID-A739DA45-A698-4FED-B40C-CB81BB28B0AA"></a>
+<h3 id="OADEE-GUID-A739DA45-A698-4FED-B40C-CB81BB28B0AA" class="sect3"><span class="enumeration_section">16.6.3</span> How to Secure the Activity Guide Oracle UI Shell Client Application</h3>
+<div>
+<p>Securing the Activity Guide client application ensures that only users with proper credentials can complete the tasks outlined in the Activity Guide. Security features include authentication, authorization, realm verification and policy enforcement.</p>
+<p>Follow the instructions for securing a Web application as described in the Enabling ADF Security in an Oracle Fusion Web Application section of the <span class="italic">Oracle Fusion Middleware Developing Fusion Web Applications with Oracle Application Development Framework</span>.</p>
+<p>You can deploy an Activity Guide client application with Oracle UI Shell directly from JDeveloper or to the standalone <span id="GUID-A739DA45-A698-4FED-B40C-CB81BB28B0AA__WLS">Oracle WebLogic Server</span>.</p>
+</div>
+<a id="OADEV67260"></a>
+<div class="sect4"><a id="GUID-073A1D2D-D921-4E14-A4FB-0A7A0193A3D0"></a>
+<h4 id="OADEE-GUID-073A1D2D-D921-4E14-A4FB-0A7A0193A3D0" class="sect4"><span class="enumeration_section">16.6.3.1</span> Deploy an Activity Guide Client Application with Oracle UI Shell to Integrated <span id="WLS">Oracle WebLogic Server</span></h4>
+<div>
+<p>From the Application Navigator, right-click the JSF page created in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-BD9B20CF-9037-4837-B4CC-CE5765577553">How to Develop an Activity Guide Client Application Using Oracle UI Shell</a> and select <span class="bold">Run</span>.</p>
+</div>
+</div>
+<a id="OADEV67261"></a>
+<div class="props_rev_3"><a id="GUID-F1865FB8-13F2-45D3-9C6D-C4734214E628"></a>
+<h4 id="OADEE-GUID-F1865FB8-13F2-45D3-9C6D-C4734214E628" class="sect4"><span class="enumeration_section">16.6.3.2</span> Deploy an Activity Guide Client Application with Oracle UI Shell to Standalone <span>Oracle WebLogic Server</span></h4>
+<div>
+<div class="section">
+<p>Follow these steps to deploy an Activity Guide client application with Oracle UI Shell to a standalone Oracle WebLogic Server:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Create a connection to the standalone <span id="GUID-F1865FB8-13F2-45D3-9C6D-C4734214E628__WLS">Oracle WebLogic Server</span>.</span></li>
+<li class="stepexpand"><span>From the Application Navigator, right-click the project created in step 2 of <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-BD9B20CF-9037-4837-B4CC-CE5765577553">How to Develop an Activity Guide Client Application Using Oracle UI Shell</a>.</span></li>
+<li class="stepexpand"><span>Select <span class="bold">Project Properties</span>.</span>
+<div>
+<p>From the Project Properties dialog, select <span class="bold">Deployment</span>.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Create a new WAR deployment profile.</span></li>
+<li class="stepexpand"><span>Right-click the project and select <span class="bold">Deploy</span>. Deploy the project to the standalone <span>Oracle WebLogic Server</span> connection created in step 1.</span></li>
+<li class="stepexpand"><span>Launch the client page from a browser.</span></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<a id="OADEV66631"></a><a id="OADEV66625"></a>
+<div class="props_rev_3"><a id="GUID-0B25EDE5-760C-44FC-ADEA-D31A68BBAE35"></a>
+<h2 id="OADEE-GUID-0B25EDE5-760C-44FC-ADEA-D31A68BBAE35" class="sect2"><span class="enumeration_section">16.7</span> Implementing Touch Device Support in the UI Shell</h2>
+<div>
+<p>The Global Area display on a tablet device is the same as the standard Global Area design except these menu options and display area are not available:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Administration</span> menu options</p>
+</li>
+<li>
+<p><span class="bold">Personalization &gt; Customize</span> this page menu option</p>
+</li>
+</ul>
+<p>The items that are not available on a tablet device take up too much space to be used comfortably on a small screen.</p>
+<p>The page template will also collapse the left-side Regional area by default to save space.</p>
+<p>Also see the Creating Web Applications for Touch Devices Using ADF Faces section in the <span class="italic">Oracle Fusion Middleware Developing Web User Interfaces with Oracle ADF Face</span> guide.</p>
+<div class="section">
+<p class="subhead2">How to use flow mode on a touch screen device</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>Implementing flow mode follows the Best Practices When Using ADF Faces Components in a Mobile Browser section in the <span class="italic">Oracle Fusion Middleware Developing Web User Interfaces with Oracle ADF Face</span> guide.</p>
+<p>To use flow mode on a touch screen device, but making sure that nothing is changed when displaying pages on a desktop system, add this <code class="codeph">context-param</code> to the <code class="codeph">web.xml</code> file of the J2EE application:</p>
+<pre dir="ltr">
+&lt;context-param&gt;
+    &lt;description&gt;
+      This parameter controls the default value for component geometry on the page.
+      Supported values are:
+        legacy - component attributes use the default values as specified for
+the attributes
+        auto - component attributes use the correct default value given the
+value of their parent component. For example, with this setting, the
+panelStretchLayout will use "auto" as the default value for its
+"dimensionsFrom" attribute instead of "parent".
+    &lt;/description&gt;
+    &lt;param-name&gt;oracle.adf.view.rich.geometry.DEFAULT_DIMENSIONS&lt;/param-name&gt;
+    &lt;param-value&gt;#{requestContext.agent.capabilities['touchScreen'] eq 'none' ? 'legacy' : 'auto'}&lt;/param-value&gt;
+&lt;/context-param&gt;
+</pre>
+<p>In this case, the <code class="codeph">dimensionsFrom</code> attribute is set to <code class="codeph">auto</code> only when running on a touch screen device. But when running on a desktop system, the <code class="codeph">context-value</code> is set to <code class="codeph">legacy</code> and the <code class="codeph">dimensionsFrom</code> attribute will use the old default value, which is <code class="codeph">parent</code>.</p>
+<p>The UI Shell sets the <code class="codeph">dimensionsFrom</code> attribute to <code class="codeph">children</code> on the root panel component on a page when running on a tablet device. Setting the <code class="codeph">dimensionsFrom</code> attribute to <code class="codeph">auto</code>, and placing the <code class="codeph">context-param</code> in the <code class="codeph">web.xml</code> file, will allow all other components to use the <code class="codeph">dimensionsFrom</code> attribute.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OADEV66888"></a><a id="OADEV66889"></a><a id="OADEV66890"></a><a id="OADEV66887"></a>
+<div class="props_rev_3"><a id="GUID-C9136113-358A-4AE9-8922-9A376F0311EC"></a>
+<h2 id="OADEE-GUID-C9136113-358A-4AE9-8922-9A376F0311EC" class="sect2"><span class="enumeration_section">16.8</span> Implementing the Translation Editor</h2>
+<div>
+<p>The Translation Editor is a standard UI component that allows translated data to be edited in all languages, regardless of the session language. It is accessible in Table layout. It also:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Allows all translated data stored in multi-lingual (TL) tables to be edited on the same setup UI as untranslated data for the same object.</p>
+</li>
+<li>
+<p>Automatically synchronizes any updates required by source_lang defaulting.</p>
+</li>
+<li>
+<p>Does not require the user to change session language, even temporarily.</p>
+</li>
+</ul>
+<p>The Translation Editor is implemented as a popup window, launched at the row level.</p>
+<p>The Edit Translations popup has a row for each language that is installed and implemented by the Translation Editor. When the user highlights an editable row and clicks the Translations Editor button and the popup displays, the user can enter, for instance, a description in German in the row marked German. This then places the German text in the correct field in a database.</p>
+<p>This example shows that the <code class="codeph">ABSENCE_STATUS</code> row is selected:</p>
+<div class="figure" id="GUID-C9136113-358A-4AE9-8922-9A376F0311EC__GUID-4F118D43-6EEE-41B5-BE82-A1B97A77B6F1">
+<p class="titleinfigure">Figure 16-10 Row Selected in Table</p>
+<img width="675" height="281" src="img/GUID-21C0E8E4-63D5-46C5-B070-99D2843BD069-default.png" alt="Row selected in table" title="Row selected in table" /></div>
+<!-- class="figure" -->
+<p>Click the <code class="codeph">Translation Editor</code> button to display the Edit Translations dialog:</p>
+<div class="figure" id="GUID-C9136113-358A-4AE9-8922-9A376F0311EC__GUID-E332266A-E7A4-43A8-893C-7B1746036F53">
+<p class="titleinfigure">Figure 16-11 Translations Dialog</p>
+<img width="518" height="198" src="img/GUID-A1596E8E-87C4-46B8-B2DB-C49BD21925B2-default.png" alt="Edit Translations dialog" title="Edit Translations dialog" /></div>
+<!-- class="figure" -->
+<p>A user can enter other language descriptions in any other available language row without having to close the Edit Translations dialog and restarting it.</p>
+<p>Assume the user's job is to enter data in multiple languages: Korean, German and English. When the Edit Translations dialog opens, the user would see Korean, German, and English rows.</p>
+<p>When the system first starts, there may be no data. When data is added, it would be in a single language. That is the source language. So if a Korean user first adds the data, when any user views the data, it would be in Korean, even if the user were an English or German user. Then when the translation editor opens, it would have Korean data in all rows, and the Source Language in the right-hand column for each row would say Korean in all rows. If a German user then opens the translation editor and changes the German row, the Source Language for that row will change to German.</p>
+<p><span class="bold">Note:</span> If the source language value is updated, all values that show the same source language also will update.</p>
+<p><span class="bold">Note:</span> A user can enter a translation in the wrong field; such as entering a German translation in the French field.</p>
+<p><span class="bold">Limiting languages shown:</span> This is to help someone that is translating many UIs for a certain language to limit the popup to only show the language on which he or she is currently working. This control is accomplished by setting the profile option <code class="codeph">FND_TRANS_EDITOR_LANGS</code> to the languages that you want to see. This profile can be set at Site or User level.</p>
+<p>To access the profile option, click <span class="bold">Setup and Maintenance &gt; Manage Administrator Profile Option Values &gt;</span> then search for <code class="codeph">FND_TRANS_EDITOR_LANGS</code>.</p>
+<div class="figure" id="GUID-C9136113-358A-4AE9-8922-9A376F0311EC__GUID-FA5806B2-8C61-4A6D-821C-88C303306F90">
+<p class="titleinfigure">Figure 16-12 Setting Which Languages to Display in the Edit Translations Dialog</p>
+<img width="648" height="301" src="img/GUID-BF59C0DF-D5F4-407C-995F-83EBB0532FF5-default.png" alt="Setting languages to display in Edit Translations dialog" title="Setting languages to display in Edit Translations dialog" /></div>
+<!-- class="figure" --></div>
+<a id="OADEV66892"></a><a id="OADEV66893"></a><a id="OADEV66894"></a><a id="OADEV66895"></a><a id="OADEV66896"></a><a id="OADEV66897"></a><a id="OADEV66898"></a><a id="OADEV66891"></a>
+<div class="props_rev_3"><a id="GUID-A2D0488D-3C58-4C18-81FB-E78CA3DA2B1F"></a>
+<h3 id="OADEE-GUID-A2D0488D-3C58-4C18-81FB-E78CA3DA2B1F" class="sect3"><span class="enumeration_section">16.8.1</span> How to Implement the Translation Editor</h3>
+<div>
+<div class="section">
+<p><span class="bold">Important:</span> This section assumes that developers will have completed all coding necessary to support the OA Base Class Translation Model. See OADEE58122 "Using Oracle Fusion Middleware Extensions for Oracle Applications Base Classes."</p>
+<p>To implement the Translation Editor, follow these steps:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Define a view object for the translatable table (TL). For more information, see the Defining SQL Queries Using View Objects section in the <span class="italic">Oracle Fusion Middleware Developing Fusion Web Applications with Oracle Application Development Framework</span>.</span>
+<div>
+<p>If the Multi-language support (MLS) coding standard has been followed (see <a href="GUID-FA6B0626-194E-48DD-A5AF-D0FD3BEF59E1.htm#GUID-97086AD3-AAB3-4A72-82DC-30989CBE5C57">Understanding Multi-Language Support Features</a>), every TL should have an entity object that is linked to an entity object based on the view link (VL) view, but only the VL-based entity object has a view object. To support the Translation Editor, a view object also must be added for the TL entity object. Define a new view object based on the TL entity object. The view object should be the default and should include all attributes in the TL entity object. No other changes are needed. This view object must be added to the Application Module as a child of the VL view object. The translated attributes in this new view object will inherit custom properties fnd:OA_TRANSLATABLE from the TL entity object that should have been set previously.</p>
+</div>
+</li>
+<li class="stepexpand"><span>On the new TL view object, define the custom property at the view object level to <code class="codeph">fnd:OA_TRANSLATION_TABLE = true</code>, as shown here.</span>
+<div>
+<div class="figure" id="GUID-A2D0488D-3C58-4C18-81FB-E78CA3DA2B1F__GUID-F4273B94-015B-437B-82D8-D9BB07BD161A">
+<p class="titleinfigure">Figure 16-13 Defining A Custom Property</p>
+<img width="843" height="466" src="img/GUID-CAA30FA3-972F-477D-A79E-98A1E1F3A401-default.png" alt="Defining custom property" title="Defining custom property" /></div>
+<!-- class="figure" -->
+<p>The translated attributes in this new view object will inherit custom properties <code class="codeph">fnd:OA_TRANSLATABLE</code> from the TL entity object that should have been set previously.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Add a view link for the view object. This new TL view object must be a child of the base VL view object. A view link must be defined between the VL view object and the new TL view object.</span></li>
+<li class="stepexpand"><span>Copy validators from VL entity object to TL entity object. Using the MLS coding standard, only the VL entity object will have any validation; the TL entity object has no validation, it relies on validation in the VL entity object before values are copied to the TL entity object by the OA base classes. This will not be sufficient though if translated values can be updated directly. Any validators on the VL entity object that reference translated attributes must be copied to the TL entity object.</span></li>
+<li class="stepexpand"><span>Copy control hints from VL entity object to TL entity object. If you did not set the control hints to your TL entity object, add control hints to the TL entity object, for prompt, display length, widget, and so on. These control hints will be used when rendering the Translation Editor. Generally these will be the same control hints as the attributes on the VL entity object, but under some circumstances might be different (for example, display length may be shorter.)</span></li>
+<li class="stepexpand"><span>Set the display name for the <code class="codeph">Language</code> and <code class="codeph">SourceLang</code> attributes. Note that the TL view object needs to join to <code class="codeph">LanguagePEO</code> so that you get the correct display name for the <code class="codeph">Language</code> and <code class="codeph">SourceLang</code> attributes.</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>To do that, you will need to create two entity object associations. One is from your <code class="codeph">Language</code> attribute to the <code class="codeph">LanguagePEO.LanguageCode</code>. The other one is from your <code class="codeph">SourceLang</code> attribute to the <code class="codeph">LanguagePEO.LanguageCode</code>. For example, the two entity object associations created for this test case are <code class="codeph">LookupTypeTranslationVOLanguageToLanguagePEO</code> and <code class="codeph">lookupTypeTranslationVOSourceLangToLanguagePEO</code>.</p>
+<p>Look for <code class="codeph">LanguagePEO</code> as shown here and add it to the TL view object as an entity object.</p>
+<div class="figure" id="GUID-A2D0488D-3C58-4C18-81FB-E78CA3DA2B1F__GUID-A9892136-09B1-4FF5-8829-6113CD5FAC52">
+<p class="titleinfigure">Figure 16-14 Creating Entity Object Associations</p>
+<img width="866" height="374" src="img/GUID-D794731B-E7EE-4B0F-988E-4F94C2D24FD4-default.png" alt="Creating Entity Object Associations" title="Creating Entity Object Associations" /></div>
+<!-- class="figure" --></li>
+<li>
+<p>You will need to add it twice. Once for the <code class="codeph">Language</code> attribute that would use the association <code class="codeph">LookupTypeTranslationVOLanguageToLanguagePEO</code> and once for the <code class="codeph">SourceLang</code> attribute that would use <code class="codeph">LookupTypeTranslationVOSourceLangToLanguagePEO</code>. The two <code class="codeph">LanguagePEO</code> instances should be named <code class="codeph">LanguagePEOForLanguage</code> and <code class="codeph">LanguagePEOForSourceLang</code>.</p>
+<div class="figure" id="GUID-A2D0488D-3C58-4C18-81FB-E78CA3DA2B1F__GUID-B66D6479-304E-4A91-AA31-EE877722AD23">
+<p class="titleinfigure">Figure 16-15 Adding and Aliasing LanguagePEO Twice</p>
+<img width="771" height="390" src="img/GUID-932753DF-56B3-484F-BA57-182474EB7BD2-default.png" alt="Adding and Aliasing LanguagePEO Twice" title="Adding and Aliasing LanguagePEO Twice" /></div>
+<!-- class="figure" --></li>
+<li>
+<p>Add the <code class="codeph">LanguageDisplayName</code> and <code class="codeph">SourceDisplayName</code> attributes into your translation view object.</p>
+<div class="figure" id="GUID-A2D0488D-3C58-4C18-81FB-E78CA3DA2B1F__GUID-ABA1E34C-F083-4B1E-9138-CF77DDB3EA0A">
+<p class="titleinfigure">Figure 16-16 Adding Attributes to Translation View Object</p>
+<img width="886" height="320" src="img/GUID-DD3106A9-C174-40D8-BE93-7FD409EB18CE-default.png" alt="Adding Attributes to Translation View Object" title="Adding Attributes to Translation View Object" /></div>
+<!-- class="figure" -->
+<p>In the translation popup window, you should show the language description instead of the language code, such as American instead of US.</p>
+<div class="infobox-note" id="GUID-A2D0488D-3C58-4C18-81FB-E78CA3DA2B1F__GUID-A43C8F93-9236-454D-89A8-0B491A9698AF">
+<p class="notep1">Note:</p>
+<p>When adding these attributes to the entity object, you <span class="italic">must</span> give them the Aliases <code class="codeph">LanguageDisplayName</code> and <code class="codeph">SourceLangDisplayName</code>.</p>
+</div>
+<div class="figure" id="GUID-A2D0488D-3C58-4C18-81FB-E78CA3DA2B1F__GUID-D0166185-AD33-4E94-B751-739720E80876">
+<p class="titleinfigure">Figure 16-17 Required Aliases for Attributes Added to Entity Object</p>
+<img width="640" height="561" src="img/GUID-4ADFED56-97A1-4557-BC60-814DE61AD6A8-default.png" alt="Required Aliases for Attributes Added to Entity Object" title="Required Aliases for Attributes Added to Entity Object" /></div>
+<!-- class="figure" -->
+<p>The <code class="codeph">LanguageDisplayName</code> and <code class="codeph">SourceDisplayName</code> attributes now should be included in the TL view object.</p>
+<div class="figure" id="GUID-A2D0488D-3C58-4C18-81FB-E78CA3DA2B1F__GUID-D8256AAA-89FD-4F4E-A260-7E702068EE86">
+<p class="titleinfigure">Figure 16-18 Required Attributes Added to TL View Object</p>
+<img width="703" height="324" src="img/GUID-1BF4A4A9-75B1-4C83-BD1D-DDF185A2E617-default.png" alt="Required Attributes Added to TL View Object" title="Required Attributes Added to TL View Object" /></div>
+<!-- class="figure" -->
+<div class="infobox-note" id="GUID-A2D0488D-3C58-4C18-81FB-E78CA3DA2B1F__GUID-B1886497-F3E8-4C2B-AFCB-07F459A5DD10">
+<p class="notep1">Note:</p>
+<p>Set the Query Column Alias of the <code class="codeph">LanguageDisplayName</code> attribute to <code class="codeph">LANGUAGE_DISPLAY_NAME</code>. The Translation Editor uses the Language Display Name to set the order when displaying the translation data in the popup. You <span class="italic">do not</span> need to set the Query Column Alias for <code class="codeph">SourceLangDisplayName</code>.</p>
+</div>
+<div class="figure" id="GUID-A2D0488D-3C58-4C18-81FB-E78CA3DA2B1F__GUID-D2354DC5-0027-4C5C-9387-9F45593C2D55">
+<p class="titleinfigure">Figure 16-19 Setting the Query Column Alias of the LanguageDisplayName Attribute</p>
+<img width="799" height="410" src="img/GUID-0387BF7D-6715-4BEC-9C51-F8AB652558EA-default.png" alt="Setting Query Column Alias of LanguageDisplayName Attribute" title="Setting Query Column Alias of LanguageDisplayName Attribute" /></div>
+<!-- class="figure" --></li>
+</ul>
+</div>
+</li>
+</ol>
+<div class="section">
+<p>The TL model should now be complete. The next step is to add the Translation Editor to the UI.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OADEV66900"></a><a id="OADEV66901"></a><a id="OADEV66899"></a>
+<div class="props_rev_3"><a id="GUID-487CD0C8-C529-4DA9-B0D2-DE3730394072"></a>
+<h3 id="OADEE-GUID-487CD0C8-C529-4DA9-B0D2-DE3730394072" class="sect3"><span class="enumeration_section">16.8.2</span> How to Add the Translation Editor to Existing Application Tables During Design Time</h3>
+<div>
+<p>This section describes how to add the Translation Editor to an Application Table on an existing JSFF page. If you are creating a new Application Table, skip to <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-1F09A350-02D4-4B65-90DE-AAD5379BDED0">How to Add the Translation Editor to New Application Tables During Design Time</a>.</p>
+<p>You will use a design time wizard add the Translation Editor to a UI.</p>
+<p>For example, if you drag a translatable table (TL) view object instance from the dataControl to an existing <span class="bold">ApplicationTable &gt; additionalToolbarButton &gt; af:toolbar or ApplicationTable &gt; f:facet-popup &gt; panelGroupLayout</span>, you can pick the Translation Editor under <span class="bold">applications</span>. You can drop the Translation Editor on either facet; the result will be the same.</p>
+<p>Note that you can not drag and drop directly onto an ApplicationTable.</p>
+<p>This shows an example drag-and-drop of a TL view object onto an <span class="bold">ApplicationTable &gt; additionToolbarButton-&gt; af:toolbar</span>.</p>
+<div class="figure" id="GUID-487CD0C8-C529-4DA9-B0D2-DE3730394072__GUID-A0C47317-E6BA-4010-A979-EC6079561E33">
+<p class="titleinfigure">Figure 16-20 Example Drag-and-Drop of A TL View Object</p>
+<img width="587" height="151" src="img/GUID-27843988-89E0-4D88-BC89-2FEAEB22AEC6-default.png" alt="Example Drag-and-Drop of A TL View Object" title="Example Drag-and-Drop of A TL View Object" /></div>
+<!-- class="figure" -->
+<p>You also can drag and drop your TL view object onto <span class="bold">ApplicationTable &gt; f:facet-popup &gt; panelGroupLayout</span>.</p>
+<p>After the drag-and-drop, the Create Translation Popup wizard will open. The wizard will include input for a list of all the columns in the TL view object and you can remove the ones you do not want. The list will show all the attributes in the TL view object, except for Who columns, LANGUAGE, SOURCE_LANG and the Primary Key. You can remove the translation attributes you do not want to display. You also can pick input text field or text region as the type. All other display properties (such as prompts) will be defaulted from control hints on the TL view object.</p>
+<div class="figure" id="GUID-487CD0C8-C529-4DA9-B0D2-DE3730394072__BABDBIHG">
+<p class="titleinfigure">Figure 16-21 Create Translation Popup Wizard</p>
+<img width="598" height="415" src="img/GUID-AAC61B90-20AA-4085-8E3E-1416CA8E48BC-default.png" alt="Create Translation Popup Wizard" title="Create Translation Popup Wizard" /></div>
+<!-- class="figure" -->
+<p>When you click <span class="bold">Continue</span>, designer will add the popup code into your JSFF file. You should not edit anything in the code that is added to your page.</p>
+</div>
+</div>
+<a id="OADEV66902"></a>
+<div class="props_rev_3"><a id="GUID-1F09A350-02D4-4B65-90DE-AAD5379BDED0"></a>
+<h3 id="OADEE-GUID-1F09A350-02D4-4B65-90DE-AAD5379BDED0" class="sect3"><span class="enumeration_section">16.8.3</span> How to Add the Translation Editor to New Application Tables During Design Time</h3>
+<div>
+<p>The Application Table Configure Table Patterns wizard has an option for users to choose whether to have the translation editor ability. The View Instances that will be available to enable for the Translation Editor will be those view objects marked with the <code class="codeph">fnd:OA_TRANSLATION_TABLE</code> custom property (see Model layer changes below). If there are no such view objects, the Translation Editor option will be disabled.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-71E15CCA-143F-4D7B-A766-E5E722641874"></a>
+<h3 id="OADEE-GUID-71E15CCA-143F-4D7B-A766-E5E722641874" class="sect3"><span class="enumeration_section">16.8.4</span> Handle Multi-Language Data Entry</h3>
+<div>
+<p>The Translation Editor allows translated data to be edited in all languages, regardless of session language.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Allow all translated data stored in in multi-lingual (TL) tables to be edited on the same setup UI as untranslated data for the same object</p>
+</li>
+<li>
+<p>Automatically synchronizes any updates required by source_lang defaulting</p>
+</li>
+<li>
+<p>Does ot require the user to change session language, even temporarily</p>
+</li>
+<li>
+<p>Accessible in either Form or Table layout</p>
+</li>
+<li>
+<p>Is a standard component that require minimal hand-coding by consuming developers</p>
+</li>
+<li>
+<p>Properly handles validation of translated values</p>
+</li>
+</ul>
+<div class="section">
+<p class="subhead3">Runtime Design</p>
+<p>The Translation Editor is implemented as a popup window, launched at the row level by a button. The button and popup window will appear as shown in these two images:</p>
+<div class="figure" id="GUID-71E15CCA-143F-4D7B-A766-E5E722641874__GUID-AF54C286-217C-4FCC-89C3-484FF8F4756D">
+<p class="titleinfigure">Figure 16-22 Example of the Translation Editor in a Table</p>
+<img width="994" height="340" src="img/GUID-D2A7E4FE-6B8A-46FD-9A2D-FECBE934B7AA-default.jpg" alt="An example of the Translation Editor in a table." title="An example of the Translation Editor in a table." /></div>
+<!-- class="figure" -->
+<div class="figure" id="GUID-71E15CCA-143F-4D7B-A766-E5E722641874__GUID-09A602D7-6569-4217-91A5-B7F59E086A36">
+<p class="titleinfigure">Figure 16-23 Example of the Edit Translations Display</p>
+<img width="518" height="372" src="img/GUID-2F90C864-0EE8-44F4-8BE9-D47F92F9D005-default.jpg" alt="An example of the Edit Translations display." title="An example of the Edit Translations display." /></div>
+<!-- class="figure" -->
+<p>The translation button will be in the primary button region of Application Table.</p>
+<p>If there is only 1 language active, the icon will not be visible.</p>
+<p>The popup window will show a table of translated data for a single data row, with 1 row per active language (translated data for disabled languages will not be displayed, even if present). The columns of the table will include language and source language (both read-only), and 1 column for each translated attribute. Translated attributes may be editable or read-only. Column prompts and display properties (such as display size) should match the prompt and display properties of the base attribute. (NOTE: TBD how to do this.)</p>
+<p>When a value is updated:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>The row will be marked at "translated," meaning the language and source language will be set to the same value.</p>
+</li>
+<li>
+<p>Any other languages with the same source language as the updated row will be re-defaulted.</p>
+</li>
+</ul>
+<p>If the window is closed:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>If closed with <span class="bold">OK</span>, values will be written back to be committed (or not) with the main transaction. If any translated values for the session language have been updated, they will be updated in the main UI.</p>
+</li>
+<li>
+<p>If closed with <span class="bold">Cancel</span>, all changes in the popup are discarded without affecting anything in the main transaction.</p>
+</li>
+</ul>
+<p>When the entire transaction is committed, any updates performed in the Translation Editor will be validated and committed at the same time. If any validation errors occur in translated data, they will be reported along with all other validation errors. The user will need to re-open the popup window to correct the error. If the error is associated with an attribute, that attribute will have a "red box" indicator in the popup, only on the language row in error.</p>
+<p><span class="bold">Ability to limit languages shown:</span> The languages that are shown can be limited. This is to help someone that is translating many UIs for a certain language to limit the popup to only show the language on which he or she is currently working. This control is accomplished by setting the profile option <code class="codeph">FND_TRANS_EDITOR_LANGS</code> to the languages that will be shown. This profile can be set at SITE or USER level. If null, all active languages are shown. The values (US, KO, F) can be found in the Manage Languages setup UI.</p>
+<div class="figure" id="GUID-71E15CCA-143F-4D7B-A766-E5E722641874__GUID-7846A81D-BF20-4E9C-91D1-21F4DDD7BD59">
+<p class="titleinfigure">Figure 16-24 Setting the FND_TRANS_EDITOR_LANGS Profile</p>
+<img width="1066" height="462" src="img/GUID-B9B4811F-1F8C-49B8-85E8-C95CDB2F6F9E-default.jpg" alt="A screenshot showing the setting of the FND_TRANS_EDITOR_LANGS profile." title="A screenshot showing the setting of the FND_TRANS_EDITOR_LANGS profile." /></div>
+<!-- class="figure" -->
+<p>Launching the Translation Editor from a form is shown in this example.</p>
+<div class="figure" id="GUID-71E15CCA-143F-4D7B-A766-E5E722641874__GUID-6543E3DF-13B9-4D4D-9868-5B08A39CE75E">
+<p class="titleinfigure">Figure 16-25 Launching the Translation Editor from a Form</p>
+<img width="809" height="267" src="img/GUID-3AB1D170-5D75-417D-8D41-1D854024871B-default.jpg" alt="A screenshot showing how to launch the Translation Editor from a form." title="A screenshot showing how to launch the Translation Editor from a form." /></div>
+<!-- class="figure" -->
+<p>When you click the Translation Editor button, the same popup described for the Application Table case will show.</p>
+<div class="figure" id="GUID-71E15CCA-143F-4D7B-A766-E5E722641874__GUID-EBD90350-9F10-4D9D-9E7E-0DFF10DD3554">
+<p class="titleinfigure">Figure 16-26 Edit Translations Popup</p>
+<img width="555" height="256" src="img/GUID-7E61DAF1-1BAB-4249-B585-636BB35F98AC-default.jpg" alt="A screenshot showing the Edit Translations popup." title="A screenshot showing the Edit Translations popup." /></div>
+<!-- class="figure" -->
+<p>If your form has multiple regions that involve more than one TL ViewObject, then we recommended that you drag-and-drop the TL ViewObject onto the desired location in your form. For example, in the below case, the Translation Editor button is placed at the end of the form.</p>
+<div class="figure" id="GUID-71E15CCA-143F-4D7B-A766-E5E722641874__GUID-7F4AF5F5-10EF-43AC-A7A8-97FFF515135B">
+<p class="titleinfigure">Figure 16-27 Edit Profile Category</p>
+<img width="388" height="295" src="img/GUID-615C5729-E8AA-4A4C-BE55-7AA9F3767955-default.jpg" alt="A screenshot showing the Edit Profile category." title="A screenshot showing the Edit Profile category." /></div>
+<!-- class="figure" --></div>
+<!-- class="section" --></div>
+<div class="sect4"><a id="GUID-5BF8D897-7C24-402C-8C55-44556C4A7328"></a>
+<h4 id="OADEE-GUID-5BF8D897-7C24-402C-8C55-44556C4A7328" class="sect4"><span class="enumeration_section">16.8.4.1</span> Implement Multi-Language Data Entry</h4>
+<div>
+<div class="section">
+<p class="subhead3">Prerequisite</p>
+<p>Bbefore starting this, developers will have completed all coding necessary to support the OA Base Class Translation Model. See <a href="GUID-FA6B0626-194E-48DD-A5AF-D0FD3BEF59E1.htm#GUID-97086AD3-AAB3-4A72-82DC-30989CBE5C57">Understanding Multi-Language Support Features</a> for setting up translation tables.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">Prepare the TL EO and Entity Associations</p>
+<ol>
+<li>
+<p>Copy validators from VL EO to TL EO. In accordance with the MLS coding standard, only the VL EO will have any validation; the TL EO has no validation, it relies on validation in the VL EO before values are copied to the TL EO by the OA base classes. This will not be sufficient if translated values can be updated directly. Any validators on the VL EO that reference translated attributes must be copied to the TL EO.</p>
+</li>
+<li>
+<p>Copy control hints from VL EO to TL EO. If you did not set the control hints to your TL EO, add control hints to the TL EO for prompt, display length, widget, and so on. These control hints will be used when rendering the Translation Editor. Generally, these will be the same control hints as the attributes on the VL EO, but under some circumstances might be different (for example display length may be shorter.)</p>
+</li>
+<li>
+<p>Create Entity Associations for Language attributes. Create two EO associations from the TL EO to <code class="codeph">LanguagePEO</code>: one from your Language attribute to the <code class="codeph">LanguagePEO.LanguageCode</code>, and one from the <code class="codeph">SourceLang</code> attribute to the <code class="codeph">LanguagePEO.LanguageCode</code>. Both associations are 0,1 .. *, everything else can be left as default. For example, the two EO associations created for this test case are <code class="codeph">LookupTypeTranslationVOLanguageToLanguagePEO</code> and <code class="codeph">lookupTypeTranslationVOSourceLangToLanguagePEO</code>.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">Create the TL VO and View Link</p>
+<ol>
+<li>
+<p>Define a VO for the TL table. If the MLS coding standard has been followed, every TL table should have an EO, linked to an EO based on the VL view, but only the VL-based EO has a VO. To support the Translation Editor, a VO must be added for the TL EO as well. Define a new VO based on the TL EO. The VO should be the default, and include all attributes in the TL EO. No other changes are needed. The translated attributes in this new VO will inherit custom properties <code class="codeph">fnd:OA_TRANSLATABLE</code> from the TL EO that should have been set previously.</p>
+</li>
+<li>
+<p>On the new TL VO, define the custom property at the VO level to <code class="codeph">fnd:OA_TRANSLATION_TABLE = true</code>. The translated attributes in this new VO will inherit custom properties <code class="codeph">fnd:OA_TRANSLATABLE</code> from the TL EO that should have been set previously.</p>
+<div class="figure" id="GUID-5BF8D897-7C24-402C-8C55-44556C4A7328__GUID-76F0DB09-60D2-41FC-B108-55A35E89C22A">
+<p class="titleinfigure">Figure 16-28 Example Showing Custom Property</p>
+<img width="808" height="489" src="img/GUID-4700536C-D3BC-46AC-85E3-2B4CEFE3857E-default.jpg" alt="An example showing the Custom Property View Object ." title="An example showing the Custom Property View Object ." /></div>
+<!-- class="figure" --></li>
+<li>
+<p>Add <code class="codeph">LanguagePEO</code> to the VO for Language and <code class="codeph">SourceLang</code>. The <code class="codeph">LanguagePEO</code> must be added to the model for the new TL VO for Language and <code class="codeph">SourceLang</code>, using the 2 entity associations created above.</p>
+<ol>
+<li>
+<p>Add <code class="codeph">LanguagePEO</code> to the TL VO as an Entity Object, using the Entity Association created for the Language attribute.</p>
+<div class="figure" id="GUID-5BF8D897-7C24-402C-8C55-44556C4A7328__GUID-B30AC44C-9278-4343-B6FC-82A089D3C7AE">
+<p class="titleinfigure">Figure 16-29 Adding LanguagePEO</p>
+<img width="654" height="319" src="img/GUID-DABB2347-5DDF-4003-902F-E1E9D38D1752-default.jpg" alt="A screenshot showing the adding of LanguagePEO." title="A screenshot showing the adding of LanguagePEO." /></div>
+<!-- class="figure" --></li>
+<li>
+<p>Add <code class="codeph">LanguagePEO</code> to the TL VO as an Entity Object again, using the Entity Association created for the <code class="codeph">SourceLang</code> attribute.</p>
+<div class="figure" id="GUID-5BF8D897-7C24-402C-8C55-44556C4A7328__GUID-710C43DB-49D2-4097-A2C4-779BCC71EBA8">
+<p class="titleinfigure">Figure 16-30 Adding LanguagePEO Again</p>
+<img width="772" height="392" src="img/GUID-3E21190A-65BF-43B9-AA7E-28B9E1D44CEA-default.jpg" alt="A screenshot showing adding LanguagePEO again." title="A screenshot showing adding LanguagePEO again." /></div>
+<!-- class="figure" --></li>
+</ol>
+</li>
+<li>
+<p>Add <code class="codeph">Language</code> and <code class="codeph">SourceLang</code> display name attributes. Create 2 attributes in your VO for the <code class="codeph">Language</code> and <code class="codeph">SourceLang</code> display name, using the <code class="codeph">Description</code> attribute from the <code class="codeph">LanguagePEO</code> entity objects just added.</p>
+<div class="figure" id="GUID-5BF8D897-7C24-402C-8C55-44556C4A7328__GUID-9DC61302-0C81-47F0-A99D-F712707C000B">
+<p class="titleinfigure">Figure 16-31 Adding Display Names Attributes</p>
+<img width="938" height="316" src="img/GUID-A14AAE1D-0EDB-432B-B8EC-2C4450ED39CA-default.jpg" alt="A screenshot showing adding a Display Names attribute." title="A screenshot showing adding a Display Names attribute." /></div>
+<!-- class="figure" -->
+<p>In the translation popup window, show the language description instead of the language code. For example, American instead of US.</p>
+<div class="infobox-note" id="GUID-5BF8D897-7C24-402C-8C55-44556C4A7328__GUID-9EBC8CBE-8C1C-4E9B-9A62-CD199EDC7070">
+<p class="notep1">Important:</p>
+<p>When adding these attributes to the EO you <span class="italic">must</span> give them the alias <code class="codeph">LanguageDisplayName</code> and <code class="codeph">SourceLangDisplayName</code>, as shown below.</p>
+<div class="figure" id="GUID-5BF8D897-7C24-402C-8C55-44556C4A7328__GUID-91B1D428-EB5F-486D-9A3B-8E9CE4251363">
+<p class="titleinfigure">Figure 16-32 Creating LanguageDisplayName Alias for Description Attribute</p>
+<img width="640" height="561" src="img/GUID-9C7491CB-FFF5-4D43-B66A-AE111087E7CF-default.jpg" alt="A screenshot showing creating a LanguageDisplayName alias for a description attribute." title="A screenshot showing creating a LanguageDisplayName alias for a description attribute." /></div>
+<!-- class="figure" -->
+<div class="figure" id="GUID-5BF8D897-7C24-402C-8C55-44556C4A7328__GUID-A41E4BC1-22CE-4FB2-A54A-D9A18D395684">
+<p class="titleinfigure">Figure 16-33 Creating SourceLanguageDisplayName Alias for Description1 Attribute</p>
+<img width="639" height="561" src="img/GUID-5CCA9B64-7482-4D76-8BD3-BEC1394F51B9-default.jpg" alt="A screenshot showing creating of a SourceLanguageDisplayname alias for Description1 attribute." title="A screenshot showing creating of a SourceLanguageDisplayname alias for Description1 attribute." /></div>
+<!-- class="figure" --></div>
+<p>The <code class="codeph">LanguageDisplayName</code> and <code class="codeph">SourceLangDisplayName</code> attributes should now be included in the TL VO.</p>
+<div class="figure" id="GUID-5BF8D897-7C24-402C-8C55-44556C4A7328__GUID-4E7EC8B0-066A-4B46-8661-74F3C0B4028F">
+<p class="titleinfigure">Figure 16-34 Example Showing LanguageDisplayName and SourceLangDisplayName Included in TL VO</p>
+<img width="759" height="324" src="img/GUID-9F4FF9CE-280C-4DB1-908E-ABD29EF43403-default.jpg" alt="A screenshot showing LanguageDisplayName and SourceLangDisplayName attributes included in the TL View Object." title="A screenshot showing LanguageDisplayName and SourceLangDisplayName attributes included in the TL View Object." /></div>
+<!-- class="figure" -->
+<div class="infobox-note" id="GUID-5BF8D897-7C24-402C-8C55-44556C4A7328__GUID-C940DDB9-48D1-4C0C-A5D7-8F930F2936BA">
+<p class="notep1">Important:</p>
+<p>Set the Query Column Alias of the <code class="codeph">LanguageDisplayName</code> attribute to "LANGUAGE_DISPLAY_NAME". The Translation Editor uses the Language Display Name to do the "order by" when displaying the translation data in the popup. You do not need to set the Query Column alias for <code class="codeph">SourceLangDisplayName</code>, only <code class="codeph">LanguageDisplayName</code>, as shown here.</p>
+<div class="figure" id="GUID-5BF8D897-7C24-402C-8C55-44556C4A7328__GUID-7C37B7F5-D473-49BD-AD5A-8B8615228F1B">
+<p class="titleinfigure">Figure 16-35 LanguageDisplayName Alias</p>
+<img width="1068" height="500" src="img/GUID-30282724-FD2C-4322-9248-9C4E786D36FC-default.jpg" alt="A screenshot showing the setting of the Query Column Alias of the LanguageDisplayName attribute to &ldquo;LANGUAGE_DISPLAY_NAME&rdquo;." title="A screenshot showing the setting of the Query Column Alias of the LanguageDisplayName attribute to &ldquo;LANGUAGE_DISPLAY_NAME&rdquo;." /></div>
+<!-- class="figure" --></div>
+<div class="infobox-note" id="GUID-5BF8D897-7C24-402C-8C55-44556C4A7328__GUID-42233682-935D-4D4F-B398-63A4E6A1B917">
+<p class="notep1">Important:</p>
+<p>Set the Control hint label text of your <code class="codeph">LanguageDisplayName</code> to "Language". Set the Control hint label text of your <code class="codeph">SourceLangDisplayName</code> to "Source Language."</p>
+</div>
+</li>
+<li>
+<p>Add a View Link for the VO. This new TL VO must be a child of the base VL VO. A View Link must be defined between the VL VO and the new TL VO.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">Add Translation VL to AM</p>
+<ol>
+<li>
+<p>Add Translation VO to the AM. Use this View Link to add the Translation VO to the AM, as a child of the VL VO.</p>
+</li>
+<li>
+<p>Exclude this TLVO from loader VO list. If you are using the same model for both your UI and loader purpose, you will need to exclude this TLVO so that loader will skip this TLVO. For example, assume <code class="codeph">StandardLookupTypeUIVO</code> is the loader VO and it now has a TLVO child. If you don't exclude this child, the TLVO will appear in the loader file. What you do is to add <code class="codeph">SD_EXCLUSION_LINKLIST</code> into your AM.xml file as shown here:</p>
+<pre dir="ltr">
+&lt;CustomProperties&gt;
+   &lt;Property
+      Name= "SD_EXCLUSION_LINKLIST_StandardLookupTypeUI1"
+      Value = "StandardLookupTypeUIVOToLookupTypeTL1"/&gt;
+</pre>
+<div class="infobox-note" id="GUID-5BF8D897-7C24-402C-8C55-44556C4A7328__GUID-37344A77-4C5E-43C7-919C-56DB578C535D">
+<p class="notep1">Important:</p>
+<p>Note that in the above example, <code class="codeph">StandardLookupTypeUI1</code> is the View Instance Name. And in the Value portion of <code class="codeph">StandardLookupTypeUIVOToLookupTypeTL1</code> is the View Link Instance Name. You can get the exact name in your AM &gt; DataModel, as shown here.</p>
+<div class="figure" id="GUID-5BF8D897-7C24-402C-8C55-44556C4A7328__GUID-7B79DDD9-A265-434F-80BD-FD82EA26519A">
+<p class="titleinfigure">Figure 16-36 StandardLookupType UI1 in Data Model</p>
+<img width="879" height="304" src="img/GUID-E3ED46C0-5581-430F-AEF3-D959827A7B9E-default.jpg" alt="A screenshot of the StandardLookupTypeUI1 in the data model." title="A screenshot of the StandardLookupTypeUI1 in the data model." /></div>
+<!-- class="figure" -->
+<div class="figure" id="GUID-5BF8D897-7C24-402C-8C55-44556C4A7328__GUID-8E74E812-9DC7-4CD2-A5B0-E56C61F0B20E">
+<p class="titleinfigure">Figure 16-37 LookupTypeTL1 in Data Model</p>
+<img width="879" height="304" src="img/GUID-F8283F0F-0866-4481-BB6A-A2435E363A1E-default.jpg" alt="A screenshot of the LookupTypeUI1 in the Data Model." title="A screenshot of the LookupTypeUI1 in the Data Model." /></div>
+<!-- class="figure" --></div>
+</li>
+</ol>
+<p>Your TL model should now be complete. Continue to the Design Time section to add the Translation Editor to your UI.</p>
+</div>
+<!-- class="section" --></div>
+<div class="sect5"><a id="GUID-96838133-5FE1-4865-968D-6F42431A73E1"></a>
+<h5 id="OADEE-GUID-96838133-5FE1-4865-968D-6F42431A73E1" class="sect5"><span class="enumeration_section">16.8.4.1.1</span> Design Time for Existing Application Tables</h5>
+<div>
+<p>This section describes how to add a Translation Editor to an Application Table on an existing JSFF page. If you are creating a new Application Table, skip to the "Design Time for New Application Tables" section.</p>
+<p>A design time wizard is used to add the Translation Editor to a setup UI.</p>
+<p>For example, if you drag a TLVO Instance from the dataControl to your existing ApplicationTable &gt; additionalToolbarButton &gt; af:toolbar or ApplicationTable &gt; f:facet-popup &gt; panelGroupLayout then under Applications you can pick Translation Editor. You can drop the Translation Editor on either facet; the result will be exactly the same.</p>
+<p>Note that you can not drag and drop directly onto ApplicationTable because it is not an ADF component that can be dropped.</p>
+<p>This is an example drag and drop of your TLVO onto ApplicationTable &gt; additionToolbarButton &gt; af:toolbar.</p>
+<div class="figure" id="GUID-96838133-5FE1-4865-968D-6F42431A73E1__GUID-7DD92B54-742C-457C-AF8C-36CCF2BAE85D">
+<p class="titleinfigure">Figure 16-38 Example Drag and Drop to Existing Toolbar</p>
+<img width="893" height="412" src="img/GUID-A2497F1A-73E6-42AC-852A-48A0AC106FC8-default.jpg" alt="A screenshot showing the dragging and dropping of Translation Editor onto an existing af:toolbar." title="A screenshot showing the dragging and dropping of Translation Editor onto an existing af:toolbar." /></div>
+<!-- class="figure" -->
+<p>You also can drag and drop your TLVO onto ApplicationTable &gt; f:facet-popup &gt; panelGroupLayout.</p>
+<div class="figure" id="GUID-96838133-5FE1-4865-968D-6F42431A73E1__GUID-5A9C178E-5185-447A-87C5-2F6257EE82E6">
+<p class="titleinfigure">Figure 16-39 Example Drag and Drop to existing panelGroupLayout</p>
+<img width="843" height="433" src="img/GUID-752082D2-2F06-4FF4-B191-BD8A8E9B2C3F-default.jpg" alt="A screenshot showing the dragging and dropping of Translation Editor onto an existing panelGroupLayout" title="A screenshot showing the dragging and dropping of Translation Editor onto an existing panelGroupLayout" /></div>
+<!-- class="figure" -->
+<p>After the drag and drop, the wizard will show. The wizard will include input for a list of all the columns in the TL VO and you can remove the ones you do not want. The list will show all the attributes in the TL VO, except for WHO columns, LANGUAGE, SOURCE_LANG and the Primary Key. You can remove the translation attributes you do not want to display. You also can pick input text field or text region as the type. All other display properties (such as prompt) will be defaulted from control hints on the TL VO.</p>
+<div class="figure" id="GUID-96838133-5FE1-4865-968D-6F42431A73E1__GUID-272BB405-7303-4AB1-B0FA-8F4D045DA0BA">
+<p class="titleinfigure">Figure 16-40 Create Translation Popup</p>
+<img width="600" height="540" src="img/GUID-5878418E-55FA-4E72-AF7E-39114120DEE0-default.jpg" alt="The Create Translation Popup dialog." title="The Create Translation Popup dialog." /></div>
+<!-- class="figure" -->
+<p>When you click <span class="bold">Continue</span>, designer will add the popup code into your JSFF file. You should not edit anything in the code added to your page.</p>
+<div class="section">
+<p class="subhead3">Turn On Auto Submit</p>
+<p>Turn on the <code class="codeph">autoSubmit</code> property for all your translation attributes so that any changes you make in your base table are immediately seen inside your Translation Editor popup table.</p>
+<p>All updates you make inside the Translation Editor popup table will automatically be brought back to your base table.</p>
+<p>Adjust your code accordingly if it is sensitive with <code class="codeph">autoSubmit</code> turned on.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<div class="sect5"><a id="GUID-0B97161F-AC7F-4D66-925E-D4CD89116514"></a>
+<h5 id="OADEE-GUID-0B97161F-AC7F-4D66-925E-D4CD89116514" class="sect5"><span class="enumeration_section">16.8.4.1.2</span> Design Time for Creating a New Application Table</h5>
+<div>
+<p>The Application Table wizard lets the user choose whether or not to have the Translation Editor ability. The View Instances that will be available to enable for the Translation Editor will be those VOs marked with the <code class="codeph">fnd:OA_TRANSLATION_TABLE</code> custom property. If there are no such VOs, the Translation Editor option will be disabled.</p>
+<div class="figure" id="GUID-0B97161F-AC7F-4D66-925E-D4CD89116514__GUID-FE18582B-7E4B-4523-B230-BA2E23D202EC">
+<p class="titleinfigure">Figure 16-41 Configure Table Patterns</p>
+<img width="400" height="450" src="img/GUID-BC4175D4-CDF5-46BA-8EDC-D95CBAEBD0D8-default.jpg" alt="The Configure Table patterns window of the Application Table wizard." title="The Configure Table patterns window of the Application Table wizard." /></div>
+<!-- class="figure" -->
+<p><code class="codeph">LookupTypeTL1</code> is shown automatically because it has defined the custom property <code class="codeph">OA_TRANSLATION_TABLE = yes</code>.</p>
+<p>Further steps are identical to the procedures in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-96838133-5FE1-4865-968D-6F42431A73E1">Design Time for Existing Application Tables</a>.</p>
+<div class="section">
+<p class="subhead3">Information Written to the JSFF File</p>
+<p>Whether you add the Translation Editor feature for an existing application table or enable it when creating a new application table, Translation Editor writes two pieces of information into the JSFF page whether you create it within the Application Table wizard or you create it by dragging and dropping the TLVO into an existing application table.</p>
+<p>This example shows information that will be written inside the JSFF file.</p>
+<pre dir="ltr">
+&lt;fnd:applicationsTable tableId="ATt1" id="AT1"
+ ..................................&gt;
+    &lt;af:table .............
+&lt;!-- Design time add the TL dialog id into your af:table partialTriggers !--&gt;
+        partialTriggers=............":::TlAfd1"
+ 
+&lt;!-- TL button is placed inside ApplicationTable additionToolbarButtons --&gt;
+&lt;f:facet name="additionalToolbarButtons"&gt;
+   &lt;af:toolbar id="t1"&gt;
+     &lt;af:commandToolbarButton shortDesc="#{applcoreBundle.TRANSLATION_EDITOR}"
+             icon="/images/applcore/patterns/language_qualifier_ena.png"
+             hoverIcon="/images/applcore/patterns/language_qualifier_ovr.png"
+             depressedIcon="/images/applcore/patterns/language_qualifier_dwn.png"
+             disabledIcon="/images/applcore/patterns/language_qualifier_dis.png"
+             disabled="#{backingBeanScope.TranslationEditorBean.checkNewRow.tlt2}"&gt;
+             id="ctb1"&gt;
+       &lt;af:showPopupBehavior popupId="::TlAfp1"  &lt;&lt;&lt;&lt;--- Translation Editor popup id
+            triggerType="action"/&gt;
+     &lt;/af:commandToolbarButton&gt;
+   &lt;/af:toolbar&gt;
+ &lt;/f:facet&gt;
+ .......................................
+ ........................................
+                &lt;/af:table&gt;
+ &lt;/f:facet&gt;
+&lt;!-- Design Time place the the TL popup dialog code at the end of your table --&gt;
+ &lt;f:facet name="popup"&gt;
+   &lt;af:panelGroupLayout id="pgl2"&gt;
+     &lt;af:popup contentDelivery="lazyUncached"
+               popupFetchListener="#{backingBeanScope.TranslationEditorBean.handlePopupFetch}"
+               popupCanceledListener="#{backingBeanScope.TranslationEditorBean.handlePopupCanceled}"
+               id="TlAfp1"&gt;
+       &lt;af:dialog title="#{applcoreBundle.EDIT_TRANSLATIONS}"
+                  cancelTextAndAccessKey="#{applcoreBundle.CANCEL}"
+                  type="okCancel"
+                  affirmativeTextAndAccessKey="#{applcoreBundle.OK}"
+                  modal="true"
+                  dialogListener="#{backingBeanScope.TranslationEditorBean.updateBaseParent}"
+                  id="TlAfd1"&gt;
+         &lt;af:panelStretchLayout id="psl1" dimensionsFrom="children"&gt;
+           &lt;f:facet name="center"&gt;
+             &lt;af:table value="#{bindings.LookupTypeTL1.collectionModel}"
+                       var="row"
+                       rows="#{bindings.LookupTypeTL1.rangeSize}"
+                       emptyText="#{bindings.LookupTypeTL1.viewable ? applcoreBundle.TABLE_EMPTY_TEXT_NO_ROWS_YET :
+                                    applcoreBundle.TABLE_EMPTY_TEXT_ACCESS_DENIED}"
+                       fetchSize="#{bindings.LookupTypeTL1.rangeSize}"
+                       rowBandingInterval="0" inlineStyle="width:840px; height:200px;"
+                       selectedRowKeys="#{bindings.LookupTypeTL1.collectionModel.selectedRow}"
+                       selectionListener="#{bindings.LookupTypeTL1.collectionModel.makeCurrent}"
+                       rowSelection="single" id="tlt2"&gt;
+               &lt;af:column sortProperty="#{bindings.LookupTypeTL1.hints.LanguageDisplayName.name}"
+                          headerText="#{bindings.LookupTypeTL1.hints.LanguageDisplayName.label}"
+                          sortable="false" id="c19"&gt;
+                 &lt;af:outputText value="#{row.LanguageDisplayName}"
+                                id="ot1"/&gt;
+               &lt;/af:column&gt;
+               &lt;af:column sortProperty="#{bindings.LookupTypeTL1.hints.Meaning.name}"
+                          sortable="false"
+                          headerText="#{bindings.LookupTypeTL1.hints.Meaning.label}"
+                          id="c21"&gt;
+                 &lt;af:inputText value="#{row.bindings.Meaning.inputValue}"
+                               label="#{bindings.LookupTypeTL1.hints.Meaning.label}"
+                               required="#{bindings.LookupTypeTL1.hints.Meaning.mandatory}"
+                               columns="#{bindings.LookupTypeTL1.hints.Meaning.displayWidth}"
+                               maximumLength="#{bindings.LookupTypeTL1.hints.Meaning.precision}"
+                               shortDesc="#{bindings.LookupTypeTL1.hints.Meaning.tooltip}"
+                               autoSubmit="true"
+                               valueChangeListener="#{backingBeanScope.TranslationEditorBean.TLValueChangeListener}"
+                               id="it3"&gt;
+                   &lt;f:validator binding="#{row.bindings.Meaning.validator}"/&gt;
+                 &lt;/af:inputText&gt;
+               &lt;/af:column&gt;
+               &lt;af:column sortProperty="#{bindings.LookupTypeTL1.hints.Description.name}"
+                          sortable="false"
+                          headerText="#{bindings.LookupTypeTL1.hints.Description.label}"
+                          id="c22"&gt;
+                 &lt;af:inputText value="#{row.bindings.Description.inputValue}"
+                               label="#{bindings.LookupTypeTL1.hints.Description.label}"
+                               required="#{bindings.LookupTypeTL1.hints.Description.mandatory}"
+                               columns="#{bindings.LookupTypeTL1.hints.Description.displayWidth}"
+                               maximumLength="#{bindings.LookupTypeTL1.hints.Description.precision}"
+                               shortDesc="#{bindings.LookupTypeTL1.hints.Description.tooltip}"
+                               autoSubmit="true"
+                               valueChangeListener="#{backingBeanScope.TranslationEditorBean.TLValueChangeListener}"
+                               id="it12"&gt;
+                   &lt;f:validator binding="#{row.bindings.Description.validator}"/&gt;
+                 &lt;/af:inputText&gt;
+               &lt;/af:column&gt;
+               &lt;af:column sortProperty="#{bindings.LookupTypeTL1.hints.SourceLangDisplayName.name}"
+                          headerText="#{bindings.LookupTypeTL1.hints.SourceLangDisplayName.label}"
+                          sortable="false" id="c20"&gt;
+                 &lt;af:outputText value="#{row.SourceLangDisplayName}"
+                                id="ot2"/&gt;
+               &lt;/af:column&gt;
+             &lt;/af:table&gt;
+           &lt;/f:facet&gt;
+         &lt;/af:panelStretchLayout&gt;
+       &lt;/af:dialog&gt;
+     &lt;/af:popup&gt;
+   &lt;/af:panelGroupLayout&gt;
+ &lt;/f:facet&gt;
+&lt;/fnd:applicationsTable&gt; 
+</pre></div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">&lt;af:column&gt; and &lt;af:inputText&gt; Properties Copied from Base Attribute</p>
+<p>If you have any properties set on the translatable attribute in the base table, design time will copy the same properties into the attribute inside the translation popup table.</p>
+<p>These are the properties Designer will copy:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>&lt;af:column&gt;</p>
+</li>
+<li>
+<p>allign, headerNoWrap, headerText, helpTopicId, minimumWidth, noWrap, rendered, shortDesc, showRequired, sortProperty, sortable, visible,</p>
+</li>
+<li>
+<p>&lt;af:inputText&gt;</p>
+</li>
+<li>
+<p>disabled, editable, helpTopicId, label, labelAndAccessKey, maximumLength, readOnly, rendered, required, requiredMessageDetail, rows, shortDesc, showRequired, validator, visible, wrap</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+<div class="sect5"><a id="GUID-D38BF5E4-4DFB-499E-BF01-4F9B2708D3F0"></a>
+<h5 id="OADEE-GUID-D38BF5E4-4DFB-499E-BF01-4F9B2708D3F0" class="sect5"><span class="enumeration_section">16.8.4.1.3</span> Design Time for Adding Translation Editor into ADF Form</h5>
+<div>
+<p>This is the start of your topic.</p>
+<p>The Translation Editor feature is designed outside of the native ADF. Therefore, you must create your ADF form first and then drag and drop the Translation Editor view object onto the desire location in the ADF form.</p>
+<p>If you have a simple form, you should drag and drop onto the applicationsPanel &gt; actionButtonBar facet.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Locate the Data Control created for the new Translation VO.</p>
+</li>
+<li>
+<p>Open the JSFF page. Drag-drop this data control onto the fnd:applicationsPanel &gt; f:facet - actionButtonBar in the Structure window.</p>
+</li>
+<li>
+<p>In the Create menu, choose Applications &gt; Translation Editor.</p>
+</li>
+</ul>
+<div class="figure" id="GUID-D38BF5E4-4DFB-499E-BF01-4F9B2708D3F0__GUID-01E6AA18-A75A-4212-B524-B48A6DDAAE0A">
+<p class="titleinfigure">Figure 16-42 Drag and Drop onto actionButtonBar Facet</p>
+<img width="443" height="153" src="img/GUID-74BE3D36-06D6-4B5B-B1C4-51B9AF665ADA-default.jpg" alt="Dragging and dropping Translation Editor onto actionButtonBar." title="Dragging and dropping Translation Editor onto actionButtonBar." /></div>
+<!-- class="figure" -->
+<p>After the drag and drop, the Translation Editor wizard already described for the application table will open.</p>
+<p>You also can choose to drag and drop the Translation Editor button inside your ADF form. For example:</p>
+<div class="figure" id="GUID-D38BF5E4-4DFB-499E-BF01-4F9B2708D3F0__GUID-B3AA0656-F9B7-4579-9DC0-86FDFDA30DB2">
+<p class="titleinfigure">Figure 16-43 Drag and Drop into ADF Form</p>
+<img width="427" height="187" src="img/GUID-45F33F80-CBDB-4024-8112-EFC8EE891BAB-default.jpg" alt="Dragging and dropping Translation Editor into an ADF form." title="Dragging and dropping Translation Editor into an ADF form." /></div>
+<!-- class="figure" -->
+<div class="infobox-note" id="GUID-D38BF5E4-4DFB-499E-BF01-4F9B2708D3F0__GUID-A8697316-BEC3-4E55-916A-C764B768FC68">
+<p class="notep1">Note:</p>
+<p>Turn On Auto Submit.</p>
+Turn on the <code class="codeph">autoSubmit</code> property for all of your translation attributes so that any changes you make in your base form will be seen immediately inside your Translation Editor popup table.
+<p>All updates you make inside the Translation Editor popup table will automatically be brought back to your base form.</p>
+<p>Adjust your code accordingly if it is sensitive to having <code class="codeph">autoSubmit</code> turned on.</p>
+</div>
+<p>This is the code written into your JSFF file:</p>
+<pre dir="ltr">
+&lt;?xml version='1.0' encoding='UTF-8'?&gt;
+&lt;jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.1"
+          xmlns:af="http://xmlns.oracle.com/adf/faces/rich"
+          xmlns:f="http://java.sun.com/jsf/core"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fnd="http://xmlns.oracle.com/apps/fnd/applcore"
+          xmlns:h="http://java.sun.com/jsf/html"&gt;
+  &lt;c:set var="profileuiBundle"
+         value="#{adfBundle['oracle.apps.fnd.applcore.profiles.ui.CreateEditCategoryBundle']}"/&gt;
+  &lt;c:set var="profileuiMainBundle"
+         value="#{adfBundle['oracle.apps.fnd.applcore.profiles.ui.ProfilesMainBundle']}"/&gt;
+  &lt;af:pageTemplate viewId="/oracle/apps/fnd/applcore/templates/UIShellMainArea.jspx"
+                   id="pt1"&gt;
+    &lt;f:facet name="localArea"&gt;
+      &lt;fnd:applicationsPanel id="AP1"
+            title="#{bindings.Name.inputValue == 'a' ? profileuiBundle.CREATE_PROFILE_CATEGORY : af:formatNamed(profileuiBundle.EDIT_PROFILE_CATEGORY, 'PROFILE_CATEGORY_NAME',  bindings.Name.inputValue)}"
+            scrollable="true" contentsFacet="scroll"
+            navigationType="none" cancelVisible="true"
+            cancelRendered="true" saveVisible="true"
+            saveRendered="true" saveAndCloseVisible="true"
+            saveAndCloseRendered="true"
+            saveDisabled="#{bindings.CreatedBy.inputValue == 'SEED_DATA_FROM_APPLICATION' and securityContext.userName != 'SEED_DATA_FROM_APPLICATION'}"
+            saveAndCloseDisabled="#{bindings.CreatedBy.inputValue == 'SEED_DATA_FROM_APPLICATION' and securityContext.userName != 'SEED_DATA_FROM_APPLICATION'}"
+            saveOptionsStyle="button"&gt;
+        &lt;f:facet name="contents"&gt;
+          &lt;h:panelGroup id="pg1"&gt;
+          &lt;af:panelGroupLayout id="pgl1"&gt;
+            &lt;af:panelHeader text="#{profileuiBundle.PROFILE_CATEGORY}" id="ph1"&gt;
+ 
+&lt;!-- Design time will write a partial trigger inside your form to point to the TL dialog !--&gt;
+              &lt;af:panelFormLayout maxColumns="1" rows="1" id="pfl2" partialTriggers="TlAfd1"&gt;
+                &lt;!-- Your existing af:form content --&gt;
+..........................................
+..........................................
+&lt;!-- could also put the TL button at the end of your form  --&gt;
+              &lt;/af:panelFormLayout&gt;
+            &lt;/af:panelHeader&gt;
+          &lt;/af:panelGroupLayout&gt;
+&lt;!-- The TL popup dialog code starts here --&gt;
+           &lt;af:popup id="TlAfp3" contentDelivery="lazyUncached"
+   popupFetchListener="#{backingBeanScope.TranslationEditorBean.handlePopupFetch}"
+   popupCanceledListener="#{backingBeanScope.TranslationEditorBean.handlePopupCanceled}"&gt;
+              &lt;af:dialog id="TlAfd1"
+                        title="#{applcoreBundle.EDIT_TRANSLATIONS}"
+                        cancelTextAndAccessKey="#{applcoreBundle.CANCEL}"
+                        type="okCancel"
+                        affirmativeTextAndAccessKey="#{applcoreBundle.OK}"
+                        modal="true"
+                        dialogListener="#{backingBeanScope.TranslationEditorBean.updateBaseParent}"&gt;
+                  &lt;af:panelStretchLayout dimensionsFrom="children"
+                                    id="psl3"&gt;
+                      &lt;f:facet name="center"&gt;
+                          &lt;af:table value="#{bindings.ProfileCategoryTLUI1.collectionModel}
+            &lt;!-- The TL table content is the same as the above example --&gt;
+ 
+        &lt;/h:panelGroup&gt;
+        &lt;/f:facet&gt;
+        &lt;f:facet name="navigationBar"/&gt;
+        &lt;f:facet name="actionButtonBar"&gt;
+&lt;!-- The TL button is placed inside Application Panel actionButtonBar --&gt;
+ 
+          &lt;h:panelGroup id="pg2"&gt;
+            &lt;af:commandToolbarButton shortDesc="#{applcoreBundle.TRANSLATION_EDITOR}"
+                                    icon="/images/applcore/patterns/ipaddress_ena.png"
+                                    hoverIcon="/images/applcore/patterns/ipaddress_ovr.png"
+                                    depressedIcon="/images/applcore/patterns/ipaddress_dwn.png"
+                                    disabledIcon="/images/applcore/patterns/ipaddress_dis.png"
+                                    id="ctb1"
+                                    disabled="#{backingBeanScope.TranslationEditorBean.checkNewRow.tlt29}"&gt;
+                &lt;af:showPopupBehavior popupId="TlAfp1"
+                                    triggerType="action"/&gt;
+            &lt;/af:commandToolbarButton&gt;
+          &lt;/h:panelGroup&gt;
+        &lt;/f:facet&gt;
+        &lt;f:facet name="saveButtonMenu"/&gt;
+        &lt;f:facet name="submitButtonMenu"/&gt;
+        &lt;f:facet name="popup"/&gt;
+        &lt;f:facet name="customSaveDropButton"/&gt;
+        &lt;f:facet name="collaborationToolbar"/&gt;
+        &lt;f:facet name="scalingInfo"/&gt;
+        &lt;f:facet name="taskStamp"/&gt;
+        &lt;f:facet name="localContext"/&gt;
+        &lt;f:facet name="appsPanelLegend"&gt;
+          &lt;af:message id="msg1"
+                      messageType="warning"
+                      message="#{profileuiMainBundle.CANNOT_EDIT_PROTECTED_DATA}"
+                      rendered="#{bindings.CreatedBy.inputValue == 'SEED_DATA_FROM_APPLICATION' and securityContext.userName != 'SEED_DATA_FROM_APPLICATION'}"/&gt;
+        &lt;/f:facet&gt;
+      &lt;/fnd:applicationsPanel&gt;
+    &lt;/f:facet&gt;
+    &lt;f:facet name="contextualArea"/&gt;
+    &lt;f:facet name="localAreaScroll"/&gt;
+  &lt;/af:pageTemplate&gt;
+&lt;/jsp:root&gt;
+</pre>
+<p>If you have a more complicated form that involves multiple regions (multiple TL ViewObject), you should drag and drop to the location that makes the most sense to you.</p>
+<p>For example, if you have five fields on your form, A, B, C, D, E and if you drag and drop the TL ViewObject onto attribute C, the Translation Editor button will appear after attribute C.</p>
+</div>
+</div>
+<div class="sect5"><a id="GUID-B9EA1F83-D688-40CF-BC0E-09AA12CE96B1"></a>
+<h5 id="OADEE-GUID-B9EA1F83-D688-40CF-BC0E-09AA12CE96B1" class="sect5"><span class="enumeration_section">16.8.4.1.4</span> Removing the Translation Editor</h5>
+<div>
+<p>The two pieces of information written to your page file are the Translation Editor button and the dialog. You can search for "TlAfp" to find the button and dialog locations in your page so that you can remove them manually.</p>
+<p>If you add a new translation attribute into your TLVO and you would like to include this new attribute, you can remove them. Then you can drag and drop the TLVO again so that the new attribute will be included.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<a id="OADEV67445"></a>
+<div class="props_rev_3"><a id="GUID-4EB14182-E2E6-4618-AF28-7A7014FEC337"></a>
+<h2 id="OADEE-GUID-4EB14182-E2E6-4618-AF28-7A7014FEC337" class="sect2"><span class="enumeration_section">16.9</span> About the Create Page Wizard</h2>
+<div>
+<p>If the implementing code is in place, Create Page lets a user create, text, and export a new application page without having to use JDeveloper. This is useful, for instance, in creating a new homepage, testing it, and finally moving it from one system to another, such as from a test environment to a production environment.</p>
+<p>The basic steps to create a page are:</p>
+<ol>
+<li>
+<p>Create and then enter a sandbox. Using a sandbox is described in the <span class="italic">Oracle Sales Cloud Customizing Sales</span> guide.</p>
+</li>
+<li>
+<p>In the Navigator menu, select <span class="bold">New Page</span>.</p>
+</li>
+<li>
+<p>Complete the Create Page wizard.</p>
+</li>
+<li>
+<p>Edit and test the page.</p>
+</li>
+<li>
+<p>Publish the page.</p>
+</li>
+</ol>
+</div>
+<a id="OADEV67447"></a><a id="OADEV67446"></a>
+<div class="props_rev_3"><a id="GUID-581B5A77-EBD4-4095-96EF-8B5336AEFDC7"></a>
+<h3 id="OADEE-GUID-581B5A77-EBD4-4095-96EF-8B5336AEFDC7" class="sect3"><span class="enumeration_section">16.9.1</span> How to Complete the Create Page Wizard</h3>
+<div>
+<p>When you click <span class="bold">New Page</span> on the Navigator menu, the Create Page wizard displays.</p>
+<div class="figure" id="GUID-581B5A77-EBD4-4095-96EF-8B5336AEFDC7__GUID-7D043A9C-DF97-4C40-BD35-E4FF9C564ED6">
+<p class="titleinfigure">Figure 16-44 Create Page Wizard</p>
+<img width="701" height="398" src="img/GUID-0EE985B9-EB91-4AB1-82C9-93DF4739808D-default.png" alt="Explained in surrounding text." title="Explained in surrounding text." /></div>
+<!-- class="figure" -->
+<p><span class="bold">Name:</span> Enter a name for the page.</p>
+<p><span class="bold">Menu Category Title:</span> Enter a menu category title. The page name will be displayed under this title.</p>
+<p><span class="bold">Icon:</span> Click the Search icon to select an icon to represent this page. This step is mandatory and the icon must be selected from the choices presented; a user-supplied icon cannot be used.</p>
+<p><span class="bold">Web Page:</span> [Optional] Enter the URL of the application that you wish to host in this page in an iFrame. For example, if you want to run a calculator in your page, you can enter this URL:</p>
+<pre dir="ltr">
+http://www.embedcalculator.com/flash/StandardCalculator.swf
+</pre>
+<p>This usually is used to create a page where content is coming from another application. This can be a link to a related application, or to a public web site, as shown in the calculator example.</p>
+<p><span class="bold">Secure Token:</span> If you need to add a secure token to the URL, click the key icon.</p>
+<p>This option is used when you link a menu item to a secure token URL of an application outside <span id="GUID-581B5A77-EBD4-4095-96EF-8B5336AEFDC7__FASHORT">Fusion Applications</span>.</p>
+<p>An HTTPS protocol is required to access the application.</p>
+<p>The secure token expires if the user session is inactive. Refresh the page to regenerate the tokens.</p>
+<p>This additional dialog displays:</p>
+<p>[image]</p>
+<p><span class="bold">Web Application:</span> This is a dropdown menu that shows third-party applications that have been registered in the topology tables. To register an application, use the Register Enterprise Applications task in Setup and Maintenance. Registered content usually includes the protocol (such as http or https), the host, port and context root. This means that the beginning section of the URL can be built from this information.</p>
+<p><span class="bold">Destination for Web Application:</span> The destination is anything else to be appended on the URL.</p>
+<p><span class="bold">Secure Token Name:</span> [Optional] This can be any name you choose.</p>
+<p>For example:</p>
+<pre dir="ltr">
+Web Application = "BlueApp"
+Destination for Web Application = "/faces/showItem.asp" - The beginning "/" is optional, the design time will insert it if it is not included.
+Secure Token Name = "userToken"
+</pre>
+<p>When saved, the design time will create a menu node with just a destination field with the following:</p>
+<pre dir="ltr">
+destination="#{EndPointProvider.externalEndpointByModuleShortName['BlueApp']}/faces/showItem.asp?userToken=#{applCoreSecuredToken.trustToken}"
+</pre>
+<p>At runtime, this could evaluate to:</p>
+<pre dir="ltr">
+https://BlueAppsHost:9001/BlueApp/faces/showItem.asp?userToken=9439439432JHU8I53KL88E3 
+</pre>
+<p>Click <span class="bold">Save and Close</span>.</p>
+<p>Click <span class="bold">Save and Continue</span>.</p>
+</div>
+</div>
+</div>
+<a id="OADEV66054"></a>
+<div class="props_rev_3"><a id="GUID-C3D140FB-693A-42F9-97E8-BFF20C4B938B"></a>
+<h2 id="OADEE-GUID-C3D140FB-693A-42F9-97E8-BFF20C4B938B" class="sect2"><span class="enumeration_section">16.10</span> Troubleshooting UI Shell Issues</h2>
+<div>
+<p>This section presents the more-common problems, with their solutions, that may be experienced by Oracle Fusion applications developers. Also see <a class="olink OADTC1300" target="_blank" href="../OADTC/GUID-FA264B3E-4E31-43CB-8302-9ADF681F8FAE.htm#OADTC1300">"Troubleshooting Customizations</a>" in the <span class="italic"><span id="GUID-C3D140FB-693A-42F9-97E8-BFF20C4B938B__OADTC"><cite>Extensibility Guide for Developers</cite></span></span>.</p>
+</div>
+<a id="OADEV66056"></a><a id="OADEV66057"></a><a id="OADEV66073"></a><a id="OADEV66055"></a>
+<div class="props_rev_3"><a id="GUID-554E34B5-5216-48EC-840D-35310D7654AB"></a>
+<h3 id="OADEE-GUID-554E34B5-5216-48EC-840D-35310D7654AB" class="sect3"><span class="enumeration_section">16.10.1</span> ApplSession Is Not Created</h3>
+<div>
+<div class="section">
+<p class="subhead3">Problem</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>When ApplSession is not created, these problems occur:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>User Language settings are not set.</p>
+</li>
+<li>
+<p>Data security policies are not applied.</p>
+</li>
+<li>
+<p>Webservice requests are run as anonymous users instead of named users.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">Solution</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>To resolve this problem:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Check that the JpsFilter section is correct in <span class="bold">web.xml</span>: Applcore Session code depends on the JPS subject. The entry must appear exactly as shown in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-554E34B5-5216-48EC-840D-35310D7654AB__BABGEFDI">Example 16-16</a>.</p>
+</li>
+<li>
+<p>Check that the ApplSessionFilter section is correct in <span class="bold">web.xml</span>: ApplSession <span class="italic">must</span> be configured <span class="italic">immediately after</span> JpsFilter. The entry must appear exactly as shown in <a href="GUID-DD78A071-D54A-4A13-B839-3B93CCCE33B9.htm#GUID-554E34B5-5216-48EC-840D-35310D7654AB__BABGEFDI">Example 16-16</a>.</p>
+</li>
+<li>
+<p>If the issue is with the ApplSession not being created over a web service request using SOA, check how the ApplSession context interceptor is configured.</p>
+<p>ApplSession information is preserved over SOA/Web Service requests with context interceptors that fire when requests are sent and received. The ApplSessionContext interceptor, in particular, will handle propagating all session attributes from the caller to the web service, and will even attempt to reuse the same session Id if running against the same database. To enable the context interceptor, the <span class="bold">weblogic-application.xml</span> on both the caller and the called should include the <span class="bold">oracle.applcore.config</span> shared library:</p>
+<pre dir="ltr">
+&lt;library-ref&gt;
+    &lt;library-name&gt;
+      oracle.applcore.config
+    &lt;/library-name&gt;
+  &lt;/library-ref&gt;
+</pre>
+<p>If the context interceptor has not been enabled, the <span class="bold">prepareSession()</span> of the root application module call should still be able to create the session as the right user, so long as the Subject has been established correctly in the Oracle Web Services Manager layer. But in that case, no other session attributes will be propagated, and the session cannot be reused.</p>
+</li>
+<li>
+<p>Obtain the session Id from the cookie. The cookie is located in the browser's cookies folder.</p>
+<p>The session cookie is obtained so that subsequent queries can be run to verify the session's existence and obtain additional info about the session. Note that it is the session cookie that is stored in the browser cookie location, not the session Id. They represent the same session, but the actual session Id is internal.</p>
+<p>Cookie name: ORA_FND_SESSION_&lt;db_instance_name&gt;</p>
+<p>The session cookie value will appear similar to: <code class="codeph">DEFAULT_PILLAR:wvlu8CUiH4FYjySCPQtwaEphBOyiUTZwexYd1fYXh5VwV9i9koUL8L3Qhm0bNrZ8:1282160020177</code></p>
+<p>To retrieve the actual session id, run this SQL statement: <code class="codeph">select session_id from fnd_sessions where session_cookie=</code><span class="italic"><code class="codeph">value_obtained_from_cookie_value</code></span>.</p>
+<p><span class="bold">Note:</span> The <span class="italic"><code class="codeph">value_obtained_from_cookie_value</code></span> is the alpha-numeric string between the two colons. In the example, it is <code class="codeph">wvlu8CUiH4FYjySCPQtwaEphBOyiUTZwexYd1fYXh5VwV9i9koUL8L3Qhm0bNrZ8</code>. This value will always be different.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="example" id="GUID-554E34B5-5216-48EC-840D-35310D7654AB__BABGEFDI">
+<p class="titleinexample">Example 16-16 ApplSessionFilter and JpsFilter Configuration in web.xml</p>
+<pre dir="ltr">
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;JpsFilter&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+    &lt;dispatcher&gt;FORWARD&lt;/dispatcher&gt;
+    &lt;dispatcher&gt;REQUEST&lt;/dispatcher&gt;
+    &lt;dispatcher&gt;INCLUDE&lt;/dispatcher&gt;
+&lt;/filter-mapping&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;ApplSessionFilter&lt;/filter-name&gt;
+    &lt;servlet-name&gt;Faces Servlet&lt;/servlet-name&gt;
+    &lt;dispatcher&gt;FORWARD&lt;/dispatcher&gt;
+    &lt;dispatcher&gt;REQUEST&lt;/dispatcher&gt;
+&lt;/filter-mapping&gt;
+</pre></div>
+<!-- class="example" --></div>
+</div>
+<a id="OADEV66062"></a><a id="OADEV66063"></a><a id="OADEV66064"></a><a id="OADEV66061"></a>
+<div class="props_rev_3"><a id="GUID-F9EEC65A-0DA8-478A-9E77-17E8C0112CFB"></a>
+<h3 id="OADEE-GUID-F9EEC65A-0DA8-478A-9E77-17E8C0112CFB" class="sect3"><span class="enumeration_section">16.10.2</span> Navigator Shows a Little White Box</h3>
+<div>
+<div class="section">
+<p class="subhead3">Problem</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>Clicking the Navigator in the global area shows a little white box.</p>
+<p>This is an issue that developers would see.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">Solution when in a production environment</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Make sure that you are signed in as a user that has access to some pages in the Navigator menu. You can type the full URL of the page directly into the browser and see if the user can access it.</p>
+</li>
+<li>
+<p>Make sure there is a valid connection to the LDAP server. This is needed to check the policies of each entry in the Navigator menu.</p>
+</li>
+<li>
+<p>Use Enterprise Manager to make sure the Applications are registered in the topology tables.</p>
+</li>
+<li>
+<p>Make sure the Applications Core Setup application is deployed. (From JDeveloper, run <span class="bold">.../atgpf/applcore/applications/FndSetup/FndSetup.jws</span>.) This contains the Navigator menu file and usually is deployed to the Oracle Fusion Applications Global domain.</p>
+</li>
+<li>
+<p>Check that the menus are in MDS. Check for entries with the path oracle/apps/menu.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">Solution when in a development environment</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>You usually should run without menu security. The first thing to check is if you have started your web server with this parameter to turn off security checking:</p>
+<p><code class="codeph">-DAPPLCORE_TEST_SECURED_MENU=N</code></p>
+</li>
+<li>
+<p>Then check steps 3 through 5 in the solution for a production environment.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OADEV66066"></a><a id="OADEV66067"></a><a id="OADEV66065"></a>
+<div class="props_rev_3"><a id="GUID-2BDC9ECF-99CC-4AFE-A1AA-DDEC4E4F4E60"></a>
+<h3 id="OADEE-GUID-2BDC9ECF-99CC-4AFE-A1AA-DDEC4E4F4E60" class="sect3"><span class="enumeration_section">16.10.3</span> Navigator Shows Unfiltered Entries</h3>
+<div>
+<div class="section">
+<p class="subhead3">Problem</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>The Navigator menu is showing all entries, rather than being filtered by what the user has access to, and the Welcome page has all tabs exposed.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">Solution</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>This is caused by menu security being turned off. This should happen only in development environments.</p>
+<p>Because menu security is on by default, check that the web server was <span class="italic">not</span> started with <code class="codeph">-DAPPLCORE_TEST_SECURED_MENU=N</code>.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment533">
+<tr>
+<td class="cellalignment570">
+<table class="cellalignment538">
+<tr>
+<td class="cellalignment537"><a href="GUID-6693E64F-077A-4BBE-BECB-59A81565B832.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment537"><a href="GUID-19886EA7-0B7A-413B-95B4-BE3EE12FA6CC.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2011, 2016, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment572">
+<table class="cellalignment536">
+<tr>
+<td class="cellalignment537"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment537"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

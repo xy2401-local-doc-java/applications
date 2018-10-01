@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Implementing GL Segment, GL Account, Asset Category and Asset Location Dimensions for Oracle Fusion Applications</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="You can implement GL Segment and GL Segment Hierarchy Dimensions." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-EC526200-508F-4C94-8353-715BD548ADAE.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-18671FE7-6A1F-4203-925E-86307D106C16.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-1CE5B2C2-67D3-4787-9378-045BBD036A34"></a> <span id="PAGE" style="display:none;">107/336</span> <!-- End Header -->
+<a id="BIACF25626"></a><a id="BIACF125"></a><a id="IT_25"></a>
+<h1 id="BIAFC-GUID-1CE5B2C2-67D3-4787-9378-045BBD036A34" class="sect1">Implementing GL Segment, GL Account, Asset Category and Asset Location Dimensions for Oracle Fusion Applications</h1>
+<div>
+<p>You can implement GL Segment and GL Segment Hierarchy Dimensions.</p>
+<div class="section">
+<p class="subhead1">Guidelines</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>If you need to report on only concatenated segments, then no configuration is required, and you can skip this section.</p>
+</li>
+<li>
+<p>If you want only Group Account Num (and related attributes), then at a minimum you need to configure just the Natural Account dimension.</p>
+</li>
+<li>
+<p>If you are exposing any GL Segments (including cost center, balancing segment, natural account), then you must go through the full configuration.</p>
+</li>
+<li>
+<p>If you are exposing any Financial fact, then at a minimum you need to configure the Natural Account dimension, because you need group account number.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Tasks</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-1CE5B2C2-67D3-4787-9378-045BBD036A34.htm#GUID-DEE1557F-6533-4123-BF14-8C2C743EA6A7" title="To enable GL Accounting Flexfield in Oracle BI Applications, sue the Manage Key Flexfields UI in Oracle Fusion Applications to configure the Accounting Flex Segments for BI and provide the mapping with BI Object names that should be used as dimensions for each of the Account Flexfield segments.">Mapping the GL Segment Labels to BI Objects in Fusion Applications</a></p>
+</li>
+<li>
+<p><a href="GUID-1CE5B2C2-67D3-4787-9378-045BBD036A34.htm#GUID-E455E79C-7725-44EB-A518-C478C8A40031" title="You can map the Assets segment labels to BI Objects in Oracle Fusion Applications.">Mapping the Asset Segment Labels to BI Objects in Fusion Applications</a></p>
+</li>
+<li>
+<p><a href="GUID-1CE5B2C2-67D3-4787-9378-045BBD036A34.htm#GUID-390474D1-AC6E-4E0B-AEBB-877D9A50D88B" title="If your Fusion applications are deployed on premises, then load the financial key flexfield data for GL account, asset location, and asset category key flexfields into Oracle Business Analytics Warehouse.">Configuring GL Account, Asset Location, and Asset Category</a></p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+<a id="BIACF25630"></a>
+<div class="props_rev_3"><a id="GUID-DEE1557F-6533-4123-BF14-8C2C743EA6A7"></a>
+<h2 id="BIAFC-GUID-DEE1557F-6533-4123-BF14-8C2C743EA6A7" class="sect2">Mapping the GL Segment Labels to BI Objects in <span>Oracle Fusion Applications</span></h2>
+<div>
+<p>To enable GL Accounting Flexfield in <span>Oracle BI Applications</span>, sue the Manage Key Flexfields UI in <span>Oracle Fusion Applications</span> to configure the Accounting Flex Segments for BI and provide the mapping with BI Object names that should be used as dimensions for each of the Account Flexfield segments.</p>
+<ol>
+<li class="stepexpand"><span>In <span>Oracle Fusion Applications</span>, navigate to Manage Key Flexfields.</span></li>
+<li class="stepexpand"><span>For General Ledger, in each of the Accounting Flexfield segments, set the BI Enabled Flag to <span class="bold">Y</span>.</span>
+<ol>
+<li class="substepexpand"><span>Query for <code class="codeph">GL#</code> as Key Flexfield Code.</span></li>
+<li class="substepexpand"><span>Click <span class="bold">Manage Structure Instances</span>.</span></li>
+<li class="substepexpand"><span>Edit each of the segments and select the <span class="bold">BI enabled</span> check box, then save the details.</span>
+<div>
+<p>This should be done for all segments in every Structure instance that you intend to be mapped in the BI metadata repository (that is, the RPD file).</p>
+<div class="figure" id="GUID-DEE1557F-6533-4123-BF14-8C2C743EA6A7__GUID-EC8F4764-6174-4B27-879B-5D114A31C793"><img width="743" height="338" src="img/GUID-47FB39B5-025A-42FE-A903-F7F890D48B74-default.gif" alt="Description of GUID-47FB39B5-025A-42FE-A903-F7F890D48B74-default.gif follows" title="Description of GUID-47FB39B5-025A-42FE-A903-F7F890D48B74-default.gif follows" /><br />
+<a href="img_text/GUID-47FB39B5-025A-42FE-A903-F7F890D48B74-default.htm">Description of the illustration GUID-47FB39B5-025A-42FE-A903-F7F890D48B74-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+</ol>
+</li>
+<li class="stepexpand"><span>Populate the BI Object Name for each of the Segment Labels.</span>
+<div>
+<p>This name is the Logical table name in the BI metadata repository (that is, the RPD file) that is used as the dimension for the corresponding segment.</p>
+</div>
+<ol>
+<li class="substepexpand"><span>In the Manage Key Flexfields UI in <span>Oracle Fusion Applications</span>, query for <code class="codeph">GL#</code> as Key Flexfield Code.</span></li>
+<li class="substepexpand"><span>Choose <span class="bold">Actions</span>, then <span class="bold">Manage Segment Labels</span>.</span>
+<div>
+<div class="figure" id="GUID-DEE1557F-6533-4123-BF14-8C2C743EA6A7__GUID-BD585EE7-F38E-4DD1-BF71-247440AB4378"><img width="679" height="370" src="img/GUID-6C940559-57E6-45A7-BD2F-2422726A09D4-default.gif" alt="Description of GUID-6C940559-57E6-45A7-BD2F-2422726A09D4-default.gif follows" title="Description of GUID-6C940559-57E6-45A7-BD2F-2422726A09D4-default.gif follows" /><br />
+<a href="img_text/GUID-6C940559-57E6-45A7-BD2F-2422726A09D4-default.htm">Description of the illustration GUID-6C940559-57E6-45A7-BD2F-2422726A09D4-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="substepexpand"><span>Populate the BI Object Name for all the segment labels that you need to map in the repository, then save the details.</span>
+<div>
+<div class="figure" id="GUID-DEE1557F-6533-4123-BF14-8C2C743EA6A7__GUID-8EC1D124-2CAE-485E-8DB4-9CA0BA427A1E"><img width="745" height="225" src="img/GUID-BCE93E89-178D-45BB-AB0D-47F584F4ED79-default.gif" alt="Description of GUID-BCE93E89-178D-45BB-AB0D-47F584F4ED79-default.gif follows" title="Description of GUID-BCE93E89-178D-45BB-AB0D-47F584F4ED79-default.gif follows" /><br />
+<a href="img_text/GUID-BCE93E89-178D-45BB-AB0D-47F584F4ED79-default.htm">Description of the illustration GUID-BCE93E89-178D-45BB-AB0D-47F584F4ED79-default.gif</a></div>
+<!-- class="figure" -->
+<p>The following table shows the BI Object Names for each Qualified Segment label.</p>
+<div class="tblformal" id="GUID-DEE1557F-6533-4123-BF14-8C2C743EA6A7__GUID-65EE2F2A-4CF2-456E-AA27-74EFC7D4A942">
+<table class="cellalignment156" summary="Mappings for BI Object Names to Qualified Segment labels">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment143" id="d85738e197">Segment Label Code</th>
+<th class="cellalignment143" id="d85738e199">BI Object Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment145" id="d85738e203" headers="d85738e197">
+<p>FA_COST_CTR</p>
+</td>
+<td class="cellalignment145" headers="d85738e203 d85738e199">
+<p>Dim - Cost Center</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment145" id="d85738e210" headers="d85738e197">
+<p>GL_BALANCING</p>
+</td>
+<td class="cellalignment145" headers="d85738e210 d85738e199">
+<p>Dim - Balancing Segment</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment145" id="d85738e217" headers="d85738e197">
+<p>GL_ACCOUNT</p>
+</td>
+<td class="cellalignment145" headers="d85738e217 d85738e199">
+<p>Dim - Natural Account Segment</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>For the non qualified segment labels, the BI Object Name should be populated with one of the 10 numbered Dim - Segments: Dim - GL Segment1, Dim - GL Segment2, Dim - GL Segment&lt;<span class="variable">n</span>&gt;, and so on, to Dim - GL Segment10.</p>
+</div>
+</li>
+</ol>
+</li>
+<li class="stepexpand"><span>Click the <span class="bold">Deploy Flexfield</span> option to deploy the Flexfields.</span></li>
+</ol>
+</div>
+</div>
+<a id="BIACF128"></a>
+<div class="props_rev_3"><a id="GUID-E455E79C-7725-44EB-A518-C478C8A40031"></a>
+<h2 id="BIAFC-GUID-E455E79C-7725-44EB-A518-C478C8A40031" class="sect2">Mapping the Asset Segment Labels to BI Objects in Oracle Fusion Applications</h2>
+<div>
+<p>You can map the Assets segment labels to BI Objects in <span>Oracle Fusion Applications</span>.</p>
+<div class="section"></div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In <span>Oracle Fusion Applications</span>, navigate to Manage Key Flexfields.</span></li>
+<li class="stepexpand"><span>For Assets, in each of the Accounting Flexfield segments, set the BI Enabled Flag to <span class="bold">Y</span>.</span>
+<ol>
+<li class="substepexpand"><span>Query for Key Flexfield Code equals the following:</span>
+<div>
+<p>For Fixed Asset Category, query on <kbd class="userinput">CAT#</kbd>.</p>
+<p>For Fixed Asset Location, query on <kbd class="userinput">LOC#</kbd>.</p>
+</div>
+</li>
+<li class="substepexpand"><span>Click <span class="bold">Manage Structure Instances</span>.</span></li>
+<li class="substepexpand"><span>Edit each of the segments and select the <span class="bold">BI enabled</span> check box, then save the details.</span>
+<div>
+<p>This should be done for all segments in every Structure instance that you intend to be mapped in the BI metadata repository (that is, the RPD file).</p>
+<div class="figure" id="GUID-E455E79C-7725-44EB-A518-C478C8A40031__GUID-8C3F1BF2-6535-4E59-8199-85122043BBC3"><img width="809" height="345" src="img/GUID-9653D211-212A-4CF5-B1AF-208BF702B5FB-default.gif" alt="Description of GUID-9653D211-212A-4CF5-B1AF-208BF702B5FB-default.gif follows" title="Description of GUID-9653D211-212A-4CF5-B1AF-208BF702B5FB-default.gif follows" /><br />
+<a href="img_text/GUID-9653D211-212A-4CF5-B1AF-208BF702B5FB-default.htm">Description of the illustration GUID-9653D211-212A-4CF5-B1AF-208BF702B5FB-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+</ol>
+</li>
+<li class="stepexpand"><span>Populate the BI Object Name for each of the Segment Labels.</span>
+<div>
+<p>This name is the Logical table name in the BI metadata repository (that is, the RPD file) that is used as the dimension for the corresponding segment.</p>
+</div>
+<ol>
+<li class="substepexpand"><span>Query for the appropriate Key Flexfield Code (CAT# or LOC#) in the <span class="wintitle">Manage Key Flexfields</span> dialog.</span></li>
+<li class="substepexpand"><span>Choose <span class="bold">Actions</span>, then <span class="bold">Manage Segment Labels</span>.</span>
+<div>
+<div class="figure" id="GUID-E455E79C-7725-44EB-A518-C478C8A40031__GUID-2C70BD93-C15E-4214-928C-7E5B5B63BABB"><img width="806" height="392" src="img/GUID-8C97DF4E-8691-42DF-8EB8-01FEEFC9B359-default.gif" alt="Description of GUID-8C97DF4E-8691-42DF-8EB8-01FEEFC9B359-default.gif follows" title="Description of GUID-8C97DF4E-8691-42DF-8EB8-01FEEFC9B359-default.gif follows" /><br />
+<a href="img_text/GUID-8C97DF4E-8691-42DF-8EB8-01FEEFC9B359-default.htm">Description of the illustration GUID-8C97DF4E-8691-42DF-8EB8-01FEEFC9B359-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="substepexpand"><span>Populate the BI Object Name for all the segment labels that you need to map in the BI metadata repository (that is, the RPD file), then save the details.</span>
+<div>
+<div class="figure" id="GUID-E455E79C-7725-44EB-A518-C478C8A40031__GUID-99E5208F-14DB-4528-B6F3-2570F1F88DD6"><img width="762" height="167" src="img/GUID-BCC6A0F8-7B06-4971-80B8-89A7842A26C7-default.gif" alt="Description of GUID-BCC6A0F8-7B06-4971-80B8-89A7842A26C7-default.gif follows" title="Description of GUID-BCC6A0F8-7B06-4971-80B8-89A7842A26C7-default.gif follows" /><br />
+<a href="img_text/GUID-BCC6A0F8-7B06-4971-80B8-89A7842A26C7-default.htm">Description of the illustration GUID-BCC6A0F8-7B06-4971-80B8-89A7842A26C7-default.gif</a></div>
+<!-- class="figure" -->
+<p>For the "qualified" segment labels, use the following BI Object Names for each Qualified Segment label:</p>
+<div class="tblformal" id="GUID-E455E79C-7725-44EB-A518-C478C8A40031__GUID-1E5EB524-B0F2-461E-9961-DD1F7394ED61">
+<table class="cellalignment156" summary="Mappings for BI Object Names to Qualified Segment labels">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment216" id="d85738e355">Segment Label Code</th>
+<th class="cellalignment223" id="d85738e357">BI Object Name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment218" id="d85738e361" headers="d85738e355">
+<p>BASED_CATEGORY</p>
+</td>
+<td class="cellalignment224" headers="d85738e361 d85738e357">
+<p>Major Category</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment218" id="d85738e368" headers="d85738e355">
+<p>MINOR_CATEGORY</p>
+</td>
+<td class="cellalignment224" headers="d85738e368 d85738e357">
+<p>Minor Category</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>For all other segment labels, use any of the following values: Segment1, Segment2, and so on, to Segment10</p>
+<p>For BI Object Names for "Fixed Asset Location (LOC#)" Key Flex Field, for all segment labels, use Segment1, Segment2, and so on, to Segment7.</p>
+</div>
+</li>
+</ol>
+</li>
+<li class="stepexpand"><span>Click the <span class="bold">Deploy Flexfield</span> option to deploy the Flexfields.</span></li>
+</ol>
+</div>
+</div>
+<div class="sect2"><a id="GUID-390474D1-AC6E-4E0B-AEBB-877D9A50D88B"></a>
+<h2 id="BIAFC-GUID-390474D1-AC6E-4E0B-AEBB-877D9A50D88B" class="sect2">Configuring GL Account, Asset Location, and Asset Category</h2>
+<div>
+<p>If your Fusion applications are deployed on premises, then load the financial key flexfield data for GL account, asset location, and asset category key flexfields into Oracle Business Analytics Warehouse.</p>
+<div class="p">Before you complete the following steps, ensure that you complete all your Fusion setups and run the <span class="bold">Import Oracle Fusion Data Extensions for Transactional Business Intelligence</span> ESS job from your Fusion instance to bring in the key flexfield changes into the repository.</div>
+<!-- class="section" -->
+<div class="section">
+<p>The BI flattened VO generated for each key flexfield has columns pertaining to each segment label. These columns are generated after deployment and hence there is no out of the box mapping for these columns downstream. Hence, you need to make changes to the necessary ODI artifacts to map those columns.</p>
+<p>To configure GL account, asset location, and asset category, you need to complete the following ODI changes:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Once you have run the pre-requisite Import process, all the key flexfield related segment columns would have been imported into the BI flattened VO&rsquo;s in the repository. Open the repository in the offline mode and check the segment columns for each key flexfield and the following VOs:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>GL# KFF-<code class="codeph">VO: FscmTopModelAM.AccountBIAM.FLEX_BI_Account_VI</code></p>
+</li>
+<li>
+<p>CAT#KFF -<code class="codeph">VO: FscmTopModelAM.CategoryBIAM.FLEX_BI_Category_VI</code></p>
+</li>
+<li>
+<p>LOC#KFF -<code class="codeph">VO: FscmTopModelAM.LocationBIAM.FLEX_BI_Location_VI</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>These segment columns end with <code class="codeph">_</code> or <code class="codeph">_c</code>. For example, <code class="codeph">FA_COST_CTR_</code> and <code class="codeph">FA_COST_CTR_c</code>, <code class="codeph">PRODUCT_</code> and <code class="codeph">PRODUCT_c</code>. Once you have identified them, you must add these new columns in the corresponding VO data store in ODI.. Use the default data type of Varchar (50,50). Ensure that you add them to the data stores for the appropriate Fusion release that you are using.</span>
+<div>
+<div class="figure" id="GUID-390474D1-AC6E-4E0B-AEBB-877D9A50D88B__GUID-B1E14BEF-6429-42D2-9FAF-27CBC748A945"><img width="637" height="488" src="img/GUID-1D78B95F-2361-4336-9190-1EA0F7BA4689-default.gif" alt="Description of GUID-1D78B95F-2361-4336-9190-1EA0F7BA4689-default.gif follows" title="Description of GUID-1D78B95F-2361-4336-9190-1EA0F7BA4689-default.gif follows" /><br />
+<a href="img_text/GUID-1D78B95F-2361-4336-9190-1EA0F7BA4689-default.htm">Description of the illustration GUID-1D78B95F-2361-4336-9190-1EA0F7BA4689-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Edit the SDE mapping for <code class="codeph">GL# KFF</code> to map these new columns to the corresponding columns in the staging table.</span>
+<div>
+<div class="figure" id="GUID-390474D1-AC6E-4E0B-AEBB-877D9A50D88B__GUID-6B9B4A51-A5C8-41A3-94CA-7FEC2CE8E650"><img width="595" height="168" src="img/GUID-5CCA280B-C53E-40EC-8F9A-015B390965D1-default.gif" alt="Description of GUID-5CCA280B-C53E-40EC-8F9A-015B390965D1-default.gif follows" title="Description of GUID-5CCA280B-C53E-40EC-8F9A-015B390965D1-default.gif follows" /><br />
+<a href="img_text/GUID-5CCA280B-C53E-40EC-8F9A-015B390965D1-default.htm">Description of the illustration GUID-5CCA280B-C53E-40EC-8F9A-015B390965D1-default.gif</a></div>
+<!-- class="figure" -->
+<p>The SDE mapping is located in the appropriate Fusion folder based on the release you are on. For example, SDE_FUSION_11_Adaptor</p>
+<div class="p">The column mapping is based on the segment label to BI Object mapping done in your Fusion setup. For example, assuming that you have mapped PRODUCT label to <code class="codeph">Dim &ndash; GL Segment1</code> and ORG label to <code class="codeph">Dim &ndash; GL Segment2,</code> then the column mapping will look like:
+<div class="figure" id="GUID-390474D1-AC6E-4E0B-AEBB-877D9A50D88B__GUID-4701645E-1473-4446-A52E-B27AA52E2F7A"><img width="325" height="144" src="img/GUID-171490F8-7110-4A4A-81F3-6DD463ECA5CE-default.gif" alt="Description of GUID-171490F8-7110-4A4A-81F3-6DD463ECA5CE-default.gif follows" title="Description of GUID-171490F8-7110-4A4A-81F3-6DD463ECA5CE-default.gif follows" /><br />
+<a href="img_text/GUID-171490F8-7110-4A4A-81F3-6DD463ECA5CE-default.htm">Description of the illustration GUID-171490F8-7110-4A4A-81F3-6DD463ECA5CE-default.gif</a></div>
+<!-- class="figure" --></div>
+<div class="p">For example, assuming that you have mapped ALTACCT label to <code class="codeph">Dim &ndash; GL Segment3</code> and GL_MANAGEMENT label to <code class="codeph">Dim &ndash; GL Segment5</code>, then the column mapping will look like:
+<div class="figure" id="GUID-390474D1-AC6E-4E0B-AEBB-877D9A50D88B__GUID-5F77203A-6FAA-4BFE-A14D-040636B21187"><img width="383" height="141" src="img/GUID-0DF8B826-90E6-4C9B-91F7-97EFF92EC1C4-default.gif" alt="Description of GUID-0DF8B826-90E6-4C9B-91F7-97EFF92EC1C4-default.gif follows" title="Description of GUID-0DF8B826-90E6-4C9B-91F7-97EFF92EC1C4-default.gif follows" /><br />
+<a href="img_text/GUID-0DF8B826-90E6-4C9B-91F7-97EFF92EC1C4-default.htm">Description of the illustration GUID-0DF8B826-90E6-4C9B-91F7-97EFF92EC1C4-default.gif</a></div>
+<!-- class="figure" --></div>
+</div>
+</li>
+<li class="stepexpand"><span>Save the changes and regenerate the underlying scenario for the package.</span></li>
+<li class="stepexpand"><span>If applicable, make equivalent updates for CAT# and LOC#.</span>
+<div>
+<div class="p">The corresponding mappings for both are as follows:
+<ul style="list-style-type: disc;">
+<li>
+<div class="p">CAT# KFF
+<ul style="list-style-type: disc;">
+<li>
+<p>SDE mapping: <code class="codeph">SDE_FUSION_FixedAssetCategoryDimension</code></p>
+</li>
+<li>
+<p>Staging table: <code class="codeph">W_ASSET_CATEGORY_DS</code></p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<div class="p">LOC# KFF
+<ul style="list-style-type: disc;">
+<li>
+<p>SDE mapping: <code class="codeph">SDE_FUSION_FixedAssetLocationDimension</code></p>
+</li>
+<li>
+<p>Staging table: <code class="codeph">W_ASSET_LOCATION_DS</code></p>
+</li>
+</ul>
+</div>
+</li>
+</ul>
+</div>
+<div class="p">For CAT#KFF, if you have mapped BASED_CATEGORY and MINOR_CATEGORY and would like to use them as the Major and Minor Category, then the column mapping is:
+<ul style="list-style-type: disc;">
+<li>
+<p>MAJOR_CATEGORY: FLEXVO.BASED_CATEGORY_</p>
+</li>
+<li>
+<p>MINOR_CATEGORY: FLEXVO.MINOR_CATEGORY_</p>
+</li>
+</ul>
+</div>
+<div class="figure" id="GUID-390474D1-AC6E-4E0B-AEBB-877D9A50D88B__GUID-C9E37249-228E-4453-AF35-B008E7F4061C"><img width="625" height="374" src="img/GUID-85765BDB-438B-4339-A703-C559DAFC1563-default.gif" alt="Description of GUID-85765BDB-438B-4339-A703-C559DAFC1563-default.gif follows" title="Description of GUID-85765BDB-438B-4339-A703-C559DAFC1563-default.gif follows" /><br />
+<a href="img_text/GUID-85765BDB-438B-4339-A703-C559DAFC1563-default.htm">Description of the illustration GUID-85765BDB-438B-4339-A703-C559DAFC1563-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Save the changes and regenerate the underlying scenarios for the packages.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-EC526200-508F-4C94-8353-715BD548ADAE.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-18671FE7-6A1F-4203-925E-86307D106C16.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

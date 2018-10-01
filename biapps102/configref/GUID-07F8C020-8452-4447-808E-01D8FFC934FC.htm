@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>About Configuring Slowly Changing Dimensions</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="Oracle Business Analytics Warehouse provides Category 2 slowly changing dimension (SCD) functionality, which allows you to track the history of updates to dimension records. When a record in Oracle Business Analytics Warehouse has an update, the updated information is posted into a new row and the old information is kept for historical reporting purposes." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-8C1CCCC1-6B0E-4F61-842C-F0D175BAD40E.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-CB757933-8A7E-4957-9041-81F72CAB3FA8.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-07F8C020-8452-4447-808E-01D8FFC934FC"></a> <span id="PAGE" style="display:none;">7/336</span> <!-- End Header -->
+<a id="IT_49"></a>
+<h1 id="BIAFC-GUID-07F8C020-8452-4447-808E-01D8FFC934FC" class="sect1">About Configuring Slowly Changing Dimensions</h1>
+<div>
+<p><span>Oracle Business Analytics Warehouse</span> provides Category 2 slowly changing dimension (SCD) functionality, which allows you to track the history of updates to dimension records. When a record in <span>Oracle Business Analytics Warehouse</span> has an update, the updated information is posted into a new row and the old information is kept for historical reporting purposes.</p>
+<p><span>Oracle Business Analytics Warehouse</span> identifies and applies the slowly changing dimension logic chosen by the user after data has been extracted and transformed to be source-independent. Users may configure <span>Oracle Business Intelligence Applications</span> (<span>Oracle BI Applications</span>) to support both Category 1 SCDs, in which data is overwritten with updates, and Category 2 SCDs, in which the original records are maintained while a new record stores the updated data. Choosing Category 1 or Category 2 SCDs depends on identifying your historically significant attributes.</p>
+<p>Users can choose Category 1 or Category 2 by setting the value for $$TYPE2_FLG to Y or N in <span>Configuration Manager</span>.</p>
+<p>These tables have TYPE2 defined by default (by default, it is set to ON):</p>
+<div class="section">
+<p class="subhead1">Common Dimensions</p>
+<p>W_PRODUCT_D</p>
+<p>W_INVENTORY_PRODUCT_D</p>
+<p>W_POSITION_D</p>
+<p>W_USER_D</p>
+<p>W_INT_ORG_DH</p>
+<p>W_PARTY_ORG_D</p>
+<p>W_PARTY_PER_D</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">HCM</p>
+<p>W_HR_PERSON_LEG_D</p>
+<p>W_HR_POSITION_D</p>
+<p>W_JOB_D</p>
+<p>W_PAY_GRADE_D</p>
+<p>W_SUPERVISOR_D and W_SUPERVISOR_STATUS_D:</p>
+<div class="infobox-note" id="GUID-07F8C020-8452-4447-808E-01D8FFC934FC__GUID-F5FC906B-AC3E-455B-AD0F-AB38812BCFFF">
+<p class="notep1">Note:</p>
+These are not the classical Type-2 dimensions. They have EFFECTIVE_FROM_DT and EFFECTIVE_TO_DT and are set to Type2.</div>
+<p>However, HCM handles the dates internally and does not rely on the SCDUpdate mappings for these two. These tables are used to build the Supervisor Hierarchy, and not exposed in the repository after the physical layer.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Finance</p>
+<p>W_FIXED_ASSET_D</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>These tables have TYPE2 supported in applications but not set by default (by default, it is OFF; it can be turned ON if required).</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Common Dimensions</p>
+<p>W_COST_CENTER_D</p>
+<p>W_COST_CENTER_DH</p>
+<p>W_BUSN_LOCATION_D</p>
+<p>W_TERR_DH</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Finance</p>
+<p>W_AP_TERMS_D</p>
+<p>W_BALANCING_SEGMENT_D</p>
+<p>W_BANK_D</p>
+<p>W_ASSET_BOOK_D</p>
+<p>W_ASSET_CATEGORY_D</p>
+<p>W_ASSET_LOCATION_D</p>
+<p>W_GL_ACCOUNT_D</p>
+<p>W_GL_SEGMENT_D</p>
+<p>W_NATURAL_ACCOUNT_D</p>
+<p>W_PAYMENT_TERMS_D</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">CRM/OM/PIM</p>
+<p>No SCD2 dims</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">SCM/Procurement/Sourcing/Expense</p>
+<p>No SCD2 dims</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-8C1CCCC1-6B0E-4F61-842C-F0D175BAD40E.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-CB757933-8A7E-4957-9041-81F72CAB3FA8.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

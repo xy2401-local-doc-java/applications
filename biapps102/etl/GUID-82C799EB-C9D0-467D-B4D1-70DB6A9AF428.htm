@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>About Diagnostics Health Check and ETL Diagnostics and Automatic Correction</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="Diagnostic Health Check is a preliminary ETL phase in which a diagnostic report is generated to identify problematic source data that might cause ETL failure or data loss or corruption in the data warehouse. In the event of a failure of an ETL task, diagnostics are run and error handling and automatic correction are performed to enable the load plan to restart and continue." />
+<meta name="dcterms.created" content="2017-05-25T23:49:13Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications ETL Guide" />
+<meta name="dcterms.identifier" content="E72285-04" />
+<meta name="dcterms.isVersionOf" content="BIAET" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2014, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-33BEB35E-A05B-49E5-832D-1B4A6261A6D2.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-C1BD3F54-E330-42F1-A391-2CE4801AD6FE.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAET.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-82C799EB-C9D0-467D-B4D1-70DB6A9AF428"></a> <span id="PAGE" style="display:none;">24/47</span> <!-- End Header -->
+<h1 id="BIAET-GUID-82C799EB-C9D0-467D-B4D1-70DB6A9AF428" class="sect1">About Diagnostics Health Check and ETL Diagnostics and Automatic Correction</h1>
+<div>
+<p>Diagnostic Health Check is a preliminary ETL phase in which a diagnostic report is generated to identify problematic source data that might cause ETL failure or data loss or corruption in the data warehouse. In the event of a failure of an ETL task, diagnostics are run and error handling and automatic correction are performed to enable the load plan to restart and continue.</p>
+<p>During ETL, when you run a load plan, the relevant source data is queried to generate a health check report. The health check queries are seed data XML files and can be found at <code>{bi.oracle.home}/biapps/etl/data_files/src_files/BIA_11/metadata/healthcheck_xml</code>. You can download a health check report from <span>Configuration Manager</span> and the health check report includes any problematic data, a description of detected issues, and actions to resolve health check failures.</p>
+<div class="section">
+<p class="subhead1">Email Notifications</p>
+<div class="p">If an email address is configured for ETL email notification during <span>Functional Setup Manager</span> configuration, an email is sent in the following cases:
+<ul style="list-style-type: disc;">
+<li>
+<p>If the health check scenario fails, an email is sent with a summary of the health check results.</p>
+</li>
+<li>
+<p>If the load plan execution fails, an email is sent with a list of failed tasks during that load plan execution.</p>
+</li>
+<li>
+<p>If the load plan execution completes, an email is sent with a list of tasks that are in failed state in any of the load plan instance runs and a summary of auto-corrections performed (if any), during the ETL.</p>
+</li>
+</ul>
+</div>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Automatic Correction of Data Errors</p>
+<p>Some common data errors that can cause ETL tasks to fail are automatically diagnosed and corrected during the ETL, allowing for the load plan to restart and complete.</p>
+<div class="tblformal" id="GUID-82C799EB-C9D0-467D-B4D1-70DB6A9AF428__GUID-F99E4C03-D0A9-42CF-BE0C-6588D0CF45FE">
+<table class="cellalignment58" summary="This table lists common error types and how they are automatically corrected during the ETL.">
+<thead>
+<tr class="cellalignment44">
+<th class="cellalignment59" id="d5409e62">Data Error Type</th>
+<th class="cellalignment59" id="d5409e64">Automatic Correction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment44">
+<td class="cellalignment60" id="d5409e68" headers="d5409e62">Duplicate rows being inserted into the target table causes a unique constraint violation.</td>
+<td class="cellalignment60" headers="d5409e68 d5409e64">One row is inserted and the duplicate rows are rejected.</td>
+</tr>
+<tr class="cellalignment44">
+<td class="cellalignment60" id="d5409e73" headers="d5409e62">String values larger than allowed being inserted into <code class="codeph">varchar</code> or <code class="codeph">char</code> columns.</td>
+<td class="cellalignment60" headers="d5409e73 d5409e64">All <code class="codeph">varchar</code> columns are truncated to the precision allowed by each column before insert. Exception: key columns defined in the interface are not truncated.</td>
+</tr>
+<tr class="cellalignment44">
+<td class="cellalignment60" id="d5409e87" headers="d5409e62">All other issues, including:
+<ul style="list-style-type: disc;">
+<li>
+<p>Number values larger than allowed being inserted into numeric columns.</p>
+</li>
+<li>
+<p>NULL values being inserted into a <code class="codeph">NOT NULL</code> column.</p>
+</li>
+<li>
+<p>Invalid data, for example alphanumeric values being inserted into a number column, invalid date strings, and so on.</p>
+</li>
+</ul>
+</td>
+<td class="cellalignment60" headers="d5409e87 d5409e64">
+<p>Row is rejected.</p>
+<p>For dimension load tasks, instead of rejecting rows, the row is inserted into the target table with the unspecified value for all the columns except the key columns (typically INTEGRATION_ID and DATASOURCE_NUM_ID). This is done to ensure that fact rows inserted during ETL which refer to a dimension row, don&rsquo;t have a dangling foreign key.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>The following Knowledge Modules have been enhanced to support diagnostic features during load plan execution process:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>IKM BIAPPS Oracle Control Append</p>
+</li>
+<li>
+<p>IKM BIAPPS Oracle Incremental Update</p>
+</li>
+<li>
+<p>IKM BIAPPS Oracle Fact Incremental Update</p>
+</li>
+<li>
+<p>IKM BIAPPS Oracle Slowly Changing Dimension</p>
+</li>
+<li>
+<p>IKM BIAPPS Oracle Event Queue Delete Append</p>
+</li>
+<li>
+<p>IKM BIAPPS Oracle Fact Event Queue Delete Append</p>
+</li>
+<li>
+<p>IKM BIAPPS CLOUD Oracle Incremental Update</p>
+</li>
+<li>
+<p>CKM BIAPPS Oracle</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Package Structure for Error Handling and Automatic Correction</p>
+<p>All ODI packages that have a main interface step using one of the diagnostic-enabled IKMs include a loop as shown in the example here. Each interface step in the package that uses one of the IKMs has a <code class="codeph">ko</code> flow. At a high level, if there is no failure in the interface step, the scenario execution completes successfully after executing the interface step. However, if there is a failure in the interface step, the control is transferred to the <code class="codeph">ko</code> flow, which executes Refresh DIAG_EXEC_NUMBER and Evaluate DIAG_EXEC_NUMBER steps and then re-runs the interface step in diagnostic mode. The interface step now tries to capture Data Manipulation Language (DML) data errors (if any) in an error table and tries to auto-correct them based on a set of predefined rules as described, for example trimming string lengths in case of a string length overflow error.</p>
+<div class="figure" id="GUID-82C799EB-C9D0-467D-B4D1-70DB6A9AF428__GUID-058D2C2C-2ECD-441C-9A3F-40DABA4A4490"><img width="505" height="351" src="img/GUID-E8278035-0201-4BDE-87D1-7B012B4A072F-default.gif" alt="Description of GUID-E8278035-0201-4BDE-87D1-7B012B4A072F-default.gif follows" title="Description of GUID-E8278035-0201-4BDE-87D1-7B012B4A072F-default.gif follows" /><br />
+<a href="img_text/GUID-E8278035-0201-4BDE-87D1-7B012B4A072F-default.htm">Description of the illustration GUID-E8278035-0201-4BDE-87D1-7B012B4A072F-default.gif</a></div>
+<!-- class="figure" -->
+<p>If the diagnostic framework can&rsquo;t automatically correct the error records, they are rejected in an error table so that the non-error rows can be loaded in the target and the scenario execution can complete successfully.</p>
+<p>If the failure was caused by a system error or error in LKM steps, the interface step is more likely to fail again, in which case the control is transferred to Diagnostic Raise Exception procedure step and fail the scenario execution.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Enabling and Disabling Diagnostic Features</p>
+<p>ETL diagnostics and automatic correction can be turned on or off using two parameters in <span>Configuration Manager</span>, both of which are set to <kbd class="userinput">Y</kbd> by default:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><code>DIAG_ERR_LOG_SUPPORTED</code> &mdash; This parameter controls whether the ODI IKM code performs any auto-corrections for DML data errors or not. If disabled, ODI IKM does not attempt to perform any automatic corrections on data. Upon failure of a task, it still re-runs the interface step in diagnostic mode, but raises an error after attempting to capture the data errors.</p>
+</li>
+<li>
+<p><code>DIAG_AUTOCORRECT</code>&mdash; This parameter controls the ETL diagnostic and auto-correction feature. When disabled, failed interface steps are not re-run in diagnostic mode.</p>
+</li>
+</ul>
+<p>To reset these parameters, navigate to the <span class="wintitle">Manage Data Loads Parameters</span> page in <span>Configuration Manager</span> and set them to <kbd class="userinput">N</kbd>. Your load plans are regenerated after resetting these parameters.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment43">
+<tr>
+<td class="cellalignment50">
+<table class="cellalignment48">
+<tr>
+<td class="cellalignment47"><a href="GUID-33BEB35E-A05B-49E5-832D-1B4A6261A6D2.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment47"><a href="GUID-C1BD3F54-E330-42F1-A391-2CE4801AD6FE.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2014, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment52">
+<table class="cellalignment46">
+<tr>
+<td class="cellalignment47"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment47"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment47"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

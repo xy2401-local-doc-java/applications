@@ -1,0 +1,1483 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Payroll Batch Loader Using Workbooks (Chapter 21) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:18 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="batch uploads;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM1415462.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM2009021.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="The payroll batch loader workbooks display a status on the Batch Header Sheet. The status reflects the status of the batch
+      header, all the batch lines, and any control totals specified for the batch. Use the Batch Loader task from the Payroll Administration,
+      Data Exchange, or Checklist work area to download the workbooks. For payroll managers and administrators, select the Batch
+      Loader task in the Payroll Administration, Data Exchange, or Checklist work area. If a flow includes the batch loader, you
+      can also access it from the Payroll Checklist work area using the Enter Batch task on the Payroll Flow page."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">24/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM2009020" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">21</span>Payroll Batch Loader Using Workbooks
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM280596">Payroll Batch Statuses: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM874922">Creating Element Entries Using the Batch Loader: Worked Example</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM280546">Creating Globals Using the Batch Loader: Worked Example</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1415461">FAQs for Payroll Batch Loader Using Workbooks</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM280596">
+                  <h2>Payroll Batch Statuses:  Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The payroll batch loader workbooks display
+                     a status on the Batch Header Sheet. The status reflects the status
+                     of the batch header, all the batch lines, and any control totals specified
+                     for the batch. Use the Batch Loader task from the Payroll Administration,
+                     Data Exchange, or Checklist work area to download the workbooks.
+                  </p>
+                  
+                  
+                  
+                  <p>On the Batch Header Sheet, you can see the following
+                     status values.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="Meaning of batch statuses in&#xA;the payroll batch loader workbooks">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Status
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Meaning
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Valid</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>All of the lines, totals, and header are valid</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Transferred</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>All of the lines, totals, and header are transferred
+                                 from the staging tables to the applicable HCM tables
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Transfer incomplete</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>The header and totals are transferred along with
+                                 only some of the lines
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Unprocessed</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>At least one line, total, or the header is unprocessed,
+                                 and no lines transferred
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Error</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>The header wasn't transferred and at least one line,
+                                 total, or the header is in error
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM874922">
+                  <h2>Creating Element Entries Using the Batch Loader: Worked Example</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This example demonstrates how to create element entries for
+                     bonus earnings for two workers in the US Sun Power legislative data
+                     group using the payroll
+                     batch loader. You select the annual bonus element and create
+                     element entries in the workbook entering the monetary amount for each
+                     bonus payment.
+                  </p>
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     In this example, you create batch header and batch
+                     content and transfer the batch from the Data Exchange work area. You
+                     can also create and transfer batch from the Payroll Administration
+                     or Checklist work area.
+                     
+                  </div>
+                  
+                  
+                  <div class="sect2" id="FAIHM874862">
+                     <h3 class="topictitle">Prerequisites</h3>
+                     
+                     <p>This worked example assumes that you completed the
+                        following prerequisites:
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Install Oracle ADF Desktop Integration
+                              Runtime Add-in for Excel
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Create a bonus element at the assignment
+                              level for element entries
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Identify the assignment numbers of
+                              the workers who receive the bonus element entries
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                  </div>
+                  
+                  
+                  <h3 class="topictitle">Creating a Batch Header</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>From the Data Exchange work area, select the Batch
+                           Loader task.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Manage Batch Loader Processes page, click <span class="uicontrol">Download Spreadsheet</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>After the DesktopGenericBatchLoader.xlsx file downloads,
+                           open the file.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>When prompted to connect, click <span class="uicontrol">Yes</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Login dialog box, enter your user ID and
+                           password, and then click <span class="uicontrol">Sign In</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Batch Name column of the Search Results section,
+                           enter US Sun Power Bonus.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Legislative Data Group list, select <span class="uicontrol">US Sun Power</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Save</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Upload Options dialog box, accept the default
+                           selection and click <span class="uicontrol">OK</span>.
+                        </p>
+                        
+                        <p> 
+                           <p>Once your selections are saved, the batch is
+                              created and the status for that row displays that the row inserted
+                              successfully.
+                           </p> 
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Creating Batch Content</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>On the Batch Header Sheet, double-click the batch
+                           name <span class="uicontrol">US Sun Power Bonus</span> to prepare
+                           for data entry.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Navigate to the Batch Content Sheet.</p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Under Batch Contents Action, click <span class="uicontrol">Add</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Search for and select the task and task action as
+                           follows:
+                        </p>
+                        
+                        <p> 
+                           <ol>
+                              
+                              <li>
+                                 <p>In the Task Name field, enter <span class="uicontrol">Element Entry</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the Task Action Name field,
+                                    enter <span class="uicontrol">Create</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the Reference field, enter the
+                                    element name for the bonus. For example, US Annual Bonus.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Search</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Select the row with your bonus
+                                    element in the Reference column, and then click <span class="uicontrol">OK</span>.
+                                 </p>
+                              </li>
+                              
+                           </ol> 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Double-click the <span class="uicontrol">Create
+                              Element Entry</span> task action name.
+                        </p>
+                        
+                        <p> 
+                           <p>The workbook refreshes to display the columns
+                              for the selected element, ready for data entry.
+                           </p> 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Batch Content Line Details section, enter
+                           the values for Nancy as shown in this table.
+                        </p>
+                        
+                        <p></p>
+                        <div class="simpletable-margin">
+                           <table summary="This table lists field names (left column) and their respective values.">
+                              
+                              
+                              <tr>
+                                 
+                                 <th scope="col">
+                                    Field
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Line Sequence</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>1</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Effective Start Date</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>2014-12-15</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Assignment Number</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>E1000842</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Pay Value</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>500</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        
+                        <p> 
+                           <div class="infobox-note"><span class="notep1">Note: </span>
+                              One number to identify the person is required. Use
+                              one of the number columns depending on the person's employment level.
+                              For example, if a person has more than one assignment for a single
+                              payroll relationship, enter both the payroll relationship number and
+                              the assignment number.
+                              
+                           </div> 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Right-click the next row number and insert a row
+                           for Joseph's details.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Enter the values for Joseph as shown in this table.</p>
+                        
+                        <p></p>
+                        <div class="simpletable-margin">
+                           <table summary="This table lists field names (left column) and their respective values.">
+                              
+                              
+                              <tr>
+                                 
+                                 <th scope="col">
+                                    Field
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Line Sequence</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>2</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Effective Start Date</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>2014-12-15</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Assignment Number</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>E1003564</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Pay Value</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>400</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Save</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Upload Options dialog box accept the default
+                           selection and click <span class="uicontrol">OK</span>.
+                        </p>
+                        
+                        <p> 
+                           <p>Keep the workbook open. You verify the transfer
+                              of the element entries in the final step of this example.
+                           </p> 
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Transferring the Batch</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>On the Batch Loader Processes page, click <span class="uicontrol">Submit a Process</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Legislative Data Group field, select <span class="uicontrol">US Sun Power</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p> In the Batch Process field, search for and select <span class="uicontrol">Transfer Batch</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p> On the Submit a Batch Process: Transfer Batch page,
+                           in the Batch Run Name field, enter a name for the batch, such as US
+                           Sun Power Bonus Batch. 
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Batch field, search for and select US Sun
+                           Power Bonus. 
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Submit</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Refresh</span> until the Transfer Batch process status displays as complete.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Monitoring and Verifying the Transfer</h3>
+                  
+                  On the Manage Batch Loader Processes page,
+                  you can click:
+                  <ul>
+                     
+                     <li>
+                        <p><span class="uicontrol">Recently
+                              Completed</span> to view the list of recently completed batch
+                           processes.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p><span class="uicontrol">Attention
+                              Required </span> to view the list of errored processes.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Recently Completed</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Search field, search for and select the
+                           US Sun Power Bonus batch name to view the progress of the batch process. 
+                        </p>
+                        
+                        <p>On this page, you can monitor the progress of existing batch
+                           processes, view the volume of batch records processed, and troubleshoot
+                           any errored processes. 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>You should see the status of the batch process
+                           as Complete.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Verifying the Transfer in the Workbook</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>Navigate to the Batch Header Sheet and double-click
+                           your batch name.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Navigate to the Batch Content Sheet.</p>
+                        
+                        <p> 
+                           <p>Notice that the status displays as transferred.</p> 
+                        </p>
+                        <p></p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Double-click the Create Element Entry task action
+                           name.
+                        </p>
+                        
+                        <p> 
+                           <p>Notice that the two rows show that they are
+                              transferred.
+                           </p> 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Scroll to the right to show the Message column.</p>
+                        
+                        <p> 
+                           <p>You should see no error messages. Nancy and
+                              Joseph should now have the bonus element entries. You can use the
+                              Manage Element Entries task to find the workers and view the element
+                              entries.
+                           </p> 
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=95727E50BD3F13CBE040D30A68812CBC">Using Desktop Integrated Excel Workbooks: Points to Consider</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM1415462.htm#FAIHM306458">Payroll Batch Loader Tasks: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM1415466.htm#FAIHM1754801">Payroll Batch Loader Workbook for Element Entries</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM280546">
+                  <h2>Creating Globals Using the Batch Loader: Worked Example</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This example demonstrates how to enter globals for two types of
+                     bonuses in the InFusion US legislative data group using the payroll batch loader workbook. You set the bonus values for executives at ten percent
+                     of their salary and instructors at a fixed value of 500. You can change
+                     these values later in the global to apply the same value in any formulas that use them.
+                  </p>
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     In this example, you create batch header and batch
+                     content and transfer the batch from the Payroll Administration work
+                     area. You can also create and transfer batch from the Data Exchange
+                     or Checklist work area. 
+                     
+                  </div>
+                  
+                  
+                  
+                  <p>The following table summarizes key decisions for this
+                     scenario.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="Decisions about the type of data&#xA;and which globals to create">
+                        
+                        
+                        <tr class="header">
+                           <th scope="col">
+                              Decisions to Consider
+                              
+                           </th>
+                           <th scope="col">
+                              In This Example
+                              
+                           </th>
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Load what type of data?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Fast Formula Global</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Create which globals?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Executive Bonus for a percentage and Instructor Bonus
+                                 for a fixed amount.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  <div class="sect2" id="FAIHM280507">
+                     <h3 class="topictitle">Prerequisite</h3>
+                     
+                     <p>This worked example assumes that you installed Oracle
+                        ADF Desktop Integration Runtime Add-in for Excel.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <h3 class="topictitle">Creating a Batch Header</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>From the Payroll Administration work area, select
+                           the Batch Loader task.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Batch Loader page, click <span class="uicontrol">Download</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>After the DesktopGenericBatch.xlsx file downloads,
+                           open the file.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>When prompted to connect, click <span class="uicontrol">Yes</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Login dialog box, enter your user ID and
+                           password, and then click <span class="uicontrol">Sign In</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Navigate to the Batch Header Sheet at the bottom
+                           of the workbook.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Batch Name column of the Search Results section,
+                           enter InFusion Globals.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Legislative Data Group list, select <span class="uicontrol">InFusion US</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Save</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Upload Options dialog box, accept the default
+                           selection and click <span class="uicontrol">OK</span>.
+                        </p>
+                        
+                        <p> 
+                           <p>After you save your selections, the Batch Status
+                              text for that row displays that the row inserted successfully.
+                           </p> 
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Creating Batch Content</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>On the Batch Header Sheet, double-click the batch
+                           name <span class="uicontrol">InFusion Globals</span> to prepare
+                           for data entry.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Navigate to the Batch Content Sheet.</p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Under Batch Contents Action, click <span class="uicontrol">Add</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Task Name field, enter Fast Formula Global.</p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Search</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Select <span class="uicontrol">Fast Formula Global</span>, and then click <span class="uicontrol">OK</span>.
+                        </p>
+                        
+                        <p> 
+                           <p>The workbook should update to display the columns
+                              for the selected task, ready for data entry.
+                           </p> 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Batch Line Content Details section enter
+                           the values for each global as shown in this table.
+                        </p>
+                        
+                        <p></p>
+                        <div class="simpletable-margin">
+                           <table summary="This table lists field names (left column) and their respective values.">
+                              
+                              
+                              <tr>
+                                 
+                                 <th scope="col">
+                                    Field
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    First Global Value
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Second Global Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Line Sequence</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>1</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>2</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Effective Start Date</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>2011-01-01</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>2011-01-01</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Effective End Date</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>2020-12-31</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>2020-12-31</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Value</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>.10</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>500</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Data Type</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>N</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>N</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Name</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Executive Bonus</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Instructor Bonus</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        
+                        <p> 
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              To insert more lines for additional global values,
+                              right-click on the row number where you want to add a row, and then
+                              select <span class="uicontrol">Insert</span>.
+                              
+                           </div> 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Save</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Upload Options dialog box accept the default
+                           selection and click <span class="uicontrol">OK</span>.
+                        </p>
+                        
+                        <p> 
+                           <p>Keep the workbook open. You verify the transferred
+                              globals in the final step of this example.
+                           </p> 
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Transferring the Batch</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>From the Payroll Administration work area, click <span class="uicontrol">Submit a Process or Report</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Legislative Data Group field, select <span class="uicontrol">InFusion US</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Flow Pattern column, select <span class="uicontrol">Transfer Batch</span>, and then click <span class="uicontrol">Next</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Payroll Flow field, enter a name for the
+                           process, such as InFusion Globals Batch.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Batch field, search for and select <span class="uicontrol">InFusion Globals</span>, and then click <span class="uicontrol">Next</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Enter Flow Interaction page, click <span class="uicontrol">Next</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Review page, click <span class="uicontrol">Submit</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Refresh</span> until the Transfer Batch process status displays as complete.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Verifying the Transfer</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>In the workbook, navigate to the Batch Content Sheet.</p>
+                        
+                        <p> 
+                           <p>You should see the status displayed as transferred.</p> 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Navigate back to the Batch Message Sheet.</p>
+                        
+                        <p> 
+                           <p>You should see no error messages. You can use
+                              the new globals in your formulas.
+                           </p> 
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=95727E50BD3F13CBE040D30A68812CBC">Using Desktop Integrated Excel Workbooks: Points to Consider</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM1415462.htm#FAIHM306458">Payroll Batch Loader Tasks: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM2009021.htm#FAIHM1398738">Loading a Payroll Batch From a File: Procedure</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1415461">
+                  <h2>FAQs for Payroll Batch Loader Using Workbooks</h2>
+                  
+                  <div class="sect2" id="FAIHM279241">
+                     <h3>How can I access the payroll batch loader?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>For payroll managers and administrators, select
+                        the <span class="uicontrol">Batch Loader</span> task in the Payroll
+                        Administration, Data Exchange, or Checklist work area. If a flow includes
+                        the batch loader, you can also access it from the Payroll Checklist work area using
+                        the Enter Batch task on the Payroll Flow page.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1563387">
+                     <h3>Can I copy rows from another spreadsheet into a batch loader workbook?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Yes, but you must ensure that you save the
+                        workbook without errors before you transfer the batch. It's best practice
+                        to insert blank rows and then add content. If you have multiple rows
+                        to insert, copy rows from your offline spreadsheet, and then right-click
+                        a row in the content area and select <span class="uicontrol">Insert
+                           Copied Cells</span>. Once you verify that all the inserted data
+                        is in the correct columns, click <span class="uicontrol">Save</span>. Then check that the status for each row shows that it was inserted
+                        successfully.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM279259">
+                     <h3>Can I use the batch loader to upload a spreadsheet I create?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>No, you can't if you didn't download the payroll batch loader workbook. The batch loader workbook automatically inserts macros
+                        essential to successful processing. You can download the batch upload
+                        workbook to your desktop and edit the data before loading it.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM279250">
+                     <h3>How do I modify an Excel workbook template for the payroll batch loader?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>You can't modify the structure of integrated
+                        Microsoft Excel workbooks because they're based on predefined templates.
+                        This restriction ensures the fields entered correspond exactly to
+                        the HCM tables that receive the uploaded data.
+                     </p>
+                     
+                     
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Mapping Source Payroll Information Using Domains</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="You can map from source Payroll balances/earnings/deductions/taxes to the Oracle Business Analytics Warehouse Payroll summary measures through the use of domain values." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-46D90C7D-95BB-48C9-B497-661DB2EC7ADB.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-541E4DCC-0190-412F-8164-5EED2BF68B21.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-E2FF7AEF-E758-4FBB-9097-CE5B8CFFCDAC"></a> <span id="PAGE" style="display:none;">102/336</span> <!-- End Header -->
+<a id="BIACF25367"></a><a id="BIACF25368"></a><a id="BIACF25369"></a><a id="BIACF25370"></a><a id="BIACF25371"></a><a id="IT_107"></a>
+<h1 id="BIAFC-GUID-E2FF7AEF-E758-4FBB-9097-CE5B8CFFCDAC" class="sect1">Mapping Source Payroll Information Using Domains</h1>
+<div>
+<p>You can map from source Payroll balances/earnings/deductions/taxes to the <span>Oracle Business Analytics Warehouse</span> Payroll summary measures through the use of domain values.</p>
+<div class="section">
+<p>HR Analytics Payroll model has two fact tables, the detailed fact table and the summary fact table. The detailed fact table has all the balances (in case of EBS Payroll) and Earnings/Deductions/Taxes (In case of PeopleSoft North American and Global Payroll) extracted from the source system on separate rows. This table will be used for detail reports and ad-hoc analysis.</p>
+<p>To support analytic reporting, the summary fact table delivers a set of default summary measures. Source payroll balances are mapped to the summary measures and loaded into summary fact table. More than one payroll balance can be mapped to a summary metric, in which case the individual source balances will be summed to form a summary measure.</p>
+<div class="figure" id="GUID-E2FF7AEF-E758-4FBB-9097-CE5B8CFFCDAC__GUID-236230F4-1DC2-456B-A91B-40BA6A476939"><img width="714" height="417" src="img/GUID-8A415DCA-F1B7-44A3-869C-6125393534B7-default.gif" alt="Description of GUID-8A415DCA-F1B7-44A3-869C-6125393534B7-default.gif follows" title="Description of GUID-8A415DCA-F1B7-44A3-869C-6125393534B7-default.gif follows" /><br />
+<a href="img_text/GUID-8A415DCA-F1B7-44A3-869C-6125393534B7-default.htm">Description of the illustration GUID-8A415DCA-F1B7-44A3-869C-6125393534B7-default.gif</a></div>
+<!-- class="figure" -->
+<p>If, Base Pay constitutes Regular Salary, Total Earnings constitutes Regular Salary and Bonus and Total Tax constitutes Income Tax and Social Insurance Tax.</p>
+<p>The source to target balance mapping should be done accordingly as shown below.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Regular Salary is mapped to Pay_Base and Total Earnings summary measures.</p>
+</li>
+<li>
+<p>Bonus is mapped to Total Earnings (Total Earnings = Regular Salary + Bonus).</p>
+</li>
+<li>
+<p>Income Tax and Social Insurance Tax are mapped to Total Tax (Total Tax = Income Tax + Social Insurance Tax).</p>
+</li>
+</ul>
+<p>To ensure additive property of measures, we only support run balances. For each payroll run the actual run balances processed are stored. Because we are not breaking these down by context, we can combine run balances across time to form higher level balances, for example, PTD, MTD, and YTD.</p>
+<p>If the source balance mapping to the summary measures are not done in the <span>Configuration Manager</span>, the Payroll Summary Fact table will not be loaded with any data and this will cause the reports based on the summary fact table to return no data.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Optional or Mandatory</p>
+<p>Mandatory, as the default HR Analytics payroll reports that are based on the Summary Fact table will return no data if the Source balance mapping is not configured.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Task description in detail</p>
+<p>The graphic shows the domains used for mapping the source balances to the target summary measures.</p>
+<div class="figure" id="GUID-E2FF7AEF-E758-4FBB-9097-CE5B8CFFCDAC__GUID-07D0FBD7-EF96-41C4-8ACE-789C855A48B8"><img width="665" height="534" src="img/GUID-47B3A94B-A0BC-43E0-82C4-93DD8A50162D-default.gif" alt="Description of GUID-47B3A94B-A0BC-43E0-82C4-93DD8A50162D-default.gif follows" title="Description of GUID-47B3A94B-A0BC-43E0-82C4-93DD8A50162D-default.gif follows" /><br />
+<a href="img_text/GUID-47B3A94B-A0BC-43E0-82C4-93DD8A50162D-default.htm">Description of the illustration GUID-47B3A94B-A0BC-43E0-82C4-93DD8A50162D-default.gif</a></div>
+<!-- class="figure" -->
+<p>Source payroll balances can be mapped to the target summary measures in two ways:</p>
+<p>- One to One Mapping (using W_PAY_BALANCE domain).</p>
+<p>- Many to One Mapping (using W_PAY_MAP_FACTOR_xxxx domain).</p>
+<p>In one-to-one mapping, a source balance is directly mapped to a summary measure in <span>Configuration Manager</span>.</p>
+<p>For example: If you have a source balance called Base Pay, you can map it to PAY_BASE summary measure code in the <span>Configuration Manager</span> using the Domain Mappings.</p>
+<p>If you have multiple source balances Earns1, Earns2 that constitute a summary measure PAY_BASE, you can map multiple source balances to a single summary measure.</p>
+<p>The source balances will be aggregated to populate the summary measure.</p>
+<p>PAY_BASE = Earns1 + Earns2</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">List of delivered Payroll Summary Measures</p>
+<p>FLEX_BALANCEx summary measures can be used to map any source balance that does not fit in to the out-of-box summary measures. The flex balance list can be extended as part of any customization.</p>
+<p>The following list shows the tab-separated data for Summary Measure Code, Category, and Description for the delivered Payroll Summary Measures.</p>
+<pre dir="ltr">
+SUMMARY MEASURE CODE CATEGORY        DESCRIPTION
+BEN_COST_EMPLOYEE       Benefits        Benefit costs paid by an employee such as employee premium for medical, dental, vision, disability and life insurance. 
+BEN_COST_EMPLOYER       Benefits        Benefit costs paid by the employer such as employer premium for medical, dental, vision, disabilility, and life insurance, retirement funding and educational assistance, et.,  Employer-paid benefit cost is a key metric in analyzing employee total compensation and workforce cost.
+BEN_TAXABLE     Benefits        Taxable benefits are employer provided "non-cash" taxable compensation or fringe benefits, such as employer-provided vehicles, complementary tickets, and educational assistance, are subject to tax rules.
+DEDUCTIONS_INVOL        Other Deductions        Involuntary deducitons are payroll deductions that the employer is mandated by the law to withhold from an employee's paycheck, e.g. income tax witholding, social security taxes, court ordered garnishment such as child support, bankrupcy order, tax levy.
+DEDUCTIONS_POST_TAX     Other Deductions        Payroll deductions that are deducted after taxes are withheld.   Examples of post tax deductions are union dues, transportation fees, garnishments etc.  These deductions do not reduce taxable wages. 
+DEDUCTIONS_PRE_TAX      Other Deductions        Payroll deductions that are deducted before taxes are withheld.   Examples of before tax deductions are health insurance premium, 401K deductions, etc.  These deductions reduce taxable wages.
+DEDUCTIONS_VOL  Other Deductions        Voluntary deductions are payroll deductions that have been authorized by an employee e.g. retirement saving deduction, health and life insurance premiums, contribution to disability and health saving plans.  Some voluntary deductions are before-tax withholdings whereas others are withheld after taxes.  
+FLEX_BALANCE1   Flex Balances   Extensible balance field 1
+FLEX_BALANCE10  Flex Balances   Extensible balance field 10
+FLEX_BALANCE11  Flex Balances   Extensible balance field 11
+FLEX_BALANCE12  Flex Balances   Extensible balance field 12
+FLEX_BALANCE13  Flex Balances   Extensible balance field 13
+FLEX_BALANCE14  Flex Balances   Extensible balance field 14
+FLEX_BALANCE15  Flex Balances   Extensible balance field 15
+FLEX_BALANCE16  Flex Balances   Extensible balance field 16
+FLEX_BALANCE17  Flex Balances   Extensible balance field 17
+FLEX_BALANCE18  Flex Balances   Extensible balance field 18
+FLEX_BALANCE19  Flex Balances   Extensible balance field 19
+FLEX_BALANCE2   Flex Balances   Extensible balance field 2
+FLEX_BALANCE20  Flex Balances   Extensible balance field 20
+FLEX_BALANCE3   Flex Balances   Extensible balance field 3
+FLEX_BALANCE4   Flex Balances   Extensible balance field 4
+FLEX_BALANCE5   Flex Balances   Extensible balance field 5
+FLEX_BALANCE6   Flex Balances   Extensible balance field 6
+FLEX_BALANCE7   Flex Balances   Extensible balance field 7
+FLEX_BALANCE8   Flex Balances   Extensible balance field 8
+FLEX_BALANCE9   Flex Balances   Extensible balance field 9
+HEALTHCARE_EMPLOYEE     Other Deductions        Employee contribution to healthcare insurance premiums including medical, dental and vision plans.
+HEALTHCARE_EMPLOYER     Benefits        Employer contribution towards the cost of employee healthcare insurance including medical, dental and vision insurance premium, or other employer-assisted wellness plans.
+HOLIDAY_HOURS   Hours   Holiday hours are hours compensated for paid company holidays such as New Year, Christmas, etc.
+OVERTIME_HOURS  Hours   Overtime hours paid  
+PAY_BASE        Standard Earnings       Base salary is the fixed salary or wage paid to an employee based on an employment contract.  Base pay does not include variable pay components such as bonus, overtime or sales commission.
+PAY_BONUS       Standard Earnings       Bonus pay is they pay compensation over and above the amount of pay specified as a base salary or hourly rate of pay
+PAY_COMMISSION  Standard Earnings       The amount of money that an individual receives based on the level of sales he or she has obtained. Sales commission is the amount earned in addition to his/her base salary.
+PAY_GROSS       Standard Earnings       Gross amount of remuneration for each pay type including regular pay, overtime pay, allowances, commissions, bonuses, and any other amounts, before any deductions are made.
+PAY_HOLIDAY     Standard Earnings       Holiday pay are pay compensated for paid company holidays such as New Year, Christmas, etc.
+PAY_NET Standard Earnings       The remaining amounts of an employee's gross pay after deductions, such as taxes and retirement contributions, are made.
+PAY_OTHER       Standard Earnings       Other types of pay that are not base pay, bonus, overtime, commission pay.
+PAY_OVERTIME    Standard Earnings       The amount of pay compensated for hours worked beyond an employee's normal working hours and is entitled to overtime premium.
+PAY_VARIABLE    Standard Earnings       Variable pay is also known as performance pay, is used to recognise and reward employee performance above and beyond their normal job requirements.  Variable pay may include profit sharing, bonuses, holiday bonus, or other forms of cash, and goods and services such as a company-paid trip.
+PENSION_EMPLOYEE        Pension The amount contributed by an employee towards his/her retirement funding such as an employee's contribution to a retirement saving plan
+PENSION_EMPLOYER        Pension The amount contributed by the employer towards an employee's retirement funding such as employer contribution to an employee's retirement saving plan
+REGULAR_HOURS   Hours   Hours compensation for an employee's normal working hours based on an employment contract
+SICK_HOURS                      Hours   An employee sick time that is compensated
+SICK_PAY                        Standard Earnings       Amount paid for an employee's sick time
+SOC_INS_EMPLOYEE        Other Deductions        Social security insurance taxes paid by an employee
+SOC_INS_EMPLOYER        Other Deductions        Social security insurance taxes paid by the employer
+STOCK_VESTED_VAL        Benefits        The value of an employee's vested stock options
+TAX_EMPLOYEE    Tax     Payroll taxes withheld from an employee's pay check such as income taxes, social security and medicate taxes, etc.
+TAX_EMPLOYER    Tax     Employer paid taxes are payroll taxes paid by the employer for social security, medicare tax withholding unemployment tax insurance or any other form of employer payroll taxes.  Employer-paid tax is a key metric in  analyzing employee total compensation and workforce cost.
+TOTAL_DEDUCTIONS        Totals  Total before and after tax deductions including benefit deductions, taxes, and other voluntary or involuntary deductions.
+TOTAL_EARNINGS  Totals  Total gross pay; this is the grand total of all gross pays on a pay check
+VACATION_HOURS                  Hours   Total number of hours paid for an employee's vacation time or personal time off.
+VACATION_PAY                    Standard Earnings       Amount compensated for an employee's vacation time or personal time off
+</pre></div>
+<!-- class="section" --></div>
+<div class="sect2"><a id="MANY_TO_ONE_BALANCE_MAPPING"></a>
+<h2 id="BIAFC-MANY_TO_ONE_BALANCE_MAPPING" class="sect2">Steps for One-to-One Balance Mapping</h2>
+<div>
+<p>The following are the steps to be followed to map the Source Balances to the Warehouse Summary Measures.</p>
+<ol>
+<li class="stepexpand"><span>Identify the Source Balances to be extracted in the ETL.</span>
+<div>To restrict the balances extraction, see <a href="GUID-85313822-294A-4411-92FA-3301B7A66DD5.htm#GUID-85313822-294A-4411-92FA-3301B7A66DD5" title="To extract payroll balances into Oracle Business Analytics Warehouse, the balances must be assigned to the BI Balance Group in the Fusion Applications system and Elements to Element Group in PeopleSoft Global Payroll.">About Adding Payroll Balances to BI Payroll Balance Group</a>.</div>
+</li>
+<li class="stepexpand"><span>Run the Domains ETL and extract the source domains into <span>Configuration Manager</span>.</span>
+<ol>
+<li><span>Create a Domains ETL load plan in the <span>Configuration Manager</span> with the Fact Group as Payroll Fact Group.</span></li>
+<li><span>Execute the load plan and the source domains will be extracted into the <span>Configuration Manager</span> schema.</span></li>
+</ol>
+</li>
+<li class="stepexpand"><span>Map the Source balances to the corresponding summary measures.</span>
+<ol>
+<li class="substepexpand"><span>Navigate to 'Manage Source Domains' under Domains Administration to check if the source domains are populated.</span>
+<div>
+<div class="figure" id="MANY_TO_ONE_BALANCE_MAPPING__GUID-99D246CD-A59A-43F9-9328-E5985460D924"><img width="719" height="345" src="img/GUID-7F361C1B-C01A-4502-8CEC-B9A957410AC5-default.gif" alt="Description of GUID-7F361C1B-C01A-4502-8CEC-B9A957410AC5-default.gif follows" title="Description of GUID-7F361C1B-C01A-4502-8CEC-B9A957410AC5-default.gif follows" /><br />
+<a href="img_text/GUID-7F361C1B-C01A-4502-8CEC-B9A957410AC5-default.htm">Description of the illustration GUID-7F361C1B-C01A-4502-8CEC-B9A957410AC5-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="substepexpand"><span>Navigate to 'Manage Warehouse Domains' under Domains Administration to verify the target domains (summary measures) are present.</span>
+<div>
+<div class="figure" id="MANY_TO_ONE_BALANCE_MAPPING__GUID-26C93E53-B23C-4976-A146-02C9B5266B51"><img width="777" height="531" src="img/GUID-6F7A4739-A632-4560-98AD-2A08FC29F697-default.gif" alt="Description of GUID-6F7A4739-A632-4560-98AD-2A08FC29F697-default.gif follows" title="Description of GUID-6F7A4739-A632-4560-98AD-2A08FC29F697-default.gif follows" /><br />
+<a href="img_text/GUID-6F7A4739-A632-4560-98AD-2A08FC29F697-default.htm">Description of the illustration GUID-6F7A4739-A632-4560-98AD-2A08FC29F697-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="substepexpand"><span>Navigate to 'Manage Domain Mappings and Hierarchies' for mapping the Source balances to the Summary Measures.</span>
+<div>
+<div class="figure" id="MANY_TO_ONE_BALANCE_MAPPING__GUID-4019FCBC-7638-4926-ADA3-4D0E079AA24F"><img width="767" height="525" src="img/GUID-57B41014-85E7-4215-BFC4-6886631F5B5B-default.gif" alt="Description of GUID-57B41014-85E7-4215-BFC4-6886631F5B5B-default.gif follows" title="Description of GUID-57B41014-85E7-4215-BFC4-6886631F5B5B-default.gif follows" /><br />
+<a href="img_text/GUID-57B41014-85E7-4215-BFC4-6886631F5B5B-default.htm">Description of the illustration GUID-57B41014-85E7-4215-BFC4-6886631F5B5B-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="substepexpand"><span>Click on the <span class="bold">Edit</span> button in the Domain Member Mappings section to map the source domains to the target domains.</span></li>
+<li class="substepexpand"><span>Save and Close.</span></li>
+</ol>
+</li>
+<li class="stepexpand"><span>Run the main Load Plan to load <span>Oracle Business Analytics Warehouse</span>.</span>
+<div>
+<p>The identified balances are loaded into Payroll detail fact table as separate rows. The Summary Measures are loaded in the summary fact table as per the mapping done in step 3.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect2"><a id="ONE_TO_ONE_BALANCE_MAPPING"></a>
+<h2 id="BIAFC-ONE_TO_ONE_BALANCE_MAPPING" class="sect2">Steps for Many-to-One Balance Mapping</h2>
+<div>
+<p>In Many-to-One mapping, you can also derive a summary measure using various balances.</p>
+<div class="section">
+<p>For example, NET_PAY can be derived using a calculation like:</p>
+<p>Earns1 + Earns2 &ndash; Ded1 &ndash; Ded2, Earns1, Earns2, Ded1 and Ded2 being source balances.</p>
+<p>For this to achieve, you need to map the above source balances to warehouse domain W_PAY_MAP_FACTOR_PAY_NET.</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Follow the steps from 1 to 3.a in <cite>Steps for One-to-One Balance Mapping</cite>.</span></li>
+<li class="stepexpand"><span>Navigate to Manage Warehouse Domains and search for W_PAY_MAP_FACTOR domain code.</span>
+<div>
+<div class="figure" id="ONE_TO_ONE_BALANCE_MAPPING__GUID-6B65A65B-D66A-436D-B90E-B89CD606D137"><img width="758" height="477" src="img/GUID-DC89AF9F-CDC6-48F9-8CBE-3FBB1A520C0A-default.gif" alt="Description of GUID-DC89AF9F-CDC6-48F9-8CBE-3FBB1A520C0A-default.gif follows" title="Description of GUID-DC89AF9F-CDC6-48F9-8CBE-3FBB1A520C0A-default.gif follows" /><br />
+<a href="img_text/GUID-DC89AF9F-CDC6-48F9-8CBE-3FBB1A520C0A-default.htm">Description of the illustration GUID-DC89AF9F-CDC6-48F9-8CBE-3FBB1A520C0A-default.gif</a></div>
+<!-- class="figure" -->
+<p>You can add the desired multiplier as the Domain Member Code. For example: 1, if you want the balance to be added once or &ndash;1 to deduct once.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Navigate to the Manage Domain Mappings and Hierarchies and search for the domain W_PAY_MAP_FACTOR.</span>
+<div>
+<div class="figure" id="ONE_TO_ONE_BALANCE_MAPPING__GUID-E42EA453-8932-4DD0-8D29-291098257129"><img width="764" height="526" src="img/GUID-0D4D90CD-1140-4AE2-8D9A-C3DC3A80D3E0-default.gif" alt="Description of GUID-0D4D90CD-1140-4AE2-8D9A-C3DC3A80D3E0-default.gif follows" title="Description of GUID-0D4D90CD-1140-4AE2-8D9A-C3DC3A80D3E0-default.gif follows" /><br />
+<a href="img_text/GUID-0D4D90CD-1140-4AE2-8D9A-C3DC3A80D3E0-default.htm">Description of the illustration GUID-0D4D90CD-1140-4AE2-8D9A-C3DC3A80D3E0-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Select the Net Pay domain mapping and click <span class="bold">Edit</span> in the Domain Member Section.</span>
+<div>
+<div class="figure" id="ONE_TO_ONE_BALANCE_MAPPING__GUID-569CDB34-98D2-42FE-9B8D-5DE1042A89C9"><img width="670" height="326" src="img/GUID-EBED8054-79FE-4E07-B96E-80AEC2E1070A-default.gif" alt="Description of GUID-EBED8054-79FE-4E07-B96E-80AEC2E1070A-default.gif follows" title="Description of GUID-EBED8054-79FE-4E07-B96E-80AEC2E1070A-default.gif follows" /><br />
+<a href="img_text/GUID-EBED8054-79FE-4E07-B96E-80AEC2E1070A-default.htm">Description of the illustration GUID-EBED8054-79FE-4E07-B96E-80AEC2E1070A-default.gif</a></div>
+<!-- class="figure" -->
+<p>In this screen, you can map the source balances to the balance multiplier. For example: If NET_PAY is calculated as Earns1 + Earns2 &ndash; Ded1 &ndash; Ded2, then Source Earns1 is mapped to 1, Earns2 is mapped to 1, Ded1 is mapped to &ndash;1 and Ded2 is mapped to &ndash;1. For each employee, per pay period, the NET_PAY is calculated with the above formula and loaded into PAY_NET column of the Payroll Summary Fact table.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Run the Main Load Plan to extract the balances from source to warehouse.</span>
+<div>
+<p>The identified balances are loaded into Payroll detail fact table as separate rows. The Summary Measures are loaded in the summary fact table as per the mapping done in step 3.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-46D90C7D-95BB-48C9-B497-661DB2EC7ADB.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-541E4DCC-0190-412F-8164-5EED2BF68B21.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

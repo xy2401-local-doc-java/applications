@@ -1,0 +1,956 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Transferring Encrypted Data (Chapter 28) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:21 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="extracts; encrypting files; setting up encryption and decryption;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM1434033.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM1436830.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="You use encryption keys to encrypt files for secure transfer between Oracle HCM Cloud and your own servers through the Oracle
+      WebCenter Content server. This PGP-based encryption support is available for secure file transfer using HCM Data Loader, payroll
+      batch loader, and HCM Extracts."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">31/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM1693484" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">28</span>Transferring Encrypted Data
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1672917">Setting up Encryption for File Transfer: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1681762">Encrypting and Uploading Files Automatically: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1673014">Transferring Files Automatically from HCM Extracts with PGP Encryption: Procedure</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM1672917">
+                  <h2>Setting up Encryption for File Transfer: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You use encryption keys to encrypt files
+                     for secure transfer between Oracle HCM Cloud and your own servers
+                     through the Oracle WebCenter Content server. This PGP-based encryption
+                     support is available for secure file transfer using HCM Data Loader,
+                     payroll batch loader, and HCM Extracts.
+                  </p>
+                  
+                  
+                  
+                  <p>The process for inbound files (into Oracle HCM Cloud)
+                     is:
+                  </p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>You encrypt files using the Oracle
+                           HCM Cloud public key.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>The data-loading process decrypts
+                           files using the Oracle HCM Cloud private key.
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  <p>The process for outbound files (generated by Oracle
+                     HCM Cloud) is:
+                  </p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>Oracle HCM Cloud encrypts files
+                           using your public key.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>You decrypt files using your private
+                           key.
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  <p>Therefore, before you can encrypt or decrypt files,
+                     you must:
+                  </p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>Import your public key to Oracle
+                           HCM Cloud.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Generate the PGP encryption key
+                           pair and download the Oracle HCM Cloud public key.
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  <p>You can also sign the files, as follows:</p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Outbound files are signed using
+                           the HCM Cloud private key. You verify these files using the HCM Cloud
+                           public key.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Inbound files are signed using
+                           your private key. The data-loading process verifies inbound files
+                           using your public key.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>This topic describes how to set up encryption, decryption,
+                     and signing of files.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2174587">
+                     <h3 class="topictitle">Encryption and Signature Keys</h3>
+                     
+                     <p>This table identifies the keys that are used for
+                        encryption, decryption, signing, and verification in each supported
+                        encryption mode.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Encryption Mode
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Encryption Key
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Decryption Key
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Signing Key
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Verification Key
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Outbound PGP Signed</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>customer-key_pub</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>customer-key_priv</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>fusion-key_priv</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>fusion-key_pub</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Outbound PGP Unsigned</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>customer-key_pub</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>customer-key_priv</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>N/A</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>N/A</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Inbound PGP Signed</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>fusion-key_pub</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>fusion-key_priv</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>customer-key_priv</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>customer-key_pub</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Inbound PGP Unsigned</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>fusion-key_pub</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>fusion-key_priv</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>N/A</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>N/A</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2174623">
+                     <h3 class="topictitle">Importing Your Public Key</h3>
+                     
+                     <p>Your public key (customer-key_pub) is used for encryption
+                        of outbound files. You can decrypt the files using your private key
+                        (customer-key_priv). If you also want outbound files to be signed,
+                        then the HCM Cloud private key (fusion-key_priv) is used for signing.
+                        You can verify signed outbound files using the HCM Cloud public key
+                        (fusion-key_pub).
+                     </p>
+                     
+                     
+                     <p>To import the customer public key:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Sign in to Oracle HCM Cloud with
+                              the IT Security Manager job role or privileges.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">Security Console</span></span> to open the Security Console.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click the Certificates tab to open
+                              the Certificates page.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Import</span> to open the Import page.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Set <span class="uicontrol">Certificate
+                                 Type</span> to <span class="uicontrol">PGP</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Alias</span> field, enter <span class="uicontrol">customer-key</span>.
+                           </p>
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              You must enter <span class="uicontrol">customer-key</span> in this field. Otherwise, the encryption APIs can't use this key
+                              for encrypting outbound files.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Browse</span> to identify the location of the customer public
+                              key.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Import and Close</span> to import the public key into the Oracle
+                              HCM Cloud keystore.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>Your public key now appears on the Security Console
+                        Certificates page.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2174677">
+                     <h3 class="topictitle">Generating the PGP Encryption Key Pair</h3>
+                     
+                     <p>You generate the PGP key pair on the Security Console.
+                        You download the public key to encrypt files that are inbound into
+                        HCM Cloud (for example, input data files for HCM Data Loader). To
+                        sign these inbound files, you can use your private key (customer-key_priv),
+                        which is verified using your public key (customer-key_pub) in Oracle
+                        HCM Cloud. You must have imported the customer public key.
+                     </p>
+                     
+                     
+                     <p>To generate the PGP Encryption Key Pair:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Sign in to Oracle HCM Cloud with
+                              the IT Security Manager job role or privileges.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">Security Console</span></span> to open the Security Console.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click the Certificates tab to open
+                              the Certificates page.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Generate</span> to open the <span class="uicontrol">Generate</span> dialog box.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Generate</span> dialog box, set <span class="uicontrol">Certificate
+                                 Type</span> to <span class="uicontrol">PGP</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Alias</span> field, enter <span class="uicontrol">fusion-key</span>.
+                           </p>
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              You must enter <span class="uicontrol">fusion-key</span> in this field. Otherwise, the encryption APIs can't use this key
+                              to decrypt all encrypted inbound files.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Passphrase</span> field, enter a passphrase for the private
+                              key. This passphrase is needed when you edit, delete, or download
+                              the private key.
+                           </p>
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              If you forget the passphrase, then you may have to
+                              raise a service request for help to delete the private key. Once the
+                              old key is deleted, you can generate a new key using the process described
+                              here.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Key Algorithm</span> field, select <span class="uicontrol">RSA</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Key Length</span> field, select either <span class="uicontrol">1024</span> or <span class="uicontrol">2048</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Save and Close</span>. The fusion-key pair is generated and
+                              ready for download. You can see the fusion-key pair on the Certificates
+                              page of the Security Console.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Status</span> actions for the fusion-key pair on the Certificates
+                              page, select <span><span class="uicontrol">Export</span> - <span class="uicontrol">Public key</span></span>. Save
+                              the HCM Cloud public key (fusion-key_pub.asc)
+                              to your desktop. Use the downloaded key to encrypt files that are
+                              inbound to Oracle HCM Cloud.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1681762">
+                  <h2>Encrypting and Uploading Files Automatically: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Encrypt files of data with PGP encryption
+                     and transfer them automatically between your servers and Oracle WebCenter
+                     Content using APIs and web services. For example, you can encrypt
+                     and decrypt files that contain sensitive employee data or confidential
+                     documents. You write programs to collect the encrypted files from
+                     your file server. You then place them on the Oracle WebCenter Content
+                     server and call a data loader to decrypt and load the data to Oracle
+                     HCM Cloud.
+                  </p>
+                  
+                  
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     You must set up your encryption keys before you perform
+                     these tasks.
+                     
+                  </div>
+                  
+                  
+                  <div class="sect2" id="FAIHM2174713">
+                     <h3 class="topictitle">Supported Encryption Algorithms</h3>
+                     
+                     <p>Oracle HCM Cloud supports the following encryption
+                        algorithms. You must ensure that you use only supported encryption
+                        algorithms.
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Cipher: AES-128, Blowfish, CAST5,
+                              3DES
+                           </p>
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              These cipher algorithms aren't supported: Twofish,
+                              IDEA, AES-192, and AES-256
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>Compression: bzip2, zlib, zip,
+                              uncompressed
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Hash: SHA-1, SHA-256, SHA-224,
+                              SHA-512, MD5, SHA-384, RIPEMD-160
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2174714">
+                     <h3 class="topictitle">Encrypting Files</h3>
+                     
+                     <p>This section provides the commands to encrypt files
+                        in Microsoft Windows and Linux environments using the GnuPG encryption
+                        tool. For other tools and platforms, work with your suppliers to find
+                        the necessary commands for setting the cipher algorithm.
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Gpg4win, the official GnuPG distribution
+                              for Microsoft Windows, provides both a command-line interface and
+                              a graphical user interface for encryption, decryption, signing, and
+                              verification. For encryption, use the command-line interface. You
+                              can find Gpg4win here: <code>https://www.gpg4win.org/about.html</code>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You can download GnuPG for Linux
+                              from various sources, depending on the Linux distribution that you're
+                              using. Commonly used GnuPG versions can be found here: <code>https://www.gnupg.org/index.html</code>.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>After installing the Gpg4win or GnuPG tool, follow
+                        these steps to encrypt or encrypt and sign a file:
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Import the HCM Cloud public key
+                              (downloaded from the Security Console) using this command at the command
+                              prompt:
+                           </p>
+                           <pre><code>gpg --import &lt;fusion public key file&gt;<br></code></pre>
+                           </li>
+                        
+                        <li>
+                           <p>Perform one of these steps.</p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>To encrypt a file without signing,
+                                    use this command:
+                                 </p>
+                                 <pre><code>gpg --cipher-algo &lt;one_of_the_supported_algorithms&gt; -r fusion-key --encrypt &lt;inbound_file_name&gt;<br></code></pre>
+                                 </li>
+                              
+                              <li>
+                                 <p>To both encrypt and sign a file,
+                                    use this command:
+                                 </p>
+                                 <pre><code>gpg --cipher-algo &lt;one_of_the_supported_algorithms&gt; -r fusion-key -se &lt;inbound_file_name&gt;<br></code></pre>
+                                 <div class="infobox-"><span class="notep1">Note: </span>
+                                    When signing files, ensure that your private key
+                                    is imported into the keystore that's used for signing.
+                                    
+                                 </div>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2174734">
+                     <h3 class="topictitle">Loading Encrypted Files</h3>
+                     
+                     <p>Perform the following steps to load encrypted files
+                        to Oracle HCM Cloud from the Oracle WebCenter Content server.
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Write programs to send your encrypted
+                              files to Oracle WebCenter Content, using the Oracle WebCenter Content
+                              Web Services. If your home page is: https://Hostname/homePage/faces/AtkHomePageWelcome, then the Oracle WebCenterContent Server WSDL is: https://Hostname/idcws/GenericSoap?wsdl.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Call the loader program to pass
+                              the encryption parameter with other required parameters. The loaderIntegrationService
+                              uses the submitEncryptedBatch method, which has an additional parameter
+                              named encryptType. This parameter has the following values, which
+                              are defined in the ORA_HRC_FILE_ENCRYPT_TYPE lookup type:
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>NONE</p>
+                              </li>
+                              
+                              <li>
+                                 <p>PGPSIGNED</p>
+                              </li>
+                              
+                              <li>
+                                 <p>PGPUNSIGNED</p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1673014">
+                  <h2>Transferring Files Automatically from HCM Extracts with PGP Encryption: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Transfer encrypted files to Oracle WebCenter
+                     Content using HCM Extracts and your encryption key. HCM Extracts can
+                     generate encrypted output and store it on the WebCenter Content server.
+                     For example, you can encrypt and decrypt files that contain sensitive
+                     employee data or confidential documents. Use HCM Extracts to generate
+                     encrypted files and deliver them to the WebCenter Content server.
+                     You write your own programs to collect the files.
+                  </p>
+                  
+                  
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     You must set up your encryption keys before you try
+                     to encrypt or decrypt data.
+                     
+                  </div>
+                  
+                  
+                  <div class="sect2" id="FAIHM1673012">
+                     <h3 class="topictitle">Outbound Integrations</h3>
+                     
+                     <p>Set up the following information to use HCM Extracts
+                        with your outbound integrations:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>In the Data Exchange work area,
+                              select the Manage Extract Definitions task.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select the HCM Connect delivery
+                              type on the Deliver page.
+                           </p>
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              HCM Connect is a delivery type in HCM Extracts. You
+                              don't have to install or license HCM Connect to use this option for
+                              encryption.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>Enter an Integration Name. The
+                              application uses this name to create the title of the entry in WebCenter
+                              Content.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select an Encryption Mode. The
+                              encryption mode is one of the values from the ORA_HRC_FILE_ENCRYPT_TYPE
+                              lookup type. It determines how the application encrypts the file before
+                              loading it to WebCenter Content. When HCM Extracts transfers the file
+                              to WebCenter Content it generates a content ID automatically with
+                              the following format: UCMFAnnnnnn.
+                           </p>
+                           <p>The file includes
+                              the following properties:
+                           </p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="This two-column table with four&#xA;data rows shows the field name (left column) and its value (right&#xA;column).">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Field Name
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Value
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Author</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>FUSION_APPS_HCM_ESS_APPID</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Security Group</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>FAFusionImportExport</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Account</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>hcm/dataloader/export</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Title</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>HEXTV1CON_{Integration Name}_{Encryption Type}_{Date
+                                          Time Stamp}
+                                       </p>
+                                       
+                                       <p>For example: HEXTV1CON_ExtractConn1_PGPUNSIGNED_17-11-2014
+                                          14-16-44
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Configure the HCM Extract delivery
+                              option to output an XML (data) file directly to WebCenter Content
+                              without formatting it in BI Publisher. You can achieve this by selecting
+                              Data as the output format, omitting a template name, and selecting
+                              the HCM Connect Delivery Type.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Download the encrypted files from
+                              WebCenter Content using client command-line tools or a web service
+                              call.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2174740">
+                     <h3 class="topictitle">Decryption of Outbound Files</h3>
+                     
+                     <p>Using your private key, you can decrypt encrypted
+                        files that are generated from Oracle HCM Cloud. To verify signed files,
+                        you use the Oracle HCM Cloud public key. Ensure that these two keys
+                        are imported into the keystore. For both Microsoft Windows and Linux,
+                        use this command to decrypt both signed and unsigned files:
+                     </p>
+                     
+                     <pre><code>gpg --decrypt &lt;inbound_file_name&gt; --output &lt;output_file_name&gt; <br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="http://support.oracle.com/epmos/faces/DocumentDisplay?id=1964920.1">HCM Extracts: Changes Only (Document ID 1964920.1.)</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

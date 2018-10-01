@@ -1,0 +1,3444 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Implementing Security in Oracle Fusion Procurement (Chapter 13) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle ERP Cloud" name="dcterms.title">
+      <meta content="Securing Oracle ERP Cloud" name="doctitle">
+      <meta content="E74113-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FASER" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:25:31 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="procurement ; security;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FASER1349817.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="glossary.htm" rel="Next">
+      <link type="application/pdf" title="PDF version" href="FASER.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FASER.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="Oracle Procurement Cloud applications use the standard role-based security model. Predefined security roles are delivered
+      for Procurement in the security reference implementation. Predefined roles for Procurement are provided in the security reference
+      implementation for these functional areas: A user's ability to create or view purchase requisitions is controlled by role-based
+      data security."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">16/17</span><a name="BEGIN" id="BEGIN"></a><div id="FASER1351439" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">13</span>Implementing Security in Oracle Fusion Procurement
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER2132412">Implementing Security for Procurement: Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER2280212">Procurement Requester</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER2280213">Procurement Agent</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER2280214">Supplier User</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER2280215">Supplier Administration</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER2280216">Business Intelligence</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FASER2132412">
+                  <h2>Implementing Security for Procurement: Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Oracle Procurement Cloud applications use
+                     the standard role-based security model. Predefined security roles
+                     are delivered for Procurement in the security reference implementation. 
+                  </p>
+                  
+                  <p>Some types of delivered roles are:</p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Common job roles.</p>
+                     </li>
+                     
+                     <li>
+                        <p>Abstract roles, for common functionality
+                           that is not job-specific.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Duty roles, that can carry both
+                           function and data security grants.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Discretionary roles, are like duty
+                           roles but can be provisioned to users independent of job or abstract
+                           roles.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>For each of the predefined roles, the included or
+                     inherited duties grant access to application functions that correspond
+                     to their responsibilities. In some areas of Procurement you must also
+                     grant data access directly to specific users. For example, you must
+                     directly set up users such as buyers, category managers and procurement
+                     managers as procurement agents.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FASER2149107">
+                     <h3 class="topictitle">Predefined Roles for Procurement</h3>
+                     
+                     <p>Predefined roles for Procurement are provided
+                        in the security reference implementation for these functional areas: 
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Requisitioning</p>
+                        </li>
+                        
+                        <li>
+                           <p>Purchasing</p>
+                        </li>
+                        
+                        <li>
+                           <p>Supplier</p>
+                        </li>
+                        
+                        <li>
+                           <p>Supplier Portal</p>
+                        </li>
+                        
+                        <li>
+                           <p>Sourcing</p>
+                        </li>
+                        
+                        <li>
+                           <p>Supplier Qualification</p>
+                        </li>
+                        
+                        <li>
+                           <p>Setup and Administration</p>
+                        </li>
+                        
+                        <li>
+                           <p>Business Intelligence</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>The following table lists predefined requisitioning
+                        roles and descriptions.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Role
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Procurement Requester</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Abstract</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Creates requests for goods or services for themselves.
+                                    This role is inherited by users whose primary worker assignment is
+                                    Employee or Contingent Worker.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Procurement Preparer</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Abstract</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Creates requests for goods or services for themselves
+                                    and for others. This role must be directly assigned to a user.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Advanced Procurement Requester</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Abstract</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Creates requests for goods or services for themselves
+                                    and for others. Also has access to the Add Requisition Lines function
+                                    which supports the quick creation of multiple requisition lines. This
+                                    role must be directly assigned to a user.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Procurement Catalog Administrator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Abstract</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manages agreements and catalog content. This includes
+                                    catalogs, category hierarchies, content zones, information templates,
+                                    map sets, public shopping lists and smart forms.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The following table lists predefined purchasing roles
+                        and descriptions.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Role 
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Buyer</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Performs transactional functions in procurement applications,
+                                    such as for processing purchase agreements and purchase orders.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Category Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Identifies savings opportunities. Determines negotiation
+                                    strategies. Creates requests for quote, information, proposal or auction
+                                    events on behalf of their organization. Awards future business, typically
+                                    in the form of agreements and orders with suppliers.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Procurement Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manages a group of buyers in an organization.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Procurement Contracts Administrator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Creates, manages and administers procurement contracts.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The following table lists predefined buying organization
+                        supplier roles and descriptions.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Role
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplier Administrator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Abstract</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manages supplier information and user provisioning.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplier Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Abstract</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manages supplier information and authorizes promotion
+                                    of prospective suppliers to spend authorized status.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The following table lists predefined supplier portal
+                        roles and descriptions.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Role 
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplier Bidder</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Abstract</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Represents a potential supplier. Responds to requests
+                                    for quote, proposal, information and reverse auctions.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplier Accounts Receivable Specialist</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Submits invoices and tracks invoice and payment status
+                                    for the supplier organization.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplier Customer Service Representative</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manages inbound purchase orders. Communicates shipment
+                                    activities for the supplier organization. Tracks, acknowledges or
+                                    requests changes to new orders. Monitors the receipt activities performed
+                                    by the buying organization.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplier Demand Planner</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manages supplier scheduling, supplier managed inventory,
+                                    and consigned inventory for the supplier organization.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplier Product Administrator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Accesses retail external portal, and uploads and
+                                    maintains supplier product and catalog data with the retailer. This
+                                    catalog data is for both sell-side and buy-side transactions.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplier Sales Representative</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manages agreements and deliverables for the supplier
+                                    organization. Acknowledges or requests changes to agreements. Adds
+                                    catalog line items with customer-specific pricing and terms. Updates
+                                    contract deliverables that are assigned to the supplier. Updates progress
+                                    on contract deliverables for which the supplier is responsible.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplier Self Service Administrator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Abstract</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manages the profile information for the supplier
+                                    organization. Updates supplier contact information. Administers user
+                                    accounts to grant employees access to the buying organization's application.
+                                    Provisions supplier roles and defines supplier data access.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplier Self Service Clerk</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Abstract</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Updates the profile information for the supplier
+                                    company. Requests updates to supplier contact information and user
+                                    accounts to grant employees access to the buying organization's application.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplier Inventory Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manages inventory process control from beginning
+                                    to end. Monitors available supplies, materials and products to ensure
+                                    that customers, employees and production have access to the materials
+                                    they need.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The following table lists predefined sourcing roles
+                        and descriptions.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Role
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Sourcing Project Collaborator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Abstract</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Helps determine negotiation strategies, award decision
+                                    criteria, and perform objective scoring. The role can be assigned
+                                    to a key organization member helping to do these tasks.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Category Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Identifies savings opportunities. Determines negotiation
+                                    strategies. Creates requests for quote, information, proposal or auction
+                                    events on behalf of their organization. Awards future business, typically
+                                    in the form of contracts or purchase orders to suppliers.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The following table lists predefined supplier qualification
+                        roles and descriptions.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Role
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplier Qualification</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Discretionary</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Allows a user to define the requirements a supplier
+                                    should meet. Can qualify a supplier by performing verification and
+                                    audits. Can assess and maintain supplier qualifications.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The following table lists predefined setup and administration
+                        roles and descriptions.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Role 
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Procurement Application Administrator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Performs most setup tasks. Performs the technical
+                                    aspects of keeping the procurement application functions available.
+                                    Configures the applications to meet the business needs of the organization.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Procurement Integration Specialist</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Plans, coordinates, and supervises all activities
+                                    related to the integration of the procurement applications.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Procurement Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manages a group of buyers in an organization.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Procurement Contract Administrator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Creates, manages and administers procurement contracts.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Procurement Catalog Administrator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Abstract</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manages agreements and catalog content. This includes
+                                    catalogs, category hierarchies, content zones, information templates,
+                                    map sets, public shopping lists and smart forms.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplier Administrator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Abstract</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manages supplier profile and user provisioning.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplier Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Abstract</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Manages supplier information and authorizes promotion
+                                    of prospective suppliers to spend authorized status.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The following table lists predefined business intelligence
+                        roles and descriptions.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Role
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Purchase Analysis</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Abstract</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Allows a user to perform line-of-business analysis
+                                    on requisitions, purchase orders and suppliers. This role is only
+                                    used to grant access to Oracle Business Intelligence, not the Oracle
+                                    Procurement Cloud applications. The user is not a procurement agent.
+                                    They are a person who owns the line-of-business and wants to do business
+                                    intelligence analysis on procurement data. 
+                                 </p>
+                                 
+                                 <p>The user who has this role has data access to the
+                                    business unit associated with their primary worker assignment. You
+                                    can assign additional business units to their data access. Use the
+                                    Manage Data Access for Users task, in the Setup and Maintenance work
+                                    area.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER2280212">
+                  <h2>Procurement Requester</h2>
+                  
+                  <div class="sect2" id="FASER2126878">
+                     <h3>Procurement Requester Data Security: Explained</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>A user's ability to create or view purchase
+                        requisitions is controlled by role-based data security. 
+                     </p>
+                     
+                     
+                     
+                     <p>Three abstract roles define procurement requester
+                        security:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Procurement Requester</p>
+                        </li>
+                        
+                        <li>
+                           <p>Procurement Preparer</p>
+                        </li>
+                        
+                        <li>
+                           <p>Advanced Procurement Requester</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     <div class="sect3" id="FASER2127598">
+                        <h4 class="topictitle">Procurement Requester</h4>
+                        
+                        <p>A user with the Procurement Requester role can create
+                           requests for goods or services for themselves. This abstract role
+                           is inherited by the Employee and Contingent Worker job roles. Procurement
+                           requesters can: 
+                        </p>
+                        
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Create purchase requisitions.</p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>View requisitions that have their
+                                 name listed as the requester on the requisition line.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Edit requisitions that have their
+                                 name listed as the person who entered the requisition.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>A user with the Procurement Requester role has implicit
+                           access to data for the business unit associated with their primary
+                           worker assignment. This determines the requisitioning business unit
+                           the requester belongs to.
+                        </p>
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER2127599">
+                        <h4 class="topictitle">Procurement Preparer</h4>
+                        
+                        <p>A user with the Procurement Preparer role can create
+                           requests for goods or services for themselves and for others. This
+                           role must be provisioned directly to a user.
+                        </p>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER2127600">
+                        <h4 class="topictitle">Advanced Procurement Requester</h4>
+                        
+                        <p>A user with the Advanced Procurement Requester role
+                           can also create requests for goods or services for themselves and
+                           for others. They also have access to the Add Requisition Lines function,
+                           which supports the quick creation of multiple requisition lines. This
+                           role must be provisioned directly to a user.
+                        </p>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER2127719">
+                        <h4 class="topictitle">Additional Business Units</h4>
+                        
+                        <p>To provide a requester access to an additional business
+                           unit, beyond their primary worker assignment, you must provision them
+                           with explicit data access. To do this use the Manage Data Access for
+                           Users page, in the Setup and Maintenance work area, Procurement offering.
+                           For example, consider a user with the following security: 
+                        </p>
+                        
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Their primary employee assignment
+                                 is to US business unit.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>You have also directly provisioned
+                                 them with access to the France business unit.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>As a result, the user has access to data for both
+                           the US and France business units.
+                        </p>
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER2127720">
+                        <h4 class="topictitle">View Requisitions Owned by Other Users</h4>
+                        
+                        <p>By default, a user can only see:</p>
+                        
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Requisitions they create.</p>
+                           </li>
+                           
+                           <li>
+                              <p>Requisitions they did not create,
+                                 in which they are listed as the requester on one of the lines.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>You can use function security to provide a user the
+                           ability to view requisitions owned by other users. You can assign
+                           a user the privilege View Requisitions - All. This provides them access
+                           to requisitions for which they are not the preparer or requester,
+                           in the business units they have access to.
+                        </p>
+                        
+                        <p>Some additional purchase requisition-related privileges
+                           are available in the security reference implementation, are not assigned
+                           to predefined roles, but can be assigned as needed. 
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Edit Requisition as Approver: Allows
+                                 users to modify requisitions as approvers.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Reassign Requisition: Allows users
+                                 to reassign requisitions entered by others.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Reassign Requisition Data: Allows
+                                 data access for reassigning requisitions entered by others.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <div class="infobox-note"><span class="notep1">Note: </span>
+                           Never edit the predefined roles. You can make a copy
+                           of a predefined role to create your own customized role, if needed.
+                           
+                        </div>
+                        
+                        <p>For more information about procurement requester
+                           security roles refer to the Oracle Procurement Cloud Security Reference
+                           guide in the Oracle Help Center.
+                        </p>
+                        
+                        
+                     </div>
+                     
+                     
+                  </div>
+               </div>
+               
+               <div class="sect1" id="FASER2280213">
+                  <h2>Procurement Agent</h2>
+                  
+                  <div class="sect2" id="FASER49218">
+                     <h3>Procurement Agent Security: Explained</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Use the Manage Procurement Agents task to create
+                        and maintain a procurement agent's access to procurement functionality
+                        for a business unit.
+                     </p>
+                     
+                     
+                     
+                     <p>You can implement document security for individual
+                        document types such as purchase orders, purchase agreements, and requisitions.
+                        You can also control a procurement agent's access to manage activities
+                        for suppliers, negotiations, catalog content, and business intelligence
+                        spend data.
+                     </p>
+                     
+                     
+                     
+                     <p>Key aspects for managing procurement agents are:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Understanding what a procurement
+                              agent is.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Implementing document security.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Navigating to the Manage Procurement
+                              Agents task.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     <div class="sect3" id="FASER2141676">
+                        <h4 class="topictitle">What is a Procurement Agent?</h4>
+                        
+                        <p>Procurement agents are typically users with procurement
+                           roles such as:
+                        </p>
+                        
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Buyer</p>
+                           </li>
+                           
+                           <li>
+                              <p>Catalog Administrator</p>
+                           </li>
+                           
+                           <li>
+                              <p>Category Manager</p>
+                           </li>
+                           
+                           <li>
+                              <p>Procurement Contract Administrator</p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Procurement Manager</p>
+                           </li>
+                           
+                           <li>
+                              <p>Supplier Administrator</p>
+                           </li>
+                           
+                           <li>
+                              <p>Supplier Manager</p>
+                           </li>
+                           
+                           <li>
+                              <p>Supplier Qualification</p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>They have procurement job responsibilities in the
+                           buying organization, such as creating purchase agreements, purchase
+                           orders, and related procurement functions. You must set up these users
+                           as procurement agents for them to manage procurement documents and
+                           perform other procurement actions.
+                        </p>
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER56989">
+                        <h4 class="topictitle">Implement Document Security</h4>
+                        
+                        
+                        <p>The key elements for setting up procurement
+                           agent document security are: 
+                        </p>
+                        
+                        
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Assigning the agent to a procurement
+                                 business unit. 
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Enabling the agent's access to
+                                 procurement actions.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Defining the agent's access levels
+                                 to other agents' documents.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER2141694">
+                        <h4 class="topictitle">Locate the Manage Procurement Agents Task</h4>
+                        
+                        <p>Depending on your user role and access permissions,
+                           you can use the Manage Procurement Agents task in the following work
+                           areas:
+                        </p>
+                        
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Setup and Maintenance work area,
+                                 Procurement offering, Procurement Foundation functional area.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Purchasing work area.</p>
+                           </li>
+                           
+                        </ul>
+                        
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER57032">
+                     <h3>Create Procurement Agent: Critical Choices</h3>
+                     
+                     
+                     
+                     
+                     
+                     
+                     <p>Use the Manage Procurement Agents task to create
+                        or edit a procurement agent. With this task you can define an agent's
+                        access to procurement functionality within a procurement business
+                        unit.
+                     </p>
+                     
+                     <p>The following predefined roles are controlled by
+                        procurement agent access configuration:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Buyer</p>
+                        </li>
+                        
+                        <li>
+                           <p>Catalog Administrator</p>
+                        </li>
+                        
+                        <li>
+                           <p>Category Manager</p>
+                        </li>
+                        
+                        <li>
+                           <p>Procurement Contracts Administrator</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Procurement Manager</p>
+                        </li>
+                        
+                        <li>
+                           <p>Supplier Administrator</p>
+                        </li>
+                        
+                        <li>
+                           <p>Supplier Manager</p>
+                        </li>
+                        
+                        <li>
+                           <p>Supplier Qualification</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     
+                     <div class="sect3" id="FASER57025">
+                        <h4 class="topictitle">Procurement BU</h4>
+                        
+                        
+                        
+                        <p>Assign the agent to one or more procurement
+                           business units (BU).
+                        </p>
+                        
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER57026">
+                        <h4 class="topictitle">Action</h4>
+                        
+                        
+                        
+                        <p>Enable the agent to access one or more procurement
+                           actions for each procurement business unit.
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Manage Requisitions: Enable access
+                                 to purchase requisitions.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Manage Purchase Orders: Enable access
+                                 to purchase orders.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Manage Purchase Agreements: Enable
+                                 access to blanket purchase agreements and contract agreements.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Manage Negotiations: Enable access
+                                 to Sourcing negotiations, if implemented by your organization.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Manage Catalog Content: Enable access
+                                 to catalog content. This includes local catalogs, punchout catalogs,
+                                 content zones, smart forms, information templates, and collaborative
+                                 authoring.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Manage Suppliers: Enable access to
+                                 create and update supplier information.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Manage Supplier Qualifications:
+                                 Enable access to initiatives, qualifications, and assessments, if
+                                 Supplier Qualification is implemented by your organization.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Manage Approved Supplier List Entries:
+                                 Enable access to create and update approved supplier lists.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Analyze Spend: Used by the business
+                                 intelligence functionality to enable access to view invoice spend
+                                 information.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER57027">
+                        <h4 class="topictitle">Access to Other Agents' Documents</h4>
+                        
+                        
+                        
+                        <p>Assign an access level to documents owned by
+                           other procurement agents for each procurement business unit. Note
+                           that an agent can perform all actions on their own documents as long
+                           as they have procurement BU access.
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>None: The agent cannot access documents
+                                 owned by other agents.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>View: Permits the agent to search and
+                                 view other agents' documents.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Modify: Permits the agent to view,
+                                 modify, delete, and withdraw other agents' documents.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Full: Permits the agent full control
+                                 of other agents' documents. This includes the view, modify, delete,
+                                 withdraw, freeze, hold, close, cancel, and finally close actions.
+                              </p>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                        
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+               </div>
+               
+               <div class="sect1" id="FASER2280214">
+                  <h2>Supplier User</h2>
+                  
+                  <div class="sect2" id="FASER183900">
+                     <h3>Supplier User Provisioning: How It Works</h3>
+                     
+                     
+                     
+                     
+                     
+                     
+                     <p>Supplier user provisioning refers to the
+                        process of establishing supplier users with access to Oracle Fusion
+                        Supplier Portal (Supplier Portal). Your buying organization can create
+                        and maintain user accounts, job roles, and data access controls for
+                        supplier contacts. 
+                     </p>
+                     
+                     <p>The content supplier users can access, and tasks
+                        they can perform, are controlled by your buying organization. You
+                        can also allow supplier users to assume the responsibility for user
+                        account management on behalf of your buying organization. To do this,
+                        allow trusted supplier users to create and maintain user accounts
+                        for their fellow employees that require access to the Supplier Portal.
+                        Your buying organization can maintain control, and reduce their administrative
+                        burden, by granting provisioning access to their trusted suppliers.
+                     </p>
+                     
+                     
+                     
+                     <div class="sect3" id="FASER183895">
+                        <h4 class="topictitle">User Provisioning Job Roles</h4>
+                        
+                        <p>You provision supplier users with job roles, giving
+                           them the ability to perform business tasks and functions on the Supplier
+                           Portal.  The predefined job roles that can perform supplier user provisioning
+                           are:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Supplier Administrator: This job
+                                 role is for the buying organization. Users with this role are responsible
+                                 for maintaining supplier profile information as well as administering
+                                 user accounts for supplier contacts.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Supplier Manager: This job role
+                                 is for the buying organization. Users with this role are responsible
+                                 for authorizing a new supplier for spending. They control the addition
+                                 of new spend authorized suppliers into the supply base. In smaller
+                                 organizations, you can assign this job role and the Supplier Administrator
+                                 role to the same individual.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Supplier Self Service Clerk: This
+                                 job role is for the supplier organization. Supplier users with this
+                                 role can maintain contact profiles and request user accounts for their
+                                 fellow employees. All contact profile updates and user account requests
+                                 made by the SSC require approval by the buying organization.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Supplier Self Service Administrator
+                                 (SSA): This job role is for the supplier organization. Supplier users
+                                 with this role can maintain contact profiles and provision user accounts
+                                 to their fellow employees, without requiring buying organization approval.
+                              </p>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>You can perform user provisioning from the following
+                           procurement flows:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Supplier registration review and
+                                 approval.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Supplier profile change request review
+                                 and approval.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Suppliers work area, Manage Suppliers
+                                 task, Edit Supplier flow where supplier contacts are maintained.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Supplier Portal work area where
+                                 suppliers can perform user provisioning on behalf of their company
+                                 using the Manage Profile task.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>In each of these flows a user with one of the appropriate
+                           job roles can: 
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Create or request a user account.</p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Assign job roles.</p>
+                           </li>
+                           
+                           <li>
+                              <p>Set data security access for a
+                                 supplier contact.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER183896">
+                        <h4 class="topictitle">Manage Supplier User Roles Setup Page</h4>
+                        
+                        <p>The IT Security Manager and the Procurement Application
+                           Administrator can use the Manage Supplier User Roles page. They can
+                           find the page in the Setup and Maintenance work area, Procurement
+                           offering, Supplier Portal functional area. They can open the page
+                           from the following respective setup tasks:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Manage Supplier User Roles</p>
+                           </li>
+                           
+                           <li>
+                              <p>Manage Supplier User Roles Usages</p>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>Your buying organization uses the Manage Supplier
+                           User Roles page to perform the two following setup actions. These
+                           two actions are performed by two different job roles: IT Security
+                           Manager, and Procurement Application Administrator.
+                        </p>
+                        
+                        <ol>
+                           
+                           <li>
+                              <p>Define the list of roles that can
+                                 be granted to supplier users in Supplier Portal provisioning flows.
+                                 Only the IT Security Manager job role can add and remove roles. This
+                                 helps your organization avoid the risk of adding an internal application
+                                 job role inadvertently. It prevents suppliers from gaining unauthorized
+                                 access to internal data. The supplier roles are added from the central
+                                 Oracle LDAP roles repository which stores all Oracle Fusion application
+                                 job roles. Once they add a role to the table, the role is immediately
+                                 available for provisioning to supplier contacts by the Supplier Administrator.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Define the supplier role usages.
+                                 The Procurement Application Administrator is responsible for this
+                                 setup task. They manage settings for how the supplier job roles are
+                                 exposed in provisioning flows. The first column controls whether a
+                                 supplier job role can be provisioned in Supplier Portal, by supplier
+                                 users with the SSA role.
+                              </p>
+                           </li>
+                           
+                        </ol>
+                        
+                        <p>The IT Security Manager can also set supplier role
+                           usages, as they can access all functions on the setup page. However,
+                           this task is typically performed by the Procurement Application Administrator.
+                           The Procurement Application Administrator cannot add or remove roles
+                           from the table.
+                        </p>
+                        
+                        <p>Your buying organization can establish default roles
+                           which expedite supplier user account requests. To do this, identify
+                           the minimum set of job roles that a supplier contact can be granted.
+                           This prevents approvers from having to explicitly review and assign
+                           job roles for each user account request.
+                        </p>
+                        
+                        <p>When the role default setup is done correctly, the
+                           Supplier Administrator (or approver) can review supplier contact user
+                           account requests. This allows them to: 
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Review requests with job roles
+                                 selected based on the source of the request.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Approve user account requests with
+                                 appropriate role assignments.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>The three role usages relevant to supplier user provisioning
+                           include:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Allow Supplier to Provision: If
+                                 selected, the role can be provisioned by the SSA, assuming the role
+                                 is also assigned to the SSA user.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Default for Oracle Fusion Supplier
+                                 Portal: If selected, the role is automatically added to supplier user
+                                 requests in the core user provisioning flows, such as supplier profile
+                                 maintenance.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Default for Oracle Fusion Sourcing:
+                                 If selected, the role is automatically added to supplier user requests
+                                 generated in sourcing flows such as Create Negotiation.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>A role in the table can be marked for one or more
+                           of the three usages.
+                        </p>
+                        
+                        <p>The figure below shows the flow for managing supplier
+                           user roles.
+                        </p>
+                        <img src="img/prc_pos_manage_supplier_user_roles_04_20038915.png" alt="Manage supplier user roles flow." class="fusappimg">
+                        
+                        <p>Users with the SSA job role are able to provision
+                           roles for other users. They can do this based on the following: 
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Those roles checked in the Allow
+                                 Supplier to Provision column.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>The set of roles the SSA has already
+                                 been assigned. 
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>This intersection, as depicted in the figure below,
+                           determines what roles the SSA can grant to their fellow employees.
+                           This ensures the SSA provisions proper roles to the supplier users
+                           in their organization.
+                        </p>
+                        <img src="img/prc_pos_ssa_role_provisioning_00_20038916.png" alt="Role provisioning diagram" class="fusappimg">
+                        
+                        <div class="infobox-"><span class="notep1">Note: </span>
+                           SSA users should be careful when removing roles from
+                           their account because they are not able to add additional roles to
+                           their own user account.
+                           
+                        </div>
+                        
+                     </div>
+                     
+                     
+                     <p class="relatedlinks">Related Topics</p>
+                     <ul>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=96D535137FDECA60E040D30A688130CF">Request Supplier User Account: Explained</a></p>
+                        </li>
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER230459">
+                     <h3>Supplier User Account Administration: Explained</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>The buying organization's supplier administrator
+                        provisions user accounts to provide supplier contacts access to Oracle
+                        Fusion Supplier Portal (Supplier Portal). The administrator performs
+                        user account maintenance for a specific supplier contact in the Suppliers
+                        work area, on the Edit Supplier page, Contacts tab. The administrator
+                        assigns a user account with roles that determine what functions the
+                        supplier contact can perform in the Supplier Portal.
+                     </p>
+                     
+                     
+                     
+                     <p>The following are Oracle Procurement Cloud flows where
+                        a supplier administrator can request and manage a user account for
+                        a supplier contact:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Create Supplier Contact: When creating
+                              a supplier contact, the administrator can also request to create a
+                              user account for the contact, request roles and grant data access.
+                              A supplier user can also request for a supplier contact and user account
+                              to be created.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Edit Supplier Contact: The supplier
+                              administrator can make changes to supplier contact information as
+                              well as create or maintain the user account for the contact. A supplier
+                              user can also request a user account to be created for an existing
+                              contact.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Approve supplier registration request:
+                              When approving a supplier registration, an approver can create and
+                              edit supplier contacts. A user account is part of a supplier contact.
+                              The approver has the ability to create a user account and assign roles
+                              within this flow.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="infobox-note"><span class="notep1">Note: </span>
+                        Creating a user account for a supplier contact cannot
+                        be reversed. Once a user account is created it cannot be deleted,
+                        but it can be inactivated.
+                        
+                     </div>
+                     
+                     
+                     
+                     <p>The Supplier Administrator is responsible for:</p>
+                     
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Creating and inactivating supplier
+                              user accounts.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Assigning job roles.</p>
+                        </li>
+                        
+                        <li>
+                           <p>Assigning data access.</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     
+                     <p>Create and Inactivate Supplier User Accounts</p>
+                     
+                     <p>Select the Create User Account option for a contact
+                        to send a request to the identity management system to provision the
+                        account. Status is displayed to communicate provisioning status during
+                        this process. When the process is complete, the identity management system
+                        sends notification to the supplier contact with the user name and
+                        temporary password for Supplier Portal. If the process fails, a notification
+                        is sent to the Supplier Administrator that a user account was not
+                        successfully provisioned. 
+                     </p>
+                     
+                     
+                     
+                     <p>Assign Job Roles</p>
+                     
+                     <p>Use the Roles subtab to control function security.
+                        This determines the business objects and task flows the supplier user
+                        can access. Supplier job roles should be assigned based on the job
+                        that the contact performs within the supplier organization. For example,
+                        Customer Service Representative or Accounts Receivable Specialist.
+                     </p>
+                     
+                     
+                     
+                     <p>Assign Data Access</p>
+                     
+                     <p>Use the Data Access tab to control data security.
+                        This determines which transactions the user can access for the specific
+                        business objects their job role is associated with. The two levels
+                        of data security are: Supplier and Supplier Site. By default, all
+                        supplier user accounts start with Supplier level, meaning they can
+                        access all transactions belonging to their supplier company only.
+                        For more restrictive access, the Supplier Site level limits user access
+                        to transactions for specific supplier sites only.
+                     </p>
+                     
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER183927">
+                     <h3>Set Up Supplier Roles: Examples</h3>
+                     
+                     
+                     
+                     
+                     
+                     
+                     <p>The following simple examples illustrate selecting
+                        and managing roles for supplier user provisioning.
+                     </p>
+                     
+                     
+                     
+                     <div class="sect3" id="FASER611831"><h4 class="OracleScenario">Selecting Roles for Supplier User Provisioning:</h4>
+                        <p>Vision Corporation decides to expand their Oracle
+                           Fusion Supplier Portal (Supplier Portal) deployment and allow supplier
+                           customer service representatives to access orders and agreements.
+                           The corporation also wants the Supplier Self Service Administrator
+                           to provision the supplier customer service representatives. 
+                        </p>
+                        <p>The IT security manager navigates to the Manage Supplier
+                           User Roles page. They locate it in the Setup and Maintenance work
+                           area, Procurement offering, Supplier Portal functional area, Manage
+                           Supplier User Roles task. They search for the supplier job role Supplier
+                           Customer Service Representative, and add the role to the table.
+                        </p>
+                        <p>The Procurement Application Administrator navigates
+                           to the Manage Supplier User Role Usages page. For the Supplier Customer
+                           Service Representative role, they select the two following options:
+                           Default for Supplier Portal, and Allow Supplier to Provision.
+                        </p>
+                     </div>
+                     
+                     <div class="sect3" id="FASER611832"><h4 class="OracleScenario">Managing Default Roles and Defining Roles that
+                        the Self Service Administrator can Provision:</h4>
+                        <p>Vision Corporation currently grants selected supplier
+                           users access to agreements only. The corporation determines that all
+                           supplier users should also be granted access to orders, shipments,
+                           receipts, invoices and payments information by default.
+                        </p>
+                        <p>The Procurement Application Administrator navigates
+                           to the Manage Supplier User Roles page. They select the Allow Supplier
+                           to Provision option for all supplier roles in the table. This allows
+                           the Supplier Self Service Administrator to provision users with these
+                           roles in the Supplier Portal.
+                        </p>
+                        <p>The corporation also decides the Supplier Sales Representative
+                           role should not be marked as a default role. The Procurement Application
+                           Administrator ensures the Default for Supplier Portal option is not
+                           selected for that role.
+                        </p>
+                        <p>Vision Corporation also recently implemented Oracle
+                           Fusion Sourcing. They must provision the Supplier Bidder role to specific
+                           suppliers invited to sourcing events. 
+                        </p>
+                        <p>The IT Security Manager must ensure the Supplier
+                           Self Service Administrator is not allowed to provision this role as
+                           it must be controlled by Vision Corporation. The IT Security Manager
+                           adds the Supplier Bidder role to the table. For the newly added role,
+                           they leave the Allow Supplier to Provision option not checked, and
+                           check the Default Roles for Sourcing option.
+                        </p>
+                     </div>
+                     
+                     
+                     <p class="relatedlinks">Related Topics</p>
+                     <ul>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=96D535137FDECA60E040D30A688130CF">Request Supplier User Account: Explained</a></p>
+                        </li>
+                     </ul>
+                     
+                  </div>
+                  
+               </div>
+               
+               <div class="sect1" id="FASER2280215">
+                  <h2>Supplier Administration</h2>
+                  
+                  <div class="sect2" id="FASER245277">
+                     <h3>Security for Individual Supplier Information: Explained</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Use the Personally Identifiable Information
+                        (PII) framework to protect tax identifiers for suppliers classified
+                        as individuals.
+                     </p>
+                     
+                     
+                     
+                     <p>PII refers to the framework in Oracle Fusion Applications
+                        for protecting sensitive data for an individual. Additional security
+                        privileges are required for users to view and maintain such data.
+                     </p>
+                     
+                     <p>The predefined job roles Supplier Administrator and
+                        Supplier Manager include data security polices to maintain tax identifiers
+                        for suppliers classified as individuals. Only users with these roles
+                        can maintain the following tax identifiers for individual suppliers:
+                        
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Taxpayer ID</p>
+                        </li>
+                        
+                        <li>
+                           <p>Tax Registration Number</p>
+                        </li>
+                        
+                        <li>
+                           <p>National Insurance Number</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p> Individual suppliers are defined as suppliers with
+                        a Tax Organization Type of Individual or Foreign Individual. Other
+                        users without these roles can still search and access individual suppliers.
+                        They are restricted from viewing or updating the tax identifiers for
+                        these suppliers.
+                     </p>
+                     
+                     <p>Similar PII data security is also enforced in the
+                        Supplier Registration flows. Only users with the Supplier Administrator
+                        and Supplier Manager roles can view or maintain the tax identifier
+                        information for an individual supplier's registration approval request.
+                     </p>
+                     
+                     
+                     
+                  </div>
+               </div>
+               
+               <div class="sect1" id="FASER2280216">
+                  <h2>Business Intelligence</h2>
+                  
+                  <div class="sect2" id="FASER1596230">
+                     <h3>Security for Oracle Procurement Cloud Business Intelligence: Overview</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Users with the appropriate roles can view,
+                        create or edit business intelligence analytics and reports in Oracle
+                        Procurement Cloud. 
+                     </p>
+                     
+                     <p>Security for viewing, creating, and editing business
+                        intelligence analytics and reports includes these concepts:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Access to business intelligence
+                              functionality
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Access to the data that you want
+                              an analytic or report to return
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Access to the folders where the
+                              analytics or reports are stored
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Secured list views</p>
+                        </li>
+                        
+                        <li>
+                           <p>Personally identifiable information
+                              (PII)
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p></p>
+                     
+                     
+                     <div class="sect3" id="FASER2320073">
+                        <h4 class="topictitle">Business Intelligence Roles</h4>
+                        
+                        <p>Business intelligence security roles apply
+                           to both Oracle Business Intelligence Publisher and Oracle Transactional
+                           Business Intelligence. They grant access to business intelligence
+                           functionality, such as the ability to run or author analytics and
+                           reports. Users need one or more of these roles. In addition, users
+                           need the roles that grant access to the following: 
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Functional folders, analytics and
+                                 reports
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Subject areas</p>
+                           </li>
+                           
+                           <li>
+                              <p>Oracle Procurement Cloud data</p>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER2320074">
+                        <h4 class="topictitle">Access to Subject Areas in the Business Intelligence
+                        Catalog</h4>
+                        
+                        <p>Access to subject areas in the Business Intelligence
+                           Catalog is secured by OTBI Transactional Analysis Duty roles. The
+                           following table lists the procurement subject areas by functional
+                           area, and the corresponding job role and OTBI Transactional Analysis
+                           Duty role.
+                        </p>
+                        
+                        <div class="simpletable-margin">
+                           <table class="customlayout" summary="List of business intelligence&#xA;subject areas for Procurement and the security roles needed for each&#xA;subject area.">
+                              
+                              
+                              <tr class="header">
+                                 
+                                 <th scope="col">
+                                    Subject Area
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Job Role
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    OTBI Transactional Analysis Duty Role
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Procurement - Implemented Change Orders Real Time</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Category Manager</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Buyer</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Contract Administrator</p>
+                                          
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Manager</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Implemented Change Order Transaction Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Procurement - Pending Change Orders Real Time</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Category Manager</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Buyer</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Contract Administrator</p>
+                                          
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Manager</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Pending Change Order Transaction Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Procurement - Purchasing Agreements Real Time</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Category Manager</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Buyer</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Contract Administrator</p>
+                                          
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Manager</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Agreement Transaction Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Procurement - Purchasing Real Time</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Category Manager</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Buyer</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Contract Administrator</p>
+                                          
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Manager</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Purchase Analysis</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Purchase Order Transaction Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Procurement - Requisitions Real Time</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Buyer</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Contract Administrator</p>
+                                          
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Manager</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Purchase Analysis</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Purchase Requisitions Transaction Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Procurement - Spend Real Time</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Accounts Payable Manager</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Accounts Payable Specialist</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Accounts Payable Supervisor</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Buyer</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Manager</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Spend Transaction Analysis Duty Role</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Sourcing - Supplier Awards Real Time</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Category Manager</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Contract Administrator</p>
+                                          
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Manager</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Sourcing Transaction Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Sourcing - Supplier Negotiations Real Time</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Category Manager</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Contract Administrator</p>
+                                          
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Manager</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Sourcing Transaction Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Sourcing - Supplier Responses Real Time</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Category Manager</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Contract Administrator</p>
+                                          
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Manager</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Sourcing Transaction Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Supplier - Supplier Real Time</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Purchase Analysis</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Supplier Administrator</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Supplier Manager</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Supplier Master Data Transaction Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Supplier Import - Supplier Real Time</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Purchase Analysis</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Supplier Administrator</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Supplier Manager</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Supplier Master Data Transaction Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Supplier Qualification - Qualifications and Assessments
+                                       Real Time
+                                    </p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Supplier Qualification</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Supplier Qualification Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Supplier Qualification - Question Responses Real
+                                       Time 
+                                    </p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Category Manager </p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Supplier Qualification </p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Supplier Question and Responses Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Supplier Registration - Supplier Real Time</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Purchase Analysis</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Supplier Administrator</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Supplier Manager</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Supplier Master Data Transaction Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        <p></p>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER2320075">
+                        <h4 class="topictitle">Access to Reports in the Business Intelligence
+                        Catalog</h4>
+                        
+                        <p>Access to functional folders in the Business
+                           Intelligence Catalog is secured using the same duty roles that secure
+                           access to the subject areas. Functional folders contain delivered
+                           analytics and reports. For example, a user who inherits the Purchase
+                           Order Transaction Analysis Duty has access to the:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Purchasing folder in the Business
+                                 Intelligence Catalog
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Procurement-Purchasing Real Time
+                                 subject area
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>Reports are secured based on the folders in which
+                           they're stored. You can set permissions against folders and reports
+                           for Application Roles, Catalog Groups, or Users.
+                        </p>
+                        
+                        <div class="simpletable-margin">
+                           <table class="customlayout" summary="List of business intelligence&#xA;functional area folders for Procurement and the security roles needed&#xA;for each functional area folder.">
+                              
+                              
+                              <tr class="header">
+                                 
+                                 <th scope="col">
+                                    Functional Area Folder
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Job Role
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    OTBI Transactional Analysis Duty Role
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Purchasing</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Category Manager</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Buyer</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Contract Administrator</p>
+                                          
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Manager</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Purchase Analysis</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Purchase Order Transaction Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Sourcing</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Category Manager</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Buyer</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Manager</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Sourcing Transaction Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Spend</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Accounts Payable Manager</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Accounts Payable Specialist</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Accounts Payable Supervisor</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Buyer</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Procurement Manager</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Spend Transaction Analysis Duty Role</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Supplier</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Supplier Administrator</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Supplier Manager</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Supplier Master Data Transaction Analysis Duty</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Supplier Qualification</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Category Manager</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>Supplier Qualification</p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Supplier Question and Responses Analysis Duty </p>
+                                    
+                                    <p>Supplier Question and Responses Analysis Duty, and
+                                       Supplier Qualification Analysis Duty
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        <p></p>
+                        
+                        <p>For a list of predefined analytics and reports, see
+                           Oracle Procurement Cloud View Procurement Reports and Analyses on
+                           the Oracle Help Center.
+                        </p>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER2320076">
+                        <h4 class="topictitle">Reporting Data</h4>
+                        
+                        <p>The data that's returned in reports is secured
+                           in a similar way to the data that's returned in Oracle Procurement
+                           Cloud pages. Each of the transaction analysis duty roles grants access
+                           to subject areas and Business Intelligence Catalog folders. You can
+                           view them using the Security Console.
+                        </p>
+                        
+                        <p>If you cannot see buyer or requester names in analyses
+                           or reports, add the View All Workers security profile to your user
+                           role. Use the Assign Security Profiles to Role task, in the Setup
+                           and Maintenance work area.
+                        </p>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER2320077">
+                        <h4 class="topictitle">Secured List Views</h4>
+                        
+                        <p>You have two options to obtain access to
+                           data using a data model that uses a SQL Query as the data source:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Select data directly from a database
+                                 table. The data you return isn't subject to data-security restrictions.
+                                 Because you can create data models on unsecured data, you should minimize
+                                 the number of users who can create data models.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Join to a secured list view in
+                                 your select statements. The data returned is determined by the security
+                                 profiles that are assigned to the roles of the user who's running
+                                 the report.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER2320078">
+                        <h4 class="topictitle">PII Data</h4>
+                        
+                        <p>Personally identifiable information (PII)
+                           tables are secured at the database level using virtual private database
+                           policies. Only authorized users can report on data in PII tables.
+                           This restriction also applies to Business Intelligence Publisher analytics
+                           and reports. The data in PII tables is protected using data security
+                           privileges that are granted by means of duty roles in the usual way.
+                        </p>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="">
+                        
+                        <p>For more information about delivered roles,
+                           see the Oracle Procurement Cloud Security Reference guide in the Oracle
+                           Help Center.
+                        </p>
+                        
+                        <p>For more information about business intelligence,
+                           see the Oracle Procurement Cloud Creating and Administering Analytics
+                           and Reports guide in the Oracle Help Center.
+                        </p>
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER2484250">
+                     <h3>Setting Up Security Profile to View Employee Names in Procurement Analyses: Procedure</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Use the Assign Security Profiles to Role
+                        task to obtain access to buyer and requester names in your analyses. 
+                     </p>
+                     
+                     
+                     <div class="sect3" id="FASER2484283">
+                        <h4 class="topictitle">Setting Up Security Profile</h4>
+                        
+                        <p>If you create or run a report and cannot see buyer
+                           or requester names in the report, check your person data security
+                           profile. Follow these steps to add the View All Workers security profile
+                           to your user role.
+                        </p>
+                        
+                        
+                        <div class="infobox-"><span class="notep1">Note: </span>
+                           A Security Manager can open and use the Assign Security
+                           Profiles to Role task.
+                           
+                        </div>
+                        
+                        <ol>
+                           
+                           <li>
+                              <p>From the Navigator, click <span class="uicontrol">Setup and Maintenance</span>.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>In the Setup and Maintenance work
+                                 area, search for and open the <span class="uicontrol">Assign Security
+                                    Profiles to Role</span> task.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>On the Manage Data Roles and Security
+                                 Profiles page, search for the user role to which you want to grant
+                                 access. For example, Buyer.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>In the Search Results region, select
+                                 the role and click <span class="uicontrol">Edit</span>.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>On the Edit Data Role: Role Details
+                                 page, click Next.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Select <span class="uicontrol">View All Workers</span> when prompted for a Public Person security
+                                 profile.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Click <span class="uicontrol">Review</span>.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Click <span class="uicontrol">Submit</span>.
+                              </p>
+                           </li>
+                           
+                        </ol>
+                        
+                        
+                     </div>
+                     
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

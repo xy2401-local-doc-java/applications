@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Managing Fusion Flex Extensions in Release 11.1.1.10.2</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This section applies to the BI Applications Release 11.1.1.10.2 and to Fusion 10 and 11." />
+<meta name="dcterms.created" content="2018-09-24T23:04:57Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Installation Guide" />
+<meta name="dcterms.identifier" content="E72034-07" />
+<meta name="dcterms.isVersionOf" content="BIAIN" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2013, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-36A18CFA-55F1-4D19-B371-A6D15EBF2E24.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-B656D84A-5BFF-4338-ABF7-3A9F999371D2.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAIN.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-74FB3060-12EB-4C03-AA6F-00B9367DF903"></a> <span id="PAGE" style="display:none;">43/119</span> <!-- End Header -->
+<h1 id="BIAIN-GUID-74FB3060-12EB-4C03-AA6F-00B9367DF903" class="sect1">Managing Fusion Flex Extensions in Release 11.1.1.10.2</h1>
+<div>
+<p>This section applies to the BI Applications Release 11.1.1.10.2 and to Fusion 10 and 11.</p>
+<div class="section">The warehouse tables, by default, carry a limited number of extension columns. For char type columns there are usually around 30 char columns in the warehouse tables that can be used for extensions. At times there could be cases where you end up with more than 30 columns. In such a case, only 30 columns would get mapped for extensions while the remaining columns get loaded in the SDS.
+<p>This section explains the current options available in such a case and provides a way by which you can control the columns that should get mapped rather than just let the algorithm decide which columns should get mapped.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1" id="GUID-74FB3060-12EB-4C03-AA6F-00B9367DF903__GUID-F132B4D4-F76C-4535-885A-AF30CE57134B">Option 1: Using the BI Applications Enabled Flag on the Fusion side</p>
+<p>This is the recommended approach.</p>
+<p>If all the flexfields you defined on the VO are not relevant for BI Applications, you can restrict the flex extensions in BI Applications to only those that are relevant to BI Applications, by following these steps:</p>
+<ol>
+<li>
+<p>Enable the <span class="bold">BI Enabled</span> option.</p>
+<p>When you define a flex field in Fusion, you see the <span class="bold">BI Enabled</span> option. Enabling this option ensures that this flex field gets extended to the repository and eventually flows into the BI Applications. If however some columns are not required for BI Applications, then you can disable this option for those columns.</p>
+<div class="figure" id="GUID-74FB3060-12EB-4C03-AA6F-00B9367DF903__GUID-6718AAF3-5886-447E-B504-9A96EF603D55"><img width="1208" height="604" src="img/GUID-279F0EE6-95EA-4747-AADE-92BEDDF1503E-default.gif" alt="Description of GUID-279F0EE6-95EA-4747-AADE-92BEDDF1503E-default.gif follows" title="Description of GUID-279F0EE6-95EA-4747-AADE-92BEDDF1503E-default.gif follows" /><br />
+<a href="img_text/GUID-279F0EE6-95EA-4747-AADE-92BEDDF1503E-default.htm">Description of the illustration GUID-279F0EE6-95EA-4747-AADE-92BEDDF1503E-default.gif</a></div>
+<!-- class="figure" --></li>
+<li>
+<div class="p">On editing the selected flex field, you can see the option for existing flexfields. Disable the option for the ones that are not required for BI Applications.
+<div class="infobox-note" id="GUID-74FB3060-12EB-4C03-AA6F-00B9367DF903__GUID-33941E59-C7F1-42AD-AE5D-4DF89A02BB17">
+<p class="notep1">Note:</p>
+Disabling the <span class="bold">BI Enabled</span> option disables it for OTBI as well. Disable this option only if it is not required for OTBI as well as B IApplications. There is no current way to disable it only for BI Applications.</div>
+</div>
+</li>
+<li>
+<p>After disabling the option, wait till the BI Extender runs again to update the repository. Post that schedule, run a full extract, and do a full load again. Drop the SDS tables and reset the warehouse (using the option in the Configuration Manager ) before running the full load.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1" id="GUID-74FB3060-12EB-4C03-AA6F-00B9367DF903__GUID-2046BEC8-D0C5-4E6B-AD88-576CADA47EC9">Option 2: Specifying a Column Exclude List in ODI Repository:</p>
+<p>If Option 1 is not feasible, then try this option. The Extension framework in BI Applications looks at the ODI repository to identify which columns are extension columns. A workaround is to add the extension columns you do not need in BI Application, to the ODI repository against the VO. This way the extension framework treats them as regular columns and not extension columns.</p>
+<div class="p">Based on your use case, follow either of these intructions:
+<ul style="list-style-type: disc;">
+<li>
+<p>You have access to the extended Fusion repository</p>
+</li>
+<li>
+<p>You do not have access to the extended Fusion repository</p>
+</li>
+</ul>
+</div>
+<div class="p">If you have access to the Fusion source repository from your ODI environment, follow these steps:
+<ol>
+<li>
+<p>Run the Oracle BI Applications reverse knowledge module (RKM).</p>
+</li>
+<li>
+<div class="p">Login to the ODI repository using the ODI studio and navigate to the <span class="bold">Models</span> tab and open Oracle Fusion 10 HCM model as shown below.
+<div class="infobox-note" id="GUID-74FB3060-12EB-4C03-AA6F-00B9367DF903__GUID-FD791852-115D-4447-A1C8-A229EC53B3A2">
+<p class="notep1">Note:</p>
+The Fusion Connection should be specified pointing to the BI Server with the extended repository.</div>
+<div class="figure" id="GUID-74FB3060-12EB-4C03-AA6F-00B9367DF903__GUID-1B2E8DDB-2D66-4C24-8752-09ED28087BC6"><img width="925" height="433" src="img/GUID-6B70DB4E-3632-483C-B7DB-D128C69EF525-default.gif" alt="Description of GUID-6B70DB4E-3632-483C-B7DB-D128C69EF525-default.gif follows" title="Description of GUID-6B70DB4E-3632-483C-B7DB-D128C69EF525-default.gif follows" /><br />
+<a href="img_text/GUID-6B70DB4E-3632-483C-B7DB-D128C69EF525-default.htm">Description of the illustration GUID-6B70DB4E-3632-483C-B7DB-D128C69EF525-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li>
+<p>Set the <span class="bold">Mask</span> property to<code class="codeph">%.FLEX_BI_BaseWorkerAsgDFF_VI</code> as shown below. This prevents attempting to refresh the model for all the VOs inadvertently.</p>
+</li>
+<li>
+<div class="p">Click <span class="bold">Reverse Engineer</span> to bring all the VO&rsquo;s extension columns into the model.
+<div class="figure" id="GUID-74FB3060-12EB-4C03-AA6F-00B9367DF903__GUID-8691ED0F-2A35-4238-B11E-DB000986DCF3"><img width="1179" height="626" src="img/GUID-EDDA6CCE-4300-4002-8EB3-ECA20982AA90-default.gif" alt="Description of GUID-EDDA6CCE-4300-4002-8EB3-ECA20982AA90-default.gif follows" title="Description of GUID-EDDA6CCE-4300-4002-8EB3-ECA20982AA90-default.gif follows" /><br />
+<a href="img_text/GUID-EDDA6CCE-4300-4002-8EB3-ECA20982AA90-default.htm">Description of the illustration GUID-EDDA6CCE-4300-4002-8EB3-ECA20982AA90-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li>
+<p>Once you see all the extension columns against the VO&rsquo;s definition, identify the extension columns that are needed for your business, and then delete those columns which you required from the data store.</p>
+<p>For Example, if SE_HRBP_ extension column is needed for your business, delete it and save the changes.</p>
+<p>For the remaining extension columns which you do not need and if you do not want the column to be populated or created in SDS, then use the flexfield OBI Populate Column in SDS to do so.</p>
+</li>
+<li>
+<p>Edit the flexfield value (by default the flexfield value is be set to <span class="bold">Y</span>) and set the value as <span class="bold">N</span> and save the changes.</p>
+</li>
+</ol>
+</div>
+<p>If you do not have access to the fusion source repository from your ODI Environment, follow these steps:</p>
+<div class="p">In this case, since you do not have access to the fusion source environment, there is no way to run RKM to reverse engineer a VO to add all extensible columns to it. Hence you should add all unused extensible columns manually against a VO&rsquo;s data store.
+<div class="infobox-note" id="GUID-74FB3060-12EB-4C03-AA6F-00B9367DF903__GUID-6F723DFA-748F-49A6-9C7C-7A05A79D604E">
+<p class="notep1">Note:</p>
+In Fusion 10, the extractor provides mdcsv files which will contain the metadata of the extended columns. Refer to that mdcsv file when you are manually adding the columns in the ODI.</div>
+</div>
+<ol>
+<li>
+<div class="p">Login to the ODI repository using the ODI studio and navigate to the <span class="bold">Models</span> tab, find the data store, and open it as shown below.
+<div class="figure" id="GUID-74FB3060-12EB-4C03-AA6F-00B9367DF903__GUID-5A1ECBAF-D9E5-4315-A6D4-4178AB025546"><img width="818" height="321" src="img/GUID-9E444682-280D-4F5C-A8D3-BB7B83F86355-default.gif" alt="Description of GUID-9E444682-280D-4F5C-A8D3-BB7B83F86355-default.gif follows" title="Description of GUID-9E444682-280D-4F5C-A8D3-BB7B83F86355-default.gif follows" /><br />
+<a href="img_text/GUID-9E444682-280D-4F5C-A8D3-BB7B83F86355-default.htm">Description of the illustration GUID-9E444682-280D-4F5C-A8D3-BB7B83F86355-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li>
+<p>Click <span class="bold">Add</span> to add columns. Choose the correct data type, length and other options and save the changes.</p>
+<p>If you do not want the column to be populated or created in the SDS, then use the flexfield OBI Populate Column in SDS to do so.</p>
+</li>
+<li>
+<p>Edit the columns and go to the <span class="bold">Flexfields</span> tab. By default, the flexfield value is set to <span class="bold">Y</span>. Edit the flexfield value and set the value as <span class="bold">N</span> and save the changes.</p>
+</li>
+<li>
+<p>Run the RKM to update the newly added extensible column&rsquo;s short name.</p>
+</li>
+<li>
+<p>Navigate to the <span class="bold">Models</span> tab and open the Oracle Fusion 10 HCM model</p>
+</li>
+<li>
+<div class="p">Click the <span class="bold">Reverse Engineer</span> tab and set the <span class="bold">Mask</span> property to<code class="codeph">%.FLEX_BI_BaseWorkerAsgDFF_VI</code> as shown below. This prevents attempting to refresh the model for all the VOs inadvertently.
+<div class="figure" id="GUID-74FB3060-12EB-4C03-AA6F-00B9367DF903__GUID-9D6E7422-551E-4048-AF08-003D1CB79455"><img width="824" height="420" src="img/GUID-ABE8AD33-2161-418D-9856-0466014D1F01-default.gif" alt="Description of GUID-ABE8AD33-2161-418D-9856-0466014D1F01-default.gif follows" title="Description of GUID-ABE8AD33-2161-418D-9856-0466014D1F01-default.gif follows" /><br />
+<a href="img_text/GUID-ABE8AD33-2161-418D-9856-0466014D1F01-default.htm">Description of the illustration GUID-ABE8AD33-2161-418D-9856-0466014D1F01-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li>
+<p>Set the <span class="bold">INTROSPECT_SOURCE</span> option to <span class="bold">false</span>, the <span class="bold">USE_LOG</span> option to <span class="bold">false</span> and enable the <span class="bold">REFRESH_SDS_FLEXFIELDS</span> mode by changing the option value to <span class="bold">true</span>.</p>
+</li>
+<li>
+<div class="p">Click <span class="bold">Reverse Engineer</span>to bring all VO&rsquo;s extension columns into the model.
+<div class="infobox-note" id="GUID-74FB3060-12EB-4C03-AA6F-00B9367DF903__GUID-96D76933-A0E0-4CE8-8429-146855A4ADBA">
+<p class="notep1">Note:</p>
+If you have already loaded data, then you need to do a full load again. Reset the warehouse and make sure that all warehouse tables are empty and reload.</div>
+</div>
+</li>
+</ol>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1" id="GUID-74FB3060-12EB-4C03-AA6F-00B9367DF903__GUID-65815236-7E34-4757-B8C8-60CAFB0AB9B6">Option 3</p>
+<p>If Option 1 and 2 are not possible, then use option 3. In this option you attempt to manually update the backend table that controls the mapping between the Source column and the target warehouse column. Identify a column that has already been mapped but not required and then run backend update statements to switch it to a column that should get mapped instead.</p>
+<p>As an example, assume that CATEGORY10_ extension column is not required and you want to switch this mapping with INTERNATIONAL__STATUS_ extension column.</p>
+<ol>
+<li>
+<p>Connect to BIApps warehouse schema using SQL tools.</p>
+</li>
+<li>
+<div class="p">Run the following update script:
+<pre dir="ltr">
+UPDATE W_ETL_FLEX_SQL SET FLEX_SRC_ATTRIB     ='INTERNATIONAL__STATUS_', 
+ATTRIB_SQL_EXPRESSION='ASGDFF.INTERNATIONAL__STATUS_'WHERE FLEX_CODE     
+='HRASG'  AND FLEX_SRC_TABLE      
+='HcmTopModelAnalyticsGlobalAM.BaseWorkerAsgDFFBIAM.FLEX_BI_BaseWorkerAsgDFF_VI' AND FLEX_SRC_ATTRIB ='CATEGORY10_'
+AND FLEX_ ATTRIB='ASSIGNMENT_ATTR14_CHAR' 
+AND DATASOURCE_NUM_ID   =200;
+
+COMMIT;
+</pre>
+<div class="infobox-note" id="GUID-74FB3060-12EB-4C03-AA6F-00B9367DF903__GUID-951AE7F4-7F1F-471C-A284-A65207A1BFD1">
+<p class="notep1">Note:</p>
+If the data is already loaded then you need to reload it to use the new mapping. Do not attempt to truncate all warehouse tables before doing the reload. Instead use the reset warehouse option in the Configuration Manager. Truncating all warehouse tables will truncate the mapping table as well.</div>
+</div>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment1">
+<tr>
+<td class="cellalignment8">
+<table class="cellalignment6">
+<tr>
+<td class="cellalignment5"><a href="GUID-36A18CFA-55F1-4D19-B371-A6D15EBF2E24.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment5"><a href="GUID-B656D84A-5BFF-4338-ABF7-3A9F999371D2.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2013, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment10">
+<table class="cellalignment4">
+<tr>
+<td class="cellalignment5"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment5"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment5"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

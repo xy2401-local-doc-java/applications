@@ -1,0 +1,190 @@
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+
+<meta name="DC.Type" content="topic">
+<meta name="description" content="You can create a HTTP client, which uses the HTTPS protocol, to invoke a web service."><meta content="all" name="robots">
+<meta content="yes" name="mos_crawl">
+<meta content="SOAP Web Services for Oracle Project Portfolio Management Cloud" name="dcterms.title">
+<meta content="SOAP Web Services for Oracle Project Portfolio Management Cloud" name="doctitle">
+<meta content="E74441-03" name="dcterms.identifier">
+<meta content="E67968-01" name="partno">
+<meta content="OESPP" name="dcterms.isVersionOf">
+<meta content="Fusion Publishing Server, UAE Print Staging" name="generator">
+<meta content="Tue Jul 18 16:32:28 MDT 2017" name="dcterms.created">
+<meta name="relnum" content="Release 12">
+<meta name="rel_num" content="Release 12"><link type="text/html" title="Previous" href="Java_Client.htm" rel="Prev">
+<link type="text/html" title="Next" href="Static_JAX_WS_Proxy_Client.htm" rel="Next">
+<link type="text/html" title="Home" href="../../index.html" rel="Start">
+<link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+<script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+<script src="../nav/js/doccd.js" type="application/javascript"></script>
+<link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+<link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+<link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+<script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+<script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+<script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+<script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+<script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+<script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+<meta class="foundation-mq-topbar">
+<link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/oer.css" rel="stylesheet">
+HTTPClient-62D9B5B0<meta name="DC.Language" content="en">
+<title>HTTP Client</title>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header><div class="row" id="CONTENT"><div class="IND large-9 medium-8 columns"><div id="EXTRATOC"></div><span id="PAGE" style="display:none;">44/297</span><a name="BEGIN" id="BEGIN"></a><div class="fusiondoc" id="HTTPClient-62D9B5B0">
+
+   <h1 class="title topictitle1" id="HTTPClient-62D9B5B0__topic-100-65E1134A">HTTP Client</h1>
+
+   
+   
+   <div class="body" id="topic-112-65E11355"><p class="shortdesc">You can create a HTTP client, which
+uses the HTTPS protocol, to invoke a web service.</p>
+
+      <p class="p" id="topic-114-65E1135A">The following is a sample client code to:</p>
+
+      <ol class="ol" id="topic-126-01790C87">
+         <li class="li" id="topic-128-01790C87"><p>Construct an xml payload to invoke the <a class="xref" href="find_Operation.htm" title="The find operation retrieves the service data objects that meet the specified search criteria in the request payload. Use this operation to retrieve a subset of attributes for business objects that consist of entities with many attributes or many service data objects.">find</a> operation on the Expense
+Item and Expense Report service.</p></li>
+
+         <li class="li" id="topic-130-01790C87"><p>Open an <samp class="ph codeph" id="topic-132-01790C89">HTTPUrlConnection</samp> to the service.</p></li>
+
+         <li class="li" id="topic-134-0179D7D8"><p>Configure the request content type to <samp class="ph codeph" id="topic-136-0179D7D9">xml</samp> and HTTP method to <samp class="ph codeph" id="topic-138-0179D7D9">POST</samp>.</p></li>
+
+         <li class="li" id="topic-140-0179D7D9"><p>Configure the request to use basic authentication,
+with a user name and a password to invoke the service.</p></li>
+
+         <li class="li" id="topic-142-0179D7DB"><p>Write the xml payload to the connection
+as request.</p></li>
+
+         <li class="li" id="topic-144-0179E689"><p>Receive the response from the connection,
+and print the output.</p></li>
+
+      </ol>
+
+      <div class="p" id="topic-130-13666521">To run this sample code, you must:<ul class="ul" id="topic-132-13666523">
+            <li class="li" id="topic-134-13666524">Get the hostname and port for the Expense
+Item and Expense Report service using the <a class="xref" href="Developer_Connect.htm" title="Use Developer Connect portal to discover business object services, to look up service endpoints, and to view service data object metadata and customizations.">Developer Connect</a> portal. <p class="p" id="topic-116-62D3A59B">To use the sample code to invoke a different business object service,
+replace with the corresponding service endpoint URL. For example,
+replace <samp class="ph codeph" id="topic-118-62D3A59B">HOST</samp> with <span class="ph uicontrol" id="topic-120-62D3A59D">your-host-name:your-port</span> and <samp class="ph codeph" id="topic-122-62D3A59D">SVC_RELPATH</samp> with <span class="ph uicontrol" id="topic-124-62D3A59E">/finExmSharedCommon/ExpenseService</span>.</p>
+
+            </li>
+
+            <li class="li" id="topic-136-13666524"><p>Update the user name and password (<samp class="ph codeph" id="topic-146-136965E1">"username:password"</samp>) with a valid
+user name and password for your cloud instance.</p></li>
+
+            <li class="li" id="topic-112-62D33311"><p>Import the certificate from the server
+into the client trust store using the keytool command.</p></li>
+
+         </ul>
+ 
+      </div>
+
+      <pre class="pre codeblock" id="topic-124-0177EA3D"> public static void http_client() throws Exception {
+        System.out.println("Invoke service using direct HTTP call with Basic Auth");
+        String payload =
+            "&lt;soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"&gt;\n" +
+            "    &lt;soap:Header&gt;\n" +
+            "        &lt;fmw-context xmlns=\"http://xmlns.oracle.com/fmw/context/1.0\"/&gt;\n" +
+            "    &lt;/soap:Header&gt;\n" +
+            "    &lt;soap:Body&gt;\n" +
+            "        &lt;ns1:findExpense xmlns:ns1=\"http://xmlns.oracle.com/apps/financials/expenses/shared/common/expenseExternalService/types/\"&gt;\n" +
+            "            &lt;ns1:findCriteria xmlns:ns2=\"http://xmlns.oracle.com/adf/svc/types/\"&gt;\n" +
+            "                &lt;ns2:fetchStart&gt;0&lt;/ns2:fetchStart&gt;\n" +
+            "                &lt;ns2:fetchSize&gt;2&lt;/ns2:fetchSize&gt;\n" +
+            "                &lt;ns2:excludeAttribute&gt;true&lt;/ns2:excludeAttribute&gt;\n" +
+            "            &lt;/ns1:findCriteria&gt;\n" +
+            "            &lt;ns1:findControl xmlns:ns2=\"http://xmlns.oracle.com/adf/svc/types/\"&gt;\n" +
+            "                &lt;ns2:retrieveAllTranslations&gt;true&lt;/ns2:retrieveAllTranslations&gt;\n" +
+            "            &lt;/ns1:findControl&gt;\n" +
+            "        &lt;/ns1:findExpense&gt;\n" +
+            "    &lt;/soap:Body&gt;\n" +
+            "&lt;/soap:Envelope&gt;"; 
+
+        httpPost("https://" + HOST + SVC_RELPATH + "?invoke=", payload,
+                 "username:password");				 
+    }
+ private static String httpPost(String destUrl, String postData,
+                                   String authStr) throws Exception {
+        URL url = new URL(destUrl);
+        HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+        if (conn == null) {
+            return null;
+        }
+        conn.setRequestProperty("Content-Type", "text/xml; charset=UTF-8");
+        conn.setDoOutput(true);
+        conn.setDoInput(true);
+        conn.setUseCaches(false);
+        conn.setFollowRedirects(true);
+        conn.setAllowUserInteraction(false);
+        conn.setRequestMethod("POST"); 
+
+        byte[] authBytes = authStr.getBytes("UTF-8");
+        String auth = com.sun.org.apache.xml.internal.security.utils.Base64.encode(authBytes);
+        conn.setRequestProperty("Authorization", "Basic " + auth);
+ 
+
+        System.out.println("post data size:" + postData.length());
+ 
+
+        OutputStream out = conn.getOutputStream();
+        OutputStreamWriter writer = new OutputStreamWriter(out, "UTF-8");
+        writer.write(postData);
+        writer.close();
+        out.close();
+
+        System.out.println("connection status: " + conn.getResponseCode() +
+                           "; connection response: " +
+                           conn.getResponseMessage());
+
+        InputStream in = conn.getInputStream();
+        InputStreamReader iReader = new InputStreamReader(in);
+        BufferedReader bReader = new BufferedReader(iReader);
+
+        String line;
+        String response = "";
+        System.out.println("==================Service response: ================ ");
+        while ((line = bReader.readLine()) != null) {
+            System.out.println(line);
+            response += line;
+        }
+        iReader.close();
+        bReader.close();
+        in.close();
+        conn.disconnect();
+ 
+
+        return response;
+    }
+</pre>
+
+   </div>
+
+   <nav role="navigation" class="related-links">
+<div class="linklist linklist"><h5 class="relatedlinks">Related Topics</h5>
+<ul>
+<li><p><a class="link" href="Static_JAX_WS_Proxy_Client.htm">Static JAX-WS Proxy Client</a></p></li>
+<li><p><a class="link" href="Dynamic_Dispatch_Client.htm">Dynamic Dispatch Client</a></p></li>
+<li><p><a class="link" href="Java_Client.htm">Java
+Client</a></p></li>
+<li><p><a class="link" href="Invoking_SOAP_Web_Services.htm">Invoking SOAP Web Services</a></p></li></ul></div>
+</nav>
+</div></div></div><footer></footer><noscript><p>Scripting on this page enhances content navigation, but does not change the content in any way.</p></noscript>
+<!-- Start SiteCatalyst code -->
+<script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+<!-- End SiteCatalyst code -->
+</body>
+</html>

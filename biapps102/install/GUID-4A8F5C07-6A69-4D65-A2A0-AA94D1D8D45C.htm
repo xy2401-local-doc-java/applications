@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>General Guidelines for Setting Up Databases for Oracle BI Applications</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="These guidelines help you set up the data warehouse physical database and explain why a separate database is necessary for Oracle BI Applications." />
+<meta name="dcterms.created" content="2018-09-24T23:04:57Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Installation Guide" />
+<meta name="dcterms.identifier" content="E72034-07" />
+<meta name="dcterms.isVersionOf" content="BIAIN" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2013, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-CD414D31-4958-4282-9ABF-0891578BCE27.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-DB60AFB0-CC8A-4A60-B75F-5EF7D4481D93.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAIN.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-4A8F5C07-6A69-4D65-A2A0-AA94D1D8D45C"></a> <span id="PAGE" style="display:none;">9/119</span> <!-- End Header -->
+<a id="BIAIN24443"></a>
+<h1 id="BIAIN-GUID-4A8F5C07-6A69-4D65-A2A0-AA94D1D8D45C" class="sect1">General Guidelines for Setting Up Databases for <span>Oracle BI Applications</span></h1>
+<div>
+<p>These guidelines help you set up the data warehouse physical database and explain why a separate database is necessary for <span>Oracle BI Applications</span>.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-4A8F5C07-6A69-4D65-A2A0-AA94D1D8D45C.htm#GUID-3F233DBB-75B0-4356-A73D-D7E89A534AE1" title="These guidelines help you set up the data warehouse physical database for performance and growth.">Guidelines for Setting Up Oracle Business Analytics Warehouse Databases</a></p>
+</li>
+<li>
+<p><a href="GUID-4A8F5C07-6A69-4D65-A2A0-AA94D1D8D45C.htm#GUID-9AF07729-0BDE-4A9F-B758-D94FA1B39F94" title="Although it is technically possible to put the Oracle Business Analytics Warehouse in the same database as the transactional database, it is not recommended for performance reasons. The transactional database is structured as an online transaction processing (OLTP) database, whereas the Oracle Business Analytics Warehouse is structured as an online analytical processing (OLAP) database, each optimized for its own purpose.">Why Use a Separate Database for the Oracle Business Analytics Warehouse?</a></p>
+</li>
+</ul>
+</div>
+<a id="BIAIN24445"></a>
+<div class="props_rev_3"><a id="GUID-3F233DBB-75B0-4356-A73D-D7E89A534AE1"></a>
+<h2 id="BIAIN-GUID-3F233DBB-75B0-4356-A73D-D7E89A534AE1" class="sect2">Guidelines for Setting Up <span>Oracle Business Analytics Warehouse</span> Databases</h2>
+<div>
+<p>These guidelines help you set up the data warehouse physical database for performance and growth.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Allocate around 50 to 70 percent of the total available server memory to the database, assuming no other application is running on the same server.</p>
+</li>
+<li>
+<p>At a minimum, separate the data and index tablespaces. Create more tablespaces to separate heavily used tables and their indexes.</p>
+</li>
+<li>
+<p>Oracle recommends using 8k block size for Oracle warehouses.</p>
+</li>
+<li>
+<p>If you are using multiple disk storage systems, stripe the tablespace containers and files across as many disks as possible.</p>
+</li>
+<li>
+<p>Raw devices for tablespaces provide better performance as compared to cooked file systems.</p>
+</li>
+<li>
+<p>RAID-5 is known to give a good balance of performance and availability.</p>
+</li>
+</ul>
+</div>
+</div>
+<a id="BIAIN24447"></a>
+<div class="props_rev_3"><a id="GUID-9AF07729-0BDE-4A9F-B758-D94FA1B39F94"></a>
+<h2 id="BIAIN-GUID-9AF07729-0BDE-4A9F-B758-D94FA1B39F94" class="sect2">Why Use a Separate Database for the <span>Oracle Business Analytics Warehouse</span>?</h2>
+<div>
+<p>Although it is technically possible to put the <span>Oracle Business Analytics Warehouse</span> in the same database as the transactional database, it is not recommended for performance reasons. The transactional database is structured as an online transaction processing (OLTP) database, whereas the <span>Oracle Business Analytics Warehouse</span> is structured as an online analytical processing (OLAP) database, each optimized for its own purpose.</p>
+<p>The reasons for not combining the two databases are:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>ETL is configured to maximize hardware resources; and, therefore, the warehouse should not share any resources with any other projects.</p>
+</li>
+<li>
+<p>The analytical queries interfere with normal use of the transactional database, which is entering and managing individual transactions.</p>
+</li>
+<li>
+<p>The data in a transactional database is normalized for update efficiency. Transactional queries join several normalized tables and will be slow (as opposed to pre-joined, de-normalized analytical tables).</p>
+</li>
+<li>
+<p>Historical data cannot be purged from a transactional database, even if not required for current transaction processing, because you need it for analysis. (By contrast, the analytical database is the warehouse for historical as well as current data.) This causes the transactional database to further slow down.</p>
+</li>
+<li>
+<p>Transactional databases are tuned for one specific application, and it is not productive to use these separate transactional databases for analytical queries that usually span more than one functional application.</p>
+</li>
+<li>
+<p>The analytical database can be specifically tuned for the analytical queries and Extract-Transform-Load (ETL) processing. These are quite different from transactional database requirements.</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment1">
+<tr>
+<td class="cellalignment8">
+<table class="cellalignment6">
+<tr>
+<td class="cellalignment5"><a href="GUID-CD414D31-4958-4282-9ABF-0891578BCE27.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment5"><a href="GUID-DB60AFB0-CC8A-4A60-B75F-5EF7D4481D93.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2013, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment10">
+<table class="cellalignment4">
+<tr>
+<td class="cellalignment5"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment5"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment5"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

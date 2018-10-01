@@ -1,0 +1,2889 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Payroll Data Loading (Chapter 19) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:18 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="loading data; payroll data; importing payroll data; migrating payroll data;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM2141648.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM1415462.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="You can load payroll data for initial migration or mass data entry using the payroll batch loader, predefined processes, and
+      web services. You can also automate the regular import of time cards, absence entries, and benefit enrollments using predefined
+      flows. You can use HCM Data Loader during implementation to migrate HCM setup data, including element entries and salaries.
+      However, for most payroll-related setup data and worker data, as shown in the following table, use the payroll batch loader.
+      You can load the data from a spreadsheet or a file. Typically, you initially migrate data to a test environment. After successful
+      testing, you can move the data to your production environment using one of the following tasks: You can use the payroll batch
+      loader and predefined batch processes to load element entries and other payroll data on an ongoing basis. You can automate
+      the submission of the flows using the Flow Actions web service."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">22/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM1446823" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">19</span>Payroll Data Loading
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1123975">Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM721950">Initial Balance Loading: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM727094">Initial Balances: How They're Loaded</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM727353">Balance Batch Header and Lines Views</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1828841">Adjusting Multiple Balances: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1196290">Adjusting Balances: Critical Choices</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1194436">Adjusting Balances: Worked Example</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM1123975">
+                  <h2>Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can load payroll data for initial migration
+                     or mass data entry using the payroll batch loader, predefined
+                     processes, and web services. You can also automate the regular import
+                     of time cards, absence entries, and benefit enrollments using predefined
+                     flows.
+                  </p>
+                  
+                  <p>This overview outlines your options to meet the following
+                     data loading requirements: 
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Loading setup data</p>
+                     </li>
+                     
+                     <li>
+                        <p>Exporting and importing setup data
+                           between test and production environments
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Ongoing data loading</p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="FAIHM1288896">
+                     <h3 class="topictitle">Loading Setup Data </h3>
+                     
+                     <p>You can use HCM Data Loader during implementation
+                        to migrate HCM setup data, including element entries and salaries.
+                        However, for most payroll-related setup data and worker data, as shown
+                        in the following table, use the payroll batch loader. You can load
+                        the data from a spreadsheet or a file.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Payroll setup data and worker&#xA;setup data managed by the payroll batch loader">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Payroll Setup Data
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Worker Data
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Balances in balance groups</p>
+                                 
+                                 <p>Elements</p>
+                                 
+                                 <p>Formula globals</p>
+                                 
+                                 <p>Object groups</p>
+                                 
+                                 <p>Payroll definitions</p>
+                                 
+                                 <p>User-defined tables</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Assigned payrolls</p>
+                                 
+                                 <p>Bank details for personal payment methods</p>
+                                 
+                                 <p>Element entries</p>
+                                 
+                                 <p>Initial balance values</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>Use the Batch Loader task in the Payroll Administration,
+                        Data Exchange, or Data Exchange work area to perform the following
+                        actions:
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Enter the data in a workbook format
+                              that's specific to the object type or create a batch from a file using
+                              a transformation formula.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Save your entries to staging tables.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Validate the data in staging tables.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Submit the Transfer Batch flow
+                              to load the data to the application tables. For initial balance values,
+                              use the Load Initial Balances flow instead.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1123922">
+                     <h3 class="topictitle">Exporting and Importing Setup Data Between Environments</h3>
+                     
+                     <p>Typically, you initially migrate data to
+                        a test environment. After successful testing, you can move the data
+                        to your production environment using one of the following tasks:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Use the Manage Configuration Packages
+                              task in the Setup and Maintenance work area to export and import a
+                              configuration package.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Use the Create Batch for an Object
+                              process in the Payroll Administration work area to select specific
+                              objects, such as elements or formulas, to migrate.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1123923">
+                     <h3 class="topictitle">Ongoing Data Loading</h3>
+                     
+                     <p>You can use the payroll batch loader and
+                        predefined batch processes to load element entries and other payroll
+                        data on an ongoing basis. You can automate the submission of the flows
+                        using the Flow Actions web service.
+                     </p>
+                     
+                     <p>Specific flows exist for loading payroll-related
+                        data for payroll processing, such as the Load Absence Batches process,
+                        where you specify the interface type and XML file containing the data
+                        to load.
+                     </p>
+                     
+                     <p>To import data from a third-party payroll provider,
+                        such as processed payroll data or payslips, you can use the HCM Data
+                        Loader.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=A48BC766452FB084E040D30A6881408B">Implementation Project Based Export and Import: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM1415462.htm#FAIHM1398746">Migrating Objects Using the Payroll Batch Loader: Procedure</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM721950">
+                  <h2>Initial Balance Loading: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Setting initial balances values is an essential
+                     task when you migrate payroll data from another application. First
+                     you load balance values into batch views, then submit the Load Initial
+                     Balances process from the Payroll Calculation work area. The process
+                     validates the information then loads the batch.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM721948">
+                     <h3 class="topictitle">Balance Initialization Elements</h3>
+                     
+                     
+                     <p>For each initialized balance, you must create
+                        elements in the Balance Initialization classification and add them
+                        to the balance as balance
+                        feeds. 
+                     </p>
+                     
+                     
+                     
+                     <p>You can create up to three balance initialization
+                        elements for the following levels:
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Assignment</p>
+                        </li>
+                        
+                        <li>
+                           <p>Employment terms</p>
+                        </li>
+                        
+                        <li>
+                           <p>Payroll relationship</p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                     
+                     <p>Each balance initialization element must:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Be nonrecurring and for balance adjustments
+                              only.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Be capable of being processed in
+                              the payroll run.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Have an input value to feed the balance
+                              and an input value for each context required by the balance.
+                           </p>
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              If you need to set initial values for a large number
+                              of balances you can define multiple input values for a single element
+                              with each input value feeding a different balance.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>Have an eligibility record associated
+                              with it, with an early effective start date.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM721949">
+                     <h3 class="topictitle">Batch Views</h3>
+                     
+                     
+                     <p>To populate the batch views with the balance
+                        values for the initialization date, use the Payroll batch loader workbook, which you
+                        can download from the Payroll Administration, Data Exchange, or Checklist
+                        work area.
+                     </p>
+                     
+                     
+                     
+                     <p>The views include:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>PAY_BALANCE_BATCH_HEADER</p>
+                        </li>
+                        
+                        <li>
+                           <p>PAY_BALANCE_BATCH_LINES</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="infobox-note"><span class="notep1">Note: </span>
+                        The PAY_BALANCE_BATCH_LINES view has a complex definition.
+                        You can't directly insert balance values into this view. You must
+                        use the batch loader workbook.
+                        
+                     </div>
+                     
+                     <p>When you create the batch header and lines, consider
+                        the following points:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Divide your employees into separate
+                              batches to limit the size of each batch.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Within a batch, ensure that you include
+                              batch lines for every balance to be initialized for a person. You
+                              can't split lines for a person across multiple batches.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The date you specify on the batch
+                              header applies to all lines unless you enter an override date at the
+                              line level. The date at line level must be on or before the date on
+                              the header.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You can't initialize balances once
+                              you have run any payroll processes.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Every line must include a value for
+                              payroll relationship number. If the line is initializing a terms-level
+                              balance, you must also enter a term number. If the line is initializing
+                              an assignment-level balance, you must also enter a term number and
+                              an assignment number.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM1415462.htm#FAIHM306458">Payroll Batch Loader Tasks: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM727094">
+                  <h2>Initial Balances: How They're Loaded</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>The Load Initial Balances process validates
+                     then processes the initial balance values you load into batch views.
+                     It creates balance adjustments to set the required values. To load
+                     initial balances, use the Submit a Process or Report task in the Payroll
+                     Calculation work area.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM727095">
+                     <h3 class="topictitle">Settings That Affect Initial Balances</h3>
+                     
+                     <p>The data you load into the batch views determines
+                        which defined balances the process initializes and the values it uses.
+                        Typically, you group employees into batches to manage the initialization
+                        of their balances.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM727096">
+                     <h3 class="topictitle">How the Balances  Are Initialized</h3>
+                     
+                     <p>The Load Initial Balances process validates the existence
+                        of the entities referenced in the batch data, including:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Balances</p>
+                        </li>
+                        
+                        <li>
+                           <p>Balance dimensions</p>
+                        </li>
+                        
+                        <li>
+                           <p>Tax reporting units</p>
+                        </li>
+                        
+                        <li>
+                           <p>Payrolls</p>
+                        </li>
+                        
+                        <li>
+                           <p>Payroll relationships</p>
+                        </li>
+                        
+                        <li>
+                           <p>Employment terms</p>
+                        </li>
+                        
+                        <li>
+                           <p>Assignments</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>It also checks that values are available for the contexts
+                        used by each balance dimension. It doesn't check, for example, that
+                        an employee is assigned to a specified organization. After successful
+                        validation, the process creates balance adjustments. 
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="batch line status table">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Batch Line Status
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>V</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Batch line is valid. </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>T</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Batch line has been successfully processed.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                  </div>
+                  
+                  <h3 class="topictitle">Examples</h3>
+                  
+                  <p>The following table shows a simple three-line batch
+                     loaded on 18 June.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="Example of Load Initial Balances process for defined&#xA;balances.">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Defined Balance
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Value
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Total_Earnings_PTD </p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>100</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Total_Earnings_QTD </p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>250</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Total_Earnings_YTD  </p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>500</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  <p>For this batch, the process creates an adjustment
+                     on the first day of the time period relevant to each dimension, as
+                     shown in the following table:
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="Example of adjustment process for adjusted balances.">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Adjustment Date
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Adjustment Value
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Balances Adjusted
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>1 June</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>100</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Total_Earnings_PTD </p>
+                              
+                              <p>Total_Earnings_QTD</p>
+                              
+                              <p> Total_Earnings_YTD</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>1 April</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>150</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Total_Earnings_QTD </p>
+                              
+                              <p>Total_Earnings_YTD</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>1 Jan </p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>250</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Total_Earnings_YTD</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM727353">
+                  <h2>Balance Batch Header and Lines Views</h2>
+                  
+                  
+                  
+                  
+                  <p>The Load Initial Balances process uses the
+                     PAY_BALANCE_BATCH_HEADER and PAY_BALANCE_BATCH_LINES views to hold
+                     the data to initialize balance values.
+                  </p>
+                  
+                  
+                  <p>You must load data into these views using the Payroll batch loader workbook or API in the PAY_BALANCE_BATCH_LINES_PKG PL/SQL package. </p>
+                  
+                  <p>Create each batch line with a BATCH_LINE_STATUS of
+                     U (unprocessed) and leave the PAYROLL_REL_ACTION_ID column blank.
+                     The batch upload process updates these two columns.
+                  </p>
+                  
+                  
+                  
+                  <div class="reference">
+                     
+                     <p class="columnName">Required Columns</p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        You can view the full column listing by querying the
+                        view. For more information about views, see the Tables and Views for
+                        Oracle HCM Cloud guide.
+                        
+                     </div>
+                     
+                     <p>The PAY_BALANCE_BATCH_LINES view requires the columns
+                        shown in the following table. Where there is both an ID column and
+                        a name column for the same entity, for example, PAYROLL_ASSIGNMENT_ID
+                        and ASSIGNMENT_NUMBER, you can populate either column. You must, however,
+                        populate at least one. If you leave the ID column blank, the batch
+                        upload process uses the name column value to derive the ID value.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Required columns for the PAY_BALANCE_BATCH_LINES&#xA;view.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Column
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Comments
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PAYROLL_RELATIONSHIP_ID + PAYROLL_RELATIONSHIP_NUMBER </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Identify the payroll relationship for this balance
+                                    value.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>BALANCE_TYPE_ID + BALANCE_NAME </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p> Identify the balance for this balance value.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>BALANCE_DIMENSION_ID + DIMENSION_NAME </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Identify the balance dimension for this balance value.
+                                    DIMENSION_NAME should be populated with the country-specific dimension
+                                    usage dimension name rather than the global DIMENSION_NAME held on
+                                    PAY_BALANCE_DIMENSIONS.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>VALUE </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Identify the numerical value of the balance on the
+                                    upload date.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>UPLOAD_DATE</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Identify the date of the balance value. This date
+                                    must be on or before the upload date for the batch header.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PAYROLL_ID + PAYROLL_NAME</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Identify the context required for evaluating a balance
+                                    value, even though it may not be a context for the dimension.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="reference">
+                     
+                     <p class="columnName">Core Context</p>
+                     
+                     
+                     <p>If the balance dimension expects a
+                        value for this context, you must populate the core contexts shown
+                        in the following table.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Requirements for the Core Contexts&#xA;column.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Column
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Comment
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PAYROLL_TERM_ID + TERM_NUMBER</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Identify the payroll terms for this balance value,
+                                    if required. Where there is both an ID column and a number column
+                                    for the same entity, you can populate either column, but you must
+                                    populate at least one.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PAYROLL_ASSIGNMENT_ID + ASSIGNMENT_NUMBER</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Identify the payroll assignment for this balance value,
+                                    if required.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>LEGAL_EMPLOYER_ID + LEGAL_EMPLOYER_NAME</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>TAX_UNIT_ID + TAX_UNIT_NAME</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>AREA1 + AREA2 + AREA3 + AREA4 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Identify state and county code information. </p>
+                                 
+                                 <div class="infobox-"><span class="notep1">Note: </span>
+                                    In Oracle E-Business Suite these items were STATE_CODE,
+                                    COUNTY_CODE and so on.
+                                    
+                                 </div>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>THIRD_PARTY_PAYEE_ID + THIRD_PARTY_PAYEE_NAME</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>TIME_DEFINITION_ID + TIME_DEFINITION_NAME</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>RUN_TYPE_NAME + RUN_TYPE_ID  </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>ELEMENT_ENTRY_ID</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>BALANCE_DATE</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CALC_BREAKDOWN_ID </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Identify the ID associated with the payroll terms.
+                                    If the calculation breakdown is:
+                                 </p>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>The calculation card, enter the
+                                          PAY_DIR_CARDS_F.DIR_CARD_ID.
+                                       </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>The calculation component, enter
+                                          the PAY_DIR_CARD_COMPONENTS_F.DIR_CARD_COMP_ID.
+                                       </p>
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="reference">
+                     
+                     <p class="columnName">Legislative or User-defined Context Columns</p>
+                     
+                     
+                     <p>There are six legislative or user-defined contexts
+                        that you must populate if the balance dimension expects a value for
+                        these contexts. For each context, there is a context ID, name, and
+                        value. For example:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>CONTEXT1_ID + CONTEXT1_NAME</p>
+                        </li>
+                        
+                        <li>
+                           <p>If the balance dimension uses CONTEXT1
+                              populate CONTEXT1_VALUE
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        The values of the core contexts are the IDs themselves,
+                        while the values of the legislative contexts are separate from the
+                        ID of the context.
+                        
+                     </div>
+                     
+                     <p>Populate CONTEXT[1-6]_NAME with the name of the context
+                        usage for that legislative or user-defined context. Populate CONTEXT[1-6]_VALUE
+                        with the actual value of that context.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="http://docs.oracle.com/cloud/latest/globalcs_gs/OEDMH">Tables and Views for Oracle HCM Cloud</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1828841">
+                  <h2>Adjusting Multiple Balances: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Manage balance adjustments that impact multiple
+                     employees by processing adjustments in a single batch using the payroll
+                     batch loader. To import multiple balance adjustments at the same time
+                     in a single batch for an element, complete the following sequence
+                     of steps.
+                  </p>
+                  
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>Use the Batch Loader task in the
+                           Payroll Administration work area.
+                        </p>
+                        <div class="infobox-"><span class="notep1">Note: </span>
+                           Alternatively, you can use the Batch Loader task
+                           in the Data Exchange, or Checklist work area.
+                           
+                        </div>
+                     </li>
+                     
+                     <li>
+                        <p>Enter data into integrated Microsoft
+                           Excel workbooks using the Adjust Balance task action. Data columns
+                           in the workbook vary depending on the legislative data group and the
+                           selected element.
+                        </p>
+                        <div class="infobox-note"><span class="notep1">Note: </span>
+                           The batch loader doesn't support balance adjustments
+                           to different payrolls or different inclusion rules within the same
+                           batch. Each of the following columns must have the same value: Effective
+                           Date, Payroll, Include in Costing Process, Include in Payment Balance.
+                           If you have different values for these columns, you must create a
+                           separate batch for each combination.
+                           
+                        </div>
+                     </li>
+                     
+                     <li>
+                        <p>Save the data to staging tables.</p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Use the Transfer Batch task in
+                           the Payroll Administration work area to move data to the balance adjustment
+                           interface tables.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Use the Adjust Multiple Balances
+                           task in the Payroll Calculation work area to take the data from the
+                           interface tables and create balance adjustment element entries for
+                           each line within the batch.
+                        </p>
+                        <p>The Adjust Multiple
+                           Balances process updates the element entry record for each person
+                           included in the batch. 
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Verify the balance results of the
+                           adjustments using the View Person Process Results task in the Payroll
+                           Calculation or Payroll Checklist work areas.
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM1415466.htm#FAIHM1731256">Payroll Batch Loader Workbook for Balance Adjustments</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM1415462.htm#FAIHM1141931">Importing Data Using the Payroll Batch Loader: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1196290">
+                  <h2>Adjusting Balances: Critical Choices</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>Use balance adjustment in exceptional circumstances
+                     when you can't correct the source data by submitting the appropriate
+                     recalculation process. For example you might process an adjustment
+                     to correct an initialized balance or correct a balance included in
+                     statutory reports at the end of a quarter or year. You can also use
+                     the balance adjustment process in situations where, an employee moves
+                     at the end of the year and you don't receive a notification in time.
+                     You might adjust the employee's tax balance and refund the amount
+                     collected by mistake.
+                  </p>
+                  
+                  
+                  <p>You can adjust the balance of an existing element
+                     for one person or for multiple persons in a single batch. 
+                  </p>
+                  
+                  <p>Before performing a balance adjustment, review the
+                     following factors:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Regulated limits and related balances</p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Balance adjustment for a single
+                           person
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Balance adjustment for multiple
+                           persons
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Element and input values to adjust</p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>When to cost adjustments</p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>If you are processing a payroll, also consider:</p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>When to pay refunds</p>
+                     </li>
+                     
+                     <li>
+                        <p>Reporting an adjustment</p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="FAIHM1196284">
+                     <h3 class="topictitle">Regulated Limits and Related Balances</h3>
+                     
+                     
+                     
+                     <p>Balance adjustments update the selected balance
+                        but not related balances, because you aren't recalculating the element
+                        and its balances.  Balance adjustments also bypass system validation,
+                        which means that limits aren't verified. Before performing an adjustment,
+                        consider whether related balances require adjustment, and whether
+                        your adjustment exceeds statutory regulated limits. For example, raising
+                        the upper limit of one balance might require correcting the lower
+                        limit of a related balance and ensuring that they both meet statutory
+                        limits.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1196285">
+                     <h3 class="topictitle">Balance Adjustments for a Single Person</h3>
+                     
+                     
+                     
+                     <p>Adjust the balance for a person, for example,
+                        when you load the person's balances initially, and discover the balance
+                        is incorrect for a tax balance dimensions. Two factors determine where
+                        you adjust the balance: whether you processed the element in the payroll
+                        run for the person, and whether you need to adjust the context of
+                        the balance dimension.
+                     </p>
+                     
+                     
+                     <p>You initiate a balance adjustment from the Payroll
+                        Calculation work area. From here, you can:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Use the Adjust Individual Balances
+                              task
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select Adjust Balances from the
+                              Action menu on the View Person Process Results page, Balance Results
+                              section.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>The following table contrasts the two tasks.</p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Identifies which method to use&#xA;based on whether a balance exists and whether the context can be updated">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Adjustment Tasks
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Can Adjust Elements Processed in the Run
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Can Update Context
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Adjust Individual Balances </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                                 <p>You can also create new balance results for element
+                                    not processed in a payroll run.
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Adjust Balances </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>No, the context is the one used for the payroll run.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1783890">
+                     <h3 class="topictitle">Balance Adjustments for Multiple Persons</h3>
+                     
+                     
+                     
+                     <p>Upload multiple balance adjustments for an
+                        element using the Batch Loader task in the Payroll Administration
+                        work area. You enter data into integrated Microsoft Excel workbooks,
+                        save the data to staging tables, and transfer the data to the balance
+                        adjustment interface tables. You use the Adjust Multiple Balances
+                        task in the Payroll Calculation work area to take data from the interface
+                        tables and create the balance adjustment element entries for each
+                        line within the batch.  
+                     </p>
+                     
+                     
+                     <p>When you create the batch using the payroll batch
+                        loader, consider the following points: 
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Data to load</p>
+                           <p>The data you load into the batch, such as element and input values,
+                              determines which balances to adjust and which values are used to adjust
+                              the balances.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Data columns</p>
+                           <p>The data columns display the same attributes available for the element
+                              when you process the adjustment using the Adjust Individual Balances
+                              task.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Batch size</p>
+                           <p>As best practice, use smaller batches to manage the process. For
+                              example, divide the balance adjustments into separate batches by legislative
+                              data group and limit the size of each batch to 5000 lines.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Batch processing</p>
+                           <p>Batches are single-threaded. Streamline processing by entering multiple
+                              batches and processing in parallel 
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1196434">
+                     <h3 class="topictitle">Element and Input Values to Adjust</h3>
+                     
+                     
+                     
+                     <p>The best practice is to adjust the balance
+                        of an existing element, instead of creating a new element for balance
+                        adjustment purposes. Creating a new element isn't recommended because
+                        you must create the balance feeds and input values, and ensure that
+                        you adjust all the related balances.
+                     </p>
+                     
+                     
+                     <p>When you create an element using the Manage Elements
+                        task, you complete a template to create the element definition. For
+                        some element classifications, submitting the template automatically
+                        creates related elements, such as results elements.
+                     </p>
+                     
+                     <p>You adjust the appropriate input values required
+                        to adjust the balance. For example, you might enter a different start
+                        date for a pension plan element, or geography values for an earnings
+                        element.  If you adjust an element processed in a payroll period,
+                        input values that you skip use the values from the original entry. 
+                     </p>
+                     
+                     <p> Refer to the following table to determine which
+                        element and input value to use for a balance adjustment. 
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Identifies which element input&#xA;value to use for each element classification for a balance adjustment">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Primary Classification
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Secondary Classifications
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Template Category
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Element to Use for Adjustments
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Element Input Values to Use for Adjustments
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Standard Earnings</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Standard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Base element</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Pay Value</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Supplemental Earnings</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Standard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Base element</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Pay Value</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Direct Payments</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Standard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Base element</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Pay Value</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Employee Tax Credits</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Standard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Results</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Pay Value, Accrued, Arrears, Not Taken</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Employer Charges</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Standard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Results</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Pay Value, Accrued, Arrears, Not Taken</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Employer Taxes</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Standard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Results</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Pay Value, Accrued, Arrears, Not Taken</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Involuntary Deductions</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Involuntary Deduction</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Results</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Deductions Calculated</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Involuntary Deductions</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Involuntary Deduction</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Maintenance</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Amount Accrued, Not Taken Amount, Arrears Amount</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Involuntary Deductions</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Involuntary Deduction</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Processing Fee Results</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Fee Calculated, Initial Fee Calculated</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Involuntary Deductions</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Involuntary Deduction</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Organization Fee Results</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Fee Calculated</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Involuntary Deductions</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Involuntary Deduction</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Person Fee Results</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Fee Calculated</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Pre-Statutory Deductions</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Standard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Results</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Pay Value, Accrued, Arrears, Not Taken</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Pre-Statutory Deductions</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Pre-Statutory Deductions</p>
+                                 
+                                 <p>Pension Plan Pre-Statutory</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Benefit</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Employee Contributions</p>
+                                 
+                                 <p>Employer Contributions</p>
+                                 
+                                 <p>Additional Contributions</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Contribution Amount</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Taxable Benefits</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Standard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Base element</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Pay Value</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Voluntary Deductions</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Standard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Results</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Pay Value, Accrued, Not Taken</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Voluntary Deductions</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Voluntary Deductions</p>
+                                 
+                                 <p>Pension Plan After Tax</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Benefit</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Employee Contributions</p>
+                                 
+                                 <p>Employer Contributions</p>
+                                 
+                                 <p>Additional Contributions</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Contribution Amount</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The display options for the element and balance depend
+                        on the date you specify and the employment level associated to the
+                        element. For example, the balances available on the Manage Balance
+                        Adjustment page display only balances processed in the payroll run
+                        for the selected level of the employment hierarchy. 
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1196437">
+                     <h3 class="topictitle">When to Cost Adjustments</h3>
+                     
+                     
+                     
+                     <p>Consider costing adjustments if you calculate
+                        payroll. As a guideline, if you cost the original balance and the
+                        adjustment changes the amount or account number, you cost the adjustment.
+                        To cost the adjustment, select the option to include the adjustment
+                        in the costing process on the Costing and Payment details section
+                        on the Adjust Individual Balances page.
+                     </p>
+                     
+                     <p>The following table shows two examples.</p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Examples of when you might cost&#xA;a balance adjustment">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Adjustment
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Cost the Adjustment
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Explanation
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>An earnings element or pretax deduction</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>You cost the original balance and the adjusted balance
+                                    affects quarterly wage and tax reporting requirements.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>An incorrect value of an initialized balance</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Typically the cost of the balance was entered correctly
+                                    in the previous application.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>If you process a balance adjustment for an earnings
+                        element included in a distribution group, such as an overtime element,
+                        you can specify an override cost account for the amount.  
+                     </p>
+                     
+                     <p>If you process a balance adjustment for an element
+                        that uses distributed costing, such as an employer tax, the adjusted
+                        amount is costed to a suspense account. This situation occurs because
+                        the costing process doesn't associate the adjusted balance of the
+                        distributed element with the earnings elements included in the distribution
+                        group. To correct the amount and costing for the balances of the earnings
+                        elements, process a cost adjustment for each earnings element.
+                     </p>
+                     
+                     <p>For example, if the distribution group for an employer
+                        tax includes regular, overtime, and shift earnings elements, you would
+                        process a cost adjustment for the amount and costing of the regular,
+                        overtime, and shift earnings elements.  
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1196436">
+                     <h3 class="topictitle">When to Pay Refunds</h3>
+                     
+                     
+                     
+                     <p>Some balance adjustments result in refunds
+                        that you process when calculating payroll. For example, when you adjust
+                        a balance, such as a tax that increases or decreases the amount owed,
+                        the balance is adjusted in the next payroll calculation for the person.
+                        If you adjust an input value that results in a refund, a payment is
+                        due to the person. 
+                     </p>
+                     
+                     <p>To pay the adjustment:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select the option to include the
+                              adjustment in the payment balance on the Costing and Payment details
+                              section on the Adjust Individual Balances page.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Pay the refund by one of these
+                              methods:
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Process the payment in the next
+                                    payroll run.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p> Submit the Calculate Prepayments
+                                    process to pick up the adjustment amount, and pay it as an external
+                                    payment.
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1196438">
+                     <h3 class="topictitle">Reporting Balance Adjustments</h3>
+                     
+                     
+                     
+                     <p>Reports that you submit after you calculate
+                        the payroll include balance adjustments if the effective date of the
+                        balance adjustment falls in the date range you specify for the report
+                        submission parameters. For example, you might submit the Gross-to-Net
+                        report to view the results in the current payroll run. Or, you can
+                        submit the Payroll Activity to view balance adjustments before archiving
+                        year-end run results.
+                     </p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        If you submit year-end reports, perform your balance
+                        adjustments before archiving the year-end payroll run results.
+                        
+                     </div>
+                     
+                     <p> If you are using distributed costing, and you adjust
+                        the balance of an element included in a distribution group, such as
+                        an overtime earnings element, you can override the usual costing process
+                        by specifying a cost account for the amount. 
+                     </p>
+                     
+                     <p>If you adjust the balance of an element that uses
+                        distributed costing, such as an employer tax, the balance adjustment
+                        costing processes the amount to the suspense account. This situation
+                        occurs because no values for the earnings group are associated with
+                        the balance adjustment results. To correct the amount and costing
+                        of the distributed elements, process a cost adjustment for the results
+                        of each adjustment entry. 
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM1415466.htm#FAIHM1731256">Payroll Batch Loader Workbook for Balance Adjustments</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1194436">
+                  <h2>Adjusting Balances: Worked Example</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This example demonstrates how to adjust an
+                     individual balance for an employee whose initial balance was loaded
+                     incorrectly.
+                  </p>
+                  
+                  
+                  
+                  <p>The following table summarizes the key decisions
+                     for this scenario.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="Decisions considered about processing a corrective&#xA;action, determining if the element was processed in a run, and which&#xA;date to use for the adjustment">
+                        
+                        
+                        <tr class="header">
+                           <th scope="col">
+                              Decisions to Consider
+                              
+                           </th>
+                           <th scope="col">
+                              In This Example
+                              
+                           </th>
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>What effective date should I use for the adjustment? </p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p> June 30, 2013</p>
+                              
+                              <p>This is the date the initial balance was loaded.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p> Do I adjust the base or results element?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Results element</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Do I owe the person a refund?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>No</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Does the balance adjustment require costing?</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>No</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  <div class="sect2" id="">
+                     
+                     <p>Your enterprise initialized balances during a mid-year
+                        implementation on June 30. The initial balance included a life insurance
+                        deduction for Marie Kleim for 200 USD, instead of 300 USD. In the
+                        monthly payroll on July 31, Marie's payroll run results included a
+                        50 USD deduction for her life insurance, which brings the year-to-date
+                        total to 250 USD. Marie received her July 31 payment, so it's not
+                        practical to roll back the run result to correct the underlying entry.
+                        Also, the balance adjustment to her life insurance deduction doesn't
+                        affect her taxable wages. You correct the balance by submitting an
+                        adjustment of 100 USD for Marie's life insurance deduction.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <h3 class="topictitle">Adjusting an Individual Balance</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>From the Payroll Calculations work area, select <span class="uicontrol">Adjust Individual Balances</span></p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Search for and display Marie Kleim's record.</p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Manage Person Details page in the Adjust
+                           Individual Balances Element Details section, complete the fields as
+                           shown in this table. Use the default values except as indicated in
+                           this table.
+                        </p>
+                        
+                        <p></p>
+                        <div class="simpletable-margin">
+                           <table summary="This table lists field names (left column) and their respective values.">
+                              
+                              
+                              <tr>
+                                 
+                                 <th scope="col">
+                                    Field
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Effective Date</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>June 30, 2013</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Element Name</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Life Insurance Results</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Assignment Number</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>E33312345</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Adjustment Values section, enter 100 USD
+                           for the Pay Value.
+                        </p>
+                        
+                        <p>
+                           
+                           <p>In this example, the results element for the pretax
+                              deduction uses the pay value as the calculated value.
+                           </p>
+                           
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Costing and Payment Details section, enter <span class="uicontrol">No</span> for both questions.
+                        </p>
+                        
+                        <p>
+                           
+                           <p>You don't owe a refund, because the person's net
+                              pay doesn't change. You don't cost the adjustment, because the costing
+                              for the deduction was processed in the previous application before
+                              the mid-year implementation occurred.
+                           </p>
+                           
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Reviewing the Balance Adjustment</h3>
+                  
+                  
+                  
+                  <p>After completing the balance adjustment, you can
+                     review Marie's balance adjustment.
+                  </p>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>From the Payroll Calculation work area, select <span class="uicontrol">View Person Process Results</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the View Person Process Results page, search
+                           for Marie Kleim's balance adjustment, processed July 31, 2013.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click the link for Marie's record in the Search
+                           Results section. 
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the View Person Process Results page, click
+                           the arrow to display the Balance Results section.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Search Balances section, complete the search
+                           criteria as shown in the table. 
+                        </p>
+                        
+                        <p></p>
+                        <div class="simpletable-margin">
+                           <table summary="This table lists field names (left column) and their respective values.">
+                              
+                              
+                              <tr>
+                                 
+                                 <th scope="col">
+                                    Field
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Search Criteria</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Balance Group</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Balance Group</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Pretax Deductions for Statement of Earnings</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        
+                        <p>
+                           
+                           <p>The Search Results display the run result for the
+                              balance adjustment of 100 USD. When you later submit the August 31
+                              monthly payroll run, the run results for Marie's new balance for the
+                              life insurance deduction display 400 USD, which includes the balance
+                              adjustment of 100 USD and the August 31 payroll deduction of 50 USD.
+                           </p>
+                           
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=BF78CFED856DF601E040D30A68811218">Viewing and Verifying Payroll Run Results: Points to Consider</a></p>
+                     </li>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=A5DD4A63F80BED7CE040D30A688116A1">When do I cost a payroll balance adjustment?</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

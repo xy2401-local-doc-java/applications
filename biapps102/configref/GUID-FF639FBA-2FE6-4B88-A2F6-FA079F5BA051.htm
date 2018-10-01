@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Configuring Project Retention Fact for PeopleSoft</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="Retention metrics are supported for EBS and PSFT adaptors. Since the source of truth for EBS adaptor is billing fact, by default the Retention amounts are mapped to Invoice Line fact. But for PSFT adaptor these mappings are not valid and have to be sourced from Retention fact. Hence metrics defined on the Invoice line fact have to be unmapped and retention fact has to be enabled." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-F5A58914-CB70-4A9D-975A-06E1F2D01AC4.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-AD893D93-9ED6-4CF6-822B-1ED616D2310C.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-FF639FBA-2FE6-4B88-A2F6-FA079F5BA051"></a> <span id="PAGE" style="display:none;">95/336</span> <!-- End Header -->
+<a id="IT_316"></a>
+<h1 id="BIAFC-GUID-FF639FBA-2FE6-4B88-A2F6-FA079F5BA051" class="sect1">Configuring Project Retention Fact for PeopleSoft</h1>
+<div>
+<p>Retention metrics are supported for EBS and PSFT adaptors. Since the source of truth for EBS adaptor is billing fact, by default the Retention amounts are mapped to Invoice Line fact. But for PSFT adaptor these mappings are not valid and have to be sourced from Retention fact. Hence metrics defined on the Invoice line fact have to be unmapped and retention fact has to be enabled.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-FF639FBA-2FE6-4B88-A2F6-FA079F5BA051.htm#GUID-399F5CD4-7854-4A02-BAB7-5C14F7090683" title="Edit the BI metadata repository using the Oracle BI Administration Tool to enable the project retention fact.">Enabling the Retention Fact</a></p>
+</li>
+<li>
+<p><a href="GUID-FF639FBA-2FE6-4B88-A2F6-FA079F5BA051.htm#GUID-84D52ED2-07F4-40FD-A6E0-DF971A4EE64F" title="By default, the Retention related amounts are mapped to Invoice Line fact. But for a PeopleSoft adaptor, this mapping is not valid, therefore you must un-map these metrics.">Unmapping the Extraneous Metric Definitions</a></p>
+</li>
+</ul>
+<p>Oracle recommends that you make a back up of the BI metadata repository (that is, the RPD file) before applying changes.</p>
+</div>
+<div class="props_rev_3"><a id="GUID-399F5CD4-7854-4A02-BAB7-5C14F7090683"></a>
+<h2 id="BIAFC-GUID-399F5CD4-7854-4A02-BAB7-5C14F7090683" class="sect2">Enabling the Retention Fact</h2>
+<div>
+<p>Edit the BI metadata repository using the <span>Oracle BI Administration Tool</span> to enable the project retention fact.</p>
+<ol>
+<li class="stepexpand"><span>In <span>Oracle BI Administration Tool</span>, edit the BI metadata repository (for example, <code>OracleBIAnalyticsApps.rpd</code>) in online mode.</span></li>
+<li class="stepexpand"><span>In the Business Model and Mapping layer, select the 'Fact_W_PROJ_RETENTION_F_Retention_Amounts ' Logical Table Source from the 'Fact - Project Billing', and then right-click and choose <span class="bold">Edit</span>.</span></li>
+<li class="stepexpand"><span>Display the <span class="wintitle">General</span> tab and clear the <span class="bold">Disabled</span> check box as shown in the screenshot.</span>
+<div>
+<div class="figure" id="GUID-399F5CD4-7854-4A02-BAB7-5C14F7090683__GUID-0788482B-983E-44C5-9C8A-A67A79D4C772"><img width="383" height="461" src="img/GUID-063C2F04-2644-4276-AF2D-CFDA8674D91F-default.gif" alt="Description of GUID-063C2F04-2644-4276-AF2D-CFDA8674D91F-default.gif follows" title="Description of GUID-063C2F04-2644-4276-AF2D-CFDA8674D91F-default.gif follows" /><br />
+<a href="img_text/GUID-063C2F04-2644-4276-AF2D-CFDA8674D91F-default.htm">Description of the illustration GUID-063C2F04-2644-4276-AF2D-CFDA8674D91F-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Save the BI metadata repository (that is, the RPD file).</span></li>
+</ol>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-84D52ED2-07F4-40FD-A6E0-DF971A4EE64F"></a>
+<h2 id="BIAFC-GUID-84D52ED2-07F4-40FD-A6E0-DF971A4EE64F" class="sect2">Unmapping the Extraneous Metric Definitions</h2>
+<div>
+<p>By default, the Retention related amounts are mapped to Invoice Line fact. But for a PeopleSoft adaptor, this mapping is not valid, therefore you must un-map these metrics.</p>
+<ol>
+<li class="stepexpand"><span>In <span>Oracle BI Administration Tool</span>, edit the BI metadata repository (for example, <code>OracleBIAnalyticsApps.rpd</code>) in online mode.</span></li>
+<li class="stepexpand"><span>Navigate to Fact &ndash; Project Billing, select the metric Retention Billed, right-click and edit.</span></li>
+<li class="stepexpand"><span>Display the <span class="wintitle">Column Source</span> tab, select the definition mapped to Fact_W_PROJ_INVOICE_LINE_F_Invoice_Line, and click <span class="bold">Unmap</span> .</span>
+<div>
+<div class="figure" id="GUID-84D52ED2-07F4-40FD-A6E0-DF971A4EE64F__GUID-CF84BBA6-9FF9-44B9-A350-C0B2BB034AAF"><img width="620" height="443" src="img/GUID-398AC98A-6F31-4880-B4E8-A4F226AA6456-default.gif" alt="Description of GUID-398AC98A-6F31-4880-B4E8-A4F226AA6456-default.gif follows" title="Description of GUID-398AC98A-6F31-4880-B4E8-A4F226AA6456-default.gif follows" /><br />
+<a href="img_text/GUID-398AC98A-6F31-4880-B4E8-A4F226AA6456-default.htm">Description of the illustration GUID-398AC98A-6F31-4880-B4E8-A4F226AA6456-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Repeat steps 2 and 3 for following metrics for Fact_W_PROJ_INVOICE_LINE_F_Invoice_Line:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>Total Retained Amount</p>
+</li>
+<li>
+<p>Retention Write-off</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>Run the Consistency Check and ensure that there are no errors, then save the BI metadata repository, and clear <span>Oracle BI Enterprise Edition</span> Cache.</span></li>
+<li class="stepexpand"><span>Restart the <span>Oracle BI Server</span> and <span>Oracle BI Presentation Services</span>.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-F5A58914-CB70-4A9D-975A-06E1F2D01AC4.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-AD893D93-9ED6-4CF6-822B-1ED616D2310C.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

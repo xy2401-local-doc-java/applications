@@ -1,0 +1,2333 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Provisioning Roles to Application Users (Chapter 6) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle ERP Cloud" name="dcterms.title">
+      <meta content="Securing Oracle ERP Cloud" name="doctitle">
+      <meta content="E74113-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FASER" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:25:30 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="role mappings; automatic role provisioning; manual role provisioning; requesting roles; requestable roles; self-requestable
+      roles; autoprovisioning;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FASER1345796.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FASER1345801.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FASER.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FASER.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="Roles give users access to data and functions. To provision a role to users, you define a relationship, called a role mapping,
+      between the role and some conditions. This topic describes how to provision roles to users both automatically and manually.
+      Use the Manage Role Provisioning Rules or Manage HCM Role Provisioning Rules task in the Setup and Maintenance work area.
+      Most are assignment attributes, such as job or department. At least one of a user's assignments must match all assignment
+      values in the role mapping for the user to qualify for the associated roles."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">9/17</span><a name="BEGIN" id="BEGIN"></a><div id="FASER1345798" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">6</span>Provisioning Roles to Application Users
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER181362">Role Mappings: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER2292933">Creating a Role Mapping: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER204788">Role Provisioning and Deprovisioning: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1235928">Autoprovisioning: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1883767">User and Role Access Audit Report</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1780839">Managing Data Access for Users: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1780949">Assigning Data Access to Users: Worked Example</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1345779">FAQs for Provisioning Roles to Application Users</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FASER181362">
+                  <h2>Role Mappings: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Roles give users access to data and functions.
+                     To provision a role to users, you define a relationship, called a
+                     role mapping, between the role and some conditions. This topic describes
+                     how to provision roles to users both automatically and manually. Use
+                     the Manage Role Provisioning Rules or Manage HCM Role Provisioning
+                     Rules task in the Setup and Maintenance work area.
+                  </p>
+                  
+                  
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     All role provisioning generates requests to provision
+                     roles. Only when those requests are processed successfully is role
+                     provisioning complete.
+                     
+                  </div>
+                  
+                  
+                  <div class="sect2" id="FASER204676">
+                     <h3 class="topictitle">Automatic Provisioning of Roles to Users</h3>
+                     
+                     <p>Role provisioning occurs automatically if:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>At least one of the user's assignments matches
+                              all role-mapping conditions.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You select the <span class="uicontrol">Autoprovision</span> option for the role in the role mapping.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For example, for the data role Sales Manager Finance
+                        Department, you could select the <span class="uicontrol">Autoprovision</span> option and specify the following conditions.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with three&#xA;data rows identifies attributes (left column) and their values (right&#xA;column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Attribute
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Department</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Finance Department</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Job</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Sales Manager</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">HR Assignment Status</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Active</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>Users with at least one assignment that matches these
+                        conditions acquire the role automatically when you either create or
+                        update the assignment. The provisioning process also removes automatically
+                        provisioned roles from users who no longer satisfy the role-mapping
+                        conditions.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER204677">
+                     <h3 class="topictitle">Manual Provisioning of Roles to Users</h3>
+                     
+                     <p>Users such as line managers can provision roles manually
+                        to other users if: 
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>At least one of the assignments of
+                              the user who's provisioning the role, for example, the line manager,
+                              matches all role-mapping conditions.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You select the <span class="uicontrol">Requestable</span> option for the role in the role mapping.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For example, for the data role Training Team Leader,
+                        you could select the <span class="uicontrol">Requestable</span> option and specify the following conditions.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with two&#xA;data rows identifies attributes (left column) and their values (right&#xA;column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Attribute
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Manager with Reports</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">HR Assignment Status</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Active</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>Any user with at least one assignment that matches
+                        both conditions can provision the role Training Team Leader manually
+                        to other users.
+                     </p>
+                     
+                     <p>Users keep manually provisioned roles until either
+                        all of their work
+                        relationships are terminated or you deprovision the roles manually.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER204678">
+                     <h3 class="topictitle">Role Requests from Users</h3>
+                     
+                     <p>Users can request a role when managing their own accounts
+                        if: 
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>At least one of their assignments
+                              matches all role-mapping conditions. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You select the <span class="uicontrol">Self-requestable</span> option for the role in the role mapping.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For example, for the data role Expenses Reporter you
+                        could select the <span class="uicontrol">Self-requestable</span> option and specify the following conditions.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with three&#xA;data rows identifies attributes (left column) and their values (right&#xA;column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Attribute
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Department</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Finance Department</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">System Person Type</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Employee</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">HR Assignment Status</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Active</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>Any user with at least one assignment that matches
+                        these conditions can request the role. Self-requested roles are defined
+                        as manually provisioned.
+                     </p>
+                     
+                     <p>Users keep manually provisioned roles until either
+                        all of their work relationships are terminated or you deprovision
+                        the roles manually.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER238516">
+                     <h3 class="topictitle">Role-Mapping Names</h3>
+                     
+                     <p>Role mapping names must be unique in the enterprise. Devise a
+                        naming scheme that shows the scope of each role mapping. For example,
+                        the role mapping Autoprovisioned Roles Sales could include all roles
+                        provisioned automatically to workers in the sales department.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=97D69378A639C19BE040D30A688158A1">Role Mappings: Examples</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FASER2292933">
+                  <h2>Creating a Role Mapping: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>To provision roles to users, you create role mappings. This
+                     topic explains how to create a role mapping.
+                  </p>
+                  
+                  
+                  
+                  <p>Sign in as IT Security Manager and follow these steps:</p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Setup
+                                 and Maintenance</span></span> to open the Setup and Maintenance
+                           work area.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Search for and select the Manage
+                           Role Provisioning Rules or Manage HCM Role Provisioning Rules task. 
+                        </p>
+                        
+                        <p>The Manage Role Mappings page opens.</p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>In the Search Results section of
+                           the page, click <span class="uicontrol">Create</span>. 
+                        </p>
+                        <p>The Create Role Mapping page opens.</p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  <div class="sect2" id="FASER2298847">
+                     <h3 class="topictitle">Defining the Role-Mapping Conditions</h3>
+                     
+                     <p>Set values in the Conditions section to specify when
+                        the role mapping applies. For example, these values limit the role
+                        mapping to current employees of the Finance Department in Redwood
+                        Shores whose job is Accounts Payable Supervisor.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with five&#xA;data rows shows the field (left column) and its value (right column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Field
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Department</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Finance Department</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Job</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Accounts Payable Supervisor</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Location</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Redwood Shores</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">System Person Type</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Employee</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">HR Assignment Status</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Active</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>Users must have at least one assignment that meets all these conditions.</p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER2298848">
+                     <h3 class="topictitle">Identifying the Roles</h3>
+                     
+                     <p></p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>In the Associated Roles section,
+                              click <span class="uicontrol">Add Row</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Role Name</span> field, search for and select the role that
+                              you're provisioning.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select one or more of the role-provisioning options:</p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="This two-column table with three&#xA;data rows shows the role-provisioning option (left column) and its&#xA;description (right column).">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Role-Provisioning Option
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Description
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Requestable</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Qualifying users can provision the role to other
+                                          users.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Self-Requestable</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Qualifying users can request the role for themselves.</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p><span class="uicontrol">Autoprovision</span></p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Qualifying users acquire the role automatically.</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                           <p>Qualifying users have at least one assignment that
+                              matches the role-mapping conditions.
+                           </p>
+                           
+                           <div class="infobox-note"><span class="notep1">Note: </span>
+                              <span class="uicontrol">Autoprovision</span> is selected by default. Remember to deselect it if you don't want
+                              autoprovisioning.
+                              
+                           </div>
+                           <p>The <span class="uicontrol">Delegation Allowed</span> option indicates whether users who have the role or can provision
+                              it to others can also delegate it. You can't change this value, which
+                              is part of the role definition. When adding roles to a role mapping,
+                              you can search for roles that allow delegation.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>If appropriate, add more rows to
+                              the Associated Roles section and select provisioning options. The
+                              role-mapping conditions apply to all roles in this section.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Save and Close</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER2298849">
+                     <h3 class="topictitle">Applying Autoprovisioning</h3>
+                     
+                     <p>You're recommended to run the process Autoprovision
+                        Roles for All Users after creating or editing role mappings and after
+                        loading person records in bulk. This process compares all current
+                        user assignments with all current role mappings and creates appropriate
+                        autoprovisioning requests.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER204788">
+                  <h2>Role Provisioning and Deprovisioning: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You must provision roles to users. Otherwise,
+                     they have no access to data or functions and can't perform application
+                     tasks. This topic explains how role mappings control role provisioning
+                     and deprovisioning. Use the Manage Role Provisioning Rules or Manage
+                     HCM Role Provisioning Rules task to create role mappings.  
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FASER204781">
+                     <h3 class="topictitle">Role Provisioning Methods</h3>
+                     
+                     <p>You can provision roles to users:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Automatically</p>
+                        </li>
+                        
+                        <li>
+                           <p>Manually</p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Users such as line managers can provision
+                                    roles manually to other users.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Users can request roles for themselves.</p>
+                                 
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For both automatic and manual role provisioning, you
+                        create a role mapping to specify when a user becomes eligible for
+                        a role.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER204782">
+                     <h3 class="topictitle">Role Types</h3>
+                     
+                     <p>You can provision data roles, abstract roles, and job roles to users. However,
+                        for Oracle HCM Cloud users, you typically include job roles in HCM
+                        data roles and provision those data roles.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER204783">
+                     <h3 class="topictitle">Automatic Role Provisioning</h3>
+                     
+                     <p>Users acquire a role automatically when at least one
+                        of their assignments satisfies the conditions in the relevant role mapping. Provisioning
+                        occurs when you create or update worker assignments. For example,
+                        when you promote a worker to a management position, the worker acquires
+                        the line manager role automatically if an appropriate role mapping
+                        exists. All changes to assignments cause review and update of a worker's
+                        automatically provisioned roles.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER204784">
+                     <h3 class="topictitle">Role Deprovisioning</h3>
+                     
+                     <p>Users lose automatically provisioned roles when they
+                        no longer satisfy the role-mapping conditions. For example, a line
+                        manager loses an automatically provisioned line manager role when
+                        he or she stops being a line manager. You can also manually deprovision
+                        automatically provisioned roles at any time.
+                     </p>
+                     
+                     
+                     <p>Users lose manually provisioned roles automatically
+                        only when all of their work relationships are terminated.
+                        Otherwise, users keep manually provisioned roles until you deprovision
+                        them manually.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER204786">
+                     <h3 class="topictitle">Roles at Termination</h3>
+                     
+                     <p>When you terminate a work relationship, the user automatically
+                        loses all automatically provisioned roles for which he or she no longer
+                        qualifies. The user loses manually provisioned roles only if he or
+                        she has no other work relationships. Otherwise, the user keeps manually
+                        provisioned roles until you remove them manually.
+                     </p>
+                     
+                     
+                     <p>The user who's terminating a work relationship specifies
+                        when the user loses roles. Deprovisioning can occur:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>On the termination date</p>
+                        </li>
+                        
+                        <li>
+                           <p>On the day after the termination
+                              date
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>If you enter a future termination date, then role
+                        deprovisioning doesn't occur until that date or the day after. The
+                        Role Requests in the Last 30 Days section on the Manage User Account
+                        page is updated only when the deprovisioning request is created. Entries
+                        remain in that section until they're processed.
+                     </p>
+                     
+                     <p>Role mappings can provision roles to users automatically
+                        at termination. For example, a terminated worker could acquire the
+                        custom role Retiree at termination based on assignment status and person type values.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER2118753">
+                     <h3 class="topictitle">Reversal of Termination</h3>
+                     
+                     <p>Reversing a termination removes any roles that the
+                        user acquired automatically at termination. It also provisions roles
+                        to the user as follows:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Any manually provisioned roles
+                              that were lost automatically at termination are reinstated.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>As the autoprovisioning process
+                              runs automatically when a termination is reversed, roles are provisioned
+                              automatically as specified by current role-provisioning rules.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You must reinstate manually any roles that you removed
+                        manually, if appropriate.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER204787">
+                     <h3 class="topictitle">Date-Effective Changes to Assignments</h3>
+                     
+                     <p>Automatic role provisioning and deprovisioning are
+                        based on current data. For a future-dated transaction, such as a future
+                        promotion, role provisioning occurs on the day the changes take effect.
+                        The Send Pending LDAP Requests process identifies future-dated transactions
+                        and manages role provisioning and deprovisioning at the appropriate
+                        time. These role-provisioning changes take effect on the system date.
+                        Therefore, a delay of up to 24 hours may occur before users in other
+                        time zones acquire their roles.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1235928">
+                  <h2>Autoprovisioning: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Autoprovisioning is the automatic allocation
+                     or removal of user roles. It occurs for individual users when you
+                     create or update assignments. You can also apply autoprovisioning explicitly for the enterprise using the
+                     Autoprovision Roles for All Users process. This topic explains the
+                     effects of applying autoprovisioning for the enterprise.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FASER1235958">
+                     <h3 class="topictitle">Roles That Autoprovisioning Affects</h3>
+                     
+                     <p>Autoprovisioning applies only to roles that have
+                        the <span class="uicontrol">Autoprovision</span> option enabled
+                        in a role mapping.
+                     </p>
+                     
+                     
+                     <p>It doesn't apply to roles without the <span class="uicontrol">Autoprovision</span> option enabled. 
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1235959">
+                     <h3 class="topictitle">The Autoprovision Roles for All Users Process</h3>
+                     
+                     <p>The Autoprovision Roles for All Users process compares
+                        all current user assignments with all current role mappings.
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Users with at least one assignment
+                              that matches the conditions in a role mapping and who don't currently
+                              have the associated roles acquire those roles.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Users who currently have the roles
+                              but no longer satisfy the associated role-mapping conditions lose
+                              those roles.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>When a user has no roles, his or her user account
+                        is also suspended automatically by default.
+                     </p>
+                     
+                     <p>The process creates requests immediately to add or
+                        remove roles. When running the process, you can specify when role
+                        requests are to be processed. You can either process them immediately
+                        or defer them as a batch to the next run of the Send Pending LDAP
+                        Requests process. Deferring the processing is better for performance,
+                        especially when thousands of role requests may be generated. Set the <span class="uicontrol">Process Generated Role Requests</span> parameter
+                        to <span class="uicontrol">No</span> to defer the processing.
+                        If you process the requests immediately, then Autoprovision Roles
+                        for All Users produces a report identifying the LDAP request ranges
+                        that were generated. Requests are processed on their effective dates.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1415081">
+                     <h3 class="topictitle">When to Run the Process</h3>
+                     
+                     <p>You're recommended to run Autoprovision Roles for
+                        All Users after creating or editing role mappings. You may also have
+                        to run it after loading person records in bulk if you request user
+                        accounts for those records. If an appropriate role mapping exists
+                        before the load, then this process isn't necessary. Otherwise, you
+                        must run it to provision roles to new users loaded in bulk. Avoid
+                        running the process more than once in any day. Otherwise, the number
+                        of role requests that the process generates may slow the provisioning
+                        process.
+                     </p>
+                     
+                     
+                     <p>Only one instance of Autoprovision Roles for All
+                        Users can run at a time.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1235960">
+                     <h3 class="topictitle">Autoprovisioning for Individual Users</h3>
+                     
+                     <p>You can apply autoprovisioning for individual users
+                        on the Manage User Account page.   
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FASER1345796.htm#FASER230626">What happens when I autoprovision roles for a user?</a></p>
+                     </li>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=ECDA8DCC7CCE6BDEE040D30A68810BCA">Scheduling the Send Pending LDAP Requests Process: Procedure</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1883767">
+                  <h2>User and Role Access Audit Report</h2>
+                  
+                  
+                  
+                  
+                  <p>The User and Role Access Audit Report provides
+                     details of the function and data security privileges granted to specified
+                     users or roles. This information is equivalent to the information
+                     that you can see for a user or role on the Security Console. This
+                     report is based on data in the Applications Security tables, which
+                     you populate by running the Import User and Role Application Security
+                     Data process.
+                  </p>
+                  
+                  
+                  
+                  <p>To run the User and Role Access Audit Report:</p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>In the Scheduled Processes work
+                           area, click <span class="uicontrol">Schedule New Process</span>.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Search for and select the User
+                           and Role Access Audit Report.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In the <span class="uicontrol">Process Details</span> dialog box, set parameters and click <span class="uicontrol">Submit</span>.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Click <span class="uicontrol">OK</span> to close the confirmation message.
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  <div class="sect2" id="">
+                     <dl class="reference">
+                        <h3 class="parameterGroupTitle">User and Role Access Audit Report Parameters</h3>
+                        
+                        
+                        
+                        <dt>Population Type</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Set this parameter to one of these values to run
+                              the report for one user, one role, multiple users, or all roles.
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p><span class="uicontrol">All roles</span></p>
+                              </li>
+                              
+                              <li>
+                                 <p><span class="uicontrol">Multiple
+                                       users</span></p>
+                              </li>
+                              
+                              <li>
+                                 <p><span class="uicontrol">Role name</span></p>
+                              </li>
+                              
+                              <li>
+                                 <p><span class="uicontrol">User name</span></p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>User Name</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Search for and select the user name of a single user.</p>
+                           
+                           <p>This field is enabled only when <span class="uicontrol">Population Type</span> is <span class="uicontrol">User name</span>.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Role Name</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Search for and select the name of a single aggregate privilege or data, job, abstract, or duty role.</p>
+                           
+                           <p>This field is enabled only when <span class="uicontrol">Population Type</span> is <span class="uicontrol">Role name</span>.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>From User Name Starting With</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Enter one or more characters from the start of the
+                              first user name in a range of user names.
+                           </p>
+                           
+                           <p>This field is enabled only when <span class="uicontrol">Population Type</span> is <span class="uicontrol">Multiple users</span>. It enables you to report on a subset
+                              of multiple users.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>To User Name Starting With</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Enter one or more characters from the start of the
+                              last user name in a range of user names.
+                           </p>
+                           
+                           <p>This field is enabled only when <span class="uicontrol">Population Type</span> is <span class="uicontrol">Multiple users</span>. It enables you to report on a subset
+                              of multiple users.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>User Role Name Starts With</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Enter one or more characters from the start of a
+                              role name.
+                           </p>
+                           
+                           <p>This field is enabled only when <span class="uicontrol">Population Type</span> is <span class="uicontrol">Multiple users</span>. It enables you to report on a subset
+                              of all users and roles.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Data Security Policies</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Select the <span class="uicontrol">Data Security
+                                 Policies</span> check box, when you want to view the data security
+                              report for any population. When you leave the option unchecked, only
+                              the function report is generated. 
+                           </p>
+                           
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              If you don't need the data security policy document,
+                              leave the option unchecked. This reduces the processing time to run
+                              the report.
+                              
+                           </div>
+                           
+                        </dd>
+                        
+                        
+                        
+                        
+                        <dt>Debug</dt>
+                        
+                        
+                        <dd>
+                           
+                           <p>Select the <span class="uicontrol">Debug</span> check box to include role GUID in the report. The role GUID is used
+                              to troubleshoot. Use this option only when requested by the Oracle
+                              Support team.
+                           </p>
+                           
+                        </dd>
+                        
+                        
+                     </dl>
+                  </div>
+                  
+                  <div class="sect2" id="FASER1883638">
+                     <h3 class="topictitle">Viewing the Report Results</h3>
+                     
+                     <p>The report produces one or two <span class="uicontrol">.zip</span> files depending on the parameters you select. When
+                        you select the Data Security Policies check box, two <span class="uicontrol">.zip</span> files are generated: one with information
+                        on the data security policies and the other on functional security
+                        policies in a hierarchical format.
+                     </p>
+                     
+                     <p>The file names are in the following format: [FILE_PREFIX]_[PROCESS_ID]_[DATE]_[TIME]_[FILE_SUFFIX]. The file prefix depends on the specified <span class="uicontrol">Population Type</span> value, as shown in this table.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Population Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 File Prefix
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">User name</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>USER_NAME</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Role name</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>ROLE_NAME</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Multiple users</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>MULTIPLE_USERS</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">All roles</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>ALL_ROLES</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>This table shows the file suffix, file format, and
+                        file contents for each population type.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Population Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 File Suffix
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 File Format
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 File Contents
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Any</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>DataSec</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>CVS</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Data security policies. The .zip file contains one
+                                    file for all users or roles. The data security policies file is generated
+                                    only when the Data Security Policies check box is selected.
+                                 </p>
+                                 
+                                 <div class="infobox-"><span class="notep1">Note: </span>
+                                    Extract the data security policies only when needed
+                                    as it takes a long time to generate the file.
+                                    
+                                 </div>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Any</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Hierarchical</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>CVS</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Functional security policies in a hierarchical format.
+                                    The .zip file contains one file for each user or role.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Multiple users</span></p>
+                                 
+                                 <p><span class="uicontrol">All roles</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>CSV</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>CSV</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Functional security policies in a comma-separated,
+                                    tabular format.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The process also produces a .zip file containing
+                        a diagnostic log.
+                     </p>
+                     
+                     <p>For example, if you report on a job role at 13.30
+                        on 17 December 2015 with process ID 201547 and the Data Security Policies
+                        option selected, then the report files are:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>ROLE_NAME_201547_12-17-2015_13-30-00_DataSec.zip</p>
+                        </li>
+                        
+                        <li>
+                           <p>ROLE_NAME_201547_12-17-2015_13-30-00_Hierarchical.zip</p>
+                        </li>
+                        
+                        <li>
+                           <p>Diagnostic.zip</p>
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1780839">
+                  <h2>Managing Data Access for Users: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can assign users access to appropriate
+                     data based on their job roles. The Oracle Fusion security model requires
+                     a three-way link between users, role, and data. It is summarized as:
+                     who can do what on which data. Who refers to the users, what are
+                     the job roles the user is assigned, and which refers to the data that
+                     is specific to a particular security context, typically an element
+                     of the enterprise structure, such as a business unit, asset book,
+                     or ledger.
+                  </p>
+                  
+                  
+                  
+                  <p>For example, consider a user, Mary Johnson, who manages
+                     accounts payable functions, such as creating invoices for the US Operations
+                     business unit. In this scenario, Mary Johnson must be assigned the
+                     job role of an Accounts Payable Specialist, and given access to the
+                     US Operations business unit.
+                  </p>
+                  
+                  <p>The following table lists the elements of the enterprise
+                     structure to which users can be assigned access based on their job
+                     roles.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="The table lists the elements&#xA;of the enterprise structure to which users can be assigned access&#xA;based on their job roles.">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Product
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Security Context
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Oracle Fusion Financials </p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Business Unit</p>
+                              
+                              <p>Data Access Set</p>
+                              
+                              <p>Ledger</p>
+                              
+                              <p>Asset Book</p>
+                              
+                              <p>Control Budget</p>
+                              
+                              <p>Intercompany Organization</p>
+                              
+                              <p>Reference Data Set</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Oracle Fusion Supply Chain Management</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Inventory Organization</p>
+                              
+                              <p>Reference Data Set</p>
+                              
+                              <p>Cost Organization</p>
+                              
+                              <p>Inventory Organization</p>
+                              
+                              <p>Manufacturing Plant</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Oracle Fusion Procurement</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Business Unit</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Oracle Fusion Project Portfolio Management</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Project Organization Classification</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Oracle Fusion Incentive Compensation</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Business Unit</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  <div class="sect2" id="FASER1780837">
+                     <h3 class="topictitle">Assigning Data Access</h3>
+                     
+                     <p>Assigning data access to users is a three step process:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Create users using one of the following:</p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Manage Users task in Oracle Fusion
+                                    Functional Setup Manager 
+                                 </p>
+                                 <p>Specify user attributes
+                                    such as user name, assigned business unit, legal employer, department,
+                                    job, position, grade, and location.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>Security Console</p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Assign at least one job role to
+                              users. Use Oracle Fusion Human Capital Management or the Security
+                              Console to assign job roles.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Assign data access using the Manage
+                              Data Access for Users task in the Functional Setup Manager. For General
+                              Ledger users, you can also use the Manage Data Access Set Data Access
+                              for Users task to assign data access.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1780949">
+                  <h2>Assigning Data Access to Users: Worked Example</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Use the Manage Data Access for Users page
+                     to assign data access to users based on their job roles. You can assign
+                     data access to:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>One user at a time</p>
+                     </li>
+                     
+                     <li>
+                        <p>Group of users with similar job
+                           roles
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="">
+                     
+                     <p>This example demonstrates how you can assign access
+                        to a business unit to a group of users with similar job roles. The
+                        following table summarizes the key decisions for this scenario:
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="The table summarizes the key&#xA;decisions for this scenario.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Decision to Consider
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 In This Example
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Which user role is being given data access?</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Accounts Payable Manager</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>What is the security context to which access is being
+                                    given?
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Business Unit</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                  </div>
+                  
+                  
+                  <h3 class="topictitle">Prerequisites</h3>
+                  
+                   
+                  <p>Before you can complete this
+                     task, you must:
+                  </p> 
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>Create users and specify the user attributes such
+                           as a user name, assigned business unit, legal employer, department,
+                           job, position, grade and location, and so on. To create users, use
+                           the Manage Users task in the Functional Setup Manager or the Create
+                           User page. If you're implementing Oracle Fusion HCM, you can also
+                           use the Hire an Employee page. You can also use the Security Console
+                           to create the implementation users who create the setups, such as
+                           legal entities, business units, and so on, that are needed to create
+                           the users in the Manage Users or Hire an Employee page.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Assign users their job roles. You can either use
+                           Oracle Fusion Human Capital Management or the Security Console to
+                           assign job roles.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Run the Retrieve Latest LDAP Changes process.</p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Assigning Data Access to Users Using a Spreadsheet</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>Sign in to the Functional Setup Manager as an IT
+                           Security Manager or Application Implementation Consultant and navigate
+                           to the Setup and Maintenance page.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Search for and select the Manage Data Access for
+                           Users task. Alternatively, you can perform this task through the product
+                           specific task list.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Users without Data
+                              Access </span>to view users who don't have data access. Alternatively,
+                           to assign additional data access to users, use the <span class="uicontrol">Users with Data Access</span> option.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Select the <span class="uicontrol">Security Context</span>, for our example, select <span class="uicontrol">Business Unit</span>. 
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Search for users with no data access. For our example,
+                           enter <span class="uicontrol">Accounts Payable Specialist</span> in the <span class="uicontrol">Role</span> field.
+                        </p>
+                        
+                        <p> 
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              The search fields are related to the user attributes.
+                              
+                           </div> 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Search</span>. The Search Results region displays users who don't have any data
+                           access.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click the <span class="uicontrol">Authorize Data
+                              Access</span> button to export the search results to a Microsoft
+                           Excel spreadsheet. You can provide data access to a group of users
+                           through the spreadsheet.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">OK</span> to
+                           open the spreadsheet using Microsoft Excel.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Select the <span class="uicontrol">Security Context</span> from the drop-down list for each user.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Enter the <span class="uicontrol">Security Context
+                              Value</span>.
+                        </p>
+                        
+                        <p> 
+                           <ul>
+                              
+                              <li>
+                                 <p>To provide additional data access
+                                    to the user, add a new row and enter the user name, role, security
+                                    context, and security context value.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>You can click the <span class="uicontrol">View Data Access</span> button to see what other
+                                    data access the user already has even if this is outside the parameters
+                                    of the search. This may help to identify users you want to grant access
+                                    to because of existing access.
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click the <span class="uicontrol">Upload</span> button on the spreadsheet when you have assigned data access.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Select the upload options on the Upload Options
+                           window and click <span class="uicontrol">OK</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Note the status of your upload in the <span class="uicontrol">Upload</span> column.
+                        </p>
+                        
+                        <p> 
+                           <ul>
+                              
+                              <li>
+                                 <p>If the status of the upload is <span class="uicontrol">Successful</span> and there are no validation errors
+                                    in the log file, you can view the data access assignment to the users
+                                    using the search criteria on the Manage Data Access for Users page.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>If the upload status is <span class="uicontrol">Failed</span>, check the details in your upload
+                                    file, correct any errors, and upload the file again.
+                                 </p>
+                              </li>
+                              
+                           </ul> 
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1345779">
+                  <h2>FAQs for Provisioning Roles to Application Users</h2>
+                  
+                  <div class="sect2" id="FASER353905">
+                     <h3>What's a role-mapping condition?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Most are assignment attributes, such as job
+                        or department. At least one of a user's assignments must match all
+                        assignment values in the role mapping for the user to qualify for the associated roles.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER354042">
+                     <h3>What's an associated role in a role mapping?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Any role that you want to provision to users.
+                        You can provision data roles, abstract roles, and job roles to users. The roles can be either predefined or
+                        custom.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER362658">
+                     <h3>What's the provisioning method?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>The provisioning method identifies how the
+                        user acquired the role. This table describes its values.
+                     </p>
+                     
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with three data rows shows&#xA;the provisioning method (left column) and its meaning (right column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Provisioning Method
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Meaning
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Automatic</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The user qualifies for the role automatically based
+                                    on his or her assignment attribute values.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Manual</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Either another user assigned the role to the user,
+                                    or the user requested the role.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>External</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The user acquired the role outside Oracle Applications
+                                    Cloud.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER365939">
+                     <h3>How do I provision roles to users?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Use the following tasks to provision roles to users.</p>
+                     
+                     
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Manage Users </p>
+                        </li>
+                        
+                        <li>
+                           <p>Provision Roles to Implementation
+                              Users
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>The Manage Users task is available in Oracle Fusion
+                        Human Capital Management (HCM) Cloud, Oracle Fusion Sales Cloud, Oracle
+                        Fusion ERP Cloud, and Oracle Fusion Suppliers.  
+                     </p>
+                     
+                     <p>Human Resources (HR) transaction flows such as Hire and
+                        Promote also provision roles.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER328815">
+                     <h3>How do I view the privileges or policies carried by a job role?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>The most efficient way is to use the Security
+                        Console to search for and select the job role. When it appears in
+                        the visualizer, you can see all inherited roles, aggregate privileges,
+                        and privileges. If you edit the role from the visualizer, you can
+                        see the policies on the function policies and data policies pages.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER363904">
+                     <h3>How can I tell which roles are provisioned to a user?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Use the Security Console to search for the
+                        user. When you select the user, the user and any roles assigned to
+                        the user appear in the visualizer. Navigate the nodes to see the role
+                        hierarchies and privileges. You must be assigned the IT Security Manager
+                        role to access the Security Console.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER175600">
+                     <h3>Why can't a user access a task?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>If a task doesn't appear in a user's task
+                        list, you may need to provision roles to the user.
+                     </p>
+                     
+                     
+                     
+                     <p>A position or job and its included duties determine
+                        the tasks that users can perform. Provisioned roles provide access
+                        to tasks through the inherited duty roles.
+                     </p>
+                     
+                     <p>The duty roles in a role hierarchy carry privileges to access functions and data. You don't assign
+                        duty roles directly to users. Instead, duty roles are assigned to
+                        job or abstract roles in a role hierarchy. If the duties assigned
+                        to a predefined job role don't match the corresponding job in your
+                        enterprise, you can create copies of job roles and add duties to or
+                        remove duties from the copy.
+                     </p>
+                     
+                     <div class="infobox-important"><span class="notep1">Important: </span>
+                        You cannot change predefined roles to add or remove
+                        duties. In the Security Console, you can identify predefined roles
+                        by the <code>ORA_</code> prefix in the Role Code
+                        field and are displayed in red color in the role graph. Create copies
+                        and update the copies instead.
+                        
+                     </div>
+                     
+                     <p>Users are generally provisioned with roles based on
+                        role provisioning rules. If a user requests a role to access a task,
+                        always review the security reference
+                        implementation to determine the most appropriate role.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

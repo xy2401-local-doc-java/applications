@@ -1,0 +1,1823 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Security and Reporting (Chapter 18) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Securing Oracle HCM Cloud" name="doctitle">
+      <meta content="E73303-09" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="OCHUS" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Feb 16 01:08:37 PST 2018" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM security;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="OCHUS2406120.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="OCHUS1650870.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="OCHUS.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="OCHUS.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="Oracle Fusion Transactional Business Intelligence is a real-time, self-service reporting solution. All application users with
+      appropriate roles can use Transactional Business Intelligence to create analyses that support decision-making. In addition,
+      business users can perform current-state analysis of their business applications using a variety of tools. These include Oracle
+      Business Intelligence Enterprise Edition as the standard query and reporting tool, Oracle Business Intelligence Answers, and
+      Oracle Business Intelligence Dashboard end-user tools. This topic summarizes how access is secured to Transactional Business
+      Intelligence subject areas, Business Intelligence Catalog folders, and Business Intelligence reports. The predefined Line
+      Manager role has no access to compensation subject areas. To provide this access, create a custom Line Manager job role. Add
+      both the Compensation Transaction Analysis Duty and Compensation Transaction Analysis roles to the custom role."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">21/25</span><a name="BEGIN" id="BEGIN"></a><div id="OCHUS1210221" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">18</span>Security and Reporting
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1228601">Oracle Fusion Transactional Business Intelligence Security: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1228770">How Reporting Data Is Secured: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1228884">Business Intelligence Roles: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1228942">Viewing Reporting Roles and Permissions: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1229074">Business Intelligence Publisher Secured List Views: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1229303">Business Intelligence Publisher and PII Data: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1591089">Dimension Security: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2274861">FAQs for Security and Reporting</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="OCHUS1228601">
+                  <h2>Oracle Fusion Transactional Business Intelligence Security: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Oracle Fusion Transactional Business Intelligence
+                     is a real-time, self-service reporting solution. All application users
+                     with appropriate roles can use Transactional Business Intelligence
+                     to create analyses that support decision-making. In addition, business
+                     users can perform current-state analysis of their business applications
+                     using a variety of tools. These include Oracle Business Intelligence
+                     Enterprise Edition as the standard query and reporting tool, Oracle
+                     Business Intelligence Answers, and Oracle Business Intelligence Dashboard
+                     end-user tools. This topic summarizes how access is secured to Transactional
+                     Business Intelligence subject areas, Business Intelligence Catalog
+                     folders, and Business Intelligence reports.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1228675">
+                     <h3 class="topictitle">Subject Areas</h3>
+                     
+                     <p>Subject areas are functionally secured using duty roles. The names
+                        of duty roles that grant access to subject areas include the words <span class="uicontrol">Transaction Analysis Duty</span> (for example, <span class="uicontrol">Workforce Transaction Analysis Duty</span>). 
+                     </p>
+                     
+                     
+                     <p>This table identifies the subject areas that predefined
+                        HCM job roles can
+                        access.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with six&#xA;data rows shows the HCM job role (left column) and the accessible&#xA;subject areas (right column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 HCM Job Role
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Subject Areas
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Benefits Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All Benefits </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Compensation Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All Compensation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Compensation Analyst</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All Compensation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Human Resource Analyst</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Goals, Workforce Management, Workforce Performance,
+                                    Workforce Profiles, and Talent Review 
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Line Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All Workforce Management </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Payroll Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>All Payroll </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>Analyses fail if the user can't access all subject
+                        areas in a report.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1228676">
+                     <h3 class="topictitle">Business Intelligence Catalog Folders</h3>
+                     
+                     <p>Business Intelligence Catalog folders are functionally
+                        secured using the same duty roles that secure access to the subject
+                        areas. Therefore, a user who inherits the Workforce Transaction Analysis
+                        Duty can access both the Workforce Management folder in the Business
+                        Intelligence Catalog and the Workforce Management subject areas.
+                     </p>
+                     
+                     
+                     <p>This table identifies the folders that predefined
+                        HCM job roles can access.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with six&#xA;data rows shows the HCM job role (left column) and the Business Intelligence&#xA;Catalog folders (right column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 HCM Job Role
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Business Intelligence Catalog Folders
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Benefits Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Transactional Business Intelligence Benefits </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Compensation Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Transactional Business Intelligence Compensation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Compensation Analyst</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Transactional Business Intelligence Compensation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Human Resource Analyst</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Business Intelligence Publisher Goals, Performance,
+                                    and Profiles
+                                 </p>
+                                 
+                                 <p>Transactional Business Intelligence Career and Workforce
+                                    Management
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Line Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Business Intelligence Publisher Compensation and
+                                    Workforce Management
+                                 </p>
+                                 
+                                 <p>Transactional Business Intelligence Workforce Management
+                                    and many Business Intelligence Answers folders
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Payroll Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Transactional Business Intelligence and Business
+                                    Intelligence Answers Payroll folders
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1228732">
+                     <h3 class="topictitle">Business Intelligence Reports</h3>
+                     
+                     <p>Analyses are secured based on the folders in which
+                        they're stored. If you haven't secured Business Intelligence reports
+                        using the report privileges, then they're secured at the folder level
+                        by default. You can set permissions against folders and reports for
+                        Application Roles, Catalog Groups, or Users.
+                     </p>
+                     
+                     
+                     <p>You can set permissions to:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Read, Execute, Write, or Delete</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Change Permissions</p>
+                        </li>
+                        
+                        <li>
+                           <p>Set Ownership</p>
+                        </li>
+                        
+                        <li>
+                           <p>Run Publisher Report</p>
+                        </li>
+                        
+                        <li>
+                           <p>Schedule Publisher Report</p>
+                        </li>
+                        
+                        <li>
+                           <p>View Publisher Output</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1228770">
+                  <h2>How Reporting Data Is Secured: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The data that's returned in Oracle Transactional
+                     Business Intelligence reports is secured in a similar way to the data
+                     that's returned in application pages. Data access is granted by roles
+                     that are linked to security profiles. This topic describes the part played by
+                     Transaction Analysis Duty Roles in securing access to data in Transactional
+                     Business Intelligence reports. It also describes how to enable this
+                     access in custom job roles.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1272628">
+                     <h3 class="topictitle">Transaction Analysis Duty Roles</h3>
+                     
+                     <p>Each of the Transaction Analysis Duty roles providing
+                        access to subject areas and Business Intelligence Catalog folders
+                        is granted one or more data security policies. These policies enable
+                        access to the data.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1228826">
+                     <h3 class="topictitle">Custom Job Roles</h3>
+                     
+                     <p>If you create a custom job role with access to Transactional
+                        Business Intelligence reports, then you must give the role the correct
+                        duty roles. Your custom role must have both the <span class="uicontrol">OBI</span> and <span class="uicontrol">HCM</span> versions
+                        of the Transaction Analysis Duty roles. These duty roles ensure that
+                        your custom job role has the function and data security for running
+                        the reports.
+                     </p>
+                     
+                     
+                     <p>For example, if your custom role must access the
+                        Workforce Transaction Analysis subject areas, then it must inherit
+                        the following duty roles:
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with two&#xA;data rows shows the duty role (left column) and its version (OBI or&#xA;HCM) (right column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Duty Role
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Version
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Workforce Transaction Analysis Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p><span class="uicontrol">OBI</span> 
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Workforce Transaction Analysis </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p><span class="uicontrol">HCM</span> 
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The Workforce Transaction Analysis Duty role is granted
+                        relevant data security policies and inherits BI Consumer Role.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        You're recommended not to copy the OBI Transaction
+                        Analysis Duty roles. Instead, add the predefined OBI Transaction Analysis
+                        Duty roles to your custom role. If you copy the roles, then you must
+                        update the permissions for relevant reports to secure them using your
+                        copies of the roles.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1228884">
+                  <h2>Business Intelligence Roles: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Oracle Business Intelligence roles apply
+                     to both Oracle Business Intelligence Publisher and Oracle Fusion Transactional
+                     Business Intelligence. They grant access to Business Intelligence
+                     functionality, such as the ability to run or author reports. These
+                     roles are in addition to the roles that grant access to reports, subject
+                     areas, Business Intelligence catalog folders, and HCM data. This topic describes the Business
+                     Intelligence roles.
+                  </p>
+                  
+                  
+                  
+                  <p>This table lists the Business Intelligence roles.</p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="This two-column table with four&#xA;data rows shows the Business Intelligence role (left column) and its&#xA;description (right column).">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Business Intelligence Role
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Description
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>BI Consumer Role</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Runs Business Intelligence reports.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>BI Author Role</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Creates and edits reports.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>BI Administrator Role</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Performs administrative tasks such as creating and
+                                 editing dashboards and modifying security permissions for reports,
+                                 folders, and so on.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>BI Publisher Data Model Developer Role</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Creates and edits Business Intelligence Publisher
+                                 data models. 
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1228924">
+                     <h3 class="topictitle">BI Consumer Role</h3>
+                     
+                     <p>The predefined Transactional Business Intelligence
+                        Transaction Analysis Duty roles inherit BI Consumer Role. You can
+                        configure custom roles to inherit BI Consumer Role so that they can
+                        run reports but not author them.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1228925">
+                     <h3 class="topictitle">BI Author Role</h3>
+                     
+                     <p>BI Author Role inherits BI Consumer Role. Users with
+                        BI Author Role can create, edit, and run Transactional Business Intelligence
+                        reports.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1228926">
+                     <h3 class="topictitle">BI Administrator Role</h3>
+                     
+                     <p>BI Administrator Role is a superuser role. It inherits
+                        BI Author Role, which inherits BI Consumer Role. You're recommended
+                        to provision this role to users in a test environment only.
+                     </p>
+                     
+                     
+                     <p>None of the predefined HCM job roles has BI Administrator Role
+                        access.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1228927">
+                     <h3 class="topictitle">BI Publisher Data Model Developer Role</h3>
+                     
+                     <p>BI Publisher Data Model Developer Role is inherited
+                        by the Application Developer role, which is inherited by the Application
+                        Implementation Consultant role. Therefore, users with either of these
+                        predefined job roles can manage Business Intelligence Publisher data
+                        models.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1228942">
+                  <h2>Viewing Reporting Roles and Permissions: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Viewing reporting roles and permissions can
+                     help you to understand how Oracle Transactional Business Intelligence
+                     security works. 
+                  </p>
+                  
+                  
+                  
+                  <p>This topic explains how to view:</p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>The reporting roles that a job role inherits</p>
+                     </li>
+                     
+                     <li>
+                        <p>The permissions for sample Oracle
+                           Transactional Business Intelligence reports in the Business Intelligence
+                           Catalog
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="OCHUS1228984">
+                     <h3 class="topictitle">Viewing Inherited Reporting Roles on the Security
+                     Console</h3>
+                     
+                     <p>Sign in with the IT Security Manager job role and
+                        follow these steps:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">Security Console</span></span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Security Console, search
+                              for and select a job role. For example, search for and select the
+                              Human Resource Analyst job role.
+                           </p>
+                           <p>Depending on
+                              the enterprise setting, either a graphical or a tabular representation
+                              of the role appears. Switch to the tabular view if it doesn't appear
+                              by default. 
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Human Resource Analyst inherits
+                              many Transaction Analysis duty roles, such as Documents of Record
+                              Transaction Analysis and Absence Management Transaction Analysis.
+                              These roles (without the word Duty in their names) are <span class="uicontrol">HCM</span> roles. Their role codes start with the
+                              characters <span class="uicontrol">ORA_</span>. Find these roles
+                              in the table.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Notice also the many Transaction
+                              Analysis Duty roles (with the word Duty in their names) that appear
+                              here.  For example, Human Resource Analyst inherits the Documents
+                              of Record Transaction Analysis Duty and Absence Management Transaction
+                              Analysis Duty roles. These roles are <span class="uicontrol">OBI</span> roles. Their role codes start with the characters <span class="uicontrol">FBI_</span>. Find these roles in the table.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Notice that the Absence Management
+                              Transaction Analysis Duty role inherits BI Consumer Role. Most of
+                              the <span class="uicontrol">OBI</span> duty roles inherit BI
+                              Consumer Role.
+                           </p>
+                           <p></p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>The Human Resource Analyst role
+                              inherits BI Author Role directly. Find BI Author Role. Notice that
+                              BI Author Role also inherits BI Consumer Role.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        You can export the role hierarchy to a spreadsheet
+                        for offline review.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1229035">
+                     <h3 class="topictitle">Viewing Permissions in the Business Intelligence
+                     Catalog </h3>
+                     
+                     <p>To view these permissions, you must have a role that
+                        inherits BI Administrator Role. None of the predefined HCM job roles
+                        inherits BI Administrator Role.
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">Reports and Analytics</span></span> to open the Reports and Analytics work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the Contents pane, click the <span class="uicontrol">Browse Catalog</span> icon. The Business Intelligence
+                              Catalog page opens.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the Folders pane, expand <span class="uicontrol">Shared Folders</span>.
+                           </p>
+                           <p>Expand
+                              the <span class="uicontrol">Human Capital Management</span> folder
+                              and then the <span class="uicontrol">Payroll</span> folder.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click the <span class="uicontrol">Transactional Analysis Samples</span> folder. 
+                           </p>
+                           <p>A list of reports appears on the BI Catalog page.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Under <span class="uicontrol">Costing Reports</span>, click <span><span class="uicontrol">More</span> - <span class="uicontrol">Permissions</span></span>.
+                           </p>
+                           <p>The Permissions dialog box opens.
+                              Scroll if necessary to see the complete list of permissions, which
+                              includes the role BI Administrator Role.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click the Oracle Applications tab
+                              to return to the home page.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1229074">
+                  <h2>Business Intelligence Publisher Secured List Views: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Oracle Business Intelligence Publisher is
+                     a set of tools for creating formatted reports based on data models.
+                     You can access Business Intelligence Publisher from Business Intelligence
+                     Composer or the Business Intelligence Catalog by clicking <span><span class="uicontrol">New</span> - <span class="uicontrol">Report</span></span>. This topic describes how you can use secured list
+                     views to secure access to data in Business Intelligence reports.
+                  </p>
+                  
+                  
+                  
+                  <p>Some reporting tools combine the data model, layout,
+                     and translation in one report file. With that approach, business-intelligence
+                     administrators must maintain multiple copies of the same report to
+                     support minor changes. By contrast, Business Intelligence Publisher
+                     separates the data model, layout, and translation. Therefore, reports
+                     can be:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Generated and consumed in many
+                           output formats, such as PDF and spreadsheet 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Scheduled for delivery to e-mail,
+                           printers, and so on 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Printed in multiple languages by
+                           adding translation files 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Scheduled for delivery to multiple
+                           recipients
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="OCHUS1229202">
+                     <h3 class="topictitle">Business Intelligence Publisher Data Security
+                     and Secured List Views</h3>
+                     
+                     <p>When you create a Business Intelligence Publisher
+                        data model with physical SQL, you have two options.
+                     </p>
+                     
+                     
+                     <p>You can:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select data directly from a database
+                              table, in which case the data you return isn't subject to data-security
+                              restrictions. Because you can create data models on unsecured data,
+                              you're recommended to minimize the number of users who can create
+                              data models. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Join to a secured list view in
+                              your select statements. The data returned is determined by the security profiles that are assigned to the roles of the user who's running the report.
+                           </p>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>The following tables show, for each database table:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The secured list view</p>
+                        </li>
+                        
+                        <li>
+                           <p>The data security privilege required
+                              to report on data in the table, if it's accessed using the secured
+                              list view 
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>These duty roles have the privileges in the following
+                        table:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Absence Management Transaction
+                              Analysis 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Payroll Transaction Analysis </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Vacancy Transaction Analysis </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Workforce Transaction Analysis </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This three-column table with&#xA;five data rows shows (from left to right) the table name, secured&#xA;list view, and data security privilege.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Table
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Secured List View
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Data Security Privilege
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HR_ALL_ORGANIZATION_UNITS_F</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>PER_DEPARTMENT_SECURED_LIST_V</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Report Department Data</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HR_ALL_POSITIONS_F</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>PER_POSITION_SECURED_LIST_V</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Report Position Data</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_JOBS_F</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>PER_JOB_SECURED_LIST_V</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Report HR Job Data</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_LOCATIONS</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>PER_LOCATION_SECURED_LIST_V</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Report Location Data</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_GRADES_F</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>PER_GRADE_SECURED_LIST_V</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Report Assignment Grade Data</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        PER_JOBS_F, PER_LOCATIONS, and PER_GRADES_F aren't
+                        currently secured. The secured list views and privileges for these
+                        tables aren't currently used.
+                        
+                     </div>
+                     
+                     <p>These duty roles have the privileges in the following
+                        table:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Documents of Record Transaction
+                              Analysis 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Payroll Transaction Analysis </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Workforce Transaction Analysis </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This three-column table with&#xA;two data rows shows (from left to right) the table name, secured list&#xA;view, and data security privilege.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Table
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Secured List View
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Data Security Privilege
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_ALL_PEOPLE_F</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>PER_PERSON_SECURED_LIST_V</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Report Person Data</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_PERSONS</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>PER_PUB_PERS_SECURED_LIST_V</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Report Person Deferred Data</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The Payroll Transaction Analysis duty role has the
+                        privileges in the following table:
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This three-column table with&#xA;three data rows shows (from left to right) the table name, secured&#xA;list view, and data security privilege.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Table
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Secured List View
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Data Security Privilege
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HR_ALL_ORGANIZATION_UNITS_F</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>PER_LEGAL_EMP_SECURED_LIST_V</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Report Legal Employer Data</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_LEGISLATIVE_DATA_GROUPS</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>PER_LDG_SECURED_LIST_V</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Report Legislative Data Group Data</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PAY_ALL_PAYROLLS_F</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>PAY_PAYROLL_SECURED_LIST_V</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Report Payroll Definition Data</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The Compensation Transaction Analysis duty role has
+                        the privileges in the following table:
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This three-column table with&#xA;one data row shows (from left to right) the table name, secured list&#xA;view, and data security privilege.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Table
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Secured List View
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Data Security Privilege
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CMP_SALARY</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>CMP_SALARY_SECURED_LIST_V</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Report Salary Data</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The Human Resource Analyst job role has the privilege
+                        in the following table:
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This three-column table with&#xA;1 data rows shows (from left to right) the table name, secured list&#xA;view, and data security privilege.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Table
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Secured List View
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Data Security Privilege
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_ALL_ASSIGNMENTS_M</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>PER_ASSIGNMENT_SECURED_LIST_V</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Report Assignment Data</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>You can find details of the secured list views in
+                        the Tables and Views for Oracle HCM Cloud guide on the Oracle Help Center.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1229303">
+                  <h2>Business Intelligence Publisher and PII Data: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Personally identifiable information (PII)
+                     tables are secured at the database level using virtual private database
+                     (VPD) policies. Only authorized users can report on data in PII tables.
+                     This restriction also applies to Oracle Business Intelligence Publisher
+                     reports. The data in PII tables is protected using data security privileges
+                     that are granted by means of duty roles in the usual way. This topic identifies the tables
+                     that contain PII data and the data security privileges that are used
+                     to report on them.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1272669">
+                     <h3 class="topictitle">Tables Containing PII Information</h3>
+                     
+                     <p>This table lists the PII tables and the privileges
+                        that are used to report on data in these tables.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with nine&#xA;data rows shows the table name (left column) and the data security&#xA;privilege (right column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Table
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Data Security Privilege
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_ADDRESSES_F</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Report Person Address</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_CONTACT_RELSHIPS_F</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Report Person Contact</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_DRIVERS_LICENSES</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Report Driver License</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_EMAIL_ADDRESSES</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Report Person Email</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_NATIONAL_IDENTIFIERS</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Report Person National Identifier</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_PASSPORTS</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Report Person Passport</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_PERSON_DLVRY_METHODS</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Report Person Communication Method</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_PHONES</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Report Person Phone</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_VISAS_PERMITS_F</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Report Person Visa</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Work e-mail and phone aren't protected.
+                        
+                     </div>
+                     
+                     <p>All of these privileges are accessible using the
+                        Workforce Confidential Reporting duty role, which the Human Resource
+                        Analyst job role inherits.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1591089">
+                  <h2>Dimension Security: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>A dimension is a collection of business attributes
+                     or a hierarchy structure that you use to group or aggregate numeric
+                     measures. All Oracle Transactional Business Intelligence dimensions
+                     are unsecured, except for the Assignment Manager dimension. Therefore,
+                     when you select a single dimension, such as the worker or department
+                     dimension, you can see all worker and department data unfiltered.
+                     Oracle Transactional Business Intelligence data security isn't applied
+                     until you select more than one dimension or one dimension plus one
+                     or more metrics.
+                  </p>
+                  
+                  
+                  
+                  <p>For example, if you select Department Name from the
+                     Workforce Management - Worker Assignment Real Time subject area, then
+                     you can view all departments. When you add Assignment Count to the
+                     report, data security is applied and you can view workers only in
+                     the departments that you can access.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1591096">
+                     <h3 class="topictitle">Assignment Manager</h3>
+                     
+                     <p>Assignment Manager is a hierarchical structure representing
+                        the reporting relationship between workers and managers. This dimension
+                        is the only secured HCM dimension in Oracle Transactional Business
+                        Intelligence. The Assignment Manager hierarchy is restricted to line
+                        managers. If the signed-in user doesn't have direct reports, then
+                        he or she sees no data when you include Assignment Manager in the
+                        report.
+                     </p>
+                     
+                     
+                     <p>Reserve the use of Assignment Manager for line managers
+                        only. Some other job roles, such as human resource analyst, may need
+                        access to manager information. In these cases, use the Manager Name
+                        in the Worker dimension instead of the Assignment Manager hierarchy.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS2274861">
+                  <h2>FAQs for Security and Reporting</h2>
+                  
+                  <div class="sect2" id="OCHUS1586040">
+                     <h3>How can I give line managers access to compensation subject areas?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>The predefined Line Manager role has no access
+                        to compensation subject areas. To provide this access, create a custom
+                        Line Manager job role. Add both the Compensation Transaction Analysis
+                        Duty and Compensation Transaction Analysis roles to the custom role.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1586135">
+                     <h3>How can I give line managers access to talent management subject areas?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>The predefined Line Manager role has no access
+                        to talent management subject areas. To provide this access, create
+                        a custom Line Manager role. Add relevant transaction analysis duty
+                        roles to the custom role. For example, you may want to provide access
+                        to Workforce Goals subject areas. In this case, add both the Goal
+                        Management Transaction Analysis Duty and Goal Management Transaction
+                        Analysis roles to your custom role.
+                     </p>
+                     
+                     
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

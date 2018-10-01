@@ -1,0 +1,2516 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Extending and Customizing Oracle Enterprise Scheduler Jobs</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This chapter describes how to use Oracle JDeveloper or Oracle Enterprise Manager Fusion Applications Control to create and extend scheduled jobs using Oracle Enterprise Scheduler." />
+<meta name="dcterms.created" content="2017-01-11T15:33:34Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Fusion Applications Extensibility Guide for Developers" />
+<meta name="dcterms.identifier" content="E70528-01" />
+<meta name="dcterms.isVersionOf" content="OADTC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2011, 2016, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-858B8C4D-4379-45B3-9B4A-D845707244B8.htm" title="Next" type="text/html" />
+<link rel="alternate" href="OADTC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0"></a> <span id="PAGE" style="display:none;">12/20</span> <!-- End Header -->
+<a id="OADTC1225"></a><a id="OADTC614"></a>
+<h1 id="OADTC-GUID-354772F3-6367-4CCD-8363-90E5B078E0A0" class="sect1"><span class="enumeration_chapter">6</span> Extending and Customizing <span id="SCHEDULER">Oracle Enterprise Scheduler</span> Jobs</h1>
+<div>
+<div><span>This chapter describes how to use <span id="JDEV">Oracle JDeveloper</span> or <span id="FAOEMFRAME">Oracle Enterprise Manager Fusion Applications Control</span> to create and extend scheduled jobs using <span>Oracle Enterprise Scheduler</span>.</span></div>
+<p>This chapter includes the following sections:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-BC23FFC7-C9A1-424B-B370-B20942823B61">About Extending and Customizing Jobs</a></p>
+</li>
+<li>
+<p><a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B">About Extending Custom Jobs Using Existing</a></p>
+</li>
+<li>
+<p><a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-771B247A-CDB9-4635-BA53-47DC395BDB5E">About Creating a Custom Application to Extend Jobs</a></p>
+</li>
+<li>
+<p><a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-B6919D1B-2466-4D59-BD33-9AB604B7B55B">About Customizing Existing Job Properties</a></p>
+</li>
+</ul>
+</div>
+<a id="OADTC615"></a>
+<div class="sect2"><a id="GUID-BC23FFC7-C9A1-424B-B370-B20942823B61"></a>
+<h2 id="OADTC-GUID-BC23FFC7-C9A1-424B-B370-B20942823B61" class="sect2"><span class="enumeration_section">6.1</span> About Extending and Customizing <span>Oracle Enterprise Scheduler</span> Jobs</h2>
+<div>
+<p>Enterprise applications require the ability to respond to many real-time transactions requested by end users or web services. However, they also require the ability to offload larger transactions to run at a future time, or automate the running of application maintenance work based on a defined schedule.</p>
+<p><span id="GUID-BC23FFC7-C9A1-424B-B370-B20942823B61__SCHEDULER">Oracle Enterprise Scheduler</span> provides the ability to run different job types, including: Java, PL/SQL, and spawned processes, distributed across nodes in a server cluster. <span>Oracle Enterprise Scheduler</span> runs these jobs securely, and provides monitoring and management through <span id="GUID-BC23FFC7-C9A1-424B-B370-B20942823B61__FAOEMFRAMESHORT">Fusion Applications Control</span>.</p>
+<p><span id="GUID-BC23FFC7-C9A1-424B-B370-B20942823B61__ESS"><cite>Oracle Enterprise Scheduler</cite></span> provides scheduling services for the following purposes:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Distributing job request processing across a cluster of servers</p>
+</li>
+<li>
+<p>Running Java, PL/SQL, and binary jobs</p>
+</li>
+<li>
+<p>Scheduling job requests based on recurrence</p>
+</li>
+<li>
+<p>Managing job requests with <span>Fusion Applications Control</span></p>
+</li>
+</ul>
+<p><span><cite>Oracle Enterprise Scheduler</cite></span> provides the critical requirements in a service-oriented environment to automate processes that must recur on a scheduled basis and to defer heavy processing to specific time windows. <span><cite>Oracle Enterprise Scheduler</cite></span> lets you:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Support sophisticated scheduling and workload management</p>
+</li>
+<li>
+<p>Automate the running of administrative jobs</p>
+</li>
+<li>
+<p>Schedule the creation and distribution of reports</p>
+</li>
+<li>
+<p>Schedule a future time for a step in a business flow for business process management</p>
+</li>
+</ul>
+<div class="section">
+<p class="subhead2">Main Steps for Extending <span><cite>Oracle Enterprise Scheduler</cite></span> Jobs</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>Extending <span>Oracle Enterprise Scheduler</span> jobs involves the following main steps:</p>
+<ol>
+<li>
+<p>Develop the code that implements the job logic.</p>
+</li>
+<li>
+<p>Create a metadata file for the job definition.</p>
+</li>
+<li>
+<p>Grant <strong class="term">permissions</strong> to the job, such that only those with the proper permissions can request job submission.</p>
+</li>
+<li>
+<p>Enable job request submission, using an existing host application, a preconfigured user interface, or a new <strong class="term">customized</strong> application.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead2">Main Steps for Customizing <span><cite>Oracle Enterprise Scheduler</cite></span> Jobs</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>Customizing <span>Oracle Enterprise Scheduler</span> jobs involves editing job properties using <span id="GUID-BC23FFC7-C9A1-424B-B370-B20942823B61__FAOEMFRAME">Oracle Enterprise Manager Fusion Applications Control</span>. The job properties that you can modify are described in <a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-B6919D1B-2466-4D59-BD33-9AB604B7B55B__BEIHFDBE" title="Job Request Submission APIs">Table 6-10</a>.</p>
+</div>
+<!-- class="section" --></div>
+<a id="OADTC1021"></a>
+<div class="sect3"><a id="GUID-BB5FD806-BF5C-4999-BB7C-B8C460015D34"></a>
+<h3 id="OADTC-GUID-BB5FD806-BF5C-4999-BB7C-B8C460015D34" class="sect3"><span class="enumeration_section">6.1.1</span> Before You Start Extending and Customizing <span>Oracle Enterprise Scheduler</span> Jobs</h3>
+<div>
+<p>Before you extend and customize <span id="GUID-BB5FD806-BF5C-4999-BB7C-B8C460015D34__SCHEDULER">Oracle Enterprise Scheduler</span> jobs, you should be familiar with the <span id="GUID-BB5FD806-BF5C-4999-BB7C-B8C460015D34__FAAPP">Oracle Fusion application</span> architecture that enables customization, as described in <a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A" title="This chapter provides an overview of how to customize and extend on-premises installations of Oracle Fusion applications and introduces the design time and runtime tools that are used in the process. The remainder of this book describes how to use the following tools to customize and extend on-premises installations.">Customizing and Extending</a> . You should also understand the typical workflow for working with customizations, as described in <a href="GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8.htm#GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8" title="This chapter discusses the typical workflow for customizing and extending Oracle Fusion applications. It describes how to use sandboxes to perform customizations in an environment that is separate from the full test environment, publish the changes to a full test environment, and move the changes to other environments.">Understanding the Customization Development Life Cycle</a>.</p>
+<p>You will need to do the following before you can begin extending <span>Oracle Enterprise Scheduler</span> jobs:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>For developers:</p>
+<p>Set up <span id="GUID-BB5FD806-BF5C-4999-BB7C-B8C460015D34__JDEVSHORT">JDeveloper</span>. For more information, see <a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-FBD75249-534E-4857-AD58-F0D4D9822319">About Installing Customization Tools</a>.</p>
+<p>Ensure that you have configured the target environment to which you want to deploy.</p>
+</li>
+<li>
+<p>For administrators:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Install <span id="GUID-BB5FD806-BF5C-4999-BB7C-B8C460015D34__FA">Oracle Fusion Applications</span>, making sure to provision <span>Oracle Enterprise Scheduler</span> services.</p>
+<p>Start <span id="GUID-BB5FD806-BF5C-4999-BB7C-B8C460015D34__OEMCLOUDFRAME">Oracle Enterprise Manager Cloud Control</span>. For more information about starting and using <span id="GUID-BB5FD806-BF5C-4999-BB7C-B8C460015D34__OEMCLOUDFRAMESHORT">Cloud Control</span>, see "<a class="olink OASAD6473" target="_blank" href="../OASAD/GUID-68F74DBA-26E2-43D1-A4EE-02D0B810384D.htm#OASAD6473">Getting Started with Enterprise Manager <span>Cloud Control</span></a>" in the <span class="italic"><span id="GUID-BB5FD806-BF5C-4999-BB7C-B8C460015D34__OASAD"><cite>Administrator's Guide</cite></span></span>.</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<a id="OADTC616"></a>
+<div class="sect2"><a id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B"></a>
+<h2 id="OADTC-GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B" class="sect2"><span class="enumeration_section">6.2</span> About Extending Custom <span>Oracle Enterprise Scheduler</span> Jobs Using Existing <span id="FA">Oracle Fusion Applications</span></h2>
+<div>
+<p>There are two main use cases for creating <span id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B__SCHEDULER">Oracle Enterprise Scheduler</span> jobs.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold"><span id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B__ESS"><cite>Oracle Enterprise Scheduler</cite></span> Administrator</span></p>
+<p>Administrators can create a new job definition using <span id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B__FAOEMFRAME">Oracle Enterprise Manager Fusion Applications Control</span> console or Fusion Applications, using an existing host application. Scheduled jobs typically required by administrators include database maintenance tasks using PL/SQL or running spawned jobs or scripts such as SQL*Plus scripts to load data into the database. After you have defined the job, use <span>Oracle Enterprise Manager Fusion Applications Control</span> to submit the job request.</p>
+</li>
+<li>
+<p><span class="bold">Developer or System Integrator</span></p>
+<p>When using an existing host application, use <span id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B__FAOEMFRAMESHORT">Fusion Applications Control</span> to create <span id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B__BIPUB">Oracle Business Intelligence Publisher</span>, PL/SQL, and spawned jobs. Use <span id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B__JDEVSHORT">JDeveloper</span> to create Java jobs and develop a new host application that executes a set of jobs. A Java job might invoke an ADF Business Components service or a service-oriented architecture (SOA) composite application, for example.</p>
+<p>In cases where there is no need to repackage the host application, PL/SQL, binary, <span id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B__BIPUBSHORT">Oracle BI Publisher</span> and Java jobs can be added to any host application. Optionally, you can execute Java jobs from a custom host application.</p>
+<p>System integrators may want to use <span>Fusion Applications Control</span> to develop a job, while developers may prefer <span>JDeveloper</span>. Jobs are typically submitted using the scheduled request submission UI. Alternatively, it is possible to develop an <span id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B__ADF">Oracle Application Development Framework</span> application with screens for submitting <span>Oracle Enterprise Scheduler</span> jobs.</p>
+</li>
+</ul>
+<div class="section">
+<p class="subhead2">About Implementing Logic for the <span><cite>Oracle Enterprise Scheduler</cite></span> Jobs</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>An <span>Oracle Enterprise Scheduler</span> job is a request to execute a specific task written in code or a script, such as Java, PL/SQL, spawned jobs, and so on.</p>
+<p>An example of logic to be implemented by a scheduled job is writing particular data to a database under certain conditions, for example, daily shift schedules for a given subset of employees.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead2">About Creating a Job Definition Metadata File</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>An <span>Oracle Enterprise Scheduler</span> job definition specifies the type of job to be run (such as Java, PL/SQL type jobs, and so on), the host application that will run the job, and any additional required or optional parameters and properties for the job.</p>
+<p>It is possible to create a job definition in <span>Oracle Enterprise Manager Fusion Applications Control</span> or <span>JDeveloper</span>.</p>
+<p>The minimum required properties and parameters for each job type are as follows:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span>Oracle BI Publisher</span> jobs: Specify the <code>reportid</code> parameter. Specify <span>Oracle BI Publisher</span> parameters as job parameters with required validation. These can be entered by end users during request submission using the request submission user interface.</p>
+<p>If the report is a bursting report, identify it as such by selecting the bursting check box.</p>
+</li>
+<li>
+<p>PL/SQL jobs: In the job definition, specify the PL/SQL procedure that includes the job logic implementation.</p>
+<p>All input arguments to the PL/SQL procedure can be specified as parameters with required validation. These can be entered by end users during request submission using the request submission user interface.</p>
+</li>
+<li>
+<p>All other job types: Specify the name of the implementation logic and parameters in the job definition.</p>
+</li>
+</ul>
+<p>For more information about creating a job definition in <span>Oracle Enterprise Manager Fusion Applications Control</span>, see the <a class="olink OASAD1045" target="_blank" href="../OASAD/GUID-E16F47C0-6415-4D24-B68F-2DDA4C462C1B.htm#OASAD1045">"Managing <span>Oracle Enterprise Scheduler</span> Service and Jobs"</a> chapter in the <span class="italic"><span id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B__OASAD"><cite>Administrator's Guide</cite></span></span>.</p>
+<p>For more information about creating a job definition in <span>JDeveloper</span>, see the <a class="olink OADEE58132" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OADEE58132">"Working with Extensions to <span>Oracle Enterprise Scheduler</span>"</a> chapter in the <span class="italic"><span id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B__OADEE"><cite>Developer's Guide</cite></span></span>.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead2">About Granting Relevant Permissions</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>Grant the appropriate permissions for the application using <span id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B__APM">Oracle Authorization Policy Manager</span>.</p>
+<p>An example of the use of relevant permissions is to grant execution permissions to a role (an identity that determines permitted access to application functions and data) so that users belonging to that role can submit the job.</p>
+<p>For more information about granting relevant permissions to roles in a deployed application using <span>Oracle Authorization Policy Manager</span>, see the <a class="olink OASAD333" target="_blank" href="../OASAD/GUID-59E310E0-149E-4C4B-8F29-53900D4A64E4.htm#OASAD333">"Securing Oracle Fusion Applications"</a> chapter of the <span class="italic"><span><cite>Administrator's Guide</cite></span></span>.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead2">About Enabling Job Request Submissions</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>You can enable job request submissions through an <span id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B__ADFSHORT">Oracle ADF</span> user interface using <span>JDeveloper</span> or <span>Fusion Applications Control</span>.</p>
+<p>When using <span>JDeveloper</span> to enable job request submissions through an <span>Oracle ADF</span> user interface, you must define a view object to capture properties filled in by end users.</p>
+<p>If a job is defined with properties that must be filled in by end users, the user interface allows end users to fill in these properties prior to submitting the job request. For example, if the job requires start and end times, end users can fill in the desired start and end times in the space provided by the user interface.</p>
+<p>The properties that are filled in by end users are associated with a view object, which in turn is associated with the job definition itself. When the job runs, <span>Oracle Enterprise Scheduler</span> accesses the view object to retrieve the values of the properties.</p>
+<p>You could, alternatively, submit job requests using <span>Fusion Applications Control</span>. Using <span>Fusion Applications Control</span> to enable job request submissions through an <span>Oracle ADF</span> user interface does not require you to create a view object for capturing end user data.</p>
+<div class="infobox-note" id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B__GUID-8C2FBDA2-865E-4B1C-A56E-1CC4AD5C5574">
+<p class="notep1">Note:</p>
+<p>For example, suppose a parameter view object is view-linked to another view object. If you customize the view object using <span>JDeveloper</span>, then the <span>Oracle Enterprise Scheduler</span> job submission UI list of values reflects this customization, if the customization is in the <span id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B__METASVC">Oracle Metadata Services</span> runtime database.</p>
+</div>
+<p>For more information about submitting job requests using <span>Fusion Applications Control</span>, see the Submitting an <span><cite>Oracle Enterprise Scheduler</cite></span> Job Request" chapter in the <a class="olink ESSAG" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ESSAG"><span class="italic"><span id="GUID-D266125D-3B3F-4CC9-9F06-474B29A38F2B__ESSAG"><cite>Administering Oracle Enterprise Scheduler</cite></span></span></a>.</p>
+<p>For more information about defining a view object for use with a job submission interface, see the <a class="olink OADEE58132" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OADEE58132">"Working with Extensions to <span>Oracle Enterprise Scheduler</span>"</a> chapter in the <span class="italic"><span><cite>Developer's Guide</cite></span></span>.</p>
+</div>
+<!-- class="section" --></div>
+<a id="OADTC1180"></a>
+<div class="sect3"><a id="GUID-437430FE-F9B6-4ED1-81C9-7877850D6528"></a>
+<h3 id="OADTC-GUID-437430FE-F9B6-4ED1-81C9-7877850D6528" class="sect3"><span class="enumeration_section">6.2.1</span> About Extending a Custom PL/SQL <span>Oracle Enterprise Scheduler</span> Job</h3>
+<div>
+<p>Extending a custom PL/SQL <span id="GUID-437430FE-F9B6-4ED1-81C9-7877850D6528__SCHEDULER">Oracle Enterprise Scheduler</span> job involves creating a PL/SQL package and defining job metadata.</p>
+</div>
+<a id="OADTC1203"></a>
+<div class="sect4"><a id="GUID-67AF9689-9692-4071-AD52-EF46930A365E"></a>
+<h4 id="OADTC-GUID-67AF9689-9692-4071-AD52-EF46930A365E" class="sect4"><span class="enumeration_section">6.2.1.1</span> Implementing the Logic for the PL/SQL Job</h4>
+<div>
+<p>Implementing a PL/SQL scheduled job involves creating a PL/SQL package and defining the job metadata using the PL/SQL job type. The PL/SQL procedure in the package runs as the scheduled job, and the PL/SQL procedure, therefore, must be written to accept the required <code>errbuf</code> and <code>retcode</code> arguments.</p>
+<p>To implement the logic for a PL/SQL job:</p>
+<ol>
+<li>
+<p>Create a PL/SQL package, including the required <code>errbuf</code> and <code>retcode</code> arguments. A sample PL/SQL package is shown in the following example.</p>
+</li>
+<li>
+<p>Deploy the package to <span id="GUID-67AF9689-9692-4071-AD52-EF46930A365E__DB">Oracle Database</span>.</p>
+</li>
+<li>
+<p>Grant the required permissions, and perform any other necessary tasks in the database.</p>
+<pre dir="ltr">
+grant execute on xxSamplePkg to FUSION_APPS_EXECUTE;
+</pre>
+<p>For more information about granting permissions for the execution of a PL/SQL job, see the <a class="olink ESSDG309" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ESSDG309">"Performing Oracle Database Tasks for PL/SQL Stored Procedures"</a> section in the <span class="italic"><span id="GUID-67AF9689-9692-4071-AD52-EF46930A365E__ESSDG"><cite>Developing Applications for Oracle Enterprise Scheduler</cite></span></span>.</p>
+</li>
+<li>
+<p>Test the package.</p>
+</li>
+</ol>
+<div class="example" id="GUID-67AF9689-9692-4071-AD52-EF46930A365E__GUID-1743CA80-19F8-411D-AEBA-2D7F969F41E1">
+<p class="titleinexample">Example 6-1 Sample PL/SQL package</p>
+<pre dir="ltr">
+CREATE OR REPLACE PACKAGE XxSamplePkg AUTHID CURRENT_USER AS
+ 
+Procedure SampleJob (
+     errbuf out NOCOPY varchar2,
+     retcode out NOCOPY varchar2,
+     name in varchar2 );
+ 
+END XxSamplePkg;
+/
+ 
+CREATE OR REPLACE PACKAGE BODY XxSamplePkg AS
+ 
+Procedure SampleJob (
+ errbuf out NOCOPY varchar2,
+ retcode out NOCOPY varchar2,
+ name in varchar2 )
+ IS
+ 
+begin
+      -- Write log file content using the FND_FILE API.
+      FND_FILE.PUT_LINE(FND_FILE.LOG, 'Running Stored procedure SampleJob..........');
+      FND_FILE.PUT_LINE(FND_FILE.LOG, 'FND USERNAME : ' || FND_GLOBAL.USER_NAME);
+ 
+      -- Write log file content using the FND_FILE API.
+      FND_FILE.PUT_LINE(FND_FILE.OUTPUT,' Name : ' || name );
+      FND_FILE.PUT_LINE(FND_FILE.OUTPUT, 'Job Request id : ' || FND_JOB.REQUEST_ID );
+ 
+      errbuf := fnd_message.get_string('FND', 'COMPLETED NORMAL');
+      retcode := 0;
+ 
+  end SampleJob;
+ 
+END XxSamplePkg;
+/
+</pre></div>
+<!-- class="example" --></div>
+</div>
+<a id="OADTC1206"></a><a id="OADTC1207"></a><a id="OADTC1205"></a>
+<div class="sect4"><a id="GUID-09DDE652-9CD7-42E6-8EC4-CDB5F4D0B377"></a>
+<h4 id="OADTC-GUID-09DDE652-9CD7-42E6-8EC4-CDB5F4D0B377" class="sect4"><span class="enumeration_section">6.2.1.2</span> Creating a Job Definition Metadata File for the PL/SQL Job</h4>
+<div>
+<p>Use the Setup and Maintenance work area to define a job definition metadata file for the PL/SQL job. The job definition metadata file may also include user properties for the PL/SQL job as well as UI parameters to be displayed at runtime.</p>
+<p>For more information about creating an <span id="GUID-09DDE652-9CD7-42E6-8EC4-CDB5F4D0B377__SCHEDULER">Oracle Enterprise Scheduler</span> metadata file, see the "Creating or Editing a Job Definition" section in the "Managing the Work of Oracle Enterprise Scheduler Jobs" chapter in <span class="italic"><span id="GUID-09DDE652-9CD7-42E6-8EC4-CDB5F4D0B377__ESSAG"><cite>Administering Oracle Enterprise Scheduler</cite></span></span>.</p>
+<p>To create a job definition metadata file for a PL/SQL job:</p>
+<ol>
+<li>
+<p>Click your name in the global area of <span id="GUID-09DDE652-9CD7-42E6-8EC4-CDB5F4D0B377__FA">Oracle Fusion Applications</span> and select <span class="bold">Setup and Maintenance</span>, then click <span class="bold">All Tasks</span>. Search for tasks starting with "Manage Custom Enterprise Scheduler Jobs%". This will list tasks per application for creating <span id="GUID-09DDE652-9CD7-42E6-8EC4-CDB5F4D0B377__ESS"><cite>Oracle Enterprise Scheduler</cite></span> jobs.</p>
+</li>
+<li>
+<p>From the list of tasks that is displayed, select the relevant UI application you will use to host the job definitions and parameter view objects. This <span id="GUID-09DDE652-9CD7-42E6-8EC4-CDB5F4D0B377__FAAPP">Oracle Fusion application</span> is the portlet producer application for the job.</p>
+<p>Click <span class="bold">Go to Task</span>.</p>
+<p>The Manage Job Definitions tab is displayed, as shown in the following figure.</p>
+<div class="figure" id="GUID-09DDE652-9CD7-42E6-8EC4-CDB5F4D0B377__GUID-41FAE2FA-E12D-4B5D-908F-F6B0561524D8">
+<p class="titleinfigure">Figure 6-1 Manage Job Definitions Tab</p>
+<img width="1318" height="470" src="img/GUID-508F7A2A-FA25-451D-BEBB-F0E258014D8C-default.gif" alt="Manage Job Definitions Tab" title="Manage Job Definitions Tab" /></div>
+<!-- class="figure" --></li>
+<li>
+<p>In the <span class="bold">Manage Job Definitions</span> tab, click <span class="bold">New</span>.</p>
+</li>
+<li>
+<p>In the <span class="bold">Create Job Definition</span> tab, click <span class="bold">Show More</span> to display all parameters and enter the values for the job shown in the following table.</p>
+<div class="tblformalwide" id="GUID-09DDE652-9CD7-42E6-8EC4-CDB5F4D0B377__GUID-A3EAA422-33B2-4B93-BB7A-2459540EE3ED">
+<p class="titleintable">Table 6-1 PL/SQL Job Definition Values</p>
+<table class="cellalignment520" title="PL/SQL Job Definition Values" summary="PL/SQL Job Definition Values">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment472" id="d30090e755">Field</th>
+<th class="cellalignment521" id="d30090e758">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e763" headers="d30090e755">
+<p>Display Name</p>
+</td>
+<td class="cellalignment522" headers="d30090e763 d30090e758">
+<p>Enter a display name for the job.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e770" headers="d30090e755">
+<p>Name</p>
+</td>
+<td class="cellalignment522" headers="d30090e770 d30090e758">
+<p>Enter a name for the job definition.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e777" headers="d30090e755">
+<p>Path</p>
+</td>
+<td class="cellalignment522" headers="d30090e777 d30090e758">
+<p>Specify the trailing package name for the job definition metadata. The default namespace or path for custom job definitions begins with <code>oracle/apps/ess/custom</code>. For example, when entering <code>test</code> in the <span class="bold">Path</span> text field, the job definition is stored in the <code>globalEss</code> <span id="GUID-09DDE652-9CD7-42E6-8EC4-CDB5F4D0B377__MDSSHORT">MDS</span> namespace as <code>oracle/apps/ess/custom/test</code>.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e803" headers="d30090e755">
+<p>Job Application Name</p>
+</td>
+<td class="cellalignment522" headers="d30090e803 d30090e758">
+<p>From the dropdown list, select the name of the host application running the <span>Oracle Enterprise Scheduler</span> job.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e813" headers="d30090e755">
+<p>Job Type</p>
+</td>
+<td class="cellalignment522" headers="d30090e813 d30090e758">
+<p>Select the job type from the dropdown list, namely the <span class="bold">PlsqlJobType</span>.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e823" headers="d30090e755">
+<p>Procedure Name</p>
+</td>
+<td class="cellalignment522" headers="d30090e823 d30090e758">
+<p>Enter the name of the stored procedure to run as part of the PL/SQL job execution.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e830" headers="d30090e755">
+<p>Standard request submission flag</p>
+</td>
+<td class="cellalignment522" headers="d30090e830 d30090e758">
+<p>Check this box to indicate that the job request is to be submitted in the standard manner.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></li>
+<li>
+<p>At the bottom of the pane, click the <span class="bold">User Properties</span> tab. Define the following user properties by clicking <span class="bold">New</span>, as shown in the following table.</p>
+<div class="tblformalwide" id="GUID-09DDE652-9CD7-42E6-8EC4-CDB5F4D0B377__GUID-7F3901CA-AC16-403D-9152-20732A89C6DC">
+<p class="titleintable">Table 6-2 PL/SQL User Properties</p>
+<table class="cellalignment520" title="PL/SQL User Properties" summary="PL/SQL User Properties">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment464" id="d30090e857">Name</th>
+<th class="cellalignment523" id="d30090e860">Data Type</th>
+<th class="cellalignment524" id="d30090e863">Default Value</th>
+<th class="cellalignment523" id="d30090e866">Read Only</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment468" id="d30090e871" headers="d30090e857">
+<p><code>EXT_PortletContainerWebModule</code></p>
+</td>
+<td class="cellalignment525" headers="d30090e871 d30090e860">
+<p>String</p>
+</td>
+<td class="cellalignment526" headers="d30090e871 d30090e863">
+<p>For the default value, enter the name of the web module that will be used as a portlet when submitting the job request. This is the short name of the hosting application that contains the ScheduleRequest task flow. This short name is defined in the TopologyManager tables in <code>FUSION_SETUP</code> schema. There is a URL that corresponds to each short name that is used to connect to the remote ScheduleRequest task flow.</p>
+</td>
+<td class="cellalignment525" headers="d30090e871 d30090e866">
+<p>N/A</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment468" id="d30090e888" headers="d30090e857">
+<p><code>numberOfArgs</code></p>
+</td>
+<td class="cellalignment525" headers="d30090e888 d30090e860">
+<p>String</p>
+</td>
+<td class="cellalignment526" headers="d30090e888 d30090e863">
+<p>Set the number of job submission arguments. This number excludes <code>errbuf</code> and <code>retcode</code>, as these are not submission arguments.</p>
+</td>
+<td class="cellalignment525" headers="d30090e888 d30090e866">
+<p>N/A</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="infobox-note" id="GUID-09DDE652-9CD7-42E6-8EC4-CDB5F4D0B377__GUID-ADA8CF3C-1385-4574-AB4A-3C958E8B7158">
+<p class="notep1">Note:</p>
+<p>Typically, the web context is registered as the web module name. Verify with your applications administrator the value of the registered web module name in the Topology Manager work area. Registering the correct web module name enables the correct remote rendering of the <span>Oracle Fusion application</span> job request parameters from the <span>Oracle Enterprise Scheduler</span> central UI. (The web module name should match the one already provisioned in the TopologyManager tables.)</p>
+</div>
+</li>
+<li>
+<p>Click the <span class="italic"><span class="bold">Job_Definition_Name&gt;: Parameters</span></span> tab and specify UI parameters as required. These UI parameters get stored as parameter view objects internally. The UI parameter fields are described in the following table.</p>
+<div class="tblformal" id="GUID-09DDE652-9CD7-42E6-8EC4-CDB5F4D0B377__GUID-699D65F5-3376-4B15-85EC-D27DF737C25A">
+<p class="titleintable">Table 6-3 PL/SQL Job UI Parameters</p>
+<table class="cellalignment483" title="PL/SQL Job UI Parameters" summary="PL/SQL Job UI Parameters">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment472" id="d30090e933">Field</th>
+<th class="cellalignment521" id="d30090e936">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e941" headers="d30090e933">
+<p>Prompt</p>
+</td>
+<td class="cellalignment522" headers="d30090e941 d30090e936">
+<p>Enter the text to be displayed at the prompt that is displayed during runtime.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e948" headers="d30090e933">
+<p>Data Type</p>
+</td>
+<td class="cellalignment522" headers="d30090e948 d30090e936">
+<p>From the dropdown list, select the relevant data type.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e955" headers="d30090e933">
+<p>Page Element</p>
+</td>
+<td class="cellalignment522" headers="d30090e955 d30090e936">
+<p>From the dropdown list, select the UI page element you want to use to display the parameter, for example, a text box.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></li>
+<li>
+<p>Click <span class="bold">Save and Close</span> to create and save the new <span>Oracle Enterprise Scheduler</span> PL/SQL job definition.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OADTC1186"></a>
+<div class="sect3"><a id="GUID-2D3C298D-5A24-46C1-B300-29CEA4E71947"></a>
+<h3 id="OADTC-GUID-2D3C298D-5A24-46C1-B300-29CEA4E71947" class="sect3"><span class="enumeration_section">6.2.2</span> About Extending a Custom Java <span>Oracle Enterprise Scheduler</span> Job</h3>
+<div>
+<p>Implementing a Java scheduled job involves implementing the Java business logic and defining the relevant <span id="GUID-2D3C298D-5A24-46C1-B300-29CEA4E71947__SCHEDULER">Oracle Enterprise Scheduler</span> job metadata. Use <span id="GUID-2D3C298D-5A24-46C1-B300-29CEA4E71947__JDEVSHORT">JDeveloper</span> to implement a Java job and deploy the job as a shared library. Modify the deployment descriptor of the deployed user interface or host application Enterprise Archive (EAR) file so that it points to the shared library. Redeploy the file.</p>
+<p>Deploying the job as a shared library allows you to add additional jobs in the future without having to redeploy the host application. For more information about deploying <span id="GUID-2D3C298D-5A24-46C1-B300-29CEA4E71947__ADFSHORT">Oracle ADF</span> applications, see the <a class="olink ADFFD1806" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ADFFD1806">"Deploying Fusion Web Applications"</a> chapter in the <span class="italic"><span id="GUID-2D3C298D-5A24-46C1-B300-29CEA4E71947__ADFFD"><cite>Developing Fusion Web Applications with Oracle Application Development Framework</cite></span></span>.</p>
+</div>
+<a id="OADTC1208"></a>
+<div class="sect4"><a id="GUID-FDF72FB6-5B1C-42E3-9499-E7EA4EC10E4B"></a>
+<h4 id="OADTC-GUID-FDF72FB6-5B1C-42E3-9499-E7EA4EC10E4B" class="sect4"><span class="enumeration_section">6.2.2.1</span> Implementing the Logic for the Java Job</h4>
+<div>
+<p>In order to develop an application that runs a Java class under <span id="GUID-FDF72FB6-5B1C-42E3-9499-E7EA4EC10E4B__SCHEDULER">Oracle Enterprise Scheduler</span>, you must define the Java class that implements the <span>Oracle Enterprise Scheduler</span> executable interface. The executable interface defines the contract that enables using <span>Oracle Enterprise Scheduler</span> to invoke a Java class.</p>
+<p>To create a Java class for an existing <span>Oracle Enterprise Scheduler</span> <span id="GUID-FDF72FB6-5B1C-42E3-9499-E7EA4EC10E4B__FAAPP">Oracle Fusion application</span>, take the following steps:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Create an application in <span id="GUID-FDF72FB6-5B1C-42E3-9499-E7EA4EC10E4B__JDEVSHORT">JDeveloper</span>.</p>
+</li>
+<li>
+<p>Create a project in <span>JDeveloper</span>.</p>
+</li>
+<li>
+<p>Develop the application code that uses the <span>Oracle Enterprise Scheduler</span> Java APIs.</p>
+</li>
+</ul>
+<p>To implement the logic for an <span>Oracle Enterprise Scheduler</span> Java job:</p>
+<ol>
+<li>
+<p>In <span>JDeveloper</span>, create an application and project. Make sure to include Enterprise JavaBeans (EJB) and Java technologies in the project.</p>
+</li>
+<li>
+<p>Add the <span>Oracle Enterprise Scheduler</span> extensions to the project.</p>
+<ol>
+<li>
+<p>In the Navigator, right-click the project you just created. Select <span class="bold">Project Properties</span>, and then select <span class="bold">Libraries and Classpath</span>.</p>
+</li>
+<li>
+<p>In the <span class="bold">Libraries and Classpath</span> pane, click <span class="bold">Add Library</span>.</p>
+</li>
+<li>
+<p>In the Add Library window, in the <span class="bold">Libraries</span> field, select <span class="bold">Enterprise Scheduler Extensions</span> and click <span class="bold">OK</span>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Create a Java class using the <span>Oracle Enterprise Scheduler</span> package.</p>
+<ol>
+<li>
+<p>In the project overview tab, click the <span class="bold">Java Files</span> link.</p>
+</li>
+<li>
+<p>In the Java Files pane, click <span class="bold">New</span>. From the <span class="bold">Create New in Project</span> menu, select <span class="italic"><span class="bold">Project Name</span></span> and then select <span class="bold">Java Class</span>.</p>
+<p>The Create Java Class window is displayed.</p>
+</li>
+<li>
+<p>In the Create Java Class window, enter a name for the Java class and the package name in the fields provided. For example, if working with the Financials <span>Oracle Fusion application</span>, the package name would be <span class="bold">oracle.apps.financials.ess.program</span>. Accept the remaining default values.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>In the Java class, develop the code that will do the work of the Java job. The following code sample illustrates the use of an <span>Oracle Enterprise Scheduler</span> job request file handle and writes a job request parameter submitted to the request log and output files.</p>
+</li>
+</ol>
+<div class="example" id="GUID-FDF72FB6-5B1C-42E3-9499-E7EA4EC10E4B__GUID-5C6DB05A-0CBC-478A-A832-8F6D385416DA">
+<p class="titleinexample">Example 6-2 Sample Java code</p>
+<pre dir="ltr">
+package oracle.apps.financials.ess.program;
+ 
+   import java.io.IOException;
+   import oracle.as.scheduler.Cancellable;
+   import oracle.as.scheduler.Executable;
+ 
+   import oracle.as.scheduler.ExecutionCancelledException;
+   import oracle.as.scheduler.ExecutionErrorException;
+   import oracle.as.scheduler.ExecutionPausedException;
+   import oracle.as.scheduler.ExecutionWarningException;
+   import oracle.as.scheduler.RequestExecutionContext;
+ 
+   import oracle.as.scheduler.RequestParameters;
+   import oracle.as.scheduler.SystemProperty;
+
+   import oracle.as.scheduler.cp.exec.ProcessHelper;
+   import oracle.as.scheduler.cp.file.LogFile;
+   import oracle.as.scheduler.cp.file.OutputFile;
+ 
+   public class XxSampleJob implements Executable, Cancellable {
+ 
+      private OutputFile requestOutput;
+      private LogFile requestLog;
+ 
+      private boolean m_isCancelled = false;
+ 
+      private long request_id = 0L;
+      private String requestParameter1 = null;
+ 
+      public XxSampleJob() {
+          super();
+      }
+  
+      public void execute(RequestExecutionContext ctx,
+                          RequestParameters params) throws ExecutionErrorException,
+                                                           ExecutionWarningException,
+                                                           ExecutionCancelledException,
+                                                           ExecutionPausedException {
+ 
+          request_id = ctx.getRequestId();
+ 
+          System.out.println("XxSampleJob Running, Request ID: " +
+                             ctx.getRequestId());
+       
+          try {        
+          
+              String userFileDir =
+                          (String)params.getValue(SystemProperty.USER_FILE_DIR);
+ 
+              String sysPropUserName =
+                          (String)params.getValue(SystemProperty.USER_NAME);
+           
+              // Read the job request parameter.
+              requestParameter1 = (String) params.getValue("submit.argument1");
+ 
+              requestOutput = ProcessHelper.getOutputFile();
+              requestOutput.writeln("Sample ESS Java job execution OUTPUT");          
+              requestOutput.writeln("USER_NAME as SystemProperty: " +
+                                    sysPropUserName);
+              requestOutput.writeln("ESS Job requestID: " + request_id);
+              requestOutput.writeln("ESS Job request parameter: "
+                                                          + requestParameter1);
+ 
+              requestLog = ProcessHelper.getLogFile();
+              requestLog.writeln("Sample ESS Java job execution LOG");       
+              requestLog.writeln("ESS requestFileDirectory: " + userFileDir);
+              requestLog.writeln("ESS Job requestID: " + request_id);
+              requestLog.writeln("ESS Job request parameter: "
+                                                          + requestParameter1);
+ 
+          }  catch (Exception ex) {
+           
+              System.out.println("Exception running XxSampleJob: " +
+                                 ex.getMessage());
+              ex.printStackTrace();
+           
+          } finally {
+ 
+              try {
+               
+                  // Close all open job request log and output files.
+                  ProcessHelper.closeAllFiles();
+               
+              } catch (IOException ioe) {
+               
+                  System.out.println("Exception closing files: " +
+                                     ioe.getMessage());
+                  ioe.printStackTrace();
+              }
+ 
+          }
+ 
+      }
+ 
+      @Override
+      public void cancel() {
+          m_isCancelled = true;
+      }
+ 
+   }
+</pre></div>
+<!-- class="example" --></div>
+</div>
+<div class="sect4"><a id="GUID-9DE7DCFE-D353-4FE7-A175-BE6A21505986"></a>
+<h4 id="OADTC-GUID-9DE7DCFE-D353-4FE7-A175-BE6A21505986" class="sect4"><span class="enumeration_section">6.2.2.2</span> Deploying the Java Business Logic</h4>
+<div>
+<p>To deploy the Java logic of an <span id="GUID-9DE7DCFE-D353-4FE7-A175-BE6A21505986__SCHEDULER">Oracle Enterprise Scheduler</span> Java job, identify an existing <span id="GUID-9DE7DCFE-D353-4FE7-A175-BE6A21505986__FAAPP">Oracle Fusion application</span> as the target host application.</p>
+<p>Next, update the Java business logic for an existing <span>Oracle Fusion application</span> as follows:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Package the Java application in a Java Archive (JAR) file.</p>
+</li>
+<li>
+<p>Update JAR module in the <span>Oracle Fusion application</span> class path.</p>
+</li>
+<li>
+<p>Bounce the server instance to load the Java program logic in the <span>Oracle Fusion application</span> class loader.</p>
+</li>
+</ul>
+<p>To deploy the Java business logic:</p>
+<ol>
+<li>
+<p>Create a deployment profile for the project.</p>
+<ol>
+<li>
+<p>In <span id="GUID-9DE7DCFE-D353-4FE7-A175-BE6A21505986__JDEVSHORT">JDeveloper</span>, from the Navigator, select the project you created. Build the project to ensure that the Java class successfully compiles.</p>
+</li>
+<li>
+<p>Right-click the project, select <span class="bold">Project Properties</span> and then <span class="bold">Deployment</span>.</p>
+</li>
+<li>
+<p>In the <span class="bold">Deployment Profiles</span> field, click <span class="bold">New</span> to create a deployment profile for the JAR file.</p>
+<p>The Create Deployment Profile window is displayed.</p>
+</li>
+<li>
+<p>In the Create Deployment Profile window, enter a name for the deployment profile and click <span class="bold">OK</span>.</p>
+</li>
+<li>
+<p>In the Edit JAR Deployment Profile Properties window, verify that the Java job class is included in the JAR module output and click <span class="bold">OK</span>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Package the <span>Oracle Enterprise Scheduler</span> Java class into a JAR file and deploy it.</p>
+<ol>
+<li>
+<p>From the Navigator, right-click the project you created. Select <span class="bold">Deploy</span> and then select the JAR file you just created.</p>
+<p>The Deployment Action window is displayed.</p>
+</li>
+<li>
+<p>In the Deployment Action window, click <span class="bold">Finish</span> to create a packaged JAR file.</p>
+<p>The archive module is deployed to the default project deployment path, for example, <span class="bold"><code>$JDEV_HOME</code></span><code>/&lt;</code><span class="bold"><code>PROJECT_NAME</code></span><code>&gt;/deploy/&lt;</code><span class="bold"><code>JAR_NAME</code></span><code>&gt;.jar</code>.</p>
+<div class="infobox-note" id="GUID-9DE7DCFE-D353-4FE7-A175-BE6A21505986__GUID-05302A6E-66F6-409E-98AD-3179A6F37F28">
+<p class="notep1">Note:</p>
+<p>All custom JAR files must begin with the prefix <code>Xx</code>, for example <code>XxMyJar.jar</code>.</p>
+</div>
+</li>
+</ol>
+</li>
+<li>
+<p>Update the JAR module in the application class path of the <span>Oracle Enterprise Scheduler</span> host application.</p>
+<ol>
+<li>
+<p>Locate the expanded deployment directory of the EAR file for the existing <span>Oracle Fusion application</span>, for example <span class="bold"><code>$MW_HOME</code></span><code>/fusionapps/applications/fin/deploy/EarFinancialsEss.ear/APP-INF/lib</code>.</p>
+</li>
+<li>
+<p>Copy the deployed custom JAR file to the expanded directory.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>In the domain to which the <span>Oracle Enterprise Scheduler</span> host application is deployed, restart the ESSAPP application deployed to the <span>Oracle Enterprise Scheduler</span> domain. (This can be done using <span id="GUID-9DE7DCFE-D353-4FE7-A175-BE6A21505986__WLS">Oracle WebLogic Server</span> Console or <span id="GUID-9DE7DCFE-D353-4FE7-A175-BE6A21505986__IASOEM">Oracle Enterprise Manager</span>.)</p>
+<p>The <span>Oracle Enterprise Scheduler</span> job executes the updated Java class after the application class loader successfully loads the updated class.</p>
+<p>For more information about restarting <span>Oracle Enterprise Scheduler</span>, see the <a class="olink OASAD6281" target="_blank" href="../OASAD/GUID-E16F47C0-6415-4D24-B68F-2DDA4C462C1B.htm#OASAD6281">"Stopping and Starting Oracle Enterprise Scheduler Service Processes"</a> section in the <span class="italic"><span id="GUID-9DE7DCFE-D353-4FE7-A175-BE6A21505986__OASAD"><cite>Administrator's Guide</cite></span></span>.</p>
+</li>
+</ol>
+</div>
+</div>
+<a id="OADTC1653"></a><a id="OADTC1654"></a><a id="OADTC1652"></a>
+<div class="sect4"><a id="GUID-F9F2F4D8-702F-48F1-BE4C-443FA672CD11"></a>
+<h4 id="OADTC-GUID-F9F2F4D8-702F-48F1-BE4C-443FA672CD11" class="sect4"><span class="enumeration_section">6.2.2.3</span> Creating a Job Definition Metadata File for the Java Job</h4>
+<div>
+<p>Using the Setup and Maintenance work area, create a Java type job definition.</p>
+<p>To create a job definition metadata file for a Java job:</p>
+<ol>
+<li>
+<p>Click your name in the global area of <span id="GUID-F9F2F4D8-702F-48F1-BE4C-443FA672CD11__FA">Oracle Fusion Applications</span> and select <span class="bold">Setup and Maintenance</span>, then click <span class="bold">All Tasks</span>. Search for all tasks.</p>
+</li>
+<li>
+<p>From the list of tasks that is displayed, select the relevant UI application you will use to host the job definitions and parameter view objects. This <span id="GUID-F9F2F4D8-702F-48F1-BE4C-443FA672CD11__FAAPP">Oracle Fusion application</span> is the portlet producer application for the job.</p>
+<p>Click <span class="bold">Go to Task</span>.</p>
+<p>The Manage Job Definitions tab is displayed, as shown in the following figure.</p>
+<div class="figure" id="GUID-F9F2F4D8-702F-48F1-BE4C-443FA672CD11__GUID-4BFF30BE-C5AE-4869-9541-468F0E5253AE">
+<p class="titleinfigure">Figure 6-2 The Manage Job Definitions Tab</p>
+<img width="1318" height="470" src="img/GUID-508F7A2A-FA25-451D-BEBB-F0E258014D8C-default.gif" alt="The Manage Job Definitions tab" title="The Manage Job Definitions tab" /></div>
+<!-- class="figure" --></li>
+<li>
+<p>In the <span class="bold">Manage Job Definitions</span> tab, click <span class="bold">New</span>.</p>
+</li>
+<li>
+<p>In the <span class="bold">Create Job Definition</span> tab, click <span class="bold">Show More</span> to display all parameters and enter the values for the job shown in the following table.</p>
+<div class="tblformalwide" id="GUID-F9F2F4D8-702F-48F1-BE4C-443FA672CD11__GUID-23B16597-CB5F-496D-A71C-2C74F397998F">
+<p class="titleintable">Table 6-4 Job Definition Values</p>
+<table class="cellalignment520" title="Job Definition Values" summary="Job Definition Values">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment472" id="d30090e1449">Field</th>
+<th class="cellalignment521" id="d30090e1452">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e1457" headers="d30090e1449">
+<p>Display Name</p>
+</td>
+<td class="cellalignment522" headers="d30090e1457 d30090e1452">
+<p>Enter a display name for the job.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e1464" headers="d30090e1449">
+<p>Name</p>
+</td>
+<td class="cellalignment522" headers="d30090e1464 d30090e1452">
+<p>Enter a name for the job definition.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e1471" headers="d30090e1449">
+<p>Path</p>
+</td>
+<td class="cellalignment522" headers="d30090e1471 d30090e1452">
+<p>Specify the trailing package name for the job definition metadata. The default namespace or path for custom job definitions begins with <code>oracle/apps/ess/custom</code>. For example, when entering <code>test</code> in the <span class="bold">Path</span> text field, the job definition is stored in the <code>globalEss</code> <span id="GUID-F9F2F4D8-702F-48F1-BE4C-443FA672CD11__MDSSHORT">MDS</span> namespace as <code>oracle/apps/ess/custom/test</code>.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e1497" headers="d30090e1449">
+<p>Job Application Name</p>
+</td>
+<td class="cellalignment522" headers="d30090e1497 d30090e1452">
+<p>From the dropdown list, select the name of the host application running the <span id="GUID-F9F2F4D8-702F-48F1-BE4C-443FA672CD11__SCHEDULER">Oracle Enterprise Scheduler</span> job.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e1507" headers="d30090e1449">
+<p>Job Type</p>
+</td>
+<td class="cellalignment522" headers="d30090e1507 d30090e1452">
+<p>Select the job type from the dropdown list, namely the <span class="bold">JavaJobType</span>.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e1517" headers="d30090e1449">
+<p>Class Name</p>
+</td>
+<td class="cellalignment522" headers="d30090e1517 d30090e1452">
+<p>Enter the qualified class name of the Java business logic.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e1524" headers="d30090e1449">
+<p>Standard request submission flag</p>
+</td>
+<td class="cellalignment522" headers="d30090e1524 d30090e1452">
+<p>Check this box to indicate that the job request is to be submitted in the standard manner.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></li>
+<li>
+<p>In the Create Job Definition window, from the <span class="bold">Job Type</span> dropdown list, select <span class="bold">JavaJobType</span>.</p>
+</li>
+<li>
+<p>In the Create Job Definition window, in the <span class="bold">Class Name</span> field, enter the fully qualified class name of the Java business logic.</p>
+</li>
+<li>
+<p>In the Create Job Definition window, In the <span class="bold">User Properties</span> tab, define only the <span class="bold">EXT_PortletContainerWebModule</span> property.</p>
+<p>Typically, the web context is registered as the web module name. Verify with your applications administrator the value of the registered web module name in the Topology Manager work area. Registering the correct web module name enables the correct remote rendering of the <span>Oracle Fusion application</span> job request parameters from the <span>Oracle Enterprise Scheduler</span> central UI.</p>
+</li>
+<li>
+<p>Click the <span class="italic"><span class="bold">&lt;Job Definition Name&gt;</span></span><span class="bold">: Parameters</span> tab and specify UI parameters as required. The UI parameter fields are described in the following table.</p>
+<div class="tblformal" id="GUID-F9F2F4D8-702F-48F1-BE4C-443FA672CD11__GUID-7C39402F-EAA3-4FE2-9EC2-CF899A515F85">
+<p class="titleintable">Table 6-5 Job UI Parameters</p>
+<table class="cellalignment483" title="Job UI Parameters" summary="Job UI Parameters">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment472" id="d30090e1581">Field</th>
+<th class="cellalignment521" id="d30090e1584">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e1589" headers="d30090e1581">
+<p>Prompt</p>
+</td>
+<td class="cellalignment522" headers="d30090e1589 d30090e1584">
+<p>Enter the text to be displayed at the prompt that is displayed during runtime.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e1596" headers="d30090e1581">
+<p>Data Type</p>
+</td>
+<td class="cellalignment522" headers="d30090e1596 d30090e1584">
+<p>From the dropdown list, select the relevant data type.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e1603" headers="d30090e1581">
+<p>Page Element</p>
+</td>
+<td class="cellalignment522" headers="d30090e1603 d30090e1584">
+<p>From the dropdown list, select the UI page element you want to use to display the parameter, for example, a text box.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></li>
+<li>
+<p>Click <span class="bold">Save and Close</span> to create and save the new <span>Oracle Enterprise Scheduler</span> Java job definition.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OADTC1210"></a>
+<div class="sect3"><a id="GUID-B3C5509F-9CF0-4880-8204-5B652D2DB1E7"></a>
+<h3 id="OADTC-GUID-B3C5509F-9CF0-4880-8204-5B652D2DB1E7" class="sect3"><span class="enumeration_section">6.2.3</span> Submitting <span>Oracle Enterprise Scheduler</span> Jobs</h3>
+<div>
+<div class="section">
+<p>You can use <span id="GUID-B3C5509F-9CF0-4880-8204-5B652D2DB1E7__FA">Oracle Fusion Applications</span> to submit <span id="GUID-B3C5509F-9CF0-4880-8204-5B652D2DB1E7__SCHEDULER">Oracle Enterprise Scheduler</span> jobs.</p>
+<p>To submit <span>Oracle Enterprise Scheduler</span> jobs:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In the global area of <span>Oracle Fusion Applications</span>, access the Schedule Processes page by clicking the <span class="bold">Navigator</span> menu and then choosing <span class="bold">Tools</span> and <span class="bold">Schedule Processes</span>.</span></li>
+<li class="stepexpand"><span>Click <span class="bold">Schedule New Process</span>.</span>
+<div>
+<p>The Search and Select: Process Name window is displayed.</p>
+</div>
+</li>
+<li class="stepexpand"><span>In the <span class="bold">Process Name</span> field, enter the name of the <span>Oracle Enterprise Scheduler</span> job you want to schedule and click <span class="bold">Search</span>.</span>
+<div>
+<p>The job name is displayed in the search results table.</p>
+</div>
+</li>
+<li class="stepexpand"><span>From the search results table, select the job name and click <span class="bold">OK</span>.</span>
+<div>
+<p>The Process Details page is displayed.</p>
+</div>
+</li>
+<li class="stepexpand"><span>In the Process Details page, in the <span class="bold">Parameters</span> field, specify any required parameters.</span></li>
+<li class="stepexpand"><span>Click <span class="bold">Submit</span> to request that the <span>Oracle Enterprise Scheduler</span> instance execute the job. Click <span class="bold">Close</span> to return to the Scheduled Processes page.</span></li>
+<li class="stepexpand"><span>In the Scheduled Processes page, refresh the Search Results table to monitor the status of the submitted job.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OADTC1391"></a>
+<div class="sect2"><a id="GUID-771B247A-CDB9-4635-BA53-47DC395BDB5E"></a>
+<h2 id="OADTC-GUID-771B247A-CDB9-4635-BA53-47DC395BDB5E" class="sect2"><span class="enumeration_section">6.3</span> About Creating a Custom <span>Oracle Enterprise Scheduler</span> Application to Extend <span>Oracle Enterprise Scheduler</span> Jobs</h2>
+<div>
+<p>Use Apache Ant scripts to develop and deploy an <span id="GUID-771B247A-CDB9-4635-BA53-47DC395BDB5E__SCHEDULER">Oracle Enterprise Scheduler</span> host application and user interface. Use <span id="GUID-771B247A-CDB9-4635-BA53-47DC395BDB5E__JDEVSHORT">JDeveloper</span> to create the relevant metadata.</p>
+</div>
+<a id="OADTC1393"></a><a id="OADTC1394"></a><a id="OADTC1395"></a><a id="OADTC1392"></a>
+<div class="sect3"><a id="GUID-C2D7256B-CE9B-4F72-A004-D31341271B39"></a>
+<h3 id="OADTC-GUID-C2D7256B-CE9B-4F72-A004-D31341271B39" class="sect3"><span class="enumeration_section">6.3.1</span> Creating Host and UI Applications Using an Ant Script</h3>
+<div>
+<div class="section">
+<p>Use the supplied Ant script to create the host and user interface applications for the <span id="GUID-C2D7256B-CE9B-4F72-A004-D31341271B39__SCHEDULER">Oracle Enterprise Scheduler</span> jobs.</p>
+<p>When deploying the application, be sure to identify the product family and use an existing registered <span id="GUID-C2D7256B-CE9B-4F72-A004-D31341271B39__WLS">Oracle WebLogic Server</span> domain. This allows you to test your application without having to create and register a domain, or register any associated applications with the product family.</p>
+<p>To create host and user interface applications using scripts:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Extract the <span>Oracle Enterprise Scheduler</span> <code>customer_extensibility</code> script from the <span id="GUID-C2D7256B-CE9B-4F72-A004-D31341271B39__JDEVSHORT">JDeveloper</span> installation or <span>JDeveloper</span> extensions to the development work environment, for example, into a folder called <code>template_home</code>.</span>
+<div>
+<p>The <code>template_home</code> directory contains an Ant <code>build.xml</code> driver file that processes the template <span>Oracle Enterprise Scheduler</span> host and producer web applications by replacing macros with specified input.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Change directories to the <code>template_home</code> directory to create the <code>user_home</code> directory that will contain the resulting macro-substituted files copied from the <code>template_home</code> directory.</span></li>
+<li class="stepexpand"><span>Run the script in any of the following ways:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>Interactively, where you are prompted for the relevant input. Accept the default, if there is one, by pressing Enter at each prompt.</p>
+<p>In the <code>template_home</code> directory, enter <code>ant</code> or <code>ant</code> <code>create-user-home</code>. Following is a code sample of a running script.</p>
+</li>
+<li>
+<p>Using predefined property files. Any properties not defined in a file can be entered at the prompt. A sample properties file is shown in the following example. To create a properties file, run the command <code>$&gt; cat myProperties.properties</code>, where <code>myProperties.properties</code> is the name of the properties file.</p>
+<p>Then run the following command:</p>
+<pre dir="ltr">
+$&gt; ant create-user-home -propertyfile myProperties.properties
+</pre></li>
+<li>
+<p>Specifying individual properties at the command line. Any properties not defined in a file can be entered at the prompt. Following is a code sample.</p>
+<p>To view supported options, enter <code>ant help-create-user-home</code> at the prompt.</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>On successful execution, you can modify the template application workspace from the <code>user_home</code> directory in <span>JDeveloper</span>.</span>
+<div>
+<p>At the prompt, enter <code>ant help-deploy</code> to list the supported deployment options.</p>
+</div>
+</li>
+</ol>
+<div class="example" id="GUID-C2D7256B-CE9B-4F72-A004-D31341271B39__GUID-CCFEC2C0-DD0C-4CF6-870F-848B58C7B5B5">
+<p class="titleinexample">Example 6-3 Interactive Script Execution</p>
+<pre dir="ltr">
+$ ant
+ Buildfile: build.xml
+-init:
+ 
+ create-user-home:
+    [input] Enter which template should be used (source_template) (default=Fusion)
+    [input]      ([Fusion], Standalone)
+                   Fusion
+    [input] Enter Middleware Home Directory path (fmw_home_dir) (default=) []
+            /JDEVADF_INSTALLATION/
+    [input] Enter host application name (hosting_application_name) (default=MyAppEss) [MyAppEss]
+            MyAppEss
+    [input] Enter host application JPS stripe id (hosting_application_stripe_id)  
+            (default=MyAppEss) [MyAppEss]
+            MyAppEss
+    [input] Enter UI application name (ui_application_name) (default=MyApp) [MyApp]
+            MyApp
+    [input] Enter UI application JPS stripe ID (ui_application_stripe_id) (default=MyApp) [MyApp]
+            MyAppEss
+    [input] Enter the shared library name for the job business logic (jobdef_library_name)
+            (default=MyJobsLibrary) [MyJobsLibrary]
+            oracle.ess.shared
+    [input] Enter an empty directory where the applications will be created (user_home)
+            /workspace/ess_user_home
+     [echo]
+     [echo]
+    [mkdir] Created dir: /workspace/ess_user_home
+ [propertyfile] Creating new property file: /workspace/ess_user_home/template.properties
+     [copy] Copying 31 files to /workspace/ess_user_home
+     [copy] Copied 36 empty directories to 14 empty directories under /workspace/ess_user_home
+     [copy] Copying 19 files to /workspace/ess_user_home
+     [move] Moving 1 file to /workspace/ess_user_home/Template_Hosting
+     [move] Moving 1 file to /workspace/ess_user_home/Template_UI
+     [echo]
+     [echo] ========================================
+     [echo]
+     [echo] A new application workspace has been created at: /workspace/ess_user_home
+     [echo] This application workspace can be opened and modified using JDeveloper
+     [echo] To deploy the applications, run the following command:
+     [echo]     ant -f /workspace/ess_user_home/ant/build-ess.xml deploy
+     [echo] To create new jobs from predefined templates, run the following command:
+     [echo]     ant -f /workspace/ess_user_home/build.xml create-new-job-def
+ 
+ BUILD SUCCESSFUL
+</pre></div>
+<!-- class="example" -->
+<div class="example" id="GUID-C2D7256B-CE9B-4F72-A004-D31341271B39__GUID-A289BAD6-8F1F-435D-B3E8-90CD12AFEDA1">
+<p class="titleinexample">Example 6-4 Script Execution Via Property Files</p>
+<pre dir="ltr">
+user_home=/home/myuser/ess_user_home/
+ 
+ ui_application_name=MyApp
+ ui_application_stripe_id=MyApp
+ ui_application_version=V2.0
+ 
+ hosting_application_name=MyAppEss
+ hosting_application_stripe_id=MyAppEss
+ hosting_application_version=V2.0
+ 
+ jobdef_library_name=oracle.ess.sharedlibrary
+ jobdef_library_spec_version=11
+ jobdef_library_impl_version=11.1.1.5.0
+</pre></div>
+<!-- class="example" -->
+<div class="example" id="GUID-C2D7256B-CE9B-4F72-A004-D31341271B39__GUID-214BF9F7-6D95-4163-818E-7516921B79F1">
+<p class="titleinexample">Example 6-5 Script Execution Via the Command Line</p>
+<pre dir="ltr">
+$&gt; ant create-user-home -Dui_application_name=MyApp -Dhosting_application_name=MyAppEss
+</pre></div>
+<!-- class="example" --></div>
+</div>
+<a id="OADTC1397"></a><a id="OADTC1396"></a>
+<div class="sect3"><a id="GUID-D146D3DF-38D1-473C-BB6F-04E0CD03C1CE"></a>
+<h3 id="OADTC-GUID-D146D3DF-38D1-473C-BB6F-04E0CD03C1CE" class="sect3"><span class="enumeration_section">6.3.2</span> Generating an <span>Oracle Enterprise Scheduler</span> Synchronous Java Job Business Logic Template</h3>
+<div>
+<div class="section">
+<p>If you want to run a synchronous Java scheduled job, then you must develop the business logic for the job. Use the <code>build.xml</code> file extracted in <a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-C2D7256B-CE9B-4F72-A004-D31341271B39">Creating Host and UI Applications Using an Ant Script</a> to create a template for the business logic of the Java job.</p>
+<p>To generate an <span id="GUID-D146D3DF-38D1-473C-BB6F-04E0CD03C1CE__SCHEDULER">Oracle Enterprise Scheduler</span> Java job business logic template:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>To create new jobs from predefined templates, run the following command:</span>
+<div>
+<pre dir="ltr">
+ant -f ${ess_user_home_dir}/build.xml create-new-job-def
+</pre></div>
+</li>
+<li class="stepexpand"><span>When prompted, enter the <span>Oracle Enterprise Scheduler</span> job name, for example, <code>HelloSyncJavaJob</code>, and the package name, for example, <code>oracle.apps.financials.ess.program</code>.</span>
+<div>
+<div class="infobox-note" id="GUID-D146D3DF-38D1-473C-BB6F-04E0CD03C1CE__GUID-BAB4619F-57AF-4BD7-B88C-E665559E8BAF">
+<p class="notep1">Note:</p>
+<p>Ensure that the full job package name is unique across product families.</p>
+</div>
+<p>Following is a sample command execution.</p>
+</div>
+</li>
+<li class="stepexpand"><span>In <span id="GUID-D146D3DF-38D1-473C-BB6F-04E0CD03C1CE__JDEVSHORT">JDeveloper</span>, open the <span>Oracle Enterprise Scheduler</span> host application project saved to the <code>user_home</code> application workspace location.</span></li>
+<li class="stepexpand"><span>In the Navigator, expand the <span class="bold">EssSharedLibrary Model</span> project to modify the template-generated Java job business logic.</span></li>
+<li class="stepexpand"><span>Modify the file as required and save your changes.</span></li>
+</ol>
+<div class="example" id="GUID-D146D3DF-38D1-473C-BB6F-04E0CD03C1CE__GUID-6C00770D-6EB9-46E1-92C5-5FE0E25058FF">
+<p class="titleinexample">Example 6-6 Creating a Java Job Business Logic Template</p>
+<pre dir="ltr">
+Buildfile: /workspace/ess_user_home/build.xml
+
+-init:
+
+create-new-job-def:
+    [echo] Available Job Definition Templates:
+    [echo]     1) Simple Synchronous Java Job
+   [input] Enter number of job definition template to create (job_template_to_create)
+ 1
+    [echo] Calling default target on /my_ess_main/ess/util/customer_extensibility/Fusion/
+           Template_JobLibrary/simple_synchronous_job/build.xml
+ 
+-init:
+ 
+create-job-definition:
+   [input] Enter Java package name for Job Definition (jobdef_package_name)
+           (default=oracle.apps.ess.custom) [oracle.apps.ess.custom]
+           oracle.apps.financials.ess.program
+   [input] Enter Java class name for Job Definition (jobdef_class_name)
+           (default=MySynchronousJavaJob) [MySynchronousJavaJob]
+           HelloSyncJavaJob
+    [copy] Copying 1 file to /workspace/ess_user_home/MyAppEss/EssSharedLibrary/src
+    [copy] Copying 1 file to /workspace/ess_user_home/MyAppEss/EssSharedLibrary/src/oracle/
+           apps/financials/ess/program
+ 
+BUILD SUCCESSFUL
+</pre></div>
+<!-- class="example" --></div>
+</div>
+<a id="OADTC1398"></a>
+<div class="sect3"><a id="GUID-342AAA9B-3948-4F58-B9DC-2EF433526649"></a>
+<h3 id="OADTC-GUID-342AAA9B-3948-4F58-B9DC-2EF433526649" class="sect3"><span class="enumeration_section">6.3.3</span> About Creating <span>Oracle Enterprise Scheduler</span> Job Metadata Using <span id="JDEVSHORT">JDeveloper</span></h3>
+<div>
+<p>To submit job requests using the <span id="GUID-342AAA9B-3948-4F58-B9DC-2EF433526649__SCHEDULER">Oracle Enterprise Scheduler</span> host application, you must create metadata that defines a job request, including the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Job type</span>: This specifies an execution type and defines a common set of parameters for a job request.</p>
+</li>
+<li>
+<p><span class="bold">Job definition</span>: This is the basic unit of work that defines a job request in <span>Oracle Enterprise Scheduler</span>.</p>
+</li>
+</ul>
+</div>
+<a id="OADTC1399"></a>
+<div class="sect4"><a id="GUID-DE4CBE2C-882A-42F5-80B7-0B2E06A503BA"></a>
+<h4 id="OADTC-GUID-DE4CBE2C-882A-42F5-80B7-0B2E06A503BA" class="sect4"><span class="enumeration_section">6.3.3.1</span> Creating an <span>Oracle Enterprise Scheduler</span> Job Definition in the Host Application</h4>
+<div>
+<div class="section">
+<p>To use a Java class with <span id="GUID-DE4CBE2C-882A-42F5-80B7-0B2E06A503BA__SCHEDULER">Oracle Enterprise Scheduler</span> you must create a job definition. When creating a job definition, specify a name, select a job type, and specify system properties.</p>
+<p>To create a job definition in the host application:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In the Navigator, right-click the <span class="bold">EssSharedLibrary</span> project and select <span class="bold">New</span> to display the New Gallery window.</span></li>
+<li class="stepexpand"><span>In the New Gallery in the Categories area, expand <span class="bold">Business Tier</span> and select <span class="bold">Enterprise Scheduler Metadata</span>.</span></li>
+<li class="stepexpand"><span>From the New Gallery Items area, select <span class="bold">Job Definition</span> and click <span class="bold">OK</span>.</span>
+<div>
+<p>The Create Job Definition window is displayed.</p>
+</div>
+</li>
+<li class="stepexpand"><span>In the Create Job Definition window, specify the following:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>In the <span class="bold">Name</span> field, enter a name for the job definition. For example, for the scheduler host application, enter <span class="bold">SampleJob</span>.</p>
+</li>
+<li>
+<p>In the <span class="bold">Package</span> field, enter a package name. For example, enter <code>oracle/apps/ess/custom/test</code>.</p>
+</li>
+<li>
+<p>From the <span class="bold">Job Type</span> dropdown list, select <span class="bold">JavaJobType</span>.</p>
+</li>
+</ul>
+<p>Click <span class="bold">OK</span>. The job definition <code>SampleJob.xml</code> is created, as well as the jobs folder in the package <code>oracle/apps/ess/custom/test</code>. The Job Definition page is displayed.</p>
+</div>
+</li>
+<li class="stepexpand"><span>In the Job Definition page, specify the fully qualified class name of the template-generated Java business logic created in <a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-D146D3DF-38D1-473C-BB6F-04E0CD03C1CE">Generating an Synchronous Java Job Business Logic Template</a>.</span></li>
+<li class="stepexpand"><span>Next to the Class Name field, select the <span class="bold">Overwrite</span> check box.</span></li>
+<li class="stepexpand"><span>In the <span class="bold">Class Name</span> field, enter the name of the Java class you created, for example, <code>oracle.apps.financials.ess.program.HelloSyncJavaJob</code>.</span></li>
+<li class="stepexpand"><span>In the System Properties section, click <span class="bold">Add</span> and create a system property called <span class="bold">EffectiveApplication</span>. Set the value of the property to the host application name, for example, <code>MyAppEss</code>.</span></li>
+<li class="stepexpand"><span>In the Parameters section, define the following required properties:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">jobDefinitionName</span>: The short name of the job. For example, <code>SampleJob</code>.</p>
+</li>
+<li>
+<p><span class="bold">jobDefinitionApplication</span>: The short name of the host application running the job. For example, <code>MyAppEss</code>.</p>
+</li>
+<li>
+<p><span class="bold">jobPackageName</span>: The name of the package running the job. For example, <code>/oracle/apps/ess/custom/test</code>.</p>
+</li>
+<li>
+<p><span class="bold">srsFlag</span>: A boolean parameter (Y or N) that controls whether the job is displayed in the job request submission user interface. Enter <span class="bold">Y</span>.</p>
+</li>
+<li>
+<p><span class="bold">EXT_PortletContainerWebModule</span>: The name of the web module for the <span>Oracle Enterprise Scheduler</span> Central UI application to use as a portlet when submitting a job request. For example, <code>MyApp</code>, or any producer web application (if you prefer to use an existing registered web module that hosts the <span id="GUID-DE4CBE2C-882A-42F5-80B7-0B2E06A503BA__ADFSHORT">Oracle ADF</span> view objects).</p>
+</li>
+<li>
+<p><span class="bold">parametersVO</span>: The ADF Business Components view object you define so that end users may enter additional properties at runtime through an <span>Oracle ADF</span> user interface. For example, <code>oracle.apps.financials.ess.SampleVO</code>. For more information about creating a view object in the <span>Oracle ADF</span> producer application, see <a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-5D756FC1-6491-4E7B-9672-07D94076C1BE">Creating an Model Project</a> ..</p>
+</li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<a id="OADTC1400"></a>
+<div class="sect4"><a id="GUID-1C92A184-AA5A-4158-A6F7-7A647032FD44"></a>
+<h4 id="OADTC-GUID-1C92A184-AA5A-4158-A6F7-7A647032FD44" class="sect4"><span class="enumeration_section">6.3.3.2</span> Creating a Schedule Request Submission UI to Enable End Users to Fill in Properties</h4>
+<div>
+<div class="section">
+<p>If your job includes any properties to be filled in by end users at runtime, you need to create an <span id="GUID-1C92A184-AA5A-4158-A6F7-7A647032FD44__ADFSHORT">Oracle ADF</span> user interface and an ADF Business Components view object with validation, and the parameters to be filled in. The <span id="GUID-1C92A184-AA5A-4158-A6F7-7A647032FD44__SCHEDULER">Oracle Enterprise Scheduler</span> schedule request submission UI allows end users to fill in these properties prior to submitting the job request.</p>
+<p>For more information about <span>Oracle ADF</span> view objects, see the "<a class="olink ADFFD158" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ADFFD158">Creating a Business Domain Layer Using Entity Objects</a>" chapter in the <span class="italic"><span id="GUID-1C92A184-AA5A-4158-A6F7-7A647032FD44__ADFFD"><cite>Developing Fusion Web Applications with Oracle Application Development Framework</cite></span></span>.</p>
+</div>
+<!-- class="section" --></div>
+<div class="sect5"><a id="GUID-5D756FC1-6491-4E7B-9672-07D94076C1BE"></a>
+<h5 id="OADTC-GUID-5D756FC1-6491-4E7B-9672-07D94076C1BE" class="sect5"><span class="enumeration_section">6.3.3.2.1</span> Creating an <span id="ADFSHORT">Oracle ADF</span> Model Project</h5>
+<div>
+<p>Create an <span id="GUID-5D756FC1-6491-4E7B-9672-07D94076C1BE__ADFSHORT">Oracle ADF</span> model project to display the properties to be filled in by end users at runtime.</p>
+<p>To create an <span>Oracle ADF</span> model project:</p>
+<ol>
+<li>
+<p>In <span id="GUID-5D756FC1-6491-4E7B-9672-07D94076C1BE__JDEVSHORT">JDeveloper</span>, open the <span id="GUID-5D756FC1-6491-4E7B-9672-07D94076C1BE__SCHEDULER">Oracle Enterprise Scheduler</span> <span>Oracle ADF</span> application.</p>
+</li>
+<li>
+<p>From the <span class="bold">Application</span> menu, select <span class="bold">New Project</span>.</p>
+</li>
+<li>
+<p>In the New Gallery under Categories, expand <span class="bold">General</span> and select <span class="bold">Projects</span>.</p>
+</li>
+<li>
+<p>In the Items area, select <span class="bold">ADF Model Project</span> and click <span class="bold">OK</span>.</p>
+</li>
+<li>
+<p>On the Name Your Project wizard page, enter the project name, for example <span class="bold">EssModel</span>. Click <span class="bold">Finish</span> to close the wizard.</p>
+</li>
+<li>
+<p>From the Navigator, right-click the <span class="bold">EssModel</span> project and select <span class="bold">Project Properties</span>, then <span class="bold">Libraries and Classpath</span>, and then <span class="bold">Add Library</span>.</p>
+</li>
+<li>
+<p>Add the required data model project libraries as described in the chapter <a class="olink OADEE59486" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OADEE59486">"Setting Up Your <span>JDeveloper</span> Application Workspace and Projects"</a> in the <span class="italic"><span id="GUID-5D756FC1-6491-4E7B-9672-07D94076C1BE__OADEE"><cite>Developer's Guide</cite></span></span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">OK</span> to close the Project Properties dialog.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect5"><a id="GUID-B1F7153F-0D96-4803-A9AE-AD8707B9480E"></a>
+<h5 id="OADTC-GUID-B1F7153F-0D96-4803-A9AE-AD8707B9480E" class="sect5"><span class="enumeration_section">6.3.3.2.2</span> Creating an ADF Business Components View Object for <span id="ESS"><cite>Oracle Enterprise Scheduler</cite></span></h5>
+<div>
+<p>Use a parameters view object for jobs with parameters that require collecting values from end users at runtime. The properties filled in by end users are associated with an ADF Business Components view object, which is associated with the job definition itself. When the job runs, <span id="GUID-B1F7153F-0D96-4803-A9AE-AD8707B9480E__SCHEDULER">Oracle Enterprise Scheduler</span> accesses the view object to retrieve the values of the properties.</p>
+<p>To create an ADF Business Components view object for <span>Oracle Enterprise Scheduler</span>:</p>
+<ol>
+<li>
+<p>In <span id="GUID-B1F7153F-0D96-4803-A9AE-AD8707B9480E__JDEVSHORT">JDeveloper</span> in the Navigator, right-click the project <span class="bold">EssModel</span> in which you want to create the view object, and select <span class="bold">New</span>.</p>
+</li>
+<li>
+<p>In the New Gallery, expand <span class="bold">Business Tier</span>, select <span class="bold">ADF Business Components</span> and then <span class="bold">View Object</span>. Click <span class="bold">OK</span>.</p>
+<p>If this is the first component you are creating in the project, then the Initialize Business Components Project dialog is displayed, allowing you to select a database connection.</p>
+</li>
+<li>
+<p>In the Initialize Business Components Project dialog, select the database connection or select <span class="bold">New</span> to create a connection.</p>
+<p>Click <span class="bold">OK</span>. This launches the Create View Object wizard.</p>
+</li>
+<li>
+<p>In the Create View Object wizard on the Name page, enter the following.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Package</span>: Enter package information for the view object, for example <code>oracle.apps.financials.ess</code>.</p>
+</li>
+<li>
+<p><span class="bold">Name</span>: Provide a name, for example, <code>SampleVO</code>.</p>
+</li>
+<li>
+<p><span class="bold">Select the data source type you want to use as the basis for this view object</span>: For the data source, select <span class="bold">Rows Populated Programmatically, Not Based on a Query</span>.</p>
+</li>
+</ul>
+<div class="infobox-note" id="GUID-B1F7153F-0D96-4803-A9AE-AD8707B9480E__GUID-590481E4-3B70-4021-880E-E0D02F3239EF">
+<p class="notep1">Note:</p>
+<p>Enter the view object package and name values specified for the job definition property <code>parametersVO</code> in <a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-DE4CBE2C-882A-42F5-80B7-0B2E06A503BA">Creating an Job Definition in the Host Application</a>.</p>
+</div>
+</li>
+<li>
+<p>Click <span class="bold">Next</span>. In the Attributes page, click <span class="bold">Finish</span> to create the <span>Oracle Enterprise Scheduler</span> parameter view object <code>SampleVO</code>.</p>
+</li>
+<li>
+<p>Define attributes for the view objects sequentially, <code>ATTRIBUTE1</code>, <code>ATTRIBUTE2</code>, and so on, with an attribute for each required parameter.</p>
+</li>
+<li>
+<p>Create a query for the view object:</p>
+<ol>
+<li>
+<p>On the View Object page, from the left-hand list panel, select <span class="bold">Query</span>.</p>
+</li>
+<li>
+<p>In the Query panel, click <span class="bold">Edit</span>.</p>
+</li>
+<li>
+<p>Use the following query and test for validity:</p>
+<pre dir="ltr">
+select null as ATTRIBUTE1 from dual
+</pre></li>
+<li>
+<p>Click <span class="bold">OK</span>.</p>
+</li>
+</ol>
+<div class="infobox-note" id="GUID-B1F7153F-0D96-4803-A9AE-AD8707B9480E__GUID-585701CE-33DA-46C6-9CC2-3FAEB0331447">
+<p class="notep1">Note:</p>
+<p>A maximum of 100 attributes can be used for the property <code>parametersVO</code>. The attributes should be named incrementally, for example <code>ATTRIBUTE1</code>, <code>ATTRIBUTE2</code>, and so on. Attribute names are not case-sensitive, such that <code>ATTRIBUTE1</code> and <code>Attribute2</code> can be used sequentially.</p>
+</div>
+</li>
+<li>
+<p>Ensure that the view object attributes can always be updated:</p>
+<ol>
+<li>
+<p>On the View Object page, from the left-hand list panel, select <span class="bold">Attributes</span>.</p>
+</li>
+<li>
+<p>Edit the <code>ATTRIBUTE1</code> table row.</p>
+</li>
+<li>
+<p>In the Edit Attribute: Attribute1 window, select the option <span class="bold">Always</span>.</p>
+</li>
+<li>
+<p>In the Edit Attribute: Attribute1 window, click <span class="bold">Control Hints</span> to display the Control Hints page. In the Control Hints page, specify required prompts, validation, and formatting for each parameter.</p>
+</li>
+<li>
+<p>Click <span class="bold">OK</span>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>If not already specified, add the property <code>parametersVO</code> to your <span>Oracle Enterprise Scheduler</span> host application job definition and specify the fully qualified path of the view object as the value of <code>parametersVO</code>. For example, set <code>parametersVO</code> to <code>oracle.apps.financials.ess.SampleVO</code> in the job definition <code>/oracle/apps/ess/custom/test/SampleJob.xml</code>.</p>
+<pre dir="ltr">
+&lt;parameter name="parametersVO" data-type="string"&gt;oracle.apps.financials.ess.SampleVO&lt;/parameter&gt; 
+</pre></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<a id="OADTC1403"></a>
+<div class="sect3"><a id="GUID-1298AB02-40E4-491D-9BA5-72E22F2E41A8"></a>
+<h3 id="OADTC-GUID-1298AB02-40E4-491D-9BA5-72E22F2E41A8" class="sect3"><span class="enumeration_section">6.3.4</span> About Assembling <span>Oracle Enterprise Scheduler</span> <span>Oracle Fusion Applications</span></h3>
+<div>
+<p>Assembling the <span id="GUID-1298AB02-40E4-491D-9BA5-72E22F2E41A8__SCHEDULER">Oracle Enterprise Scheduler</span> <span id="GUID-1298AB02-40E4-491D-9BA5-72E22F2E41A8__FAAPP">Oracle Fusion application</span>s involves the following main steps:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Assembling an <span>Oracle Enterprise Scheduler</span> shared library</p>
+</li>
+<li>
+<p>Assembling the host application</p>
+</li>
+<li>
+<p>Assembling the <span id="GUID-1298AB02-40E4-491D-9BA5-72E22F2E41A8__ADFSHORT">Oracle ADF</span> producer application</p>
+</li>
+</ul>
+</div>
+<a id="OADTC1405"></a>
+<div class="sect4"><a id="GUID-7A22EBC4-08B6-4429-87F4-2224960853A4"></a>
+<h4 id="OADTC-GUID-7A22EBC4-08B6-4429-87F4-2224960853A4" class="sect4"><span class="enumeration_section">6.3.4.1</span> Assembling an <span><cite>Oracle Enterprise Scheduler</cite></span> Shared Library</h4>
+<div>
+<p>Assembling a shared library for <span id="GUID-7A22EBC4-08B6-4429-87F4-2224960853A4__SCHEDULER">Oracle Enterprise Scheduler</span> involves the following main steps:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Creating or updating a shared library JAR manifest</p>
+</li>
+<li>
+<p>Updating the shared library JAR deployment profile</p>
+</li>
+</ul>
+<p>The name and version information for a shared Java EE library are specified in the <code>META-INF/MANIFEST.MF</code> file.</p>
+<p>To assemble a shared library:</p>
+<ol>
+<li>
+<p>Specify attributes for the shared library in a manifest file.</p>
+<ol>
+<li>
+<p>Create or edit the manifest file in a text editor.</p>
+</li>
+<li>
+<p>Enter the following command:</p>
+<pre dir="ltr">
+cd &lt;ess_user_home&gt;/MyAppEss/EssSharedLibrary/emacs MANIFEST.MF
+</pre></li>
+<li>
+<p>Add or edit a string value to specify the name of the shared Java EE library. For example:</p>
+<pre dir="ltr">
+Extension-Name: oracle.ess.shared
+</pre>
+<p><code>Extension-Name</code> specifies the name of the shared Java library. Use the value specified in the script prompt for the shared library name. <span>Oracle Enterprise Scheduler</span> host applications that reference the library must specify <code>Extension-Name</code> exactly to use the shared files.</p>
+<p>As a best practice, enter the optional version information for the shared Java EE library. A sample <code>MANIFEST.MF</code> file is shown in the following example.</p>
+</li>
+<li>
+<p>Save the file. The <code>MANIFEST</code> file is used by the JAR deployment file.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Compile the project. In the Navigator, right-click the <span>Oracle Enterprise Scheduler</span> shared library project and select <span class="bold">Make EssSharedLibrary*.jpr*</span>.</p>
+</li>
+<li>
+<p>Right-click the <span>Oracle Enterprise Scheduler</span> shared library project and select <span class="bold">Project Properties</span> to display the Project Properties window.</p>
+</li>
+<li>
+<p>In the Project Properties window, select <span class="bold">Deployment</span>.</p>
+</li>
+<li>
+<p>In the Deployment Profiles region, select <span class="bold">EssSharedLibrary (Shared Library JAR File)</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Edit</span> to open the Edit JAR Deployment Profile Properties window. In the Edit JAR Deployment Profile Properties window, click <span class="bold">JAR Options</span>.</p>
+</li>
+<li>
+<p>In the JAR Options window, select the check box <span class="bold">Include Manifest File (META-INF/MANIFEST.MF)</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Add</span> to specify the manifest file you created. This file should be merged into the manifest file that is generated by <span id="GUID-7A22EBC4-08B6-4429-87F4-2224960853A4__JDEVSHORT">JDeveloper</span>.</p>
+</li>
+<li>
+<p>In the Edit JAR Deployment Profile Properties window, expand <span class="bold">File Groups</span> and select <span class="bold">Filters</span>. Under the <span class="bold">Merged Contents of this File Group's Contributors</span> list, deselect <span class="bold">essmeta</span>.</p>
+</li>
+<li>
+<p>In the JAR Deployment Profile Properties page, click <span class="bold">OK</span>. In the Project Properties page, click <span class="bold">OK</span>.</p>
+</li>
+</ol>
+<div class="example" id="GUID-7A22EBC4-08B6-4429-87F4-2224960853A4__GUID-609AC8C4-288F-494D-9276-02248C29DA3E">
+<p class="titleinexample">Example 6-7 Sample MANIFEST.MF File</p>
+<pre dir="ltr">
+Extension-Name: oracle.ess.shared
+Specification-Version: 11.1.0
+Implementation-Version: 11.1.0.0.0
+</pre></div>
+<!-- class="example" --></div>
+</div>
+<div class="sect4"><a id="GUID-AE68BA03-059B-4451-9E63-542889FE4925"></a>
+<h4 id="OADTC-GUID-AE68BA03-059B-4451-9E63-542889FE4925" class="sect4"><span class="enumeration_section">6.3.4.2</span> Assembling the Host Application</h4>
+<div>
+<p>Assembling the host application involves the following main steps:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Creating a MAR deployment file</p>
+</li>
+<li>
+<p>Updating the EAR deployment file</p>
+</li>
+</ul>
+<p>To assemble the host application:</p>
+<ol>
+<li>
+<p>Open the <span id="GUID-AE68BA03-059B-4451-9E63-542889FE4925__SCHEDULER">Oracle Enterprise Scheduler</span> host application in <span id="GUID-AE68BA03-059B-4451-9E63-542889FE4925__JDEVSHORT">JDeveloper</span>, and from the <span class="bold">Application</span> menu, select <span class="bold">Application Properties</span>.</p>
+</li>
+<li>
+<p>In the Application Properties window, select <span class="bold">Deployment</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">New</span> to display the Create Deployment Profile page and do the following:</p>
+<ol>
+<li>
+<p>In the <span class="bold">Archive Type</span> field, from the dropdown list, select <span class="bold">MAR File</span>.</p>
+</li>
+<li>
+<p>In the <span class="bold">Name</span> field enter a name, for example <span class="bold">myAppEss_MAR</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">OK</span>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>In the Edit MAR Deployment Profile Properties window, select <span class="bold">MAR Options</span>.</p>
+<p>Modify the name of the MAR file, removing <code>_MAR</code> from the end of the name, for example, changing <code>myAppEss_MAR.mar</code> to <code>myAppEss.mar</code>.</p>
+</li>
+<li>
+<p>Select the <span>Oracle Enterprise Scheduler</span> metadata:</p>
+<ol>
+<li>
+<p>In the Edit MAR Deployment Profile Properties window, expand <span class="bold">Metadata File Groups</span> and select <span class="bold">User Metadata</span>.</p>
+</li>
+<li>
+<p>In the Order of Contributors panel on the right-hand side, click <span class="bold">Add</span> to display the Add Contributor dialog.</p>
+</li>
+<li>
+<p>In the Add Contributor dialog, browse to the location of the project directory, and expand it to add the <code>essmeta</code> metadata that contains the namespace for the jobs directory. Select the path that you need to include in the Add Contributor dialog by double-clicking the <span class="bold">essmeta</span> directory.</p>
+</li>
+<li>
+<p>In the Add Contributor dialog, click <span class="bold">OK</span>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Select the directory for the metadata:</p>
+<ol>
+<li>
+<p>In the Edit MAR Deployment Profile Properties window, expand <span class="bold">Metadata File Groups and User Metadata</span>, and select <span class="bold">Directories</span>.</p>
+</li>
+<li>
+<p>Select the directory that contains the <span>Oracle Enterprise Scheduler</span> application user metadata for the host application.</p>
+</li>
+<li>
+<p>Select the bottommost directory in the tree. This is the directory from which the namespace is created. The folder you select in this dialog determines the top-level namespace in <code>adf-config.xml</code> file.</p>
+</li>
+<li>
+<p>This namespace should be the same as the package defined in the job definition, for example <code>oracle/apps/ess/custom/&lt;directory name&gt;</code>.</p>
+<div class="infobox-note" id="GUID-AE68BA03-059B-4451-9E63-542889FE4925__GUID-287E0C73-068A-48AD-A194-516554E2822B">
+<p class="notep1">Note:</p>
+<p>In general, to create the namespace <code>oracle/apps/&lt;product&gt;/&lt;component&gt;/ess</code>, select the <span class="bold">ess</span> directory.</p>
+</div>
+</li>
+<li>
+<p>In the Edit MAR Deployment Profile Properties page, click <span class="bold">OK</span>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>In the Application Properties window, select <span class="bold">Deployment</span>.</p>
+<p>In the Deployment Profiles pane on the right-hand side, select the EAR profile and click <span class="bold">Edit</span>.</p>
+</li>
+<li>
+<p>In the Edit EAR Deployment Profile Properties window, select <span class="bold">Application Assembly</span>.</p>
+<p>Under Java EE Modules, select the check box for the MAR module.</p>
+</li>
+<li>
+<p>In the Edit EAR Deployment Profile Properties window, select <span class="bold">EAR Options</span>.</p>
+<p>Deselect <span class="bold">Include Manifest File (META-INF/MANIFEST.MF)</span>.</p>
+</li>
+<li>
+<p>In the Edit EAR Deployment Profile Properties page, click <span class="bold">OK</span>. In the Application Properties page, click <span class="bold">OK</span>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4"><a id="GUID-CD846803-3E7A-4BA5-A6D3-7CFD94D9CAF8"></a>
+<h4 id="OADTC-GUID-CD846803-3E7A-4BA5-A6D3-7CFD94D9CAF8" class="sect4"><span class="enumeration_section">6.3.4.3</span> Assembling the <span>Oracle ADF</span> Producer Application</h4>
+<div>
+<p>Assembling the <span id="GUID-CD846803-3E7A-4BA5-A6D3-7CFD94D9CAF8__ADFSHORT">Oracle ADF</span> application involves the following main steps:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Creating an ADF Library job deployment file</p>
+</li>
+<li>
+<p>Preparing a Web Application Archive (WAR) deployment profile</p>
+</li>
+</ul>
+<p><span>Oracle ADF</span> libraries have the option of automatic compilation that happens with deployment profile dependencies. This option allows the <span id="GUID-CD846803-3E7A-4BA5-A6D3-7CFD94D9CAF8__SCHEDULER">Oracle Enterprise Scheduler</span> <span>Oracle ADF</span> Library used by the user interface project to be automatically included in the <code>WEB-INF/lib</code> directory in the WAR file.</p>
+<p>To assemble the <span>Oracle ADF</span> producer application:</p>
+<ol>
+<li>
+<p>Open the <span>Oracle Enterprise Scheduler</span> <span>Oracle ADF</span> application in <span id="GUID-CD846803-3E7A-4BA5-A6D3-7CFD94D9CAF8__JDEVSHORT">JDeveloper</span>.</p>
+</li>
+<li>
+<p>In the Navigator, right-click the <span class="bold">EssModel</span> project and click <span class="bold">New</span> to display the New Gallery window.</p>
+</li>
+<li>
+<p>In the New Gallery in the Categories area, expand <span class="bold">General</span> and select <span class="bold">Deployment Profiles</span>. Create the deployment profile as follows:</p>
+<ol>
+<li>
+<p>In the Items region, select <span class="bold">ADF Library Jar File</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">OK</span> to open the Create Deployment Profile window.</p>
+</li>
+<li>
+<p>In the Create Deployment Profile - ADF Library Jar File window, enter a name for the profile, using the format <code>Adf&lt;projName&gt;</code> in accordance with package structure and naming standards.</p>
+</li>
+<li>
+<p>Click <span class="bold">OK</span> to save the new deployment profile and close the Create Deployment Profile window.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>In the Navigator, right-click the <span class="bold">SuperWeb</span> project and select <span class="bold">Project Properties</span>, and then <span class="bold">Deployment</span>.</p>
+</li>
+<li>
+<p>In the Deployment Profiles region, edit the SuperWeb WAR deployment profile.</p>
+</li>
+<li>
+<p>In the Edit WAR Profile Deployment Properties window, select <span class="bold">Profile Dependencies</span>.</p>
+</li>
+<li>
+<p>In the pane on the right-hand side, under Java EE Modules, select the dependency under the ADF library JAR deployment file (<code>EssModel.jpr</code>), for example, <span class="bold">ADFMyApp</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">OK</span> to save the WAR deployment profile.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OADTC1408"></a>
+<div class="sect3"><a id="GUID-3FEE5981-E2C4-4F85-BF74-523D6D526E5D"></a>
+<h3 id="OADTC-GUID-3FEE5981-E2C4-4F85-BF74-523D6D526E5D" class="sect3"><span class="enumeration_section">6.3.5</span> About Deploying <span>Oracle Enterprise Scheduler</span> <span>Oracle Fusion Applications</span></h3>
+<div>
+<p>Deploying <span id="GUID-3FEE5981-E2C4-4F85-BF74-523D6D526E5D__SCHEDULER">Oracle Enterprise Scheduler</span> <span id="GUID-3FEE5981-E2C4-4F85-BF74-523D6D526E5D__FAAPP">Oracle Fusion application</span>s involves the following main steps. You must deploy the <span>Oracle Enterprise Scheduler</span> <span>Oracle Fusion application</span> in the order specified.</p>
+<div class="infobox-note" id="GUID-3FEE5981-E2C4-4F85-BF74-523D6D526E5D__GUID-F967D986-3E54-49E5-9E60-050300DABB21">
+<p class="notep1">Note:</p>
+<p>You can deploy these applications using either <span id="GUID-3FEE5981-E2C4-4F85-BF74-523D6D526E5D__JDEV">Oracle JDeveloper</span> or an Ant script.</p>
+</div>
+<ol>
+<li>
+<p>Deploy the shared <span>Oracle Enterprise Scheduler</span> library using <span id="GUID-3FEE5981-E2C4-4F85-BF74-523D6D526E5D__JDEVSHORT">JDeveloper</span> or an Ant script.</p>
+</li>
+<li>
+<p>Deploy the <span>Oracle Enterprise Scheduler</span> host application using <span>JDeveloper</span> or an Ant script.</p>
+</li>
+<li>
+<p>Deploy the <span>Oracle Enterprise Scheduler</span> <span id="GUID-3FEE5981-E2C4-4F85-BF74-523D6D526E5D__ADFSHORT">Oracle ADF</span> producer application using <span>JDeveloper</span> or an Ant script.</p>
+</li>
+</ol>
+<p>Application-specific policies packed with script-generated host and <span>Oracle ADF</span> applications automatically migrate to the policy store when the application is deployed. Prior to deployment, verify that any grant of permissions in the application <code>jazn-data.xml</code> file contains no duplicates.</p>
+<p>For more information about securely deploying applications, see the <a class="olink JISEC2395" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=JISEC2395">"Deploying Secure Applications"</a> chapter in the <span class="italic"><span id="GUID-3FEE5981-E2C4-4F85-BF74-523D6D526E5D__JISEC"><cite>Oracle Fusion Middleware Applications Security Guide</cite></span></span>.</p>
+</div>
+<div class="sect4"><a id="GUID-D7097527-910C-4095-8184-9ADC21761842"></a>
+<h4 id="OADTC-GUID-D7097527-910C-4095-8184-9ADC21761842" class="sect4"><span class="enumeration_section">6.3.5.1</span> Deploying the Shared <span><cite>Oracle Enterprise Scheduler</cite></span> Library Using <span>JDeveloper</span></h4>
+<div>
+<p>You can deploy the shared <span id="GUID-D7097527-910C-4095-8184-9ADC21761842__SCHEDULER">Oracle Enterprise Scheduler</span> library using <span id="GUID-D7097527-910C-4095-8184-9ADC21761842__JDEVSHORT">JDeveloper</span> or an Ant script.</p>
+<p>To deploy the share library using <span>JDeveloper</span>:</p>
+<ol>
+<li>
+<p>In the Navigator, right-click the <span>Oracle Enterprise Scheduler</span> shared library project, select <span class="bold">Deploy</span> and then select the shared library JAR.</p>
+<p>The Deploy EssSharedLibrary_JAR window is displayed.</p>
+</li>
+<li>
+<p>Select <span class="bold">Deploy to a WebLogic Application Server</span> and click <span class="bold">Next</span>.</p>
+</li>
+<li>
+<p>In the Select Server window, select the application server to which you want to deploy the <span>Oracle Enterprise Scheduler</span> shared library.</p>
+</li>
+<li>
+<p>Click <span class="bold">Add</span> to create a connection to the application server if none is defined. Click <span class="bold">Next</span>.</p>
+</li>
+<li>
+<p>In the WebLogic Options window, make the following selections:</p>
+<ol>
+<li>
+<p>Select <span class="bold">Deploy to selected instances in the Domain</span>, and select the <span>Oracle Enterprise Scheduler</span> server instance in the table row. The <span>Oracle Enterprise Scheduler</span> shared library should be deployed to the same server as the <span>Oracle Enterprise Scheduler</span> host application.</p>
+</li>
+<li>
+<p>Select <span class="bold">Deploy as a shared library</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Finish</span>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Verify the deployment using the deployment log. Upon successful deployment, you can see the <span>Oracle Enterprise Scheduler</span> jobs shared library deployed as 'oracle.ess.shared(11,11.1.1)' in the <span id="GUID-D7097527-910C-4095-8184-9ADC21761842__WLS">Oracle WebLogic Server</span> Administration Console.</p>
+</li>
+</ol>
+</div>
+</div>
+<a id="OADTC1411"></a>
+<div class="sect4"><a id="GUID-482C1CF6-6539-434E-881C-CAB91BF80B30"></a>
+<h4 id="OADTC-GUID-482C1CF6-6539-434E-881C-CAB91BF80B30" class="sect4"><span class="enumeration_section">6.3.5.2</span> Deploying the Shared <span><cite>Oracle Enterprise Scheduler</cite></span> Library Using an Ant Script</h4>
+<div>
+<p>To deploy the shared library using an Ant script:</p>
+<ol>
+<li>
+<p>Run the following Ant command:</p>
+<pre dir="ltr">
+ant -f ${ESS_HOME}/ant/build-ess.xml deploy_job_logic
+</pre>
+<p>The command <code>deploy_job_logic</code> builds, packages and deploys only the <span id="GUID-482C1CF6-6539-434E-881C-CAB91BF80B30__SCHEDULER">Oracle Enterprise Scheduler</span> jobs shared library.</p>
+<div class="infobox-note" id="GUID-482C1CF6-6539-434E-881C-CAB91BF80B30__GUID-7478E3F2-B98B-46A6-8B26-80CF43F1F1FB">
+<p class="notep1">Note:</p>
+<p>When prompted, enter the <span id="GUID-482C1CF6-6539-434E-881C-CAB91BF80B30__WLS">Oracle WebLogic Server</span> password.</p>
+</div>
+</li>
+<li>
+<p>To specify a different value for the ESS shared library name, take the following steps:</p>
+<ol>
+<li>
+<p>In a text editor, modify the shared library JAR <code>MANIFEST</code> file. For example:</p>
+<pre dir="ltr">
+vi ${ess_user_home_dir}/MyAppEss/EssSharedLibrary/MANIFEST.MF
+</pre></li>
+<li>
+<p>Edit the string value of <code>Extension-Name</code> to specify the name of the shared Java EE library.</p>
+</li>
+<li>
+<p>Enter the optional version information for the shared Java EE library.</p>
+</li>
+<li>
+<p>Update the <span>Oracle Enterprise Scheduler</span> <code>build.properties</code> file by editing <code>${ESS_HOME}/ant/config/ess-build.properties</code>.</p>
+</li>
+<li>
+<p>Change the value of the property <code>customEss.shared.library.name</code> to match the value specified in the JAR <code>MANIFEST</code> file. The following example shows a sample <code>build.properties</code> file.</p>
+</li>
+<li>
+<p>Save the file.</p>
+</li>
+</ol>
+</li>
+</ol>
+<div class="example" id="GUID-482C1CF6-6539-434E-881C-CAB91BF80B30__GUID-7DE88961-508A-4913-A2F4-E01ED2909D15">
+<p class="titleinexample">Example 6-8 Sample build.properties File</p>
+<pre dir="ltr">
+# ESS build properties
+ ess.script.base.dir=${user_home}
+ 
+ fmw.home=${fmw_home}
+ jdev.home=${fmw.home}/jdeveloper
+ oracle.common=${fmw.home}/oracle_common
+ 
+ # ========== ESS JDev project details ===============
+ customEss.project.dir=${ess.script.base.dir}
+ customEss.hostapp.workspace=${hosting_application_name}
+ customEss.hostapp.jwsfile=${hosting_application_name}
+ customEss.hostapp.earprofile=${hosting_application_name}
+ customEss.hostapp.jprproject=EssSharedLibrary
+ customEss.hostapp.jarprofile=EssSharedLibrary
+ customEss.hostapp.jarfile=${jobdef_library_name}
+ 
+ customEss.shared.library.name=${jobdef_library_name}
+ 
+ customEss.hostapp.mds.partition=globalEss
+ customEss.hostapp.mds.jdbc=mds-ApplicationMDSDB
+ customEss.hostapp.name=${hosting_application_name}
+ 
+ customEss.producerapp.workspace=${ui_application_name}
+ customEss.producerapp.jwsfile=${ui_application_name}
+ customEss.producerapp.earprofile=${ui_application_name}
+ customEss.producerapp.name=${ui_application_name}
+ 
+ # ========== WebLogic Server details ===============
+ MW_HOME=${fmw.home}
+ ORACLE_HOME=${jdev.home}
+ MW_ORA_HOME=${jdev.home}
+ COMMON_COMPONENTS_HOME=${oracle.common}
+ WEBLOGIC_HOME=${fmw.home}/wlserver_10.3
+ weblogic.server.host=&lt;server_host&gt; 
+ weblogic.server.port=&lt;server_port&gt;
+ 
+ weblogic.server.ssl.port=&lt;server_ssl_port&gt;
+ 
+ weblogic.admin.user=&lt;admin_username&gt;
+ weblogic.t3.url=t3://${weblogic.server.host}:${weblogic.server.port}
+ # WebLogic server name where ESS producer web application is targeted for
+ # deployment
+ adfapp.server.name=AdminServer
+ # WebLogic server name where ESS host application is targeted for deployment
+ ess.server.name=ess_server1
+</pre></div>
+<!-- class="example" --></div>
+</div>
+<div class="sect4"><a id="GUID-40F97C64-3480-4D12-9ACA-DD29C8556C83"></a>
+<h4 id="OADTC-GUID-40F97C64-3480-4D12-9ACA-DD29C8556C83" class="sect4"><span class="enumeration_section">6.3.5.3</span> Deploying the <span><cite>Oracle Enterprise Scheduler</cite></span> Host Application Using <span>JDeveloper</span></h4>
+<div>
+<p>You can deploy the <span id="GUID-40F97C64-3480-4D12-9ACA-DD29C8556C83__SCHEDULER">Oracle Enterprise Scheduler</span> application using <span id="GUID-40F97C64-3480-4D12-9ACA-DD29C8556C83__JDEVSHORT">JDeveloper</span> or an Ant script.</p>
+<p>To deploy the <span>Oracle Enterprise Scheduler</span> host application using <span>JDeveloper</span>:</p>
+<ol>
+<li>
+<p>In <span>JDeveloper</span>, open the <span>Oracle Enterprise Scheduler</span> host application.</p>
+</li>
+<li>
+<p>From the <span class="bold">Application</span> menu, select <span class="bold">Deploy</span> and then select the name of the host application, for example <span class="bold">MyAppEss</span>.</p>
+</li>
+<li>
+<p>In the Deploy MyAppEss window, select <span class="bold">Deploy to Application Server</span> and click <span class="bold">Next</span>.</p>
+</li>
+<li>
+<p>In the Select Server window, select the application server to which you want to deploy the <span>Oracle Enterprise Scheduler</span> host application.</p>
+<p>Click <span class="bold">Add</span> to create a connection to the application server if none is defined.</p>
+</li>
+<li>
+<p>Click <span class="bold">Next</span>. In the WebLogic Options window, make the following selections:</p>
+<ol>
+<li>
+<p>Select <span class="bold">Deploy to selected instances in the Domain</span>, and select the <span>Oracle Enterprise Scheduler</span> server instance in the table row, to which the <span>Oracle Enterprise Scheduler</span> host application is to be deployed.</p>
+</li>
+<li>
+<p>Select <span class="bold">Deploy as a standalone Application</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Finish</span>.</p>
+</li>
+</ol>
+<p><span>JDeveloper</span> displays the Deployment Configuration page. Select the relevant options for your metadata repository.</p>
+</li>
+<li>
+<p>Click <span class="bold">Deploy</span>.</p>
+<p>Verify the deployment using the deployment log.</p>
+<p>Upon successful deployment, you can expect to see the <span>Oracle Enterprise Scheduler</span> host application deployed in <span id="GUID-40F97C64-3480-4D12-9ACA-DD29C8556C83__FAOEMFRAMESHORT">Fusion Applications Control</span>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4"><a id="GUID-785AF52C-638A-4625-A977-6AE267EA3D4E"></a>
+<h4 id="OADTC-GUID-785AF52C-638A-4625-A977-6AE267EA3D4E" class="sect4"><span class="enumeration_section">6.3.5.4</span> Deploying the <span><cite>Oracle Enterprise Scheduler</cite></span> Host Application Using an Ant Script</h4>
+<div>
+<p>To deploy the <span id="GUID-785AF52C-638A-4625-A977-6AE267EA3D4E__SCHEDULER">Oracle Enterprise Scheduler</span> host application using an Ant script, run the following Ant command:</p>
+<pre dir="ltr">
+ant -f ${ESS_HOME}/ant/build-ess.xml deploy_ess_host
+</pre>
+<p>The command <code>deploy_ess_host</code> builds, packages, and deploys only the <span>Oracle Enterprise Scheduler</span> host application. It is assumed that the <span>Oracle Enterprise Scheduler</span> shared job library is already deployed prior to running this command.</p>
+<div class="infobox-note" id="GUID-785AF52C-638A-4625-A977-6AE267EA3D4E__GUID-B30E72E0-1CEC-4E73-9A55-2EF52267AB55">
+<p class="notep1">Note:</p>
+<p>When prompted, enter the <span id="GUID-785AF52C-638A-4625-A977-6AE267EA3D4E__WLS">Oracle WebLogic Server</span> password.</p>
+</div>
+</div>
+</div>
+<div class="sect4"><a id="GUID-BA7A6F68-A61F-493D-B491-7C878C882262"></a>
+<h4 id="OADTC-GUID-BA7A6F68-A61F-493D-B491-7C878C882262" class="sect4"><span class="enumeration_section">6.3.5.5</span> Deploying the <span>Oracle ADF</span> Producer Application Using <span>JDeveloper</span></h4>
+<div>
+<p>You can deploy the <span id="GUID-BA7A6F68-A61F-493D-B491-7C878C882262__ADFSHORT">Oracle ADF</span> producer application using <span id="GUID-BA7A6F68-A61F-493D-B491-7C878C882262__JDEVSHORT">JDeveloper</span> or an Ant script. This step is optional if using an existing deployed producer web application. The value you defined for <span class="bold">EXT_PortletContainerWebModule</span> in <a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-DE4CBE2C-882A-42F5-80B7-0B2E06A503BA">Creating an Job Definition in the Host Application</a> indicates the name of the application to be used.</p>
+<p>To deploy the <span>Oracle ADF</span> producer application using <span>JDeveloper</span>:</p>
+<ol>
+<li>
+<p>In <span>JDeveloper</span>, open the <span>Oracle ADF</span> producer application.</p>
+</li>
+<li>
+<p>From the <span class="bold">Application</span> menu, select <span class="bold">Deploy</span> and then select the name of the <span>Oracle ADF</span> producer application.</p>
+</li>
+<li>
+<p>In the Deploy MyApp window, select <span class="bold">Deploy to Application Server</span> and click <span class="bold">Next</span>.</p>
+</li>
+<li>
+<p>In the Select Server window, select the application server to which you want to deploy the <span id="GUID-BA7A6F68-A61F-493D-B491-7C878C882262__SCHEDULER">Oracle Enterprise Scheduler</span> <span>Oracle ADF</span> application.</p>
+</li>
+<li>
+<p>Click <span class="bold">Add</span> to create a connection to the application server if none is defined.</p>
+</li>
+<li>
+<p>Click <span class="bold">Next</span>. In the WebLogic Options window, make the following selections:</p>
+<ol>
+<li>
+<p>Select <span class="bold">Deploy to selected instances in the Domain</span>, and select the <span>Oracle Enterprise Scheduler</span> server instance in the table row, to which the <span>Oracle Enterprise Scheduler</span> <span>Oracle ADF</span> application is to be deployed.</p>
+</li>
+<li>
+<p>Select <span class="bold">Deploy as a standalone Application</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Finish</span>.</p>
+</li>
+<li>
+<p>The Select Deployment Type dialog window is displayed, prompting you to expose the MyApp portlet application as a WSRP service. Select <span class="bold">Yes</span>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Click <span class="bold">Next</span>. The Deployment Configuration page is displayed. Select the relevant options for your metadata repository.</p>
+</li>
+<li>
+<p>Enter <span class="bold">globalEss</span> as the partition name and click <span class="bold">Deploy</span></p>
+</li>
+<li>
+<p>Verify the deployment using the deployment log.</p>
+<p>Upon successful deployment, you can expect to see the deployed <span>Oracle Enterprise Scheduler</span> <span>Oracle ADF</span> application in <span id="GUID-BA7A6F68-A61F-493D-B491-7C878C882262__FAOEMFRAMESHORT">Fusion Applications Control</span>.</p>
+</li>
+<li>
+<p>Open the WSRP Producer test page to validate the deployment using the following URL:</p>
+<pre dir="ltr">
+http://&lt;ADF_HOST&gt;:&lt;ADF_PORT&gt;/&lt;MyApp-context-root&gt;/
+</pre></li>
+</ol>
+</div>
+</div>
+<div class="sect4"><a id="GUID-A9838F30-079A-4614-9E60-D617A7684EDC"></a>
+<h4 id="OADTC-GUID-A9838F30-079A-4614-9E60-D617A7684EDC" class="sect4"><span class="enumeration_section">6.3.5.6</span> Deploying the <span>Oracle ADF</span> Producer Application Using an Ant Script</h4>
+<div>
+<p>To deploy the <span id="GUID-A9838F30-079A-4614-9E60-D617A7684EDC__ADFSHORT">Oracle ADF</span> producer application using an Ant script, run the following Ant command:</p>
+<pre dir="ltr">
+ant -f ${ess_user_home_dir}/ant/build-ess.xml deploy_ess_ui
+</pre>
+<p>The <code>deploy_ess_ui</code> command builds, packages, and deploys only the <span id="GUID-A9838F30-079A-4614-9E60-D617A7684EDC__SCHEDULER">Oracle Enterprise Scheduler</span> <span>Oracle ADF</span> producer application.</p>
+<div class="infobox-note" id="GUID-A9838F30-079A-4614-9E60-D617A7684EDC__GUID-CFBC97BB-A3E0-4F16-BF13-A309186A49B0">
+<p class="notep1">Note:</p>
+<p>When prompted, enter the <span id="GUID-A9838F30-079A-4614-9E60-D617A7684EDC__WLS">Oracle WebLogic Server</span> password.</p>
+</div>
+</div>
+</div>
+</div>
+<a id="OADTC1416"></a>
+<div class="sect3"><a id="GUID-78524766-844B-47CF-BAFA-23FEBD44297B"></a>
+<h3 id="OADTC-GUID-78524766-844B-47CF-BAFA-23FEBD44297B" class="sect3"><span class="enumeration_section">6.3.6</span> About Registering <span>Oracle Enterprise Scheduler</span> Topology Objects</h3>
+<div>
+<p>Registering <span id="GUID-78524766-844B-47CF-BAFA-23FEBD44297B__SCHEDULER">Oracle Enterprise Scheduler</span> topology objects involves the following main steps:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Creating <span>Oracle Enterprise Scheduler</span> topology objects</p>
+</li>
+<li>
+<p>Registering <span>Oracle Enterprise Scheduler</span> topology objects</p>
+</li>
+</ul>
+<div class="infobox-note" id="GUID-78524766-844B-47CF-BAFA-23FEBD44297B__GUID-6F4FDE9D-E5EF-4F43-91F8-60777F473CCF">
+<p class="notep1">Note:</p>
+<p>Register the topology objects only when using an Ant script-generated <span id="GUID-78524766-844B-47CF-BAFA-23FEBD44297B__ADFSHORT">Oracle ADF</span> producer web application. Alternatively, you can use an existing registered web or <span>Oracle Enterprise Scheduler</span> <span>Oracle ADF</span> producer application and skip this section.</p>
+</div>
+</div>
+<a id="OADTC1418"></a>
+<div class="sect4"><a id="GUID-9E5BE3AF-EECE-497E-8B94-5E9249C752FB"></a>
+<h4 id="OADTC-GUID-9E5BE3AF-EECE-497E-8B94-5E9249C752FB" class="sect4"><span class="enumeration_section">6.3.6.1</span> Creating <span><cite>Oracle Enterprise Scheduler</cite></span> Topology Objects</h4>
+<div>
+<div class="section">
+<p>Use the Setup and Maintenance work area to create <span id="GUID-9E5BE3AF-EECE-497E-8B94-5E9249C752FB__SCHEDULER">Oracle Enterprise Scheduler</span> topology objects, including the <span>Oracle Enterprise Scheduler</span> domain, host application, and <span>Oracle Enterprise Scheduler</span> <span id="GUID-9E5BE3AF-EECE-497E-8B94-5E9249C752FB__ADFSHORT">Oracle ADF</span> producer application.</p>
+<p>To create <span>Oracle Enterprise Scheduler</span> topology objects:</p>
+<ol>
+<li>
+<p>Create the <span>Oracle Enterprise Scheduler</span> domain topology object.</p>
+<ol>
+<li>
+<p>In the global area of <span id="GUID-9E5BE3AF-EECE-497E-8B94-5E9249C752FB__FA">Oracle Fusion Applications</span>, click your name and select <span class="bold">Setup and Maintenance</span>.</p>
+</li>
+<li>
+<p>From the Tasks Pane, select <span class="bold">Topology Objects</span> and then select <span class="bold">Manage Domains</span>.</p>
+</li>
+<li>
+<p>On the Manage Domains page in the list of domains, click the <span class="bold">Actions</span> dropdown list and select <span class="bold">Create</span>.</p>
+</li>
+<li>
+<p>In the Create Domain window that is displayed, enter a name for the domain and click <span class="bold">Save and Close</span>.</p>
+</li>
+</ol>
+</li>
+<li id="GUID-9E5BE3AF-EECE-497E-8B94-5E9249C752FB__CHDBIAEH">
+<p>Create the <span>Oracle Enterprise Scheduler</span> host application topology object:</p>
+<ol>
+<li>
+<p>In the global area of <span>Oracle Fusion Applications</span>, click your name and select <span class="bold">Setup and Maintenance</span>.</p>
+</li>
+<li>
+<p>From the Tasks Pane, select <span class="bold">Topology Objects</span> and then select <span class="bold">Manage Enterprise Applications</span>.</p>
+</li>
+<li>
+<p>On the Manage Enterprise Applications page in the list of domains, click the <span class="bold">Actions</span> dropdown list and select <span class="bold">Create</span>.</p>
+</li>
+<li>
+<p>In the Create Enterprise Application page, enter the details in the following table.</p>
+<div class="tblformal" id="GUID-9E5BE3AF-EECE-497E-8B94-5E9249C752FB__GUID-0E2C8965-8342-4827-973D-78337ABCB4F9">
+<p class="titleintable">Table 6-6 Enterprise Application Topology Object Details</p>
+<table class="cellalignment483" title="Enterprise Application Topology Object Details" summary="Create Application Page Values">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment477" id="d30090e4079">Field</th>
+<th class="cellalignment527" id="d30090e4082">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d30090e4087" headers="d30090e4079">
+<p>Name</p>
+</td>
+<td class="cellalignment528" headers="d30090e4087 d30090e4082">
+<p>Enter the name of the enterprise application that you want to register, for example <span class="bold">EarCustomHostEss</span>.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d30090e4097" headers="d30090e4079">
+<p>Code</p>
+</td>
+<td class="cellalignment528" headers="d30090e4097 d30090e4082">
+<p>Enter a unique code to identify the enterprise application. After you have created it, the code cannot be changed.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d30090e4104" headers="d30090e4079">
+<p>Domain</p>
+</td>
+<td class="cellalignment528" headers="d30090e4104 d30090e4082">
+<p>Select the name of the domain to be used by the enterprise application, for example <span class="bold">EssDomain</span>.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d30090e4114" headers="d30090e4079">
+<p>Default URL</p>
+</td>
+<td class="cellalignment528" headers="d30090e4114 d30090e4082">
+<p>Enter a static URL if the enterprise application is always to be deployed at the same location. Optional.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d30090e4121" headers="d30090e4079">
+<p>Source File</p>
+</td>
+<td class="cellalignment528" headers="d30090e4121 d30090e4082">
+<p>Enter the name of the EAR file. Optional.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d30090e4128" headers="d30090e4079">
+<p>Pillar</p>
+</td>
+<td class="cellalignment528" headers="d30090e4128 d30090e4082">
+<p>From the Available Pillars list, shuttle the relevant pillar or pillars to the Selected Pillars list.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></li>
+<li>
+<p>Click <span class="bold">Save and Close</span> to create the <span>Oracle Enterprise Scheduler</span> host application topology object.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Repeat Step <a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-9E5BE3AF-EECE-497E-8B94-5E9249C752FB__CHDBIAEH">2</a> to create the <span>Oracle Enterprise Scheduler</span> <span>Oracle ADF</span> producer application topology object.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OADTC1421"></a><a id="OADTC1422"></a><a id="OADTC1423"></a><a id="OADTC1420"></a>
+<div class="sect4"><a id="GUID-AD843708-8D3C-4BB9-BF4D-385DCB814F1C"></a>
+<h4 id="OADTC-GUID-AD843708-8D3C-4BB9-BF4D-385DCB814F1C" class="sect4"><span class="enumeration_section">6.3.6.2</span> Registering <span><cite>Oracle Enterprise Scheduler</cite></span> Topology Objects</h4>
+<div>
+<p>Use the Setup and Maintenance work area to register the <span id="GUID-AD843708-8D3C-4BB9-BF4D-385DCB814F1C__SCHEDULER">Oracle Enterprise Scheduler</span> topology objects you created.</p>
+<p>To register <span>Oracle Enterprise Scheduler</span> topology objects:</p>
+<ol>
+<li>
+<p>Register the <span>Oracle Enterprise Scheduler</span> domain.</p>
+<ol>
+<li>
+<p>In the global area of <span id="GUID-AD843708-8D3C-4BB9-BF4D-385DCB814F1C__FA">Oracle Fusion Applications</span>, click your name and select <span class="bold">Setup and Maintenance</span>.</p>
+</li>
+<li>
+<p>From the Tasks Pane, select <span class="bold">Topology Registrations</span> and then select <span class="bold">Register Domains</span>.</p>
+</li>
+<li>
+<p>On the Register Domains page in the list of domains, click the <span class="bold">Actions</span> dropdown list and select <span class="bold">Create</span>.</p>
+</li>
+<li>
+<p>In the Add Domain window that is displayed, enter the details for the <span>Oracle Enterprise Scheduler</span> domain created in <a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-9E5BE3AF-EECE-497E-8B94-5E9249C752FB">Creating Topology Objects</a> as described in the following table.</p>
+<div class="tblformal" id="GUID-AD843708-8D3C-4BB9-BF4D-385DCB814F1C__GUID-71EA8E77-EFEC-4C01-83ED-77A71EAA8EF0">
+<p class="titleintable">Table 6-7 Domain Registration Values</p>
+<table class="cellalignment483" title="Domain Registration Values" summary="Domain Registration Values">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment471" id="d30090e4245">Field</th>
+<th class="cellalignment529" id="d30090e4248">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment474" id="d30090e4253" headers="d30090e4245">
+<p>Enterprise Environment</p>
+</td>
+<td class="cellalignment530" headers="d30090e4253 d30090e4248">
+<p>From the dropdown list, select the enterprise environment to be used, for example <code>oracle</code>.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment474" id="d30090e4263" headers="d30090e4245">
+<p>Domain</p>
+</td>
+<td class="cellalignment530" headers="d30090e4263 d30090e4248">
+<p>From the dropdown list, select the name of the domain.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment474" id="d30090e4270" headers="d30090e4245">
+<p>Name/Administrator Server Name</p>
+</td>
+<td class="cellalignment530" headers="d30090e4270 d30090e4248">
+<p>Enter a name for the registered domain.</p>
+<p>Enter a name for the domain's administration server.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment474" id="d30090e4279" headers="d30090e4245">
+<p>Internal/External/Administrator Server Host/Port/Protocol</p>
+</td>
+<td class="cellalignment530" headers="d30090e4279 d30090e4248">
+<p>Enter the URL, port number, and protocol (such as HTTP, HTTPS, and so on) for the internal server to be registered, as well as the external server and the administration server.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment474" id="d30090e4286" headers="d30090e4245">
+<p>Enterprise Manager Protocol</p>
+</td>
+<td class="cellalignment530" headers="d30090e4286 d30090e4248">
+<p>From the dropdown list, select the protocol to be used for accessing <span id="GUID-AD843708-8D3C-4BB9-BF4D-385DCB814F1C__IASOEM">Oracle Enterprise Manager</span>, for example HTTP or HTTPS.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment474" id="d30090e4296" headers="d30090e4245">
+<p>Enterprise Manager Port</p>
+</td>
+<td class="cellalignment530" headers="d30090e4296 d30090e4248">
+<p>Enter the port number to be used when accessing <span>Oracle Enterprise Manager</span> in the domain.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment474" id="d30090e4306" headers="d30090e4245">
+<p>Java Management Extensions Port</p>
+</td>
+<td class="cellalignment530" headers="d30090e4306 d30090e4248">
+<p>Enter the port number to be used for Java management extensions.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></li>
+<li>
+<p>Click <span class="bold">Save and Close</span> to save your changes.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Register the <span>Oracle Enterprise Scheduler</span> web producer module.</p>
+<ol>
+<li>
+<p>In the global area of <span>Oracle Fusion Applications</span>, click your name and select <span class="bold">Setup and Maintenance</span>.</p>
+</li>
+<li>
+<p>From the Tasks Pane, select <span class="bold">Topology Objects</span> and then select <span class="bold">Manage Modules</span>.</p>
+</li>
+<li>
+<p>On the Manage Modules page from the list of applications, click the <span class="bold">Actions</span> dropdown list and select <span class="bold">Register Modules</span>.</p>
+</li>
+<li>
+<p>In the Register Modules window that is displayed, enter the details as shown in the following table.</p>
+<div class="tblformal" id="GUID-AD843708-8D3C-4BB9-BF4D-385DCB814F1C__GUID-19DDEF6F-B0C0-46AA-912E-A71D779237E4">
+<p class="titleintable">Table 6-8 Domain Registration Values</p>
+<table class="cellalignment483" title="Domain Registration Values" summary="Domain Registration Values">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment466" id="d30090e4365">Field</th>
+<th class="cellalignment531" id="d30090e4368">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment470" id="d30090e4373" headers="d30090e4365">
+<p>Name</p>
+</td>
+<td class="cellalignment532" headers="d30090e4373 d30090e4368">
+<p>Enter the name of the module that you want to register.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment470" id="d30090e4380" headers="d30090e4365">
+<p>Code</p>
+</td>
+<td class="cellalignment532" headers="d30090e4380 d30090e4368">
+<p>Enter a unique code to identify the module. After you have created it, the code cannot be changed.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment470" id="d30090e4387" headers="d30090e4365">
+<p>Description</p>
+</td>
+<td class="cellalignment532" headers="d30090e4387 d30090e4368">
+<p>Enter a brief, meaningful description of the module. Optional.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment470" id="d30090e4394" headers="d30090e4365">
+<p>Enterprise Application</p>
+</td>
+<td class="cellalignment532" headers="d30090e4394 d30090e4368">
+<p>Select and associate the enterprise application to which the module belongs.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment470" id="d30090e4401" headers="d30090e4365">
+<p>Type</p>
+</td>
+<td class="cellalignment532" headers="d30090e4401 d30090e4368">
+<p>Select the relevant module type from the list.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment470" id="d30090e4408" headers="d30090e4365">
+<p>Context Root</p>
+</td>
+<td class="cellalignment532" headers="d30090e4408 d30090e4368">
+<p>Enter the context root of the module.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></li>
+<li>
+<p>Click <span class="bold">Save and Close</span> to save your changes.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Register the <span>Oracle Enterprise Scheduler</span> host and producer applications.</p>
+<ol>
+<li>
+<p>In the global area of <span>Oracle Fusion Applications</span>, click your name and select <span class="bold">Setup and Maintenance</span>.</p>
+</li>
+<li>
+<p>From the Tasks Pane, select <span class="bold">Topology Registrations</span> and then select <span class="bold">Register Enterprise Applications</span>.</p>
+</li>
+<li>
+<p>On the Register Enterprise Applications page from the list of applications, click the <span class="bold">Actions</span> dropdown list and select <span class="bold">Add</span>.</p>
+</li>
+<li>
+<p>In the Add Enterprise Application window that is displayed, enter the details in the following table.</p>
+<div class="tblformal" id="GUID-AD843708-8D3C-4BB9-BF4D-385DCB814F1C__GUID-E1C3E314-BF6F-4E4D-9BDE-92DF78279A9C">
+<p class="titleintable">Table 6-9 Domain Registration Values</p>
+<table class="cellalignment483" title="Domain Registration Values" summary="Domain Registration Values">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment466" id="d30090e4467">Field</th>
+<th class="cellalignment531" id="d30090e4470">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment470" id="d30090e4475" headers="d30090e4467">
+<p>Enterprise Environment</p>
+</td>
+<td class="cellalignment532" headers="d30090e4475 d30090e4470">
+<p>From the dropdown list, select the enterprise environment to be used, for example <code>oracle</code>.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment470" id="d30090e4485" headers="d30090e4467">
+<p>Enterprise Application</p>
+</td>
+<td class="cellalignment532" headers="d30090e4485 d30090e4470">
+<p>Select and associate the enterprise application to which the module belongs.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment470" id="d30090e4492" headers="d30090e4467">
+<p>Name</p>
+</td>
+<td class="cellalignment532" headers="d30090e4492 d30090e4470">
+<p>Enter the name of the enterprise application.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment470" id="d30090e4499" headers="d30090e4467">
+<p>External Server Protocol/Host/Port</p>
+</td>
+<td class="cellalignment532" headers="d30090e4499 d30090e4470">
+<p>Enter the URL, port number, and protocol (such as HTTP, HTTPS, and so on) for the external server to be registered with the enterprise application.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></li>
+<li>
+<p>Click <span class="bold">Save and Close</span> to save your changes.</p>
+</li>
+<li>
+<p>In the Register Enterprise Applications page, click the <span class="bold">Actions</span> dropdown list and select <span class="bold">Add</span> to display the Add Enterprise Application window.</p>
+</li>
+<li>
+<p>Click the Enterprise Application dropdown list to display the Search and Select: Enterprise Application window.</p>
+</li>
+<li>
+<p>In the <span class="bold">Name</span> field, enter a name for the application you want to search for and click the <span class="bold">Domain</span> dropdown list to select the domain in which you want to search.</p>
+<p>Click <span class="bold">Search</span> to search for the <span>Oracle Enterprise Scheduler</span> producer web application.</p>
+</li>
+<li>
+<p>From the list of enterprise applications that is displayed, select the relevant <span>Oracle Enterprise Scheduler</span> producer web application and click <span class="bold">OK</span>, as shown in the following figure.</p>
+<div class="figure" id="GUID-AD843708-8D3C-4BB9-BF4D-385DCB814F1C__GUID-3CB9D85E-CC6F-402E-986E-81C80547CD7F">
+<p class="titleinfigure">Figure 6-3 Select the Relevant Enterprise Application</p>
+<img width="893" height="704" src="img/GUID-DC5AD9C2-1B41-444A-AE0B-66F958817548-default.png" alt="Select the relevant enterprise application" title="Select the relevant enterprise application" /></div>
+<!-- class="figure" --></li>
+<li>
+<p>In the Add Enterprise Application page, fill in the details for the <span>Oracle Enterprise Scheduler</span> producer web application as described in the following table.</p>
+</li>
+<li>
+<p>Click <span class="bold">Save and Close</span>.</p>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OADTC1424"></a>
+<div class="sect3"><a id="GUID-C3D52AFA-A658-4C09-9C9D-68CE2D120EF5"></a>
+<h3 id="OADTC-GUID-C3D52AFA-A658-4C09-9C9D-68CE2D120EF5" class="sect3"><span class="enumeration_section">6.3.7</span> About Granting Job Metadata Permissions to Application Roles and Users</h3>
+<div>
+<p>You can use <span id="GUID-C3D52AFA-A658-4C09-9C9D-68CE2D120EF5__APM">Oracle Authorization Policy Manager</span> to manage <strong class="term">application roles</strong> and resource-based policies. Identifying the application roles and users, and granting them the required <strong class="term">privileges</strong> to execute <span id="GUID-C3D52AFA-A658-4C09-9C9D-68CE2D120EF5__SCHEDULER">Oracle Enterprise Scheduler</span> job-related tasks is a one-time operation.</p>
+<p>Granting <span>Oracle Enterprise Scheduler</span> metadata permission to the new job involves the following main steps:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Creating a new resource for the custom job definition</p>
+</li>
+<li>
+<p>Creating a new policy</p>
+</li>
+</ul>
+</div>
+<div class="sect4"><a id="GUID-B40BF9AB-B967-46FE-8EB5-EF49488F7935"></a>
+<h4 id="OADTC-GUID-B40BF9AB-B967-46FE-8EB5-EF49488F7935" class="sect4"><span class="enumeration_section">6.3.7.1</span> Creating a Resource</h4>
+<div>
+<p>In <span id="GUID-B40BF9AB-B967-46FE-8EB5-EF49488F7935__APM">Oracle Authorization Policy Manager</span>, create an application resource instance.</p>
+<p>To create a resource:</p>
+<ol>
+<li>
+<p>Run <span>Oracle Authorization Policy Manager</span> by entering the following URL in a browser.</p>
+<pre dir="ltr">
+http://&lt;fs-domain_url&gt;/apm/
+</pre></li>
+<li>
+<p>From the navigator pane, right-click the application <span class="bold">Resources</span> icon button and select <span class="bold">New</span>.</p>
+<p>An untitled page is displayed.</p>
+</li>
+<li>
+<p>Define a resource with the resource type <span class="bold">ESSMetadataResourceType</span>, as well as the name and display name of the <span id="GUID-B40BF9AB-B967-46FE-8EB5-EF49488F7935__SCHEDULER">Oracle Enterprise Scheduler</span> component using the following syntax: <code>oracle.apps.ess.</code><span class="italic"><code>applicationName</code></span><code>.</code><span class="italic"><code>JobDefinitionName</code></span><code>.</code><span class="italic"><code>JobName</code></span>.</p>
+</li>
+<li>
+<p>Save the resource.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4"><a id="GUID-6FB993B1-F826-4861-91AD-6A4067416706"></a>
+<h4 id="OADTC-GUID-6FB993B1-F826-4861-91AD-6A4067416706" class="sect4"><span class="enumeration_section">6.3.7.2</span> Defining a Policy</h4>
+<div>
+<p>Define a policy that specifies the privileges allocated to a particular user when submitting the job request.</p>
+<p>To define a policy:</p>
+<ol>
+<li>
+<p>In <span id="GUID-6FB993B1-F826-4861-91AD-6A4067416706__APM">Oracle Authorization Policy Manager</span> in the <span class="bold">Home</span> tab, under the Applications region, select an application for which you want to manage the policy, for example, <span class="bold">MyAppEss</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Search Policies</span> to display the Search Authorization Policies tab.</p>
+</li>
+<li>
+<p>In the <span class="bold">Search Authorization Policies</span> tab, select the principal user on which to base the policy being created, for example, <span class="bold">FinUser1</span>.</p>
+</li>
+<li>
+<p>In the <span class="bold">Functional Security</span> tab, select <span class="bold">Resource Based Policies</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">New Policy</span> to create a new policy for the selected user.</p>
+</li>
+<li>
+<p>Add resource instances to the policy by clicking <span class="bold">Add</span> in the Resources table.</p>
+</li>
+<li>
+<p>Select the resource instance created for the custom <span id="GUID-6FB993B1-F826-4861-91AD-6A4067416706__SCHEDULER">Oracle Enterprise Scheduler</span> job definition (from <a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm#GUID-B40BF9AB-B967-46FE-8EB5-EF49488F7935">Creating a Resource</a>).</p>
+</li>
+<li>
+<p>Specify the actions <code>EXECUTE</code> and <code>READ</code> to provision <span>Oracle Enterprise Scheduler</span> job execution privileges to the user.</p>
+</li>
+<li>
+<p>Click <span class="bold">Save</span>.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect4"><a id="GUID-751EBDA9-45F6-4188-BAA1-D291B816350D"></a>
+<h4 id="OADTC-GUID-751EBDA9-45F6-4188-BAA1-D291B816350D" class="sect4"><span class="enumeration_section">6.3.7.3</span> Testing <span><cite>Oracle Enterprise Scheduler</cite></span> Job Submissions from the <span><cite>Oracle Enterprise Scheduler</cite></span> Central UI</h4>
+<div>
+<p>Submit a job request to ensure that everything works as it should.</p>
+<p>To submit a test job request:</p>
+<ol>
+<li>
+<p>Log in to <span id="GUID-751EBDA9-45F6-4188-BAA1-D291B816350D__FSMSHORT">Functional Setup Manager</span> with the user for whom you defined an authorization policy, for example, as <span class="bold">FinUser1</span>.</p>
+<p>The URL for <span>Functional Setup Manager</span> is as follows:</p>
+<pre dir="ltr">
+https://&lt;HOST&gt;/setup/faces/TaskListManagerTop
+</pre></li>
+<li>
+<p>From the <span class="bold">Tools</span> menu, select <span class="bold">Schedule Processes</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Schedule New Process</span> and select a job process name when prompted. Select the job definition you created.</p>
+</li>
+<li>
+<p>Click <span class="bold">OK</span>.</p>
+<p>The <span id="GUID-751EBDA9-45F6-4188-BAA1-D291B816350D__SCHEDULER">Oracle Enterprise Scheduler</span> Schedule Request Submission window is displayed.</p>
+</li>
+<li>
+<p>In the Parameters region, specify the job parameters as required.</p>
+</li>
+<li>
+<p>Click <span class="bold">Submit</span> to schedule the job execution, and <span class="bold">Close</span> to exit the window.</p>
+</li>
+<li>
+<p>Refresh the Search Results table to monitor the status of the submitted job.</p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<a id="OADTC627"></a><a id="OADTC626"></a>
+<div class="sect2"><a id="GUID-B6919D1B-2466-4D59-BD33-9AB604B7B55B"></a>
+<h2 id="OADTC-GUID-B6919D1B-2466-4D59-BD33-9AB604B7B55B" class="sect2"><span class="enumeration_section">6.4</span> About Customizing Existing <span>Oracle Enterprise Scheduler</span> Job Properties</h2>
+<div>
+<p>You can customize <span id="GUID-B6919D1B-2466-4D59-BD33-9AB604B7B55B__SCHEDULER">Oracle Enterprise Scheduler</span> jobs that are associated with <span id="GUID-B6919D1B-2466-4D59-BD33-9AB604B7B55B__FAAPPS">Oracle Fusion applications</span>. Customizing existing <span>Oracle Enterprise Scheduler</span> jobs involves editing job properties using <span id="GUID-B6919D1B-2466-4D59-BD33-9AB604B7B55B__FAOEMFRAME">Oracle Enterprise Manager Fusion Applications Control</span>.</p>
+<p>An example of a customization is to set the timeout value for a scheduled job to be run asynchronously. When the job takes longer than the timeout, you can find the job that timed out in <span id="GUID-B6919D1B-2466-4D59-BD33-9AB604B7B55B__FAOEMFRAMESHORT">Fusion Applications Control</span> and manually complete the job.</p>
+<p>The job properties that can be edited are shown in the following table.</p>
+<p>For more information about editing scheduled job properties, see the <a class="olink OASAD1045" target="_blank" href="../OASAD/GUID-E16F47C0-6415-4D24-B68F-2DDA4C462C1B.htm#OASAD1045">"Managing <span>Oracle Enterprise Scheduler</span> Service and Jobs"</a> chapter in the <span class="italic"><span id="GUID-B6919D1B-2466-4D59-BD33-9AB604B7B55B__OASAD"><cite>Administrator's Guide</cite></span></span>.</p>
+<div class="tblformalwide" id="GUID-B6919D1B-2466-4D59-BD33-9AB604B7B55B__BEIHFDBE">
+<p class="titleintable">Table 6-10 Job Properties</p>
+<table class="cellalignment462" title="Job Properties" summary="Job Request Submission APIs">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment472" id="d30090e4936">API</th>
+<th class="cellalignment521" id="d30090e4939">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e4944" headers="d30090e4936">
+<p><code>oracle.as.scheduler.SystemProperty.PRIORITY</code></p>
+</td>
+<td class="cellalignment522" headers="d30090e4944 d30090e4939">
+<p>This property specifies the request processing priority, from 0 to 9, where 0 is the lowest priority and 9 is the highest. If this property is not specified, the system default value used is <code>oracle.as.scheduler.RuntimeService#DEFAULT_PRIORITY</code>.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e4955" headers="d30090e4936">
+<p><code>oracle.as.scheduler.SystemProperty.RETRIES</code></p>
+</td>
+<td class="cellalignment522" headers="d30090e4955 d30090e4939">
+<p>This property defines the numerical value that specifies the retry limit for a failed job request. If job execution fails, the request retries up to the number of times specified by this property until the job succeeds. If the retry limit is zero, a failed request will not be retried. If this property is not specified, the system default used is <code>oracle.as.scheduler.RuntimeService#DEFAULT_RETRIES</code>.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e4966" headers="d30090e4936">
+<p><code>oracle.as.scheduler.SystemProperty.REQUEST_CATEGORY</code></p>
+</td>
+<td class="cellalignment522" headers="d30090e4966 d30090e4939">
+<p>This property specifies an application-specific label for a request. The label, defined by an application or system administrator, allows administrators to group job requests according to their own specific needs.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e4974" headers="d30090e4936">
+<p><code>oracle.as.scheduler.SystemProperty.ASYNC_REQUEST_TIMEOUT</code></p>
+</td>
+<td class="cellalignment522" headers="d30090e4974 d30090e4939">
+<p>This property specifies the time in minutes that the job request processor waits for an asynchronous request after it has begun execution. After the time elapses, the job request times out.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e4982" headers="d30090e4936">
+<p><code>enableTrace</code></p>
+</td>
+<td class="cellalignment522" headers="d30090e4982 d30090e4939">
+<p>The property specifies a numerical value that indicates the level of tracing control for the job. Possible values are as follows:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>1: Database trace</p>
+</li>
+<li>
+<p>5: Database trace with bind</p>
+</li>
+<li>
+<p>9: Database trace with wait</p>
+</li>
+<li>
+<p>13: Database trace with bind and wait</p>
+</li>
+<li>
+<p>16: PL/SQL profile</p>
+</li>
+<li>
+<p>17: Database trace and PL/SQL profile</p>
+</li>
+<li>
+<p>21: Database trace with bind and PL/SQL profile</p>
+</li>
+<li>
+<p>25: Database trace with wait and PL/SQL profile</p>
+</li>
+<li>
+<p>29: Database trace with bind, wait, and PL/SQL profile</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment475" id="d30090e5018" headers="d30090e4936">
+<p><code>enableTimeStatistics</code></p>
+</td>
+<td class="cellalignment522" headers="d30090e5018 d30090e4939">
+<p>This property enables or disables the accumulation of time statistics.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment439">
+<tr>
+<td class="cellalignment446">
+<table class="cellalignment444">
+<tr>
+<td class="cellalignment443"><a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment443"><a href="GUID-858B8C4D-4379-45B3-9B4A-D845707244B8.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2011, 2016, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment448">
+<table class="cellalignment442">
+<tr>
+<td class="cellalignment443"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment443"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

@@ -1,0 +1,300 @@
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+
+<meta name="DC.Type" content="topic">
+<meta name="description" content="Use the various functionalities of Oracle database such as APEX_WEB_SERVICE, UTL_HTTP package, and Application Express (Apex) to invoke SOAP web services."><meta content="all" name="robots">
+<meta content="yes" name="mos_crawl">
+<meta content="SOAP Web Services for Oracle Procurement Cloud " name="dcterms.title">
+<meta content="SOAP Web Services for Oracle Procurement Cloud " name="doctitle">
+<meta content="E74440-01" name="dcterms.identifier">
+<meta content="E67967-01" name="partno">
+<meta content="OESWP" name="dcterms.isVersionOf">
+<meta content="Fusion Publishing Server, UAE Print Staging" name="generator">
+<meta content="Fri Dec 09 12:40:19 MST 2016" name="dcterms.created">
+<meta name="relnum" content="Release 12">
+<meta name="rel_num" content="Release 12"><link type="text/html" title="Previous" href="Java_Client.htm" rel="Prev">
+<link type="text/html" title="Next" href="_NET_Framework.htm" rel="Next">
+<link type="text/html" title="Home" href="../../index.html" rel="Start">
+<link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+<script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+<script src="../nav/js/doccd.js" type="application/javascript"></script>
+<link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+<link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+<link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+<script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+<script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+<script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+<script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+<script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+<script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+<meta class="foundation-mq-topbar">
+<link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/oer.css" rel="stylesheet">
+OracleDatabase-1DCEC0C4<meta name="DC.Language" content="en">
+<title>Oracle Database</title>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header><div class="row" id="CONTENT"><div class="IND large-9 medium-8 columns"><div id="EXTRATOC"></div><span id="PAGE" style="display:none;">46/166</span><a name="BEGIN" id="BEGIN"></a><div class="fusiondoc" id="OracleDatabase-1DCEC0C4">
+
+   <h1 class="title topictitle1" id="OracleDatabase-1DCEC0C4__topic-100-0B4BED43">Oracle Database</h1>
+
+   
+   
+   <div class="body" id="topic-112-0B4BED45"><p class="shortdesc">Use the various functionalities
+of Oracle database such as APEX_WEB_SERVICE, UTL_HTTP package, and
+Application Express (Apex) to invoke SOAP web services.</p>
+
+      <section class="section" id="topic-166-1DCEBC8A"><h2 class="title sectiontitle">APEX
+Web Service</h2>
+         
+         <p class="p" id="topic-170-1DCEBC8E">Use APEX_WEB_SERVICE
+to invoke web services on a database with Application Express (APEX)
+schema.</p>
+
+         <div class="p" id="topic-114-0B4BED48">The following is a sample client
+code to:<ol class="ol" id="topic-116-0B4BED49">
+               <li class="li" id="topic-118-0B4BED49"><p>Construct an xml payload to invoke the
+service. This example code passes a hard coded string to the request.</p></li>
+
+               <li class="li" id="topic-120-0B4BED4B"><p>Invoke the service using the APEX_WEB_SERVICE
+API, which in turn uses the UTL_HTTP package.</p></li>
+
+               <li class="li" id="topic-124-0B4C5570"><p>Receive the response and process it. This
+example code just prints the response.</p></li>
+
+            </ol>
+
+            <pre class="pre codeblock" id="topic-122-0B4BED4B">declare
+	l_result XMLTYPE;
+	l_envelope CLOB;
+BEGIN
+	-- Construct xml payload to invoke the service. In this example, it is a hard coded string.
+	l_envelope := '&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+	&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+		xmlns:xsi="http ://www.w3.org/2001/XMLSchema-instance"
+		xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+	&lt;soap:Body&gt;
+	&lt;findRule
+	xmlns="http://xmlns.oracle.com/apps/incentiveCompensation/cn/creditSetup/creditRule/creditRuleService/ty
+		   pes/"&gt;
+	&lt;findCriteria&gt;
+	  &lt;fetchStart xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;0&lt;/fetchStart&gt;
+	  &lt;fetchSize xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;-1&lt;/fetchSize&gt;
+	  &lt;filter xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;
+	    &lt;group&gt;
+		  &lt;upperCaseCompare&gt;false&lt;/upperCaseCompare&gt;
+			&lt;item&gt;
+			  &lt;upperCaseCompare&gt;false&lt;/upperCaseCompare&gt;
+			  &lt;attribute&gt;RuleId&lt;/attribute&gt;
+			  &lt;operator&gt;=&lt;/operator&gt;
+			  &lt;value&gt;300000000851162&lt;/value&gt;
+			&lt;/item&gt;
+		&lt;/group&gt;
+	  &lt;/filter&gt;
+	  &lt;excludeAttribute xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;false&lt;/excludeAttribute&gt;
+	&lt;/findCriteria&gt;
+	&lt;findControl&gt;
+	  &lt;retrieveAllTranslations
+		xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;false&lt;/retrieveAllTranslations&gt;
+	&lt;/findControl&gt;
+	&lt;/findRule&gt;
+	&lt;/soap:Body&gt;
+	&lt;/soap:Envelope&gt;';
+	-- Call the web service
+	l_result := apex_web_service.make_request(
+	p_url =&gt; 'https://host:port/icCnSetupCreditRulesPublicService/CreditRuleService?wsdl',
+	p_action =&gt; 'http://xmlns.oracle.com/apps/incentiveCompensation/cn/creditSetup/creditRule/creditRuleService/findRule',
+	p_envelope =&gt; l_envelope,
+	p_username =&gt; 'username',
+	p_password =&gt; 'password' );
+	dbms_output.put_line(l_result.getClobVal());
+END;</pre>
+
+         </div>
+
+      </section>
+
+      <section class="section" id="topic-126-0B4D263A"><h2 class="title sectiontitle">UTL_HTTP
+Package</h2>
+         
+         <div class="p" id="topic-130-0B4D25D8">Use UTL_HTTP package over
+HTTPS to invoke a SOAP web service by constructing and processing
+the XML payload. Configure the following before using the UTL_HTTP
+package:<ul class="ul" id="topic-100-0FE53A96">
+               <li class="li" id="topic-102-0FE53A98"><p>Access to the database network</p></li>
+
+               <li class="li" id="topic-104-0FE53A98"><p>Create wallet containing the certificate
+if you want to access the web service over SSL</p></li>
+
+            </ul>
+For more information, refer to Fusion Middleware Administrator's
+Guide available at <a class="xref" href="http://docs.oracle.com/" target="_blank">Oracle Help Center</a>. The following is a sample client code to:<ol class="ol" id="ConstructAnXmlPayloadToInvokeTheSer-0FE5EB44">
+               <li class="li" id="ConstructAnXmlPayloadToInvokeTheSer-0FE5EBAA"><p>Construct an
+xml payload to invoke the service. This example code passes a hard
+coded string to the request.</p></li>
+
+               <li class="li" id="topic-108-0FE65A47"><p>Set the Oracle Wallet used for the request.
+This wallet must contain the certificate for the server that hosts
+the service, and is used to access the service using HTTPS.</p></li>
+
+               <li class="li" id="topic-110-0FE8665C"><p>Create a new HTTP request for the <samp class="ph codeph" id="topic-112-0FE8BAA0">POST</samp> method.</p></li>
+
+               <li class="li" id="InvokeTheServiceUsingTheAPEX_WEB_SE-0FE5EBAA"><p>Configure the
+request to use the authentication information to invoke the service.</p></li>
+
+               <li class="li" id="topic-114-0FE8BAA2"><p>Configure the request content type to <samp class="ph codeph" id="topic-116-0FE8BAA3">xml</samp>, HTTP method to <samp class="ph codeph" id="topic-118-0FE8BAA5">POST</samp>, and set the content length.</p></li>
+
+               <li class="li" id="topic-120-0FE8D936"><p>Set the <samp class="ph codeph" id="topic-124-0FE9C136">SOAPAction</samp> to be invoked. Though the call works without
+this value, it is a recommended standard.</p></li>
+
+               <li class="li" id="topic-122-0FE8D938"><p>Write the xml payload to the connection
+as request.</p></li>
+
+               <li class="li" id="ReceiveTheResponseAndProcessIt.This-0FE5EBAB"><p>Receive the
+response and process it. This example code only prints the response.</p></li>
+
+            </ol>
+
+            <pre class="pre codeblock" id="topic-100-0F64F841">DECLARE
+  -- Construct xml payload to invoke the service. In this example, it is a hard coded string.
+  l_envelope VARCHAR2(32767) := '&lt;soap:Envelope
+  xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+			xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+		&lt;soap:Body&gt;
+		&lt;findRule
+xmlns="http://xmlns.oracle.com/apps/incentiveCompensation/cn/creditSetup/creditRule/creditRuleService/ty
+pes/"&gt;
+			&lt;findCriteria&gt;
+			  &lt;fetchStart
+xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;0&lt;/fetchStart&gt;
+				&lt;fetchSize xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;-
+				1&lt;/fetchSize&gt;
+			&lt;filter xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;
+			  &lt;group&gt;
+				&lt;upperCaseCompare&gt;false&lt;/upperCaseCompare&gt;
+				  &lt;item&gt;
+					&lt;upperCaseCompare&gt;false&lt;/upperCaseCompare&gt;
+					&lt;attribute&gt;RuleId&lt;/attribute&gt;
+					&lt;operator&gt;=&lt;/operator&gt;
+					&lt;value&gt;300000000851162&lt;/value&gt;
+				  &lt;/item&gt;
+			  &lt;/group&gt;
+			&lt;/filter&gt;
+			&lt;excludeAttribute
+xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;false&lt;/excludeAttribute&gt;
+			&lt;/findCriteria&gt;
+			&lt;findControl&gt;
+			  &lt;retrieveAllTranslations
+xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;false&lt;/retrieveAllTranslations&gt;
+			&lt;/findControl&gt;
+		&lt;/findRule&gt;
+		&lt;/soap:Body&gt;
+		&lt;/soap:Envelope&gt;';
+l_result VARCHAR2(32767) := null;
+l_http_request UTL_HTTP.req;
+l_http_response UTL_HTTP.resp;
+l_counter PLS_INTEGER;
+l_length PLS_INTEGER;
+BEGIN
+  -- Sets the Oracle wallet used for request; required for HTTPS
+  UTL_HTTP.set_wallet('file:/scratch/oradba/wallet', 'Welcome1');
+  
+  -- Creates a new HTTP request
+  l_http_request :=
+  UTL_HTTP.begin_request('https://host:port/icCnSetupCreditRulesPublicService/CreditRuleService',
+  'POST','HTTP/1.1');
+  
+  -- Configure the authentication details 
+  UTL_HTTP.SET_AUTHENTICATION(l_http_request, 'username', 'password');
+  
+  -- Configure the request content type to be xml and set the content length
+  UTL_HTTP.set_header(l_http_request, 'Content-Type', 'text/xml');
+  UTL_HTTP.set_header(l_http_request, 'Content-Length', LENGTH(l_envelope));
+  
+  -- Set the SOAP action to be invoked; while the call works without this, the value is expected to be set based on
+  standards
+  UTL_HTTP.set_header(l_http_request, 'SOAPAction',
+  'http://xmlns.oracle.com/apps/incentiveCompensation/cn/creditSetup/creditRule/creditRuleService/findRule');
+  -- Write the xml payload to the request
+  UTL_HTTP.write_text(l_http_request, l_envelope);
+  
+  -- Get the response and process it. In this example, we simply print out the response
+  l_http_response := UTL_HTTP.get_response(l_http_request);
+  UTL_HTTP.read_text(l_http_response, l_result);
+  UTL_HTTP.end_response(l_http_response);
+  l_counter := 1;
+  l_length := LENGTH(l_result);
+  WHILE (l_counter &lt;= l_length) LOOP
+    DBMS_OUTPUT.put_line(SUBSTR(l_result, l_counter, 80));
+    l_counter := l_counter + 80;
+  END LOOP;
+END;
+/
+</pre>
+
+         </div>
+
+      </section>
+
+      <section class="section" id="topic-102-0F69B311"><h2 class="title sectiontitle">Oracle
+Application Express (Apex)</h2>
+         
+         <div class="p" id="topic-106-0F69B376">Use Apex
+to integrate the web services by using the Web Service Reference objects.
+These objects work with the APEX_WEB_SERVICE API to invoke the web
+services. To define a reference for a ADF business component service,
+use values such as:<ul class="ul" id="topic-108-0F69B376">
+               <li class="li" id="topic-110-0F69B376"><p>URL, for example, <samp class="ph codeph" id="topic-172-1DD6BD6D">https://(ICDomain,Incentive Compensation)/icCnSetupCreditRulesPublicService/CreditRuleService?WSDL</samp>.</p></li>
+
+               <li class="li" id="topic-112-0F69B378"><p>Action: Defines the service and the operation,
+including the namespace. For example, <samp class="ph codeph" id="topic-174-1DD6BD6D">{http://xmlns.oracle.com/apps/incentiveCompensation/cn/creditSetup/creditRule/creditRuleService/}RuleAttribute</samp>.</p></li>
+
+               <li class="li" id="topic-114-0F69B378"><p>Basic Authentication: Enable this to pass
+credentials to a secured service.</p></li>
+
+               <li class="li" id="topic-116-0F69B378"><p>SOAP Envelope: Defines the content to
+be passed to the service.</p></li>
+
+               <li class="li" id="topic-118-0F69B379"><p>Store Response in Collection: Temporary
+structure to hold the response from the web service call. Use this
+object to parse the response XML to be used in the application.</p></li>
+
+            </ul>
+
+         </div>
+
+      </section>
+
+   </div>
+
+   <nav role="navigation" class="related-links">
+<div class="linklist linklist"><h5 class="relatedlinks">Related Topics</h5>
+<ul>
+<li><p><a class="link" href="Java_Client.htm">Java
+Client</a></p></li>
+<li><p><a class="link" href="_NET_Framework.htm">.NET
+Framework</a></p></li>
+<li><p><a class="link" href="PHP.htm">PHP</a></p></li>
+<li><p><a class="link" href="Perl.htm">Perl</a></p></li>
+<li><p><a class="link" href="Python.htm">Python</a></p></li>
+<li><p><a class="link" href="Ruby.htm">Ruby</a></p></li>
+<li><p><a class="link" href="Invoking_SOAP_Web_Services.htm">Invoking SOAP Web Services</a></p></li></ul></div>
+</nav>
+</div></div></div><footer></footer><noscript><p>Scripting on this page enhances content navigation, but does not change the content in any way.</p></noscript>
+<!-- Start SiteCatalyst code -->
+<script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+<!-- End SiteCatalyst code -->
+</body>
+</html>

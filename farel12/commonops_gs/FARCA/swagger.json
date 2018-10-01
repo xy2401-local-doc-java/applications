@@ -1,0 +1,1649 @@
+
+{
+    "info":{
+        "description":"<div><em><span style=\"color: #FF0000;\">This REST API document is new for Release 12.\n</span></em><br>\n<br>\nRepresentational State Transfer (REST) APIs and Atom feeds are available to support integration requirements for the common features in Oracle Applications Cloud. The REST APIs enable easy integration of data into new and existing business process flows. Atom feeds enable easy tracking of changes made to feed-enabled resources.\n</div>",
+        "version":"2017.10.04",
+        "title":"REST API for Common Features in Oracle Applications Cloud Release 12",
+        "x-summary":"This REST API document is new for Release 12."
+    },
+    "definitions":{
+        "Resource Types":{
+            "properties":{
+                "itemsPerPage":{
+                    "type":"integer",
+                    "description":"The number of resource instances returned in the current range.",
+                    "title":"ItemsPerPage"
+                },
+                "startIndex":{
+                    "type":"integer",
+                    "description":"This parameter defines the starting position in the resource collection. For example, if startIndex is 11 and itemsPerPage is 10, the response body contains rows from 11 to 20.",
+                    "title":"StartIndex"
+                },
+                "Resources":{
+                    "items":{
+                        "$ref":"#/definitions/Resource Types-item"
+                    },
+                    "type":"array",
+                    "description":"The resources types in the collection.",
+                    "title":"Resources"
+                }
+            },
+            "type":"object"
+        },
+        "Resource Types-item":{
+            "properties":{
+                "id":{
+                    "type":"string",
+                    "description":"The id of the resource type.",
+                    "title":"Id"
+                },
+                "meta":{
+                    "title":"Meta",
+                    "description":"The metadata of the resource type.",
+                    "items":{
+                        "$ref":"#/definitions/meta-item"
+                    }
+                },
+                "schemas":{
+                    "type":"array",
+                    "title":"Schemas",
+                    "description":"A list of schema values that contain supported schema version for a SCIM representation, and any schema extensions for that representation. Each value must be a unique URI.",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "name":{
+                    "type":"string",
+                    "description":"The name of the resource type. This attribute is referenced by the meta.resourceType attribute in all the resources.",
+                    "title":"Name"
+                },
+                "description":{
+                    "type":"string",
+                    "description":"The description of the resource type.",
+                    "title":"Description"
+                },
+                "endpoint":{
+                    "type":"string",
+                    "description":"The endpoint of the resource type.",
+                    "title":"Endpoint"
+                },
+                "schema":{
+                    "type":"string",
+                    "description":"The primary schema of the resource type. This must be equal to the id attribute of the associated schema resource.",
+                    "title":"Schema"
+                }
+            }
+        },
+        "meta-item":{
+            "properties":{
+                "resourceType":{
+                    "title":"Resource Type",
+                    "type":"string",
+                    "description":"The metadata of the resource type."
+                },
+                "location":{
+                    "title":"Location",
+                    "type":"string",
+                    "description":"The URI of the resource type."
+                }
+            }
+        },
+        "Users":{
+            "properties":{
+                "itemsPerPage":{
+                    "type":"integer",
+                    "description":"The number of resource instances returned in the current range.",
+                    "title":"Count"
+                },
+                "startIndex":{
+                    "type":"integer",
+                    "description":"This parameter defines the starting position in the resource collection. For example, if startIndex is 11 and itemsPerPage is 10, the response body contains rows from 11 to 20.",
+                    "title":"start index"
+                },
+                "Resources":{
+                    "items":{
+                        "$ref":"#/definitions/Users-item"
+                    },
+                    "type":"array",
+                    "description":"The user resources in the collection.",
+                    "title":"Resources"
+                }
+            },
+            "type":"object"
+        },
+        "Users-item":{
+            "type":"object",
+            "required":[
+                "schemas",
+                "userName"
+            ],
+            "properties":{
+                "id":{
+                    "type":"string",
+                    "description":"A unique identifier for the user resource in Oracle Applications Cloud.",
+                    "title":"Id",
+                    "readOnly":true
+                },
+                "meta":{
+                    "description":"The metadata of the user resource.",
+                    "title":"Meta",
+                    "items":{
+                        "$ref":"#/definitions/meta-item"
+                    }
+                },
+                "schemas":{
+                    "type":"array",
+                    "description":"The schema of the user resource.",
+                    "title":"Schemas",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "userName":{
+                    "type":"string",
+                    "description":"A unique identifier for the user to authenticate with the service provider directly. This attribute is required.",
+                    "title":"UserName"
+                },
+                "name":{
+                    "title":"Name",
+                    "description":"The components of the user's name. This attribute may return:Full name as a single string Individual component attributes Both variants. The  formatted version indicates how the component attributes are combined so that both variants describe the same name.",
+                    "items":{
+                        "$ref":"#/definitions/name-item"
+                    }
+                },
+                "displayName":{
+                    "type":"string",
+                    "description":"The display name of the user, usually the full name.",
+                    "title":"DisplayName"
+                },
+                "emails":{
+                    "type":"array",
+                    "description":"The e-mail addresses of the user. The service provider uses canonical form of these addresses, for example, bjensen@example.com instead of bjensen@EXAMPLE.COM. Canonical type values are work, home, and other.",
+                    "title":"Emails",
+                    "items":{
+                        "$ref":"#/definitions/email-item"
+                    }
+                },
+                "roles":{
+                    "type":"array",
+                    "description":"The list of roles for users in Oracle Applications Cloud.",
+                    "title":"Roles",
+                    "items":{
+                        "$ref":"#/definitions/role-item"
+                    }
+                },
+                "active":{
+                    "type":"boolean",
+                    "description":"Indicates the administrative status of the user. The service provider determines the definitive value for this attribute. For example, true indicates that the user is able to login, and false indicates that the user account is suspended.",
+                    "title":"Active"
+                },
+                "password":{
+                    "type":"string",
+                    "description":"The clear text password of the user. This attribute is used to specify an initial password for new users and to reset password for existing users. The password attribute is never returned in response to a query.",
+                    "title":"Password"
+                }
+            }
+        },
+        "role-item":{
+            "type":"object",
+            "properties":{
+                "id":{
+                    "type":"string",
+                    "description":"A list of ids for the roles that a user can belong to, through direct membership.",
+                    "title":"Id",
+                    "readOnly":true
+                },
+                "value":{
+                    "type":"string",
+                    "description":"A list of values for the roles.",
+                    "title":"Value",
+                    "readOnly":true
+                },
+                "displayName":{
+                    "type":"string",
+                    "description":"The display name of the role.",
+                    "title":"DisplayName",
+                    "readOnly":true
+                },
+                "description":{
+                    "type":"string",
+                    "description":"The description of the role.",
+                    "title":"Description",
+                    "readOnly":true
+                }
+            }
+        },
+        "email-item":{
+            "type":"object",
+            "properties":{
+                "value":{
+                    "type":"string",
+                    "description":"The e-mail addresses of the user. The service provider uses canonical form of these addresses, for example, bjensen@example.com instead of bjensen@EXAMPLE.COM. Canonical type values are work, home, and other.",
+                    "title":"Value"
+                },
+                "type":{
+                    "type":"string",
+                    "description":"The type of e-mail id, which is hard coded to work.",
+                    "title":"Type"
+                },
+                "primary":{
+                    "type":"boolean",
+                    "description":"Indicates that this e-mail id is the primary address. This value is hard coded to true.",
+                    "title":"Primary"
+                }
+            }
+        },
+        "name-item":{
+            "type":"object",
+            "properties":{
+                "familyName":{
+                    "type":"string",
+                    "description":"The last name of the user.",
+                    "title":"FamilyName"
+                },
+                "givenName":{
+                    "type":"string",
+                    "description":"The first name of the user.",
+                    "title":"GivenName"
+                }
+            }
+        },
+        "Schemas":{
+            "properties":{
+                "itemsPerPage":{
+                    "type":"integer",
+                    "description":"The number of resource instances returned in the current range.",
+                    "title":"ItemsPerPage"
+                },
+                "startIndex":{
+                    "type":"integer",
+                    "description":"This parameter defines the starting position in the resource collection. For example, if startIndex is 11 and itemsPerPage is 10, the response body contains rows from 11 to 20.",
+                    "title":"start index"
+                },
+                "Resources":{
+                    "items":{
+                        "$ref":"#/definitions/Schemas-item"
+                    },
+                    "type":"array",
+                    "description":"The schemas in the collection.",
+                    "title":"Resources"
+                }
+            },
+            "type":"object"
+        },
+        "Schemas-item":{
+            "properties":{
+                "schemas":{
+                    "type":"array",
+                    "description":"The schema value of the schema resource.",
+                    "title":"Schemas",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "meta":{
+                    "description":"The metadata of the schema.",
+                    "title":"Meta",
+                    "items":{
+                        "$ref":"#/definitions/meta-item"
+                    }
+                },
+                "id":{
+                    "type":"string",
+                    "description":"The unique identifier of the schema in Oracle Applications Cloud.",
+                    "title":"Id"
+                },
+                "name":{
+                    "type":"string",
+                    "description":"The name of the schema.",
+                    "title":"Name"
+                },
+                "description":{
+                    "type":"string",
+                    "description":"The description of the schema.",
+                    "title":"Description"
+                },
+                "attributes":{
+                    "type":"array",
+                    "description":"The attributes of the schema.",
+                    "title":"Attributes",
+                    "items":{
+                        "$ref":"#/definitions/attributes-item"
+                    }
+                }
+            }
+        },
+        "attributes-item":{
+            "type":"object",
+            "properties":{
+                "name":{
+                    "type":"string",
+                    "description":"The attribute name.",
+                    "title":"Name"
+                },
+                "type":{
+                    "type":"string",
+                    "description":"The attribute data type.",
+                    "title":"Type"
+                },
+                "description":{
+                    "type":"string",
+                    "description":"The attribute description.",
+                    "title":"Description"
+                },
+                "mutability":{
+                    "type":"string",
+                    "description":"The mutability of the attribute. The default value is readWrite.",
+                    "title":"Mutability"
+                },
+                "multiValued":{
+                    "type":"boolean",
+                    "description":"Indicates whether the attribute contains multiple values, for example multiple email ids. The default value is false.",
+                    "title":"MultiValued"
+                },
+                "required":{
+                    "type":"boolean",
+                    "description":"Indicates whether the attribute is required. The default value is false.",
+                    "title":"Required"
+                },
+                "caseExact":{
+                    "type":"boolean",
+                    "description":"Indicates whether the attribute name is case sensitive. The default value is false.",
+                    "title":"CaseExact"
+                },
+                "subAttributes":{
+                    "type":"array",
+                    "description":"The sub-attributes of the attribute.",
+                    "title":"subAttributes",
+                    "items":{
+                        "$ref":"#/definitions/subattributes-item"
+                    }
+                },
+                "returned":{
+                    "type":"string",
+                    "description":"Specifies whether the attribute value is returned in response to a query. The default value is default to indicate that the attribute value is returned.",
+                    "title":"Returned"
+                },
+                "uniqueness":{
+                    "type":"string",
+                    "description":"Specifies the uniqueness of the attribute value. The default value is none to indicate that the values are not unique.",
+                    "title":"Uniqueness"
+                }
+            }
+        },
+        "subattributes-item":{
+            "type":"object",
+            "properties":{
+                "name":{
+                    "type":"string",
+                    "description":"The sub-attribute name.",
+                    "title":"Name"
+                },
+                "type":{
+                    "type":"string",
+                    "description":"The sub-attribute data type.",
+                    "title":"Type"
+                },
+                "description":{
+                    "type":"string",
+                    "description":"The sub-attribute description.",
+                    "title":"Description"
+                },
+                "mutability":{
+                    "type":"string",
+                    "description":"The mutability of the sub-attribute. The default value is readWrite.",
+                    "title":"Mutability"
+                },
+                "multiValued":{
+                    "type":"boolean",
+                    "description":"Indicates whether the sub-attribute contains multiple values. The default value is false.",
+                    "title":"MultiValued"
+                },
+                "required":{
+                    "type":"boolean",
+                    "description":"Indicates whether the sub-attribute is required. The default value is false.",
+                    "title":"Required"
+                },
+                "caseExact":{
+                    "type":"boolean",
+                    "description":"Indicates whether the sub-attribute name is case sensitive. The default value is false.",
+                    "title":"CaseExact"
+                }
+            }
+        },
+        "Roles":{
+            "properties":{
+                "itemsPerPage":{
+                    "type":"integer",
+                    "description":"The number of resource instances returned in the current range.",
+                    "title":"Count"
+                },
+                "startIndex":{
+                    "type":"integer",
+                    "description":"This parameter defines the starting position in the resource collection. For example, if startIndex is 11 and itemsPerPage is 10, the response body contains rows from 11 to 20.",
+                    "title":"start index"
+                },
+                "Resources":{
+                    "items":{
+                        "$ref":"#/definitions/Roles-item"
+                    },
+                    "type":"array",
+                    "description":"The roles in the collection.",
+                    "title":"Resources"
+                }
+            },
+            "type":"object"
+        },
+        "Roles-item":{
+            "properties":{
+                "schemas":{
+                    "type":"array",
+                    "description":"The schema of the roles resource.",
+                    "title":"Schemas",
+                    "items":{
+                        "type":"string"
+                    }
+                },
+                "meta":{
+                    "description":"The metadata of the roles resource.",
+                    "title":"meta",
+                    "items":{
+                        "$ref":"#/definitions/meta-item"
+                    }
+                },
+                "id":{
+                    "type":"string",
+                    "description":"A unique identifier for the role in Oracle Applications Cloud.",
+                    "title":"Id"
+                },
+                "name":{
+                    "type":"string",
+                    "description":"The name of the role.",
+                    "title":"Name"
+                },
+                "displayName":{
+                    "type":"string",
+                    "description":"The display name for the role.",
+                    "title":"DisplayName"
+                },
+                "description":{
+                    "type":"string",
+                    "description":"The description of the role.",
+                    "title":"Description"
+                },
+                "category":{
+                    "type":"string",
+                    "description":"The category of the role, for example Manager.",
+                    "title":"Category"
+                },
+                "members":{
+                    "type":"array",
+                    "description":"A list of users assigned to the role.",
+                    "title":"Members",
+                    "items":{
+                        "$ref":"#/definitions/members-item"
+                    }
+                }
+            }
+        },
+        "Roles-update-item":{
+            "properties":{
+                "members":{
+                    "type":"array",
+                    "description":"A list of users assigned to the role.",
+                    "title":"Members",
+                    "items":{
+                        "$ref":"#/definitions/members-item"
+                    }
+                }
+            }
+        },
+        "members-item":{
+            "type":"object",
+            "properties":{
+                "operation":{
+                    "type":"string",
+                    "description":"The operation to be performed in the PATCH request.",
+                    "title":"Operation"
+                },
+                "value":{
+                    "type":"string",
+                    "description":"The unique identifier of the user assigned to the role.",
+                    "title":"Value"
+                }
+            }
+        },
+        "Bulk":{
+            "properties":{
+                "Operations":{
+                    "items":{
+                        "$ref":"#/definitions/Operation-item"
+                    },
+                    "type":"array",
+                    "description":"The operations defined within a bulk job. Each operation corresponds to a single HTTP request against a resource endpoint.",
+                    "title":"Operations"
+                }
+            },
+            "type":"object"
+        },
+        "Operation-item":{
+            "properties":{
+                "location":{
+                    "type":"string",
+                    "description":"The resource endpoint URL.",
+                    "title":"location"
+                },
+                "method":{
+                    "type":"string",
+                    "description":"The HTTP method of the current operation.",
+                    "title":"method"
+                },
+                "bulkId":{
+                    "type":"string",
+                    "description":"The transient identifier of a newly created resource, which is unique within a bulk request and created by the client.",
+                    "title":"bulkId"
+                },
+                "status":{
+                    "items":{
+                        "$ref":"#/definitions/status-item"
+                    },
+                    "type":"object",
+                    "description":"A complex type that contains information about the success or failure of one operation within the bulk job.",
+                    "title":"status"
+                }
+            },
+            "type":"object"
+        },
+        "status-item":{
+            "properties":{
+                "code":{
+                    "type":"string",
+                    "description":"The HTTP response code that would be returned if a single HTTP request was used.",
+                    "title":"code"
+                },
+                "description":{
+                    "type":"string",
+                    "description":"A error message, which is required when the error occurs.",
+                    "title":"description"
+                }
+            },
+            "type":"object"
+        },
+        "bulkParam-item":{
+            "type":"object",
+            "properties":{
+                "bulkId":{
+                    "type":"string",
+                    "description":"The transient identifier of a newly created resource, which is unique within a bulk request and created by the client.",
+                    "title":"bulkId"
+                },
+                "method":{
+                    "type":"string",
+                    "description":"The HTTP method of the current operation.",
+                    "title":"method"
+                },
+                "data":{
+                    "type":"string",
+                    "description":"The resource data as it would appear for a single POST or PATCH resource operation.",
+                    "title":"data"
+                },
+                "path":{
+                    "type":"string",
+                    "description":"The relative path of the resource. If the method is POST, the value must specify a resource type endpoint, for example, /Users. For all the other methods, the value must specify the path to a specific resource, for example, /Users/2819c223-7f76-453a-919d-413861904646.",
+                    "title":"path"
+                }
+            }
+        },
+        "User Requests":{
+            "properties":{
+                "itemsPerPage":{
+                    "type":"integer",
+                    "description":"The number of resource instances returned in the current range.",
+                    "title":"Count"
+                },
+                "startIndex":{
+                    "type":"integer",
+                    "description":"This parameter defines the starting position in the resource collection. For example, if startIndex is 11 and itemsPerPage is 10, the response body contains rows from 11 to 20.",
+                    "title":"start index"
+                },
+                "Resources":{
+                    "items":{
+                        "$ref":"#/definitions/UserRequest-item"
+                    },
+                    "type":"array",
+                    "description":"The user request resources in the collection.",
+                    "title":"Resources"
+                }
+            },
+            "type":"object"
+        },
+        "UserRequest-item":{
+            "properties":{
+                "userRequestType":{
+                    "type":"string",
+                    "description":"The action code of the user request. For example, to create, update, activate, disable, or delete a user.",
+                    "title":"UserRequestType"
+                },
+                "addresses":{
+                    "type":"object",
+                    "description":"The address information of the user.",
+                    "title":"Addresses",
+                    "items":{
+                        "$ref":"#/definitions/Address-item"
+                    }
+                },
+                "employeeNumber":{
+                    "title":"EmployeeNumber",
+                    "type":"string",
+                    "description":"A unique employee number for the user's account in Oracle Applications Cloud."
+                },
+                "manager":{
+                    "type":"object",
+                    "description":"The details of the user's manager.",
+                    "title":"Manager",
+                    "items":{
+                        "$ref":"#/definitions/Manager-item"
+                    }
+                },
+                "phoneNumbers":{
+                    "type":"object",
+                    "description":"The user's phone number information.",
+                    "title":"PhoneNumbers",
+                    "items":{
+                        "$ref":"#/definitions/PhoneNumber-item"
+                    }
+                },
+                "userType":{
+                    "title":"UserType",
+                    "type":"string",
+                    "description":"Worker type of the user that identifies the organization-user relationship."
+                },
+                "user":{
+                    "title":"User",
+                    "type":"object",
+                    "description":"The user information in Oracle Applications Cloud.",
+                    "items":{
+                        "$ref":"#/definitions/Users-item"
+                    }
+                }
+            }
+        },
+        "PhoneNumber-item":{
+            "properties":{
+                "value":{
+                    "title":"Value",
+                    "type":"string",
+                    "description":"The phone number of the user."
+                },
+                "type":{
+                    "title":"Type",
+                    "type":"string",
+                    "description":"The type of phone number."
+                }
+            }
+        },
+        "Manager-item":{
+            "properties":{
+                "managerId":{
+                    "title":"ManagerId",
+                    "type":"string",
+                    "description":"The unique identifier of the user's manager."
+                },
+                "ref":{
+                    "title":"ref",
+                    "type":"string",
+                    "description":"The URI reference of the user's manager."
+                },
+                "displayName":{
+                    "title":"DisplayName",
+                    "type":"string",
+                    "description":"The display name of the user's manager."
+                },
+                "userName":{
+                    "title":"UserName",
+                    "type":"string",
+                    "description":"The login name of the manager."
+                }
+            }
+        },
+        "Address-item":{
+            "type":"object",
+            "properties":{
+                "country":{
+                    "type":"string",
+                    "description":"The country name in the address.",
+                    "title":"Country"
+                },
+                "locality":{
+                    "type":"string",
+                    "description":"The locality name in the address.",
+                    "title":"Locality"
+                },
+                "formatted":{
+                    "type":"string",
+                    "description":"The formatted version of the address.",
+                    "title":"Formatted"
+                },
+                "region":{
+                    "type":"string",
+                    "description":"The region details in the address.",
+                    "title":"Region"
+                },
+                "streetAddress":{
+                    "type":"string",
+                    "description":"The street name or number in the address.",
+                    "title":"StreetAddress"
+                },
+                "postalCode":{
+                    "type":"string",
+                    "description":"The postal code of the address.",
+                    "title":"PostalCode"
+                }
+            }
+        },
+        "attributeDetails":{
+            "properties":{
+                "attribute":{
+                    "type":"string",
+                    "description":"The display name of the attribute.",
+                    "title":"Attribute Name"
+                },
+                "attributeInternalName":{
+                    "type":"string",
+                    "description":"The internal name of the attribute.",
+                    "title":"Attribute internal name"
+                },
+                "newValue":{
+                    "type":"string",
+                    "description":"The new value of the attribute retrieved in the audit report.",
+                    "title":"Attribute new value"
+                },
+                "newValueId":{
+                    "type":"string",
+                    "description":"The attribute Id for the new value.",
+                    "title":"Attribute new value Id"
+                },
+                "oldValue":{
+                    "type":"string",
+                    "description":"The old value of the attribute retrieved in the audit report.",
+                    "title":"Attribute old value"
+                },
+                "oldValueId":{
+                    "type":"string",
+                    "description":"The attribute Id of the old value.",
+                    "title":"Attribute old value Id"
+                }
+            },
+            "type":"object"
+        },
+        "auditData":{
+            "properties":{
+                "date":{
+                    "type":"string",
+                    "description":"The date when the audit record was inserted, updated, or deleted.",
+                    "title":"Date"
+                },
+                "userName":{
+                    "type":"string",
+                    "description":"The display name of the user retrieving the audit report.",
+                    "title":"User display name"
+                },
+                "userInternalName":{
+                    "type":"string",
+                    "description":"The internal name of the user.",
+                    "title":"User internal name"
+                },
+                "impersonator":{
+                    "type":"string",
+                    "description":"The name of the impersonator.",
+                    "title":"Impersonator name"
+                },
+                "eventType":{
+                    "type":"string",
+                    "description":"The type of event.",
+                    "title":"Event Type"
+                },
+                "businessObject":{
+                    "type":"string",
+                    "description":"The display name of the business object.",
+                    "title":"Business Object(display name)"
+                },
+                "qualifiedBusinessObject":{
+                    "type":"string",
+                    "description":"The fully qualified view object name.",
+                    "title":"Business Object(internal name)"
+                },
+                "description":{
+                    "type":"string",
+                    "description":"The description of the event.",
+                    "title":"Event description"
+                },
+                "descriptionInternal":{
+                    "type":"string",
+                    "description":"The internal description of the event.",
+                    "title":"Event description(internal name)"
+                },
+                "attributeDetails":{
+                    "items":{
+                        "$ref":"#/definitions/attributeDetails"
+                    },
+                    "type":"array",
+                    "description":"The attribute details displayed in the audit report.",
+                    "title":"Attribute Details"
+                },
+                "contextName1":{
+                    "type":"string",
+                    "description":"The name of the first context attribute defined in the view object.",
+                    "title":"Context Name1"
+                },
+                "contextValue1":{
+                    "type":"string",
+                    "description":"The value of the first context attribute defined in the view object.",
+                    "title":"Context Value1"
+                },
+                "contextName2":{
+                    "type":"string",
+                    "description":"The name of the second context attribute defined in the view object.",
+                    "title":"Context Name2"
+                },
+                "contextValue2":{
+                    "type":"string",
+                    "description":"The value of the second context attribute defined in the view object.",
+                    "title":"Context Value2"
+                },
+                "contextName3":{
+                    "type":"string",
+                    "description":"The name of the third context attribute defined in the view object.",
+                    "title":"Context Name3"
+                },
+                "contextValue3":{
+                    "type":"string",
+                    "description":"The value of the third context attribute defined in the view object.",
+                    "title":"Context Value3"
+                }
+            },
+            "type":"object"
+        },
+        "auditHistory":{
+            "properties":{
+                "pageNumber":{
+                    "type":"string",
+                    "description":"The current page number in the audit report.",
+                    "title":"Page Number"
+                },
+                "pageSize":{
+                    "type":"string",
+                    "description":"The number of records displayed per page in the audit report.",
+                    "title":"Page Size"
+                },
+                "status":{
+                    "type":"string",
+                    "description":"The status of the audit report.",
+                    "title":"Status"
+                },
+                "actionName":{
+                    "type":"string",
+                    "description":"The request method name for which the response is retrieved.",
+                    "title":"Action Name"
+                },
+                "auditData":{
+                    "items":{
+                        "$ref":"#/definitions/auditData"
+                    },
+                    "type":"array",
+                    "description":"The audit data retrieved for the specified criteria.",
+                    "title":"Audit data"
+                }
+            },
+            "type":"object"
+        },
+        "auditHistoryOnError":{
+            "properties":{
+                "status":{
+                    "type":"string",
+                    "description":"The status of the audit report requets. Valid values are 200-success, 400-Bad request, 401-Authentication error, 403-Authorization error, and 500-Internal server error.",
+                    "title":"Status"
+                },
+                "actionName":{
+                    "type":"string",
+                    "description":"Action Name.",
+                    "title":"Action Name"
+                },
+                "error":{
+                    "items":{
+                        "$ref":"#/definitions/error"
+                    },
+                    "type":"array",
+                    "description":"The details of the error occurred.",
+                    "title":"Error"
+                }
+            },
+            "type":"object"
+        },
+        "error":{
+            "properties":{
+                "type":{
+                    "type":"string",
+                    "description":"The type of error.",
+                    "title":"Error Type"
+                },
+                "detail":{
+                    "type":"string",
+                    "description":"The detailed log of the error.",
+                    "title":"Error Detail"
+                },
+                "status":{
+                    "type":"string",
+                    "description":"The status of the error.",
+                    "title":"Error Status"
+                },
+                "title":{
+                    "type":"string",
+                    "description":"The title of the error.",
+                    "title":"Error Title"
+                }
+            },
+            "type":"object"
+        }
+    },
+    "tags":[
+        {
+            "name":"Audit Report",
+            "description":"The audit report resource is used to get audit history of the business objects and middleware components."
+        },
+        {
+            "name":"Bulk",
+            "description":"The bulk operation is used to send a large collection of resource operations in a single request. The body of a bulk operation contains a set of HTTP resource operations using any of the supported HTTP methods for Users and Roles resources. The supported HTTP methods for the bulk operation include POST, PUT, PATCH, and DELETE. Each bulk job can have multiple operations per resource. It may be beneficial to perform the bulk job in batches, for example 50 operations per batch."
+        },
+        {
+            "name":"Resource Types",
+            "description":"The resource type resource is used to view the supported resource types and their meta data."
+        },
+        {
+            "name":"Roles",
+            "description":"The roles resource is used to add, view, or delete membership to roles in Oracle Applications Cloud. You can also view the users assigned to each role."
+        },
+        {
+            "name":"Schemas",
+            "description":"The scheme resource is used to view the attribute definitions of the System for Cross-domain Identity Management (SCIM) resources."
+        },
+        {
+            "name":"User Requests",
+            "description":"The userRequest resource publishes an atom entry when a user is created, updated, activated, disabled, or deleted in Oracle Applications Cloud."
+        },
+        {
+            "name":"Users",
+            "description":"The user resource is used to create, update, delete, or view users in Oracle Applications Cloud."
+        }
+    ],
+    "paths":{
+        "/hcmCoreSetupApi/scim/ResourceTypes":{
+            "get":{
+                "operationId":"search",
+                "responses":{
+                    "default":{
+                        "description":"The following table describes the default response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Resource Types"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "Resource Types"
+                ],
+                "summary":"Get all resource types",
+                "x-internal-id":"hcmCoreSetupApi-scim-ResourceTypes-get"
+            }
+        },
+        "/hcmCoreSetupApi/scim/ResourceTypes/{id}":{
+            "get":{
+                "operationId":"read",
+                "responses":{
+                    "default":{
+                        "description":"The following table describes the default response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Resource Types-item"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "Resource Types"
+                ],
+                "summary":"Get a resource type",
+                "x-internal-id":"hcmCoreSetupApi-scim-ResourceTypes-{id}-get"
+            },
+            "parameters":[
+                {
+                    "name":"id",
+                    "description":"The unique identifier of the resource type.",
+                    "required":true,
+                    "in":"path",
+                    "type":"string"
+                }
+            ]
+        },
+        "/hcmCoreSetupApi/scim/Users":{
+            "get":{
+                "operationId":"search",
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/filter"
+                    },
+                    {
+                        "$ref":"#/parameters/startIndex"
+                    },
+                    {
+                        "$ref":"#/parameters/count"
+                    },
+                    {
+                        "$ref":"#/parameters/sortBy"
+                    },
+                    {
+                        "$ref":"#/parameters/sortOrder"
+                    },
+                    {
+                        "$ref":"#/parameters/attributes"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"The following table describes the response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Users"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "Users"
+                ],
+                "summary":"Get all users",
+                "x-internal-id":"hcmCoreSetupApi-scim-Users-get"
+            },
+            "post":{
+                "operationId":"create",
+                "parameters":[
+                    {
+                        "name":"request",
+                        "description":"The following table describes the body parameters in the request for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Users-item"
+                        },
+                        "in":"body"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"The following table describes the response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Users-item"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "Users"
+                ],
+                "summary":"Create a user",
+                "x-internal-id":"hcmCoreSetupApi-scim-Users-post"
+            }
+        },
+        "/hcmCoreSetupApi/scim/Users/{id}":{
+            "get":{
+                "operationId":"read",
+                "responses":{
+                    "default":{
+                        "description":"The following table describes the default response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Users-item"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "Users"
+                ],
+                "summary":"Get a user",
+                "x-internal-id":"hcmCoreSetupApi-scim-Users-{id}-get"
+            },
+            "put":{
+                "operationId":"replace",
+                "parameters":[
+                    {
+                        "name":"request",
+                        "description":"The following table describes the body parameters in the request for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Users-item"
+                        },
+                        "in":"body"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"The following table describes the response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Users-item"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "Users"
+                ],
+                "summary":"Replace a user",
+                "x-internal-id":"hcmCoreSetupApi-scim-Users-{id}-put"
+            },
+            "patch":{
+                "operationId":"update",
+                "parameters":[
+                    {
+                        "name":"request",
+                        "description":"The following table describes the body parameters in the request for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Users-item"
+                        },
+                        "in":"body"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"The following table describes the response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Users-item"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "Users"
+                ],
+                "summary":"Update a user",
+                "x-internal-id":"hcmCoreSetupApi-scim-Users-{id}-patch"
+            },
+            "delete":{
+                "operationId":"delete",
+                "responses":{
+                    "204":{
+                        "description":"No content. This task does not return elements in the response body."
+                    }
+                },
+                "tags":[
+                    "Users"
+                ],
+                "summary":"Delete a user",
+                "x-internal-id":"hcmCoreSetupApi-scim-Users-{id}-delete"
+            },
+            "parameters":[
+                {
+                    "name":"id",
+                    "description":"The unique identifier of the user",
+                    "required":true,
+                    "in":"path",
+                    "type":"string"
+                }
+            ]
+        },
+        "/hcmCoreSetupApi/scim/Schemas":{
+            "get":{
+                "operationId":"search",
+                "responses":{
+                    "default":{
+                        "description":"The following table describes the default response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Schemas"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "Schemas"
+                ],
+                "summary":"Get all schemas",
+                "x-internal-id":"hcmCoreSetupApi-scim-Schemas-get"
+            }
+        },
+        "/hcmCoreSetupApi/scim/Schemas/{id}":{
+            "get":{
+                "operationId":"read",
+                "responses":{
+                    "default":{
+                        "description":"The following table describes the default response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Schemas-item"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "Schemas"
+                ],
+                "summary":"Get a schema",
+                "x-internal-id":"hcmCoreSetupApi-scim-Schemas-{id}-get"
+            },
+            "parameters":[
+                {
+                    "name":"id",
+                    "description":"The unique identifier of the schema.",
+                    "in":"path",
+                    "required":true,
+                    "type":"string"
+                }
+            ]
+        },
+        "/hcmCoreSetupApi/scim/Roles":{
+            "get":{
+                "operationId":"search",
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/filter"
+                    },
+                    {
+                        "$ref":"#/parameters/startIndex"
+                    },
+                    {
+                        "$ref":"#/parameters/count"
+                    },
+                    {
+                        "$ref":"#/parameters/sortBy"
+                    },
+                    {
+                        "$ref":"#/parameters/sortOrder"
+                    },
+                    {
+                        "$ref":"#/parameters/attributes"
+                    }
+                ],
+                "responses":{
+                    "default":{
+                        "description":"The following table describes the default response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Roles"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "Roles"
+                ],
+                "summary":"Get all roles",
+                "x-internal-id":"hcmCoreSetupApi-scim-Roles-get"
+            }
+        },
+        "/hcmCoreSetupApi/scim/Roles/{id}":{
+            "get":{
+                "operationId":"read",
+                "responses":{
+                    "default":{
+                        "description":"The following table describes the default response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Roles-item"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "Roles"
+                ],
+                "summary":"Get a role",
+                "x-internal-id":"hcmCoreSetupApi-scim-Roles-{id}-get"
+            },
+            "patch":{
+                "operationId":"update",
+                "parameters":[
+                    {
+                        "name":"request",
+                        "description":"The following table describes the body parameters in the request for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Roles-update-item"
+                        },
+                        "in":"body"
+                    }
+                ],
+                "responses":{
+                    "204":{
+                        "description":"The server has fulfilled the request. This task does not return elements in the response body."
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "Roles"
+                ],
+                "summary":"Update a role",
+                "x-internal-id":"hcmCoreSetupApi-scim-Roles-{id}-patch"
+            },
+            "parameters":[
+                {
+                    "name":"id",
+                    "description":"The unique identifier of the role.",
+                    "in":"path",
+                    "required":true,
+                    "type":"string"
+                }
+            ]
+        },
+        "/hcmCoreSetupApi/scim/Bulk":{
+            "post":{
+                "operationId":"post",
+                "parameters":[
+                    {
+                        "name":"bulk",
+                        "schema":{
+                            "$ref":"#/definitions/bulkParam-item"
+                        },
+                        "in":"body"
+                    }
+                ],
+                "responses":{
+                    "default":{
+                        "description":"The following table describes the response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/Bulk"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "Bulk"
+                ],
+                "summary":"Bulk operation",
+                "x-internal-id":"hcmCoreSetupApi-scim-Bulk-post"
+            }
+        },
+        "/hcmCoreApi/atomservlet/user/userRequests":{
+            "get":{
+                "operationId":"search",
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/filter"
+                    },
+                    {
+                        "$ref":"#/parameters/startIndex"
+                    },
+                    {
+                        "$ref":"#/parameters/count"
+                    },
+                    {
+                        "$ref":"#/parameters/sortBy"
+                    },
+                    {
+                        "$ref":"#/parameters/sortOrder"
+                    },
+                    {
+                        "$ref":"#/parameters/attributes"
+                    }
+                ],
+                "responses":{
+                    "default":{
+                        "description":"The following table describes the default response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/User Requests"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "User Requests"
+                ],
+                "summary":"Get all user requests",
+                "x-internal-id":"hcmCoreApi-atomservlet-user-userRequests-get"
+            }
+        },
+        "/hcmCoreApi/atomservlet/user/userRequests/{id}":{
+            "get":{
+                "operationId":"read",
+                "responses":{
+                    "default":{
+                        "description":"The following table describes the default response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/UserRequest-item"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "User Requests"
+                ],
+                "summary":"Get a user request",
+                "x-internal-id":"hcmCoreApi-atomservlet-user-userRequests-{id}-get"
+            },
+            "parameters":[
+                {
+                    "name":"id",
+                    "description":"The unique identifier of the user.",
+                    "required":true,
+                    "in":"path",
+                    "type":"string"
+                }
+            ]
+        },
+        "/fndSetup/fndAuditRESTService/audittrail/getaudithistory":{
+            "post":{
+                "operationId":"getaudithistory",
+                "parameters":[
+                    {
+                        "$ref":"#/parameters/fromDate"
+                    },
+                    {
+                        "$ref":"#/parameters/toDate"
+                    },
+                    {
+                        "$ref":"#/parameters/user"
+                    },
+                    {
+                        "$ref":"#/parameters/product"
+                    },
+                    {
+                        "$ref":"#/parameters/eventType"
+                    },
+                    {
+                        "$ref":"#/parameters/businessObjectType"
+                    },
+                    {
+                        "$ref":"#/parameters/includeChildObjects"
+                    },
+                    {
+                        "$ref":"#/parameters/includeImpersonator"
+                    },
+                    {
+                        "$ref":"#/parameters/includeExtendedObjectIdentiferColumns"
+                    },
+                    {
+                        "$ref":"#/parameters/includeAttributes"
+                    },
+                    {
+                        "$ref":"#/parameters/timeZone"
+                    },
+                    {
+                        "$ref":"#/parameters/pageNumber"
+                    },
+                    {
+                        "$ref":"#/parameters/pageSize"
+                    },
+                    {
+                        "$ref":"#/parameters/attributeDetailMode"
+                    }
+                ],
+                "responses":{
+                    "200":{
+                        "description":"The following table describes the response for this task.",
+                        "schema":{
+                            "$ref":"#/definitions/auditHistory"
+                        }
+                    }
+                },
+                "produces":[
+                    "application/json"
+                ],
+                "tags":[
+                    "Audit Report"
+                ],
+                "summary":"Get audit report",
+                "x-internal-id":"fndSetup-fndAuditRESTService-audittrail-getaudithistory-post"
+            }
+        }
+    },
+    "swagger":"2.0",
+    "schemes":[
+        "https"
+    ],
+    "parameters":{
+        "filter":{
+            "name":"filter",
+            "in":"query",
+            "type":"string",
+            "description":"This parameter specifies the query expression to retrieve a subset of user resource instances. Format: ?filter=<scim-filter>  Example: filter=firstName pr and userType eq Employee"
+        },
+        "startIndex":{
+            "name":"startIndex",
+            "type":"integer",
+            "in":"query",
+            "description":"This parameter specifies use of 1-based index for the first result included in the response. Specify this query parameter to use pagination."
+        },
+        "count":{
+            "name":"count",
+            "type":"integer",
+            "in":"query",
+            "description":"This parameter specifies the number of resource instances to be returned in the current range."
+        },
+        "sortBy":{
+            "name":"sortBy",
+            "type":"string",
+            "in":"query",
+            "description":"This parameter specifies the attributes based on which the resource collection is sorted.Format:  ?sortBy=<scim-attribute> where the attribute name must be of the format <attribute> for simple attributes and <attribute.subattribute> for complex attributes. Example: sortBy=active"
+        },
+        "sortOrder":{
+            "name":"sortOrder",
+            "type":"string",
+            "in":"query",
+            "description":"This parameter specifies the attributes based on which the resource collection is ordered. Example: sortOrder=ascending"
+        },
+        "attributes":{
+            "name":"attributes",
+            "type":"string",
+            "in":"query",
+            "description":"This parameter specifies a comma-separated list of attribute values to be included in the response."
+        },
+        "fromDate":{
+            "name":"fromDate",
+            "in":"query",
+            "type":"string",
+            "description":"The date from which the audit history is to be retrieved. The format of the date can be yyyy-MM-dd or yyyy-MM-dd HH:mm:ss. You can retrieve audit history for up to one month."
+        },
+        "toDate":{
+            "name":"toDate",
+            "type":"string",
+            "in":"query",
+            "description":"The date up to which the audit report data is to be retrieved. The format of the date can be yyyy-MM-dd or yyyy-MM-dd HH:mm:ss."
+        },
+        "user":{
+            "name":"user",
+            "type":"string",
+            "in":"query",
+            "description":"The display name of the user."
+        },
+        "product":{
+            "name":"product",
+            "type":"string",
+            "in":"query",
+            "description":"A predefined product value provided in the request. The valid values are available in the FND_AUDIT_WEBAPP_AM table."
+        },
+        "eventType":{
+            "name":"eventType",
+            "type":"string",
+            "in":"query",
+            "description":"A comma-separated list of events you want to search."
+        },
+        "businessObjectType":{
+            "name":"businessObjectType",
+            "type":"string",
+            "in":"query",
+            "description":"The fully qualified view object name."
+        },
+        "includeChildObjects":{
+            "name":"includeChildObjects",
+            "type":"boolean",
+            "in":"query",
+            "description":"Indicates whether to include the child objects in the audit report. The default value is false."
+        },
+        "includeImpersonator":{
+            "name":"includeImpersonator",
+            "type":"boolean",
+            "in":"query",
+            "description":"Indicates whether to include the impersonator name in the audit report. The default value is false."
+        },
+        "includeExtendedObjectIdentiferColumns":{
+            "name":"includeExtendedObjectIdentiferColumns",
+            "type":"boolean",
+            "in":"query",
+            "description":"Indicates whether to include the context information for the business objects. The default value is false."
+        },
+        "includeAttributes":{
+            "name":"includeAttributes",
+            "type":"boolean",
+            "in":"query",
+            "description":"Indicates whether the audit report includes attribute details that were changed in the specified time period. The default value is true."
+        },
+        "attributeDetailMode":{
+            "name":"attributeDetailMode",
+            "type":"boolean",
+            "in":"query",
+            "description":"Indicates whether the old and new attribute values are returned. If true, the old and new values are retrieved. If false, the response contains only attribute names, and not old and new values. The default value is false."
+        },
+        "timeZone":{
+            "name":"timeZone",
+            "type":"string",
+            "in":"query",
+            "description":"The timezone to be used for the specified period of the audit report. The valid values are availbale in the FND_TIMEZONES_VL view."
+        },
+        "managedApp":{
+            "name":"managedApp",
+            "type":"string",
+            "in":"query",
+            "description":"This is to filter the OPSS data based on managed application name. Comma separated values can be passed."
+        },
+        "pageNumber":{
+            "name":"pageNumber",
+            "type":"number",
+            "in":"query",
+            "description":"The page number in the audit report you want to view."
+        },
+        "pageSize":{
+            "name":"pageSize",
+            "type":"number",
+            "in":"query",
+            "description":"The number of records displayed in a page, in the audit report."
+        }
+    }
+}

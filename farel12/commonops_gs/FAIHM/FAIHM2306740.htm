@@ -1,0 +1,707 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Loading Hierarchy Trees (Chapter 13) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:17 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM Data Loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM2235867.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM2305097.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="A department tree is a hierarchy of departments. For each tree, you can define multiple versions. However, only one version
+      can be active on any date. This topic describes aspects of department-tree objects that you must understand to load them successfully
+      using HCM Data Loader."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">16/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM2306740" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">13</span>Loading Hierarchy Trees
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2326543">Loading Department Trees: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2326703">Loading Department Tree Nodes: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2326607">Loading Department Tree Nodes: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2329044">Loading Organization Trees: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2329219">Loading Organization Tree Nodes: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2329283">Loading Organization Tree Nodes: Examples</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM2326543">
+                  <h2>Loading Department Trees: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>A department tree is a hierarchy of departments.
+                     For each tree, you can define multiple versions. However, only one
+                     version can be active on any date. This topic describes aspects of
+                     department-tree objects that you must understand to load them successfully
+                     using HCM Data Loader.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2326542">
+                     <h3 class="topictitle">Key Support</h3>
+                     
+                     <p>Department tree is unlike most other objects that
+                        you can load using HCM Data Loader, as it doesn't support the integration-key
+                        types. When you load department trees, you must supply the user-key
+                        attributes.
+                     </p>
+                     
+                  </div>
+                  <div class="sect2" id="FAIHM2326573">
+                     <h3 class="topictitle">How Department Trees Are Implemented</h3>
+                     
+                     <p>Department trees are implemented using two HCM Data
+                        Loader objects. This table introduces those objects.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Object
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Department tree</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The definition of a tree and the versions of the
+                                    tree. A tree version is empty until you load department tree nodes for the tree version.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Department tree node</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The department tree nodes for a tree version. Each
+                                    node represents a department.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                  </div>
+                  <div class="sect2" id="FAIHM2326584">
+                     <h3 class="topictitle">Loading Department Trees</h3>
+                     
+                     <p>You supply department-tree data in the DepartmentTree.dat
+                        file for processing by HCM Data Loader. The <span class="uicontrol">TreeStructureCode</span> attribute of both the department tree
+                        and the department tree version must be set to <span class="uicontrol">PER_DEPT_TREE_STRUCTURE</span> for a department tree.
+                     </p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        When you load a new department tree version for an
+                        existing department tree, you must include the department tree component
+                        in the DepartmentTree.dat file. You can't load a new department tree
+                        version in isolation.
+                        
+                     </div>
+                     
+                     <p>This example DepartmentTree.dat file creates a department
+                        tree with code <span class="uicontrol">Department Tree Code</span> and three versions, one for each of January, February, and March.
+                     </p>
+                     <pre><code>METADATA|DepartmentTree|TreeStructureCode|TreeCode|TreeName|TreeDescription
+MERGE|DepartmentTree|PER_DEPT_TREE_STRUCTURE|Department Tree Code|My Tree Name|My Tree Description
+METADATA|DepartmentTreeVersion|TreeStructureCode|TreeCode|TreeVersionName|TreeVersionDescription|TreeVersionStartDate|TreeVersionEndDate
+MERGE|DepartmentTreeVersion|PER_DEPT_TREE_STRUCTURE|Department Tree Code|Tree Version Jan| Tree Description Jan|2015/01/01|2015/01/31
+MERGE|DepartmentTreeVersion|PER_DEPT_TREE_STRUCTURE|Department Tree Code|Tree Version Feb| Tree Description Feb|2015/02/01|2015/02/28
+MERGE|DepartmentTreeVersion|PER_DEPT_TREE_STRUCTURE|Department Tree Code|Tree Version Mar| Tree Description Mar|2015/03/01|2015/03/31<br></code></pre>
+                     </div>
+                  <div class="sect2" id="FAIHM2326593">
+                     <h3 class="topictitle">Deleting Department Trees</h3>
+                     
+                     <p>You can delete department trees and department tree
+                        versions using HCM Data Loader. When you delete a department tree,
+                        the tree and all of its versions and nodes are deleted.
+                     </p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        The departments themselves aren't deleted. Only the
+                        relationships defined in the tree structure are deleted.
+                        
+                     </div>
+                     
+                     <p>This example DepartmentTree.dat file deletes a department
+                        tree:
+                     </p>
+                     <pre><code>METADATA|DepartmentTree|TreeStructureCode|TreeCode
+DELETE|DepartmentTree|PER_DEPT_TREE_STRUCTURE|Department Tree Code<br></code></pre>
+                     <p>If you delete a department tree version, then only
+                        the specified version and its nodes are deleted. The tree and its
+                        other versions are retained. This example DepartmentTree.dat file
+                        deletes a department tree version:
+                     </p>
+                     <pre><code>METADATA|DepartmentTreeVersion|TreeStructureCode|TreeCode|TreeVersionName
+DELETE|DepartmentTreeVersion|PER_DEPT_TREE_STRUCTURE|Department Tree Code|Tree Version Feb<br></code></pre>
+                     </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2326703">
+                  <h2>Loading Department Tree Nodes: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>A department is an internal organization
+                     to which workers are assigned. You can add any organization that has
+                     the Department classification as a tree node to a department tree version. This
+                     topic describes aspects of department tree nodes that you must understand
+                     to load them successfully using HCM Data Loader.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2326702">
+                     <h3 class="topictitle">Preparing to Load Department Tree Nodes</h3>
+                     
+                     <p>Before you load department tree nodes:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>You must create the department
+                              tree and department tree version to which the nodes belong. You can
+                              either load them using HCM Data Loader or create them using the Manage
+                              Department Trees task in the Workforce Structures work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The departments that the tree nodes
+                              refer to must exist on the start date of the tree hierarchy version.
+                              Simply adding a department to the department tree hierarchy doesn't
+                              create the department. Similarly, removing a department reference
+                              from a department tree hierarchy doesn't delete the department record.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2326720">
+                     <h3 class="topictitle">Loading Department Tree Nodes</h3>
+                     
+                     <p>The department tree node records the relationship
+                        between a parent department and a child, which can be either a department
+                        or another department tree version. When the child is another department
+                        tree version, the department nodes of that version are included by
+                        reference. When you load department tree nodes, these rules apply:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>You must supply a parent department
+                              for all nodes except the top-level node of your department tree version.
+                              The parent departments must exist. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The <span class="uicontrol">TreeStructureCode</span> attribute must be set to <span class="uicontrol">PER_DEPT_TREE_STRUCTURE</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>To avoid circular relationships,
+                              a department can appear only once in each tree version.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Each tree version can have only
+                              one top node. If you need multiple peer departments at the top, then
+                              consider using a dummy department as the top node.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM2141648.htm#FAIHM2051431">Processes to Run After Loading Data: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2326607">
+                  <h2>Loading Department Tree Nodes: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>You can load any organization that has the
+                     Department classification as a tree node to a department tree version. This
+                     topic shows how to load department tree nodes using HCM Data Loader.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2326599"><h3 class="OracleScenario">Creating Department Tree Nodes</h3>
+                     <p>This example DepartmentTreeNode.dat file loads department
+                        tree nodes to an existing department tree version.
+                     </p><pre><code>METADATA|DepartmentTreeNode|TreeStructureCode|TreeCode|TreeVersionName|DepartmentName|ParentDepartmentName
+MERGE|DepartmentTreeVersion|PER_DEPT_TREE_STRUCTURE|Department Tree Code|Tree Version Jan|Vision University|
+MERGE|DepartmentTreeVersion|PER_DEPT_TREE_STRUCTURE|Department Tree Code|Tree Version Jan|School of Arts and Science|Vision University
+MERGE|DepartmentTreeVersion|PER_DEPT_TREE_STRUCTURE|Department Tree Code|Tree Version Jan|Drama|School of Arts and Science
+MERGE|DepartmentTreeVersion|PER_DEPT_TREE_STRUCTURE|Department Tree Code|Tree Version Jan|Languages|Vision University
+MERGE|DepartmentTreeVersion|PER_DEPT_TREE_STRUCTURE|Department Tree Code|Tree Version Jan|French|Languages
+MERGE|DepartmentTreeVersion|PER_DEPT_TREE_STRUCTURE|Department Tree Code|Tree Version Jan|German|Languages<br></code></pre><p>This figure shows the hierarchy nodes that this DepartmentTreeNode.dat
+                        file creates.
+                     </p><img src="img/hrc_hdl_deptnodes_create_02_20059199.png" alt="Vision University is at the top of the hierarchy.&#xA;It inherits two departments: the School of Arts and Science and the&#xA;Languages departments. The School of Arts and Science inherits the&#xA;Drama department. The Languages department inherits the French and&#xA;German departments." class="fusappimg"></div>
+                  
+                  <div class="sect2" id="FAIHM2326614"><h3 class="OracleScenario">Deleting Department Tree Nodes</h3>
+                     <p>You can delete department tree nodes using HCM Data
+                        Loader. The departments are removed from the tree version, but the
+                        department objects themselves continue to exist. To delete a department
+                        tree node and all nodes below it in the department tree hierarchy,
+                        set the <span class="uicontrol">DeleteChildNodesFlag</span> attribute
+                        to <span class="uicontrol">Y</span>. This example DepartmentTreeNode.dat
+                        file deletes a node and its child nodes.
+                     </p><pre><code>METADATA|DepartmentTreeNode|TreeStructureCode|TreeCode|TreeVersionName|DepartmentName|DeleteChildNodesFlag
+DELETE|DepartmentTreeVersion|PER_DEPT_TREE_STRUCTURE|Department Tree Code|Tree Version Jan|Languages|Y<br></code></pre><p>This figure shows the hierarchy after deleting the
+                        Languages node and its child nodes.
+                     </p><img src="img/hrc_hdl_deptnodes_del_all_01_20059128.png" alt="Vision University is at the top of the hierarchy. It&#xA;inherits the School of Arts and Science department. The School of&#xA;Arts and Science inherits the Drama department." class="fusappimg"><p>To delete a department tree node and promote its
+                        child nodes, set the <span class="uicontrol">DeleteChildNodesFlag</span> attribute to <span class="uicontrol">N</span>. This example
+                        DepartmentTreeNode.dat file deletes a node and promotes its child
+                        nodes.
+                     </p><pre><code>METADATA|DepartmentTreeNode|TreeStructureCode|TreeCode|TreeVersionName|DepartmentName|DeleteChildNodesFlag
+DELETE|DepartmentTreeVersion|PER_DEPT_TREE_STRUCTURE|Department Tree Code|Tree Version Jan|Languages|N<br></code></pre><p>This figure shows the hierarchy after deleting the
+                        Languages node and promoting its child nodes.
+                     </p><img src="img/hrc_hdl_deptnodes_del_promote_01_20059129.png" alt="Vision University is at the top of the hierarchy.&#xA;It inherits the Schools of Arts and Science, French, and German departments.&#xA;The School of Arts and Science inherits the Drama department." class="fusappimg"></div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2329044">
+                  <h2>Loading Organization Trees: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>An organization tree is a hierarchy of organizations
+                     of any classification. For each tree, you can define multiple versions.
+                     However, only one version can be active on any date. This topic describes
+                     aspects of organization-tree objects that you must understand to load
+                     them successfully using HCM Data Loader.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2329043">
+                     <h3 class="topictitle">Key Support</h3>
+                     
+                     <p>Organization tree is unlike most other objects that
+                        you can load using HCM Data Loader, as it doesn't support the integration-key
+                        types. When you load organization trees, you must supply the user-key
+                        attributes.
+                     </p>
+                     
+                  </div>
+                  <div class="sect2" id="FAIHM2329066">
+                     <h3 class="topictitle">How Organization Trees Are Implemented</h3>
+                     
+                     <p>Organization trees are implemented using two HCM
+                        Data Loader objects. This table introduces those objects.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Object
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Organization tree</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The definition of a tree and the versions of the
+                                    tree. A tree version is empty until you load organization tree nodes for the tree version.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Organization tree node</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The organization tree nodes for a tree version. Each
+                                    node represents an organization.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                  </div>
+                  <div class="sect2" id="FAIHM2329133">
+                     <h3 class="topictitle">Loading Organization Trees</h3>
+                     
+                     <p>You supply organization-tree data in the OrganizationTree.dat
+                        file for processing by HCM Data Loader. The <span class="uicontrol">TreeStructureCode</span> attribute of both the organization
+                        tree and the organization tree version must be set to <span class="uicontrol">PER_ORG_TREE_STRUCTURE</span> for an organization
+                        tree.
+                     </p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        When you load a new organization tree version for
+                        an existing organization tree, you must include the organization tree
+                        component in the OrganizationTree.dat file. You can't load a new organization
+                        tree version in isolation.
+                        
+                     </div>
+                     
+                     <p>This example OrganizationTree.dat file creates an
+                        organization tree with code Organization Tree Code and three versions,
+                        one for each of January, February, and March.
+                     </p>
+                     <pre><code>METADATA|OrganizationTree|TreeStructureCode|TreeCode|TreeName|TreeDescription
+MERGE|OrganizationTree|PER_ORG_TREE_STRUCTURE|Organization Tree Code|My Tree Name|My Tree Description
+METADATA|OrganizationTreeVersion|TreeStructureCode|TreeCode|TreeVersionName|TreeVersionDescription|TreeVersionStartDate|TreeVersionEndDate
+MERGE|OrganizationTreeVersion|PER_ORG_TREE_STRUCTURE|Organization Tree Code|Tree Version Jan| Tree Description Jan|2015/01/01|2015/01/31
+MERGE|OrganizationTreeVersion|PER_ORG_TREE_STRUCTURE|Organization Tree Code|Tree Version Feb| Tree Description Feb|2015/02/01|2015/02/28
+MERGE|OrganizationTreeVersion|PER_ORG_TREE_STRUCTURE|Organization Tree Code|Tree Version Mar| Tree Description Mar|2015/03/01|2015/03/31<br></code></pre>
+                     </div>
+                  <div class="sect2" id="FAIHM2329147">
+                     <h3 class="topictitle">Deleting Organization Trees</h3>
+                     
+                     <p>You can delete organization trees and organization
+                        tree versions using HCM Data Loader. When you delete an organization
+                        tree, the tree and all of its versions and nodes are deleted.
+                     </p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        The organizations themselves aren't deleted. Only
+                        the relationships defined in the tree structure are deleted.
+                        
+                     </div>
+                     
+                     <p>This example OrganizationTree.dat file deletes an
+                        organization tree:
+                     </p>
+                     <pre><code>METADATA|OrganizationTree|TreeStructureCode|TreeCode
+DELETE|OrganizationTree|PER_ORG_TREE_STRUCTURE|Organization Tree Code<br></code></pre>
+                     <p>If you delete an organization tree version, then
+                        only the specified version and its nodes are deleted. The tree and
+                        its other versions are retained. This example OrganizationTree.dat
+                        file deletes an organization tree version:
+                     </p>
+                     <pre><code>METADATA|OrganizationTreeVersion|TreeStructureCode|TreeCode|TreeVersionName
+DELETE|OrganizationTreeVersion|PER_ORG_TREE_STRUCTURE|Organization Tree Code|Tree Version Feb<br></code></pre>
+                     </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2329219">
+                  <h2>Loading Organization Tree Nodes: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can load an organization of any classification
+                     as a tree node to
+                     an organization tree
+                     version. This topic describes aspects of organization tree
+                     nodes that you must understand to load them successfully using HCM
+                     Data Loader.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2329218">
+                     <h3 class="topictitle">Preparing to Load Organization Tree Nodes</h3>
+                     
+                     <p>Before you load organization tree nodes:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>You must create the organization
+                              tree and organization tree version to which the nodes belong. You
+                              can either load them using HCM Data Loader or create them using the
+                              Manage Organization Trees task in the Workforce Structures work area.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>The organizations that the tree
+                              nodes refer to must exist on the start date of the tree hierarchy
+                              version. Simply adding an organization to the organization tree hierarchy
+                              doesn't create the organization. Similarly, removing an organization
+                              reference from an organization tree hierarchy doesn't delete the organization
+                              record.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2329259">
+                     <h3 class="topictitle">Loading Organization Tree Nodes</h3>
+                     
+                     <p>The organization tree node records the relationship
+                        between a parent organization and a child, which can be either an
+                        organization or another organization tree version. When the child
+                        is an organization, you specify its classification on the <span class="uicontrol">ClassificationCode</span> attribute. When the child
+                        is another organization tree version, the organization nodes of that
+                        version are included by reference. When you load organization tree
+                        nodes, these rules apply:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>You must supply a parent organization
+                              for all nodes except the top-level node of your organization tree
+                              version. The parent organizations must exist.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The <span class="uicontrol">TreeStructureCode</span> attribute must be set to <span class="uicontrol">PER_ORG_TREE_STRUCTURE</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>To avoid circular relationships,
+                              an organization can appear only once in each tree version.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Each tree version can have only
+                              one top node. If you need multiple peer organizations at the top,
+                              then consider using the enterprise as the top node.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM2141648.htm#FAIHM2051431">Processes to Run After Loading Data: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2329283">
+                  <h2>Loading Organization Tree Nodes: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>You can load an organization with any classification
+                     as a tree node to
+                     an organization tree
+                     version. This topic shows how to load organization tree nodes
+                     using HCM Data Loader.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2329275"><h3 class="OracleScenario">Creating Organization Tree Nodes</h3>
+                     <p>This example OrganizationTreeNode.dat file loads
+                        organization tree nodes to an existing organization tree version.
+                     </p><pre><code>METADATA|OrganizationTreeNode|TreeStructureCode|TreeCode|TreeVersionName|OrganizationName|ClassificationCode|ParentOrganizationName|ParentOrganizationClassificationCode
+MERGE|OrganizationTreeVersion|PER_ORG_TREE_STRUCTURE|Vision Tree Code|Tree Version 2017|Vision Enterprise|Enterprise||
+MERGE|OrganizationTreeVersion|PER_ORG_TREE_STRUCTURE|Vision Tree Code|Tree Version 2017|US Division|Division|Vision Enterprise|Enterprise
+MERGE|OrganizationTreeVersion|PER_ORG_TREE_STRUCTURE|Vision Tree Code|Tree Version 2017|US LE|Legal Employer|US Division|Division
+MERGE|OrganizationTreeVersion|PER_ORG_TREE_STRUCTURE|Vision Tree Code|Tree Version 2017|EMEA Division|Division|Vision Enterprise|Enterprise
+MERGE|OrganizationTreeVersion|PER_ORG_TREE_STRUCTURE|Vision Tree Code|Tree Version 2017|France LE|Legal Employer|EMEA Division|Division
+MERGE|OrganizationTreeVersion|PER_ORG_TREE_STRUCTURE|Vision Tree Code|Tree Version 2017|Italy LE|Legal Employer|EMEA Division|Division<br></code></pre><p>This figure shows the hierarchy nodes that this OrganizationTreeNode.dat
+                        file creates.
+                     </p><img src="img/hrc_hdl_orgnodes_create_02_20059198.png" alt="Vision Enterprise is at the top of the hierarchy.&#xA;It inherits US Division and EMEA Division. US Division inherits one&#xA;legal employer, US LE. EMEA Division inherits two legal employers,&#xA;France LE and Italy LE." class="fusappimg"></div>
+                  
+                  <div class="sect2" id="FAIHM2329290"><h3 class="OracleScenario">Deleting Organization Tree Nodes</h3>
+                     <p>You can delete organization tree nodes using HCM
+                        Data Loader. The organizations are removed from the tree version,
+                        but the organization objects themselves continue to exist. To delete
+                        an organization tree node and all nodes below it in the organization
+                        tree hierarchy, set the <span class="uicontrol">DeleteChildNodesFlag</span> attribute to <span class="uicontrol">Y</span>. This example
+                        OrganizationTreeNode.dat file deletes a node and its child nodes.
+                     </p><pre><code>METADATA|OrganizationTreeNode|TreeStructureCode|TreeCode|TreeVersionName|OrganizationName|ClassificationCode|DeleteChildNodesFlag
+DELETE|OrganizationTreeVersion|PER_ORG_TREE_STRUCTURE|Vision Tree Code|Tree Version 2017|EMEA Division|Division|Y<br></code></pre><p>This figure shows the hierarchy after deleting the
+                        EMEA Division node and its child nodes.
+                     </p><img src="img/hrc_hdl_orgnodes_del_all_01_20059196.png" alt="Vision Enterprise is at the top of the hierarchy. It&#xA;inherits US Division, which inherits the legal employer US LE." class="fusappimg"><p>To delete an organization tree node and promote its
+                        child nodes, set the <span class="uicontrol">DeleteChildNodesFlag</span> attribute to <span class="uicontrol">N</span>. This example
+                        OrganizationTreeNode.dat file deletes a node and promotes its child
+                        nodes.
+                     </p><pre><code>METADATA|OrganizationTreeNode|TreeStructureCode|TreeCode|TreeVersionName|OrganizationName|ClassificationCode|DeleteChildNodesFlag
+DELETE|OrganizationTreeVersion|PER_ORG_TREE_STRUCTURE|Vision Tree Code|Tree Version 2017|EMEA Division|Division|N<br></code></pre><p>This figure shows the hierarchy after deleting the
+                        EMEA Division node and promoting its child nodes.
+                     </p><img src="img/hrc_hdl_orgnodes_del_promote_01_20059197.png" alt="Vision Enterprise is at the top of the hierarchy.&#xA;It inherits US Division, France LE, and Italy LE. US Division inherits&#xA;the legal employer US LE." class="fusappimg"></div>
+                  
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

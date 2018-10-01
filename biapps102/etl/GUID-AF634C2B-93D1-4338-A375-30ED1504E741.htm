@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Category 2 Customizations: Adding Additional Tables</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="Category 2 customizations use pre-packaged adapters to add new fact or dimension tables to the Oracle Business Analytics Warehouse." />
+<meta name="dcterms.created" content="2017-05-25T23:49:13Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications ETL Guide" />
+<meta name="dcterms.identifier" content="E72285-04" />
+<meta name="dcterms.isVersionOf" content="BIAET" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2014, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-8FD2D6E5-0102-48F6-9584-49E0C03CAEA3.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-8AC83C32-DAC5-4898-B0A9-EE76B5EF2A27.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAET.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-AF634C2B-93D1-4338-A375-30ED1504E741"></a> <span id="PAGE" style="display:none;">42/47</span> <!-- End Header -->
+<a id="BIASA24516"></a>
+<h1 id="BIAET-GUID-AF634C2B-93D1-4338-A375-30ED1504E741" class="sect1">Category 2 Customizations: Adding Additional Tables</h1>
+<div>
+<p>Category 2 customizations use pre-packaged adapters to add new fact or dimension tables to the Oracle Business Analytics Warehouse.</p>
+<p>You can build entirely new tables to load the data from a source table that is not already extracted from. For example, you might want to create a new Project dimension table. In this case, you create new dimension and staging tables as well as new extract and load ETL mappings.</p>
+<p>When creating a new custom table, use the prefix WC_ to help distinguish custom tables from tables provided by Oracle as well as to avoid naming conflicts in case Oracle later releases a table with a similar name. For example, for your Project dimension, you might create a WC_PROJECT_DS and a WC_PROJECT_D table.</p>
+<p>When you create a new dimension or fact table, use the required system columns that are part of each of the Oracle Business Analytics Warehouse tables to maintain consistency and enable you to reference the existing table structures. When you create a new table, you must define the table and indices in ODI Designer Models area first. The destination model for the Oracle Business Analytics Warehouse is <span>Oracle BI Applications</span>.</p>
+<div class="section">
+<p class="subhead1">About the Main Required Columns</p>
+<p>For custom staging tables, the required columns are:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>INTEGRATION_ID &mdash; Stores the primary key or the unique identifier of a record as in the source table.</p>
+</li>
+<li>
+<p>DATASOURCE_NUM_ID &mdash; Stores the data source from which the data is extracted.</p>
+</li>
+</ul>
+<p>For dimension and fact tables, the required columns are the INTEGRATION_ID and DATASOURCE_NUM_ID columns plus these:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>ROW_WID &mdash; Stores a sequence number generated during the ETL process, which is used as a unique identifier for the Oracle Business Analytics Warehouse.</p>
+</li>
+<li>
+<p>ETL_PROC_WID &mdash; Stores the ID of the ETL process information.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">About the DATASOURCE_NUM_ID Column</p>
+<p>The tables in the Oracle Business Analytics Warehouse schema have DATASOURCE_NUM_ID as part of their unique user key. While the transactional application normally ensures that a primary key is unique, it is possible that a primary key is duplicated between transactional systems. To avoid problems when loading this data into the data warehouse, uniqueness is ensured by including the DATASOURCE_NUM_ID as part of the user key. This means that the rows are loaded in the same data warehouse tables from different sources if this column is given a different value for each data source.</p>
+</div>
+<!-- class="section" --></div>
+<a id="BIASA24520"></a>
+<div class="sect2"><a id="GUID-DC499DAE-900B-4716-B6EB-8DCABC5ECE30"></a>
+<h2 id="BIAET-GUID-DC499DAE-900B-4716-B6EB-8DCABC5ECE30" class="sect2">Additional Information About Customizing</h2>
+<div>
+<p>Learn about miscellaneous information about customization in <span>Oracle BI Applications</span>.</p>
+<div class="section">
+<p class="subhead2">About the Update Strategy</p>
+<p>For loading new fact and dimension tables, design a custom process on the source side to detect the new and modified records. The SDE process is designed to load only the changed data (new and modified). If the data is loaded without the incremental process, the loaded data is erroneously updated again. For example, the logic in the preconfigured SIL mappings looks up the destination tables based on the INTEGRATION_ID and DATASOURCE_NUM_ID and returns the ROW_WID if the combination exists, in which case it updates the record. If the lookup returns null, it inserts the record instead. In some cases, last update date(s) stored in target tables are also compared in addition to the columns specified to determine insert or update. Look at the similar mappings in the preconfigured folder for more details.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead2">About Indices and Naming Conventions</p>
+<p>Staging tables typically do not require any indices. Use care to determine if indices are required on staging tables. Create indices on all the columns that the ETL uses for dimensions and facts (for example, ROW_WIDs of Dimensions and Facts, INTEGRATION_ID and DATASOURCE_NUM_ID and flags). Carefully consider which columns or combination of columns filter conditions should exist, and define indices to improve query performance. Inspect the preconfigured objects for guidance. Name all the newly created tables as WC_. This helps visually isolate the new tables from the preconfigured tables. Keep good documentation of the customizations done; this helps when upgrading your data warehouse. Once the indices are decided upon, register the indices in the ODI Model. See <a href="GUID-CD49B035-776B-4FEA-A533-35EB597B65B9.htm#GUID-39869272-75DD-400C-840A-263A30367D03" title="Dimension and Fact Tables in the Oracle Business Analytics Warehouse use an ETL Index for Unique/Binary Tree index, and Query Index for Non-Unique/Bit Map Index.">Adding an Index to an Existing Fact or Dimension Table</a>.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="BIASA24524"></a>
+<div class="sect2"><a id="GUID-EB31AE5E-6663-43A7-8779-60D5D83737B3"></a>
+<h2 id="BIAET-GUID-EB31AE5E-6663-43A7-8779-60D5D83737B3" class="sect2">Adding New Fact Tables to Oracle Business Analytics Warehouse</h2>
+<div>
+<p>Custom tables should follow the WC_ naming convention to help distinguish from preconfigured tables. Follow this procedure to add a new fact table to the Oracle Business Analytics Warehouse.</p>
+<div class="section">Placeholder fact and dimension groups to which you can add your own custom content are provided out-of-the-box. These follow the X_CUSTOM naming convention. You might introduce your own custom fact and dimension groups. See <a href="GUID-AF634C2B-93D1-4338-A375-30ED1504E741.htm#GUID-24B1176E-734F-4D3D-B3D7-81B05CD6C8C1" title="Once you have completed customization steps to include custom tables and ETL tasks, create custom fact and dimension groups in Configuration Manager and ODI to incorporate your changes into the Load Plans that orchestrate ETL.">About Creating Custom Fact and Dimension Groups</a>. The following steps assume content is being added to an out-of-the-box X_CUSTOM fact or dimension group. If you create custom groups, use those instead.
+<p>To add a new fact table:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Create the custom fact datastores and tasks.</span>
+<ol>
+<li class="substepexpand"><span>Create a WC_&lt;<span class="variable">fact name</span>&gt;_F datastore under the <span class="bold">Oracle BI Applications</span> &ndash; <span class="bold">Fact</span> model.</span></li>
+<li class="substepexpand"><span>Create a WC_&lt;<span class="variable">fact name</span>&gt;_FS datastore under the <span class="bold">Oracle BI Applications</span> &ndash; <span class="bold">Fact Stage</span> model.</span>
+<div>Use the WC_SAMPLE_FS and WC_SAMPLE_F datastores as templates. These datastores include all required system columns.</div>
+</li>
+</ol>
+<div>
+<p>The specific submodel that a table belongs to drives the table maintenance behavior. For example, tables in the Fact Stage submodel are always truncated during each ETL run while tables in the Fact submodel are only truncated during a Full ETL run.</p>
+<p>You can define a fact in ODI either manually, or by generating the DDL to create the table in the database, or by defining the table in the database and importing the definition into ODI using the Reverse-engineering Knowledge Modules (RKM) of <span>Oracle BI Applications</span>. If using the RKM, the imported table is automatically placed in the Other submodel and you must move the imported table into the Fact Staging and Fact submodels as appropriate. Set the OLAP type also for the fact table to Fact Table.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Add a foreign key constraint to all dimension tables associated with this fact. If the custom fact table joins to any custom dimension tables, be sure to complete the steps to introduce the custom dimensions prior to creating the custom fact table.</span>
+<div>
+<p>The Dimension SDE task is included in the generated load plan because it populates the staging table that is used as a source for the Dimension SIL task.</p>
+</div>
+<ol>
+<li class="substepexpand"><span>Drill into the Fact datastore.</span></li>
+<li class="substepexpand"><span>Right-click the <span class="bold">Constraints</span> subfolder below the Fact datastore and select <span class="bold">New Reference</span>.</span>
+<div>
+<p>The naming convention is FK_&lt;<span class="variable">Fact Table</span>&gt;_&lt;<span class="variable">Dimension Table</span>&gt;.</p>
+<p>If there are multiple WID columns that need to reference the same dimension table, enumerate each with a numeric suffix. For example, FK_WC_CUSTOM_F_WC_CUSTOM_D1.</p>
+</div>
+</li>
+<li class="substepexpand"><span>Set the Type to <span class="bold">User Reference</span>, select the dimension from the <span class="bold">Table</span> list and, in the <span class="bold">Columns</span> subtab, click the green + button on the top-right to add a new column.</span></li>
+<li class="substepexpand"><span>For the Foreign Table column, select the custom WID column in the fact table.</span></li>
+<li class="substepexpand"><span>For the Primary Table column, select the ROW_WID column in the dimension table.</span></li>
+</ol>
+</li>
+<li class="stepexpand"><span>Create an SDE and SIL task in the Custom SDE and SIL adaptor folders. Use the SDE_&lt;<span class="italic">Product Line Code</span>&gt;_SampleFact and SIL_SampleFact tasks as a template.</span>
+<div>
+<p>These tasks include the logic required to populate the system columns.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Add Load Plan step to the <span class="bold">3 SDE Facts X_CUSTOM_FG &lt;<span class="variable">Product Line Version Code</span>&gt;</span> Load Plan Component.</span>
+<div>
+<div class="infobox-note" id="GUID-EB31AE5E-6663-43A7-8779-60D5D83737B3__GUID-F96BFDC3-FA04-4638-9C1E-897F404BC3B5">
+<p class="notep1">Note:</p>
+If you are using a custom fact group, in the following steps, replace references to X_CUSTOM with the name of your custom fact group.</div>
+</div>
+<ol>
+<li><span>In Designer, navigate to <span class="bold">Load Plans and Scenarios</span>, <span class="bold">BIAPPS Load Plan</span>, then <span class="bold">Load Plan Dev Components</span>.</span></li>
+<li><span>Navigate to <span class="bold">SDE - &lt;<span class="variable">Product Line Version Code</span>&gt;</span> and double-click the <span class="bold">3 SDE Facts X_CUSTOM_FG &lt;<span class="variable">Product Line Version Code</span>&gt;</span>Load Plan Component.</span></li>
+<li><span>Select the <span class="bold">X_CUSTOM_FG</span> step.</span></li>
+<li><span>Click the green + symbol near the top right and select the <span class="bold">Run Scenario Step</span> option.</span></li>
+<li><span>Provide the Scenario Name, set the Version as -1, and set the Step Name to match the Task name. Set the Restart Type to <span class="bold">Restart from failed step</span>.</span></li>
+</ol>
+</li>
+<li class="stepexpand"><span>Add a Load Plan step to <span class="bold">3 SIL Facts X_CUSTOM_FG</span> Load Plan Component.</span>
+<div>
+<div class="infobox-note" id="GUID-EB31AE5E-6663-43A7-8779-60D5D83737B3__GUID-8445B998-E6C1-4920-96AE-FC24CD5BB52A">
+<p class="notep1">Note:</p>
+If you are using a custom fact group, in the following steps, replace references to X_CUSTOM with the name of your custom fact group.</div>
+</div>
+<ol>
+<li><span>In Designer, navigate to <span class="bold">Load Plans and Scenarios</span>, <span class="bold">BIAPPS Load Plan</span>, then <span class="bold">Load Plan Dev Components</span>.</span></li>
+<li><span>Navigate to SIL and double-click the <span class="bold">3 SIL Facts X_CUSTOM_FG</span> Load Plan Component.</span></li>
+<li><span>Select the <span class="bold">X_CUSTOM_FG</span> step.</span></li>
+<li><span>Click the green + symbol near the top right and select the <span class="bold">Run Scenario Step</span> option.</span></li>
+<li><span>Provide the Scenario Name, set the Version as -1, and set the Step Name to match the Task name. Set the Restart Type to <span class="bold">Restart from failed step</span>.</span></li>
+</ol>
+</li>
+</ol>
+</div>
+<div class="sect3"><a id="CREATE_FACT_TABLE"></a>
+<h3 id="BIAET-CREATE_FACT_TABLE" class="sect3">Creating Fact Tables</h3>
+<div>
+<p>You can create a new fact table using the WC_SAMPLE_FS and WC_SAMPLE_F datastores as templates. You should set the OLAP type to Fact Table and use the Generate DDL procedure to create the tables in the database.</p>
+<div class="section">To create a fact table manually:</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In Designer, navigate to <span class="bold">Models</span>, Oracle BI Applications (Folder), <span class="bold">Oracle BI Applications (Model)</span>, <span class="bold">Fact Stage (Submodel)</span>, then right-click the <span class="bold">WC_SAMPLE_FS datastore</span> and select <span class="bold">Duplicate Selection</span>.</span></li>
+<li class="stepexpand"><span>Double-click the new datastore and rename it.</span>
+<div>
+<p>Name and Resource Name should match the actual table name. Alias is the same or a more user-friendly value.</p>
+</div>
+</li>
+<li class="stepexpand"><span>In the Columns subtab, add all columns.</span></li>
+<li class="stepexpand"><span>Repeat the same steps to create the Fact Table by copying the WC_SAMPLE_F datastore under the Facts submodel.</span></li>
+<li class="stepexpand"><span>For the fact table, set the OLAP type to <span class="bold">Fact Table</span>.</span></li>
+<li class="stepexpand"><span>Generate the DDL to create the table in the database.</span></li>
+</ol>
+</div>
+</div>
+<div class="sect3"><a id="IMPORT_FACT_TABLE_INTO_ODI"></a>
+<h3 id="BIAET-IMPORT_FACT_TABLE_INTO_ODI" class="sect3">Importing Fact Tables into ODI</h3>
+<div>
+<p>You can import the existing fact tables into ODI using the RKM of <span>Oracle BI Applications</span>. The imported table is automatically placed in the Other submodel and you must move the imported table into the Fact Staging and Fact submodels as appropriate. You should set the OLAP type to Fact Table and use the Generate DDL procedure to generate the required DDL for creating the database trigger in the database.</p>
+<div class="section">To import fact tables into ODI:</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In Designer, navigate to <span class="bold">Models</span>, <span class="bold">Oracle BI Applications (Folder)</span>, and then double-click the Oracle BI Applications model.</span></li>
+<li class="stepexpand"><span>In the Reverse Engineer subtab, indicate the tables to be imported under the LIST_OF_TABLES option.</span>
+<div>
+<p>To import multiple tables, provide a comma separated list.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Click <span class="bold">Reverse Engineer</span>.</span>
+<div>
+<p>A session is started that imports the table or tables into ODI. The Reverse Engineer process places all tables in the Other submodel.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Drag and drop W_%_FS tables into the Fact Stage submodel and the W_%_F table into the Fact submodel.</span></li>
+<li class="stepexpand"><span>For the fact table, set the OLAP type to <span class="bold">Fact Table</span>.</span></li>
+<li class="stepexpand"><span>Generate the DDL to create the table in the database.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<a id="BIASA24508"></a><a id="BIASA24509"></a><a id="BIASA24510"></a><a id="BIASA24511"></a><a id="BIASA24512"></a><a id="BIASA24507"></a>
+<div class="sect2"><a id="GUID-341AB92B-3D41-4A7D-900B-836F48160DD9"></a>
+<h2 id="BIAET-GUID-341AB92B-3D41-4A7D-900B-836F48160DD9" class="sect2">Creating Custom Dimension Datastore and Tasks</h2>
+<div>
+<p>You can create the custom dimension datastores and tasks.</p>
+<div class="section">
+<p>Create a WC_<span class="variable">&lt;dimension name&gt;</span>_D datastore under the Oracle BI Applications &ndash; Dimension model. Create a WC_&lt;<span class="variable">dimension name</span>&gt;_DS datastore under the Oracle BI Applications &ndash; Dimension Stage model. Use the WC_SAMPLE_DS and WC_SAMPLE_D datastores as templates. These datastores include all required system columns. Custom tables should follow the WC_ naming convention to help distinguish from shipped tables.</p>
+<div class="infobox-note" id="GUID-341AB92B-3D41-4A7D-900B-836F48160DD9__GUID-D9B4B529-3317-45E6-8DB9-CA72D83FD49E">
+<p class="notep1">Note:</p>
+The specific submodel that a table belongs to drives the table maintenance behavior. For example, tables in the Dimension Stage submodel are always truncated at each ETL run while tables in the Dimension submodel are truncated only during a Full ETL run. Do not create a Custom submodel to place your datastores as table maintenance is not implemented properly for tables in such a submodel.</div>
+<p>You can define a dimension either in ODI, generating DDL to create the table in the database, or by defining the table in the database and importing the definition into ODI using the RKM of <span>Oracle BI Applications</span>. If you use the RKM, the imported table is automatically placed in the Other submodel and you must move the imported table into the Dimension Staging and Dimension submodels as appropriate. Also, set the OLAP type for the dimension to Dimension or Slowly Changing Dimension as appropriate.</p>
+<p>The X_CUSTOM placeholder load plan components are provided as templates, but do not use for new custom content. Create a new dimension group in <span>Oracle BI Applications Configuration Manager</span>. For information about how to do this, see <a href="GUID-AF634C2B-93D1-4338-A375-30ED1504E741.htm#GUID-24B1176E-734F-4D3D-B3D7-81B05CD6C8C1" title="Once you have completed customization steps to include custom tables and ETL tasks, create custom fact and dimension groups in Configuration Manager and ODI to incorporate your changes into the Load Plans that orchestrate ETL.">About Creating Custom Fact and Dimension Groups</a>.</p>
+</div>
+<!-- class="section" --></div>
+<div class="sect3"><a id="MANUALLY_CREATE_DIMENSION_TABLES"></a>
+<h3 id="BIAET-MANUALLY_CREATE_DIMENSION_TABLES" class="sect3">Creating Dimension Tables in ODI</h3>
+<div>
+<p>You can create a new dimension table using the WC_SAMPLE_DS and WC_SAMPLE_D datastores as templates. You should set the OLAP type to Dimension or Slowly Changing Dimension as appropriate.</p>
+<div class="section">To create a dimension table in ODI:</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In Designer, navigate to <span class="bold">Models</span>, Oracle BI Applications (Folder), <span class="bold">Oracle BI Applications</span> (Model), and then <span class="bold">Dimension Stage</span> (Submodel).</span></li>
+<li class="stepexpand"><span>Right-click the <span class="bold">WC_SAMPLE_DS</span> datastore and select <span class="bold">Duplicate Selection</span>.</span></li>
+<li class="stepexpand"><span>Double-click the new datastore and rename it.</span>
+<div>
+<p>Name and Resource Name should match the actual table name. Alias is the same or a more user-friendly value.</p>
+</div>
+</li>
+<li class="stepexpand"><span>In the Columns subtab, add all columns.</span></li>
+<li class="stepexpand"><span>Repeat the same steps to create the Dimension Table by copying the <span class="bold">WC_SAMPLE_D</span> datastore under the Dimensions submodel.</span></li>
+<li class="stepexpand"><span>For the dimension table, set the OLAP type to either <span class="bold">Dimension</span> if this is a Type I dimension or to <span class="bold">Slowly Changing Dimension</span> if this is a Type II dimension.</span></li>
+</ol>
+</div>
+</div>
+<div class="sect3"><a id="IMPORT_CUSTOM_DIMENSION_TABLES"></a>
+<h3 id="BIAET-IMPORT_CUSTOM_DIMENSION_TABLES" class="sect3">Importing Custom Dimension Tables into ODI</h3>
+<div>
+<p>You can import the existing dimension tables into ODI using the RKM of <span>Oracle BI Applications</span>. The imported table is automatically placed in the Other submodel and you must move the imported table into the Dimension Staging and Dimension submodels as appropriate. And, you should set the OLAP type for the dimension to Dimension or Slowly Changing Dimension as appropriate.</p>
+<div class="section">To import a dimension table into ODI:</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In Designer, navigate to <span class="bold">Models</span>, Oracle BI Applications (Folder) and double-click the <span class="bold">Oracle BI Applications Model</span>.</span></li>
+<li class="stepexpand"><span>In the Reverse Engineer subtab, indicate the tables to be imported under the LIST_OF_TABLES option.</span>
+<div>
+<p>To import multiple tables, provide a comma-separated list.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Click the <span class="bold">Reverse Engineer</span> button to start a session that imports the table(s) into ODI.</span>
+<div>
+<p>The Reverse Engineer process places all tables in the Other submodel.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Drag and drop <span class="bold">W_%_DS</span> tables into the Dimension Stage submodel and the <span class="bold">W_%_D</span> table into the Dimension submodel.</span></li>
+<li class="stepexpand"><span>Double-click the new dimension datastore and set the OLAP type to either <span class="bold">Dimension</span> if this is a Type I dimension, or to <span class="bold">Slowly Changing Dimension</span> if this is a Type II dimension.</span></li>
+</ol>
+</div>
+</div>
+<div class="sect3"><a id="CREATE_ODI_SEQUENCE"></a>
+<h3 id="BIAET-CREATE_ODI_SEQUENCE" class="sect3">Creating ODI Sequences for Custom Dimensions</h3>
+<div>
+<p>You can create an ODI sequence for a custom dimension.</p>
+<div class="section">
+<p>You can use a database sequence to populate the ROW_WID column of the dimension. You can use the Generate DDL procedure to generate the required DDL for creating the database trigger in the database. Use WC_SAMPLE_D_SEQ as a template.</p>
+<p>To create an ODI sequence for the custom dimension:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In Designer, navigate to <span class="bold">Projects</span>, <span class="bold">BI Apps Project</span>, then <span class="bold">Sequences</span>.</span></li>
+<li class="stepexpand"><span>Right-click the Sequence folder and select <span class="bold">New Sequence</span>.</span></li>
+<li class="stepexpand"><span>Set name to <span class="bold"><span class="variable">Dimension Name</span>_SEQ</span>.</span></li>
+<li class="stepexpand"><span>Select <span class="bold">Native</span> sequence.</span></li>
+<li class="stepexpand"><span>Set the Schema to <span class="bold">DW_BIAPPS11G</span>.</span>
+<div>
+<p>Generally, the Native sequence name should match the ODI name unless this causes the name length to exceed 30 characters, in which case, you can shorten the name to meet this limit. This database trigger populates the ROW_WID column.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Generate the DDL to create the table in the database.</span>
+<div>
+<div class="infobox-note" id="CREATE_ODI_SEQUENCE__GUID-EE9C79E9-09E0-42B7-9BB5-0940F57A3266">
+<p class="notep1">Note:</p>
+If you manually create the dimension in ODI, this generates the DDL to create both the table and sequence. If you import the dimension into ODI, this generates the DDL to create the sequence only.</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3"><a id="CREATE_SDE_SIL_TASKS"></a>
+<h3 id="BIAET-CREATE_SDE_SIL_TASKS" class="sect3">Creating SDE and SIL Tasks</h3>
+<div>
+<p>You can create SDE and SIL tasks in the Custom SDE and SIL adaptor folders.</p>
+<div class="section">Use the SDE_<span class="variable">Product Line Code</span>_SampleDimension and SIL_SampleDimension tasks as a template. These tasks include the logic required to populate the system columns. Finally, generate scenarios for these tasks.</div>
+<!-- class="section" --></div>
+</div>
+</div>
+<div class="sect2"><a id="GUID-24B1176E-734F-4D3D-B3D7-81B05CD6C8C1"></a>
+<h2 id="BIAET-GUID-24B1176E-734F-4D3D-B3D7-81B05CD6C8C1" class="sect2">About Creating Custom Fact and Dimension Groups</h2>
+<div>
+<p>Once you have completed customization steps to include custom tables and ETL tasks, create custom fact and dimension groups in <span>Configuration Manager</span> and ODI to incorporate your changes into the Load Plans that orchestrate ETL.</p>
+<p>The Data Warehouse tables are populated by ETL tasks which are orchestrated by a Load Plan. When creating custom content, new data warehouse tables and associated ETL tasks are created and you must incorporate them into a Load Plan to populate the custom tables along with the standard tables.</p>
+<p>You can build a Load Plan by assembling several Load Plan Components into an integrated load plan. You can organize Load Plan Components into level 0, 1, 2, and 3 components. Level 3 Load Plan Components execute the actual ETL tasks, while the other Load Plan Components are system Load Plan Components, and you can use the other load plan components in building up and organizing the Load Plan. The Load Plan Generator assembles these Load Plan Components into a combined Load Plan.</p>
+<p>You must create custom Load Plan Components to have custom content such as custom dimensions or custom facts incorporated into a Load Plan that includes out-of-the-box content. The Load Plan Generator can then include these components when building a load plan.</p>
+<p>To create custom tables and ETL tasks, see <a href="GUID-C9E7D7FD-3C17-4247-962B-56DD9E8A2B6B.htm" title="You can customize the ETL functionality in Oracle Business Intelligence Applications (Oracle BI Applications).">Customizing the Oracle Business Analytics Warehouse</a>. The following topics describe how to create new Load Plan Components to execute these ETL tasks. Use Pre-existing 3 Dims X_CUSTOM_DIM and 3 Dims X_CUSTOM_FG Load Plan Components as templates and the steps in the following topics describe copying these X_CUSTOM components and updating the copies to reflect custom content. The steps are essentially the same regardless of which group you are adding; only the template you start with changes.</p>
+</div>
+<div class="sect3"><a id="GUID-AC008EEB-DC68-4AD0-A662-BA881B38E04C"></a>
+<h3 id="BIAET-GUID-AC008EEB-DC68-4AD0-A662-BA881B38E04C" class="sect3">Creating Custom Fact and Dimension Groups in ODI</h3>
+<div>
+<p>The first step in creating custom fact and dimension groups is performed in ODI Designer.</p>
+<div class="section">
+<p>To create custom fact and dimension groups in ODI:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Add the custom load plan component.</span>
+<ol>
+<li class="substepexpand"><span>In ODI Designer, navigate to the Designer tab and under <span class="bold">Load Plans and Scenarios</span>, expand the <span class="bold">BIAPPS Load Plan</span>, and then <span class="bold">Load Plan Dev Components</span>.</span></li>
+<li class="substepexpand"><span>Expand the appropriate subfolder for the custom Load Plan Component you are adding.</span>
+<div>If you are adding a SIL Load Plan Component, expand the SIL subfolder. If you are creating a SDE Load Plan Component, expand the SDE subfolder, then expand the appropriate product line subfolder.</div>
+</li>
+</ol>
+</li>
+<li class="stepexpand"><span>Duplicate an existing X_CUSTOM Load Plan Component.</span>
+<div>The following Load Plan Components are generally preconfigured with all required variables and other settings, so copying these components saves you the trouble of adding variables and configuring required settings:
+<ul style="list-style-type: disc;">
+<li>
+<p>3_SDE Dims X_CUSTOM_DIM &lt;PLV_CODE&gt;</p>
+</li>
+<li>
+<p>3 SDE Fact X_CUSTOM_FG &lt;PLV_CODE&gt;</p>
+</li>
+<li>
+<p>3 SIL Dims X_CUSTOM_DIM</p>
+</li>
+<li>
+<p>3 SIL Fact X_CUSTOM_FG</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>Rename the Load Plan Component.</span>
+<div>In the properties for the copied component, delete the Copy of prefix.&nbsp;For an SDE Load Plan Component, it is very important to retain the Product Line Version code (for example, EBS_11_5_10 and so on) as the suffix, because the suffix is used by Load Plan Generator to determine whether a Load Plan Component is included in a load plan that extracts from a particular data source.&nbsp;Rename the X_CUSTOM_DIM or X_CUSTOM_FG portion of the Load Plan Component name to match the code of the Dimension Group or Fact Group that is registered in <span>Configuration Manager</span>. Load Plan Generator uses this portion of the component&rsquo;s name to coordinate with <span>Configuration Manager</span> to include Load Plan Components for those Groups specified in <span>Configuration Manager</span>.</div>
+</li>
+<li class="stepexpand"><span>In the Steps subtab, rename the first, or Root, step to match the custom Group Code. Variables are assigned values at the Fact and Dimension Group level, and are refreshed at the root level. ETL refresh logic takes the name of the root step and passes it to <span>Configuration Manager</span> to get the value for the variable.</span></li>
+<li class="stepexpand"><span>Add the Custom Level 3 Load Plan Component to the Level 2 System Load Plan Component.</span>
+<ol>
+<li><span>Navigate to the Designer tab and under <span class="bold">Load Plans and Scenarios</span>, expand the <span class="bold">Load Plan System Components</span>.</span></li>
+<li><span>If you are adding a SDE Load Plan Component, expand the SDE subfolder. If you are adding a SIL Load Plan Component, expand the SIL subfolder.</span></li>
+<li><span>If you are adding a Dimension Group, double-click the <span class="bold">Level 2 Dimension Group Load Plan Component</span>.&nbsp; If you are adding a Fact Group, double-click the <span class="bold">Level 2 Fact Group Load Plan Component</span>.</span></li>
+<li><span>Navigate to the Steps subtab of the <span class="bold">Load Plan Component</span>, right-click the $${3 X_CUSTOM_DIM} Load Plan Step, and select <span class="bold">Duplicate Selection</span>.</span></li>
+<li><span>Rename the Load Plan Step, replacing the X_CUSTOM_DIM or X_CUSTOM_FG suffix with the Group Code value used in the custom Load Plan Component and root step names.&nbsp;The portion within the brackets must match the custom Load Plan Component name exactly (ignoring the Product Line Version Code suffix in the case of SDE load plan components).&nbsp; Load Plan Generator uses this value to incorporate the Level 3 Load Plan Component into the generated load plan.</span></li>
+</ol>
+</li>
+<li class="stepexpand"><span>Add Load Plan steps to the 3 SDE Dims X_CUSTOM_DIM &lt;<span class="variable">Product Line Version Code</span>&gt; and 3 SIL Dims X_CUSTOM_DIM Load Plan Components you created.</span>
+<div>The following steps use X_CUSTOM in describing the changes to the Load Plan Components. Replace this with the actual dimension name used when you created your custom Load Plan Components.</div>
+<ol>
+<li><span>In Designer, navigate to <span class="bold">Load Plans and Scenarios</span>, <span class="bold">BIAPPS Load Plan</span>, <span class="bold">Load Plan Dev Components</span>, <span class="bold">SDE - <span class="variable">Product Line Version Code</span></span> and double-click the <span class="bold">3 SDE Dims X_CUSTOM_DIM <span class="variable">Product Line Version Code</span></span> Load Plan Component.</span></li>
+<li><span>In the Steps subtab, select the <span class="bold">X_CUSTOM_DIM</span> step.</span></li>
+<li><span>Click the green <span class="bold">+</span>symbol near the top right and select <span class="bold">Run Scenario Step</span>.</span></li>
+<li><span>Provide the Scenario Name, set the Version as <span class="bold">-1</span>, and set the Step Name to match the Task name. Set the Restart Type to <span class="bold">Restart from failed step</span>.</span></li>
+<li><span>In Designer, navigate to <span class="bold">Load Plans and Scenarios</span>, <span class="bold">BIAPPS Load Plan</span>, <span class="bold">Load Plan Dev Components</span>, <span class="bold">SIL</span> and double-click the <span class="bold">3 SIL Dims X_CUSTOM_DIM</span> Load Plan Component.</span></li>
+<li><span>In the Steps subtab, select the <span class="bold">X_CUSTOM_DIM</span> step.</span></li>
+<li><span>Click the green <span class="bold">+</span>symbol near the top-right and select <span class="bold">Run Scenario Step</span>.</span></li>
+<li><span>Provide the Scenario Name, set the Version as <span class="bold">-1</span>, and set the Step Name to match the Task name. Set the Restart Type to <span class="bold">Restart from failed step</span>.</span></li>
+</ol>
+</li>
+</ol>
+<div class="section">To associate your custom dimension with a fact table, see <a href="GUID-8FD2D6E5-0102-48F6-9584-49E0C03CAEA3.htm#GUID-1E3C06BE-88CF-417D-99FC-000AC4817D87" title="You can add a dimension to an existing fact, adding a dimension and dimension staging datastores as well as associated SDE and SIL processes, which also requires extending the fact and fact staging tables to reflect the association with the new dimension.">Adding a Dimension to an Existing Fact</a>.</div>
+<!-- class="section" --></div>
+</div>
+<div class="sect3"><a id="GUID-87785AD3-761D-49F8-BF36-2C99EE811A5B"></a>
+<h3 id="BIAET-GUID-87785AD3-761D-49F8-BF36-2C99EE811A5B" class="sect3">Creating Custom Fact and Dimension Groups in <span>Configuration Manager</span></h3>
+<div>
+<p>The last step in creating custom fact and dimension groups is performed in <span>Configuration Manager</span>.</p>
+<div class="section">
+<div class="p">To create custom fact and dimension groups:
+<div class="infobox-note" id="GUID-87785AD3-761D-49F8-BF36-2C99EE811A5B__GUID-2E414840-DD02-4418-8797-82EED444B1A2">
+<p class="notep1">Note:</p>
+If you encounter an error while creating a fact or dimension group with CUSTOM_FG or CUSTOM_DIM code, then create with a different code and rename the code to CUSTOM_FG/DIM later.</div>
+</div>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In order to add custom Fact or Dimension Groups, the user, if not the Administrative User, must be granted the following roles:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>BIA_CONFIGURE_CREATE_EDIT_DIMGROUP_PRIV</p>
+</li>
+<li>
+<p>BIA_CONFIGURE_CREATE_EDIT_FACTGROUP_PRIV</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>In <span>Configuration Manager</span>, click <span class="bold">Manage Business Intelligence Applications</span>.</span></li>
+<li class="stepexpand"><span>Select an offering where the custom Fact or Dimension Group most closely fits.</span></li>
+<li class="stepexpand"><span>In the Associated Fact and Dimension Groups table, click <span class="bold">Actions</span> and select either <span class="bold">Create Fact Group</span> or <span class="bold">Create Dimension Group</span>.</span></li>
+<li class="stepexpand"><span>Enter <code class="codeph">X_CUSTOM_FG</code> if you are creating a fact group and <code class="codeph">X_CUSTOM_DIM</code> if you are creating a dim group.</span>
+<div>
+<div class="infobox-note" id="GUID-87785AD3-761D-49F8-BF36-2C99EE811A5B__GUID-534AA745-AD46-451C-8603-53CBA3C54D9F">
+<p class="notep1">Note:</p>
+The <span class="bold">Group Code</span> value must exactly match the value used when creating the corresponding ODI Load Plan Component.&nbsp;Dimension groups use <kbd class="userinput">_DIM</kbd> as a suffix while Fact groups use <kbd class="userinput">_FG</kbd> as a suffix. As a best practice, use <kbd class="userinput">X_</kbd> as a prefix to easily identify custom groups.</div>
+</div>
+</li>
+<li class="stepexpand"><span>Add a meaningful group description.</span></li>
+</ol>
+<div class="section">The remaining steps for creating Fact Groups and Dimension Groups are different.&nbsp;</div>
+<!-- class="section" --></div>
+<div class="sect4"><a id="GUID-386B465F-CDCA-43A2-88B9-6D097A04118A"></a>
+<h4 id="BIAET-GUID-386B465F-CDCA-43A2-88B9-6D097A04118A" class="sect4">Creating Custom Dimension Groups</h4>
+<div>
+<p>To create a Custom Dimension Group, you must associate it to an existing Fact Group, so if the custom Dimension Group is to be associated with a custom Fact Group, be sure to add the Fact Group first.</p>
+<div class="section">
+<p>To create a Custom Dimension Group:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In the Associated Fact and Dimension Groups list for the offering you added a new group for, click <span class="bold">Actions</span> and select <span class="bold">Create Dimension Group</span>.</span></li>
+<li class="stepexpand"><span>In the Create Dimension Group dialog, select a Fact Group from the Associate Fact Group list, and add it to the right-hand list of associated Fact Groups.</span>
+<div>
+<div class="infobox-note" id="GUID-386B465F-CDCA-43A2-88B9-6D097A04118A__GUID-BFC7C29D-F4A8-4B84-BFCC-19E7A80524C5">
+<p class="notep1">Note:</p>
+The Create Dimension Group dialog doesn&rsquo;t filter the Fact Groups by the offering you selected when creating the new group. Be sure to only select those Fact Groups that are actually associated with the offering you are adding the custom Dimension Group to.</div>
+</div>
+</li>
+<li class="stepexpand"><span>Click <span class="bold">OK</span>.</span></li>
+</ol>
+<div class="section">The custom Dimension Group is now added to the offering and associated with a Fact Group.</div>
+<!-- class="section" --></div>
+</div>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment43">
+<tr>
+<td class="cellalignment50">
+<table class="cellalignment48">
+<tr>
+<td class="cellalignment47"><a href="GUID-8FD2D6E5-0102-48F6-9584-49E0C03CAEA3.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment47"><a href="GUID-8AC83C32-DAC5-4898-B0A9-EE76B5EF2A27.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2014, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment52">
+<table class="cellalignment46">
+<tr>
+<td class="cellalignment47"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment47"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment47"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

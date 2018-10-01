@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>About Retrieving Information Stored in Flexfield Columns</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="Flexfields are customer-configured fields that are used to store additional information that is not stored in the standard OLTP tables. This information may be mapped to fixed or placeholder attributes in some warehouse dimensions." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-07A1A618-7528-4691-BC9B-0F59C5FB1B0D.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-85313822-294A-4411-92FA-3301B7A66DD5.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-96462356-A5A0-4E1C-B4ED-B2C5B1D0FC45"></a> <span id="PAGE" style="display:none;">36/336</span> <!-- End Header -->
+<a id="BIACF24594"></a><a id="BIACF24595"></a><a id="BIACF24596"></a><a id="BIACF24598"></a><a id="IT_258"></a>
+<h1 id="BIAFC-GUID-96462356-A5A0-4E1C-B4ED-B2C5B1D0FC45" class="sect1">About Retrieving Information Stored in Flexfield Columns</h1>
+<div>
+<p>Flexfields are customer-configured fields that are used to store additional information that is not stored in the standard OLTP tables. This information may be mapped to fixed or placeholder attributes in some warehouse dimensions.</p>
+<p>Fixed attributes in <span>Oracle Business Analytics Warehouse</span>, such as Job Code, Job Family, Job Function, Job Level, Pay Level, may be used in pre-defined reports. Placeholder attributes are available for ad-hoc reporting, and once mapped can be re-labelled to describe the data that they contains. The mapping and re-labelling can be done by configuring domains and domain mappings using <span>Configuration Manager</span>.</p>
+<div class="section">
+<p class="subhead1">Optional or Mandatory</p>
+<p>This configuration is optional. If this configuration is not done, then the fixed columns dependent on flexfield data will not have any data in them. In addition, no placeholder columns will be available, as they are hidden in <span>Oracle BI Presentation Catalog</span> based on whether or not the configuration is done.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Applies to</p>
+<p>E-Business Suite source systems.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Background</p>
+<p><span>Configuration Manager</span> is used to configure flexfields. The following table shows which flexfields are supported as a source and which target dimensions they map to.</p>
+<div class="tblformal" id="GUID-96462356-A5A0-4E1C-B4ED-B2C5B1D0FC45__GUID-1050C9CB-339D-4FFC-B333-9820AE751314">
+<table class="cellalignment137" summary="Description of fields in file_group_acct_codes_psft.csv">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment161" id="d25822e65">Dimension</th>
+<th class="cellalignment152" id="d25822e67">Target Domain (Dimension Attributes)</th>
+<th class="cellalignment152" id="d25822e69">Source Domain (Flexfields)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d25822e73" headers="d25822e65">
+<p>HR Assignment</p>
+</td>
+<td class="cellalignment154" headers="d25822e73 d25822e67">
+<p>HR Assignment Dimension Attributes (W_FLEX_ASSIGNMENT_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment154" headers="d25822e73 d25822e69">
+<p>People Group Key Flexfield (KEY:801:GRP)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d25822e83" headers="d25822e65">
+<p>HR Assignment</p>
+</td>
+<td class="cellalignment154" headers="d25822e83 d25822e67">
+<p>HR Assignment Dimension Attributes (W_FLEX_ASSIGNMENT_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment154" headers="d25822e83 d25822e69">
+<p>Assignment Descriptive Flexfield (DESCRIPTIVE:800:PER_ASSIGNMENTS)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d25822e93" headers="d25822e65">
+<p>HR Person</p>
+</td>
+<td class="cellalignment154" headers="d25822e93 d25822e67">
+<p>HR Person Dimension Attributes (W_FLEX_PERSON_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment154" headers="d25822e93 d25822e69">
+<p>Person Descriptive Flexfield (DESCRIPTIVE:800:PER_PEOPLE)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d25822e103" headers="d25822e65">
+<p>HR Person Legislation</p>
+<p><span class="bold">Note:</span> HR Person Legislation placeholders will be partly filled by the mapping for HR Person, from the Person Descriptive Flexfield.</p>
+</td>
+<td class="cellalignment154" headers="d25822e103 d25822e67">
+<p>HR Person Legislation Dimension Citizenship Attributes (W_FLEX_CITIZENSHIP_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment154" headers="d25822e103 d25822e69">
+<p>Person Extra Information Descriptive Flexfield (DESCRIPTIVE:800:PER_PEOPLE_EXTRA_INFO)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d25822e117" headers="d25822e65">
+<p>HR Person Legislation*</p>
+</td>
+<td class="cellalignment154" headers="d25822e117 d25822e67">
+<p>HR Person Legislation Dimension Ethnic Attributes (W_FLEX_ETHNIC_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment154" headers="d25822e117 d25822e69">
+<p>Person Extra Information Descriptive Flexfield (DESCRIPTIVE:800:PER_PEOPLE_EXTRA_INFO)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d25822e127" headers="d25822e65">
+<p>HR Person Legislation*</p>
+</td>
+<td class="cellalignment154" headers="d25822e127 d25822e67">
+<p>HR Person Legislation Dimension Visa Attributes (W_FLEX_VISA_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment154" headers="d25822e127 d25822e69">
+<p>Person Extra Information Descriptive Flexfield (DESCRIPTIVE:800:PER_PEOPLE_EXTRA_INFO)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d25822e137" headers="d25822e65">
+<p>HR Position</p>
+</td>
+<td class="cellalignment154" headers="d25822e137 d25822e67">
+<p>HR Position Dimension Attributes (W_FLEX_POSITION_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment154" headers="d25822e137 d25822e69">
+<p>Position Key Flexfield (KEY:800:POS)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d25822e147" headers="d25822e65">
+<p>HR Position</p>
+</td>
+<td class="cellalignment154" headers="d25822e147 d25822e67">
+<p>HR Position Dimension Attributes (W_FLEX_POSITION_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment154" headers="d25822e147 d25822e69">
+<p>Position Descriptive Flexfield (DESCRIPTIVE:800:PER_POSITIONS)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d25822e157" headers="d25822e65">
+<p>Job</p>
+</td>
+<td class="cellalignment154" headers="d25822e157 d25822e67">
+<p>Job Dimension Attributes (W_FLEX_JOB_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment154" headers="d25822e157 d25822e69">
+<p>Job Key Flexfield (KEY:800:JOB)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d25822e167" headers="d25822e65">
+<p>Job</p>
+</td>
+<td class="cellalignment154" headers="d25822e167 d25822e67">
+<p>Job Dimension Attributes (W_FLEX_JOB_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment154" headers="d25822e167 d25822e69">
+<p>Job Descriptive Flexfield (DESCRIPTIVE:800:PER_JOBS)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d25822e177" headers="d25822e65">
+<p>Pay Grade</p>
+</td>
+<td class="cellalignment154" headers="d25822e177 d25822e67">
+<p>Pay Grade Dimension Attributes (W_FLEX_GRADE_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment154" headers="d25822e177 d25822e69">
+<p>Grade Key Flexfield (KEY:800:GRADE)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment162" id="d25822e188" headers="d25822e65">
+<p>Pay Grade</p>
+</td>
+<td class="cellalignment154" headers="d25822e188 d25822e67">
+<p>Pay Grade Dimension Attributes (W_FLEX_GRADE_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment154" headers="d25822e188 d25822e69">
+<p>Grade Descriptive Flexfield (DESCRIPTIVE:800:PER_GRADES)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>All target domains support the following attributes. Not all the placeholder attributes are pre-seeded, however the domain can be extended up to the supported limit and the ETL will automatically pick up any that are added:</p>
+<div class="tblformal" id="GUID-96462356-A5A0-4E1C-B4ED-B2C5B1D0FC45__GUID-8C7D25A3-D1ED-4967-B027-199BEB2DBDF9">
+<table class="cellalignment137" summary="Description of fields in file_group_acct_codes_psft.csv">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment152" id="d25822e207">Dimension</th>
+<th class="cellalignment153" id="d25822e209">Domain Members</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d25822e213" headers="d25822e207">
+<p>HR Assignment</p>
+</td>
+<td class="cellalignment155" headers="d25822e213 d25822e209">
+<p>Placeholders (30 Character, 20 Number, 10 Date)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d25822e220" headers="d25822e207">
+<p>HR Person</p>
+</td>
+<td class="cellalignment155" headers="d25822e220 d25822e209">
+<p>Placeholders (30 Character, 20 Number, 10 Date)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d25822e227" headers="d25822e207">
+<p>HR Person Legislation</p>
+</td>
+<td class="cellalignment155" headers="d25822e227 d25822e209">
+<p>Placeholders (from HR Person Attributes &ndash; first 15 Character, 9 Number, 6 Date)</p>
+<p>Placeholders (from Citizenship Attributes &ndash; next 5 Character, 3 Number, 2 Date)</p>
+<p>Placeholders (from Ethnic Attributes &ndash; next 5 Character, 3 Number, 2 Date)</p>
+<p>Placeholders (from Visa Attributes &ndash; next 5 Character, 3 Number, 2 Date)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d25822e240" headers="d25822e207">
+<p>HR Position</p>
+</td>
+<td class="cellalignment155" headers="d25822e240 d25822e209">
+<p>Placeholders (30 Character, 20 Number, 10 Date)</p>
+<p>Position Number</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d25822e249" headers="d25822e207">
+<p>Job</p>
+</td>
+<td class="cellalignment155" headers="d25822e249 d25822e209">
+<p>Placeholders (30 Character, 20 Number, 10 Date)</p>
+<p>Job Code</p>
+<p>Job Family</p>
+<p>Job Function</p>
+<p>Job Level</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d25822e264" headers="d25822e207">
+<p>Pay Grade</p>
+</td>
+<td class="cellalignment155" headers="d25822e264 d25822e209">
+<p>Placeholders (30 Character, 20 Number, 10 Date)</p>
+<p>Pay Level</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Task Flow</p>
+<ol>
+<li>
+<p>Identify the flexfield structures and columns that store the information for the fixed data warehouse columns such as Job family, Job Function.</p>
+<p>Additionally identify the flexfield structures and columns that store information that needs to be included in the warehouse for ad-hoc reporting.</p>
+</li>
+<li>
+<p>Decide which placeholder target domain members will hold which source flexfield columns.</p>
+<p>Override the default target domain member name by specifying a custom name for the target column. Where a value set is used to translate the source flexfield column provide a target domain member description which will become the label for the translated target column.</p>
+</li>
+<li>
+<p>In the domain mapping screen, map the source domain members (flexfield structure and column) to the target domain member (warehouse dimension column).</p>
+</li>
+</ol>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Example</p>
+<p>For example, the following domain mapping may be done for the Job Dimension, assuming there are two structures defined in the key flexfield that contain the job family for different legislations, and there are three attributes of the global descriptive flexfield that are required for ad-hoc reporting:</p>
+<div class="tblformal" id="GUID-96462356-A5A0-4E1C-B4ED-B2C5B1D0FC45__GUID-E04023BE-4738-4550-A1FA-DA4ADC8F317C">
+<table class="cellalignment137" summary="Description of fields in file_group_acct_codes_psft.csv">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment172" id="d25822e304">Source Domain</th>
+<th class="cellalignment235" id="d25822e306">Source Member</th>
+<th class="cellalignment235" id="d25822e308">Target Domain</th>
+<th class="cellalignment235" id="d25822e310">Target Member</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment174" id="d25822e314" headers="d25822e304">
+<p>Job Key Flexfield</p>
+</td>
+<td class="cellalignment236" headers="d25822e314 d25822e306">
+<p>Job Family (1:SEGMENT3)</p>
+</td>
+<td class="cellalignment236" headers="d25822e314 d25822e308">
+<p>Job Dimension Attributes (W_FLEX_JOB_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment236" headers="d25822e314 d25822e310">
+<p>Job Family (JOB_FAMILY)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment174" id="d25822e327" headers="d25822e304">
+<p>Job Key Flexfield</p>
+</td>
+<td class="cellalignment236" headers="d25822e327 d25822e306">
+<p>Job Family (2:SEGMENT5)</p>
+</td>
+<td class="cellalignment236" headers="d25822e327 d25822e308">
+<p>Job Dimension Attributes (W_FLEX_JOB_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment236" headers="d25822e327 d25822e310">
+<p>Job Family (JOB_FAMILY)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment174" id="d25822e340" headers="d25822e304">
+<p>Job Descriptive Flexfield</p>
+</td>
+<td class="cellalignment236" headers="d25822e340 d25822e306">
+<p>Job Type 1 (Global:ATTRIBUTE8)</p>
+</td>
+<td class="cellalignment236" headers="d25822e340 d25822e308">
+<p>Job Dimension Attributes (W_FLEX_JOB_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment236" headers="d25822e340 d25822e310">
+<p>Job Type 1 (JOB_ATTR1_CHAR)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment174" id="d25822e353" headers="d25822e304">
+<p>Job Descriptive Flexfield</p>
+</td>
+<td class="cellalignment236" headers="d25822e353 d25822e306">
+<p>Job Type 2 (Global:ATTRIBUTE13)</p>
+</td>
+<td class="cellalignment236" headers="d25822e353 d25822e308">
+<p>Job Dimension Attributes (W_FLEX_JOB_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment236" headers="d25822e353 d25822e310">
+<p>Job Type 2 (JOB_ATTR2_CHAR)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment174" id="d25822e366" headers="d25822e304">
+<p>Job Descriptive Flexfield</p>
+</td>
+<td class="cellalignment236" headers="d25822e366 d25822e306">
+<p>Job Type 3 (Global:ATTRIBUTE19)</p>
+</td>
+<td class="cellalignment236" headers="d25822e366 d25822e308">
+<p>Job Dimension Attributes (W_FLEX_JOB_ATTRIBUTES)</p>
+</td>
+<td class="cellalignment236" headers="d25822e366 d25822e310">
+<p>Job Type 3 (JOB_ATTR3_CHAR)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>The ETL will then populate the corresponding dimension columns with the data stored in the mapped flexfield columns from the source.</p>
+<p>If the flexfield is defined with a value set, then the ETL will also extract the values from this value set into a domain, which can be used to translate/lookup the code. These lookup domains are named after the target domain member, for example the domain JOB_ATTR1_CHAR:W_FLEX_JOB_ATTRIBUTES would contain the code-name pairs required to translate the values in the Job Dimension Job Type 1 field. The translated values are also presented in <span>Oracle BI Answers</span> using the description for the target member. For example, the target column JOB_ATTR1_CHAR is given the name 'Job Type 1' and description 'Job Type 1 Name'. Then, in <span>Oracle BI Answers</span> the column 'Job Type 1' will contain the codes from the value set and the column 'Job Type 1 Name' will contain the translated names from the value set.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Dependency</p>
+<p>None.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-07A1A618-7528-4691-BC9B-0F59C5FB1B0D.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-85313822-294A-4411-92FA-3301B7A66DD5.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

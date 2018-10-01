@@ -1,0 +1,262 @@
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+
+<meta name="DC.Type" content="topic">
+<meta name="description" content="Use Python to invoke web services using various techniques such as urllib2 to create a HTTP request and Suds client."><meta content="all" name="robots">
+<meta content="yes" name="mos_crawl">
+<meta content="SOAP Web Services for Oracle Procurement Cloud " name="dcterms.title">
+<meta content="SOAP Web Services for Oracle Procurement Cloud " name="doctitle">
+<meta content="E74440-01" name="dcterms.identifier">
+<meta content="E67967-01" name="partno">
+<meta content="OESWP" name="dcterms.isVersionOf">
+<meta content="Fusion Publishing Server, UAE Print Staging" name="generator">
+<meta content="Fri Dec 09 12:40:19 MST 2016" name="dcterms.created">
+<meta name="relnum" content="Release 12">
+<meta name="rel_num" content="Release 12"><link type="text/html" title="Previous" href="Perl.htm" rel="Prev">
+<link type="text/html" title="Next" href="Ruby.htm" rel="Next">
+<link type="text/html" title="Home" href="../../index.html" rel="Start">
+<link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+<script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+<script src="../nav/js/doccd.js" type="application/javascript"></script>
+<link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+<link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+<link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+<script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+<script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+<script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+<script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+<script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+<script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+<meta class="foundation-mq-topbar">
+<link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/oer.css" rel="stylesheet">
+Python-5B0DC3F6<meta name="DC.Language" content="en">
+<title>Python</title>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header><div class="row" id="CONTENT"><div class="IND large-9 medium-8 columns"><div id="EXTRATOC"></div><span id="PAGE" style="display:none;">50/166</span><a name="BEGIN" id="BEGIN"></a><div class="fusiondoc" id="Python-5B0DC3F6">
+
+   <h1 class="title topictitle1" id="Python-5B0DC3F6__topic-220-5B0EB191">Python</h1>
+
+   
+   
+   <div class="body" id="topic-234-5B0EB191"><p class="shortdesc">Use Python to invoke web services
+using various techniques such as <samp class="ph codeph" id="topic-224-5B0EB191">urllib2</samp> to create a HTTP request and Suds client.</p>
+
+      <section class="section" id="topic-236-5B0EB194"><h2 class="title sectiontitle">urllib2
+Library</h2>
+         
+         <div class="p" id="topic-240-5B0EB195">The following code uses <a class="xref" href="https://docs.python.org/2/library/urllib2.html" target="_blank">urllib2 library </a>to
+create a HTTP request to:<ol class="ol" id="topic-244-5B0F67C6">
+               <li class="li" id="topic-246-5B0F67C8"><p>Construct an xml payload to invoke the
+service. This example code passes a hard coded string.</p></li>
+
+               <li class="li" id="topic-248-5B0F67C8"><p>Construct a Base64-encoded string for
+the credentials of the service call.</p></li>
+
+               <li class="li" id="topic-250-5B0F67C9"><p>Create and register an opener. If the
+call is to a server behind a firewall, handle it through proxy.</p></li>
+
+               <li class="li" id="topic-252-5B0F96A1"><p>Create a request to call the service.</p></li>
+
+               <li class="li" id="topic-254-5B0F96A1"><p>Configure the request content type to
+be <samp class="ph codeph" id="topic-130-1DC68CBC">xml</samp>.</p></li>
+
+               <li class="li" id="topic-256-5B0F96A3"><p>Configure the request header with the
+authentication information.</p></li>
+
+               <li class="li" id="topic-258-5B0F96A5"><p>Set the <samp class="ph codeph" id="SOAPAction-5B0B673A">SOAPAction</samp> to be invoked. Though the service call works
+without this value, it is a recommended standard.</p></li>
+
+               <li class="li" id="topic-260-5B0FA83F"><p>Write the xml payload to the request and
+execute the request.</p></li>
+
+               <li class="li" id="topic-262-5B0FA840"><p>Get the response and process it. This
+example just prints the response.</p></li>
+
+            </ol>
+
+         </div>
+
+         <pre class="pre codeblock" id="topic-242-5B0EB195">import urllib2, base64
+username='username'
+password='password'
+
+# Construct xml payload to invoke the service. In the example, it is a hard coded string.
+envelope = """&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+                             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                             xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+                &lt;soap:Body&gt;
+                 &lt;findRule
+                             xmlns="http://xmlns.oracle.com/apps/incentiveCompensation/cn/creditSetup/creditRule/creditRuleService/types/"&gt;
+                    &lt;findCriteria&gt;
+                        &lt;fetchStart xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;0&lt;/fetchStart&gt;
+                        &lt;fetchSize xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;-1&lt;/fetchSize&gt;
+                        &lt;filter xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;
+                            &lt;group&gt;
+                               &lt;upperCaseCompare&gt;false&lt;/upperCaseCompare&gt;
+                               &lt;item&gt;
+                                  &lt;upperCaseCompare&gt;false&lt;/upperCaseCompare&gt;
+                                  &lt;attribute&gt;RuleId&lt;/attribute&gt;
+                                  &lt;operator&gt;=&lt;/operator&gt;
+                                  &lt;value&gt;300000000851162&lt;/value&gt;
+                               &lt;/item&gt;
+                            &lt;/group&gt;
+                        &lt;/filter&gt;
+                        &lt;excludeAttribute
+                            xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;false&lt;/excludeAttribute&gt;
+                    &lt;/findCriteria&gt;
+                    &lt;findControl&gt;
+                       &lt;retrieveAllTranslations
+                            xmlns="http://xmlns.oracle.com/adf/svc/types/"&gt;false&lt;/retrieveAllTranslations&gt;
+                    &lt;/findControl&gt;
+                 &lt;/findRule&gt;
+                &lt;/soap:Body&gt;
+            &lt;/soap:Envelope&gt;"""
+			
+# Construct the base 64 encoded string used as credentials for the service call
+creadentials = base64.encodestring('%s:%s' % (username, password))[:-1]
+authorization = "Basic %s" % creadentials
+
+# Create and register opener. Requires proxy when behind a firewall
+opener = urllib2.build_opener(urllib2.HTTPHandler(), urllib2.HTTPSHandler(), urllib2.ProxyHandler({'https':'proxyhost:proxyport'}))
+urllib2.install_opener(opener)
+
+# Create request for the service call
+request = urllib2.Request("https://host:port/icCnSetupCreditRulesPublicService/CreditRuleService")
+
+# Configure the request content type to be xml
+request.add_header("Content-Type", 'text/xml;charset=UTF-8')
+
+# Configure the request authentication in the header with base64-encoded user name and password
+request.add_header("Authorization", authorization)
+
+# Set the SOAP action to be invoked; while the call works without this, the value is expected to be set based on standards
+request.add_header("SOAPAction",
+'http://xmlns.oracle.com/apps/incentiveCompensation/cn/creditSetup/creditRule/creditRuleService/findRule')
+
+# Write the xml payload to the request
+request.add_data(envelope)
+
+# Execute the request
+handle = urllib2.urlopen(request)
+
+# Get the response and process it. This example just prints the response.
+content = handle.read()
+print content</pre>
+
+      </section>
+
+      <section class="section" id="topic-266-5B100E7C"><h2 class="title sectiontitle">Suds
+Client</h2>
+         
+         <p class="p" id="topic-270-5B106E6C">Use Suds, which is based
+on WSDL, to build SOAP envelope and client for consuming web services.
+For information about installing suds, see <a class="xref" href="https://pypi.python.org/pypi/setuptools/0.7.2" target="_blank">setup tools</a>.</p>
+
+         <div class="p" id="topic-276-5B1377A7">The following is a sample code using the suds
+framework to call a service:<ol class="ol" id="topic-278-5B1377A9">
+               <li class="li" id="topic-280-5B1377AB"><p>Construct a Base64-encoded string for
+the credentials of the service call.</p></li>
+
+               <li class="li" id="topic-282-5B1377AB"><p>Configure the request header with the
+content type, SOAP action, and authentication information.</p></li>
+
+               <li class="li" id="topic-284-5B1377AC"><p>Create a new client based on the WSDL.</p></li>
+
+               <li class="li" id="topic-286-5B1377AC"><p>Populate the objects to use as parameters.</p></li>
+
+               <li class="li" id="topic-288-5B1377AE"><p>Call the service.</p></li>
+
+               <li class="li" id="topic-290-5B1377AE"><p>Process the response.  This example just
+prints the response.</p></li>
+
+            </ol>
+
+         </div>
+
+         <pre class="pre codeblock" id="topic-274-5B12E20F">import base64
+from suds.client import Client
+
+username='username'
+password='password'
+
+# Construct the base64-encoded string used as the credentials for the service call
+credentials = base64.encodestring('%s:%s' % (username, password))[:-1]
+authorization = "Basic %s" % credentials
+
+url = 'https://host:port/icCnSetupCreditRulesPublicService/CreditRuleService?wsdl'
+
+# Configure the request content type, SOAP action, and authentication in header
+authenticationHeader = {
+   "SOAPAction" :"http://xmlns.oracle.com/apps/incentiveCompensation/cn/creditSetup/creditRule/creditRuleService/findRule",
+   "Content-Type" : "text/xml;charset=UTF-8",
+   "Authorization" : authorization }
+   
+# Create new client
+client = Client(url=url, headers=authenticationHeader)
+
+# Populate the objects to be used as parameter
+findCriteria = client.factory.create('ns4:FindCriteria')
+findControl = client.factory.create('ns4:FindControl')
+viewCriteria = client.factory.create('ns4:ViewCriteria')
+viewCriteriaRow = client.factory.create('ns4:ViewCriteriaRow')
+viewCriteriaItem = client.factory.create('ns4:ViewCriteriaItem')
+
+viewCriteriaItem.upperCaseCompare = "false";
+viewCriteriaItem.attribute = "RuleId";
+viewCriteriaItem.operator = "=";
+viewCriteriaItem.value = "300000000851162"
+
+viewCriteriaRow.upperCaseCompare = "false"
+viewCriteriaRow.item.append([viewCriteriaItem])
+viewCriteria.group.append([viewCriteriaRow])
+
+findCriteria.fetchStart = "0"
+findCriteria.fetchSize = "-1"
+findCriteria.excludeAttribute = "false"
+findCriteria.filter = viewCriteria
+
+findControl.retrieveAllTranslations = "false"
+
+# Call the service
+rule = client.service.findRule(findCriteria, findControl)
+
+# Process the response. This example just prints the response.
+print rule</pre>
+
+      </section>
+
+   </div>
+
+   <nav role="navigation" class="related-links">
+<div class="linklist linklist"><h5 class="relatedlinks">Related Topics</h5>
+<ul>
+<li><p><a class="link" href="Java_Client.htm">Java
+Client</a></p></li>
+<li><p><a class="link" href="Database.htm">Oracle
+Database</a></p></li>
+<li><p><a class="link" href="_NET_Framework.htm">.NET
+Framework</a></p></li>
+<li><p><a class="link" href="PHP.htm">PHP</a></p></li>
+<li><p><a class="link" href="Perl.htm">Perl</a></p></li>
+<li><p><a class="link" href="Ruby.htm">Ruby</a></p></li>
+<li><p><a class="link" href="Invoking_SOAP_Web_Services.htm">Invoking SOAP Web Services</a></p></li></ul></div>
+</nav>
+</div></div></div><footer></footer><noscript><p>Scripting on this page enhances content navigation, but does not change the content in any way.</p></noscript>
+<!-- Start SiteCatalyst code -->
+<script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+<!-- End SiteCatalyst code -->
+</body>
+</html>

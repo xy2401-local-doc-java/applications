@@ -1,0 +1,739 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Budgets (Chapter 6) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Using General Ledger" name="dcterms.title">
+      <meta content="Using General Ledger" name="doctitle">
+      <meta content="E73074-04" name="dcterms.identifier">
+      <meta content="E67969-01" name="partno">
+      <meta content="FAUGL" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Nov 17 09:36:01 PST 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="budgets;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAUGL1452584.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="glossary.htm" rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAUGL.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAUGL.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="In Oracle Fusion General Ledger, you can load budget data to perform variance reporting."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">9/10</span><a name="BEGIN" id="BEGIN"></a><div id="FAUGL1452585" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">6</span>Budgets
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAUGL817044">Budget Uploads: Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAUGL798473">Importing Budget Data from a Flat File: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAUGL798499">Loading Data to the Budget Interface Table: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAUGL817162">Importing Budget Data from a Spreadsheet: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAUGL828652">Budget Correction with Oracle ADF Desktop Integrator: Explained</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAUGL817044">
+                  <h2>Budget Uploads: Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>In Oracle Fusion General Ledger, you can load
+                     budget data to perform variance reporting.
+                  </p>
+                  
+                  <p>If you use a third-party budgeting application or
+                     don't use a budgeting application, there are two ways to load budgets
+                     into the GL Balances Cube.
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p><span class="uicontrol">Importing
+                              Budget Data from a Flat File</span>: Export budget data from
+                           your budgeting application to a comma separated values .csv file.
+                           Use the Import General Ledger Budget Balances file-based data import
+                           to prepare and generate flat files in a .csv format. You can use Oracle
+                           Application Development Framework Desktop Integrator correction worksheets
+                           to correct validation errors, delete rows with errors, and resubmit
+                           the corrected error rows.
+                        </p>
+                        <div class="infobox-note"><span class="notep1">Note: </span>
+                           For more information about file-based data import,
+                           see the File-Based Data Import for Oracle Financials Cloud guide.
+                           
+                        </div>
+                     </li>
+                     
+                     <li>
+                        <p><span class="uicontrol">Importing
+                              Budget Data from a Spreadsheet</span>: You can access the budget
+                           load spreadsheet from the General Accounting Dashboard. Enter, load,
+                           and correct budget data in the ADF Desktop Integrator spreadsheet
+                           tool. Use this tool to prepare and load budget data for multiple ledgers
+                           and periods with a common chart of accounts instance. The list of
+                           values and the web picker help you select valid values. This simplified
+                           data entry reduces errors and alerts you to errors as you enter the
+                           data in the spreadsheet. Error correction is done in the same spreadsheet.
+                        </p>
+                        
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <p>The following figure shows the process flow from
+                     uploading a budget to reporting on it.
+                  </p>
+                  <img src="img/budget_upload_nhdd_3_20037916.png" alt="The process flow of preparing, uploading, and reporting&#xA;on a budget." class="fusappimg">
+                  
+                  <div class="infobox-caution"><span class="notep1">Caution: </span>
+                     When the GL Balances Cube is rebuilt, the process
+                     retains the budget balances as well as the actual balances. Only the
+                     budget balances loaded using the spreadsheet or flat file through
+                     the GL Budget Balances interface table are retained.
+                     
+                     <p></p>
+                     
+                  </div>
+                  
+                  <div class="infobox-tip"><span class="notep1">Tip: </span>
+                     Create reports in Smart View or Financial Reporting
+                     to verify that the budget data was loaded correctly.
+                     
+                  </div>
+                  
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="http://docs.oracle.com/cloud/latest/financialscs_gs/OEFBF">File Based Data Import for Oracle Financials
+                              Cloud</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAUGL798473">
+                  <h2>Importing Budget Data from a Flat File: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Use the Upload Budgets processes to integrate
+                     budget information from other budgeting application such as Oracle
+                     Hyperion Planning, Fusion Edition. You can load your budget amounts
+                     to the General Ledger balances cube by populating the GL_BUDGET_INTERFACE
+                     table and running the Validate and Upload Budgets process. You can
+                     load budgets for multiple periods and for multiple ledgers with the
+                     same chart of accounts in a single load process. Note that the budget
+                     data is not loaded to the GL_BALANCES table and only loaded to the
+                     balances cube for variance reporting purposes.
+                  </p>
+                  
+                  
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     
+                     You can load data to interface tables using predefined
+                     templates and the Load Interface File for Import scheduled process,
+                     which are both part of the External Data Integration Services for
+                     Oracle Cloud. For more information about file-based data import, see
+                     the File Based Data Import guide for your cloud services.
+                     
+                     
+                  </div>
+                  
+                  
+                  <div class="sect2" id="FAUGL798471">
+                     <h3 class="topictitle">Assigning Values for Columns in the GL_BUDGET_INTERFACE
+                     Table</h3>
+                     
+                     
+                     <p>You must enter values in the columns of the
+                        interface table that require values, including not null columns, for
+                        the budget import to be successful.
+                     </p>
+                     
+                     
+                     
+                     <p>Enter values in the following required columns of
+                        the interface table:
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="List of columns and values that&#xA;are required in each column.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Column Name
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Values
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>RUN_NAME</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Enter a name to identify the budget data set being
+                                    imported.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>STATUS</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Enter the value NEW to indicate that you are bringing
+                                    new budget data.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>LEDGER_ID</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p> Enter the appropriate ledger ID value for the budget
+                                    amount. You can view the ledger ID for your ledgers in the Manage
+                                    Primary Ledgers page. The ledger ID column is hidden by default, but
+                                    you can display it from the View &gt; Columns menu. If you enter multiple
+                                    ledgers for the same run name, all of the ledgers must share the same
+                                    chart of accounts.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>BUDGET_NAME</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Enter the appropriate budget name value for the budget
+                                    line. You define your budget names in the Accounting Scenario value
+                                    set.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PERIOD_NAME</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Enter the period name that you are loading the budget
+                                    data for. Note that you can load budget data to Never Opened, Future
+                                    Enterable, and Open periods only.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CURRENCY_CODE</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Enter the currency for your budget.   </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>SEGMENT1 to SEGMENT30</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Enter valid enabled account value for each segment
+                                    in your chart of accounts. 
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>BUDGET_AMOUNT</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Enter the amount in the ledger currency for account
+                                    types, expense and assets.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>OBJECT_VERSION_NUMBER</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>For Oracle Cloud implementations, leave this field
+                                    blank as the application automatically populates this when you load
+                                    the data from the secure FTP server. For other implementations, you
+                                    can set the column to a value of 1.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                     
+                     <p>These columns are left as null because the budget
+                        import process either uses these columns for internal processing or
+                        does not use them currently.
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>CHART_OF_ACCOUNTS_ID</p>
+                        </li>
+                        
+                        <li>
+                           <p>CODE_COMBINATION_ID</p>
+                        </li>
+                        
+                        <li>
+                           <p>ERROR_MESSAGE</p>
+                        </li>
+                        
+                        <li>
+                           <p>CREATION_DATE</p>
+                        </li>
+                        
+                        <li>
+                           <p>CREATED_BY</p>
+                        </li>
+                        
+                        <li>
+                           <p>LAST_UPDATE_DATE</p>
+                        </li>
+                        
+                        <li>
+                           <p>LAST_UPDATE_LOGIN</p>
+                        </li>
+                        
+                        <li>
+                           <p>LAST_UPDATED_BY</p>
+                        </li>
+                        
+                        <li>
+                           <p>REQUEST_ID</p>
+                        </li>
+                        
+                        <li>
+                           <p>LOAD_REQUEST_ID</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=C260011EE39AD9F3E040D30A6881341B">External Data Integration Services for Oracle Cloud: Overview</a></p>
+                     </li>
+                     <li>
+                        <p><a href="http://docs.oracle.com/cloud/latest/financialscs_gs/OEFBF">File Based Data Import for Oracle Financials
+                              Cloud</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAUGL798499">
+                  <h2>Loading Data to the Budget Interface Table: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Load the budget amounts to the interface table
+                     by performing the following steps.
+                  </p>
+                  
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>Export budget data from your budgeting
+                           application to a comma separated values (.csv) file. The file-based
+                           data import for Import General Ledger Budget Balances has a template
+                           that you can use. For more information about file-based data import,
+                           see the File Based Data Import for Oracle Financials Cloud guide.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Upload the zipped .csv file to
+                           the UCM directory fin/bugetBalance/import.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Launch the scheduled process called
+                           Load Interface File for Import and select the following parameters:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Import process: Validate and Upload
+                                 Budgets
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Data file: Select the name of the
+                                 zipped .csv file
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Run the Validate and Upload Budgets
+                           process to load the budget amounts to the General Ledger balances
+                           cube.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Review the logs for validation errors.
+                           If there are validation errors, correct the data in the template and
+                           regenerate the .csv file. Then resubmit the data by repeating steps
+                           3 and 4.
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  <img src="img/budget_flat_file_process_nhdd_1_20037908.png" alt="The figure shows the process to load budget data using&#xA;a flat file. The file is loaded to the GL Budget Interface, validated,&#xA;and uploaded to the GL Balances Cube." class="fusappimg">
+                  
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="http://docs.oracle.com/cloud/latest/financialscs_gs/OEFBF">File Based Data Import for Oracle Financials
+                              Cloud</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAUGL817162">
+                  <h2>Importing Budget Data from a Spreadsheet: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Use Oracle Application Development Framework
+                     (ADF) Desktop Integrator to enter, load, and correct budget data.
+                     This functionality uses a new interface table called the GL_BUDGET_INTERFACE
+                     and requires the duty role, Budget Entry Duty.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAUGL817161">
+                     <h3 class="topictitle">Budget Import</h3>
+                     
+                     <p>Budget Import Oracle ADF Desktop Integrator import
+                        functionality is similar to the journal import sheet in Oracle Fusion
+                        General Ledger. You may use this tool to create and upload budget
+                        data. From the General Accounting Dashboard page, download the import
+                        worksheet.
+                     </p>
+                     
+                     
+                     <p>The budget import uses the Accounting Scenario value
+                        set for the budget being loaded. The Run Name is used as an identifier
+                        for the imported data set. The Oracle ADF Desktop Integrator budget
+                        import functionality:
+                     </p>
+                     
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Supports multiple ledgers but a single
+                              chart of accounts instance
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Allows multiple calendars and periods</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Supports entered currencies in addition
+                              to the ledger currency 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Contains user-friendly lists of values</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Performs most validations on the
+                              worksheet 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Secures values by data access sets</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     <img src="img/budget_adfdi_process_nhdd_2_20037917.png" alt="The figure shows the process to enter and upload budget&#xA;data into the GL Balances Cube using an ADFdi spreadsheet. After the&#xA;data is loaded into the spreadsheet, upload the spreadsheet to the&#xA;GL Budget Interface. Then, validate and run the Upload Budgets process&#xA;to load the data into the GL Balances Cube. Log files are provided&#xA;on both the validate and upload processes to facilitate error correction." class="fusappimg">
+                     
+                     <div class="infobox-note"><span class="notep1">Note: </span>
+                        The ADF Desktop Integrator spreadsheet contains a
+                        Record Status column that shows if the rows upload successfully or
+                        with errors. Use the spreadsheet where the data was entered to enter
+                        the corrections.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAUGL828652">
+                  <h2>Budget Correction with Oracle ADF Desktop Integrator: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Oracle ADF Desktop Integrator correction functionality
+                     is similar to the journal correction sheet in Oracle Fusion General
+                     Ledger. You use this tool to correct the flat file import errors. 
+                  </p>
+                  
+                  
+                  
+                  <p>The correction spreadsheet functionality:</p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Uses segment labels based on the
+                           data access set
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Contains user friendly lists of values</p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Performs most validations on the
+                           worksheet
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Allows updating or marking the row
+                           for deletion.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="FAUGL828666">
+                     <h3 class="topictitle">Correcting Data</h3>
+                     
+                     <p>To use the correction spreadsheet functionality perform
+                        the following steps:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>From the <span class="uicontrol">General Accounting Dashboard</span> page, you set the data access
+                              set and download the correction worksheet.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>After the correction worksheet is
+                              downloaded, you query for the rows in error. Pick the run name for
+                              which there are validation errors and click on the <span class="uicontrol">Search</span> button. This populates the budget
+                              rows in error.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Correct the rows in error or mark
+                              for deletion and submit the journal correction spreadsheet. Any errors
+                              will be reported on the worksheet. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If the row status indicates an error,
+                              double-click it to see the error details and take necessary action.
+                              You can use the list of values to quickly correct data that is in
+                              error.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

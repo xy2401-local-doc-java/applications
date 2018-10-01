@@ -1,0 +1,2868 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Flow Patterns (Chapter 26) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:20 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="flow patterns; flows; extracts;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM1412985.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM1434033.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="A flow pattern exists for each extract or report process. The flow pattern defines submission parameters, flow tasks, and
+      task sequence. Flow patterns for extracts and reports typically contain a single flow task. You can edit them to add tasks
+      in the Payroll Checklist work area or by using the Refine Extract task in the Data Exchange work area. Each flow pattern you
+      create must be associated with a security profile. The person who submits the flow becomes the flow owner and the task owner.
+      The person's security privileges determine whether the person can submit the flow."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">29/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM1685993" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">26</span>Flow Patterns
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1670636">Flow Patterns for Extracts and Reports: Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM317720">Checklist and Flow Tasks: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM708200">Editing Flow Tasks: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM711763">Flow Pattern Parameters: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM715934">Flow Task Start and Due Dates: Critical Choices</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM711909">Editing Flow Patterns: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1645639">Adding a BI Publisher Report to a Flow: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1997610">Creating a Flow within a Flow: Worked Example</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1685992">FAQs for Flow Patterns</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM1670636">
+                  <h2>Flow Patterns for Extracts and Reports: Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>A flow pattern exists for each extract or
+                     report process. The flow pattern defines submission parameters, flow
+                     tasks, and task sequence. Flow patterns for extracts and reports typically
+                     contain a single flow task. You can edit them to add tasks in the
+                     Payroll Checklist work area or by using the Refine Extract task in
+                     the Data Exchange work area. Each flow pattern you create must be
+                     associated with a security profile.
+                  </p>
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM317720">
+                  <h2>Checklist and Flow Tasks: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>A flow can consist of one or more tasks. The flow pattern determines the sequence of tasks executed in a flow. Submitting
+                     a flow from the Data Exchange or payroll work areas generates a checklist. Use the flow's checklist to monitor and manage the tasks included
+                     in the flow.
+                  </p>
+                  
+                  
+                  
+                  <p>Depending on the flow pattern, the checklist might
+                     include:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Automatic tasks, such as extracts,
+                           reports, and processes
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Manual tasks, such as verification
+                           tasks required to complete a flow
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="FAIHM1289268">
+                     <h3 class="topictitle">Working with Checklists</h3>
+                     
+                     <p>Use the checklist while working with flows to perform
+                        the following activities: 
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Monitor the status of the flow
+                              tasks
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Manage the flow tasks, such as
+                              reassigning tasks, marking tasks completed, and performing corrective
+                              actions
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>View task details, such as a list
+                              of records processed by the flow
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     
+                     <p>For payroll, while working on a task in the flow,
+                        you can remain in the Payroll Checklist work area or go to a related
+                        work area that includes tasks in the regional area. For example, while
+                        reviewing the results for the Calculate Payroll task, you might go
+                        to the Payroll Calculation work area to review the person's calculation
+                        card or element entries.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=9DC61AC6B52E9852E040D30A68814B32">Monitoring the Status of Flow Tasks: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM708200">
+                  <h2>Editing Flow Tasks: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>Edit flow patterns you create or copy. This
+                     topic suggests points to keep in mind when you add, delete, or move
+                     a task in a flow pattern.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM708197">
+                     <h3 class="topictitle">Editing Tasks</h3>
+                     
+                     <p>Refer to the following table for examples of edits
+                        to flow pattern tasks. You perform these edits on the Task Sequence
+                        tab of the Manage Payroll Flow Patterns page. For payroll flow patterns,
+                        use the Manage Payroll Flow Patterns task in the Payroll Checklist
+                        work area. For extract flow patterns, use the Refine Extracts task
+                        in the Data Exchange work area.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Explains and gives examples when&#xA;editing a flow pattern by adding, deleting, and moving a task">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Edits
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Impact 
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Examples
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Add a task</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>You add a task to position it as the last task in
+                                    the activity or task group. Update the task sequence.
+                                 </p>
+                                 
+                                 <p>If you repeat a task, rename it to make clear its
+                                    purpose on the checklist.
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>You add a manual verification task after each report.
+                                    You rename each task with the report name.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Delete a task</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>When you delete a task you may impact subsequent
+                                    tasks in the flow that depend on its results. Review the subsequent
+                                    tasks.
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>You delete a task. The Parameter Basis of the next
+                                    task is Bind to Task and its Basis Value is the value of the deleted
+                                    task. You update the Parameter Basis of the subsequent task as required,
+                                    for example, to Bind to Flow.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Move a task to a different activity </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The activity determines the work areas where you
+                                    can submit the flow patterns you define, and controls how the checklist
+                                    displays.
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>You move a task in a payroll flow pattern for a report
+                                    from the Payments activity to the Statutory activity. The flow owner
+                                    can view the report results from the Payroll Checklist or Regulatory
+                                    and Tax Reporting work areas, but not the Payment Distribution work
+                                    area.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Reorder the list of tasks displayed in a checklist</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The sequence specified for the task further determines
+                                    the task order within an activity on the checklist.
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>You decide to flatten the checklist sequence to group
+                                    all the tasks within a single activity.
+                                 </p>
+                                 
+                                 <ol>
+                                    
+                                    <li>
+                                       <p>On the Tasks page, you confirm
+                                          that each task belongs to the same activity and task group. 
+                                       </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>You edit each task, specifying
+                                          a value in the Sequence column on the Edit Task Details Owners and
+                                          Details page.
+                                       </p>
+                                       <p>The lowest number is used for the
+                                          first task in the checklist. For example, you might specify a sequence
+                                          of 10 for the payroll calculation task and 20 for the prepayments
+                                          calculation task.
+                                       </p>
+                                       
+                                    </li>
+                                    
+                                 </ol>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=B6EAD514696506F3E040D30A68814D2C">Editing a Flow Pattern: Worked Example</a></p>
+                     </li>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=CCAB6BCE5534CAD0E040D30A68813520">Sequencing Rules for Flows and Locked Tasks: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM711763">
+                  <h2>Flow Pattern Parameters: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Each task in a flow pattern supports task
+                     actions, such as submit, roll back, mark for retry, retry, and view.
+                     Task action parameters control how the application processes a task
+                     and how the task relates to other tasks in the flow pattern. Flow
+                     parameters, a subset of task parameters, supply the information required
+                     to successfully complete the tasks in the flow pattern.
+                  </p>
+                  
+                  
+                  
+                  <p>The following figure shows the relationship of the
+                     tasks, task parameters, and flow parameters in a flow pattern.
+                  </p>
+                  <img src="img/pay_defpay_flowpatt_pattern_06_20049304.png" alt="Flow tasks, task actions, and flow&#xA;parameters" class="fusappimg">
+                  
+                  
+                  
+                  <p>When you create a flow pattern, you review and edit
+                     the task parameters for the Submit and Initialize task actions. After
+                     submitting the flow pattern, you can edit the parameters for the remaining
+                     task actions, such as Mark for Retry, Retry, and Roll Back. The parameter
+                     details you can edit include:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Display and display format</p>
+                     </li>
+                     
+                     <li>
+                        <p>Lookups and value sets</p>
+                     </li>
+                     
+                     <li>
+                        <p>Usage</p>
+                     </li>
+                     
+                     <li>
+                        <p>Sequence</p>
+                     </li>
+                     
+                     <li>
+                        <p>Parameter Basis and Basis Value</p>
+                        
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="FAIHM711760">
+                     <h3 class="topictitle">Display and Display Format</h3>
+                     
+                     
+                     <p>Display parameters control the format and
+                        availability of the flow parameter, as shown in the following table.
+                     </p>
+                     
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Display options control the format and availability&#xA;of the parameter for use in flows">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Parameters
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Purpose
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Display</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Determines whether the parameter displays when submitting
+                                    the flow
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Display Format</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Identifies the type of data displayed, such as a
+                                    date or text, or choice list
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>Display parameters work with other parameters, such
+                        as Parameter Basis and Basis Value. For example, most task action
+                        parameters don't display the Request parameter because the application
+                        obtains the value for this parameter from the context. 
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM711758">
+                     <h3 class="topictitle">Lookups and Value Sets</h3>
+                     
+                     
+                     <p>Use lookups and value sets for descriptive
+                        flexfields to control and validate the data used in the payroll flow
+                        pattern.
+                     </p>
+                     
+                     
+                     
+                     <p>The following table describes which parameter basis
+                        to use for the different methods for obtaining the lookup value.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Example of different methods for obtaining the value&#xA;of a lookup and the parameter basis that supports it">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Lookup Value
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Parameter Basis
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Entered when submitting a flow</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Bind to Flow </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Derived by the application from existing tables, such
+                                    as the value for the payroll statutory unit
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Bind to Flow Task or Context Binding</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Derived by application from a Post SQL process</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Post SQL Bind</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM711761">
+                     <h3 class="topictitle">Usage</h3>
+                     
+                     <p>A parameter can receive information (input) or generate
+                        information (output) that subsequent tasks can use as input. For example,
+                        for the Calculate Payroll task, the Payroll Process parameter for
+                        the Submit task action generates an output value for the payroll action
+                        ID, which the Retry task action uses as input. 
+                     </p>
+                     
+                     
+                     <p>The following table describes the typical settings
+                        for a parameter whose usage is output. 
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="For output usage parameters the parameter is not&#xA;displayed and its value is derived using the parameter basis">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Parameter Option
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Setting
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Display</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Parameter Basis</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>Bind to Flow, the application derives
+                                          the value from the flow parameter and the updates the flow parameters
+                                          table with the output value
+                                       </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>If you select no value, the output
+                                          value results from the task's output
+                                       </p>
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM711759">
+                     <h3 class="topictitle">Sequence</h3>
+                     
+                     
+                     <p>Control the order in which the application
+                        processes and displays the parameters by specifying the sequence.
+                        Sequence numbers provide default logic for the application to derive
+                        the order in which to process the parameters. For example, if you
+                        have two lookups and the values of the second lookup depends on the
+                        first lookup, set the first lookup to a lower sequence number than
+                        the second one
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM711757">
+                     <h3 class="topictitle">Parameter Basis and Basis Value</h3>
+                     
+                     <p>The Parameter Basis controls how the application derives
+                        the value for the parameter. The Basis Value further specifies the
+                        value the application uses for the parameter.
+                     </p>
+                     
+                     
+                     <p>The following table lists the Parameter Basis options
+                        and gives examples of when you might select them.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Description and examples provided for the Parameter&#xA;Basis and Basis Values.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Parameter Basis
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Basis Value Available
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Example
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Use Specified Value</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Assigns a specific value to the parameter.</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Text is entered as constant or value entered by the
+                                    person who submits the flow.
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Specify a constant if the value is the same for all
+                                    tasks, such as the payroll statutory unit.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Bind to Context</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Derives the value from the context of the current
+                                    flow instance or the task instance of the flow pattern.
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Select flow, task, or the Request. The application
+                                    will automatically generate the parameter value.
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>If the task includes a Request parameter, bind it
+                                    to the flow context. Tasks in the flow reference this task using the
+                                    Request ID generated by the application.
+                                 </p>
+                                 
+                                 <p>Bind the legislative data group parameter to a task
+                                    parameter that supplies the legislative data group.
+                                 </p>
+                                 
+                                 <p>For example, the legislative data group for prepayments
+                                    uses the payroll as context, because it's already associated with
+                                    the legislative data group.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Bind to Flow Parameter</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Derives the value from one of the flow parameter values.</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Application will automatically derive the parameter
+                                    value.
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Bind a parameter to the flow that several tasks share
+                                    to avoid multiple occurrences of the same parameter.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Bind to Flow Task Parameter</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Binds the value to the output of the previous task.</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Select a value from the previous task's parameters.</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Bind a parameter to a task, such as Retry corrective
+                                    action, so that when the flow owner resubmits the task to retry it,
+                                    the application uses the output of the Submit task parameter.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Bind to Task Parameter</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Resolves the value for the task parameter.</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Select a value from the current task's parameters.</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Bind a parameter to the task if several tasks share
+                                    a parameter, such as a start date, but one task requires a different
+                                    date.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>No value specified</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Stops the application from generating a parameter
+                                    value when the task executes. 
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Application will generate a blank value.</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Not applicable</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Post SQL Bind</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Calculates the parameter but doesn't display it on
+                                    the user interface.
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>SQL statement will calculate the parameter value.</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Bind a parameter using the Post SQL bind to generate
+                                    data. 
+                                 </p>
+                                 
+                                 <p>For example, use a post SQL process to generate the
+                                    process date from the payroll period and payroll parameters.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>SQL Bind</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Calculates and displays value on the user interface.</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>SQL statement will calculate the parameter value.</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Bind a parameter using SQL </p>
+                                 
+                                 <p>For example use SQL Bind to calculate the payment
+                                    type parameter for the Generate Check Payment task. The application
+                                    obtains the payment type ID for the check payment record. 
+                                 </p>
+                                 
+                                 <p>Use SQL Bind to prompt the task owner to enter a reason
+                                    for a corrective action, such as a QuickPay.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=B6FBB7FA879E3865E040D30A68812AB4">Creating a Flow Pattern to Reissue a Check: Worked Example</a></p>
+                     </li>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=B405268B2D3E46DBE040D30A68812079">Can I skip the flow parameters for a single-task payroll flow pattern?</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM715934">
+                  <h2>Flow Task Start and Due Dates: Critical Choices</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>Specify duration dates and notification options
+                     in the payroll flow pattern to give flow owners adequate time before
+                     a task starts to prepare and before a task is due to address any issues. 
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM715929">
+                     <h3 class="topictitle">Task Start and Due Dates</h3>
+                     
+                     
+                     
+                     <p>Specify the following duration dates on the
+                        Tasks page of the Manage Payroll Flow Patterns page:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p> Start date, the date the task
+                              owner should start the task 
+                           </p>
+                           <div class="infobox-note"><span class="notep1">Note: </span>
+                              The start date applies to notifications only. You
+                              schedule when a flow starts on the Scheduling page when you submit
+                              the flow.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>Due date, the date the task owner
+                              should complete the task
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     <p>To specify duration dates:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select the flow parameter date
+                              to use as the basis for the duration date
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Optionally, offset the date by
+                              specifying a plus or minus value depending on whether the date falls
+                              before or after the duration date.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM715930">
+                     <h3 class="topictitle">Notifications</h3>
+                     
+                     
+                     
+                     <p>Select notifications to send error and warning
+                        messages, and to inform the task owner when a task starts or ends.
+                        The receipt of notifications depends on the duration dates and their
+                        offsets.
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Specify the notifications the task
+                              owner receives.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Optionally, specify the number
+                              of days before the application automatically deletes a notification
+                              from storage. 
+                           </p>
+                           <p>Use the Manage Payroll Process
+                              Configuration task in the Setup and Maintenance work area to complete
+                              the Notification Expiration Offset parameter. 
+                           </p>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=DD4337D7D5D1E28DE040D30A68813C3C">Scheduling Flows: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM711909">
+                  <h2>Editing Flow Patterns: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>Review these scenarios to better understand
+                     how to edit flow patterns to meet the requirements of your enterprise.
+                     Use the Manage Payroll Flow Pattern task in the Payroll Checklist
+                     work area or the Refine Extracts task in the Data Exchange work area
+                     for the following scenarios:
+                  </p>
+                  
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Updating a parameter to use a specified
+                           value
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Supplying a reason for a corrective
+                           action
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Adding tasks and reordering the
+                           task sequence
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Automatically incrementing dates
+                           in a scheduled extract
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="FAIHM711888"><h3 class="OracleScenario">Updating a Parameter to Use a Specified Value</h3>
+                     <p>Your payrolls use a single process configuration group
+                        named InFusion UK Consolidation Group. You want to specify a constant
+                        for the configuration group task action parameter and hide the parameter
+                        to avoid data entry mistakes. You perform the following steps. 
+                     </p>
+                     <ol>
+                        
+                        <li>
+                           <p>Query the flow pattern you defined
+                              for the payroll cycle. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Parameters tab of the Manage
+                              Payroll Flow Pattern page, edit the Process Configuration Group parameter. 
+                           </p>
+                           
+                           <p>You enter the values shown on the following table.</p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="Parameter details to enter to&#xA;automatically populate the Process Configuration Group">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Parameter Detail
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Value
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Display</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>No</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Display Format</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Text</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Lookup</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>No value</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Usage</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Input Parameter</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Parameter Basis</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Constant Bind</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Basis Value</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>InFusion UK Configuration Group</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                        </li>
+                        
+                     </ol>
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM711913"><h3 class="OracleScenario">Supplying a Reason for a Corrective Action</h3>
+                     <p>Your enterprise typically issues electronic funds
+                        transfer payments. You defined a flow pattern to issue check payments
+                        and to verify them. You want to track the reason managers issue checks,
+                        so you add a flow parameter to capture that information.
+                     </p>
+                     <ol>
+                        
+                        <li>
+                           <p>Query the payments flow pattern
+                              you defined. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Parameters tab of the Manage
+                              Payroll Flow Pattern page, Select and Add the Reason parameter to
+                              include it as a flow submission parameter, and complete the parameter
+                              details as shown in the following table.
+                           </p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="Parameter details to enter for&#xA;adding a Reason parameter to the Calculate QuickPay task">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Parameter Detail
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Value
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Display</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Yes</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Display Format</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Text</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Lookup</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>No value</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Usage</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Input Parameter</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Parameter Basis</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Context Binding</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Basis Value</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Payroll Flow</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                        </li>
+                        
+                     </ol>
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM717521"><h3 class="OracleScenario">Adding Tasks and Reordering the Task Sequence</h3>
+                     <p>Your flow pattern includes a Calculate Gross Earnings
+                        process and the Element Results Register Report. You decide to add
+                        two extract reports that run concurrently, followed by a verification
+                        task, and to simplify the checklist so that it is a single list. You
+                        perform the following steps:
+                     </p>
+                     <ol>
+                        
+                        <li>
+                           <p>From the Data Exchange work area,
+                              select the Refine Extracts task.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Refine HCM Extracts page,
+                              query the flow pattern.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Tasks tab of the Manage
+                              Payroll Flow Patterns page:
+                           </p>
+                           
+                           <ol>
+                              
+                              <li>
+                                 <p>Add the first extract report, specifying
+                                    the same Activity and Task Group as the Calculate Gross Earnings.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>Add the second extract report,
+                                    specifying the same Activity and Task Group as the Calculate Cross
+                                    Earnings.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Add a manual verification task,
+                                    specifying the same Activity and Task Group as the Calculate Cross
+                                    Earnings.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Edit each task, specifying a sequence
+                              number on the Edit Task Details Owners and Details page. 
+                           </p>
+                           <p>The lowest number is used for the first task in the
+                              checklist. For example, you might specify a sequence of 10 for the
+                              Calculate Gross Earnings task, 20 for the first extract report, 30
+                              for the second extract report, and 40 for the manual verification
+                              task.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>On the Tasks Sequence tab, reorder
+                              the sequence of reporting tasks so that the two extract reports run
+                              concurrently.
+                           </p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Task
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Following Task
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Start Flow</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Calculate Gross Earnings</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Calculate Gross Earnings</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>First extract report</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Calculate Gross Earnings</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Second extract report</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>First extract report</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Manual verification task</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Second extract report</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Manual verification task</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Manual verification task</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>End Flow</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                        </li>
+                        
+                     </ol>
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1920768"><h3 class="OracleScenario">Automatically Incrementing Dates in Scheduled
+                     Extract</h3>
+                     <p>You create a flow pattern to extract weekly payroll
+                        data that requires the user to enter a process date parameter. You
+                        schedule the extract to run weekly. The application evaluates the
+                        flow parameters at the time of submission, and the task parameters
+                        when the task starts executing. To automatically increment the date
+                        field, so that the application derives the dates from the defaulted
+                        date parameter, you edit the task parameters. 
+                     </p>
+                     <p>You use the Refine Extracts task from the Data Exchange
+                        work area, or the manage Flow Patterns task from the checklist work
+                        area. You edit the task parameters on the task's Basic Information
+                        page by performing the following actions:
+                     </p>
+                     <ol>
+                        
+                        <li>
+                           <p>Select the Process Date parameter.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Select Context binding from the
+                              Parameter Basis field.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select System Date from the Basis
+                              Value field.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=B6EAD514696506F3E040D30A68814D2C">Editing a Flow Pattern: Worked Example</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1645639">
+                  <h2>Adding a BI Publisher Report to a Flow: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Add single or multiple BI Publisher reports
+                     to your copied or user-defined flow pattern. When you submit the flow,
+                     the report automatically generates an output file that you can view.
+                     The output file is based on the template used for the BI Publisher
+                     report, such as an html template. The Run BI Publisher Report task
+                     belongs to the Statutory activities in the flow pattern. 
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM1645715">
+                     <h3 class="topictitle">Adding Your Report to a Flow </h3>
+                     
+                     <p>Follow these steps to add the task to add your BI
+                        Publisher report to an existing extract flow. 
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Use the Manage Flow Patterns task
+                              in the Payroll Checklist work area or the Refine Extracts task in
+                              the Data Exchange work area or the area. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Search and select the flow that
+                              you will customize.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Manage Flow Pattern page,
+                              on the Tasks tab, click the <span class="uicontrol">Edit</span> button
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click the <span class="uicontrol">Select and Add</span> button on the menu bar. In the Search
+                              Tasks dialog, search for and select Run BI Publisher Report. Click
+                              the <span class="uicontrol">Done</span> button.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Task Sequence page, confirm
+                              the sequence is correct.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Flow Parameters page, add
+                              a required parameter for the first argument of the BI Publisher report. 
+                           </p>
+                           
+                           <p>The flow parameters map to the BI Publisher arguments.
+                              For example, if your report is based on a SQL query, the first argument
+                              is the first bind variable of a SQL query data model. 
+                           </p>
+                           
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              To easily determine the sequence of arguments, view
+                              the list of parameters for the generated report in BI Publisher.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>Optionally, rename the parameter
+                              to a more meaningful name. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Task parameters page, in
+                              the Parameter Details section, complete the following steps:
+                           </p>
+                           
+                           <ol>
+                              
+                              <li>
+                                 <p>Confirm that the Parameter Basis
+                                    for the First Argument value is Bind to Flow.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Specify a value for the Report
+                                    Name and Report Path parameters.
+                                 </p>
+                                 <p>For example,
+                                    if the BI Publisher data model is saved to the Custom folder in Shared
+                                    Folders you would specify <code>/Custom/yourBIreport.xdo</code>.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p> Specify values for other arguments
+                                    if required.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Review the flow and submit it.</p>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM1415462.htm#FAIHM1996511">Creating a Report to View Batch Line Errors: Worked Example</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1997610">
+                  <h2>Creating a Flow within a Flow: Worked Example</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This example describes how to copy the Transfer
+                     Batch flow and
+                     modify it to include a custom flow pattern you created.
+                     In this example, the custom flow you add submits a report to check
+                     for any batch line errors after transferring a batch. If the transfer
+                     fails, you can skip the transfer process or mark it as complete, and
+                     then view the report for error details.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM1997556">
+                     <h3 class="topictitle">Summary of Tasks</h3>
+                     
+                     <p>This worked example includes details for the following
+                        tasks:
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Creating the parent flow pattern</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Adding the report flow to the parent
+                              flow
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Testing the flow</p>
+                        </li>
+                        
+                     </ol>
+                     
+                  </div>
+                  
+                  
+                  <h3 class="topictitle">Creating the Parent Flow Pattern</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>In the Payroll Checklist work area, select the <span class="uicontrol">Manage Payroll Flow Patterns</span> task.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Search for and select the row for <span class="uicontrol">Transfer Batch</span>, and then click the <span class="uicontrol">Copy</span> icon.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Enter the name of the new flow pattern, such as <span class="uicontrol">Transfer Batch with Error Report</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Enter a description, such as "Transfer a batch
+                           and view any batch line errors that occurred." and then click <span class="uicontrol">Save and Close</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Search for and select the Transfer Batch and Error
+                           Report flow pattern, and then click <span class="uicontrol">Edit</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Add the parameter that derives batch name from
+                           the batch ID as follows:
+                        </p>
+                        
+                        <p>
+                           <ol>
+                              
+                              <li>
+                                 <p>On the Parameters tab, click <span class="uicontrol">Add</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Select the added row and click <span class="uicontrol">Edit</span>. 
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Add values as shown in this table.</p>
+                                 
+                                 <div class="simpletable-margin">
+                                    <table class="customlayout" summary="">
+                                       
+                                       
+                                       <tr class="header">
+                                          
+                                          <th scope="col">
+                                             Field
+                                             
+                                          </th>
+                                          
+                                          <th scope="col">
+                                             Value
+                                             
+                                          </th>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Flow Parameter</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Batch Name</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Use for Searches</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>No</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Display</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>No</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Display Format</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Text </p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Sequence</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>3</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Usage</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Input parameter</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Parameter Basis</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Post SQL Bind</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Basis Value</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p><code>select batch_name from pay_batch_headers
+                                                   where batch_id = :BATCH</code></p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       
+                                       
+                                    </table>
+                                 </div>
+                                 <p></p>
+                                 
+                              </li>
+                              
+                           </ol>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Save</span>.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Adding the Report Flow to the Parent Flow</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>On the Tasks tab, click <span class="uicontrol">Select and Add</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Search window, search for and select <span class="uicontrol">Submit Another Flow</span>, and then click <span class="uicontrol">Done</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the row for Submit Another Flow, click the <span class="uicontrol">Edit</span> icon in the menu bar and set the values
+                           as shown in this table.
+                        </p>
+                        
+                        <p></p>
+                        <div class="simpletable-margin">
+                           <table summary="This table lists field names (left column) and their respective values.">
+                              
+                              
+                              <tr>
+                                 
+                                 <th scope="col">
+                                    Field
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Task</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Run Batch Lines Report</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Activity</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Statutory</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Task Group</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Reporting</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Description</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Submit the batch lines error report for the specified
+                                       batch.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Edit task parameters as follows:</p>
+                        
+                        <p>
+                           <ol>
+                              
+                              <li>
+                                 <p>In the row for Run Batch Lines
+                                    Report, click <span class="uicontrol">Edit Task</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Configure the predefined task parameters
+                                    as shown in this table.
+                                 </p>
+                                 
+                                 <div class="simpletable-margin">
+                                    <table class="customlayout" summary="">
+                                       
+                                       
+                                       <tr class="header">
+                                          
+                                          <th scope="col">
+                                             Parameter
+                                             
+                                          </th>
+                                          
+                                          <th scope="col">
+                                             Parameter Basis
+                                             
+                                          </th>
+                                          
+                                          <th scope="col">
+                                             Basis Value
+                                             
+                                          </th>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Flow Name</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Constant Bind</p>
+                                             
+                                          </td>
+                                          
+                                          <td>
+                                             
+                                             <p>The name of the flow, for example Batch Lines Report.</p>
+                                             
+                                             <div class="infobox-note"><span class="notep1">Note: </span>
+                                                This value is case-sensitive. Enter the name exactly.
+                                                
+                                             </div>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>From Flow Instance ID</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Context Binding</p>
+                                             
+                                          </td>
+                                          
+                                          <td>
+                                             
+                                             <p>Payroll flow</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>From Flow Task Instance ID</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Context Binding</p>
+                                             
+                                          </td>
+                                          
+                                          <td>
+                                             
+                                             <p>Payroll task</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Use to Calculate Results</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Constant Bind</p>
+                                             
+                                          </td>
+                                          
+                                          <td>
+                                             
+                                             <p>Y</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Parameter Name 1</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Constant Bind</p>
+                                             
+                                          </td>
+                                          
+                                          <td>
+                                             
+                                             <p>Batch Name</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Parameter Value 1</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Bind To Flow</p>
+                                             
+                                          </td>
+                                          
+                                          <td>
+                                             
+                                             <p>Batch Name</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       
+                                       
+                                    </table>
+                                 </div>
+                                 <p></p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Next</span>, and optionally complete the owner and checklist
+                                    information.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Next</span>, and optionally complete the duration and notification
+                                    information.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Submit</span>.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                        </p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Edit the task sequence as follows:</p>
+                        
+                        <p>
+                           <ol>
+                              
+                              <li>
+                                 <p>On the Task Sequence tab, edit
+                                    the following two rows as shown in this table
+                                 </p>
+                                 
+                                 <div class="simpletable-margin">
+                                    <table class="customlayout" summary="">
+                                       
+                                       
+                                       <tr class="header">
+                                          
+                                          <th scope="col">
+                                             Start Flow
+                                             
+                                          </th>
+                                          
+                                          <th scope="col">
+                                             Following Task
+                                             
+                                          </th>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Transfer Batch</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>Run Batch Lines Report</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       <tr>
+                                          
+                                          <th scope="row" class="row">
+                                             
+                                             <p>Run Batch Lines Report</p>
+                                             
+                                          </th>
+                                          
+                                          <td>
+                                             
+                                             <p>End Flow</p>
+                                             
+                                          </td>
+                                          
+                                       </tr>
+                                       
+                                       
+                                       
+                                    </table>
+                                 </div>
+                                 <p></p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Submit</span>.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Testing the Flow</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>Create and save a test batch that should cause
+                           an error.
+                        </p>
+                        
+                        <p>Alternatively, you can search for an existing batch that was
+                           transferred with errors using this SQL query: <pre><code>select * from pay_batch_headers where batch_status = 'E';<br></code></pre></p>
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Submit a Process or Report page, select
+                           a legislative data group.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Select the <span class="uicontrol">Transfer Batch
+                              with Error Report</span> task, and then click <span class="uicontrol">Next</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Enter a unique name for the current flow instance.</p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Enter the name of the batch with errors that you
+                           saved or queried, and then click <span class="uicontrol">Submit</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">OK and View Checklist</span>, and then click the <span class="uicontrol">Refresh</span> icon until the Transfer Batch task shows as in progress with error.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>View the report in the flow as follows:</p>
+                        
+                        <p>
+                           <ol>
+                              
+                              <li>
+                                 <p>Select the row with the Transfer
+                                    Batch task, and then select <span class="uicontrol">Skip Task</span> in the Actions menu.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the row for Run Batch Lines
+                                    Report, click <span class="uicontrol">Go to Task</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the Processes and Results section,
+                                    click the name of the report.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the row for Run BI Publisher
+                                    Report, click <span class="uicontrol">Go to Task</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>On the Process and Reports tab,
+                                    click <span class="uicontrol">View Results</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click the PDF file name to open
+                                    the report.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM1415462.htm#FAIHM1996511">Creating a Report to View Batch Line Errors: Worked Example</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1685992">
+                  <h2>FAQs for Flow Patterns</h2>
+                  
+                  <div class="sect2" id="FAIHM705409">
+                     <h3>What happens if I don't enter a task owner in a flow pattern?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>The person who submits the flow becomes the
+                        flow owner and the task owner. The person's security privileges determine
+                        whether the person can submit the flow.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM712084">
+                     <h3>How can I rearrange tasks in a flow pattern?</h3>
+                     <p>Edit the task sequence by selecting a different
+                        task in the Following Task column. Every flow pattern begins with
+                        a Start Flow task, which does not belong to an Activity or Task Group,
+                        and concludes with an End Flow task.
+                     </p>
+                     <p>When creating a flow, use the Manage Payroll Flow
+                        Pattern task in the Payroll Checklist work area or the Refine Extracts
+                        task in the Data Exchange work area. Rearrange tasks on the Task Sequence
+                        page. When editing a flow, select the task and edit its sequence on
+                        the Create Flow Pattern: Basic Information page. When you submit a
+                        flow, processes in the flow use and build upon the results of previous
+                        processes. To maintain data integrity, ensure the sequenced tasks
+                        follow a consecutive order.
+                     </p>
+                     <p class="relatedlinks">Related Topics</p>
+                     <ul>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=B6EAD514696506F3E040D30A68814D2C">Editing a Flow Pattern: Worked Example</a></p>
+                        </li>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=CCAB6BCE5534CAD0E040D30A68813520">Sequencing Rules for Flows and Locked Tasks: Explained</a></p>
+                        </li>
+                     </ul>
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM317557">
+                     <h3>What happens if I change a due date for a task in a flow?</h3>
+                     <p>It doesn't affect the status or progress information
+                        for the flow displayed on the checklist.
+                     </p>
+                     <p>You must complete a flow task before beginning the
+                        next task. Before updating a due date beyond the next task's start
+                        date, consider whether you have adequate time to perform the next
+                        task.
+                     </p>
+                     <p> Only flow owners and task owners can update the due
+                        date.
+                     </p>
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM705385">
+                     <h3>Why don't the duration dates in the flow pattern display?</h3>
+                     <p>The start and end dates and their offsets
+                        display after you complete the flow parameter dates. Use the Manage
+                        Payroll Flow Patterns task in the Payroll Checklist work area or the
+                        Refine Extracts task in the Data Exchange work area. Enter the
+                        flow parameters on the Parameters page, and then return to the Tasks
+                        page to enter the duration dates. 
+                     </p>
+                     <p>If your flow pattern doesn't specify dates as flow
+                        parameters, the duration list of values is blank. Change the values
+                        for the Duration list by displaying the date parameters for tasks
+                        in your flow pattern.
+                     </p>
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM782393">
+                     <h3>How can I improve performance and troubleshoot flows?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Add parameters to a payroll process configuration
+                        group to optimize performance and troubleshoot your payroll processes.
+                        To process large volumes of records, use the Threads and Chunk Size
+                        parameters. To troubleshoot processes, add the Logging Category or
+                        Formula Execution Logging parameters to a configuration group and
+                        rerun the process using that configuration group. Using these parameters
+                        enables you to investigate formula code problems.
+                     </p>
+                     
+                     
+                     
+                     <p class="relatedlinks">Related Topics</p>
+                     <ul>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=C146AE8901B23FECE040D30A68816154">Payroll Process Configuration Groups: Explained</a></p>
+                        </li>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=C128E0C3C95BDB7FE040D30A68812330">Payroll Process Configuration Parameters</a></p>
+                        </li>
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1707613">
+                     <h3>How can I run tasks concurrently in a flow?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Use the Manage Payroll Flow Patterns task
+                        in the Payroll Checklist. Search for and open your flow pattern. Click
+                        the Task Sequence tab. You specify that each concurrent task follows
+                        the same previous task.
+                     </p>
+                     
+                     
+                     
+                     <p>For example, you create a flow pattern with a payroll
+                        calculation task and two reports. The flow ends when both reports
+                        complete. For the first row, you specify the Start Flow task with
+                        the Calculate Payroll as the following task. For the second row, you
+                        specify Calculate Payroll as the task, and the first report as the
+                        following task. For the third row, you specify Calculate Payroll as
+                        the task, and the second report as the following task. For the fourth
+                        row, you specify the first report as the task and End Flow as the
+                        following task. For the last row, you specify the second report as
+                        the task and End Flow as the following task.
+                     </p>
+                     
+                     
+                     
+                     <p class="relatedlinks">Related Topics</p>
+                     <ul>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=B6EAD514696506F3E040D30A68814D2C">Editing a Flow Pattern: Worked Example</a></p>
+                        </li>
+                     </ul>
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

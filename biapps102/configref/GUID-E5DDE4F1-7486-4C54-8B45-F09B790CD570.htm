@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>About Configuring GL Account and GL Segments for PeopleSoft</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="The GL Account dimension in the Oracle Business Analytics Warehouse is at a granularity of a combination of chart fields. PeopleSoft Financials provides several chart fields for GL accounts, such as account, alternate account, operating unit, department, and so on. The ETL program extracts all possible combinations of these chart fields that you have used and stores each of these chart fields individually in the GL Account dimension." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-7592DEE2-74CA-465E-AE58-F477F143E37C.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-146712E7-176C-41C5-855F-4BE4EBD7F78A.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-E5DDE4F1-7486-4C54-8B45-F09B790CD570"></a> <span id="PAGE" style="display:none;">26/336</span> <!-- End Header -->
+<a id="BIACF24553"></a><a id="IT_282"></a>
+<h1 id="BIAFC-GUID-E5DDE4F1-7486-4C54-8B45-F09B790CD570" class="sect1">About Configuring GL Account and GL Segments for PeopleSoft</h1>
+<div>
+<p>The GL Account dimension in the <span>Oracle Business Analytics Warehouse</span> is at a granularity of a combination of chart fields. PeopleSoft Financials provides several chart fields for GL accounts, such as account, alternate account, operating unit, department, and so on. The ETL program extracts all possible combinations of these chart fields that you have used and stores each of these chart fields individually in the GL Account dimension.</p>
+<p>It extracts the combinations of chart fields used from the following PeopleSoft account entry tables:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>PS_VCHR_ACCTG_LINES (Accounts Payable)</p>
+</li>
+<li>
+<p>PS_ITEM_DST (Accounts Receivable)</p>
+</li>
+<li>
+<p>PS_BI_ACCT_ENTRY (Billings)</p>
+</li>
+<li>
+<p>PS_CM_ACCTG_LINE (Costing)</p>
+</li>
+<li>
+<p>PS_JRNL_LN (General Ledger)</p>
+</li>
+</ul>
+<p>The GL Account dimension (W_GL_ACCOUNT_D) in the <span>Oracle Business Analytics Warehouse</span> provides a flexible and generic data model to accommodate up to 30 chartfields. These are stored in the generic columns named ACCOUNT_SEG1_CODE, ACCOUNT_SEG2_CODE and so on up to ACCOUNT_SEG30_CODE, henceforth referred to as segments. These columns store the actual chartfield value that is used in your PeopleSoft application.</p>
+<div class="section">
+<p class="subhead1">Mapping PeopleSoft Chartfields</p>
+<p>A CSV file named <code>file_glacct_segment_config_psft.csv</code> is provided to map the PeopleSoft chartfields to the generic segments.</p>
+<p>The configuration file or files for this task are provided on installation of <span>Oracle BI Applications</span> at one of the following locations:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Source-independent files: <code><span class="variable">&lt;Oracle Home for BI&gt;</span>\biapps\etl\data_files\src_files\</code>.</p>
+</li>
+<li>
+<p>Source-specific files: <code><span class="variable">&lt;Oracle Home for BI&gt;</span>\biapps\etl\data_files\src_files\<span class="variable">&lt;source adaptor&gt;</span></code>.</p>
+</li>
+</ul>
+<div class="infobox-note" id="GUID-E5DDE4F1-7486-4C54-8B45-F09B790CD570__GUID-36B46A5A-1227-4E13-BBB0-0121B2C85183">
+<p class="notep1">Note:</p>
+If you are deploying OTBI-Enterprise, then you must download the CSV files from Configuration Manager, as follows: 1. From the Tasks bar, click <span class="bold">Define Business Intelligence Applications</span>. 2. Click <span class="bold">Actions</span>, then <span class="bold">Manage Source Configuration Data Files</span>. 3. Click the <span class="bold">Export Source Configuration Data Files</span> option on the tool bar. 4. Move the required files to the right hand list, then click Export.</div>
+<p>Your system administrator will have copied these files to another location and configured ODI connections to read from this location. Work with your system administrator to obtain the files. When configuration is complete, your system administrator will need to copy the configured files to the location from which ODI reads these files.</p>
+<p>The first row in the file is a header row; do not modify this line. The second row in the file is where you specify how to do the mapping. The value for the column ROW_ID is hard coded to '1'; there is no need to change this.</p>
+<p>Note that the file contains 30 columns &ndash; SEG1, SEG2, up to SEG30. You will have to specify which chart field to populate in each of these columns by specifying one of the supported values for the chart fields. The following list shows the chart fields currently supported for the PeopleSoft application.</p>
+<div class="infobox-note" id="GUID-E5DDE4F1-7486-4C54-8B45-F09B790CD570__GUID-BB385D95-4272-409C-AE35-75762BC257EC">
+<p class="notep1">Note:</p>
+<p>Values are case-sensitive. You must specify the values exactly as listed:</p>
+</div>
+<ul style="list-style-type: disc;">
+<li>
+<p>Activity ID</p>
+</li>
+<li>
+<p>Affiliate</p>
+</li>
+<li>
+<p>Alternate Account</p>
+</li>
+<li>
+<p>Analysis Type</p>
+</li>
+<li>
+<p>Book Code</p>
+</li>
+<li>
+<p>Budget Reference</p>
+</li>
+<li>
+<p>Budget Scenario</p>
+</li>
+<li>
+<p>Business Unit PC</p>
+</li>
+<li>
+<p>ChartField 1</p>
+</li>
+<li>
+<p>ChartField 2</p>
+</li>
+<li>
+<p>ChartField 3</p>
+</li>
+<li>
+<p>Class Field</p>
+</li>
+<li>
+<p>Fund Affiliate</p>
+</li>
+<li>
+<p>GL Adjust Type</p>
+</li>
+<li>
+<p>Operating Unit</p>
+</li>
+<li>
+<p>Operating Unit Affiliate</p>
+</li>
+<li>
+<p>Product</p>
+</li>
+<li>
+<p>Program Code</p>
+</li>
+<li>
+<p>Project</p>
+</li>
+<li>
+<p>Resource Category</p>
+</li>
+<li>
+<p>Resource Sub Category</p>
+</li>
+<li>
+<p>Resource Type</p>
+</li>
+<li>
+<p>Statistics Code</p>
+</li>
+</ul>
+<div class="infobox-note" id="GUID-E5DDE4F1-7486-4C54-8B45-F09B790CD570__GUID-DD95CE19-356E-466B-B567-B06E22AC4007">
+<p class="notep1">Note:</p>
+<p>You only need to include the chartfields in the CSV file that you want to map.</p>
+</div>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-7592DEE2-74CA-465E-AE58-F477F143E37C.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-146712E7-176C-41C5-855F-4BE4EBD7F78A.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

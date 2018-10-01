@@ -1,0 +1,2664 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Manual Patching of Oracle Fusion Applications During Offline Patching</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This chapter describes how Oracle Fusion Applications Patch Manager (Patch Manager) supports the patching of middleware and database artifacts. It also provides detailed steps for the manual deployment of artifacts, if needed." />
+<meta name="dcterms.created" content="2017-09-11T13:03:11Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Fusion Applications Patching Guide" />
+<meta name="dcterms.identifier" content="E71563_03" />
+<meta name="dcterms.isVersionOf" content="OAPAT" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2011, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-1D6499E1-01AA-477D-91E0-3FDCAF5EBBEC.htm" title="Previous" type="text/html" />
+<link rel="alternate" href="OAPAT.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-EB1763ED-50E3-4489-835E-3290A33836FA"></a> <span id="PAGE" style="display:none;">14/14</span> <!-- End Header -->
+<h1 id="OAPAT-GUID-EB1763ED-50E3-4489-835E-3290A33836FA" class="sect1"><span class="enumeration_chapter">10</span> Manual Patching of Oracle Fusion Applications During Offline Patching</h1>
+<div>
+<div><span>This chapter describes how Oracle Fusion Applications Patch Manager (Patch Manager) supports the patching of middleware and database artifacts. It also provides detailed steps for the manual deployment of artifacts, if needed.</span></div>
+<p>The following topics are discussed:</p>
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-948A4DB3-CF82-4EE0-8F8C-5A00D8351602">Oracle Fusion Applications Patch Manager Middleware Artifact Support</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-33F08168-C721-4B25-9E92-E8AD0DA44DAB">Oracle Fusion Applications Patch Manager Database Artifact Support</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-FD8A0502-15B3-4020-8C97-244C87453142">Patching Applications Help Content (AHC) Artifacts</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-43D1B525-D42B-4288-9A06-BDDA4DA8D124">Patch Oracle B2B Metadata in Offline Mode</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-40562571-4588-4D86-ADD2-CE241A5AA5F6">Patch Oracle Business Intelligence Publisher Artifacts in Offline Mode</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-1909ABD2-A79A-48B2-AFBA-2311B1B265F9">Patch Oracle Business Process Management (Oracle BPM) Templates in Offline Mode</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-74C462CF-8952-4763-9E94-A47F12967BFB">Patch C Artifacts</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-40F7DAA5-4593-4F41-B665-79287869AA53">Patch Common Resource (Activity Strings) Artifacts</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-DB4A8822-CBD5-49D8-81B7-3F057BB53DA3">Patch Customized Seed Data</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-F7575801-493F-4145-9E17-72341AD79025">Patch Diagnostic Testing Framework (DTF) JAR Files</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-1972C42A-B820-4A37-B421-1532B0B4FE3D">Patch E-Mail and Web Marketing (EWM) Artifacts</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-5A0DA9BE-7211-42FA-92DF-E5EFA4CE7996">Patch Flexfield Artifacts</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-5FDD2A6C-D940-44C0-B4CD-F6BA5FEB0E75">Patch Group Space Templates</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-F2FC8917-DF47-4DAB-A83C-CE009224DB36">Patch Image and Process Management (IPM) Artifacts in Offline Mode</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-4C9179BC-3BE7-4BBB-80BC-861466F76875">Patch Java EE Artifacts</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-3AE6995A-CDD6-4F04-8D6B-787678BA1B86">Patch Mobile and Mobile Script Artifacts</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-54652A00-3746-4E09-BD7F-6438A04E0F84">Patch Oracle Data Integrator (ODI) Artifacts</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-2D757B28-958A-4953-BA62-080C47B23FC6">Patch Oracle Forms Recognition and Oracle Document Capture Artifacts</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-5E84356A-9F16-45BA-BB9C-91F928862CAA">Patch Oracle Fusion Applications Patch Manager Artifacts</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-F0FC155B-600F-415F-8CE8-036720912477">Patch Script Files</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-550AEF09-2A94-4504-86DF-41EB87DC82A4">Patch Security Artifacts</a></p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-64675849-E683-44D0-BCEA-31FC47C3D34B">Patch Applications Policies (system-jazn-data.xml)</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-45665A24-4D0A-4180-A102-B753893EC7A7">Patch Data Security Grants</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-9D643714-9DA9-4299-897C-116998FB92DA">Patch Data Role (RGX) Templates in Offline Mode</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-FD755AA3-8CFA-41C7-9B7F-CF29D8B60FC7">Patch Data Security Grants and Data Role (RGX) Templates</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-78A805A9-910B-4571-BD23-2D24014659B0">Patch Service-Oriented Architecture (SOA) Composites</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-3C85DAA4-EA43-492B-8F03-4897082C74CE">Patch SOAEXTENSION Artifacts</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-2F67BF68-6D5D-4861-BAD3-E62A2BB23F17">Patch SOA Resource Bundles</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-C7D2B8D1-F540-40EE-8DD8-D6B8CDB18B25">Patch Sales Prediction Engine (SPE) Inline Service Artifacts</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-777A9DB9-FD41-4698-914E-64B3109E7DEA">Patch Tree Artifacts</a></p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+<a id="OAPAT740"></a><a id="OAPAT719"></a>
+<div class="sect2"><a id="GUID-948A4DB3-CF82-4EE0-8F8C-5A00D8351602"></a>
+<h2 id="OAPAT-GUID-948A4DB3-CF82-4EE0-8F8C-5A00D8351602" class="sect2"><span class="enumeration_section">10.1</span> Oracle Fusion Applications Patch Manager Middleware Artifact Support</h2>
+<div>
+<div class="section">
+<p>The online mode of Oracle Fusion Applications Patch Manager (Patch Manager) supports most of the deployment actions required for patching middleware and database artifacts used by Oracle Fusion Applications. Depending on the type of artifact included in a patch, the artifact deployment may require manual actions. Some manual actions are required only if the patch is applied in offline mode, while others are always required. Before applying any patch, Oracle recommends to run the Patch Impact report to determine which artifact types are included in the patch and if manual actions are required by the patch. For more information, see the <a href="GUID-D71DC177-4FBA-40A6-AE3D-457818A31382.htm#GUID-76067A2F-1963-4564-BAF0-AD9C54F23883">Patch Impact Report</a> section.</p>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-948A4DB3-CF82-4EE0-8F8C-5A00D8351602__CIHHAHCJ" title="This table describes the list of Oracle Fusion Middleware artifacts and how they are supported by Oracle Fusion Applications Patch Manager">Table 10-1</a> provides a quick reference that depicts how Patch Manager supports the Oracle Fusion Middleware artifacts that could be included in a patch. This table assumes that online patching is used unless otherwise specified.</p>
+<p>An explanation of the information presented in this table follows:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Automated Actions Performed by Patch Manager</p>
+<p>Patch Manager always copies the artifacts from the patch to the appropriate location on the system. This column describes additional actions that are performed automatically in online mode for each artifact.</p>
+</li>
+<li>
+<p>Actions to Be Performed Manually in Online Mode</p>
+<p>This column describes the actions that must be performed when the patch includes the specified artifact. These actions are described in more detail in this section.</p>
+</li>
+<li>
+<p>Actions to Be Performed Manually in Offline Mode and in the Case of Failures</p>
+<p>This column describes the actions that must be performed when the patch includes the specified artifact and the patch is applied in offline mode. If the patch is applied in online mode and there is a failure, these actions may also be required.</p>
+</li>
+<li>
+<p>What Must Be Running During Online Patching Mode and Manual Actions</p>
+<p>This column describes what must be running while applying the patch in online mode and when manual actions are performed.</p>
+</li>
+</ul>
+<p>After applying a patch, review the Diagnostics report to find out which manual steps are required for the artifacts included in the patch and where the artifacts were copied in <span class="italic"><code class="codeph">FA_ORACLE_HOME</code></span>. For more information, see the <a href="GUID-C9E7FC50-20BE-4F33-9760-E5B8C3F978DE.htm#GUID-37783AF5-2B27-4F5A-9607-7D2D49CF351A">Diagnostics Report</a> section. For more detailed information about manual actions for each artifact, refer to the relevant sections in this chapter.</p>
+<p>The following table describes the Oracle Fusion Middleware artifacts:</p>
+</div>
+<!-- class="section" -->
+<div class="tblformal" id="GUID-948A4DB3-CF82-4EE0-8F8C-5A00D8351602__CIHHAHCJ">
+<p class="titleintable">Table 10-1 Oracle Fusion Middleware Artifacts Supported by Oracle Fusion Applications Patch Manager</p>
+<table class="cellalignment237" title="Oracle Fusion Middleware Artifacts Supported by Oracle Fusion Applications Patch Manager" summary="This table describes the list of Oracle Fusion Middleware artifacts and how they are supported by Oracle Fusion Applications Patch Manager">
+<thead>
+<tr class="cellalignment228">
+<th class="cellalignment264" id="d21613e292">Artifact Type</th>
+<th class="cellalignment270" id="d21613e295">Automated Actions Performed by Oracle Fusion Applications Patch Manager</th>
+<th class="cellalignment270" id="d21613e298">Actions to Be Performed Manually in Online Mode</th>
+<th class="cellalignment288" id="d21613e301">Actions to Be Performed Manually in Offline Mode and in the Case of Failures</th>
+<th class="cellalignment280" id="d21613e304">What Must Be Running During Online Patching Mode and Manual Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e309" headers="d21613e292">
+<p>Applications Help Content (AHC)</p>
+</td>
+<td class="cellalignment273" headers="d21613e309 d21613e295">
+<p>Stop and start the HelpPortalServer for the Common Domain</p>
+</td>
+<td class="cellalignment273" headers="d21613e309 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e309 d21613e301">
+<p>Stop and start the HelpPortalServer for the Common Domain</p>
+</td>
+<td class="cellalignment283" headers="d21613e309 d21613e304">
+<p>Domain Administration Server, Node Manager, database, HelpPortalServer</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e325" headers="d21613e292">
+<p>Applications Policies (<code class="codeph">system-jazn-data.xml</code>)</p>
+</td>
+<td class="cellalignment273" headers="d21613e325 d21613e295">
+<p>Deploy using the <code class="codeph">patchPolicyStore</code> silent install command for JAZN</p>
+</td>
+<td class="cellalignment273" headers="d21613e325 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e325 d21613e301">
+<p>Deploy using Oracle Authorization Policy Manager</p>
+</td>
+<td class="cellalignment283" headers="d21613e325 d21613e304">
+<p>Oracle Authorization Policy Manager, OPSS Security Store</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e347" headers="d21613e292">
+<p>B2B Metadata</p>
+</td>
+<td class="cellalignment273" headers="d21613e347 d21613e295">
+<p>Deploy trading partner agreements</p>
+</td>
+<td class="cellalignment273" headers="d21613e347 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e347 d21613e301">
+<p>Deploy agreements if the change needs to be implemented</p>
+</td>
+<td class="cellalignment283" headers="d21613e347 d21613e304">
+<p>Database</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e363" headers="d21613e292">
+<p>Oracle Business Intelligence Publisher (Reports and Captions)</p>
+</td>
+<td class="cellalignment273" headers="d21613e363 d21613e295">
+<p>Shut down the BI Presentation server, deploy to the Business Intelligence repository using Catalog Manager, and start the BI Presentation server after patching</p>
+</td>
+<td class="cellalignment273" headers="d21613e363 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e363 d21613e301">
+<p>Shut down the BI Presentation server, deploy to the Business Intelligence repository using Catalog Manager, and start the BI Presentation server after patching</p>
+</td>
+<td class="cellalignment283" headers="d21613e363 d21613e304">
+<p>None</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e379" headers="d21613e292">
+<p>Oracle Business Process Management (Oracle BPM) Template</p>
+</td>
+<td class="cellalignment273" headers="d21613e379 d21613e295">
+<p>Publish template to the Oracle Metadata Services (MDS) repository</p>
+</td>
+<td class="cellalignment273" headers="d21613e379 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e379 d21613e301">
+<p>Publish template to the MDS repository</p>
+</td>
+<td class="cellalignment283" headers="d21613e379 d21613e304">
+<p>Database</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e395" headers="d21613e292">
+<p>C Artifact</p>
+</td>
+<td class="cellalignment273" headers="d21613e395 d21613e295">
+<p>None</p>
+</td>
+<td class="cellalignment273" headers="d21613e395 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e395 d21613e301">
+<p>None</p>
+</td>
+<td class="cellalignment283" headers="d21613e395 d21613e304">
+<p>Database must be running. Oracle Enterprise Scheduler Service server must be down.</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e411" headers="d21613e292">
+<p>Common Resource (Activity Strings)</p>
+</td>
+<td class="cellalignment273" headers="d21613e411 d21613e295">
+<p>None</p>
+</td>
+<td class="cellalignment273" headers="d21613e411 d21613e298">
+<p>Stop and start all Managed Servers in all domains after patching</p>
+</td>
+<td class="cellalignment289" headers="d21613e411 d21613e301">
+<p>Stop and start all Managed Servers in all domains after patching</p>
+</td>
+<td class="cellalignment283" headers="d21613e411 d21613e304">
+<p>Administration Server, Node Manager, database</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e427" headers="d21613e292">
+<p>Data Security</p>
+</td>
+<td class="cellalignment273" headers="d21613e427 d21613e295">
+<p>Run the <code class="codeph">DSDataMigrator</code> utility to reconcile GUID in LDAP</p>
+</td>
+<td class="cellalignment273" headers="d21613e427 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e427 d21613e301">
+<p>Run the <code class="codeph">DSDataMigrator</code> utility to reconcile GUID in LDAP</p>
+</td>
+<td class="cellalignment283" headers="d21613e427 d21613e304">
+<p>OPSS Security Store, database</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e449" headers="d21613e292">
+<p>Diagnostic Testing Framework JAR</p>
+</td>
+<td class="cellalignment273" headers="d21613e449 d21613e295">
+<p>None</p>
+</td>
+<td class="cellalignment273" headers="d21613e449 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e449 d21613e301">
+<p>None</p>
+</td>
+<td class="cellalignment283" headers="d21613e449 d21613e304">
+<p>None</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e465" headers="d21613e292">
+<p>E-Mail and Web Marketing (EWM)</p>
+</td>
+<td class="cellalignment273" headers="d21613e465 d21613e295">
+<p>Start and stop the relevant servers that host the Java EE application</p>
+</td>
+<td class="cellalignment273" headers="d21613e465 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e465 d21613e301">
+<p>Start and stop the relevant servers that host the Java EE application</p>
+</td>
+<td class="cellalignment283" headers="d21613e465 d21613e304">
+<p>Administration Server, Node Manager, database</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e481" headers="d21613e292">
+<p>Fatp JAR</p>
+</td>
+<td class="cellalignment273" headers="d21613e481 d21613e295">
+<p>Stop and start the relevant servers that host the Java EE application</p>
+</td>
+<td class="cellalignment273" headers="d21613e481 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e481 d21613e301">
+<p>Stop and start the relevant servers that host the Java EE application</p>
+</td>
+<td class="cellalignment283" headers="d21613e481 d21613e304">
+<p>Administration Server, Node Manager, database</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e498" headers="d21613e292">
+<p>Fatp C</p>
+</td>
+<td class="cellalignment273" headers="d21613e498 d21613e295">
+<p>None</p>
+</td>
+<td class="cellalignment273" headers="d21613e498 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e498 d21613e301">
+<p>None</p>
+</td>
+<td class="cellalignment283" headers="d21613e498 d21613e304">
+<p>Database must be running. Oracle Enterprise Scheduler Service server must be down.</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e514" headers="d21613e292">
+<p>Fatp directory</p>
+</td>
+<td class="cellalignment273" headers="d21613e514 d21613e295">
+<p>None</p>
+</td>
+<td class="cellalignment273" headers="d21613e514 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e514 d21613e301">
+<p>None</p>
+</td>
+<td class="cellalignment283" headers="d21613e514 d21613e304">
+<p>None</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e530" headers="d21613e292">
+<p>Flexfield</p>
+</td>
+<td class="cellalignment273" headers="d21613e530 d21613e295">
+<p>Stop and start the FNDSETUP Managed Servers and then deploy the flexfield</p>
+</td>
+<td class="cellalignment273" headers="d21613e530 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e530 d21613e301">
+<p>Stop and start the FNDSETUP Managed Servers and then deploy the flexfield</p>
+</td>
+<td class="cellalignment283" headers="d21613e530 d21613e304">
+<p>Administration Server, Managed Servers hosting <code class="codeph">FndSetup</code> application, database</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e549" headers="d21613e292">
+<p>Group Space Template</p>
+</td>
+<td class="cellalignment273" headers="d21613e549 d21613e295">
+<p>Deploy template</p>
+</td>
+<td class="cellalignment273" headers="d21613e549 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e549 d21613e301">
+<p>Deploy template</p>
+</td>
+<td class="cellalignment283" headers="d21613e549 d21613e304">
+<p>WebCenter Managed Servers (<code class="codeph">WC_Spaces, WC_Collaboration</code>), <code class="codeph">ucm_server1</code>, OPSS Security Store, database</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e571" headers="d21613e292">
+<p>Image Routing (IPM)</p>
+</td>
+<td class="cellalignment273" headers="d21613e571 d21613e295">
+<p>Deploy to IPM servers</p>
+</td>
+<td class="cellalignment273" headers="d21613e571 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e571 d21613e301">
+<p>Deploy to IPM servers</p>
+</td>
+<td class="cellalignment283" headers="d21613e571 d21613e304">
+<p>See prerequisites in the <a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-F2FC8917-DF47-4DAB-A83C-CE009224DB36">Patch Image and Process Management (IPM) Artifacts in Offline Mode</a> section</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e591" headers="d21613e292">
+<p>Java EE</p>
+</td>
+<td class="cellalignment273" headers="d21613e591 d21613e295">
+<p>Stop and start the relevant servers that host the Java EE application</p>
+</td>
+<td class="cellalignment273" headers="d21613e591 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e591 d21613e301">
+<p>Stop and start the relevant servers that host the Java EE application</p>
+</td>
+<td class="cellalignment283" headers="d21613e591 d21613e304">
+<p>Administration Server, Node Manager, database</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e607" headers="d21613e292">
+<p>Mobile Artifacts (MOBILE and MOBILESCRIPT)</p>
+</td>
+<td class="cellalignment273" headers="d21613e607 d21613e295">
+<p>Import MAF Artifact Archive (.maa) file into MDS</p>
+</td>
+<td class="cellalignment273" headers="d21613e607 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e607 d21613e301">
+<p>Start Common Domain Administration Server, CRM Domain Administration Server, SalesServer, and CRMCommonServer. Call the WLST command to import the mobile files.</p>
+</td>
+<td class="cellalignment283" headers="d21613e607 d21613e304">
+<p>Common Domain Administration Server, CRM Domain Administration Servier, SalesServer, CRMCommonServer</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e623" headers="d21613e292">
+<p>Oracle Data Integrator (ODI)</p>
+</td>
+<td class="cellalignment273" headers="d21613e623 d21613e295">
+<p>Import to ODI repository</p>
+</td>
+<td class="cellalignment273" headers="d21613e623 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e623 d21613e301">
+<p>Import to ODI repository</p>
+</td>
+<td class="cellalignment283" headers="d21613e623 d21613e304">
+<p>ODI repository import tool, database</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e639" headers="d21613e292">
+<p>Oracle Fusion Applications Patch Manager</p>
+</td>
+<td class="cellalignment273" headers="d21613e639 d21613e295">
+<p>None</p>
+</td>
+<td class="cellalignment273" headers="d21613e639 d21613e298">
+<p>Apply the patch with OPatch</p>
+</td>
+<td class="cellalignment289" headers="d21613e639 d21613e301">
+<p>Apply the patch with OPatch</p>
+</td>
+<td class="cellalignment283" headers="d21613e639 d21613e304">
+<p>None</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e655" headers="d21613e292">
+<p>Data Role Template (RGX)</p>
+</td>
+<td class="cellalignment273" headers="d21613e655 d21613e295">
+<p>Deploy the template</p>
+</td>
+<td class="cellalignment273" headers="d21613e655 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e655 d21613e301">
+<p>Deploy the template</p>
+</td>
+<td class="cellalignment283" headers="d21613e655 d21613e304">
+<p>Administration Server, Oracle Authorization Policy Manager, database</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e671" headers="d21613e292">
+<p>SOA Composite</p>
+</td>
+<td class="cellalignment273" headers="d21613e671 d21613e295">
+<p>Deploy and merge</p>
+</td>
+<td class="cellalignment273" headers="d21613e671 d21613e298">
+<p>Preserve any JDeveloper customizations</p>
+</td>
+<td class="cellalignment289" headers="d21613e671 d21613e301">
+<p>Deploy and merge</p>
+</td>
+<td class="cellalignment283" headers="d21613e671 d21613e304">
+<p>Administration Server, SOA-INFRA Managed Servers, database</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e688" headers="d21613e292">
+<p>SOAEXTENSION</p>
+</td>
+<td class="cellalignment273" headers="d21613e688 d21613e295">
+<p>None</p>
+</td>
+<td class="cellalignment273" headers="d21613e688 d21613e298">
+<p>Stop and restart all SOA-INFRA Managed Servers in all domains</p>
+</td>
+<td class="cellalignment289" headers="d21613e688 d21613e301">
+<p>Stop and restart all SOA-INFRA Managed Servers in all domains</p>
+</td>
+<td class="cellalignment283" headers="d21613e688 d21613e304">
+<p>None</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e704" headers="d21613e292">
+<p>SOA Resource Bundle</p>
+</td>
+<td class="cellalignment273" headers="d21613e704 d21613e295">
+<p>Deploy resource bundle and restart dependent composites</p>
+</td>
+<td class="cellalignment273" headers="d21613e704 d21613e298">
+<p>Reset SOA-INFRA <code class="codeph">MBean</code> property if resource bundle contains human task-mapped attribute labels and standard view names</p>
+</td>
+<td class="cellalignment289" headers="d21613e704 d21613e301">
+<p>Deploy resource bundle and restart dependent composites</p>
+</td>
+<td class="cellalignment283" headers="d21613e704 d21613e304">
+<p>Administration Server, SOA-INFRA Managed Servers, Node Manager, database</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment267" id="d21613e723" headers="d21613e292">
+<p>SPE Inline Service</p>
+</td>
+<td class="cellalignment273" headers="d21613e723 d21613e295">
+<p>Deploy SPE files</p>
+</td>
+<td class="cellalignment273" headers="d21613e723 d21613e298">
+<p>None</p>
+</td>
+<td class="cellalignment289" headers="d21613e723 d21613e301">
+<p>Deploy SPE files</p>
+</td>
+<td class="cellalignment283" headers="d21613e723 d21613e304">
+<p>Oracle BI Server, database</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+<a id="OAPAT749"></a><a id="OAPAT784"></a>
+<div class="sect2"><a id="GUID-33F08168-C721-4B25-9E92-E8AD0DA44DAB"></a>
+<h2 id="OAPAT-GUID-33F08168-C721-4B25-9E92-E8AD0DA44DAB" class="sect2"><span class="enumeration_section">10.2</span> Oracle Fusion Applications Patch Manager Database Artifact Support</h2>
+<div>
+<div class="section">
+<p>The following table provides a quick reference that displays the Oracle Fusion Applications database artifacts that could be included in a patch. Database artifacts typically do not require manual actions be performed during online mode, as they are copied and deployed automatically in online mode. In offline mode, database artifacts are copied but they are not deployed. Before patching database artifacts, the database must be in an idle state with no locks being held on any of the database objects. All background jobs, including jobs in the database, must be terminated before patching to avoid locks on patched objects. There should not be any active processes, such as Oracle Enterprise Scheduler Service jobs running against the database. This is to prevent locking and other data issues during patching.</p>
+<p>The following table describes the Oracle Fusion Database artifacts:</p>
+</div>
+<!-- class="section" -->
+<div class="tblformal" id="GUID-33F08168-C721-4B25-9E92-E8AD0DA44DAB__GUID-536EA1A8-4DA2-44CA-AEC9-C780D78CD688">
+<p class="titleintable">Table 10-2 Oracle Fusion Applications Database Artifacts Supported by Oracle Fusion Applications Patch Manager</p>
+<table class="cellalignment237" title="Oracle Fusion Applications Database Artifacts Supported by Oracle Fusion Applications Patch Manager" summary="This table describes the list the database artifacts supported by Oracle Fusion Applications Patch Manager">
+<thead>
+<tr class="cellalignment228">
+<th class="cellalignment269" id="d21613e793">Artifact Type</th>
+<th class="cellalignment294" id="d21613e796">Description</th>
+<th class="cellalignment259" id="d21613e799">Actions to be Performed Manually</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment228">
+<td class="cellalignment272" id="d21613e804" headers="d21613e793">
+<p>Applications Seed Data (XML,XLIFF files)</p>
+</td>
+<td class="cellalignment295" headers="d21613e804 d21613e796">
+<p>Examples include static lists of values, functional or error messages, and lookup values. Any non-transactional data values loaded into the database can be considered seed data</p>
+</td>
+<td class="cellalignment262" headers="d21613e804 d21613e799">
+<p>Oracle recommends that patches containing seed data be applied from a machine that is co-located in the same subnetwork as the database server to maximize performance</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment272" id="d21613e814" headers="d21613e793">
+<p>Applications Database schema changes (SXML)</p>
+</td>
+<td class="cellalignment295" headers="d21613e814 d21613e796">
+<p>Examples include tables, triggers, views, sequences, synonyms, queues, queue tables, policies, and contexts</p>
+</td>
+<td class="cellalignment262" headers="d21613e814 d21613e799">
+<p>None</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment272" id="d21613e824" headers="d21613e793">
+<p>PL/SQL objects (pkh, pkb files)</p>
+</td>
+<td class="cellalignment295" headers="d21613e824 d21613e796">
+<p>Package headers and bodies</p>
+</td>
+<td class="cellalignment262" headers="d21613e824 d21613e799">
+<p>Manually shut down the Oracle Enterprise Scheduler Service servers before applying patches that contain PL/SQL changes</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment272" id="d21613e834" headers="d21613e793">
+<p>SQL scripts</p>
+</td>
+<td class="cellalignment295" headers="d21613e834 d21613e796">
+<p>Scripts that update the database</p>
+</td>
+<td class="cellalignment262" headers="d21613e834 d21613e799">
+<p>None</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+<div class="sect2"><a id="GUID-FD8A0502-15B3-4020-8C97-244C87453142"></a>
+<h2 id="OAPAT-GUID-FD8A0502-15B3-4020-8C97-244C87453142" class="sect2"><span class="enumeration_section">10.3</span> Patch Applications Help Content (AHC) Artifacts</h2>
+<div>
+<p>Oracle recommends to patch AHC artifacts in online mode. When AHC artifacts are patched in online mode, no manual steps are required, except to ensure that the following are running:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Administration Server for the Common Domain</p>
+</li>
+<li>
+<p>Node manager</p>
+</li>
+<li>
+<p>Database</p>
+</li>
+<li>
+<p>HelpPortalServer (In the case of Scaled out server any one of the servers must be up)</p>
+</li>
+</ul>
+<p>In offline mode, the impacted Managed Servers that host the <code class="codeph">FndSetup.ear</code> application, such as the <code class="codeph">HelpPortalServer</code>, must be manually stopped, patched, and restarted. To determine which product family is affected by the patch being applied, run the Patch Impact report. For more information, see the <a href="GUID-D71DC177-4FBA-40A6-AE3D-457818A31382.htm#GUID-76067A2F-1963-4564-BAF0-AD9C54F23883">Patch Impact Report</a> section. The Patch Impact report indicates the domain and the corresponding managed server that will be impacted by this patch. Examples of artifacts in this category include the accompanying graphics and PDF files referenced by the content in the Seed Data Framework (SDF) files.</p>
+</div>
+</div>
+<a id="OAPAT720"></a>
+<div class="sect2"><a id="GUID-43D1B525-D42B-4288-9A06-BDDA4DA8D124"></a>
+<h2 id="OAPAT-GUID-43D1B525-D42B-4288-9A06-BDDA4DA8D124" class="sect2"><span class="enumeration_section">10.4</span> Patch Oracle B2B Metadata in Offline Mode</h2>
+<div>
+<div class="section">
+<p>Oracle recommends to patch Oracle B2B metadata in online mode. When updates to Oracle B2B metadata are introduced in a patch, no manual steps are required in online mode to redeploy all Trading Partner Agreements that are affected by the metadata change.</p>
+<p>When a patch containing Oracle B2B metada updates is applied in offline mode, and the change is implemented, Trading Partner Agreements that are affected by the metadata change must be manually redeployed. If the redeployment is not performed, the runtime continues to use the older metadata. The agreements can be deployed using the B2B User Interface (UI) or by running the <code class="codeph">b2bdeploy</code> utility from the command line.</p>
+</div>
+<!-- class="section" --></div>
+<a id="OAPAT1169"></a>
+<div class="sect3"><a id="GUID-9925E1E7-4461-4EC7-A5A6-1F1D65BEACA1"></a>
+<h3 id="OAPAT-GUID-9925E1E7-4461-4EC7-A5A6-1F1D65BEACA1" class="sect3"><span class="enumeration_section">10.4.1</span> Deploy Agreements from the User Interface</h3>
+<div>
+<div class="section">
+<p>To deploy all agreements from the UI, follow the steps in &rdquo;Deploying an Agreement" in the <span class="italic"><span id="GUID-9925E1E7-4461-4EC7-A5A6-1F1D65BEACA1__XBBUG"><cite>User's Guide for Oracle B2B</cite></span></span>.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT1170"></a>
+<div class="sect3"><a id="GUID-4C018676-CED9-4C66-BB64-FB2B4DCF97BC"></a>
+<h3 id="OAPAT-GUID-4C018676-CED9-4C66-BB64-FB2B4DCF97BC" class="sect3"><span class="enumeration_section">10.4.2</span> Deploy Agreements from the Command Line</h3>
+<div>
+<div class="section">
+<p>To import the patched metadata and deploy the agreements, follow these steps:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Follow the steps in the <cite>Prerequisites for Running the Command-line Tools</cite> section in <span class="italic"><span id="GUID-4C018676-CED9-4C66-BB64-FB2B4DCF97BC__XBBUG"><cite>User's Guide for Oracle B2B</cite></span></span> with one exception. In Step 2 under "Create <code class="codeph">jndi.properties</code>", this command must be used:</span>
+<div>
+<pre dir="ltr">
+cd <span class="italic">FMW_HOME</span>/soa/bin
+</pre>
+<p>instead of this command:</p>
+<pre dir="ltr">
+cd $ORACLE_HOME\bin
+</pre></div>
+</li>
+<li class="stepexpand"><span>Export the entire repository for backup purposes. Before running the following command, set <span class="italic"><code class="codeph">ANT_HOME</code></span> to <code class="codeph">/APPTOP/fusionapps/modules/org.apache.ant_1.7.1</code> and set the <span class="italic"><code class="codeph">PATH</code></span> to include <span class="italic"><code class="codeph">ANT_HOME/</code></span><code class="codeph">bin</code>.</span>
+<div>
+<pre dir="ltr">
+ant -f ant-b2b-util.xml b2bexport -Dexportfile=/<span class="italic">local_directory</span>/backup_export.zip
+</pre></div>
+</li>
+<li class="stepexpand"><span>Import the patched export file.</span>
+<div>
+<pre dir="ltr">
+ant -f ant-b2b-util.xml b2bimport -Dexportfile=/<span class="italic">local_directory</span>/patch_export.zip -Dlocalfile=true -Doverwrite=true
+</pre></div>
+</li>
+<li class="stepexpand"><span>Run the <code class="codeph">b2bdeploy</code> command. If there is no Trading Partner Agreement found, this step is not needed.</span>
+<div>
+<pre dir="ltr">
+ant -f ant-b2b-util.xml b2bdeploy -
+Dtpanames="<span class="italic">Agreement_name</span>,<span class="italic">Agreement_name</span>"
+</pre></div>
+</li>
+<li class="stepexpand"><span>If the patch introduces new documents for Trading Partner agreements, the document definition must be added.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OAPAT679"></a>
+<div class="sect2"><a id="GUID-40562571-4588-4D86-ADD2-CE241A5AA5F6"></a>
+<h2 id="OAPAT-GUID-40562571-4588-4D86-ADD2-CE241A5AA5F6" class="sect2"><span class="enumeration_section">10.5</span> Patch Oracle Business Intelligence Publisher Artifacts in Offline Mode</h2>
+<div>
+<div class="section">
+<p>When the Oracle Business Intelligence Publisher (BI Publisher) artifacts (Reports and Captions) are patched in online mode, Patch Manager shuts down the BI Presentation Server before the patch applies and restarts it after successful patch application. No manual steps are required in online patching mode. If the shutdown of this server fails for any reason, the BI Publisher artifacts must be manually deployed.</p>
+<p>Oracle recommends not to use offline mode when a patch contains BI Publisher artifacts. If applying a patch in offline mode is decided, the changes to the Oracle Business Intelligence repository must be manually deployed, in addition to stopping and restarting the BI Presentation server. These manual steps are required to keep the Oracle home and the Oracle Instance versions of the Oracle Business Intelligence Presentation Catalog synchronized. If these manual steps are not followed as described, subsequent patches containing BI Publisher artifacts may fail.</p>
+<p>Perform the following steps to manually deploy BI Publisher artifact after applying a patch in offline mode:</p>
+<ol>
+<li>
+<p>The <code class="codeph">opmn</code> process must be running. Follow these steps:</p>
+<ol>
+<li>
+<p>To verify if the process is running, go to the <span class="italic"><code class="codeph">FA_ORACLE_HOME/</code></span><code class="codeph">instance/BIInstance/bin</code> directory and run this command:</p>
+<pre dir="ltr">
+opmnctl status
+</pre></li>
+<li>
+<p>If the opmn process is not <span class="bold">Alive</span>, start it with this command:</p>
+<pre dir="ltr">
+opmnctl start 
+</pre></li>
+</ol>
+</li>
+<li>
+<p>Patch Manager must have copied one or more Oracle BI Presentation Catalog files into the Oracle home-based catalog.</p>
+</li>
+<li>
+<p>Within the patch, there are some catalog <span class="italic">diff</span> files. These files are used with the Oracle Business Intelligence Catalog Manager tool to apply changes to a catalog. These changes must be applied to:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>The run-time, or Oracle Instance, Oracle BI Presentation Catalog</p>
+</li>
+<li>
+<p>The Oracle home Oracle BI Presentation Catalog</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Special care must be taken when the patch being applied is a standard patch. With a standard patch, OPatch may choose to copy only a subset of the total files in the patch archive.</p>
+<p>Before performing the following steps, first determine exactly which files were actually copied to the Oracle home during the OPatch apply stage. Review the Patch Impact report to get this list of files. Capture the list of files from the messages sent to the console and to the <code class="codeph">FAPatchManager</code>_<code class="codeph">apply</code>_<span class="italic">timestamp</span>.log file.</p>
+<p>After the list is done, apply only the <span class="italic">diff</span> files that correspond to the files that were actually copied to the Oracle home. The <span class="italic">diff</span> files are named the same as the original files, except they have a <span class="italic">.diff</span> extension added. If additional <span class="italic">diff</span> files are applied beyond the files that were actually copied to the Oracle home, then previous patch updates may be undone and the Oracle BI Presentation Catalog may be in an unsupportable state. Basically, a previous patch have been partially rolled back.</p>
+</li>
+<li>
+<p>Shut down the BI Presentation server.</p>
+</li>
+<li>
+<p>Unzip the middleware portion of the patch, the OPatch archive file, into a temporary location, such as <code class="codeph">C:\patch</code>. To see which files are included in the patch, run the Patch Impact report. For more information, see the <a href="GUID-D71DC177-4FBA-40A6-AE3D-457818A31382.htm#GUID-76067A2F-1963-4564-BAF0-AD9C54F23883">Patch Impact Report</a> section.</p>
+</li>
+<li>
+<p>Using the example in the previous step, go to the <code class="codeph">C:\patch\custom\scripts</code> directory.</p>
+</li>
+<li>
+<p>Locate the Catalog Manager <span class="italic">diff</span> files listed in the subdirectories under the directory in the previous step. These files have <span class="italic">.diff</span> extensions. This is referred to as <span class="italic"><code class="codeph">diff_file_location</code></span> in subsequent steps.</p>
+</li>
+<li>
+<p>Use Catalog Manager to apply each of these <span class="italic">diff</span> files to the Oracle home Oracle BI Presentation Catalog, using the following commands:</p>
+<ol>
+<li>
+<p>Create the Catalog Manager patch file, as follows:</p>
+<pre dir="ltr">
+<span class="italic">oracle-instance</span>/runcat.sh -cmd createPatch -inputFile <span class="italic">diff_file_location</span>
+ -production <span class="italic">webcat_location </span>-outputFile <span class="italic">webcat_patch.out</span> -winsConflict latest
+</pre>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="italic"><code class="codeph">diff_file_location</code></span> refers to the file from the previous step</p>
+</li>
+<li>
+<p><span class="italic"><code class="codeph">webcat_location</code></span> is the Oracle home Oracle BI Presentation Catalog location</p>
+</li>
+<li>
+<p><span class="italic"><code class="codeph">webcat_patch.out</code></span> is a temporary file created by this step and used in Step 5b</p>
+<p>Example of <span class="italic"><code class="codeph">oracle-instance</code></span> on Unix:</p>
+<pre dir="ltr">
+<span class="italic">APPLICATIONS_BASE</span>/instance/BIInstance/bifoundation
+/OracleBIPresentationServicesComponent/coreapplication_obips1/catalogmanager
+</pre></li>
+</ul>
+</li>
+<li>
+<p>Apply the Catalog Manager patch file, as follows:</p>
+<pre dir="ltr">
+oracle-instance/runcat.cmd -cmd applyPatch -inputFile webcat_patch.out
+-outputFile  -persistNewApplicationsRoles <span class="italic">webcat_applypatch.out</span>
+</pre>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="italic">webcat_patch.out</span> is the file created in Step 5a</p>
+</li>
+<li>
+<p><span class="italic">webcat_applypatch.out</span> is the output file from this deployment process</p>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>Repeat the previous step for the run-time catalog.</p>
+</li>
+<li>
+<p>Restart the Oracle Business Intelligence system components using <code class="codeph">opmnctl</code>:</p>
+<pre dir="ltr">
+cd <span class="italic">APPLICATIONS_CONFIG</span>/BIInstance/bin/opmnctl
+./opmnctl stopall
+./opmnctl startall
+</pre></li>
+</ol>
+<p>For more information, see the &rdquo;Starting and Stopping Oracle Business Intelligence" section in the <span class="italic"><span id="GUID-40562571-4588-4D86-ADD2-CE241A5AA5F6__BIESG"><cite>System Administrator's Guide for Oracle Business Intelligence Enterprise Edition</cite></span></span>.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT721"></a>
+<div class="sect2"><a id="GUID-1909ABD2-A79A-48B2-AFBA-2311B1B265F9"></a>
+<h2 id="OAPAT-GUID-1909ABD2-A79A-48B2-AFBA-2311B1B265F9" class="sect2"><span class="enumeration_section">10.6</span> Patching Oracle Business Process Management (Oracle BPM) Templates in Offline Mode</h2>
+<div>
+<div class="section">
+<p>Oracle recommends to patch Oracle BPM templates in online mode. When updates to Oracle BPM templates are introduced in a patch, no manual steps are required in online mode to publish the new Oracle BPM Template to the Oracle Metadata Services (MDS) repository.</p>
+<p>If a patch containing updates to Oracle BPM templates is applied in offline mode, the new Oracle BPM Template must be manually published to the Oracle MDS repository supporting the Oracle BPM Composer instance after the patch is applied. Use the <code class="codeph">publish_template</code> WebLogic Scripting Tool (WLST) command from the WLST shell. The WLST <code class="codeph">publish_template</code> command connects to the SOA MDS data using the <code class="codeph">mds-config.xml</code> configuration file created. Provide the location of the <code class="codeph">mds-config.xml</code> configuration file as one of the input parameters of the <code class="codeph">publish_template</code> command.</p>
+<p>Perform the following steps to create the <code class="codeph">mds-config.xml</code> configuration file:</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ol>
+<li>
+<p>Copy the <code class="codeph">mds-config-template.xml</code> file from the SOA server installation to a local directory, as follows:</p>
+<pre dir="ltr">
+cp <span class="italic">SOA_ORACLE_HOME</span>/bpm/config/mds-config-template.xml /<span class="italic">local_directory</span>/mds-config.xml
+</pre></li>
+<li>
+<p>Modify the following properties in the recently copied file to the temporary directory:</p>
+<ol>
+<li>
+<p>Set <code class="codeph">jdbc.userid</code> to the database user name of the SOA MDS database</p>
+</li>
+<li>
+<p>Set <code class="codeph">jdbc.passwd</code> to the database password of the SOA MDS database</p>
+</li>
+<li>
+<p>Set <code class="codeph">jdbc.url</code> to the connection URL of the SOA MDS database, for example, <code class="codeph">jdbc:oracle:thin:@host2:1525:mds</code></p>
+</li>
+<li>
+<p>Set <code class="codeph">partition.name</code> to <code class="codeph">obpm</code></p>
+</li>
+</ol>
+</li>
+</ol>
+<p>Perform the following steps to publish the new Oracle BPM template to the MDS repository:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Review the Diagnostics report to find the location of the archive file that contains the BPM template. For more information, see the <a href="GUID-C9E7FC50-20BE-4F33-9760-E5B8C3F978DE.htm#GUID-37783AF5-2B27-4F5A-9607-7D2D49CF351A">Diagnostics Report</a> section.</span></li>
+<li class="stepexpand"><span>Expand the archive that contains the new BPM template, so the <code class="codeph">publish_template</code> command can find the template, as follows:</span>
+<ol>
+<li><span>Create or use an existing local directory.</span></li>
+<li><span>Untar the patched archive file, as shown in this example:</span></li>
+</ol>
+<div>
+<pre dir="ltr">
+cd /<span class="italic">local_directory</span>
+mkdir preboardWorker
+cd preboardWorker
+jar xf <span class="italic">FA_ORACLE_HOME</span>/hcm/deploy/bta_HcmCommonProcessesPreboardWorkerComposite.jar
+</pre></div>
+</li>
+<li class="stepexpand"><span>Access the WLST shell, as follows:</span>
+<div>
+<pre dir="ltr">
+(UNIX) <span class="italic">SOA_ORACLE_HOME</span>/common/bin/wlst.sh
+</pre></div>
+</li>
+<li class="stepexpand"><span>Deploy the Oracle BPM template, passing the temporary directory, <code class="codeph">/local_directory/preboardWorker</code>, as the directory containing the template in the example in Step 2.</span>
+<div>
+<p>Generic command syntax follows:</p>
+<pre dir="ltr">
+publish_template(<span class="italic">templateName</span>, fsLocation, mdsconfigLocation, [Override], [oracleHome] )
+</pre>
+<p>Note that the <code class="codeph">publish_template</code> command simply updates the existing Oracle BPM template with a newer version. It has no impact on the projects deployed or instantiated from the existing template.</p>
+</div>
+</li>
+</ol>
+<div class="section">
+<p>For more information about the <code class="codeph">publish_template</code> command syntax, see the &rdquo;publish_template" section in the <span class="italic"><span id="GUID-1909ABD2-A79A-48B2-AFBA-2311B1B265F9__WLSTC"><cite>WLST Command Reference for WebLogic Server</cite></span></span>.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT828"></a>
+<div class="sect2"><a id="GUID-74C462CF-8952-4763-9E94-A47F12967BFB"></a>
+<h2 id="OAPAT-GUID-74C462CF-8952-4763-9E94-A47F12967BFB" class="sect2"><span class="enumeration_section">10.7</span> Patch C Artifacts</h2>
+<div>
+<div class="section">
+<p>When updates to C artifacts are introduced in a patch, no manual steps are required in either online or offline mode. Note that before applying C artifacts, all C executable files and the Oracle Enterprise Scheduler Service servers that host the C files must be shut down and the database must be running.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT722"></a>
+<div class="sect2"><a id="GUID-40F7DAA5-4593-4F41-B665-79287869AA53"></a>
+<h2 id="OAPAT-GUID-40F7DAA5-4593-4F41-B665-79287869AA53" class="sect2"><span class="enumeration_section">10.8</span> Patching Common Resource (Activity Strings) Artifacts</h2>
+<div>
+<div class="section">
+<p>When updates to Common Resource artifacts are introduced in a patch, the Administration Server, Node Manager, and database must be running. Stop and restart all Managed Servers in all domains after the patch is applied.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT1564"></a>
+<div class="sect2"><a id="GUID-DB4A8822-CBD5-49D8-81B7-3F057BB53DA3"></a>
+<h2 id="OAPAT-GUID-DB4A8822-CBD5-49D8-81B7-3F057BB53DA3" class="sect2"><span class="enumeration_section">10.9</span> Patch Customized Seed Data</h2>
+<div>
+<div class="section">
+<p>A conflict between Oracle supplied seed data and customized seed data may occur when applying a patch that uploads seed data. The following types of conflicts may occur:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>When uploaded seed data conflicts with a primary unique index, the customer record is preserved and the Oracle seed data is not uploaded.</p>
+</li>
+<li>
+<p>When uploaded seed data conflicts with a non-primary unique index, a uniqueness violation occurs and an automatic conflict resolution feature prevents a seed data upload failure by appending numeric values, such as _1, _2, _3, to the display value.</p>
+</li>
+</ul>
+<p>For more information, see the <a href="GUID-C9E7FC50-20BE-4F33-9760-E5B8C3F978DE.htm#GUID-5D5E00D9-8FB3-4BC4-B712-FAA780C8AF0E">Understand the Impact of Automatic Conflict Resolution for Seed Data</a> section.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT756"></a>
+<div class="sect2"><a id="GUID-F7575801-493F-4145-9E17-72341AD79025"></a>
+<h2 id="OAPAT-GUID-F7575801-493F-4145-9E17-72341AD79025" class="sect2"><span class="enumeration_section">10.10</span> Patch Diagnostic Test Framework (DTF) JAR Files</h2>
+<div>
+<div class="section">
+<p>No manual steps are required when patching DTF artifacts in either online or offline mode.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT724"></a>
+<div class="sect2"><a id="GUID-1972C42A-B820-4A37-B421-1532B0B4FE3D"></a>
+<h2 id="OAPAT-GUID-1972C42A-B820-4A37-B421-1532B0B4FE3D" class="sect2"><span class="enumeration_section">10.11</span> Patch E-Mail and Web Marketing (EWM) Artifacts</h2>
+<div>
+<div class="section">
+<p>Oracle recommends to patch EWM artifacts in online mode. When updates to EWM artifacts are introduced in a patch, no manual steps are required in online mode. In offline mode, follow the steps in mentioned in the <a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-4C9179BC-3BE7-4BBB-80BC-861466F76875">Patch Java EE Artifacts</a> section.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT725"></a>
+<div class="sect2"><a id="GUID-5A0DA9BE-7211-42FA-92DF-E5EFA4CE7996"></a>
+<h2 id="OAPAT-GUID-5A0DA9BE-7211-42FA-92DF-E5EFA4CE7996" class="sect2"><span class="enumeration_section">10.12</span> Patch Flexfield Artifacts</h2>
+<div>
+<div class="section">
+<p>Oracle recommends to patch flexfield artifacts in online mode. When flexfield changes are introduced in a patch, no manual steps are required to automatically deploy the flexfields in online mode, except to ensure that the following are running:</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Administration Server</p>
+</li>
+<li>
+<p>Managed Servers that host the <code class="codeph">FndSetup</code> application</p>
+</li>
+<li>
+<p>Database</p>
+</li>
+</ul>
+<p>Users must log out and log in after a successful patch application to see the latest flexfield changes because flexfields reload upon user logout and login. If the changes to a flexfield are not implemented, it is possible to revert to a previous version of a flexfield. For more information, consult following links:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-C9E7FC50-20BE-4F33-9760-E5B8C3F978DE.htm#GUID-BD20A680-8E53-40EA-A0D6-9B36A94CEFF8">Revert to a Previous Flexfield Definition After it is Updated by a Patch</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-0BC6B6C6-FDBE-4A38-8E79-159DFCEF649F">Manually Deploying Patched Flexfields</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-00D1C523-25A7-4782-B609-1C53D1AE66AF">Perform Flexfield NameSpaces Merge</a></p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+<a id="OAPAT966"></a><a id="OAPAT1093"></a>
+<div class="sect3"><a id="GUID-0BC6B6C6-FDBE-4A38-8E79-159DFCEF649F"></a>
+<h3 id="OAPAT-GUID-0BC6B6C6-FDBE-4A38-8E79-159DFCEF649F" class="sect3"><span class="enumeration_section">10.12.1</span> Manually Deploy of Patched Flexfields</h3>
+<div>
+<div class="section">
+<p>Follow these steps when patching flexfields in offline mode to manually deploy the patched flexfield:</p>
+<ol>
+<li>
+<p>Ensure that the Administration Server and database are running.</p>
+</li>
+<li>
+<p>Stop and start the <code class="codeph">FNDSETUP</code> Managed Servers. For more information, see the &ldquo;Starting and Stopping Components&rdquo; section in the <span class="italic"><span id="GUID-0BC6B6C6-FDBE-4A38-8E79-159DFCEF649F__OASAD"><cite>Oracle Fusion Applications Administrator's Guide</cite></span></span>.</p>
+</li>
+<li>
+<p>Connect to the Oracle WebLogic Server Administration Server for the domain that hosts the <code class="codeph">FndSetup</code> application. This is typically the Common Domain.</p>
+</li>
+<li>
+<p>Run the <code class="codeph">deployPatchedFlex()</code> WLST command. As this is run on a domain that hosts the <code class="codeph">FndSetup</code> Application, this application within the parentheses do not have to be specified. However, the <code class="codeph">FndSetup</code> application must be running for the command to succeed.</p>
+<p>Example:</p>
+<pre dir="ltr">
+connect('weblogic' , 'weblogic1' , 't3://localhost:7101')
+deployPatchedFlex()
+</pre></li>
+<li>
+<p>Review the report for errors.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">Example of confirmation that flexfield changes were successfully deployed</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>As an example, assume that the patch delivered a new flexfield segment to the Calculation Defaults in Payroll Definitions. To confirm that the new flexfield segment was successfully deployed, follow these steps in the Payroll application:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li><span>From the Oracle Fusion Payroll application, select <span class="bold">Manage Payroll Definition</span>.</span></li>
+<li><span>Click the <span class="bold">Create a New Payroll</span> icon.</span></li>
+<li><span>Select a <span class="bold">Legislative Data Group</span>.</span></li>
+<li><span>Confirm that the new flexfield segment appears under <span class="bold">Calculation Defaults</span>.</span></li>
+</ol>
+</div>
+</div>
+<a id="OAPAT1536"></a>
+<div class="sect3"><a id="GUID-00D1C523-25A7-4782-B609-1C53D1AE66AF"></a>
+<h3 id="OAPAT-GUID-00D1C523-25A7-4782-B609-1C53D1AE66AF" class="sect3"><span class="enumeration_section">10.12.2</span> Perform Flexfield NameSpaces Merge</h3>
+<div>
+<div class="section">
+<p>If a patch is applied in offline mode that includes flexfield changes that require a <code class="codeph">NameSpaces</code> merge, the manual steps in this section must be manually performed, as follows:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li><span>Stop the managed servers that host the FNDSETUP application.</span></li>
+<li><span>Run the following script: <span class="italic"><code class="codeph">APPLICATIONS_BASE/</code></span><code class="codeph">fusionapps/atgpf/atgpf/bin/flex_namespaces_merge.py</code></span></li>
+<li><span>Start the managed servers that host the FNDSETUP application.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OAPAT726"></a>
+<div class="sect2"><a id="GUID-5FDD2A6C-D940-44C0-B4CD-F6BA5FEB0E75"></a>
+<h2 id="OAPAT-GUID-5FDD2A6C-D940-44C0-B4CD-F6BA5FEB0E75" class="sect2"><span class="enumeration_section">10.13</span> Patch Group Space Templates</h2>
+<div>
+<p>When a Group Space template is included in a patch, the patch introduces a new template with a version number attached, which is unlike other artifacts where the patched version replaces the existing one. If any customizations are on the template that the patched version will replace, the customizations must be manually incorporated in the new version of the template. If there are any settings or configurations that refer to the Group Space template name, ensure to update these to reflect the new template name. For all WebCenter services configured in a Group Space template, ensure that connections are configured properly.</p>
+<p>Oracle recommends to patch Group Space templates in online mode. When updates to Group Space templates are introduced in a patch and the template included in the patch has not been customized, no manual steps are required in online mode, except to ensure that the following servers must be running:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>WebCenter Managed and Servers: <code class="codeph">WC_Spaces,</code> <code class="codeph">WC_Utilities</code></p>
+</li>
+<li>
+<p>Oracle UCM Managed Server: <code class="codeph">ucm_server1</code></p>
+</li>
+<li>
+<p>LDAP Policy Store Server</p>
+</li>
+</ul>
+</div>
+<a id="OAPAT1094"></a>
+<div class="sect3"><a id="GUID-BCD01A97-DE82-4235-A27B-CCCDA84F8406"></a>
+<h3 id="OAPAT-GUID-BCD01A97-DE82-4235-A27B-CCCDA84F8406" class="sect3"><span class="enumeration_section">10.13.1</span> Manually Deploy Group Space Templates</h3>
+<div>
+<div class="section">
+<p>In offline mode, or in the case of failure, the new Group Space template must be manually deployed using the <code class="codeph">importGroupSpace</code> WLST command.</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Ensure that the following WebCenter Managed Servers are running:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>WebCenter Managed Servers: <code class="codeph">WC_Spaces, WC_Utilities</code></p>
+</li>
+<li>
+<p>Oracle UCM Managed Server: <code class="codeph">ucm_server1</code></p>
+</li>
+<li>
+<p>LDAP Policy Store Server</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>Access the WLST shell from the Oracle home where WebCenter is installed, using the following command:</span>
+<div>
+<pre dir="ltr">
+(UNIX) <span class="italic">WC_ORACLE_HOME</span>/common/bin/wlst.sh
+</pre></div>
+</li>
+<li class="stepexpand"><span>Deploy the Group Space template, using the following command:</span>
+<div>
+<pre dir="ltr">
+importGroupSpaces('appName', 'fileName')
+</pre>
+<p>The <code class="codeph">appName</code> is always <code class="codeph">webcenter</code> and the <code class="codeph">fileName</code> is the name of the WebCenter archive file, from the patch to be imported. Refer to the Diagnostics report to get the full path and file name. For more information, see the <a href="GUID-C9E7FC50-20BE-4F33-9760-E5B8C3F978DE.htm#GUID-37783AF5-2B27-4F5A-9607-7D2D49CF351A">Diagnostics Report</a> section.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OAPAT727"></a>
+<div class="sect2"><a id="GUID-F2FC8917-DF47-4DAB-A83C-CE009224DB36"></a>
+<h2 id="OAPAT-GUID-F2FC8917-DF47-4DAB-A83C-CE009224DB36" class="sect2"><span class="enumeration_section">10.14</span> Patch Image and Process Management (IPM) Artifacts in Offline Mode</h2>
+<div>
+<div class="section">
+<p>Oracle recommends to patch IPM artifacts in online mode. When updates to IPM artifacts are introduced in a patch, no manual steps are required in online mode, other than ensuring all prerequisites are met. In offline mode, the IPM artifacts must be manually deployed.</p>
+<p>Perform the following steps to manually deploy IPM artifacts:</p>
+<ol>
+<li>
+<p>The <code class="codeph">opmn</code> processes must be running. Follow these steps:</p>
+<ol>
+<li>
+<p>To verify if the process is running, go to the <span class="italic"><code class="codeph">FA_ORACLE_HOME</code></span>/<code class="codeph">CommonDomain_webtier</code> directory and run this command:</p>
+<pre dir="ltr">
+opmnctl status
+</pre></li>
+<li>
+<p>If the opmn process is not <span class="bold">Alive</span>, start it with this command:</p>
+<pre dir="ltr">
+opmnctl start 
+</pre></li>
+</ol>
+</li>
+<li>
+<p>The imaging application must be running. The format for the IPM URL is <code class="codeph">http://</code><span class="italic"><code class="codeph">host name:Port</code></span><code class="codeph">/imaging/</code>.</p>
+</li>
+<li>
+<p>The Financials SOA server (<code class="codeph">soa_server1</code>) must be running.</p>
+</li>
+<li>
+<p>The Financials Payables Invoice and Expense Report SOA composites must have been successfully deployed and be in an active state.</p>
+</li>
+<li>
+<p>The <code class="codeph">FIN wsm-pm</code> application must be in an active state, which means the <code class="codeph">FinancialCommon</code> server must be running.</p>
+</li>
+<li>
+<p>The IPM to UCM connection, "Fusion Applications UCM Connection", must exist.</p>
+</li>
+<li>
+<p>The IPM to SOA connection, "Financial SOA Connection", must exist.</p>
+</li>
+<li>
+<p>The IPM Input should be set to <span class="bold">Offline</span> from the <span class="bold">Manage Inputs</span> section of the IPM UI. For example, select <span class="bold">Invoices</span> under <span class="bold">Manage Inputs</span> and then deselect <span class="bold">Online</span> under <span class="bold">Basic Information</span>.</p>
+</li>
+<li>
+<p>Follow these steps to back up the existing IPM application definition:</p>
+<ol>
+<li>
+<p>Log in to the IPM server as the IPM super user.</p>
+</li>
+<li>
+<p>From <span class="bold">Tools</span>, select <span class="bold">Export Definitions</span>.</p>
+</li>
+<li>
+<p>Export the Oracle Fusion Payables Application and Expenses Application, all related searches, and inputs to a local file.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Review the Diagnostics report to find the location of the IPM artifacts that were copied to <span class="italic"><code class="codeph">FA_ORACLE_HOME</code></span>. For more information, see the <a href="GUID-1D6499E1-01AA-477D-91E0-3FDCAF5EBBEC.htm#GUID-05D899F8-C973-4A84-A9B4-F7582613ADFD">Online Patch Progress Report and Diagnostics Report</a> section.</p>
+</li>
+<li>
+<p>Access the WLST shell, as follows:</p>
+<pre dir="ltr">
+(UNIX) <span class="italic">ECM_ORACLE_HOME</span>/common/bin/wlst.sh
+</pre></li>
+<li>
+<p>Deploy the IPM artifact, as follows:</p>
+<pre dir="ltr">
+connect(<span class="italic">IPM Server user name</span>,<span class="italic">IPM Server password</span>,<span class="italic">IPM Server hostname:port)</span>
+importIPMApplication(ipmAppFile,'Update',appDefName,'None');
+importIPMInput(ipmAppFile,'Update',inputDefName);
+</pre>
+<p>Example:</p>
+<pre dir="ltr">
+connect('FAadmin','fusion','t3://IPMserver01.mycompany.com:17014');
+
+importIPMApplication(exportFile='/net/server01/fusionapps/applications/fin/ap/ipm/ApInvoiceIpmApp.xml',
+action='Update', name='Payables Invoice Application','None')
+
+importIPMInput(exportFile='/net/server01/fusionapps/applications/fin/ap/ipm/ApInvoiceIpmApp.xml', 
+action='Update', name='Payables Invoice Input') 
+</pre></li>
+<li>
+<p>If applicable, perform the customizations on the new file, based on the exported file.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT728"></a>
+<div class="sect2"><a id="GUID-4C9179BC-3BE7-4BBB-80BC-861466F76875"></a>
+<h2 id="OAPAT-GUID-4C9179BC-3BE7-4BBB-80BC-861466F76875" class="sect2"><span class="enumeration_section">10.15</span> PatchJava EE Artifacts</h2>
+<div>
+<div class="section">
+<p>Oracle recommends to you patch Java EE artifacts in online mode. When Java EE artifacts are patched in online mode, no manual steps are required, except to ensure that the following are running:</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Administration Server</p>
+</li>
+<li>
+<p>Node manager</p>
+</li>
+<li>
+<p>Database</p>
+</li>
+</ul>
+<p>In offline mode, manually stop, patch, and restart the impacted Managed Servers that host the Java EE application. To determine which product family is affected by the patch being applied, run the Patch Impact report. For more information, see the <a href="GUID-1D6499E1-01AA-477D-91E0-3FDCAF5EBBEC.htm#GUID-3B940983-6C53-468F-A5DD-8A05DFC81CE4">Run the Patch Impact Report</a> section. For example, if the Patch Impact report indicates that the patch updates a Java EE artifact in the Financials Domain, then the Financials Domain must be stopped, apply the patch, and then start the Financials Domain after the patch applies successfully. Examples of artifacts in this category include Oracle ADF Resource JAR files and Oracle Enterprise Scheduler Service MAR files.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<div class="sect2"><a id="GUID-0E2C54ED-8053-4B37-A2FF-192A7ABDA95C"></a>
+<h2 id="OAPAT-GUID-0E2C54ED-8053-4B37-A2FF-192A7ABDA95C" class="sect2"><span class="enumeration_section">10.16</span> Patch JEECONFIG Artifacts</h2>
+<div>
+<p>Oracle recommends to patch JEECONFIG artifacts in online mode. When JEECONFIG artifacts are patched in online mode, no manual steps are required, except to ensure that the following are running:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Administration Server</p>
+</li>
+<li>
+<p>Node manager</p>
+</li>
+<li>
+<p>Database</p>
+</li>
+<li>
+<p>Impacted Managed Servers</p>
+</li>
+</ul>
+<p>Also, the JEECONFIG application should be in an active state.</p>
+<p>In offline mode, manually stop, patch, and restart the impacted Managed Servers that host the JEECONFIG application. To determine which product family is affected by the patch being applied, run the Patch Impact report. For more information, see the <a href="GUID-1D6499E1-01AA-477D-91E0-3FDCAF5EBBEC.htm#GUID-3B940983-6C53-468F-A5DD-8A05DFC81CE4">Run the Patch Impact Report</a> section. After bouncing the servers manually invoke the <code class="codeph">CrmExtnUpgradeMBean</code> mbean from the Administration Server of the impacted domains.</p>
+<p>For more information about stopping and starting servers, see the "Starting and Stopping an Oracle WebLogic Server Domain for a Product Family" section in the <span class="italic"><span id="GUID-0E2C54ED-8053-4B37-A2FF-192A7ABDA95C__OASAD"><cite>Oracle Fusion Applications Administrator's Guide</cite></span></span>.</p>
+</div>
+</div>
+<div class="sect2"><a id="GUID-3AE6995A-CDD6-4F04-8D6B-787678BA1B86"></a>
+<h2 id="OAPAT-GUID-3AE6995A-CDD6-4F04-8D6B-787678BA1B86" class="sect2"><span class="enumeration_section">10.17</span> Patching Mobile and Mobile Script Artifacts</h2>
+<div>
+<p>Oracle recommends to patch Mobile and Mobile Script artifacts in online mode. When Mobile and Mobile Script artifacts are introduced in a patch, no manual steps are required to automatically import the mobile files into MDS in online mode, except to ensure that the following are running:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Administration Server</p>
+</li>
+<li>
+<p>Database</p>
+</li>
+</ul>
+<p>To perform the validation for these artifacts, Fusion Applications Patch Manager must be run in online validate mode. In this mode, Patch Manager calls the corresponding python script from the patch to check for the availability of servers which are required to patch these artifacts. After the online validation completes successfully, the patch can be applied in online mode.</p>
+<p><span class="bold">Manually Importing Mobile Artifacts into MDS</span></p>
+<p>If the patch is applied in offline mode, perform the following steps to manually import Mobile artifacts into MDS:</p>
+<ol>
+<li>
+<p>Ensure the following servers are up and running:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Common Domain Administration Server</p>
+</li>
+<li>
+<p>CRM Domain Administration Server</p>
+</li>
+<li>
+<p><code class="codeph">SalesServer</code> (In the case of high availability servers, any one instance must be up)</p>
+</li>
+<li>
+<p><code class="codeph">CRMCommonServer</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Confirm that Patch Panager copied one or more Mobile artifacts and the corresponding Mobiles Script artifact into the respective product family directory, as shown in the following examples:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Mobile Artifact - <span class="italic"><code class="codeph">FA_ORACLE_HOME/</code></span><code class="codeph">crm/mobile/deploy</code></p>
+</li>
+<li>
+<p>MobileScript Artifact - <span class="italic"><code class="codeph">FA_ORACLE_HOME/</code></span><code class="codeph">crm/mobile/script</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Run the following command to import the files:</p>
+<pre dir="ltr">
+$MW_HOME/oracle_common/common/bin ./wlst.sh <span class="italic">FA_ORACLE_HOME/</span>crm/mobile/script/OracleSalesCloudMobileArchiveImport.py $FA_ORACLE_HOME wls_host_name wls_admin_port_no wls_admin_user [apply|validate]
+</pre>
+<p>Provide the <code class="codeph">wls_admin_password</code> on the command line. Note that the last parameter, ["apply" or "validate"] is optional. If no value is specified, the script runs in apply mode.</p>
+</li>
+</ol>
+</div>
+</div>
+<a id="OAPAT729"></a>
+<div class="sect2"><a id="GUID-54652A00-3746-4E09-BD7F-6438A04E0F84"></a>
+<h2 id="OAPAT-GUID-54652A00-3746-4E09-BD7F-6438A04E0F84" class="sect2"><span class="enumeration_section">10.18</span> Patch Oracle Data Integrator (ODI) Artifacts</h2>
+<div>
+<div class="section">
+<p>Oracle recommends to patch ODI artifacts in online mode. When updates to ODI artifacts are introduced in a patch, Patch Manager imports the ODI changes in online mode. If ODI artifacts are patched in offline mode, the changed ODI content must be manually imported to the ODI repository. In both online and offline modes, the ODI repository import tool and the database must be running.</p>
+<p>Oracle Fusion Applications Provisioning does not install ODI Studio. ODI Studio must be installed before manually importing ODI changes. Therefore, ODI Studio must be installed before applying the patches that deliver ODI changes in offline mode or when a failed ODI import step is required to be manually retried in online mode.</p>
+<p><span class="bold">Manually Importing ODI Changes</span></p>
+<p>Oracle recommends that the ODI import be performed from a machine that is co-located in the same subnetwork as the database server to maximize performance. The following steps shows the instruction for the&nbsp;Manual Import ODI Changes:</p>
+<ol>
+<li>
+<p>Review the instructions in the patch README file to determine which ODI Project or Model must be deleted and imported again. The patch README file contains a list of the ODI files that are included in the patch, in the order that they must be imported.</p>
+</li>
+<li>
+<p>Review the Diagnostics report to determine the location and file name for each ODI artifact that is to be imported. For more information, see the <a href="GUID-1D6499E1-01AA-477D-91E0-3FDCAF5EBBEC.htm#GUID-05D899F8-C973-4A84-A9B4-F7582613ADFD">Online Patch Progress Report and Diagnostics Report</a> section.</p>
+</li>
+<li>
+<p>Start the ODI Studio, as follows:</p>
+<pre dir="ltr">
+(UNIX) odi.sh
+</pre></li>
+<li>
+<p>Access the ODI Studio. Follow these steps:</p>
+<ol>
+<li>
+<p>Select <span class="bold">View</span>, then <span class="bold">ODI Designer Navigator</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Connect to Repository</span>.</p>
+</li>
+<li>
+<p>Log in using the super user name and password for the ODI repository.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Delete the Model or Project if specified in the patch README file. The README file specifies whether any Model or Project must be deleted and in what order.</p>
+<p>Right-click the Model or Project name and click <span class="bold">Delete</span>.</p>
+</li>
+<li>
+<p>Import the ODI files in the order they are listed in the patch README file. Follow these steps:</p>
+<ol>
+<li>
+<p>To import a project, right-click the Project name and click <span class="bold">Import</span>, then <span class="bold">Import Project</span>.</p>
+</li>
+<li>
+<p>To import a model, right-click the Model name and click <span class="bold">Import</span>, then <span class="bold">Import Model</span>.</p>
+</li>
+<li>
+<p>Select <span class="bold">Synonym Mode INSERT_UPDATE</span> from the list in the Import Dialog window.</p>
+</li>
+<li>
+<p>For the File Import directory, select the directory that contains the ODI file to be imported.</p>
+</li>
+<li>
+<p>Select the ODI file to import.</p>
+</li>
+<li>
+<p>Click <span class="bold">OK</span> to import.</p>
+</li>
+</ol>
+<p>Repeat Steps 5 and 6 for each Model or Project in the patch.</p>
+</li>
+<li>
+<p>Close the ODI Studio after importing all the files in the order specified in the patch README file.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT730"></a>
+<div class="sect2"><a id="GUID-2D757B28-958A-4953-BA62-080C47B23FC6"></a>
+<h2 id="OAPAT-GUID-2D757B28-958A-4953-BA62-080C47B23FC6" class="sect2"><span class="enumeration_section">10.19</span> Patch Oracle Forms Recognition and Oracle Document Capture Artifacts</h2>
+<div>
+<div class="section">
+<p>Oracle Forms Recognition (OFR) and Oracle Document Capture (ODC) artifacts are used only by Windows. When a patch that contains OFR and ODC artifacts is applied, Patch Manager backs up the customized files, if any, before copying the new files to <span class="italic">FA_ORACLE_HOME</span>., the OFR and ODC artifacts that were delivered in the patch must be manually installed. If the OFR and ODC have not been installed, refer to the <a class="olink OAINS2794" target="_blank" href="../OAINS/GUID-A118AF2D-636D-4704-B7DE-831A65267278.htm#OAINS2794">Set Up Oracle Document Capture and Oracle Forms Recognition</a> section in the <span class="italic"><span id="GUID-2D757B28-958A-4953-BA62-080C47B23FC6__OAINS"><cite>Oracle Fusion Applications Installation Guide</cite></span></span> for the installation steps. Then return to this section for patching.</p>
+<p><span class="bold">Install OFR Artifacts</span></p>
+<p>If the <code class="codeph">AP_Packaged_Project_1004a.ini</code> file was previously customized, then this file should not be installed from the patch as the patch delivers it. Instead keep the existing file and copy the file from the patch to a directory with a different name. Then compare the files and manually update the existing file with the changes to preserve the customizations, as follows:</p>
+<ol>
+<li>
+<p>Review the Patch Impact report to find the location of the files related to OFR.</p>
+</li>
+<li>
+<p>Rename the file <code class="codeph">AP_Packaged_Project_1004a.ini</code> to another name as a backup and copy <code class="codeph">APPLICATIONS_BASE/fusionapps/fin/ap/ofr</code>/<code class="codeph">AP_Packaged_Project_1004a.ini</code> to a new file on the Windows environment.</p>
+</li>
+<li>
+<p>Move this <code class="codeph">.ini</code> file to the OFR AP Project directory, which is located in the OFR directory structure, <code class="codeph">Projects\AP\Global</code> (for example, <code class="codeph">C:\Program Files\OFR\Projects\AP\Global</code>). If the existing <code class="codeph">AP_Packaged_Projects_1004a.ini</code> file is in this location, rename it to a backup file.</p>
+</li>
+<li>
+<p>Create a data link:</p>
+<ol>
+<li>
+<p>Click the Windows <span class="bold">Start</span> menu button.</p>
+</li>
+<li>
+<p>Select <span class="bold">Run</span>.</p>
+</li>
+<li>
+<p>Enter <span class="bold">Notepad</span> into the <span class="bold">Open</span> field and click <span class="bold">OK</span>.</p>
+<p>Do not right click on the desktop to create a new file. Windows will assign a hidden file type to the file that will interfere with the following steps.</p>
+</li>
+<li>
+<p>Click <span class="bold">File - Save</span>.</p>
+</li>
+<li>
+<p>Navigate to the Desktop folder.</p>
+</li>
+<li>
+<p>In the <span class="bold">File name</span> field, enter the following, including quote marks: "<span class="italic"><code class="codeph">odbc_dns</code></span>.<code class="codeph">udl</code>". Substitute the actual ODBC data source name for <span class="italic"><code class="codeph">odbc_dns</code></span>. The data source name can be found by opening the <span class="bold">Control Panel</span>, then <span class="bold">Administrative Tools</span>, and <span class="bold">Data Source (ODBC)</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Save</span>.</p>
+</li>
+<li>
+<p>Find the file on the desktop and double-click it to open the Data Link Properties dialog. If a text file is opened instead, go back and carefully follow the instructions for creating this file again.</p>
+</li>
+<li>
+<p>Set <span class="bold">Data Source</span>: <span class="italic"><code class="codeph">ODBC data source name</code></span></p>
+</li>
+<li>
+<p>Select the <span class="bold">Use a specific user name and password</span> option.</p>
+</li>
+<li>
+<p>Enter the READ-ONLY user name and password</p>
+</li>
+<li>
+<p>Select the <span class="bold">Allow saving password</span> option.</p>
+</li>
+<li>
+<p>Select <span class="bold">Test Connection</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">OK</span>. An example of the file contents follows:</p>
+<pre dir="ltr">
+Provider=MSDASQL.1;Password=fusion;Persist Security Info=True;User ID=fusion;Data Source=ffinde
+</pre></li>
+</ol>
+</li>
+<li>
+<p>Open the data link (<code class="codeph">.udl</code> file) previously created, as follows:</p>
+<ol>
+<li>
+<p>Click the Windows <span class="bold">Start</span> menu button.</p>
+</li>
+<li>
+<p>Select <span class="bold">Run</span>.</p>
+</li>
+<li>
+<p>Enter <span class="bold">Notepad</span> into the <span class="bold">Open</span> field and click <span class="bold">OK</span>.</p>
+</li>
+<li>
+<p>Open the <code class="codeph">.udl</code> file.</p>
+</li>
+<li>
+<p>From the <code class="codeph">.udl</code> file, copy the entire string, starting with <span class="bold">Provider=</span>.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Open the <code class="codeph">AP Packaged Project_1004a.ini</code> file (under C:\OFR_Projects\AP\Global) in another instance of Notepad and make the following changes:</p>
+<ol>
+<li>
+<p>Replace the connection string for the line starting with <span class="bold">SQL_VL_01_ConnectionString=</span>, with the text copied in Step 5.</p>
+</li>
+<li>
+<p>Update attribute <code class="codeph">ASA_VL_01_ImportODBCDSN</code> with the System DSN name of the Oracle Fusion Applications database.</p>
+</li>
+<li>
+<p>Update attribute <code class="codeph">ASA_VL_01_ImportODBCUser</code> with the READ-ONLY user name.</p>
+</li>
+<li>
+<p>Update the attribute, <code class="codeph">ASA_VL_01_ImportODBCPWD</code>, with the READ-ONLY account password.</p>
+</li>
+<li>
+<p>Proceed with any additional customizations on the <code class="codeph">.ini</code> file, as required by the implementation.</p>
+</li>
+<li>
+<p>Verify the changes.</p>
+</li>
+<li>
+<p>Save and close the file.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p><span class="bold">Update ODC Expenses Metadata</span></p>
+<p>Perform the following steps to update ODC Expenses metadata:</p>
+<ol>
+<li>
+<p>Install the ODC Import-Export Utility from the Companion DVD, if this has not already been done.</p>
+</li>
+<li>
+<p>Copy the ODC metadata ZIP files from <code class="codeph">APPLICATIONS_BASE</code>/<code class="codeph">fusionapps/fin/ap/odc</code> and <code class="codeph">APPLICATIONS_BASE</code><code class="codeph">/fusionapps/fin/exm/odc</code> to a temporary directory in the Windows desktop environment.</p>
+</li>
+<li>
+<p>Go to <span class="bold">Start</span>, then <span class="bold">Oracle Document Capture</span>, then <span class="bold">Import-Export Utility</span> and log in. The user name is <code class="codeph">ADMIN</code> and the password is <code class="codeph">admin</code>.</p>
+</li>
+<li>
+<p>In the utility, go to <span class="bold">File</span> - <span class="bold">Import</span> or click <span class="bold">Import</span> and then import the metadata files one at a time. Ensure that all files are imported.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT741"></a>
+<div class="sect2"><a id="GUID-5E84356A-9F16-45BA-BB9C-91F928862CAA"></a>
+<h2 id="OAPAT-GUID-5E84356A-9F16-45BA-BB9C-91F928862CAA" class="sect2"><span class="enumeration_section">10.20</span> Patch Oracle Fusion Applications Patch Manager Artifacts</h2>
+<div>
+<div class="section">
+<p>When updates to <span id="GUID-5E84356A-9F16-45BA-BB9C-91F928862CAA__FA">Oracle Fusion Applications</span> Patch Manager are introduced in a patch, the patch must be applied with the OPatch utility. Oracle Fusion Applications is compatible with a specific version of OPatch instead of the generic version of OPatch. If an incompatible version of OPatch exists in <span class="italic">FA_ORACLE_HOME</span>, errors can occur while applying patches and running Upgrade Orchestrator. The compatible version of Opatch is available on My Oracle Support under patch 14044793.</p>
+<p>During provisioning, the data model for Oracle Fusion Applications Patch Manager is updated by running the <code class="codeph">fapmgr bootstrap</code> command. If the data model is updated again by a patch, the patch README file instructs to run the <code class="codeph">fapmgr bootstrap</code> command.</p>
+<p>Use this syntax to run <code class="codeph">bootstrap</code>:</p>
+<pre dir="ltr">
+(UNIX) <span class="italic">FA_ORACLE_HOME</span>/lcm/ad/bin/fapmgr.sh bootstrap [-logfile <span class="italic">log_file_name</span>] [-loglevel <span class="italic">level</span>]
+</pre></div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT1541"></a>
+<div class="sect2"><a id="GUID-F0FC155B-600F-415F-8CE8-036720912477"></a>
+<h2 id="OAPAT-GUID-F0FC155B-600F-415F-8CE8-036720912477" class="sect2"><span class="enumeration_section">10.21</span> Patch Script Files</h2>
+<div>
+<p>When updates to script files or control files are introduced in a patch, no manual steps are required in either online or offline mode. Note that before applying Scripts Control artifacts (SCRIPTSCTL), no processes should be running that use these scripts or control files.</p>
+</div>
+</div>
+<a id="OAPAT897"></a>
+<div class="sect2"><a id="GUID-550AEF09-2A94-4504-86DF-41EB87DC82A4"></a>
+<h2 id="OAPAT-GUID-550AEF09-2A94-4504-86DF-41EB87DC82A4" class="sect2"><span class="enumeration_section">10.22</span> Patch Security Artifacts</h2>
+<div>
+<div class="section">
+<p>In Oracle Fusion Applications, the following artifact types related to security can be patched:</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Function Security Policies (Applications Policies, using the <code class="codeph">system-jazn-data.xml</code> file)</p>
+</li>
+<li>
+<p>Data Security Grants (using Seed Data)</p>
+</li>
+<li>
+<p>Data Role (RGX) Templates</p>
+</li>
+<li>
+<p>JAR files secured by the Data Security Grants and Function Security Grants</p>
+</li>
+</ul>
+<p>A patch can contain one or more of these artifacts. This section describes the steps for applying security patches and recovering from patch failures. Examples of scenarios that may be needed when following the recovery steps include:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Apply a security patch that introduces a set of new policies and LDAP GUIDs, after backing up the policy store and the applications database. The GUID reconciliation has not been performed with the applications database due to an unrelated database issue. To resolve the database issue, restore from the backup, resulting in the policy store containing extra GUIDs from the database and a synchronization issue between the policy store and the database.</p>
+</li>
+<li>
+<p>Apply a security patch that includes updates to the applications policies and the patch fails, resulting in a set of LDAP GUIDs not applying correctly.</p>
+</li>
+</ul>
+<p>The patching and recovery scenarios for the following combinations of security artifact patches are included:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-64675849-E683-44D0-BCEA-31FC47C3D34B">Patch Applications Policies (system-jazn-data.xml)</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-45665A24-4D0A-4180-A102-B753893EC7A7">Patch Data Security Grants</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-9D643714-9DA9-4299-897C-116998FB92DA">Patch Data Role (RGX) Templates in Offline Mode</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-FD755AA3-8CFA-41C7-9B7F-CF29D8B60FC7">Patch Data Security Grants and Data Role (RGX) Templates</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-D5EA1913-8F83-4532-B65D-BFEB61A59EF3">Back up the Data Security Store</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-B4FBDE0B-A3D4-4216-9D8C-F37FCBB30BCA">Recover Data Security Seed Data from the Backup</a></p>
+</li>
+</ul>
+<p>Oracle recommends to apply security patches in online mode and run the Patch Impact report to understand which artifacts are included in the patch. The Patch Impact report displays security artifacts as <code class="codeph">JAZN</code>, <code class="codeph">Data Security</code>, and <code class="codeph">RGXTEMPLATE</code>. For more information, see the <a href="GUID-D71DC177-4FBA-40A6-AE3D-457818A31382.htm#GUID-76067A2F-1963-4564-BAF0-AD9C54F23883">Patch Impact Report</a> section.</p>
+</div>
+<!-- class="section" --></div>
+<a id="OAPAT1070"></a><a id="OAPAT898"></a>
+<div class="sect3"><a id="GUID-64675849-E683-44D0-BCEA-31FC47C3D34B"></a>
+<h3 id="OAPAT-GUID-64675849-E683-44D0-BCEA-31FC47C3D34B" class="sect3"><span class="enumeration_section">10.22.1</span> Patch Applications Policies (system-jazn-data.xml)</h3>
+<div>
+<div class="section">
+<p>Oracle Fusion Applications uses the XML file, <code class="codeph">system-jazn-data.xml,</code> to package function security policies through application roles, role hierarchies, grants, and policies. Function security policies are shipped as a <code class="codeph">system-jazn-data.xml</code> file that resides in the Oracle home. After provisioning, these policies are migrated to an LDAP Policy store. Patching function security policies requires steps to absorb changes delivered by Oracle (<code class="codeph">system-jazn-data.xml</code> in a patch), changes currently deployed, which include changes by the policies in the LDAP server, and <code class="codeph">system-jazn-data.xml</code> contents previously shipped from Oracle (<code class="codeph">system-jazn-data.xml</code> in the Oracle home).</p>
+<p>Oracle Fusion Applications Manager runs a comprehensive analysis tool during patch validation to check for conflicts in applications policy changes before the patch is applied. If a change is considered <span class="italic">safe</span>, apply the patch in online mode. If a change is considered to be a <span class="italic">conflict</span>, follow the steps to apply the patch in offline mode, which includes manually resolving conflicts. The following table describes a summary of changes that are safe and those that cause a conflict:</p>
+</div>
+<!-- class="section" -->
+<div class="tblformalwide" id="GUID-64675849-E683-44D0-BCEA-31FC47C3D34B__BACIEHBE">
+<p class="titleintable">Table 10-3 Changes to Applications Policies</p>
+<table class="cellalignment296" title="Changes to Applications Policies " summary="This table describes the options available for display safe changes and changes that cause conflicts when patching">
+<thead>
+<tr class="cellalignment228">
+<th class="cellalignment270" id="d21613e3354">Type of Change</th>
+<th class="cellalignment243" id="d21613e3357">Safe - Apply Patch in Online Mode</th>
+<th class="cellalignment297" id="d21613e3360">Conflicts - Apply Patch in Offline Mode</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment228">
+<td class="cellalignment273" id="d21613e3365" headers="d21613e3354">
+<p>Additions</p>
+</td>
+<td class="cellalignment245" headers="d21613e3365 d21613e3357">
+<p>New artifacts shipped from Oracle</p>
+</td>
+<td class="cellalignment298" headers="d21613e3365 d21613e3360">
+<p>Artifacts retained by Oracle in a patch with or without modifications, but deleted by the customer</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment273" id="d21613e3375" headers="d21613e3354">
+<p>Modifications</p>
+</td>
+<td class="cellalignment245" headers="d21613e3375 d21613e3357">
+<p>Artifacts modified by Oracle in a patch but not by the customer</p>
+</td>
+<td class="cellalignment298" headers="d21613e3375 d21613e3360">
+<ul style="list-style-type: disc;">
+<li>
+<p>Artifacts modified by Oracle in a patch and by the customer</p>
+</li>
+<li>
+<p>Artifact created by both Oracle in a patch and by the customer, using the same identifier, but with some other differences</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment273" id="d21613e3390" headers="d21613e3354">
+<p>Deletions</p>
+</td>
+<td class="cellalignment245" headers="d21613e3390 d21613e3357">
+<p>All artifact deletions must be applied in offline mode</p>
+</td>
+<td class="cellalignment298" headers="d21613e3390 d21613e3360">
+<ul style="list-style-type: disc;">
+<li>
+<p>Artifacts deleted by Oracle in a patch and not touched by the customer</p>
+</li>
+<li>
+<p>Artifacts deleted by Oracle in a patch and modified by the customer</p>
+</li>
+<li>
+<p>Artifacts deleted by Oracle in a patch, and where the customer created new references to the Oracle deleted artifact in their system. Examples include but are not limited to permission and resource grants, entitlements grants, role inheritance relationships, and entitlements to resource associations</p>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="section">
+<p>This section contains information about the following methods for patching applications policies:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-91F69938-56B4-47F8-9F47-E4C06810036C">Prerequisites for Patching Applications Policies in Online Mode</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-9EE8519F-EC0D-48D0-84E1-5ABF8E38A074">Patch Applications Policies in Offline Mode using APM</a></p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+<a id="OAPAT1099"></a>
+<div class="sect4"><a id="GUID-91F69938-56B4-47F8-9F47-E4C06810036C"></a>
+<h4 id="OAPAT-GUID-91F69938-56B4-47F8-9F47-E4C06810036C" class="sect4"><span class="enumeration_section">10.22.1.1</span> Prerequisites for Patching Applications Policies in Online Mode</h4>
+<div>
+<div class="section">
+<p>Oracle recommends to patch applications policies in online mode because Patch Manager automates the deployment of the <code class="codeph">system-jazn-data.xml</code> file by running the <code class="codeph">patchPolicyStore</code> silent install command.</p>
+<p>Ensure that the following steps are completed before patching applications policies in online mode:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Validate the patch in online mode and ensure that the validation output does not contain any conflicts. For more information, consult the <a href="GUID-1D6499E1-01AA-477D-91E0-3FDCAF5EBBEC.htm#GUID-5C7B6FD4-DB72-4C71-8630-D9405F61FEAE">Validate Patches</a> section and the <a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-64675849-E683-44D0-BCEA-31FC47C3D34B__BACIEHBE" title="This table describes the options available for display safe changes and changes that cause conflicts when patching">Table 10-3</a> section.</span>
+<div>
+<p>If the validation reports any conflicts, then choose to apply all safe changes in online mode. Later, apply conflicting changes in offline mode, as described in the <a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-9EE8519F-EC0D-48D0-84E1-5ABF8E38A074">Patch Applications Policies in Offline Mode using APM</a> section.</p>
+</div>
+</li>
+<li class="stepexpand"><span>All domains that use the OPSS Policy store in Oracle Internet Directory for authorization policies must be shut down before the patch applies.</span></li>
+</ol>
+</div>
+</div>
+<a id="OAPAT1100"></a>
+<div class="sect4"><a id="GUID-9EE8519F-EC0D-48D0-84E1-5ABF8E38A074"></a>
+<h4 id="OAPAT-GUID-9EE8519F-EC0D-48D0-84E1-5ABF8E38A074" class="sect4"><span class="enumeration_section">10.22.1.2</span> Patch Applications Policies in Offline Mode using APM</h4>
+<div>
+<div class="section">All domains, except the OPSS Security Store and the domain that hosts APM, must be shut down before JAZN patching and restarted after JAZN patching. The following steps must be performed if applications policies are patched in offline mode using APM:
+<ol>
+<li>
+<p>Run the Patch Impact report to see which artifacts are included in the patch. For more information, see the&nbsp;<a href="GUID-D71DC177-4FBA-40A6-AE3D-457818A31382.htm#GUID-76067A2F-1963-4564-BAF0-AD9C54F23883">Patch Impact Report</a> section. The location where the <code class="codeph">system-jazn-data.xml</code> is located in the patch, because this location is requested in Step 4.</p>
+</li>
+<li>
+<p>Run Patch Manager to apply the patch, which copies system-jazn-data.xml from the patch to the Oracle home in offline mode.</p>
+</li>
+<li>
+<p>Log in to Authorization Policy Manager.</p>
+</li>
+<li>
+<p>Open the&nbsp;Policy Upgrade Management&nbsp;tab as follows:</p>
+<ol>
+<li>
+<p>Perform the analysis</p>
+</li>
+<li>
+<p>Before applying a patch, take off line any WebLogic domain that uses the Security Store where the application policies to be patched reside</p>
+</li>
+<li>
+<p>Backup the Security Store by using Oracle Platform Security Services <code class="codeph">migrateSecurityStore</code> to export the Security Store into a replica of it. Now the patch can be applied.</p>
+</li>
+</ol>
+When the application to patch from the pull-down&nbsp;Application&nbsp;list is selected, choices such as the following should appear:
+<ul style="list-style-type: disc;">
+<li>
+<p><code class="codeph">fscm_system-jazn-data.xml: FSCM stripe</code></p>
+</li>
+<li>
+<p><code class="codeph">crm_system-jazn-data.xml: CRM stripe</code></p>
+</li>
+<li>
+<p><code class="codeph">hcm_system-jazn-data.xml: HCM stripe</code></p>
+</li>
+<li>
+<p><code class="codeph">bip_jazn-data.xml: OBI stripe</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Analyze Patch Differences and Resolve Patch Differences and, if there are errors during this step, &nbsp;restore the backup, as mentioned in the step 4.</p>
+</li>
+<li>
+<p>Restart all Oracle Fusion Applications domains.</p>
+</li>
+<li>
+<p>Oracle delivers changes to <code class="codeph">system-jazn-data.xml</code>in its own patch. Related code change patches, if any, should be applied only after all of the steps in this section complete successfully.</p>
+</li>
+</ol>
+The following document provides additional information related to subjects discussed in this section:
+<ul style="list-style-type: disc;">
+<li>
+<p>For more information about general troubleshooting for Patch Manager, see the <a href="GUID-C9E7FC50-20BE-4F33-9760-E5B8C3F978DE.htm#GUID-C9E7FC50-20BE-4F33-9760-E5B8C3F978DE" title="This section describes how to monitor and troubleshoot Oracle Fusion Applications patching and AD Administration processing sessions.">Monitor and Troubleshoot Patches</a> section.</p>
+</li>
+<li>
+<p>For more information about security in Oracle Fusion Applications, see the <a class="olink OASAD-GUID-59E310E0-149E-4C4B-8F29-53900D4A64E4" target="_blank" href="../OASAD/GUID-59E310E0-149E-4C4B-8F29-53900D4A64E4.htm#OASAD-GUID-59E310E0-149E-4C4B-8F29-53900D4A64E4">Secure Oracle Fusion Applications</a> in the&nbsp; <span class="italic">Oracle Fusion Applications Administrator's Guide</span>.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+</div>
+<a id="OAPAT939"></a>
+<div class="sect3"><a id="GUID-45665A24-4D0A-4180-A102-B753893EC7A7"></a>
+<h3 id="OAPAT-GUID-45665A24-4D0A-4180-A102-B753893EC7A7" class="sect3"><span class="enumeration_section">10.22.2</span> Patch Data Security Grants</h3>
+<div>
+<div class="section">
+<p>Oracle recommends to patch data security grants in online mode. In both online and offline patching mode, ensure that the prerequisites are met. The topics related to Patch Data Security Grants area as follows:</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-081DEE53-4D27-481E-8AA9-3CC2A81587C2">Prerequisites for Patching Data Security Grants</a></p>
+</li>
+<li>
+<p><a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-7091B3FB-4D38-4F8A-B804-D32630C27444">Patch Data Security Grants in Offline Mode</a></p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+<a id="OAPAT1110"></a>
+<div class="sect4"><a id="GUID-081DEE53-4D27-481E-8AA9-3CC2A81587C2"></a>
+<h4 id="OAPAT-GUID-081DEE53-4D27-481E-8AA9-3CC2A81587C2" class="sect4"><span class="enumeration_section">10.22.2.1</span> Prerequisites for Patching Data Security Grants</h4>
+<div>
+<div class="section">Follow these steps to Patching Data Security Grants steps:</div>
+<!-- class="section" -->
+<ol>
+<li><span>Run the Patch Impact report to see which artifacts are included in the patch. For more information, see the <a href="GUID-D71DC177-4FBA-40A6-AE3D-457818A31382.htm#GUID-76067A2F-1963-4564-BAF0-AD9C54F23883">Patch Impact Report</a> section .</span></li>
+<li><span>Back up the data security store by using the Oracle Database data pump export tool. For more information, see the <a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-D5EA1913-8F83-4532-B65D-BFEB61A59EF3">Back up the Data Security Store</a> section.</span></li>
+</ol>
+</div>
+</div>
+<a id="OAPAT1111"></a>
+<div class="sect4"><a id="GUID-7091B3FB-4D38-4F8A-B804-D32630C27444"></a>
+<h4 id="OAPAT-GUID-7091B3FB-4D38-4F8A-B804-D32630C27444" class="sect4"><span class="enumeration_section">10.22.2.2</span> Patch Data Security Grants in Offline Mode</h4>
+<div>
+<div class="section">
+<p>Follow these steps to patch data security in Offline Mode:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li><span>Run Patch Manager to apply the seed data changes to the data security system. When data security changes are introduced in a patch, no manual steps are required in online mode to update the data security subsystem with the GUIDs of the new application roles seeded in the policy story. In offline mode or in the case of patch failure, manually run the <code class="codeph">DSDataMigrator</code> utility as described in the <a class="olink OASAD3516" target="_blank" href="../OASAD/GUID-7005EACF-AFFA-475A-BFA7-9EF535FE244F.htm#OASAD3516">Data is Missing After Migrating or Patching the Policy Store: Use DSDataMigrator to Reconcile GUIDs</a> section in the <span class="italic"><span id="GUID-7091B3FB-4D38-4F8A-B804-D32630C27444__OASAD"><cite>Oracle Fusion Applications Administrator's Guide</cite></span></span>.</span></li>
+<li><span>If there are any database errors during Step 1, such as running out of tablespace, fix the database errors that occurred and restart the patch.</span></li>
+<li><span>If the errors that occurred while applying the seed data changes are not resolved, recover the seed data from the backup export file created in Step 2 of the prerequisites.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OAPAT980"></a><a id="OAPAT978"></a>
+<div class="sect3"><a id="GUID-9D643714-9DA9-4299-897C-116998FB92DA"></a>
+<h3 id="OAPAT-GUID-9D643714-9DA9-4299-897C-116998FB92DA" class="sect3"><span class="enumeration_section">10.22.3</span> Patch Data Role (RGX) Templates in Offline Mode</h3>
+<div>
+<div class="section">
+<p>Oracle recommends to patch data role templates in online mode. When data role template changes are introduced in a patch, no manual steps are required in online mode to deploy the changed templates.</p>
+<p>Every data role template consists of two XML files. One is for data role generation and the other XML file is for data security policies generation. Both of these files must be deployed after a patch that contains changes to data role templates is applied, so that they remain synchronized with each other. Follow the steps in this section when applying a patch in offline mode that contains data role templates:</p>
+<ol>
+<li>
+<p>Run the Patch Impact report to see which artifacts are included in the patch. For more information, see the <a href="GUID-D71DC177-4FBA-40A6-AE3D-457818A31382.htm#GUID-76067A2F-1963-4564-BAF0-AD9C54F23883">Patch Impact Report</a> section. Note that the Patch Impact report refers to data role templates as <code class="codeph">RGXTEMPLATE</code>.</p>
+</li>
+<li>
+<p>The following must be running while patching data role templates:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Administration Server</p>
+</li>
+<li>
+<p>Oracle Authorization Policy Manager</p>
+</li>
+<li>
+<p>Database</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Run Patch Manager to copy the data role templates to <span class="italic"><code class="codeph">FA_ORACLE_HOME</code></span>.</p>
+</li>
+<li>
+<p>To create a save point before deploying the data role templates, use the <code class="codeph">createMetadataLabel</code> WLST command to label the MDS partition for <code class="codeph">oracle.security.apm</code>, using the following syntax:</p>
+<pre dir="ltr">
+createMetadataLabel(application, server, name)
+ 
+</pre>
+<p>The following example creates the label <code class="codeph">data_role_save_point</code> for the application <code class="codeph">oracle.security.apm</code> deployed in the Administration Server:</p>
+<pre dir="ltr">
+createMetadataLabel('oracle.security.apm', 'AdminServer', data_role_save_point')
+</pre></li>
+<li>
+<p>Follow these steps to manually deploy the data role templates using the <code class="codeph">importMetadata</code> WLST command against the Administration Server in the Common Domain for the <code class="codeph">oracle.security.apm</code> application:</p>
+<ol>
+<li>
+<p>Access the WLST shell, as follows:</p>
+<pre dir="ltr">
+(UNIX) <span class="italic">SOA_ORACLE_HOME</span>/common/bin/wlst.sh
+</pre></li>
+<li>
+<p>Connect to WebLogic Server, as follows:</p>
+<pre dir="ltr">
+&gt; connect ('<span class="italic">admin user name</span>','<span class="italic">admin user passwor</span>d','<span class="italic">URL of the AdminServer</span>')
+</pre></li>
+<li>
+<p>Deploy the data role template using the <code class="codeph">importMetadata</code> WLST command. Refer to the Diagnostics report to find the directory where the template was copied by the patch. For more information, see the <a href="GUID-C9E7FC50-20BE-4F33-9760-E5B8C3F978DE.htm#GUID-37783AF5-2B27-4F5A-9607-7D2D49CF351A">Diagnostics Report</a> section.</p>
+<p>Syntax for the <code class="codeph">importMetadata</code> command follows:</p>
+<pre dir="ltr">
+importMetadata(application='oracle.security.apm', server='<span class="italic">Name of AdminServer</span>',
+fromLocation='<span class="italic">Directory in FA_ORACLE_HOME where data role templates were copied</span>',
+docs='Path to t<span class="italic">he changed data role templates starting with APM partition</span>')
+</pre>
+<p>The following table displays the parameters required by the <code class="codeph">importMetadata</code> command:</p>
+<div class="tblformal" id="GUID-9D643714-9DA9-4299-897C-116998FB92DA__GUID-666B3B20-DA85-43D4-BFC0-8904A96CA292">
+<p class="titleintable">Table 10-4 Parameters for the importMetadata WLST Command</p>
+<table class="cellalignment252" title="Parameters for the importMetadata WLST Command" summary="Lists the parameters for the Import Metadata command">
+<thead>
+<tr class="cellalignment228">
+<th class="cellalignment299" id="d21613e3953">Parameter Name</th>
+<th class="cellalignment300" id="d21613e3956">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment228">
+<td class="cellalignment301" id="d21613e3961" headers="d21613e3953">
+<p>application</p>
+</td>
+<td class="cellalignment302" headers="d21613e3961 d21613e3956">
+<p>Enter the value of <code class="codeph">oracle.security.apm</code></p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment301" id="d21613e3970" headers="d21613e3953">
+<p>server</p>
+</td>
+<td class="cellalignment302" headers="d21613e3970 d21613e3956">
+<p>Enter the name of theAdministration Server</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment301" id="d21613e3977" headers="d21613e3953">
+<p>fromLocation</p>
+</td>
+<td class="cellalignment302" headers="d21613e3977 d21613e3956">
+<p>Enter the absolute path to the directory in <span class="italic"><code class="codeph">FA_ORACLE_HOME</code></span> where the patch copied the data role templates. The path must not include the APM partition, because the APM partition is included in the next parameter, <code class="codeph">docs</code>. The Diagnostics report provides the full path and file name in <span class="italic"><code class="codeph">FA_ORACLE_HOME</code></span> for each data role template that was copied from the patch</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment301" id="d21613e3995" headers="d21613e3953">
+<p>docs</p>
+</td>
+<td class="cellalignment302" headers="d21613e3995 d21613e3956">
+<p>Enter the directory for the APM partition, starting with <code class="codeph">/oracle/apps/apm</code>, followed by the remainder of the path, which includes the data role template itself</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p><span class="bold">Example for Importing the FinancialAssetBook.xml data role template</span></p>
+<p>In this example, the <code class="codeph">FinancialAssetBook.xml</code> data role template is located in this directory:</p>
+<pre dir="ltr">
+(UNIX)FA_ORACLE_HOME/fin/fa/apm/oracle/apps/apm/fin/fa/rgx/template
+</pre>
+<p>Example of the <code class="codeph">importMetadata</code> command:</p>
+<pre dir="ltr">
+(UNIX)
+importMetadata(application='oracle.security.apm', server='AdminServer',
+fromLocation='FA_ORACLE_HOME/fin/fa/apm',
+docs='/oracle/apps/apm/fin/fa/rgx/template/FinancialAssetBook.xml'
+</pre>
+<p><span class="bold">Example for Importing multiple XML files in one command by using a wild card in the docs parameter</span></p>
+<p>The XML file for data role generation is located in this directory:</p>
+<pre dir="ltr">
+(UNIX) /net/machine1/oracle/apps/oracle/fin/gl/rgx/template/GeneralLedger.xml
+</pre>
+<p>The XML file for data security policies generation is located in this directory:</p>
+<pre dir="ltr">
+(UNIX) /net/machine1/oracle/apps/oracle/fin/gl/rgx/dataSecPolicy/fndDataSecProvider/GeneralLedger.xml
+</pre>
+<p>The following command imports both XML files at the same time:</p>
+<pre dir="ltr">
+(UNIX) importMetadata(application='oracle.security.apm', server='AdminServer',
+fromLocation='/net/machine1', docs='/oracle/apps/oracle/fin/gl/**'
+</pre></li>
+</ol>
+</li>
+<li>
+<p>If there are any errors in Step 5, follow these steps to recover by restoring the data role templates. Proceed to Step 7 if there are no errors in Step 5.</p>
+<ol>
+<li>
+<p>Promote the MDS label created in Step 4 using the following command:</p>
+<pre dir="ltr">
+promoteMetadataLabel(application, server, name)
+</pre>
+<p>The following example promotes the metadata label <code class="codeph">data_role_save_point</code> to the <code class="codeph">oracle.security.apm</code> application deployed in the Administration Server:</p>
+<pre dir="ltr">
+promoteMetadataLabel('oracle.security.apm', 'AdminServer','data_role_save_point')
+</pre></li>
+<li>
+<p>Delete any new data role templates that were delivered in the patch, using the following command:</p>
+<pre dir="ltr">
+deleteMetadataLabel(application, server, name)
+</pre>
+<p>The following example deletes the data role templates in the metadata label <code class="codeph">data_role_save_point</code> from the <code class="codeph">oracle.security.apm</code> application deployed in the Administration Server:</p>
+<pre dir="ltr">
+deleteMetadataLabel('oracle.security.apm','AdminServer','data_role_save_point')
+</pre></li>
+</ol>
+</li>
+<li>
+<p>Assuming Steps 3 through 5 are successful, Oracle recommends to preview the execution of the changed data role templates. Run the preview from the <span class="bold">Summary</span> tab after the data role template is opened from the APM console.</p>
+<p>If the preview results are not correct, follow the recovery described in Step 6 to restore the data role templates. Otherwise, proceed to Step 8.</p>
+</li>
+<li>
+<p>Run the changed data role template and confirm that the data roles and grants are generated correctly. Use the APM role templates summary for reconciliation of the generated artifacts.</p>
+</li>
+<li>
+<p>If all steps are successful, delete the MDS label created in Step 4, using the <code class="codeph">deleteMetaDataLabels</code> command:</p>
+<pre dir="ltr">
+deleteMetadataLabel(application, server, name)
+</pre>
+<p>The following example deletes the metadata label <code class="codeph">data_role_save_point</code> from the <code class="codeph">oracle.security.apm</code> application deployed in the Administration Server:</p>
+<pre dir="ltr">
+deleteMetadataLabel('oracle.security.apm','AdminServer','data_role_save_point')
+</pre></li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT976"></a><a id="OAPAT750"></a>
+<div class="sect3"><a id="GUID-FD755AA3-8CFA-41C7-9B7F-CF29D8B60FC7"></a>
+<h3 id="OAPAT-GUID-FD755AA3-8CFA-41C7-9B7F-CF29D8B60FC7" class="sect3"><span class="enumeration_section">10.22.4</span> Patch Data Security Grants and Data Role (RGX) Templates</h3>
+<div>
+<div class="section">
+<p>Oracle recommends to patch data security grants in online mode. Follow the steps in this section when a patch contains both data security grants and data role templates. Every data role template consists of two XML files. One is for data role generation and the other XML file is for data security policies generation. Both of these files must be manually deployed after a patch is applied, so they remain synchronized with each other.</p>
+<p>Perform the following steps to patch data security grants and data role templates:</p>
+<ol>
+<li>
+<p>Run the Patch Impact report to see which artifacts are included in the patch. Note that the Patch Impact report refers to data role templates as <code class="codeph">RGXTEMPLATE</code>.</p>
+</li>
+<li>
+<p>Back up the security store by using the Oracle Database data pump export tool, as described in the <a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-D5EA1913-8F83-4532-B65D-BFEB61A59EF3">Back up the Data Security Store</a> section.</p>
+</li>
+<li>
+<p>The following must be running when patching data security grants and data role templates:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>OPSS Security Store</p>
+</li>
+<li>
+<p>Administration Server</p>
+</li>
+<li>
+<p>Oracle Authorization Policy Manager</p>
+</li>
+<li>
+<p>Database</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Run Patch Manager to apply the seed data changes to the data security system and to copy the data role templates to <span class="italic"><code class="codeph">FA_ORACLE_HOME</code></span>.</p>
+<p>When data security changes are introduced in a patch, no manual steps are required in online mode to update the data security subsystem with the GUIDs of the new application roles seeded in the policy story. In offline patching mode or in the case of patch failure, manually run the <code class="codeph">DSDataMigrator</code> utility as described in <a class="olink OASAD3516" target="_blank" href="../OASAD/GUID-7005EACF-AFFA-475A-BFA7-9EF535FE244F.htm#OASAD3516">Data is Missing After Migrating or Patching the Policy Store: Use DSDataMigrator to Reconcile GUIDs</a> in the <span class="italic"><span id="GUID-FD755AA3-8CFA-41C7-9B7F-CF29D8B60FC7__OASAD"><cite>Oracle Fusion Applications Administrator's Guide</cite></span></span>.</p>
+</li>
+<li>
+<p>If there are any database errors during Step 4, such as running out of tablespace, fix the database errors that occurred and restart the patch.</p>
+<p>If the errors that occurred while applying the seed data changes are not solved, recover the seed data from the backup export file created in Step 2.</p>
+</li>
+<li>
+<p>To create a save point before deploying the data role templates, use the <code class="codeph">createMetadataLabel</code> WLST command to label the MDS partition for <code class="codeph">oracle.security.apm</code>, using the following syntax:</p>
+<pre dir="ltr">
+createMetadataLabel(application, server, name)
+ 
+</pre>
+<p>The following example creates the label <code class="codeph">data_role_save_point</code> for the application <code class="codeph">oracle.security.apm</code> deployed in the Administration Server:</p>
+<pre dir="ltr">
+createMetadataLabel('oracle.security.apm', 'AdminServer', data_role_save_point')
+</pre></li>
+<li>
+<p>Follow these steps to manually deploy the data role templates using the <code class="codeph">importMetadata</code> WLST command against the Administration Server in the Common Domain for the <code class="codeph">oracle.security.apm</code> application:</p>
+<ol>
+<li>
+<p>Access the WLST shell, as follows:</p>
+<pre dir="ltr">
+(UNIX) <span class="italic">SOA_ORACLE_HOME</span>/common/bin/wlst.sh
+</pre></li>
+<li>
+<p>Connect to WebLogic Server, as follows:</p>
+<pre dir="ltr">
+&gt; connect ('<span class="italic">admin user name</span>','<span class="italic">admin user passwor</span>d','<span class="italic">URL of the AdminServer</span>')
+</pre></li>
+<li>
+<p>Deploy the data role template using the following <code class="codeph">importMetadata</code> WLST command. Refer to the Diagnostics report to find the directory where the template was copied, as follows:</p>
+<pre dir="ltr">
+importMetadata(application='oracle.security.apm', server='<span class="italic">Name of AdminServer</span>',
+fromLocation='<span class="italic">Directory in FA_ORACLE_HOME where data role templates were copied</span>',
+docs='Path to t<span class="italic">he changed data role templates starting with APM partition</span>')
+</pre>
+<p>The following table displays the parameters required by the <code class="codeph">importMetadata</code> command:</p>
+<div class="tblformal" id="GUID-FD755AA3-8CFA-41C7-9B7F-CF29D8B60FC7__GUID-0FEA9978-CE51-4827-91DF-F42307D31777">
+<p class="titleintable">Table 10-5 Parameters for the importMetadata WLST Command</p>
+<table class="cellalignment252" title="Parameters for the importMetadata WLST Command" summary="This table describes the lists the parameters for the Import Metadata command">
+<thead>
+<tr class="cellalignment228">
+<th class="cellalignment299" id="d21613e4286">Parameter Name</th>
+<th class="cellalignment300" id="d21613e4289">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment228">
+<td class="cellalignment301" id="d21613e4294" headers="d21613e4286">
+<p>application</p>
+</td>
+<td class="cellalignment302" headers="d21613e4294 d21613e4289">
+<p>Enter the value of <code class="codeph">oracle.security.apm</code>.</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment301" id="d21613e4304" headers="d21613e4286">
+<p>server</p>
+</td>
+<td class="cellalignment302" headers="d21613e4304 d21613e4289">
+<p>Enter the name of the Administration Server</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment301" id="d21613e4311" headers="d21613e4286">
+<p>fromLocation</p>
+</td>
+<td class="cellalignment302" headers="d21613e4311 d21613e4289">
+<p>Enter the absolute path to the directory in <span class="italic"><code class="codeph">FA_ORACLE_HOME</code></span> where the patch copied the data role templates. The path must not include the APM partition, because the APM partition is included in the next parameter, <code class="codeph">docs</code>. The Diagnostics report provides the full path and file name in <span class="italic"><code class="codeph">FA_ORACLE_HOME</code></span> for each data role template that was copied from the patch</p>
+</td>
+</tr>
+<tr class="cellalignment228">
+<td class="cellalignment301" id="d21613e4329" headers="d21613e4286">
+<p>docs</p>
+</td>
+<td class="cellalignment302" headers="d21613e4329 d21613e4289">
+<p>Enter the directory for the APM partition, starting with <code class="codeph">/oracle/apps/apm</code>, followed by the remainder of the path, which includes the data role template itself</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>Example of Importing the Financial AssetBook.xml data role template:</p>
+<pre dir="ltr">
+(UNIX)<span class="italic">FA_ORACLE_HOME</span>/fin/fa/apm/oracle/apps/apm/fin/fa/rgx/template
+</pre>
+<p>Example of the <span class="bold"><code class="codeph">importMetadata</code></span> command:</p>
+<pre dir="ltr">
+(UNIX)
+importMetadata(application='oracle.security.apm', server='AdminServer',
+fromLocation='<span class="italic">FA_ORACLE_HOME</span>/fin/fa/apm',
+docs='/oracle/apps/apm/fin/fa/rgx/template/FinancialAssetBook.xml'
+</pre>
+<p>Example of importing multiple XML files in one command by using a wild card in the doc parameter. The XML file for data role generation is located in this directory:</p>
+<pre dir="ltr">
+(UNIX) /net/machine1/oracle/apps/oracle/fin/gl/rgx/template/GeneralLedger.xml
+</pre>
+<p>The XML file for data security policies generation is located in this directory:</p>
+<pre dir="ltr">
+(UNIX) /net/machine1/oracle/apps/oracle/fin/gl/rgx/dataSecPolicy/fndDataSecProvider/GeneralLedger.xml
+</pre>
+<p>The following command imports both XML files at the same time:</p>
+<pre dir="ltr">
+(UNIX) importMetadata(application='oracle.security.apm', server='AdminServer',
+fromLocation='/net/machine1', docs='/oracle/apps/oracle/fin/gl/**'
+</pre></li>
+</ol>
+<p>For more information, see the <a href="GUID-C9E7FC50-20BE-4F33-9760-E5B8C3F978DE.htm#GUID-37783AF5-2B27-4F5A-9607-7D2D49CF351A">Diagnostics Report</a> section.</p>
+</li>
+<li>
+<p>If there are any errors in Step 7, follow these steps to recover by restoring the data role templates. Otherwise, proceed to Step 9.</p>
+<ol>
+<li>
+<p>Restore the security seed data from the backup created in Step 2. For more information, see the <a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-B4FBDE0B-A3D4-4216-9D8C-F37FCBB30BCA">Recovery Data Security Seed Data from the Backup</a> section.</p>
+</li>
+<li>
+<p>Promote the MDS label created in Step 6 using the following command:</p>
+<pre dir="ltr">
+promoteMetadataLabel(application, server, name)
+</pre>
+<p>The following example promotes the metadata label <code class="codeph">data_role_save_point</code> to the <code class="codeph">oracle.security.apm</code> application deployed in the Administration Server:</p>
+<pre dir="ltr">
+promoteMetadataLabel('oracle.security.apm', 'AdminServer','data_role_save_point')
+</pre></li>
+<li>
+<p>Delete any new data role templates that were delivered in the patch, using the following command:</p>
+<pre dir="ltr">
+deleteMetadataLabel(application, server, name)
+</pre>
+<p>The following example deletes the data role templates in the metadata label <code class="codeph">data_role_save_point</code> from the <code class="codeph">oracle.security.apm</code> application deployed in the Administration Server:</p>
+<pre dir="ltr">
+deleteMetadataLabel('oracle.security.apm','AdminServer','data_role_save_point')
+</pre></li>
+</ol>
+</li>
+<li>
+<p>Assuming Steps 2 through 7 are successful, Oracle recommends to preview the execution of the changed data role templates. Run the preview from the <span class="bold">Summary</span> tab after the data role template is opened from the APM console.</p>
+<p>If the preview results are not correct, follow the recovery described in Step 8 to restore the seed grants and data role templates. Otherwise, proceed to Step 10.</p>
+</li>
+<li>
+<p>Run the changed data role template and confirm that the data roles and grants are generated correctly. Use the APM role templates summary for reconciliation of the generated artifacts.</p>
+<p>If the results are not correct, restore the database from the backup created in Step 2. For more information, see the <a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-B4FBDE0B-A3D4-4216-9D8C-F37FCBB30BCA">Recovery Data Security Seed Data from the Backup</a> section.</p>
+</li>
+<li>
+<p>If all steps are successful, delete the MDS label created in Step 6, using the <code class="codeph">deleteMetaDataLabels</code> command:</p>
+<pre dir="ltr">
+deleteMetadataLabel(application, server, name)
+</pre>
+<p>The following example deletes the metadata label <code class="codeph">data_role_save_point</code> from the <code class="codeph">oracle.security.apm</code> application deployed in the Administration Server:</p>
+<pre dir="ltr">
+deleteMetadataLabel('oracle.security.apm','AdminServer','data_role_save_point')
+</pre></li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT983"></a>
+<div class="sect3"><a id="GUID-D5EA1913-8F83-4532-B65D-BFEB61A59EF3"></a>
+<h3 id="OAPAT-GUID-D5EA1913-8F83-4532-B65D-BFEB61A59EF3" class="sect3"><span class="enumeration_section">10.22.5</span> Back up the Data Security Store</h3>
+<div>
+<div class="section">
+<p>Back up the data security store by using the Oracle Database data pump export tool. Before running the export tool, ensure that the <code class="codeph">TWO_TASK</code> environment variable is set to point to the Oracle Fusion Applications instance. Oracle Fusion Applications database user name and password are requested. Perform the following steps for Back up the Data Security Store:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>For setting any environment variable, run the <code class="codeph">adsetenv</code> script to generate the <code class="codeph">APPSORA.env</code> file, which when sourced, sets all environment variables:</span>
+<div>
+<pre dir="ltr">
+(UNIX)
+sh adsetenv.sh
+source APPSORA.env
+echo $TWO_TASK
+</pre></div>
+</li>
+<li class="stepexpand"><span>Run the data pump export tool as follows:</span>
+<div>
+<pre dir="ltr">
+ORACLE_HOME/bin/expdp directory=<span class="italic">local_directory</span> dumpfile=fndds1.dmp tables='(FND_GRANTS,
+FND_MENUS_TL,FND_MENUS,FND_MENU_ENTRIES,FND_COMPILED_MENU_FUNCTIONS,
+FND_FORM_FUNCTIONS_TL,FND_FORM_FUNCTIONS,FND_OBJECT_INSTANCE_SETS_TL,
+FND_OBJECT_INSTANCE_SETS,FND_OBJECTS_TL,FND_OBJECTS)' NOLOGFILE=y
+</pre></div>
+</li>
+</ol>
+<div class="section">
+<p>The following document provides additional information related to subjects discussed in this section:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>For more information about Oracle Data Pump, see the <a href="http://www.oracle.com/technetwork/database/enterprise-edition/data-pump-overview-084963.html" target="_blank">Oracle Data Pump Overview</a> page.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT984"></a>
+<div class="sect3"><a id="GUID-B4FBDE0B-A3D4-4216-9D8C-F37FCBB30BCA"></a>
+<h3 id="OAPAT-GUID-B4FBDE0B-A3D4-4216-9D8C-F37FCBB30BCA" class="sect3"><span class="enumeration_section">10.22.6</span> Recovery Data Security Seed Data from the Backup</h3>
+<div>
+<div class="section">
+<p>Follow these steps only if a data security seed data patch failed and there is no way to resolve the failure and reapply the patch:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Remove the existing data security grant data from the data security tables. Connect to the <code class="codeph">fusion</code> account using SQL*Plus and run the following commands:</span>
+<div>
+<pre dir="ltr">
+truncate table fusion.fnd_objects; 
+truncate table fusion.fnd_objects_tl; 
+truncate table fusion.fnd_object_instance_sets; 
+truncate table fusion.fnd_object_instance_sets_tl; 
+truncate table fusion.fnd_form_functions; 
+truncate table fusion.fnd_form_functions_tl; 
+truncate table fusion.fnd_menus; 
+truncate table fusion.fnd_menus_tl; 
+truncate table fusion.fnd_menu_entries; 
+truncate table fusion.fnd_grants; 
+</pre></div>
+</li>
+<li class="stepexpand"><span>Import the data security seed data from the backup export file previously created, as follows:</span>
+<div>
+<pre dir="ltr">
+ORACLE_HOME/bin/impdp dumpfile=fndds1.dmp tables='(FND_GRANTS,
+FND_MENUS_TL,FND_MENUS,FND_MENU_ENTRIES,FND_COMPILED_MENU_FUNCTIONS,
+FND_FORM_FUNCTIONS_TL,FND_FORM_FUNCTIONS,FND_OBJECT_INSTANCE_SETS_TL,
+FND_OBJECT_INSTANCE_SETS,FND_OBJECTS_TL,FND_OBJECTS)' 
+NOLOGFILE=y
+</pre></div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OAPAT645"></a>
+<div class="sect2"><a id="GUID-78A805A9-910B-4571-BD23-2D24014659B0"></a>
+<h2 id="OAPAT-GUID-78A805A9-910B-4571-BD23-2D24014659B0" class="sect2"><span class="enumeration_section">10.23</span> Patch Service-Oriented Architecture (SOA) Composites</h2>
+<div>
+<div class="section">
+<p>When updates to SOA composites are introduced in a patch, no manual steps are required if <span class="italic">both</span> of the following conditions are met:</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>SOA composite customizations are not available in Oracle JDeveloper. If customizations exist, follow the steps in the <a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-4E760B38-A921-4428-A90D-BA6162F6AFE9">Preserve SOA Composite JDeveloper Customizations Before Applying a Patch</a> section.</p>
+</li>
+<li>
+<p>Apply the patch in online mode and no validation or deployment errors occurred during the application of the patch that contains SOA composites. Oracle recommends not to use offline mode when a patch contains SOA composites. If the patch fails while attempting to deploy a SOA composite, manually deploy the composite. For more information, see the <a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-DFD04F83-F7D9-422E-B0B1-55B2F6870AC9">Manually Deploy SOA Composites</a> section.</p>
+</li>
+</ul>
+<p>For information about resolving validation errors, see the <a href="GUID-C9E7FC50-20BE-4F33-9760-E5B8C3F978DE.htm#GUID-A37FADC9-C708-481D-AADF-4BA091A4D02D">Troubleshoot SOA Composite Validation Failures</a> section. For information about recovering from deployment errors, see the <a href="GUID-C9E7FC50-20BE-4F33-9760-E5B8C3F978DE.htm#GUID-64B69A1A-321D-43A6-93A2-987FCA14AF92">Troubleshoot SOA Composite Deployment Failures</a> section.</p>
+<p>If SOA composites used by Oracle Fusion Applications are customized in JDeveloper, preserve these customizations before applying a patch that includes the next revision of the composite. Other customizations to the SOA composite being patched are automatically merged by the SOA deployment command called during patching. These runtime customizations, such as design time and run-time (DT@RT) changes or property changes, do not require a manual merge process.</p>
+<p>What must be running when patching SOA composite:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Administration Server</p>
+</li>
+<li>
+<p>SOA-INFRA Managed Servers</p>
+</li>
+<li>
+<p>Database</p>
+</li>
+<li>
+<p>At least one server must be running the Policy Manager component from the Web Services Manager (WSM-PM) application. Typically in an Oracle Fusion Applications environment, this is the Common Cluster, for example in the <code class="codeph">CRMDomain</code>, it is the <code class="codeph">CRMCommonCluster</code>. Find out which server is running by logging in to Fusion Applications Control to verify that the application named <code class="codeph">wsm-pm</code> is running with an <code class="codeph">OK</code> or <span class="bold">green</span> status.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+<a id="OAPAT829"></a>
+<div class="sect3"><a id="GUID-4E760B38-A921-4428-A90D-BA6162F6AFE9"></a>
+<h3 id="OAPAT-GUID-4E760B38-A921-4428-A90D-BA6162F6AFE9" class="sect3"><span class="enumeration_section">10.23.1</span> Preserve SOA Composite JDeveloper Customizations Before Apply a Patch</h3>
+<div>
+<div class="section">
+<p>If JDeveloper customizations were performed, not supported by OPatch, to a SOA composite and then the composite to the SOA runtime is deployed, subsequent patches are not directly deployable. The Patch Manager validation process returns the appropriate error, which instructs to take the newer version of the composite that is in the patch, redo the same customizations that were performed on the previous version of the composite, and then apply the patch in online mode to deploy the composite.</p>
+<p>Perform the following steps to preserve SOA composite JDeveloper customizations before applying a patch:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li><span>Run Patch Manager validation in online mode to determine which composites have JDeveloper customizations. If any customizations are detected, the validation results display the SOA composite name, its location in the <code class="codeph">patch_top</code> directory, and the requirement to merge JDeveloper customizations into the <code class="codeph">sca_*.jar</code> file in the <code class="codeph">patch_top</code> directory before applying the patch in online mode. For more information, see the <a href="GUID-1D6499E1-01AA-477D-91E0-3FDCAF5EBBEC.htm#GUID-5C7B6FD4-DB72-4C71-8630-D9405F61FEAE">Validate Patches</a> section. Run Patch Manager validation before applying every patch, especially patches that contain SOA composites. If the JDeveloper customizations are not merged into the <code class="codeph">sca_*.jar</code> file in the <code class="codeph">patch_top</code> directory, the deployment of the SOA composite that was changed inside the patch will fail when applying the patch.</span></li>
+<li><span>Open the custom SOA workspace and the customized version of the Fusion Applications SOA composite in JDeveloper using "Oracle Fusion Applications Developer".</span></li>
+<li><span>Import the composite <code class="codeph">sca_*.jar</code> file from the <code class="codeph">patch_top</code> directory into the project, for example revision <code class="codeph">yy_patchnum</code>, in JDeveloper. Make note of this revision number in the deployment window because it will be needed it in Step 8. Find the revision number on the Patch Impact report.</span></li>
+<li><span>Restart JDeveloper in the Oracle Fusion Applications Administrator Customization role.</span></li>
+<li><span>Verify that there are no errors in JDeveloper.</span></li>
+<li><span>Verify that the changes introduced in both the customized version and the patched version are present.</span></li>
+<li><span>Right-click the composite project in the Application Navigator, select <span class="bold">Deploy</span>, select the composite, click <span class="bold">Deploy to SAR</span>, and click <span class="bold">Next</span>.</span></li>
+<li><span>Manually change the value in <span class="bold">New Revision ID</span> to the revision from Step 3, for example, <code class="codeph">yy_patchnum</code>, and click <span class="bold">Finish</span>.</span></li>
+<li><span>If the deployment folder is set to a location different from that of the <code class="codeph">patch_top</code> directory, copy and replace the JAR in the patch under <span class="italic"><code class="codeph">patch_top</code></span><code class="codeph">/patch_mw/files/</code><span class="italic"><code class="codeph">productfamily</code></span>/deploy. If the file name is different, rename it to the original name.</span></li>
+<li><span>Now validate and apply this patch successfully using Patch Manager in online mode.</span></li>
+</ol>
+<div class="section">For more information about customizing SOA composites, see the <span class="italic">Oracle Fusion Applications Extensibility Guide for Developers Guide</span> .</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT830"></a>
+<div class="sect3"><a id="GUID-DFD04F83-F7D9-422E-B0B1-55B2F6870AC9"></a>
+<h3 id="OAPAT-GUID-DFD04F83-F7D9-422E-B0B1-55B2F6870AC9" class="sect3"><span class="enumeration_section">10.23.2</span> Manually Deploying SOA Composites</h3>
+<div>
+<div class="section">
+<p>If a customized SOA composite deployment fails during patching, manually deploy this composite using WLST commands. Also manually deploy SOA composites if a patch is applied in offline mode that contains SOA composites.</p>
+<p>Perform the following steps to apply a SOA composite manually after a deployment failure or when patching in offline mode:</p>
+<div class="p">
+<blockquote>
+<p>In the following steps, the example composite, <code class="codeph">FinAp,</code> is patched from revision 1.0 to revision 2.0 and the SAR file of revision 2.0 is in <span class="italic"><code class="codeph">FA_ORACLE_HOME</code></span><code class="codeph">/crm/deploy/sca_FinAp_rev2.0.jar</code>. Note that the parameters are for illustration purposes only.</p>
+</blockquote>
+</div>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Refer to the <a href="GUID-C9E7FC50-20BE-4F33-9760-E5B8C3F978DE.htm#GUID-37783AF5-2B27-4F5A-9607-7D2D49CF351A">Diagnostics Report</a> section, to find the name and location of the <code class="codeph">sca_*.jar</code> file that was copied to <span class="italic"><code class="codeph">FA_ORACLE_HOME</code></span> by Patch Manager.</span></li>
+<li class="stepexpand"><span>If the previous revision contained JDeveloper customizations, ensure that the patched revision is deployed with the merged JDeveloper customizations. Using the <code class="codeph">sca_*.jar</code> file from Step 1, follow the JDeveloper customization merge instructions that are described in the <a href="GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#GUID-4E760B38-A921-4428-A90D-BA6162F6AFE9">Preserve SOA Composite JDeveloper Customizations Before Apply a Patch</a> section. Then use the merged sca_*.jar for Step 3.</span></li>
+<li class="stepexpand"><span>Deploy the patched composite using the single patch composite command, as follows:</span>
+<div>
+<pre dir="ltr">
+sca_patchComposite('SOA-Infra URL', user, password, 
+'/FA_ORACLE_HOME/crm/deploy//sca_FinAprev2.0.jar', mergeLogFile='/tmp/merge-log.txt')
+</pre></div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<a id="OAPAT940"></a>
+<div class="sect2"><a id="GUID-3C85DAA4-EA43-492B-8F03-4897082C74CE"></a>
+<h2 id="OAPAT-GUID-3C85DAA4-EA43-492B-8F03-4897082C74CE" class="sect2"><span class="enumeration_section">10.24</span> Patch SOAEXTENSION Artifacts</h2>
+<div>
+<p>When updates to SOAEXTENSION artifacts are introduced in a patch, stop and restart all SOA-INFRA Managed Servers in all domains. Both online and offline patching require this step.</p>
+</div>
+</div>
+<a id="OAPAT732"></a>
+<div class="sect2"><a id="GUID-2F67BF68-6D5D-4861-BAD3-E62A2BB23F17"></a>
+<h2 id="OAPAT-GUID-2F67BF68-6D5D-4861-BAD3-E62A2BB23F17" class="sect2"><span class="enumeration_section">10.25</span> Patch SOA Resource Bundles</h2>
+<div>
+<div class="section">
+<p>Oracle recommends to patch SOA resource bundles in online mode. No manual steps are required when patching SOA resource bundles in online mode unless the SOA resource bundle JAR file contains translatable strings for human task-mapped attribute labels and standard view names, as indicated by a JAR name that ends with <code class="codeph">FlexFieldSoaResource.jar</code>. In offline mode, in case of patch failure, or if the patch contains human task-mapped attribute labels and standard view names, manually deploy the SOA resource bundle and restart the SOA composites that depend on the SOA resource bundle.</p>
+<p>The following must be running when SOA resource bundles are patched:</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<ul style="list-style-type: disc;">
+<li>
+<p>Administration Server</p>
+</li>
+<li>
+<p>SOA-INFRA Managed Servers</p>
+</li>
+<li>
+<p>Node manager</p>
+</li>
+<li>
+<p>Database</p>
+</li>
+</ul>
+<p>After applying the patch, refer to the <a href="GUID-C9E7FC50-20BE-4F33-9760-E5B8C3F978DE.htm#GUID-37783AF5-2B27-4F5A-9607-7D2D49CF351A">Diagnostics Report</a> section to get a complete list of composites that depend on each SOA resource bundle and also the domains.</p>
+<p><span class="bold">Manually Deployment SOA Resource Bundle JAR Files</span></p>
+<p>Perform the following steps to manually deploy SOA resource Bubdle JAR files:</p>
+<ol>
+<li>
+<p>From the Diagnostics report for patch validation, review the list of SOA resource bundle JAR files included in the patch and the domain where they should be deployed. Use the <code class="codeph">ant-sca-deploy.xml</code> script to deploy the appropriate SOA cluster for each JAR included in the patch.</p>
+<p>Set the <code class="codeph">ANT_HOME</code> variable:</p>
+<pre dir="ltr">
+ANT_HOME=<span class="italic">FA_ORACLE_HOME</span>/modules/org.apache.ant_1.7.1; export ANT_HOME
+</pre>
+<p>Deploy the appropriate cluster:</p>
+<pre dir="ltr">
+ant -f <span class="italic">Middleware_Home/SOA_Suite_Home</span>/bin/ant-sca-deploy.xml
+     -DserverURL=<span class="italic">URL_to_SOA_server</span>
+     -DsarLocation=<span class="italic">Location_of_resource_bundle_jar under FA_ORACLE_HOME</span>
+     -Duser=weblogic
+     -Dpassword=<span class="italic">weblogic_password</span>
+</pre></li>
+<li>
+<p>The Diagnostics report lists the composite affected by the patch and the domain where the composite is deployed. Follow these steps for each affected composite:</p>
+<ol>
+<li>
+<p>Log in to in the domain where the composite is deployed.</p>
+</li>
+<li>
+<p>Go to <span class="italic"><span class="bold">domain name,</span></span> then <span class="bold">SOA</span>, then <span class="italic"><span class="bold">soa-infra</span></span> (SOA cluster name), then <span class="bold">default</span>, and then <span class="italic"><span class="bold">composite name.</span></span></p>
+</li>
+<li>
+<p>Click <span class="bold">Shut Down</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Yes</span> in the confirmation window.</p>
+</li>
+<li>
+<p>Click <span class="bold">Start Up</span>.</p>
+</li>
+<li>
+<p>Click <span class="bold">Yes</span> in the confirmation window.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Review the list of SOA resource bundle JAR files being patched. If a patch contains a JAR file with a name which starts with "jar_" and ends with "FlexFieldSoaResource.jar", for example, <code class="codeph">jar_AppCmmnCompNotesFlexFieldSoaResource.jar</code>, perform the following steps to ensure that the patched resource bundle is reflected in the Oracle BPM Worklist. These steps describe how to set the <code class="codeph">WorkflowCustomClasspathURL</code> MBean property to null, and then set it to <code class="codeph">oramds:///apps/resource/</code> and apply the changes in Fusion Applications Control.</p>
+<ol>
+<li>
+<p>Log in to Fusion Applications Control in the domain where the JAR was deployed.</p>
+</li>
+<li>
+<p>Go to <span class="bold">SOA</span>, then <span class="bold">soa-infra</span> in the left-hand panel. Go to <span class="bold">SOA Infrastructure</span>, then <span class="bold">Administration</span>, and then <span class="bold">System MBean Browser</span> in the right-hand panel.</p>
+</li>
+<li>
+<p>Go to <span class="bold">Application Defined MBeans</span>, then <span class="bold">oracle.as.soainfra.config</span>, then <span class="bold">Server:</span> <span class="italic"><span class="bold">SOA cluster name</span></span>, then <span class="bold">WorkflowConfig</span> and then <span class="bold">human-workflow</span>.</p>
+</li>
+<li>
+<p>Remove the contents in the <span class="bold">Value</span> column of the <code class="codeph">WorkflowCustomClasspathURL</code> attribute.</p>
+</li>
+<li>
+<p>Click <span class="bold">Apply</span>.</p>
+</li>
+<li>
+<p>Enter <code class="codeph">oramds:///apps/resource</code>/ in the <span class="bold">Value</span> column of the <code class="codeph">WorkflowCustomClasspathURL</code> attribute.</p>
+</li>
+<li>
+<p>Click <span class="bold">Apply</span>.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>The following documents provide additional information related to subjects discussed in this section:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>For more information about the <code class="codeph">ant-sca-deploy.xml</code> script that is used to deploy the SOA resource bundle, see "How to Manage SOA Composite Applications with ant Scripts" in the <span class="italic"><span id="GUID-2F67BF68-6D5D-4861-BAD3-E62A2BB23F17__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</li>
+<li>
+<p>For information about shutting down and starting up SOA composites in Oracle Enterprise Manager, see "Managing the State of Deployed SOA Composite Applications" in the <span class="italic"><span id="GUID-2F67BF68-6D5D-4861-BAD3-E62A2BB23F17__SOAAG"><cite>Administering Oracle SOA Suite and Oracle Business Process Management Suite</cite></span></span>.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT733"></a>
+<div class="sect2"><a id="GUID-C7D2B8D1-F540-40EE-8DD8-D6B8CDB18B25"></a>
+<h2 id="OAPAT-GUID-C7D2B8D1-F540-40EE-8DD8-D6B8CDB18B25" class="sect2"><span class="enumeration_section">10.26</span> Patch Sales Prediction Engine (SPE) Inline Service Artifacts</h2>
+<div>
+<div class="section">
+<p>Oracle recommends to patch data role templates in online mode. When updates to SPE Inline Service artifacts are introduced in a patch, no manual steps are required in online mode to deploy changed SPE artifacts.</p>
+<p>Updates to SPE Inline Service are delivered in the <code class="codeph">SPE_ILS.zip</code> file and the <code class="codeph">AdfZspPredictionModuleSupportUtilities.jar</code> file. This section contains information about manual deployment of SPE artifacts, in the case of offline patching or failure during online patching.</p>
+<p>SPE artifacts are provisioned only when Oracle Fusion CRM Performance Management is provisioned. If CRM Performance Management is not provisioned in the environment, do not deploy SPE artifacts.</p>
+<p><span class="bold">Manually Deploying SPE Artifacts After Applying the Patch</span></p>
+<p>Perform the following steps:</p>
+<ol>
+<li>
+<p>JDK 1.6 or later must be running.</p>
+</li>
+<li>
+<p>Access to the ZIP file, <code class="codeph">rtd-deploytool-11.1.1.zip</code>. This ZIP file resides inside another ZIP file, <span class="italic">FA_ORACLE_HOME</span>/<code class="codeph">bi/clients/rtd</code>/<code class="codeph">rtd_client_</code><code class="codeph">11.1.1</code>.<code class="codeph">zip.</code></p>
+</li>
+<li>
+<p>Make a backup copy, in a temporary directory, of the existing <code class="codeph">SPE_ILS.zip</code> file, which is located under <span class="italic"><code class="codeph">FA_ORACLE_HOME</code></span> in this directory:</p>
+<div class="p">
+<pre dir="ltr">
+(Unix) crm/components/crmPerformance/zsp/predictionmodule/inlineservice
+</pre></div>
+</li>
+<li>
+<p>Oracle suggests to refer to the text file that was created when provisioning completed, which is a textual overview of the topology, as you follow these steps.</p>
+</li>
+<li>
+<p>Stop and start <code class="codeph">bi_server1</code> to include the changes in <code class="codeph">AdfZspPredictionModuleSupportUtilities.jar</code>.</p>
+</li>
+<li>
+<p>Follow these steps to deploy the new <code class="codeph">SPE_ILS</code>.zip artifact:</p>
+<ol>
+<li>
+<p>Unzip <code class="codeph">rtd_client_11.1.1.zip</code> in a temporary directory. To find this file, refer to Step 2 in this section.</p>
+</li>
+<li>
+<p>In the unzipped files, go to the folder <code class="codeph">.../client/CommandLineDeploy</code> and find <code class="codeph">rtd-deploytool-11.1.1.zip</code><code class="codeph">.</code></p>
+</li>
+<li>
+<p>Unzip <code class="codeph">rtd-deploytool-11.1.1.zip</code> and go to the folder, <code class="codeph">.../OracleBI/RTD/deploytool.</code></p>
+</li>
+<li>
+<p>In this folder, open a command terminal. Ensure having the JDK class path set for this terminal.</p>
+</li>
+<li>
+<p>Run this command:</p>
+<pre dir="ltr">
+java -jar deploytool.jar -deploy 
+-server <span class="italic">Host name of the server where BI domain is created</span>
+-port <span class="italic">Managed server port where the OracleRTD app is deployed</span>
+-terminateSessions true <span class="italic">Full directory path to SPE_ILS.zip</span>
+</pre>
+<p>Example:</p>
+<pre dir="ltr">
+(UNIX) java -jar deploytool.jar -deploy -server server01.oracle.com -port
+7001 -terminateSessions true FA_ORACLE_HOME/crm/components/ \
+crmPerformance/zsp/predictionmodule/inlineservice/SPE_ILS.zip
+</pre></li>
+<li>
+<p>When prompted, enter the user name and password to connect to the RTD server. This user must have a role that includes ILS deploy permission. Both the <code class="codeph">BIAdministrator</code> and <code class="codeph">BIAuthor</code> have this permission.</p>
+</li>
+<li>
+<p>This message indicates the deployment is complete:</p>
+<pre dir="ltr">
+deploymentStateId is 5Inline service "SPE_ILS" in "FA_ORACLE_HOME/crm/components/crmPerformance/zsp/predictionmodule/inlineservice/SPE_ILS.zip/SPE_ILS.zip" 
+deployed to server: "server01.oracle.com" port: "7001" deployment state: "Development"
+</pre></li>
+</ol>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<a id="OAPAT985"></a>
+<div class="sect2"><a id="GUID-777A9DB9-FD41-4698-914E-64B3109E7DEA"></a>
+<h2 id="OAPAT-GUID-777A9DB9-FD41-4698-914E-64B3109E7DEA" class="sect2"><span class="enumeration_section">10.27</span> Patch Tree Artifacts</h2>
+<div>
+<div class="section">
+<p>Tree artifacts are delivered as seed data in patches and therefore, do not typically require manual steps after they are patched. A process called <span class="italic">tree flattening</span> automatically runs during the patching process. If this process fails, perform the following additional steps:</p>
+<ol>
+<li>
+<p>To determine if the patch contains any files related to tree flattening, refer to the Patch Impact report and look for a file named <code class="codeph">FndTreeVersionSD.xml</code>. This is the only file that requires tree flattening. For more information, see the <a href="GUID-D71DC177-4FBA-40A6-AE3D-457818A31382.htm#GUID-76067A2F-1963-4564-BAF0-AD9C54F23883">Patch Impact Report</a> section.</p>
+</li>
+<li>
+<p>Confirm that the tree version changes were successfully flattened by reviewing the worker logs for errors related to tree flattening. To determine the worker that executed the specific seed data task, based on the file name <code class="codeph">FndTreeVersionSD.xml</code>, refer to the Diagnostics report generated at the end of the patching session. Note any tree versions that failed because the version numbers are needed to manually flatten the tree version changes.</p>
+</li>
+<li>
+<p>Follow these steps to manually flatten tree versions:</p>
+<ol>
+<li>
+<p>Access the administrative area of Oracle Fusion Functional Setup Manager by logging in to Oracle Fusion Applications with a user account that is provisioned with the necessary role. Contact the security administrator for details.</p>
+</li>
+<li>
+<p>From the <span class="bold">Administration</span> menu in the work area of Oracle Fusion Applications, choose <span class="bold">Setup and Maintenance.</span></p>
+</li>
+<li>
+<p>Choose the <span class="bold">Manage Trees and Tree Versions</span> task.</p>
+</li>
+<li>
+<p>Search for the tree versions that require flattening.</p>
+</li>
+<li>
+<p>Choose the appropriate tree version and optionally choose <span class="bold">Audit</span> from the <span class="bold">Actions</span> menu to diagnose the issues.</p>
+</li>
+<li>
+<p>If changes to the tree version need to be made, click the tree version and edit it.</p>
+</li>
+<li>
+<p>Choose <span class="bold">Flattening</span>, <span class="bold">Row Flattening</span>, then <span class="bold">Flattening, Column Flattening</span> from the <span class="bold">Actions</span> menu to flatten the selected tree version.</p>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment227">
+<tr>
+<td class="cellalignment234">
+<table class="cellalignment278">
+<tr>
+<td class="cellalignment231"><a href="GUID-1D6499E1-01AA-477D-91E0-3FDCAF5EBBEC.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2011, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment236">
+<table class="cellalignment230">
+<tr>
+<td class="cellalignment231"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment231"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

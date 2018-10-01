@@ -1,0 +1,890 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Data Loading Using Spreadsheets (Chapter 16) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:17 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="using spreadsheets to load HCM data;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM2139760.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM1413013.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="This topic introduces the various spreadsheet data loaders provided with Oracle Fusion HCM. To use any of the spreadsheet
+      data loaders, you must install the Oracle ADF Desktop Integration Add-in for Excel."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">19/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM1434012" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">16</span>Data Loading Using Spreadsheets
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1448216">Spreadsheet Data Loaders: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM714710">Setting Up the Desktop Integration for Excel: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM740634">Troubleshooting the Desktop Integration for Excel: Procedure</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM1448216">
+                  <h2>Spreadsheet Data Loaders: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic introduces the various spreadsheet
+                     data loaders provided with Oracle Fusion HCM. To use any of the spreadsheet
+                     data loaders, you must install the Oracle ADF Desktop Integration
+                     Add-in for Excel.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM1448212">
+                     <h3 class="topictitle">HCM Spreadsheet Data Loader</h3>
+                     
+                     <p>HCM Spreadsheet Data Loader is a generic data loader
+                        that you can use to load most objects that HCM Data Loader supports.
+                        The exceptions are objects, such as attachments and person images,
+                        that don't provide user keys. Objects are loaded from the spreadsheet
+                        to the HCM Data Loader stage tables. HCM Spreadsheet Data Loader is available in
+                        the Data Exchange work area.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1448213">
+                     <h3 class="topictitle">Payroll Batch Loader</h3>
+                     
+                     <p>Payroll Batch Loader is a generic data loader that
+                        supports creation of several payroll objects, including elements, element entries,
+                        external bank accounts, and payroll definitions. Using Payroll Batch
+                        Loader, you can also update or delete several of the supported objects.
+                        Payroll Batch Loader is available in the Data Exchange, Payroll Administration,
+                        and Checklist work areas.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1448214">
+                     <h3 class="topictitle">Single-Object Spreadsheet Loaders</h3>
+                     
+                     <p>Oracle Fusion HCM provides many spreadsheet loaders
+                        for specific object types.
+                     </p>
+                     
+                     
+                     <p>In most cases, you:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Create the spreadsheet on the page
+                              where you manage the object. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Load the objects directly to the
+                              application tables.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Correct any errors in the spreadsheet.</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>In many cases, you can both create and update the
+                        object in a spreadsheet.
+                     </p>
+                     
+                     <p>Single-object spreadsheets are most useful for users
+                        such as HR specialists and benefits specialists, who are creating
+                        objects of a specific type in bulk. You're less likely to use these
+                        types of spreadsheet loaders for integrations.
+                     </p>
+                     
+                     <p> This table shows some key objects that you can create
+                        in bulk using this type of spreadsheet. It also identifies the page
+                        or tab where you generate the spreadsheet.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with 17&#xA;data rows shows the business object (left column) and the page on&#xA;which you generate the spreadsheet (right column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Business Object
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Page or Tab
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Benefit enrollments</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Evaluation and Reporting work area, Enrollment Uploads
+                                    tab
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Benefit plans</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Benefit Plans page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Benefit programs</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Benefit Programs page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Competencies</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Content Items page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Departments</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Departments page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Jobs</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Jobs page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Locations</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Locations page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Performance ratings</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Content Items page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Postal code ranges and service areas</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Postal Code Ranges and Service Areas page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Regulations</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Regulations page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Reporting groups</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Reporting Groups page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Stock grants</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Stock Grants page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Variable rate profiles</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Benefit Rates page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Work patterns</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Work Schedules page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Work schedule assignments</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Work Schedule Assignment Administration page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Work schedules</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Work Schedules page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Worker goals</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Administer Goals page</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                     
+                     <p>For some objects, such as benefit rates, person habits, and assignments, you can
+                        perform a mass update in a spreadsheet. To update these objects, you
+                        download existing objects to a generated spreadsheet, edit the objects,
+                        and upload the changes.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM714710">
+                  <h2>Setting Up the Desktop Integration for Excel: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>Desktop integrated Excel workbooks let you
+                     create or edit records that you can upload to the application. To
+                     use these workbooks, you must install a desktop client and set up
+                     Microsoft Excel.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM714704">
+                     <h3 class="topictitle">Prerequisites</h3>
+                     
+                     
+                     
+                     <p>Perform these prerequisites before you install
+                        the client.
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Make sure that you have:</p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Microsoft Excel 2007, 2010, 2013,
+                                    or 2016 (32-bit recommended)
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Microsoft Windows 7, 8.1, or 10</p>
+                                 
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>If you're reinstalling the client
+                              and currently have a version older than 11.1.1.7.3 (4.0.0), then uninstall
+                              that Oracle ADF Desktop Integration Add-In for Excel client the same
+                              way you uninstall any program on your computer.
+                           </p>
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              You can find the version in the control panel where
+                              you uninstall programs, or in the About dialog box in Excel.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>Optionally install the following
+                              from the Microsoft web site.
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Microsoft .NET Framework 4.5.2</p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>Microsoft Visual Studio 2010 Tools
+                                    for Office Runtime (VSTO Runtime)
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                           <p>The desktop client installer does check if you have
+                              these already, and would download and install them if needed. But,
+                              you can manually install them first, especially if you run into issues
+                              installing them as part of installing the desktop client.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM714705">
+                     <h3 class="topictitle">Installing the Desktop Client</h3>
+                     
+                     
+                     
+                     <p>Install the Oracle ADF 11g Desktop Integration
+                        Add-In for Excel, which is a desktop client that lets you use the
+                        integrated workbooks that you download from the application.
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Make sure you are signed in to
+                              your computer with your account. For example, you can't have someone
+                              else sign in as an administrator and make the installation available
+                              for everyone using your computer.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the application, look for the
+                              client installer under <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span></span>. If it's
+                              not there, then ask your help desk where you can find the installer.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Run the installer (<code>adfdi-excel-addin-installer.exe</code>) as you would
+                              any program that you install on your computer.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM714706">
+                     <h3 class="topictitle">Setting Up Microsoft Excel</h3>
+                     
+                     
+                     
+                     <p>Integrated workbooks can have buttons within
+                        the worksheet, which you click to perform an action, for example to
+                        upload the worksheet. If you use any workbook with such buttons, then
+                        perform the following steps in Microsoft Excel only once, even if
+                        you reinstall the desktop client.
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click the <span class="uicontrol">Microsoft Office</span> button, and click the <span class="uicontrol">Excel Options</span> button.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the Excel Options dialog box,
+                              select the Trust Center tab, and click <span class="uicontrol">Trust
+                                 Center Settings</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the Trust Center dialog box, select
+                              the Macro Settings tab, and select the <span class="uicontrol">Trust
+                                 access to the VBA project object model</span> check box.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        The exact steps can vary depending on your version
+                        of Microsoft Excel.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=95727E50BD3F13CBE040D30A68812CBC">Using Desktop Integrated Excel Workbooks: Points to Consider</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM740634">
+                  <h2>Troubleshooting the Desktop Integration for Excel: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The application is integrated with Microsoft
+                     Excel so that, where available, you can work with records in a desktop
+                     integrated workbook. You might run into issues with the integration,
+                     for example, if you can't open the workbook that you downloaded or
+                     the workbook doesn't look right.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM740633">
+                     <h3 class="topictitle">Verifying the Version of Your Desktop Client</h3>
+                     
+                     <p>First, check the version of your Oracle ADF 11g Desktop
+                        Integration Add-In for Excel client.
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Find Oracle ADF 11g Desktop Integration
+                              Add-In for Excel in the control panel where you uninstall programs
+                              on your computer, and see the <span class="uicontrol">Version</span> column. Or, open the About dialog box in Excel, for example by doing
+                              one of the following:
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Without opening a desktop integrated
+                                    workbook, click the Microsoft Office button in Excel, select <span class="uicontrol">ADF Desktop Integration</span>, and then select <span class="uicontrol">About Oracle ADF 11g Desktop Integration</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>With a desktop integrated workbook
+                                    open, click the Ribbon tab named after the task you're doing in the
+                                    workbook, if available. Click <span class="uicontrol">About</span>, and open the Versions tab, and see the version for the ADF Desktop
+                                    Integration component.
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Ask your help desk if you need
+                              to reinstall the client, due to the version you're on.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2061220">
+                     <h3 class="topictitle">Using the Client Health Check Tool</h3>
+                     
+                     <p>Use the health check tool to find out what integration
+                        issues you might have and how to resolve them. Ask your help desk
+                        if you are unable to find or use the tool.
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Open a desktop-integrated workbook,
+                              and note down the URL in the Connect dialog box.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In a web browser, open the URL
+                              and click the <span class="uicontrol">Run client health check tool</span> link to download the tool.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Run <code>ClientHealthCheck.exe</code> as you would other programs on your computer, and review the result
+                              for each checked item.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select any item that has a problem,
+                              and read the help text.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Fix some of the problems by clicking
+                              the <span class="uicontrol">Fix Problems</span> button. Otherwise,
+                              follow the instructions in the help text.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If you need more assistance, click
+                              the <span class="uicontrol">Save Report As</span> button to
+                              prepare information for your help desk.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Review the report and remove any
+                              sensitive information.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Contact your help desk and provide
+                              your report.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1510241">
+                     <h3 class="topictitle">Reenabling the Add-In</h3>
+                     
+                     <p>In some cases, the desktop integration add-in for
+                        Excel can become disabled. If you have the right version installed,
+                        but the add-in isn't working and you're not using the health check
+                        tool, then try the following:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        
+                        <li>
+                           <p>Click the <span class="uicontrol">Microsoft Office</span> button, and click the <span class="uicontrol">Excel Options</span> button.
+                           </p>
+                        </li>
+                        
+                        
+                        <li>
+                           <p>Select the Add-Ins tab, and check
+                              which list the <span class="uicontrol">Oracle ADF 11g Desktop Integration
+                                 Add-in for Excel</span> is in.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If <span class="uicontrol">Oracle
+                                 ADF 11g Desktop Integration Add-in for Excel</span> is in the <span class="uicontrol">Disabled Application Add-ins</span> list:
+                           </p>
+                           
+                           <ol>
+                              
+                              <li>
+                                 <p>Select <span class="uicontrol">Disabled
+                                       Items</span> in the <span class="uicontrol">Manage</span> field and click <span class="uicontrol">Go</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the Disabled Items dialog box,
+                                    select <span class="uicontrol">Oracle ADF Desktop Integration Add-In
+                                       for Excel</span> and click <span class="uicontrol">Enable</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Back in the Excel Options dialog
+                                    box, select <span class="uicontrol">COM Add-ins</span> in the <span class="uicontrol">Manage</span> field and click <span class="uicontrol">Go</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the COM Add-Ins dialog box, select <span class="uicontrol">Oracle ADF 11g Desktop Integration Add-in for Excel</span>.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>If <span class="uicontrol">Oracle
+                                 ADF 11g Desktop Integration Add-in for Excel</span> is in the <span class="uicontrol">Inactive Application Add-ins</span> list, then perform
+                              only steps 3.3 and 3.4.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If <span class="uicontrol">Oracle
+                                 ADF 11g Desktop Integration Add-in for Excel</span> is in the <span class="uicontrol">Active Application Add-ins</span> list, then contact
+                              your help desk.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        The exact steps can vary depending on your version
+                        of Microsoft Excel.
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

@@ -1,0 +1,755 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Oracle Taleo Recruiting Cloud Service Integration (Chapter 29) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:21 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="Oracle Taleo Recruiting Cloud Service;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM1693484.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM1434037.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="Some business objects in HCM don't map directly to any business objects in Oracle Taleo Recruiting Cloud Service, when exporting
+      data from HCM to Oracle Taleo Recruiting Cloud Service. These business objects (for example, legal employers, jobs, and positions)
+      are mapped to Large User Defined Selections (LUDS) instead. LUDS are custom, user-defined fields in Oracle Taleo Recruiting
+      Cloud Service, specifically configured for the integration with HCM. The mappings are defined in the Oracle Taleo Recruiting
+      Cloud Service application."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">32/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM1436830" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">29</span>Oracle Taleo Recruiting Cloud Service Integration
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1517826">HCM and Oracle Taleo Recruiting Cloud Service Components: How They Work Together</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1108074">Importing Data From Oracle Taleo Recruiting Cloud Service: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1103397">Exporting Data to Oracle Taleo Recruiting Cloud Service: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1436829">FAQs for Oracle Taleo Recruiting Cloud Service and HCM Integration </a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM1517826">
+                  <h2>HCM and Oracle Taleo Recruiting Cloud Service Components: How They Work Together</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>The integration between HCM and Oracle Taleo
+                     Recruiting Cloud Service facilitates seamless flow of the recruitment
+                     process from creating a job requisition to hiring a worker.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM1517823">
+                     <h3 class="topictitle">HCM and Oracle Taleo Recruiting Cloud Service
+                     Integration</h3>
+                     
+                     <p>The integration between HCM and Oracle Taleo Recruiting
+                        Cloud Service involves the following stages: 
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>HCM</p>
+                           <p>Exporting
+                              work structures and worker data to Oracle Taleo Recruiting Cloud Service.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Oracle Taleo Recruiting Cloud Service</p>
+                           
+                           <ol>
+                              
+                              <li>
+                                 <p>Creating a job requisition using
+                                    the data imported from HCM
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Selecting candidates for a job
+                                    requisition
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Hiring a candidate</p>
+                              </li>
+                              
+                              <li>
+                                 <p>Importing candidate data from Oracle
+                                    Taleo Recruiting Cloud Service
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>HCM</p>
+                           
+                           <ol>
+                              
+                              <li>
+                                 <p>Creating a pending worker</p>
+                              </li>
+                              
+                              <li>
+                                 <p>Converting the pending worker to
+                                    an employee
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Exporting changed data to Oracle
+                                    Taleo Recruiting Cloud Service
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1108074">
+                  <h2>Importing Data From Oracle Taleo Recruiting Cloud Service: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>Once a candidate is selected in Oracle Taleo
+                     Recruiting Cloud Service, you must import the candidate data to HCM
+                     to facilitate hiring the candidate as an employee or contingent worker
+                     in HCM.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2237119">
+                     <h3 class="topictitle">Selected Candidates</h3>
+                     
+                     <p>When ready-to-be-hired candidates are imported from
+                        Oracle Taleo Recruiting Cloud Service you can view notifications:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>On the Selected Candidates tab
+                              of the New Workers to Process page
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the Worklist notifications,
+                              if you are the hiring manager
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Click the notification task to process the selected
+                        candidate as a pending worker. You must ensure that all information
+                        is correct before submitting the candidate for approval. Successfully
+                        processed pending workers appear on the Pending Workers tab. From
+                        that tab, you can convert them into employees.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1108071">
+                     <h3 class="topictitle">Imported Data</h3>
+                     
+                     <p>The data that is imported from Oracle Taleo Recruiting
+                        Cloud Service to HCM includes the following:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Candidate data, including:</p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Person and employment data</p>
+                              </li>
+                              
+                              <li>
+                                 <p>Compensation and payroll data</p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>Education, certification, and previous
+                                    experience details, which are captured as a part of HCM Talent
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Requisition data</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1108072">
+                     <h3 class="topictitle">Scheduled Processes</h3>
+                     
+                     <p>You can access the Import Oracle Taleo Recruiting
+                        Cloud Service Data process from the Scheduled Processes work area.
+                        You can run this process manually or schedule it to run at regular
+                        intervals (for example, weekly at a specified time). The likely volume
+                        and frequency of hiring persons in your enterprise determines how
+                        often you run this process.
+                     </p>
+                     
+                     
+                     <p>After you run the import process, you can view the
+                        selected candidates in the New Person Overview page. The Selected
+                        Candidates page displays a list of candidates ready to be added as
+                        pending workers. Once you add a candidate as a pending worker, the
+                        candidate appears in the Pending Workers list. You can then convert
+                        the pending worker to an employee or a contingent worker. The imported
+                        person, payroll, compensation, and talent (education, certification,
+                        and previous experience) details appear by default in the Convert
+                        Pending Worker flow.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        After you import a candidate from Oracle Taleo Recruiting
+                        Cloud Service to HCM, if you make any changes to the candidate or
+                        requisition in Oracle Taleo Recruiting Cloud Service, these changes
+                        aren't included in the subsequent import runs.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1103397">
+                  <h2>Exporting Data to Oracle Taleo Recruiting Cloud Service: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>Oracle Taleo Recruiting Cloud Service uses
+                     HCM work structures and worker data to create and process job requisitions.
+                     You can export this data from HCM to Oracle Taleo Recruiting Cloud
+                     Service.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM1103395">
+                     <h3 class="topictitle">HCM and Oracle Taleo Recruiting Cloud Service
+                     Mapping</h3>
+                     
+                     <p>The following table lists the business objects that
+                        HCM exports and the corresponding business objects that they are mapped
+                        to in Oracle Taleo Recruiting Cloud Service.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Data Export">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 HCM
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Oracle Taleo Recruiting Cloud Service
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Departments</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Departments</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Jobs</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Requisition Templates</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Business Units</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Organizations</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Users</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Users</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Employees</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Candidates</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Locations</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Locations</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Positions</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Large user-defined selection</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Grades</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Large user-defined selection</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Legal Employers</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Large user-defined selection</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Job Families</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Job Fields</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1195946">
+                     <h3 class="topictitle">Employees and Users Export</h3>
+                     
+                     
+                     <p>As a part of the integration, HCM exports
+                        employees and users such as Managers, Hiring Managers, and Recruiters,
+                        who have the privilege to create requisitions in Oracle Taleo Recruiting
+                        Cloud Service. From the HCM perspective, user and employee data are
+                        the same, and use the same data mapping. The employee or user creation
+                        process relies on certain default user types provisioned in Oracle Taleo
+                        Recruiting Cloud Service. The following table lists the roles exported
+                        from HCM, and the user types they are mapped to in Oracle Taleo Recruiting
+                        Cloud Service.
+                     </p>
+                     
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Users">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 HCM Role
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Oracle Taleo Recruiting Cloud Service User Type Code
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Oracle Taleo Recruiting Cloud Service User Type Name
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_RECRUITING_ADMINISTRATOR_JOB </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>01-RecruitingAdmin</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Recruiting - Administrator</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_POWER_RECRUITER_ABSTRACT </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>02-PowerRecruiter</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Recruiting - Power Recruiter</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_BASIC_RECRUITER_ABSTRACT</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>03-BasicRecruiter</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Recruiting - Basic Recruiter</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_LINE_MANAGER_ABSTRACT </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>04-PowerManager</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Recruiting - Power Manager</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PER_EMPLOYEE_ABSTRACT </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>10-Employee</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Recruiting - Employee</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1103565">
+                     <h3 class="topictitle">Scheduled Processes</h3>
+                     
+                     <p>You can schedule the following process in the Scheduled
+                        Processes work area: 
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Export All Oracle Taleo Recruiting
+                              Cloud Service Data
+                           </p>
+                           <p>Exports all work structures
+                              and worker data from HCM to Oracle Taleo Recruiting Cloud Service. You must
+                              run this process typically only once, in the beginning, to send all
+                              HCM data to Oracle Taleo Recruiting Cloud Service to enable creation
+                              of job requisitions.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Export Changed Oracle Taleo Recruiting
+                              Cloud Service Data
+                           </p>
+                           <p>Exports any changed work structures
+                              and worker data from HCM to Oracle Taleo Recruiting Cloud Service.
+                              You can run this process manually or schedule it to run at regular
+                              intervals (for example, weekly at a specified time). The likely volume
+                              and frequency of hiring persons in your enterprise determines how
+                              often you run this process.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1436829">
+                  <h2>FAQs for Oracle Taleo Recruiting Cloud Service and HCM Integration </h2>
+                  
+                  <div class="sect2" id="FAIHM1112125">
+                     <h3>What are Large User Defined Selections (LUDS)?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Some business objects in HCM don't map directly
+                        to any business objects in Oracle Taleo Recruiting Cloud Service,
+                        when exporting data from HCM to Oracle Taleo Recruiting Cloud Service.
+                        These business objects (for example, legal employers, jobs, and positions)
+                        are mapped to Large User Defined Selections (LUDS) instead. LUDS are
+                        custom, user-defined fields in Oracle Taleo Recruiting Cloud Service,
+                        specifically configured for the integration with HCM. The mappings
+                        are defined in the Oracle Taleo Recruiting Cloud Service application.
+                     </p>
+                     
+                     
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

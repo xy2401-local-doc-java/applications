@@ -1,0 +1,1808 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Payroll Batch Loader File Loading (Chapter 22) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:18 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="batch loader; payroll batch loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM2009020.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM1415466.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="Load Batch from File is a flow pattern that you can use to transform data in a source file into a payroll batch for upload.
+      You can submit this flow alone or include it in a flow that you create for automating data loads on a periodic basis. When
+      you submit the flow, either manually or using a web service, you can specify a transformation formula to transform the data,
+      as needed."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">25/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM2009021" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">22</span>Payroll Batch Loader File Loading
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1398738">Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1528227">Automating Payroll Data Loads: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1737135">File Format and Data Transformation for Payroll Batch Uploads: Critical Choices</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1745218">Batch Loader Formula Type</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1737262">Sample Formula for Batch Loader File Transformation</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1754433">Sample Batch Loader Formula for Multiple Tasks</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM1398738">
+                  <h2>Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Load Batch from File is a flow pattern that you can
+                     use to transform data in a source file into a payroll batch for upload.
+                     You can submit this flow alone or include it in a flow that you create
+                     for automating data loads on a periodic basis. When you submit the
+                     flow, either manually or using a web service, you can specify a transformation
+                     formula to transform the data, as needed.
+                  </p>
+                  
+                  
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     You can create a payroll batch from a file from the
+                     Data Exchange, Payroll Administration or Checklist work area. 
+                     
+                  </div>
+                  
+                  
+                  <div class="sect2" id="FAIHM1723611">
+                     <h3 class="topictitle">Assumptions</h3>
+                     
+                     <p>This procedure has the following assumptions:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The user performing these steps
+                              has the Human Capital Management Integration Specialist role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You have the source file ready
+                              to upload to Oracle WebCenter Content, or it's already uploaded and
+                              you have noted the content ID. The following table shows three examples
+                              of how to upload files to the content server.
+                           </p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="Example methods to use to upload&#xA;flat files into the content server">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Example
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Details
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Upload File flow task</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Browse to the source file on your file system and
+                                          upload it as part of the Load Batch from a File flow. Using the Upload
+                                          File flow task, you don't have to provide the file's content ID when
+                                          you submit the flow.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>UploadTool Java utility</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Programmatically upload a file from a local or remote
+                                          file system into the content server and retrieve its content ID. 
+                                       </p>
+                                       
+                                       <p>For more information, see the Automating HCM Data
+                                          Loader attachment for the Using Payroll Batch Loader Guide (2030268.1)
+                                          on My Oracle Support at https://support.oracle.com.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Oracle WebCenter Content application</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Browse to the source file on your file system, check
+                                          it in to the content server, and retrieve its content ID. For more
+                                          information, see Oracle Fusion Middleware Using Oracle WebCenter Content
+                                          guide.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1528436">
+                     <h3 class="topictitle">Prerequisites</h3>
+                     
+                     <p>Before you create a payroll batch from a file, ensure
+                        that you meet the prerequisites for the characteristics in the following
+                        table.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Prerequisites by characteristic,&#xA;such as transformation and encryption">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Characteristic
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Prerequisite
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Data transformation</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>If the data in the source file requires transformation,
+                                    create and compile a transformation formula using the Batch Loader
+                                    formula type. Use the Manage Fast Formulas task in the Payroll Calculation
+                                    work area.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>File encryption</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Before loading encrypted files, ensure that encryption
+                                    keys exist for secure file transfer. This involves creating a service
+                                    request, generating PGP key pairs, and sharing the encryption keys.
+                                 </p>
+                                 
+                                 <p>Specify the Payroll Batch Loader Encryption Type
+                                    parameter value for the process configuration group you select when
+                                    running the flow or the web service. Valid values are PGPSIGNED, PGPUNSIGNED,
+                                    and NONE. Use the Manage Payroll Process Configuration task in the
+                                    Setup and Maintenance work area to specify processing parameters for
+                                    your process configuration group.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Other processing parameters</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Use the Manage Payroll Process Configuration task
+                                    in the Setup and Maintenance work area to add parameters for the process
+                                    configuration group, as needed. Examples of processing parameters
+                                    are Batch Error Mode, Logging Area, Logging Category, and Threads.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1528431">
+                     <h3 class="topictitle">Creating the Batch Manually</h3>
+                     
+                     <p>The following steps describe how to submit a flow
+                        manually to create the batch from a file that you have already uploaded:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Use the Submit a Payroll Flow task
+                              in the Checklist work area, and select the <span class="uicontrol">Load Batch from File</span> flow pattern.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Enter a name for the flow.</p>
+                        </li>
+                        
+                        <li>
+                           <p>If the source file already exists
+                              on the content server, enter the content ID, otherwise, leave the
+                              Content ID field blank.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Enter a name for the batch.</p>
+                        </li>
+                        
+                        <li>
+                           <p>Optionally, select the transformation
+                              formula and process configuration group.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Submit the flow and click <span class="uicontrol">OK and View Checklist</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If you supplied the content ID,
+                              select the row for Upload File, and then right-click to select <span class="uicontrol">Mark as Complete</span>. Otherwise, if you are
+                              uploading your file now, perform these steps:
+                           </p>
+                           
+                           <ol>
+                              
+                              <li>
+                                 <p>In the row for Upload File, click <span class="uicontrol">Go to Task</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Manage Attachments</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Browse</span> to select your file to upload, and then click <span class="uicontrol">OK</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Done</span>.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Refresh</span> until the Upload File task and the Load Batch
+                              task show as complete.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Verify the batch content as follows:</p>
+                           
+                           <ol>
+                              
+                              <li>
+                                 <p>In the row for the Verify Batch
+                                    task, click <span class="uicontrol">Go to Task</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Download and open the batch loader
+                                    workbook.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Select your legislative data group,
+                                    and then click <span class="uicontrol">Search</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Double-click the batch name that
+                                    you entered when submitting the Load Batch From File flow.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>On the Batch Content Sheet, double-click
+                                    the task action name, for example, <span class="uicontrol">Add Payroll</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Verify the content and save the
+                                    workbook to upload any changes you made.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Transfer the batch as follows:</p>
+                           
+                           <ol>
+                              
+                              <li>
+                                 <p>Use the Submit a Process or Report
+                                    task in the Checklist or Payroll Administration work area, and select
+                                    the <span class="uicontrol">Transfer Batch</span> flow pattern.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>Enter a name for the flow.</p>
+                              </li>
+                              
+                              <li>
+                                 <p>Search for and select the batch
+                                    to transfer.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Submit the flow.</p>
+                              </li>
+                              
+                           </ol>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        To roll back a batch of element entries, use the
+                        Roll Back Batch Transfer process from the Payroll Administration work
+                        area. The Roll Back Batch Transfer process supports only batches using
+                        the Create Element Entry task.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1528432">
+                     <h3 class="topictitle">Automating Batch Creation</h3>
+                     
+                     <p>You can combine the Create Batch task and the Transfer
+                        Batch task into a custom flow pattern. You can then use the Flow Actions
+                        web service to call your custom flow for automation. Specify a transformation
+                        formula to transform the data, as needed.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM1693484.htm#FAIHM1672917">Setting up Encryption for File Transfer: Procedure</a></p>
+                     </li>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=C128E0C3C95BDB7FE040D30A68812330">Payroll Process Configuration Parameters</a></p>
+                     </li>
+                     <li>
+                        <p><a href="http://docs.oracle.com/cloud/latest/globalcs_gs/OESWH">SOAP Web Services for Oracle HCM Cloud</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1528227">
+                  <h2>Automating Payroll Data Loads: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can automate the process to load payroll-related
+                     data, such as element
+                     entries, on a schedule of your choice using the Flow Actions
+                     Service web service. You write your own programs to load the source
+                     file to Oracle WebCenter Content Server and invoke the Flow Actions
+                     web service that submits a custom flow. The custom flow loads the
+                     file into a batch using the payroll batch loader, and transfers
+                     the batch from the staging tables into the application tables.
+                  </p>
+                  
+                  
+                  
+                  <p>To automate data loading, you must:</p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Copy the Load Batch from File flow
+                           pattern and edit it for automation.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>If you have set up a security profile,
+                           add the new flow pattern to the security profile.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Create the program to upload files
+                           to the content server and invoke the Flow Actions Service web service.
+                        </p>
+                        
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>Optionally, when submitting the flow, you must specify:</p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>A process configuration group as
+                           a flow parameter, if your source data is encrypted or if you require
+                           other processing parameters.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>A file transformation formula,
+                           if the source file contains data that must be transformed, such as
+                           deriving an assignment number from a person number.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="FAIHM1528224">
+                     <h3 class="topictitle">Copying and Editing the Flow Pattern</h3>
+                     
+                     <p>You copy and edit the predefined flow pattern to:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Remove the manual tasks for uploading
+                              the file and verifying the batch.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Add the Transfer Batch task so
+                              the transfer automatically follows the loading of the file to the
+                              staging tables.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Complete the following steps:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select the <span class="uicontrol">Manage Payroll Flow Patterns</span> task in the Payroll Checklist
+                              work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Search for and select <span class="uicontrol">Load Batch from File</span>, and then click <span class="uicontrol">Copy</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the Copy Flow Pattern window,
+                              complete the fields as shown in this table:
+                           </p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="Field definitions for copy flow&#xA;pattern window">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Field
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Value
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Name</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Enter the same name that you use to identify the
+                                          flow pattern in the flow action service.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Legislative Data Group</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Optionally, select a legislative data group to restrict
+                                          access to this flow.
+                                       </p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Save and Close</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Search for and select the new flow
+                              pattern, and then click <span class="uicontrol">Edit</span>.
+                           </p>
+                           
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              If you selected a legislative data group when making
+                              the copy, you must select it when searching for the new flow pattern.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>Remove two flow tasks as follows:</p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Select <span class="uicontrol">Upload File</span>, click <span class="uicontrol">Delete</span>, and then click <span class="uicontrol">Yes</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Select <span class="uicontrol">Verify Batch</span>, and then click <span class="uicontrol">Delete</span>. 
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Add the Transfer Batch flow task
+                              as follows:
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Click <span class="uicontrol">Select and Add</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Search for and select <span class="uicontrol">Transfer Batch</span>, and then click <span class="uicontrol">Done</span>. 
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>On the Task Sequence page, review
+                              the Task column and the Following Task column and ensure that the
+                              tasks are in this sequence: Start Flow, Load Batch, Transfer Batch,
+                              End Flow. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Optionally, on the Parameters page,
+                              select and edit the flow parameters as shown in this table.
+                           </p>
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              If you are using a transformation formula with preconfigured
+                              process configuration group parameters, you already have values to
+                              use by default, so you don't need this step.
+                              
+                           </div>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="Values to use for process configuration&#xA;group and transformation formula parameters">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Parameter Name
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Parameter Basis
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Basis Value
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Process Configuration Group</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Post SQL Bind</p>
+                                       
+                                    </td>
+                                    
+                                    <td>
+                                       <pre><code>select
+action_param_group_id
+from
+pay_action_param_groups
+where
+action_param_group_name = 'Configuration Group Name that has the encryption type to be used'<br></code></pre>
+                                       </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>Transformation Formula</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Post SQL Bind</p>
+                                       
+                                    </td>
+                                    
+                                    <td>
+                                       <pre><code>select
+max(formula_id)
+from
+ff_formulas_vl ff,
+ff_formula_types ft
+where
+ff.formula_type_id = ft.formula_type_id and
+ft.formula_type_name = 'Batch Loader' and
+ff.formula_name = 'Name of formula to be used'<br></code></pre>
+                                       </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Edit the Transfer Batch task as
+                              follows:
+                           </p>
+                           
+                           <ol>
+                              
+                              <li>
+                                 <p>On the Tasks tab, select <span class="uicontrol">Transfer Batch</span>, click <span class="uicontrol">Edit</span>, and then click <span class="uicontrol">Edit Task</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>On the Basic Information page,
+                                    select the <span class="uicontrol">Batch</span> parameter.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>In the Batch Parameter Details
+                                    section, in the <span class="uicontrol">Parameter Basis</span> field, select <span class="uicontrol">Bind to Flow Task</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>In the <span class="uicontrol">Basis Value</span> field, select <span class="uicontrol">Batch</span>, and then click <span class="uicontrol">Next</span>. 
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Optionally, enter ownership information,
+                                    and then click <span class="uicontrol">Next</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Optionally, enter duration and
+                                    notification information, and then click <span class="uicontrol">Submit</span>.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Edit the Load Batch task as follows:</p>
+                           
+                           <ol>
+                              
+                              <li>
+                                 <p>On the Tasks tab, select <span class="uicontrol">Load Batch</span>, click <span class="uicontrol">Edit</span>, and then click <span class="uicontrol">Edit Task</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>On the Basic Information page,
+                                    select the <span class="uicontrol">Batch</span> parameter.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>In the Batch Parameter Details
+                                    section, in the <span class="uicontrol">Usage</span> field,
+                                    select <span class="uicontrol">Output parameter</span>, and
+                                    then click <span class="uicontrol">Next</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Optionally, enter ownership information,
+                                    and then click <span class="uicontrol">Next</span>.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Optionally, enter duration and
+                                    notification information, and then click <span class="uicontrol">Submit</span>.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>On the Manage Payroll Flow Patterns
+                              page, click <span class="uicontrol">Submit</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1528273">
+                     <h3 class="topictitle">Adding the Flow Pattern to a Security Profile</h3>
+                     
+                     <p>The HCM data role security controls who can submit
+                        the flow pattern or view the resulting flow from the Payroll Dashboard
+                        or payroll work areas. If a security profile exists, an IT security
+                        manager must add the new flow pattern to the security profile.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1723664">
+                     <h3 class="topictitle">Creating the Program for Automation</h3>
+                     
+                     <p>Your custom program uploads the source file to the
+                        content server, and retrieves the content ID for the Flow Actions
+                        Service web service.
+                     </p>
+                     
+                     <img src="img/PAY_FlowActionsService01_20051837.png" alt="Flow Actions web service invocation" class="fusappimg">
+                     
+                     
+                     
+                     
+                     <p>Your program then calls the Flow Actions web service
+                        supplying the following parameters:
+                     </p>
+                     
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Name of the custom flow pattern
+                              (copy of Load Batch From File)
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Content ID of the uploaded file</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Unique name to identify the flow
+                              instance being submitted
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Unique name for batch to create
+                              and then transfer
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Process configuration group name
+                              for special processing (optional)
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Transformation formula name (optional)</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For more information about the Flow Actions Service
+                        web service, refer to the SOAP Web Services for Oracle HCM Cloud guide.
+                        For examples of its usage for automating file uploads, refer to the
+                        attachment for HCM Data Loader User Guide (1664133.1) on My Oracle
+                        Support at https://support.oracle.com.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM1693484.htm#FAIHM1672917">Setting up Encryption for File Transfer: Procedure</a></p>
+                     </li>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=C146AE8901B23FECE040D30A68816154">Payroll Process Configuration Groups: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=93AF3F66333A3D7CE040D30A68813E14">HCM Security Profiles: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="http://docs.oracle.com/cloud/latest/globalcs_gs/OESWH">SOAP Web Services for Oracle HCM Cloud</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1737135">
+                  <h2>File Format and Data Transformation for Payroll Batch Uploads: Critical Choices</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>The Load Batch from File process takes data
+                     from a flat file and moves that data into a payroll batch loader workbook for
+                     upload. The requirements of the format of your flat file vary depending
+                     on whether you will transform the type or sequence of data in your
+                     file. This topic describes the different file format requirements.
+                  </p>
+                  
+                  <p>All columns in the batch loader workbook for the
+                     task and task name you want to use must be represented in your flat
+                     file, even if they are optional in the workbook.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM1737132">
+                     <h3 class="topictitle">File Format with No Transformation (Default Format)</h3>
+                     
+                     
+                     
+                     <p>If the attributes and sequence in the source
+                        file are the same as what's expected in the workbook for the task
+                        and task action you want, then you don't need any transformation.
+                        The file must include the task name, task action name, and data for
+                        each record you want to upload. 
+                     </p>
+                     
+                     <p>The following example shows the content of a file
+                        that adds three people to different payrolls in the US LDG by assignment
+                        number.
+                     </p>
+                     <pre><code>Payroll Relationship|Add Payroll||E34567|Monthly Payroll|2015-01-01|US LDG
+Payroll Relationship|Add Payroll||E5897|Weekly Payroll|2015-01-01|US LDG
+Payroll Relationship|Add Payroll||E9736456|Monthly Payroll|2015-01-01|US LDG
+<br></code></pre>
+                     <p>Notice that it includes the task name, the task action
+                        name, and no reference name before the values to upload for each record.
+                        The reference name is blank because it isn't applicable in this example.
+                        Other task actions, such as Create Element Entry, use the value for
+                        reference name is typically the element name.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1737192">
+                     <h3 class="topictitle">Files with Data Transformation</h3>
+                     
+                     
+                     
+                     <p>Use a simple formula for basic transformation
+                        of data, such as changing the order of attributes in your file to
+                        the order that the batch loader workbook requires. Use more complex
+                        formulas to convert attributes, such as a person number into an assignment
+                        number.
+                     </p>
+                     
+                     <p>The following example shows the content of a file
+                        that adds three people to different payrolls by assignment number.
+                        Notice that the data, payroll name, and assignment number are in a
+                        different sequence from the batch loader workbook, so you would use
+                        a transformation formula to change the positions. Because the formula
+                        already specifies the task and task action, the file format can begin
+                        directly with a column attribute value.
+                     </p>
+                     <pre><code>2015-10-10|Monthly Payroll|E34567
+2015-10-10|Weekly Payroll|E5897
+2015-10-10|Monthly Payroll|E9736456
+<br></code></pre>
+                     
+                     
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM1737198">
+                     <h3 class="topictitle">Transformation Formulas</h3>
+                     
+                     
+                     
+                     <p>The Batch Loader formula must contain values
+                        for at least one task name and task action. You can potentially load
+                        different types of data, using different tasks, with the same formula
+                        and a single batch. 
+                     </p>
+                     
+                     <p>The following example specifies the task name in
+                        the formula as Payroll Relationship and the task action name as Add
+                        Payroll.
+                     </p>
+                     <pre><code>/*Batch Related Outputs*/
+    TASK='Payroll Relationship'
+    TASKACTION='Add Payroll'
+<br></code></pre>
+                     
+                     <p>The following example specifies the task name in
+                        the formula as Element Entry, the task action name as Create Element
+                        Entry, and the task action reference as Pay Period Amount.
+                     </p>
+                     <pre><code>/*Batch Related Outputs*/
+TASK='Element Entry'
+TASKACTION='Create Element Entry'
+ACTIONREFERENCE='Pay Period Amount'
+<br></code></pre>
+                     
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM1737251">
+                     <h3 class="topictitle">Delimiters</h3>
+                     
+                     
+                     
+                     <p>The default delimiter that separates values
+                        is a pipe character. If your file uses a different delimiter, you
+                        must set the delimiter you want in a Batch Loader transformation formula.
+                        The following example specifies a comma character as the delimiter.
+                     </p>
+                     <pre><code>/* Calculations */
+IF OPERATION='FILETYPE' THEN
+   OUTPUTVALUE='DELIMITED'
+ELSE IF OPERATION='DELIMITER' THEN
+   OUTPUTVALUE=','
+<br></code></pre>
+                     <div class="infobox-note"><span class="notep1">Note: </span>
+                        Ensure that the delimiter you enter in the formula
+                        is a single non-ASCII character and not part of any of the values
+                        to upload.
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1745218">
+                  <h2>Batch Loader Formula Type</h2>
+                  
+                  
+                  
+                  
+                  <p>The Batch Loader formula type controls how
+                     the application retrieves information when loading a batch from a
+                     file. You create batch loader formulas on the Manage Fast Formulas
+                     page when the file you want to upload requires transformation.
+                  </p>
+                  
+                  
+                  <p>Examples of why you might create a batch loader formula
+                     include:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>To assign the position of attributes
+                           in the file because they are not in the expected sequence.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>To convert an attribute in the
+                           file to another attribute that you derive using value sets.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>To use a single formula for separate
+                           batch loader tasks.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  
+                  <div class="sect2" id="F1745309"><h3 class="contexts">Contexts</h3>
+                     
+                     <p>The following contexts are available to all formulas
+                        of the Batch Loader type:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>EFFECTIVE_DATE (Text)</p>
+                        </li>
+                        
+                        <li>
+                           <p>TASK (text)</p>
+                           <p>Name of the task from the batch loader workbook.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>TASKACTION (Text)</p>
+                           <p>Name of the task action from the batch loader workbook.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>REFERENCE (Text)</p>
+                           <p>The name of the element for task actions such as element entries,
+                              costing setups, and balance adjustments.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="F1775116"><h3 class="databaseItems">Database Items</h3>
+                     
+                     <p>The Batch Loader formula type does not support database
+                        items. You can use database items in your batch loader formulas by
+                        calling a formula within your formula.
+                     </p>
+                     
+                     <p>To retrieve information when a database item isn't
+                        available, use the GET_VALUE_SET function.
+                     </p>
+                     
+                     <div class="infobox-note"><span class="notep1">Note: </span>
+                        When using the GET_VALUE_SET function, ensure that
+                        the Value Attributes Table Alias field for the value set has no value.
+                        The function will fail when an alias is provided.
+                        
+                     </div>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="F1745312"><h3 class="inputs">Input Variables</h3>
+                     
+                     <p>The following input variables are available for all
+                        formulas of Batch Loader formula type. Additional variables may be
+                        available depending on the selected task and task action.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="The input variables that are&#xA;available to formulas of the Batch Loader type">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Input and Data Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Required
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Notes
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>OPERATION (text)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Available operations:</p>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>FILETYPE</p>
+                                       <p>If
+                                          specified, value must be DELIMITED.
+                                       </p>
+                                       
+                                    </li>
+                                    
+                                    <li>
+                                       <p>DELIMITER</p>
+                                       <p>The
+                                          character used to delimit the columns in the file.
+                                       </p>
+                                       
+                                    </li>
+                                    
+                                    <li>
+                                       <p>MAP</p>
+                                       <p>Where the
+                                          information for the task and task action is mapped from the file content.
+                                       </p>
+                                       
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PROCESS_DATE (text)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Must be in the format YYYY-MM-DD HH:MM:SS where hours
+                                    represent a 24-hour clock.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>LEGISLATIVE_DATA_GROUP_ID (Text)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>LINESEQUENCE (Number)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Line number to be used for the batch. The following
+                                    example takes the line number and multiplies by 10; the created batch
+                                    lines will increment from 10, 20, 30, and so on.
+                                 </p>
+                                 <pre><code>LINESEQUENCE = LINESEQUENCE * 10 <br></code></pre>
+                                 </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>LINEREPEATNO (Number)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Number of times the formula executes for the given
+                                    line in the file.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>LINEREPEAT (Number)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Enable creating multiple batch lines for a single
+                                    row in a file. Valid values are Y and N.
+                                 </p>
+                                 
+                                 <p>If set as Y, after creating the batch line the formula
+                                    is called again for the same file content. LINEREPEATNO indicates
+                                    how many repetitions. For example, for time entry, there might be
+                                    a regular time entry wage followed by a premium time entry wage.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>TOTALLINES (Number)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Total number of lines in the file. Use, for example,
+                                    to compare a hard-coded total in the file to reconcile the file content.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>POSITION1 (Text)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>First position of the column in the file.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>POSITION2 (Text)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Second position of the column in the file.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>POSITION3-POSITION30 (Text)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Optional additional positions of columns in the file.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>TOTALLINES (Number)</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>For example, to compare a hard-coded total in the
+                                    file to reconcile the file content.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="F1754479"><h3 class="returnValues">Return Values</h3>
+                     
+                     <p>The return values for batch loader formulas vary
+                        based on the business object and task action. Return values are the
+                        same as the parameter names with space characters replaced by underscore
+                        characters. 
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1737262">
+                  <h2>Sample Formula for Batch Loader File Transformation</h2>
+                  
+                  
+                  
+                  
+                  <p>The transformation formula in this example
+                     specifies the position of attributes because the attributes in the
+                     flat file are in a different sequence than the sequence expected in
+                     payroll batch loader workbook. The formula also converts Person Number
+                     in the flat file into Assignment Number.
+                  </p>
+                  
+                  
+                  <p>The formula's return values are the same as the parameter
+                     name with space characters replaced by underscore characters.
+                  </p>
+                  
+                  <p>The following snippet in the formula assigns the
+                     attributes to the required position and performs the conversion using
+                     values sets to derive the necessary values:
+                  </p>
+                  <pre><code>/*Task Action Related Outputs */ 
+PAYROLL=POSITION2
+ASSIGNMENT_NUMBER=GET_VALUE_SET('SAMPLE_GET_ASG_NUM','|=PERSON_NUMBER='''||POSITION3||'''') 
+Effective_As_Of_Date=POSITION1<br></code></pre>
+                  <div class="infobox-tip"><span class="notep1">Tip: </span>
+                     To debug value sets, create a BI report with the
+                     following query as a data model to return the required data:  <code>SELECT pay_ff_functions.gvs ('SAMPLE_GET_ASG_NUM','|=PERSON_ID=100000012092216')
+                        value FROM dual;</code>
+                     
+                  </div>
+                  
+                  
+                  
+                  <p>The complete formula for this example is as follows:</p>
+                  
+                  
+                  
+                  <pre><code>/******************************************************************
+FORMULA NAME: Transform Attribute - Payroll Relationship
+FORMULA TYPE: Batch Loader
+Sample Input File Format: 
+Effective As Of Date|Payroll|Person Number/
+
+/* Inputs  */
+INPUTS ARE OPERATION (text), LINESEQUENCE (number), LINEREPEATNO (number), 
+POSITION1 (text), POSITION2 (text), POSITION3 (text)
+
+DEFAULT FOR LINENO IS 1
+DEFAULT FOR LINEREPEATNO IS 1
+DEFAULT FOR LINESEQUENCE IS 1
+DEFAULT FOR POSITION1 IS 'NO DATA'
+DEFAULT FOR POSITION2 IS 'NO DATA'
+DEFAULT FOR POSITION3 IS 'NO DATA' 
+
+/* Calculations */
+IF OPERATION='FILETYPE' THEN 
+OUTPUTVALUE='DELIMITED'
+ELSE IF OPERATION='DELIMITER' THEN
+OUTPUTVALUE='|' 
+ELSE IF OPERATION='MAP' THEN
+( 
+/*Batch Related Outputs*/
+TASK='Payroll Relationship'
+TASKACTION='Add Payroll' 
+
+/*Task Action Related Outputs */
+PAYROLL=POSITION2 ASSIGNMENT_NUMBER=GET_VALUE_SET('SAMPLE_GET_ASG_NUM','|=PERSON_NUMBER='''||POSITION3||'''')
+Effective_As_Of_Date=POSITION1
+)
+ELSE
+OUTPUTVALUE='NONE'
+
+/* Returns */
+IF OPERATION='MAP' THEN
+RETURN TASK,TASKACTION,LINESEQUENCE,PAYROLL,ASSIGNMENT_NUMBER,Effective_As_Of_Date
+ELSE
+RETURN OUTPUTVALUE
+/* End Formula Text */<br></code></pre>
+                  
+                  
+                  
+                  
+                  </div>
+               
+               <div class="sect1" id="FAIHM1754433">
+                  <h2>Sample Batch Loader Formula for Multiple Tasks</h2>
+                  
+                  
+                  
+                  
+                  <p>The formula in this example uses two separate
+                     tasks to create bank and also add payroll to a payroll relationship.
+                     The formula also converts Person Number in the flat file into Assignment
+                     Number.
+                  </p>
+                  
+                  
+                  <p>The formula for this example is as follows:</p>
+                  
+                  
+                  
+                  <pre><code>/**********************************************************
+FORMULA NAME: Create Bank and Payroll Relationship 
+FORMULA TYPE: Batch Loader 
+Sample Input File Format: 
+Effective As Of Date|Payroll|Assignment Number
+*************************************************************/
+
+/* Inputs  */
+INPUTS ARE   OPERATION (text), 
+LINEREPEATNO (number), POSITION1 (text), POSITION2 (text), POSITION3 (text), POSITION4 (text), 
+POSITION5 (text), 
+
+DEFAULT FOR LINESEQUENCE IS 1 
+DEFAULT FOR LINEREPEATNO IS 1 
+DEFAULT FOR POSITION1 IS 'NO DATA' 
+DEFAULT FOR POSITION2 IS 'NO DATA' 
+DEFAULT FOR POSITION3 IS 'NO DATA' 
+DEFAULT FOR POSITION4 IS 'NO DATA' 
+DEFAULT FOR POSITION5 IS 'NO DATA'
+
+/* Calculations */
+IF OPERATION='FILETYPE' THEN OUTPUTVALUE='DELIMITED' 
+ELSE IF OPERATION='DELIMITER' THEN OUTPUTVALUE='|' 
+ELSE IF OPERATION='READ' THEN OUTPUTVALUE='NONE' 
+ELSE IF OPERATION='MAP' THEN 
+(
+
+/*Batch Related Outputs*/
+IF POSITION1 = 'Payroll Relationship' AND POSITION2 = 'Add Payroll' THEN (
+TASK='Payroll Relationship' TASKACTION='Add Payroll' 
+
+/*Task Action Related Outputs */
+PAYROLL=POSITION4 
+ASSIGNMENT_NUMBER=POSITION5 
+Effective_As_Of_Date=POSITION3
+) 
+IF POSITION1 = 'Bank and Branch' AND POSITION2 = 'Create Bank' THEN(
+TASK='Bank and Branch' 
+TASKACTION='Create Bank' 
+
+/*Task Action Related Outputs */
+Bank_Name=POSITION3
+)
+) 
+ELSE  OUTPUTVALUE='NONE' 
+
+/* Returns */
+IF OPERATION='MAP' 
+THEN IF POSITION1 = 'Payroll Relationship' AND POSITION2 = 'Add Payroll' THEN (
+RETURN TASK,TASKACTION,LINESEQUENCE,PAYROLL,ASSIGNMENT_NUMBER,Effective_As_Of_Date
+) 
+IF POSITION1 = 'Bank and Branch' AND POSITION2 = 'Create Bank' THEN (
+RETURN TASK,TASKACTION,LINESEQUENCE,Bank_Name
+)
+ELSE RETURN OUTPUTVALUE 
+
+/* End Formula Text */<br></code></pre>
+                  
+                  
+                  
+                  
+                  </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Fixing Event Queue Knowledge Module</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="Certain ETL maps that use the IKM BIAPPS Oracle Event Queue Delete Append KM can fail, requiring changes to the IKM BIAPPS Oracle Event Queue Delete Append KM." />
+<meta name="dcterms.created" content="2017-05-25T23:49:13Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications ETL Guide" />
+<meta name="dcterms.identifier" content="E72285-04" />
+<meta name="dcterms.isVersionOf" content="BIAET" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2014, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-56DB694D-DB27-4E06-9A2F-C5E72C3BDCDF.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-C9E7D7FD-3C17-4247-962B-56DD9E8A2B6B.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAET.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-D3BFCC58-44CB-4442-9965-9FF6156DE37C"></a> <span id="PAGE" style="display:none;">38/47</span> <!-- End Header -->
+<h1 id="BIAET-GUID-D3BFCC58-44CB-4442-9965-9FF6156DE37C" class="sect1">Fixing Event Queue Knowledge Module</h1>
+<div>
+<p>Certain ETL maps that use the IKM BIAPPS Oracle Event Queue Delete Append KM can fail, requiring changes to the IKM BIAPPS Oracle Event Queue Delete Append KM.</p>
+<div class="section">
+<p class="subhead1">Error Message</p>
+<p>You must fix the IKM BIAPPS Oracle Event Queue Delete Append KM when ETL maps fail with the following error:</p>
+<div class="p">
+<pre dir="ltr">
+ODI-17517: Error during task interpretation.
+Task: 11 java.lang.Exception: BeanShell script error: Sourced file: inline evaluation
+of: `` if (errLogSupport.equalsIgnoreCase("Y")  &amp;&amp;
+errLogOption.equalsIgnoreCase("Y")  . . . '' : Attempt to resolve method: 
+equals() on undefined variable or class name: isPartitioned : at Line: 8 : in
+file: inline evaluation of: `` if (errLogSupport.equalsIgnoreCase("Y")  &amp;&amp; 
+errLogOption.equalsIgnoreCase("Y")  . . . '' : isPartitioned .equals ( "Y" )
+</pre></div>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Affected Scenarios</p>
+<p>The maps affected by the KM are listed here. After the Knowledge Module (KM) fix, regenerate the scenarios present in these mapping folders. The Post Load Process (PLP) and Source Independent Load (SIL) scenarios are mandatory and Source Dependent Extract (SDE) scenarios of the PLVs you use need to be regenerated. For example, if you are using Oracle E-Business Suite, then regenerate those SDE, SIL, and PLP scenarios.</p>
+<p>PLP:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>PLP_WorkforceCompensationFact_Quarter</p>
+</li>
+<li>
+<p>PLP_SupervisorHierarchy_Analysis_Top</p>
+</li>
+<li>
+<p>PLP_SupervisorStatusDimension</p>
+</li>
+<li>
+<p>PLP_WorkforceBalanceAggregate_Temp</p>
+</li>
+<li>
+<p>PLP_WorkforceCompensationFact_Year</p>
+</li>
+<li>
+<p>PLP_WorkforceEventFact_Age</p>
+</li>
+<li>
+<p>PLP_WorkforceEventFact_Merge</p>
+</li>
+<li>
+<p>PLP_WorkforceEventFact_Month</p>
+</li>
+<li>
+<p>PLP_WorkforceEventFact_Pow</p>
+</li>
+<li>
+<p>PLP_Workforce_GainLossFact_NonSupChanges</p>
+</li>
+<li>
+<p>PLP_Workforce_GainLoss_Tmp_SupChanges</p>
+</li>
+<li>
+<p>PLP_Workforce_Gen01_GainLossFact_Frozen</p>
+</li>
+<li>
+<p>PLP_Workforce_Gen01_GainLossFact_Live</p>
+</li>
+</ul>
+<p>SIL</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>SIL_AbsenceEventFact</p>
+</li>
+<li>
+<p>SIL_AssignmentSupervisorDimension</p>
+</li>
+<li>
+<p>SIL_WorkforceEventFact</p>
+</li>
+</ul>
+<p>Fusion SDE</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>SDE_FUSION_AssignmentSupervisorDimension</p>
+</li>
+<li>
+<p>SDE_FUSION_AssignmentSupervisorDimension</p>
+</li>
+<li>
+<p>SDE_FUSION_DomainGeneral_ProjectAwardFundingSource</p>
+</li>
+<li>
+<p>SDE_FUSION_DomainGeneral_ProjectAwardInstitution</p>
+</li>
+<li>
+<p>SDE_FUSION_DomainGeneral_ProjectAwardKeyword</p>
+</li>
+<li>
+<p>SDE_FUSION_PersistedStage_WorkforceEvent</p>
+</li>
+<li>
+<p>SDE_FUSION_PersistedStage_WorkforceEvent</p>
+</li>
+<li>
+<p>SDE_FUSION_WorkforceEventFact</p>
+</li>
+<li>
+<p>SDE_FUSION_WorkforceEventFact</p>
+</li>
+</ul>
+<p>E-Business Suite SDE</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>SDE_ORA_AssignmentSupervisorDimension</p>
+</li>
+<li>
+<p>SDE_ORA_HRPersonLegDimension</p>
+</li>
+<li>
+<p>SDE_ORA_PersistedStage_WorkforceEvent</p>
+</li>
+<li>
+<p>SDE_ORA_PersistedStage_WorkforceEvent_Supervisor</p>
+</li>
+<li>
+<p>SDE_ORA_WorkforceEventFact</p>
+</li>
+</ul>
+<p>PeopleSoft SDE</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>SDE_PSFT_AssignmentSupervisorDimension</p>
+</li>
+<li>
+<p>SDE_PSFT_HRPersonLegislation_XLegs</p>
+</li>
+<li>
+<p>SDE_PSFT_PersistedStage_WorkforceEvent</p>
+</li>
+<li>
+<p>SDE_PSFT_PersistedStage_WorkforceEvent_Headcount</p>
+</li>
+<li>
+<p>SDE_PSFT_PersistedStage_WorkforceEvent_PositionHolder</p>
+</li>
+<li>
+<p>SDE_PSFT_PersistedStage_WorkforceEvent_WorkerPosition</p>
+</li>
+<li>
+<p>SDE_PSFT_WorkforceEventFact</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">To make the changes required:</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In ODI Designer, log in as a user with privileges to edit KMs.</span></li>
+<li class="stepexpand"><span>In the repository, expand <span class="bold">Knowledge Modules</span>, then <span class="bold">Integration (IKM)</span>, and open the <span class="bold">IKM BIAPPS Oracle Event Queue Delete Append</span> KM.</span></li>
+<li class="stepexpand"><span>Double-click <span class="bold">Create I$ Table</span>.</span></li>
+<li class="stepexpand"><span>Enter the following code:</span>
+<div>
+<pre dir="ltr">
+&lt;$ if (errLogSupport.equalsIgnoreCase("Y") 
+&amp;&amp; errLogOption.equalsIgnoreCase("Y") ) { $&gt;
+
+/* Creates the flow table which is the replica of Target table during Error Logging Mode */
+CREATE TABLE  &lt;%=odiRef.getTable("L", "INT_NAME", "W")%&gt;
+AS SELECT &lt;%=odiRef.getColList("", "[COL_NAME],", "\n\t", "", "(INS and REW)")%&gt;
+         CAST('' AS VARCHAR2(100)) ERROR_TYPE_IND 
+         ,CAST('' AS UROWID) DIAGNOSTIC_ROWID
+         ,CAST('' AS VARCHAR2(10)) IND_UPDATE
+FROM  &lt;%=odiRef.getTable("L","TARG_NAME","A")%&gt; &lt;%=odiRef.getOption("FLOW_TABLE_OPTIONS")%&gt;
+WHERE 1=2
+&lt;$ } 
+else if ("&lt;%=odiRef.getOption("FLOW_CONTROL")%&gt;".equals("1") ||
+   ("&lt;%=odiRef.getOption("OBI_EVENT_QUEUE_UPDATE")%&gt;".equals("1") &amp;&amp; "&lt;%=refreshType%&gt;".equals("TARGET")) ||
+   ("#IS_INCREMENTAL".equals("Y") ) &amp;&amp; (errLogSupport.equalsIgnoreCase("N") || errLogOption.equalsIgnoreCase("N") ))  { $&gt;
+CREATE TABLE &lt;%=odiRef.getTable("L", "INT_NAME", "W")%&gt;
+(  &lt;%=odiRef.getColList("", "[COL_NAME]\t\t[DEST_WRI_DT] NULL", ",\n\t", "", "UK")%&gt;
+ &lt;%=odiRef.getColList(",\n\t", "[COL_NAME]\t\t&lt;? if (\u0022[DEST_DT]\u0022.equals
+(\u0022NUMBER\u0022)) {?&gt;NUMBER&lt;?} else if (\u0022[DEST_DT]\u0022.equals
+(\u0022VARCHAR2\u0022)) {?&gt;VARCHAR2(4000)&lt;?} else {?&gt;[DEST_WRI_DT]&lt;?}?&gt; NULL", ",\n\t", "", "NOT UK")%&gt;
+)
+&lt;%=odiRef.getOption("FLOW_TABLE_OPTIONS")%&gt;
+&lt;$ }
+else { $&gt;
+/* Step bypassed. It runs only in error logging mode if ETL diagnostics is supported */
+&lt;$ } $&gt;
+</pre></div>
+</li>
+<li class="stepexpand"><span>Regenerate the scenarios.</span></li>
+</ol>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment43">
+<tr>
+<td class="cellalignment50">
+<table class="cellalignment48">
+<tr>
+<td class="cellalignment47"><a href="GUID-56DB694D-DB27-4E06-9A2F-C5E72C3BDCDF.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment47"><a href="GUID-C9E7D7FD-3C17-4247-962B-56DD9E8A2B6B.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2014, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment52">
+<table class="cellalignment46">
+<tr>
+<td class="cellalignment47"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment47"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment47"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

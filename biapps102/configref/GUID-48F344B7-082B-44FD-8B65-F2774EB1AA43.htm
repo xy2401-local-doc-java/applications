@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>How to Integrate Financial Analytics with Oracle Essbase for E-Business Suite</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="Oracle Essbase, with its architecture, provides the capability to load aggregated data, which results in better retrieval times as compared to a similar request on a star schema in the data warehouse. Also, it allows us to perform dynamic aggregation, which helps to load the FSG hierarchies into Oracle Essbase, and build a similar report from Oracle BI Enterprise Edition (Oracle BI EE) using the data loaded into the cube. You can leverage these key benefits of Oracle Essbase and integrate GL data to provide the capability of reporting against the Essbase data." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-7DBC6DC3-BB0C-4167-A972-232DC9464230.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-342F87BC-49BA-44A1-8E74-E4D426D3C7B1.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43"></a> <span id="PAGE" style="display:none;">114/336</span> <!-- End Header -->
+<a id="IT_407"></a>
+<h1 id="BIAFC-GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43" class="sect1">How to Integrate Financial Analytics with Oracle Essbase for E-Business Suite</h1>
+<div>
+<p>Oracle Essbase, with its architecture, provides the capability to load aggregated data, which results in better retrieval times as compared to a similar request on a star schema in the data warehouse. Also, it allows us to perform dynamic aggregation, which helps to load the FSG hierarchies into Oracle Essbase, and build a similar report from <span>Oracle BI Enterprise Edition</span> (<span>Oracle BI EE</span>) using the data loaded into the cube. You can leverage these key benefits of Oracle Essbase and integrate GL data to provide the capability of reporting against the Essbase data.</p>
+<p>One of the key requirements in <span>Oracle BI Applications</span> Financial Analytics has always been to report general ledger data against multiple accounting segment hierarchies, that is, to perform roll-up reporting against the accounting segment trees. In addition, there has been a requirement to build a financial report in Oracle BI that is exactly similar to the FSG report in Oracle E-Business Suite. The FSG report involves various kinds of arithmetic aggregations in the hierarchy structure and also a drill down on the measures within these financial reports.</p>
+<div class="section">
+<p class="subhead1">Overview</p>
+<p>In integrating Financial Analytics with Oracle Essbase for E-Business Suite, we do the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Load GL Balances and GL Budgets (Actuals and Budgets) data from our data warehouse into the Essbase cube.</p>
+</li>
+<li>
+<p>Load the accounting segment hierarchies (Value Set Hierarchies in EBS terminology) into the cube. Unlike the hierarchies that are loaded in the DW, that are level-based and have a consistent number of levels, the hierarchies that are loaded into the Essbase cube are ragged hierarchies and will be reported as ragged hierarchies from <span>Oracle BI EE</span>.</p>
+</li>
+<li>
+<p>Load FSG row set hierarchies into one of the dimensions in the cube. Such a dimension is referred to as the Financial Reporting dimension from that point.</p>
+</li>
+<li>
+<p>Integrate Essbase with <span>Oracle BI EE</span> as well, and provide the capability of reporting Essbase data from <span>Oracle BI EE</span>. In addition to the Financial Reporting dimension, this integration supports all other key GL dimensions, such as Time, Ledger, Budget, Accounting segment dimensions such as Balancing Segment, Cost Center, Natural Account, GL Segment1 through GL Segment10, Program Segment, and Project Segment. This enables users to build reports that are similar to the ones built from the regular DW GL Star schema.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Key Notes</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>For the financial reporting dimension, only the row set hierarchies have been brought in from EBS, thereby allowing you to perform various arithmetic aggregations among the hierarchy nodes. Base metrics such as Budget Amount, Balance Amount, and Activity Amount are available for reporting. If required, additional metrics such as YTD and PTD metrics can be built as a customization on top of the base metrics that are available out of the box.</p>
+</li>
+<li>
+<p>The base metrics provided out of the box are supported in 4 different currencies &ndash; Ledger Currency, Global1 Currency, Global2 Currency, and Global3 Currency. There is no support for document currency in this release.</p>
+</li>
+<li>
+<p>This integration is currently supported only for budgets and actuals data. Encumbrances are not loaded into the Essbase cube.</p>
+</li>
+<li>
+<p>This integration is currently supported only for a DW loaded from a single EBS instance. Integration with a multi-source DW or a multi instance DW is not supported.</p>
+</li>
+<li>
+<p>With this integration, users are expected to retrieve data that is residing in Essbase only through <span>Oracle BI EE</span> and not through other Essbase clients, such as smart view.</p>
+</li>
+<li>
+<p>Ledger security has been implemented for this integration. Data viewed by users is restricted to the ledgers that the users have access to.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Performing the Integration</p>
+<p>The following are the prerequisites required for this integration to work:</p>
+<ol>
+<li>
+<p>Create an ODBC connection with the name OBIAFA from your Essbase server host, pointing to your Oracle DW target database.</p>
+<div class="infobox-note" id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43__GUID-F17DA510-8CFA-4752-ADA5-5FAEFCC97B64">
+<p class="notep1">Note:</p>
+It is important that you use the same connection name (OBIAFA) as mentioned here.</div>
+<p>If your Essbase server is on a Windows host, create the ODBC connection using the DataDirect 6.0 Oracle Wire Protocol driver.</p>
+</li>
+<li>
+<p>Perform the following steps to create a physical data server in the ODI repository pointing to your Essbase server, and then to assign it to the appropriate execution context:</p>
+<ol>
+<li>
+<p>In your ODI repository, navigate to Topology &gt; Physical Architecture &gt; Technologies &gt; Hyperion Essbase, and create a new physical data server with the name Essbase_BIAPPS11G.</p>
+<div class="figure" id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43__GUID-8495893A-43A0-4B62-9E4C-A54B0ABB35A6"><img width="549" height="335" src="img/GUID-DF49D69D-38C4-4FCF-B7E4-2A9BDFAEFFF7-default.gif" alt="Description of GUID-DF49D69D-38C4-4FCF-B7E4-2A9BDFAEFFF7-default.gif follows" title="Description of GUID-DF49D69D-38C4-4FCF-B7E4-2A9BDFAEFFF7-default.gif follows" /><br />
+<a href="img_text/GUID-DF49D69D-38C4-4FCF-B7E4-2A9BDFAEFFF7-default.htm">Description of the illustration GUID-DF49D69D-38C4-4FCF-B7E4-2A9BDFAEFFF7-default.gif</a></div>
+<!-- class="figure" --></li>
+<li>
+<p>Create a new physical schema for the new physical data server. Hardcode the application and the database name to be OBIAFA.</p>
+<div class="figure" id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43__GUID-322728DA-192C-4D1A-91EC-6BC3211B9D76"><img width="476" height="231" src="img/GUID-EAD2F10B-B68C-4134-BF4D-70F211C056E0-default.gif" alt="Description of GUID-EAD2F10B-B68C-4134-BF4D-70F211C056E0-default.gif follows" title="Description of GUID-EAD2F10B-B68C-4134-BF4D-70F211C056E0-default.gif follows" /><br />
+<a href="img_text/GUID-EAD2F10B-B68C-4134-BF4D-70F211C056E0-default.htm">Description of the illustration GUID-EAD2F10B-B68C-4134-BF4D-70F211C056E0-default.gif</a></div>
+<!-- class="figure" --></li>
+<li>
+<p>In your ODI repository, navigate to Topology &gt; Contexts &gt; Global, and assign the newly created physical server and schema to the appropriate logical schema for the Global Context.</p>
+<p>On the Schemas tab, set the logical schema ESSBASE_BIAPPS11G to the new physical schema that you created in the previous step.</p>
+<div class="figure" id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43__GUID-6141805A-2EF4-4F55-A496-28AC50583F36"><img width="724" height="140" src="img/GUID-C6A6DEB7-A930-4C11-B57A-DF222D04AF85-default.gif" alt="Description of GUID-C6A6DEB7-A930-4C11-B57A-DF222D04AF85-default.gif follows" title="Description of GUID-C6A6DEB7-A930-4C11-B57A-DF222D04AF85-default.gif follows" /><br />
+<a href="img_text/GUID-C6A6DEB7-A930-4C11-B57A-DF222D04AF85-default.htm">Description of the illustration GUID-C6A6DEB7-A930-4C11-B57A-DF222D04AF85-default.gif</a></div>
+<!-- class="figure" --></li>
+</ol>
+</li>
+</ol>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Executing Oracle Essbase Load Plans</p>
+<p>All the mappings that are required to load the Essbase cube are shipped in separate load plans (one per EBS version) and are not integrated with the regular load plan components. Therefore, these load plans must be run after the regular DW load plan execution is completed.</p>
+<p>To execute the Essbase load plans:</p>
+<ol>
+<li>
+<p>In ODI studio, navigate to Load Plans and Scenarios &gt; Predefined Load Plans &gt; Essbase, and run the load plans in full mode.</p>
+<div class="infobox-note" id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43__GUID-3FE3CC2E-A66A-4CA9-BB68-379F53289569">
+<p class="notep1">Note:</p>
+The Oracle Essbase load plans can only be run in full mode, that is, there is no incremental logic implemented for any of the mappings in the load plan. Every time these load plans are run, even the Essbase cube is refreshed in full.</div>
+<div class="figure" id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43__GUID-C8529AA8-C80F-45FB-9A1D-28CA64237D7C"><img width="405" height="170" src="img/GUID-848E88BB-B6D7-432E-BE92-09B569FFB5F2-default.gif" alt="Description of GUID-848E88BB-B6D7-432E-BE92-09B569FFB5F2-default.gif follows" title="Description of GUID-848E88BB-B6D7-432E-BE92-09B569FFB5F2-default.gif follows" /><br />
+<a href="img_text/GUID-848E88BB-B6D7-432E-BE92-09B569FFB5F2-default.htm">Description of the illustration GUID-848E88BB-B6D7-432E-BE92-09B569FFB5F2-default.gif</a></div>
+<!-- class="figure" --></li>
+<li>
+<p>In the Startup Values window that is displayed when executing these Load Plans, provide values for the following parameters:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>DATASOURCE_NUM_ID: The data source ID that is configured for your source E-Business Suite instance in the <span>Configuration Manager</span>. All mappings have a filter on the DSN value. Therefore, to ensure that the mappings process the data, it is important that you provide the correct value for this parameter.</p>
+</li>
+<li>
+<p>LANGUAGE_BASE: The language base value configured for this parameter in <span>Configuration Manager</span>.</p>
+</li>
+<li>
+<p>ESSBASE_LOG_LOCATION: Location where all the log files are stored. Log files are useful for debugging purposes.</p>
+</li>
+<li>
+<p>IS_FIN_ESSBASE_ENABLED: Set this parameter value to Y.</p>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Building a Financial Report from <span>Oracle BI EE</span> Answers</p>
+<p>After the execution of the Essbase Load plans are completed and the data loaded into Essbase, you can build Financial Reports, similar to FSG reports in E-Business Suite, using the Financials &ndash; GL Balance (Essbase) subject area. This topic explains the basic steps for building a financial report from <span>Oracle BI EE</span> Answers.</p>
+<ol>
+<li>
+<p>Drag the necessary columns from the Financials &ndash; GL Balance (Essbase) subject area. For the Financial Reporting dimension, drag the Financial Reporting presentation hierarchy.</p>
+</li>
+<li>
+<p>Apply the appropriate filters.</p>
+<div class="figure" id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43__GUID-24661BCE-43A7-41A6-9DFD-FB217D4C3F81"><img width="453" height="217" src="img/GUID-324C3AB8-4227-4BF5-898D-7E8003489E1D-default.gif" alt="Description of GUID-324C3AB8-4227-4BF5-898D-7E8003489E1D-default.gif follows" title="Description of GUID-324C3AB8-4227-4BF5-898D-7E8003489E1D-default.gif follows" /><br />
+<a href="img_text/GUID-324C3AB8-4227-4BF5-898D-7E8003489E1D-default.htm">Description of the illustration GUID-324C3AB8-4227-4BF5-898D-7E8003489E1D-default.gif</a></div>
+<!-- class="figure" --></li>
+<li>
+<p>Navigate to the Results tab.</p>
+<p>Based on the filters that are applied, all the applicable hierarchies are displayed in the report. These hierarchies are FSG row sets that are defined in E-Business Suite.</p>
+<div class="figure" id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43__GUID-5B1EB1DD-43A0-4520-AF16-E46CF2A745CC"><img width="395" height="320" src="img/GUID-72D2DD67-3063-457B-8A15-872AEFFED56D-default.gif" alt="Description of GUID-72D2DD67-3063-457B-8A15-872AEFFED56D-default.gif follows" title="Description of GUID-72D2DD67-3063-457B-8A15-872AEFFED56D-default.gif follows" /><br />
+<a href="img_text/GUID-72D2DD67-3063-457B-8A15-872AEFFED56D-default.htm">Description of the illustration GUID-72D2DD67-3063-457B-8A15-872AEFFED56D-default.gif</a></div>
+<!-- class="figure" --></li>
+<li>
+<p>Drill down to any hierarchy or row set of your choice.</p>
+</li>
+<li>
+<p>To see only one hierarchy in a report and save the report for future usage, perform the following steps:</p>
+<ol>
+<li>
+<p>To filter out the necessary hierarchy, for example, Balance Sheet hierarchy, use the Selection Steps feature of <span>Oracle BI EE</span>.</p>
+</li>
+<li>
+<p>In the lower pane, expand Selection Steps and edit the Dim &ndash; Financial Reporting dimension to start with the hierarchy of your choice.</p>
+<div class="figure" id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43__GUID-874B8FE5-B045-410A-BDC3-9D59A953E601"><img width="803" height="245" src="img/GUID-2246D958-4F88-4B45-B9F2-5E90425ADA44-default.gif" alt="Description of GUID-2246D958-4F88-4B45-B9F2-5E90425ADA44-default.gif follows" title="Description of GUID-2246D958-4F88-4B45-B9F2-5E90425ADA44-default.gif follows" /><br />
+<a href="img_text/GUID-2246D958-4F88-4B45-B9F2-5E90425ADA44-default.htm">Description of the illustration GUID-2246D958-4F88-4B45-B9F2-5E90425ADA44-default.gif</a></div>
+<!-- class="figure" -->
+<p>Only the specified hierarchy is displayed on the screen.</p>
+</li>
+<li>
+<p>Expand all the nodes in the hierarchy, and save the report for future usage.</p>
+<div class="figure" id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43__GUID-77E365F7-AEA6-46A8-A461-91835450DDDD"><img width="446" height="436" src="img/GUID-D2F608F9-E3CA-4EEE-A01B-2689F270EF65-default.gif" alt="Description of GUID-D2F608F9-E3CA-4EEE-A01B-2689F270EF65-default.gif follows" title="Description of GUID-D2F608F9-E3CA-4EEE-A01B-2689F270EF65-default.gif follows" /><br />
+<a href="img_text/GUID-D2F608F9-E3CA-4EEE-A01B-2689F270EF65-default.htm">Description of the illustration GUID-D2F608F9-E3CA-4EEE-A01B-2689F270EF65-default.gif</a></div>
+<!-- class="figure" --></li>
+</ol>
+</li>
+</ol>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Applying Segment Overrides in the Financial Reports</p>
+<p>When an FSG report is built in E-Business Suite, it is common practice to override some segment values for the COA structure. For example, a Balance Sheet report can be built for a company, product, and sub account combination. This topic explains how to apply such filters on reports that are built from <span>Oracle BI EE</span>.</p>
+<p>Consider the example of a Balance Sheet report that does not have any segment filters, and assume that you must apply a filter on Company (Segment Value &ndash; 01), Product (Segment Value &ndash; 000) and Sub account (Segment Value &ndash; 0000) segments. Before you apply these filters, you must know the dimensions to which these segments map in <span>Oracle BI Applications</span>, and then apply the filters accordingly. This is because filters are applied on the code columns of the respective dimensions. For example, if Company maps to the Balancing Segment dimension, Sub Account maps to the GL Segment1 dimension, and Product maps to GL Segment2 dimension, the filters are applied on the code columns of these dimensions.</p>
+<div class="figure" id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43__GUID-AFFA5640-20EA-44B7-AF69-E061F9A2EA4A"><img width="652" height="271" src="img/GUID-9BA9E951-28CF-4FB7-B2E6-232BD68AB72F-default.gif" alt="Description of GUID-9BA9E951-28CF-4FB7-B2E6-232BD68AB72F-default.gif follows" title="Description of GUID-9BA9E951-28CF-4FB7-B2E6-232BD68AB72F-default.gif follows" /><br />
+<a href="img_text/GUID-9BA9E951-28CF-4FB7-B2E6-232BD68AB72F-default.htm">Description of the illustration GUID-9BA9E951-28CF-4FB7-B2E6-232BD68AB72F-default.gif</a></div>
+<!-- class="figure" -->
+<p>All the segment values are stored as hierarchies in the Essbase cube, and therefore, the filters are applied as fully qualified paths and must strictly adhere to the following format:</p>
+<p>[&lt;Segment String&gt;].[&lt;Value Set ID&gt;].[Value Set ID&gt;~&lt;Segment Value&gt;]</p>
+<p>The segment strings to be used for the various dimensions are as shown in the following table:</p>
+<div class="tblformal" id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43__GUID-01915A55-AF71-4A2F-A817-6B177E11D5A6">
+<table class="cellalignment137" summary="This table shows the various dimensions and the segment strings to be used with each.">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment151" id="d87788e248">Dimension</th>
+<th class="cellalignment151" id="d87788e250">Segment String</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d87788e254" headers="d87788e248">Balancing Segment</td>
+<td class="cellalignment128" headers="d87788e254 d87788e250">All Balancing Segments</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d87788e259" headers="d87788e248">Natural Account</td>
+<td class="cellalignment128" headers="d87788e259 d87788e250">All Natural Accounts</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d87788e264" headers="d87788e248">Cost Center</td>
+<td class="cellalignment128" headers="d87788e264 d87788e250">All Cost Centers</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment128" id="d87788e269" headers="d87788e248">GL Segment 1&ndash;10</td>
+<td class="cellalignment128" headers="d87788e269 d87788e250">All Segments</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>The following are a few more examples for a better understanding of applying filters:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Apply a filter on Cost Center, Account, and Company segments, which map to Cost Center, Natural Account, and Balancing Segment respectively.</p>
+<div class="figure" id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43__GUID-B7DA3ECE-552E-4663-B881-68C687EE61A3"><img width="581" height="271" src="img/GUID-8ECBC1C6-A66B-44C4-AA8F-586301201C77-default.gif" alt="Description of GUID-8ECBC1C6-A66B-44C4-AA8F-586301201C77-default.gif follows" title="Description of GUID-8ECBC1C6-A66B-44C4-AA8F-586301201C77-default.gif follows" /><br />
+<a href="img_text/GUID-8ECBC1C6-A66B-44C4-AA8F-586301201C77-default.htm">Description of the illustration GUID-8ECBC1C6-A66B-44C4-AA8F-586301201C77-default.gif</a></div>
+<!-- class="figure" --></li>
+<li>
+<p>Apply a filter on Account and Organization segments, which map to Natural Account and GL Segment3 respectively.</p>
+<div class="figure" id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43__GUID-1B0B1B1D-E60E-48AC-A11D-E944087EB1F0"><img width="614" height="253" src="img/GUID-F2355CE1-558D-4D90-9E85-7FB2B3FEFCD6-default.gif" alt="Description of GUID-F2355CE1-558D-4D90-9E85-7FB2B3FEFCD6-default.gif follows" title="Description of GUID-F2355CE1-558D-4D90-9E85-7FB2B3FEFCD6-default.gif follows" /><br />
+<a href="img_text/GUID-F2355CE1-558D-4D90-9E85-7FB2B3FEFCD6-default.htm">Description of the illustration GUID-F2355CE1-558D-4D90-9E85-7FB2B3FEFCD6-default.gif</a></div>
+<!-- class="figure" --></li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Loading Financial Reporting Hierarchies from a CSV File</p>
+<p>This section is applicable for E-Business Suite customers who don&rsquo;t have FSG implementation but still want to leverage the Oracle Essbase integration and build financial reports from <span>Oracle BI EE</span>. It explains how to add financial reporting hierarchies in a CSV file so that the ETL process loads these hierarchies into the cube, similar to how FSG hierarchies areloaded into the cube. The remaining process of building the report in <span>Oracle BI EE</span> is as explained in the previous sections.</p>
+<p>You can define the financial reporting hierarchies using the configuration file, file_group_acct_hier.csv. The configuration file or files for this task are available at either of the following locations when you install <span>Oracle BI Applications</span>:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Source-independent files: &lt;Oracle Home for BI&gt;\biapps\etl\data_files\src_files\</p>
+</li>
+<li>
+<p>Source-specific files: &lt;Oracle Home for BI&gt;\biapps\etl\data_files\src_files\&lt;source adaptor&gt;</p>
+</li>
+</ul>
+<p>However, the system administrator would have copied these files to another location and configured ODI connections to read from this location. Work with your system administrator to obtain the files. When configuration is complete, a system administrator must copy the configured files back to the location from where ODI reads these files.</p>
+<p>Edit the file_group_acct_hier.csv file and define any financial reporting hierarchy you need. The following screenshot provides an example for one such hierarchy.</p>
+<img width="993" height="740" src="img/GUID-F24EC844-00E6-405B-9A85-2091B8F2580B-default.png" alt="Sample financial reporting hierarchy." title="Sample financial reporting hierarchy." />
+<p><span class="bold">Notes</span>:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>While defining the hierarchy, enter all the child nodes under the CHILD_GROUP_ACCT_NUM column, and the parent nodes under PARENT_GROUP_ACCT_NUM column. The values in these columns must be the Group Account codes. The names and descriptions for these group account codes can be entered in <span>Configuration Manager</span>, for the Group Accounts domain. Ensure that the values entered in the CSV file match the values defined in <span>Configuration Manager</span>.</p>
+</li>
+<li>
+<p>The AGGREGATION column indicates the arithmetic operator between the nodes in the hierarchy, and it can be +, -, *, or /.</p>
+</li>
+<li>
+<p>The SEQUENCE column indicates the sequence of child nodes for any parent node in the hierarchy. For example, if Gross Profit is defined as REVENUE-COGS, the sequence is defined as 1 for REVENUE and 2 for COGS. This sequence is important because the nodes are entered in the same order as mentioned in the CSV file into the cube, and it enables Essbase to perform the appropriate arithmetic operation or consolidation in the proper order.</p>
+</li>
+<li>
+<p>The following example explains how to define this SEQUENCE column better. Let us assume that you want to define an expression for a node A as A = (B+C)/(D+E).</p>
+<p>In such a case, it is always prudent that you split these operations. Therefore, define two intermediate nodes:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>X, whose children are B and C with sequence 1 and 2 respectively.</p>
+</li>
+<li>
+<p>Y, whose children are D and E with sequence 1 and 2 respectively.</p>
+</li>
+</ul>
+<p>Then define the node A, with children X and Y with sequence 1 and 2 respectively. This enables Essbase to perform the consolidation in the appropriate order, as mentioned earlier.</p>
+<div class="infobox-note" id="GUID-48F344B7-082B-44FD-8B65-F2774EB1AA43__GUID-64AC5FA2-8DC8-494F-9CE7-3A973F47EFC3">
+<p class="notep1">Note:</p>
+Two sample hierarchies, Sample Income Statement and Sample Balance Sheet, are included in the out-of-the-box file, and can be used as references.</div>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-7DBC6DC3-BB0C-4167-A972-232DC9464230.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-342F87BC-49BA-44A1-8E74-E4D426D3C7B1.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

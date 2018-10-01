@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Provisioning BI Users with Duty Roles</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="To provision a BI User with a Duty Role, you first assign the User to an Enterprise Role/Group in LDAP, then make sure that the Enterprise Role/Group is associated with the appropriate Duty Role in the Policy Store." />
+<meta name="dcterms.created" content="2017-05-25T23:34:47Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Security Guide" />
+<meta name="dcterms.identifier" content="E72288-04" />
+<meta name="dcterms.isVersionOf" content="BIASC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2014, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-31FB3199-DB43-4279-AA14-270DC66368CD.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-CD331861-765B-4F9F-BE40-9A327E7D8B2C.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIASC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-E48CB0CB-3040-4651-B858-8E0F5B89C637"></a> <span id="PAGE" style="display:none;">17/21</span> <!-- End Header -->
+<h1 id="BIASC-GUID-E48CB0CB-3040-4651-B858-8E0F5B89C637" class="sect1">Provisioning BI Users with Duty Roles</h1>
+<div>
+<p>To provision a BI User with a Duty Role, you first assign the User to an Enterprise Role/Group in LDAP, then make sure that the Enterprise Role/Group is associated with the appropriate Duty Role in the Policy Store.</p>
+<div class="section">BI Users are provisioned with BI Duty Roles using Enterprise Roles in the LDAP. To provision users, you typically use either <span>Oracle Fusion Middleware</span>, or the <span>Oracle BI Repository</span> initialization blocks. If you are using the default embedded Enterprise Roles in Oracle WebLogic Server LDAP, then these Enterprise Roles are associated with the appropriate Duty Roles by default, and no further configuration is required.
+<p>If you are using a different LDAP with your own set of Enterprise Roles, then you need to make sure that these are associated with the appropriate Duty Roles, by following the steps below.</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Log in to <span>Oracle Enterprise Manager Fusion Middleware Control</span> as an administrator.</span></li>
+<li class="stepexpand"><span>Expand Business Intelligence, right-click <span class="bold">coreapplication</span>, and select <span class="bold">Security</span>, then <span class="bold">Application Roles</span>.</span>
+<div>
+<div class="p">A list of available Duty Roles is displayed.
+<div class="figure" id="GUID-E48CB0CB-3040-4651-B858-8E0F5B89C637__GUID-7C6EE619-FDF8-43E6-9255-17254B9B9B23"><img width="948" height="648" src="img/GUID-E56A4CF8-D691-4F77-B4DD-5E4C218185C8-default.gif" alt="Description of GUID-E56A4CF8-D691-4F77-B4DD-5E4C218185C8-default.gif follows" title="Description of GUID-E56A4CF8-D691-4F77-B4DD-5E4C218185C8-default.gif follows" /><br />
+<a href="img_text/GUID-E56A4CF8-D691-4F77-B4DD-5E4C218185C8-default.htm">Description of the illustration GUID-E56A4CF8-D691-4F77-B4DD-5E4C218185C8-default.gif</a></div>
+<!-- class="figure" --></div>
+</div>
+</li>
+<li class="stepexpand"><span>Provision a BI User with a Duty Role.</span>
+<ol>
+<li class="substepexpand"><span>Select the Duty Role that a BI User requires access to.</span></li>
+<li class="substepexpand"><span>Click <span class="bold">Edit</span> to display the <span class="wintitle">Edit Application Role</span> dialog.</span>
+<div>
+<div class="figure" id="GUID-E48CB0CB-3040-4651-B858-8E0F5B89C637__GUID-AFF805BC-1F59-41DB-8320-2BD38111AF5E"><img width="886" height="596" src="img/GUID-89DEF60C-A0BD-42E1-AAF0-27E1FA13E38D-default.gif" alt="Description of GUID-89DEF60C-A0BD-42E1-AAF0-27E1FA13E38D-default.gif follows" title="Description of GUID-89DEF60C-A0BD-42E1-AAF0-27E1FA13E38D-default.gif follows" /><br />
+<a href="img_text/GUID-89DEF60C-A0BD-42E1-AAF0-27E1FA13E38D-default.htm">Description of the illustration GUID-89DEF60C-A0BD-42E1-AAF0-27E1FA13E38D-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="substepexpand"><span>In the Member list, click <span class="bold">Add</span> to display the <span class="wintitle">Add Principal</span> dialog.</span></li>
+<li class="substepexpand"><span>Use the Search area to locate and select the Enterprise Role/Group that the BI User has.</span>
+<div>
+<div class="p">For example, User Fred has Enterprise Role 'Fixed Asset Accounting Manager EBS'. To provision Fred with security access for Fixed Assets Accounting reporting for EBS, you edit the BI Duty Role 'Fixed Asset Accounting Manager EBS' and add Enterprise Role 'Fixed Asset Accounting Manager EBS' as a Member.
+<div class="figure" id="GUID-E48CB0CB-3040-4651-B858-8E0F5B89C637__GUID-6C2E8831-C401-4AE1-ADC4-36D9E2AA0E29"><img width="497" height="485" src="img/GUID-8489E204-45D7-4B94-A17C-81FFD1831DF1-default.gif" alt="Description of GUID-8489E204-45D7-4B94-A17C-81FFD1831DF1-default.gif follows" title="Description of GUID-8489E204-45D7-4B94-A17C-81FFD1831DF1-default.gif follows" /><br />
+<a href="img_text/GUID-8489E204-45D7-4B94-A17C-81FFD1831DF1-default.htm">Description of the illustration GUID-8489E204-45D7-4B94-A17C-81FFD1831DF1-default.gif</a></div>
+<!-- class="figure" --></div>
+</div>
+</li>
+<li class="substepexpand"><span>Click <span class="bold">OK</span>.</span></li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment276">
+<tr>
+<td class="cellalignment283">
+<table class="cellalignment281">
+<tr>
+<td class="cellalignment280"><a href="GUID-31FB3199-DB43-4279-AA14-270DC66368CD.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment280"><a href="GUID-CD331861-765B-4F9F-BE40-9A327E7D8B2C.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2014, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment285">
+<table class="cellalignment279">
+<tr>
+<td class="cellalignment280"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment280"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment280"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

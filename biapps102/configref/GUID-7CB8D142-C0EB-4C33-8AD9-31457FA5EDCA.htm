@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Partitioning Tables for Human Resource Analytics</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="The Human Resource application will benefit from table partitioning especially on larger systems where the amount of data is greater." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-1A81DAC7-F7A5-4195-85A2-A396DFF6D1C7.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-8F95028A-4D16-4AB1-A21C-7777A7ABC5EA.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-7CB8D142-C0EB-4C33-8AD9-31457FA5EDCA"></a> <span id="PAGE" style="display:none;">15/336</span> <!-- End Header -->
+<a id="BIACF24463"></a><a id="BIACF24464"></a><a id="BIACF24465"></a><a id="BIACF24466"></a><a id="BIACF24467"></a><a id="IT_368"></a>
+<h1 id="BIAFC-GUID-7CB8D142-C0EB-4C33-8AD9-31457FA5EDCA" class="sect1">Partitioning Tables for Human Resource Analytics</h1>
+<div>
+<p>The Human Resource application will benefit from table partitioning especially on larger systems where the amount of data is greater.</p>
+<div class="section">
+<p>The main benefits of table partitioning are:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Faster ETL, as indexes are rebuilt only over the table partitions that have changed.</p>
+</li>
+<li>
+<p>Faster reports, as partition pruning is a very efficient way of getting to the required data.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Optional or Mandatory</p>
+<p>This task is optional, however by default no tables are partitioned.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Applies to</p>
+<p>Systems where <span>Oracle Business Analytics Warehouse</span> is implemented on an Oracle database.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Dependencies</p>
+<p>No dependencies.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Task</p>
+<p>The latest recommendations for table partitioning of Human Resource tables can be found in Tech Notes in My Oracle Support. These should be reviewed before any action is taken.</p>
+<p>There is a table partitioning utility provided in ODI which can be used to create partitioned tables. This utility can be run at any time to implement a particular partition strategy on a table. It is re-runnable and can be used to change the strategy if needed. It will backup the existing table, create the partitioned table in its place and copy in the data and indexes.</p>
+<p>For example, to implement table partitioning on the table W_WRKFC_EVT_MONTH_F:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Execute the scenario IMPLEMENT_DW_TABLE_PARTITIONS passing in the parameters:</span>
+<div>
+<div class="tblformal" id="GUID-7CB8D142-C0EB-4C33-8AD9-31457FA5EDCA__GUID-4C4517E2-2811-4D7F-8F03-CAE90BBB3A9E">
+<table class="cellalignment156" summary="Parameters for Table Partitioning">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment142" id="d6066e80">Parameter Name</th>
+<th class="cellalignment143" id="d6066e82">Description</th>
+<th class="cellalignment142" id="d6066e84">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d6066e88" headers="d6066e80">
+<p>CREATE_SCRIPT_FILE</p>
+</td>
+<td class="cellalignment145" headers="d6066e88 d6066e82">
+<p>Whether or not to create a file with the partition table script.</p>
+</td>
+<td class="cellalignment144" headers="d6066e88 d6066e84">
+<p>Y(es)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d6066e98" headers="d6066e80">
+<p>PARTITION_KEY</p>
+</td>
+<td class="cellalignment145" headers="d6066e98 d6066e82">
+<p>Column acting as partition key.</p>
+</td>
+<td class="cellalignment144" headers="d6066e98 d6066e84">
+<p>EVENT_MONTH_WID</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d6066e108" headers="d6066e80">
+<p>RUN_DDL</p>
+</td>
+<td class="cellalignment145" headers="d6066e108 d6066e82">
+<p>Whether or not to execute the script.</p>
+</td>
+<td class="cellalignment144" headers="d6066e108 d6066e84">
+<p>N(o)</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d6066e118" headers="d6066e80">
+<p>SCRIPT_LOCATION</p>
+</td>
+<td class="cellalignment145" headers="d6066e118 d6066e82">
+<p>Location on file system to create the script.</p>
+</td>
+<td class="cellalignment144" headers="d6066e118 d6066e84">
+<p>C:/Scripts/Partitioning</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d6066e128" headers="d6066e80">
+<p>TABLE_NAME</p>
+</td>
+<td class="cellalignment145" headers="d6066e128 d6066e82">
+<p>Name of table to partition.</p>
+</td>
+<td class="cellalignment144" headers="d6066e128 d6066e84">
+<p>W_WRKFC_EVT_MONTH_F</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</li>
+<li class="stepexpand"><span>If required, then review the script and adjust the partitioning definition.</span>
+<div>
+<p>For the workforce fact table, monthly snapshot records are created from a specified date (HR Workforce Snapshot Date, default value 1st January 2008). Therefore, it would be logical to make this date the cutoff for the first partition, and then partition monthly or quarterly thereafter.</p>
+<p>This is done by changing the script from:</p>
+<pre dir="ltr">
+CREATE TABLE W_WRKFC_EVT_MONTH_F 
+&hellip;
+PARTITION BY RANGE (EVENT_MONTH_WID) INTERVAL(1)
+ (PARTITION p0 VALUES LESS THAN (1)) 
+&hellip;
+</pre>
+<p>To:</p>
+<pre dir="ltr">
+CREATE TABLE W_WRKFC_EVT_MONTH_F 
+&hellip;
+PARTITION BY RANGE (EVENT_MONTH_WID) INTERVAL(3) 
+ (PARTITION p0 VALUES LESS THAN (200801)) 
+&hellip;
+</pre></div>
+</li>
+<li class="stepexpand"><span>Execute the script against <span>Oracle Business Analytics Warehouse</span>.</span></li>
+</ol>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-1A81DAC7-F7A5-4195-85A2-A396DFF6D1C7.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-8F95028A-4D16-4AB1-A21C-7777A7ABC5EA.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

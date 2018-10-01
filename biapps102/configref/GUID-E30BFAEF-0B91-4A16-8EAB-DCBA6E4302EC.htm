@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>About Configuring Project Forecast Fact for E-Business Suite</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="The Forecast fact table is based on PA_BUDGET_LINES. A filter is applied to the Budget Version table to extract only baselined Forecasts for the Forecast fact. The grain of this table is a Forecast line. The ETL extracts only baselined forecasts, so the records in this table are not updated after they are loaded to Oracle Business Analytics Warehouse; only new records are inserted during an incremental run." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-B4534F3E-22BD-4578-B1BD-366E887788BB.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-F8683EF0-BBBF-4AAB-8BD3-00009902302F.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-E30BFAEF-0B91-4A16-8EAB-DCBA6E4302EC"></a> <span id="PAGE" style="display:none;">46/336</span> <!-- End Header -->
+<a id="BIACF24666"></a><a id="BIACF24667"></a><a id="IT_302"></a>
+<h1 id="BIAFC-GUID-E30BFAEF-0B91-4A16-8EAB-DCBA6E4302EC" class="sect1">About Configuring Project Forecast Fact for E-Business Suite</h1>
+<div>
+<p>The Forecast fact table is based on PA_BUDGET_LINES. A filter is applied to the Budget Version table to extract only baselined Forecasts for the Forecast fact. The grain of this table is a Forecast line. The ETL extracts only baselined forecasts, so the records in this table are not updated after they are loaded to <span>Oracle Business Analytics Warehouse</span>; only new records are inserted during an incremental run.</p>
+<p>Forecasts are stored in the Budget dimension (W_PROJ_BUDGET_D) as well.</p>
+<div class="infobox-note" id="GUID-E30BFAEF-0B91-4A16-8EAB-DCBA6E4302EC__GUID-7460C0C1-DBE2-4346-ADE0-D5A0C1D66ABE">
+<p class="notep1">Note:</p>
+For E-Business Suite, Transaction Currency is the Document Currency for this fact.</div>
+<div class="section">
+<p class="subhead1">Defining Filters on Forecast Metrics</p>
+<p>Users can create multiple forecasts for a single Project and multiple versions for the same forecast type. Therefore, <span>Oracle BI Applications</span> filter all exposed metrics using the following filters:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Primary Forecast Type: One project can have only one Cost Forecast with a forecast type of 'Primary Cost Forecast' and one Revenue Forecast with a Forecast type of 'Primary Revenue Forecast.' Therefore, all Cost and Revenue Forecast metrics are filtered on two flags, Primary Cost Forecast and Primary Revenue Forecast, to make sure we are showing data for only one forecast.</p>
+</li>
+<li>
+<p>Current or Original Forecast: One Project forecast can have multiple versions. To show only one forecast version at a time, every metric for the Current Version and the Current Original Version is shown. These flags are set automatically in OLTP when the forecast is baselined, but users can update them manually.</p>
+</li>
+</ul>
+<p>Users can still view metrics for any other forecast type or version by bringing the non-filtered metrics from the Fact - Project Forecast fact table into the Presentation area. But to avoid duplicate data, the report must have a filter on Dim - Project Forecast Version.Forecast Type and Dim - Project Forecast Version.Forecast Version.</p>
+<p>Before running the ETL for the first time, access the Financial Plan Type page in the HTML client, and select your Primary Cost forecast and Primary Revenue forecast types.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Forecasts Created in Forms Client</p>
+<p>For Forecasts entered through the Form client, the PA_BUDGET_ TYPES.PLAN_TYPE column is not populated for the two predefined budget types, 'FC' and 'FR'. Therefore, the following ETL logic is incorporated in SDE_ORA_ProjectBudgetDimension_BudgetType.W_PROJ_BUDGET_DS in the SDE_ORA_ProjectBudgetDimension folder:</p>
+<pre dir="ltr">
+DOMAIN_DEFAULT_UNASSIGNED( TO_CHAR(case when ISNULL(SQ_PA_BUDGET_VERSIONS.PLAN_TYPE) then  DECODE(SQ_PA_BUDGET_VERSIONS.BUDGET_TYPE_CODE1,'AC','BUDGET','AR','BUDGET','FC','FORECAST','FR', 'FORECAST',SQ_PA_BUDGET_VERSIONS.PLAN_TYPE  else SQ_PA_BUDGET_VERSIONS.PLAN_TYPE end  )  )
+</pre>
+<p>For 'FC' and 'FR' types of Forecast versions created in the Forms client, the PRIMARY_COST_FORECAST _FLAG and PRIMARY_REV_FORECAST_FLAG are not populated in PA_BUDGET_VERSIONS. Therefore, the following ETL logic is incorporated in SDE_ORA_ProjectBudgetDimension_BudgetType.W_PROJ_BUDGET_DS in the SDE_ORA_ProjectBudgetDimension folder:</p>
+<pre dir="ltr">
+COALESCE(SQ_PA_BUDGET_VERSIONS.PRIMARY_COST_FORECAST_FLAG, case when SQ_PA_BUDGET_VERSIONS.BUDGET_TYPE_CODE1 = 'FC' THEN 'Y' ELSE NULL END)
+COALESCE(SQ_PA_BUDGET_VERSIONS.PRIMARY_REV_FORECAST_FLAG, case when SQ_PA_BUDGET_VERSIONS.BUDGET_TYPE_CODE1 = 'FR' THEN 'Y' ELSE NULL END)
+</pre>
+<p>For Forms based forecasts, even though the application does not allow the creation of forecast lines in a different currency than the Project Functional currency, we are defaulting the Project Functional Currency in the Document Currency field, so that the Forecast Amounts can also be analyzed in the Global Currencies. For example Doc EAC Raw Cost Amount is populated as:</p>
+<pre dir="ltr">
+COALESCE(SQ_PA_BUDGET_LINES.TXN_RAW_COST,IIF(SQ_PA_BUDGET_LINES.TXN_CURRENCY_CODE = SQ_PA_BUDGET_LINES.PROJFUNC_CURRENCY_CODE, SQ_PA_BUDGET_LINES.RAW_COST,NULL))
+</pre>
+<p>Forecast Fact Canonical Date: The Forecast fact has the following two sets of Accounting Date and Period WIDs:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>PROJ_ACCT_START_DT_WID, PROJ_ACCT_END_DT_WID &amp; PROJ_PERIOD_WID</p>
+<p>PROJ_ACCT_START_DT_WID and PROJ_ACCT_END_DT_WID are populated using START_DATE and END_DATE of forecast line only for Forecasts that are time phased using the Project Accounting (PA) Calendar.</p>
+</li>
+<li>
+<p>GL_ACCT_START_DT_WID, GL_ACCT_END_DT_WID and GL_PERIOD_WID</p>
+<p>The GL_ACCT_START_DT_WID and GL_ACCT_END_DT_WID are populated using START_DATE and END_DATE of forecast line for Forecasts time phased by the General Ledger (GL) Calendar.</p>
+<p>For Forecasts with a Time Phase equal to 'P' (PA), 'N' (No Time Phase), or 'R' (Date Range), the GL_ACCT_START_DT_WID and GL_PERIOD_WID are resolved using the START_DATE of the forecast line by choosing the Period containing that date in the corresponding GL Calendar.</p>
+<p>This approach assumes that for time phase equal 'P', 'N' or 'R', there will always be a period containing the START_DATE for the given GL Calendar in OLTP database.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-B4534F3E-22BD-4578-B1BD-366E887788BB.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-F8683EF0-BBBF-4AAB-8BD3-00009902302F.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

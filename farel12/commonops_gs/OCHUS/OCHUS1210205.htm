@@ -1,0 +1,605 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Creating Application Users (Chapter 8) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Securing Oracle HCM Cloud" name="doctitle">
+      <meta content="E73303-09" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="OCHUS" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Feb 16 01:08:36 PST 2018" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM security; HCM Data Loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="OCHUS1210204.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="OCHUS1210216.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="OCHUS.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="OCHUS.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="When you create a person record, an Oracle Fusion Applications user account is created automatically if automatic creation
+      of accounts is enabled. If a user account isn't created automatically, then an authorized user can create it on the Security
+      Console. You link an account created in this way to the person record on the Manage User Account page."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">11/25</span><a name="BEGIN" id="BEGIN"></a><div id="OCHUS1210205" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">8</span>Creating Application Users
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1218086">Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1226603">Using the New Person Tasks: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1225678">Using the Create User Task: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1210234">FAQs for Creating Application Users</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="OCHUS1218086">
+                  <h2>Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>When you create person records in Oracle
+                     HCM Cloud, user accounts can be created automatically. The User and
+                     Role Provisioning options control whether accounts are created and
+                     maintained automatically. You set these options for the enterprise during implementation
+                     using the Manage Enterprise HCM Information task.
+                  </p>
+                  
+                  
+                  <p>Some enterprises use applications other than Oracle
+                     HCM Cloud to manage user and role provisioning. In this
+                     case, you set the User and Role Provisioning options to prevent automatic
+                     creation of user accounts. Oracle HCM Cloud user accounts don't provide
+                     access to other enterprise applications.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1218083">
+                     <h3 class="topictitle">Creating Person Records</h3>
+                     
+                     
+                     
+                     <p>You can create person records:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Individually, using tasks such
+                              as Hire an Employee
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>By uploading them in bulk, using
+                              HCM Data Loader
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>During implementation, you can also use the Create
+                        User task to create individual application users for test purposes.
+                        However, after implementation, you use tasks such as Hire an Employee
+                        and Add a Contingent Worker. These tasks are functionally rich and
+                        create the employment information required for Oracle HCM Cloud implementations.
+                        Don't use Create User, which is intended primarily for Oracle Fusion
+                        Applications customers who aren't implementing Oracle HCM Cloud.
+                     </p>
+                     
+                     
+                     
+                     <div class="sect2" id="OCHUS1230504">
+                        <h4 class="topictitle">Uploading Workers Using HCM Data Loader</h4>
+                        
+                        <p>To load workers using HCM Data Loader, use the Import
+                           and Load Data task in the Data Exchange work area. The enterprise
+                           option <span class="uicontrol">User Account Creation</span> controls
+                           whether user accounts are created for all workers by default. You
+                           can prevent user accounts from being created for individual workers
+                           by setting the <span class="uicontrol">GeneratedUserAccountFlag</span> attribute of the user information component to <span class="uicontrol">N</span>. You can also provide a user name in the
+                           uploaded data to override the default user-name format. You run the
+                           process Send Pending LDAP Requests to send bulk user-account requests
+                           for processing.
+                        </p>
+                        
+                        <div class="infobox-"><span class="notep1">Note: </span>
+                           If appropriate role mappings don't exist when you
+                           load new workers, then user accounts are created but no roles are
+                           provisioned. User accounts without roles are automatically suspended
+                           when send Pending LDAP Requests completes. To avoid this suspension,
+                           always create a role mapping for the workers you're loading before
+                           you load them. Having the recommended role mapping to provision abstract roles automatically
+                           to employees, contingent workers, and line managers is sufficient
+                           in most cases.
+                           
+                        </div>
+                        
+                     </div>
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1226603">
+                  <h2>Using the New Person Tasks: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Once your initial implementation of Oracle
+                     HCM Cloud is complete, you create person records:
+                  </p>
+                  
+                  
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Individually, using tasks such
+                           as Hire an Employee in the New Person work area
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In bulk, by uploading person records
+                           using HCM Data Loader
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>This topic summarizes how to create person records
+                     using the Hire an Employee task, with emphasis on any steps that affect
+                     user and role
+                     provisioning.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1262220">
+                     <h3 class="topictitle">Hiring an Employee: User-Name Values</h3>
+                     
+                     <p>You must have the Human Resource Specialist or Line
+                        Manager job role to hire an employee. Follow these steps:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">My Workforce</span> - <span class="uicontrol">New Person</span></span> to open
+                              the New Person work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Tasks panel tab, select
+                              the <span class="uicontrol">Hire an Employee</span> task. The
+                              Hire an Employee: Identification page opens.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If the <span class="uicontrol">Person Number</span> value is <span class="uicontrol">Generated
+                                 automatically</span>, then the number is generated on approval
+                              of the hire. If the field is blank, then you can enter a  person number.
+                           </p>
+                           <p>The user name is the person number if the generation
+                              rule for user names, as specified on the Security Console, is <span class="uicontrol">Person or party number</span>.  
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>You enter the person's last name.
+                              Other names are optional. The user name is based on the person's first
+                              and last names if the generation rule for user names is either <span class="uicontrol">FirstName.LastName</span> or <span class="uicontrol">FLastName</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Next</span>. The Hire an Employee: Person Information page opens.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>A user can have only one work e-mail.
+                              If you enter no work e-mail when you create the person record, then
+                              it can be entered later on the Security Console. You can't add it
+                              directly to the person record later. Once the person record exists,
+                              you manage the e-mail on the Security Console.
+                           </p>
+                           <p>The user name is the work e-mail if the generation rule for user
+                              names is<span class="uicontrol"> E-Mail</span>.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Next</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2111860">
+                     <h3 class="topictitle">Hiring an Employee: Roles</h3>
+                     
+                     <p>The Hire an Employee: Employment Information page
+                        opens. Many assignment details, including <span class="uicontrol">Assignment Status</span> and <span class="uicontrol">Job</span>, may occur as conditions
+                        in role mappings. For example, users may acquire a role automatically if their grade matches that in the
+                        associated role mapping.
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Next</span>. The Hire an Employee: Compensation and Other Information
+                              page opens.
+                           </p>
+                           <p>Any roles for which the employee qualifies
+                              automatically appear in the Role Requests region of the page.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>To add roles manually, click <span class="uicontrol">Add Role</span>. The <span class="uicontrol">Add
+                                 Role</span> dialog box opens.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Search for and select the role.
+                              A role that you can provision appears in a role mapping where you
+                              satisfy the conditions and the <span class="uicontrol">Requestable</span> option is selected for the role.
+                           </p>
+                           <p>The selected
+                              role appears in the Role Requests region with the status <span class="uicontrol">Add requested</span>. Repeat steps 2 and 3 for
+                              additional roles.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Next</span>. On the Hire an Employee: Review page, click <span class="uicontrol">Submit</span>.
+                           </p>
+                           <p>This action:</p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Submits the Hire an Employee transaction
+                                    for approval
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Creates a request to create the
+                                    user account and provision the requested roles, on approval of the
+                                    hire
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                           <p>The user is notified of his or her sign-in details
+                              if an appropriate notification template is enabled.
+                           </p>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1225678">
+                  <h2>Using the Create User Task: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>During implementation, you can use the Create
+                     User task to create test application users. By default, this task
+                     creates a minimal person record and a user account. After implementation,
+                     you use tasks such as Hire an Employee to create application users.
+                     The Create User task isn't recommended once implementation is complete.
+                     This topic describes how to create a test user using the Create User
+                     task.
+                  </p>
+                  
+                  
+                  
+                  <p>. Sign in and follow these steps:</p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">My Team</span> - <span class="uicontrol">Manage Users</span></span> to
+                           open the Manage Users page.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In the Search Results section,
+                           click the <span class="uicontrol">Create</span> icon.
+                        </p>
+                        <p>The Create User page opens.</p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  <div class="sect2" id="OCHUS1225673">
+                     <h3 class="topictitle">Completing Personal Details</h3>
+                     
+                     <p></p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Enter the user's name.</p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">E-Mail</span> field, enter the user's primary e-mail. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Hire Date</span> field, enter the hire date for a worker. For
+                              other types of users, enter a user start date. You can't edit this
+                              date once the user exists.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1225674">
+                     <h3 class="topictitle">Completing User Details</h3>
+                     
+                     <p>You can enter a user name for the user. If you leave
+                        the <span class="uicontrol">User Name</span> field blank, then
+                        the user name is generated automatically and follows the enterprise
+                        default format.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1225675">
+                     <h3 class="topictitle">Setting User Notification Preferences</h3>
+                     
+                     <p>The <span class="uicontrol">Send user name and password</span> option controls whether a notification containing the new user's
+                        sign-in details is sent when the account is created. This option is
+                        enabled only if notifications are enabled on the Security Console
+                        and an appropriate notification template exists. For example, if the
+                        predefined notification template <span class="uicontrol">New Account
+                           Template</span> is enabled, then a notification is sent to the
+                        new user.
+                     </p>
+                     
+                     
+                     <p>If you deselect this option, then you can send the
+                        e-mail later by running the Send User Name and Password E-Mail Notifications
+                        process. An appropriate notification template must be enabled at that
+                        time.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1225676">
+                     <h3 class="topictitle">Completing Employment Information </h3>
+                     
+                     <p></p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select a <span class="uicontrol">Person Type</span> value. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select <span class="uicontrol">Legal Employer</span> and <span class="uicontrol">Business
+                                 Unit</span> values. 
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1225677">
+                     <h3 class="topictitle">Adding Roles</h3>
+                     
+                     <p></p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Autoprovision Roles</span>. Any roles for which the user qualifies
+                              automatically, based on the information that you have entered so far,
+                              appear in the Role Requests table.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>To provision a role manually to
+                              the user, click <span class="uicontrol">Add Role</span>. The
+                              Add Role dialog box opens. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Search for and select the role.
+                              The role must appear in a role mapping for which you satisfy the role-mapping conditions
+                              and where the <span class="uicontrol">Requestable</span> option
+                              is selected for the role.
+                           </p>
+                           <p>The selected role appears
+                              in the Role Requests region with the status <span class="uicontrol">Add requested</span>. The role request is created when you click <span class="uicontrol">Save and Close</span>.
+                           </p>
+                           
+                           <p>Repeat steps 2 and 3 for additional roles.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Save and Close</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Done</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1210234">
+                  <h2>FAQs for Creating Application Users</h2>
+                  
+                  <div class="sect2" id="OCHUS214011">
+                     <h3>How can I create a user account for a new worker?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>When you create a person record, an Oracle
+                        Fusion Applications user account is created automatically if automatic
+                        creation of accounts is enabled. If a user account isn't created automatically,
+                        then an authorized user can create it on the Security Console. You
+                        link an account created in this way to the person record on the Manage
+                        User Account page.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1015939">
+                     <h3>How can I create a user account for an existing worker?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>On the Manage User Account page, select <span class="uicontrol"> Create User Account</span>. Update account details,
+                        if appropriate, and click <span class="uicontrol">Save</span>. Once the request is processed successfully, the account becomes
+                        available.
+                     </p>
+                     
+                     
+                     
+                     
+                     <p>If automatic creation of accounts is disabled, then
+                        you can't use the Create User Account action. Instead, authorized
+                        users can create user accounts on the Security Console.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1014788">
+                     <h3>Where do default user names come from?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>User names are generated automatically in
+                        the format specified on the Security Console. The default format is
+                        the worker's primary work e-mail, but this value can be overridden
+                        for the enterprise. For example, your enterprise may use person number
+                        as the default user name.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

@@ -1,0 +1,382 @@
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+
+<meta name="DC.Type" content="topic">
+<meta name="description" content="Use the various features of .NET framework to integrate with the web services in Oracle Applications Cloud."><meta content="all" name="robots">
+<meta content="yes" name="mos_crawl">
+<meta content="SOAP Web Services for Oracle Project Portfolio Management Cloud" name="dcterms.title">
+<meta content="SOAP Web Services for Oracle Project Portfolio Management Cloud" name="doctitle">
+<meta content="E74441-03" name="dcterms.identifier">
+<meta content="E67968-01" name="partno">
+<meta content="OESPP" name="dcterms.isVersionOf">
+<meta content="Fusion Publishing Server, UAE Print Staging" name="generator">
+<meta content="Tue Jul 18 16:32:29 MDT 2017" name="dcterms.created">
+<meta name="relnum" content="Release 12">
+<meta name="rel_num" content="Release 12"><link type="text/html" title="Previous" href="Database.htm" rel="Prev">
+<link type="text/html" title="Next" href="PHP.htm" rel="Next">
+<link type="text/html" title="Home" href="../../index.html" rel="Start">
+<link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+<script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+<script src="../nav/js/doccd.js" type="application/javascript"></script>
+<link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+<link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+<link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+<script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+<script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+<script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+<script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+<script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+<script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+<meta class="foundation-mq-topbar">
+<link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/oer.css" rel="stylesheet">
+NETFramework-1DC5F33D<meta name="DC.Language" content="en">
+<title>.NET Framework</title>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header><div class="row" id="CONTENT"><div class="IND large-9 medium-8 columns"><div id="EXTRATOC"></div><span id="PAGE" style="display:none;">48/297</span><a name="BEGIN" id="BEGIN"></a><div class="fusiondoc" id="NETFramework-1DC5F33D">
+
+   <h1 class="title topictitle1" id="NETFramework-1DC5F33D__topic-100-1DC68CA9">.NET Framework</h1>
+
+   
+   
+   <div class="body" id="topic-112-1DC68CB3"><p class="shortdesc">Use the various features of .NET
+framework to integrate with the web services in Oracle Applications
+Cloud.</p>
+
+      <section class="section" id="topic-114-1DC68CB4"><h2 class="title sectiontitle">HttpWebRequest</h2>
+         
+         <p class="p" id="topic-118-1DC68CB7">Use HttpWebRequest to programmatically
+construct the SOAP envelope and invoke the web service. This Web Proxy
+approach hides much of the complexity and provides convenience methods,
+instead of hand-crafting the XML. Some cases may require direct calls
+with HttpWebRequest. For such cases, the following is an example of
+a http request to:</p>
+
+         <ol class="ol" id="topic-120-1DC68CB9">
+            <li class="li" id="topic-122-1DC68CBA"><p>Construct an xml payload to invoke the
+service. This example code passes a hard coded string, which is encoded
+to UTF-8 byte array, to the request.</p></li>
+
+            <li class="li" id="topic-124-1DC68CBA"><p>Construct a Base64-encoded string for
+the credentials of the service call.</p></li>
+
+            <li class="li" id="topic-126-1DC68CBA"><p>Create HttpWebRequest connection to the
+service.</p></li>
+
+            <li class="li" id="topic-128-1DC68CBC"><p>Configure the request content type to
+be <samp class="ph codeph" id="topic-130-1DC68CBC">xml</samp>, HTTP method to <samp class="ph codeph" id="topic-132-1DC68CBD">POST</samp>, and set the content length.</p></li>
+
+            <li class="li" id="topic-134-1DC68CBD"><p>Configure the request to use basic authentication,
+with Base64-encoded user name and password, to invoke the service.</p></li>
+
+            <li class="li" id="topic-136-1DC68CBF"><p>Set the <samp class="ph codeph" id="topic-138-1DC68CBF">SOAPAction</samp> to be invoked. Though the service call works
+without this value, it is a recommended standard.</p></li>
+
+            <li class="li" id="topic-140-1DC68CC1"><p>Write the xml payload to the request.</p></li>
+
+            <li class="li" id="topic-142-1DC68CC2"><p>Get the response and process it. This
+example just prints the response.</p></li>
+
+         </ol>
+
+         <pre class="pre codeblock" id="topic-146-1DC76182">using System;
+using System.Text;
+using System.Net;
+using System.IO;
+using System.Xml.Linq;
+
+namespace HttpWebRequestExample1
+{
+  class Program
+  {
+    static void Main(string[] args)
+	{
+	// Construct xml payload to invoke the service. In this example, it is a hard coded string.
+	string envelope = "&lt;soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" " +
+						"xmlns:xsi=\"http ://www.w3.org/2001/XMLSchema-instance\" " +
+						"xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"&gt;" +
+					  "&lt;soap:Body&gt;" +
+						"&lt;findRule
+    xmlns=\"http://xmlns.oracle.com/apps/incentiveCompensation/cn/creditSetup/creditRule/creditRuleService/types/\"&gt;" +
+							"&lt;findCriteria&gt;" +
+							  "&lt;fetchStart
+    xmlns=\"http://xmlns.oracle.com/adf/svc/types/\"&gt;0&lt;/fetchStart&gt;" +
+							  "&lt;fetchSize xmlns=\"http://xmlns.oracle.com/adf/svc/types/\"&gt;-1&lt;/fetchSize&gt;" +
+							  "&lt;filter xmlns=\"http://xmlns.oracle.com/adf/svc/types/\"&gt;" +
+								"&lt;group&gt;" +
+								  "&lt;upperCaseCompare&gt;false&lt;/upperCaseCompare&gt;" +
+								  "&lt;item&gt;" +
+									"&lt;upperCaseCompare&gt;false&lt;/upperCaseCompare&gt;" +
+									"&lt;attribute&gt;RuleId&lt;/attribute&gt;" +
+									"&lt;operator&gt;=&lt;/operator&gt;" +
+									"&lt;value&gt;300000000851162&lt;/value&gt;" +
+								  "&lt;/item&gt;" +
+								"&lt;/group&gt;" +
+							  "&lt;/filter&gt;" +
+							  "&lt;excludeAttribute
+    xmlns=\"http://xmlns.oracle.com/adf/svc/types/\"&gt;false&lt;/excludeAttribute&gt;" +
+							  "&lt;/findCriteria&gt;" +
+							  "&lt;findControl&gt;" +
+								"&lt;retrieveAllTranslations
+    xmlns=\"http://xmlns.oracle.com/adf/svc/types/\"&gt;false&lt;/retrieveAllTranslations&gt;" +
+							  "&lt;/findControl&gt;" +
+						"&lt;/findRule&gt;" +
+					  "&lt;/soap:Body&gt;" +
+					"&lt;/soap:Envelope&gt;";
+		byte[] byteArray = Encoding.UTF8.GetBytes(envelope);
+		
+		// Construct the base 64 encoded string used as credentials for the service call
+		byte[] toEncodeAsBytes = System.Text.ASCIIEncoding.ASCII.GetBytes("username" + ":" + "password");
+		string credentials = System.Convert.ToBase64String(toEncodeAsBytes);
+		
+		// Create HttpWebRequest connection to the service
+		HttpWebRequest request =
+		(HttpWebRequest)WebRequest.Create("https://host:port/icCnSetupCreditRulesPublicService/CreditRuleService");
+		
+		// Configure the request content type to be xml, HTTP method to be POST, and set the content length
+		request.Method = "POST";
+		request.ContentType = "text/xml;charset=UTF-8";
+		request.ContentLength = byteArray.Length;
+
+		// Configure the request to use basic authentication, with base64 encoded user name and password, to invoke the service.
+		request.Headers.Add("Authorization", "Basic " + credentials);
+		
+		// Set the SOAP action to be invoked; while the call works without this, the value is expected to be set based as per standards
+		request.Headers.Add("SOAPAction", "http://xmlns.oracle.com/apps/incentiveCompensation/cn/creditSetup/creditRule/creditRuleService/findRule");
+		
+		// Write the xml payload to the request
+		Stream dataStream = request.GetRequestStream();
+		dataStream.Write(byteArray, 0, byteArray.Length);
+		dataStream.Close();
+		
+		// Get the response and process it; In this example, we simply print out the response XDocument doc;
+		using (WebResponse response = request.GetResponse())
+		{
+		  using (Stream stream = response.GetResponseStream())
+		  {
+			doc = XDocument.Load(stream);
+		  }
+		}
+		Console.WriteLine(doc);
+	}
+  }
+}</pre>
+
+      </section>
+
+      <section class="section" id="topic-124-635B895E"><h2 class="title sectiontitle">Service
+Reference</h2>
+         
+         <p class="p" id="topic-128-635B8960">Use Microsoft Visual Studio
+to create Service Reference and generate a proxy that can invoke web
+services.</p>
+
+         <div class="note note" id="topic-130-635B8961"><span class="notetitle">Note:</span> Create Service Reference,
+and not Web Reference as it may fail due to cyclic references in the
+service definition.</div>
+
+         <p class="p" id="topic-132-635B8961">To integrate
+with a service, first <a class="xref" href="https://msdn.microsoft.com/en-us/library/bb628652.aspx" target="_blank">generate a Service Reference</a> and then use the specified service reference name to access the
+objects generated in the code. In the following example, <span class="ph uicontrol" id="topic-136-635B89C8">FusionServiceReference</span> is the
+service reference name. This example shows how to use a generated
+reference object to find, create, and delete a rule by calling a web
+service.</p>
+
+         <pre class="pre codeblock" id="topic-138-635B89C8">using System;
+using System.ServiceModel.Channels;
+using System.ServiceModel;
+using ServiceReferenceExample1Client.FusionServiceReference;
+
+namespace ServiceReferenceExample1Client
+{
+    /// &lt;summary&gt;
+    /// Custom binding that can be used to invoke Fusion Application services secured with OWSM policy
+    /// &lt;/summary&gt;
+    /// &lt;remarks&gt;
+    /// This custom binding can be used to invoke Fusion Application services secured with 
+    /// "oracle/wss_username_token_over_ssl_service_policy" OWSM policy
+    /// &lt;/remarks&gt;
+    public class UsernameTokenOverSslBinding : CustomBinding
+    {
+        public override BindingElementCollection CreateBindingElements()
+        {
+            BindingElementCollection bindingElements = new BindingElementCollection();
+            bindingElements.Add(SecurityBindingElement.CreateUserNameOverTransportBindingElement());
+            MtomMessageEncodingBindingElement messageEncoding = new MtomMessageEncodingBindingElement();
+            messageEncoding.MessageVersion = MessageVersion.Soap11;
+            bindingElements.Add(messageEncoding);
+            HttpsTransportBindingElement transport = new HttpsTransportBindingElement();
+            bindingElements.Add(transport);
+            return bindingElements.Clone();
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+           
+ EndpointAddress endpointAddress = new EndpointAddress(new 
+Uri("https://host:port/icCnSetupCreditRulesPublicService/CreditRuleService"));
+
+            // Get instance of the service to be invoked
+            CreditRuleServiceClient crs = new CreditRuleServiceClient(new UsernameTokenOverSslBinding(), endpointAddress);
+
+            // Set the authentication details to be used for the service call
+            crs.ClientCredentials.UserName.UserName = "username";
+            crs.ClientCredentials.UserName.Password = "password";
+
+            // Run the test case which includes queries, creates and deletes a rule
+            callFindRule(crs);
+            callCreateRule(crs);
+            Rule rule = callFindRule(crs);
+            callDeleteRule(crs, rule);
+            callFindRule(crs);
+
+        }
+
+        /// &lt;summary&gt;
+        /// Logic to find a object using a web service call
+        /// &lt;/summary&gt;
+        /// &lt;param name="crs"&gt;Instance of the credit rule service client&lt;/param&gt;
+        /// &lt;returns&gt;Rule with a given name in this case "JRAUTIAI_TEST_RULE1"&lt;/returns&gt;
+        static Rule callFindRule(CreditRuleServiceClient crs)
+        {
+            Rule result = null;
+            try
+            {
+                // Populate the objects to be used as parameter
+                FindCriteria findCriteria = new FindCriteria();
+                ViewCriteria viewCriteria = new ViewCriteria();
+                viewCriteria.conjunction = Conjunction.And;
+                ViewCriteriaRow viewCriteriaRow = new ViewCriteriaRow();
+                viewCriteriaRow.conjunction = Conjunction.And;
+                viewCriteriaRow.upperCaseCompare = false;
+                ViewCriteriaItem viewCriteriaItem = new ViewCriteriaItem();
+                viewCriteriaItem.conjunction = Conjunction.And;
+                viewCriteriaItem.upperCaseCompare = false;
+                viewCriteriaItem.attribute = "Name";
+                viewCriteriaItem.@operator = "=";
+                string[] ruleNames = new string[1] { "JRAUTIAI_TEST_RULE1" };
+                viewCriteriaItem.Items = ruleNames;
+ 
+                ViewCriteriaItem[] vcis = new ViewCriteriaItem[1] { viewCriteriaItem };
+                viewCriteriaRow.item = vcis;
+                ViewCriteriaRow[] vcrs = new ViewCriteriaRow[1] { viewCriteriaRow };
+                viewCriteria.group = vcrs;
+                findCriteria.filter = viewCriteria;
+ 
+                findCriteria.fetchStart = 0;
+                findCriteria.fetchSize = -1;
+                FindControl findControl = new FindControl();
+ 
+                // Call the service with the appropriate parameters
+                Rule[] rules = crs.findRule(findCriteria, findControl);
+                if (null != rules &amp;&amp; rules.Length &gt; 0)
+                {
+                    result = rules[0];
+                    foreach (Rule rule in rules)
+                    {
+                        Console.WriteLine("ruleId: " + rule.RuleId + " - orgId: " + rule.OrgId + " - name: " + rule.Name);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Rule JRAUTIAI_TEST_RULE1 not found ");
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return result;
+        }
+ 
+        /// &lt;summary&gt;
+        /// Logic to create a rule, in this case we have hard coded the content of the new rule to simplify the example
+        /// &lt;/summary&gt;
+        /// &lt;param name="crs"&gt;Instance of the credit rule service client&lt;/param&gt;
+        static void callCreateRule(CreditRuleServiceClient crs)
+        {
+            try
+            {
+                // Populate the object to be used as parameter
+                Rule rule = new Rule();
+                rule.EnabledFlag = true;
+                rule.OrgId = 300000000678473;
+                rule.OrgIdSpecified = true;
+                rule.UsageId = -1001;
+                rule.UsageIdSpecified = true;
+                rule.StartDate = new DateTime(2012, 1, 1);
+                rule.StartDateSpecified = true;
+                rule.EndDate = new DateTime(2012, 1, 31);
+                rule.EndDateSpecified = true;
+                rule.Name = "JRAUTIAI_TEST_RULE1";
+ 
+                // Call the service with the appropriate parameters
+                Rule result = crs.createRule(rule);
+                Console.WriteLine("Rule JRAUTIAI_TEST_RULE1 created ");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+ 
+        /// &lt;summary&gt;
+        /// Logic to delete a specific Rule
+        /// &lt;/summary&gt;
+        /// &lt;param name="crs"&gt;Instance of the credit rule service client&lt;/param&gt;
+        /// &lt;param name="rule"&gt;Instance of the Rule to be deleted&lt;/param&gt;
+        static void callDeleteRule(CreditRuleServiceClient crs, Rule rule)
+        {
+            try
+            {
+                // Call the service with the appropriate parameters
+                crs.deleteRule(rule);
+                Console.WriteLine("Rule JRAUTIAI_TEST_RULE1 deleted ");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+        }
+    }
+} 
+</pre>
+
+      </section>
+
+   </div>
+
+   <nav role="navigation" class="related-links">
+<div class="linklist linklist"><h5 class="relatedlinks">Related Topics</h5>
+<ul>
+<li><p><a class="link" href="Java_Client.htm">Java
+Client</a></p></li>
+<li><p><a class="link" href="Database.htm">Oracle
+Database</a></p></li>
+<li><p><a class="link" href="PHP.htm">PHP</a></p></li>
+<li><p><a class="link" href="Perl.htm">Perl</a></p></li>
+<li><p><a class="link" href="Python.htm">Python</a></p></li>
+<li><p><a class="link" href="Ruby.htm">Ruby</a></p></li>
+<li><p><a class="link" href="Invoking_SOAP_Web_Services.htm">Invoking SOAP Web Services</a></p></li></ul></div>
+</nav>
+</div></div></div><footer></footer><noscript><p>Scripting on this page enhances content navigation, but does not change the content in any way.</p></noscript>
+<!-- Start SiteCatalyst code -->
+<script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+<!-- End SiteCatalyst code -->
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Patching</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="After releasing Oracle BI Applications, Oracle may release patches. This section discusses patches that impact SDS related content and considerations when deploying those patches." />
+<meta name="dcterms.created" content="2018-09-25T06:56:20Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Administrator's Guide" />
+<meta name="dcterms.identifier" content="E72283-05" />
+<meta name="dcterms.isVersionOf" content="BIASA" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2014, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-1A0EA88B-88FF-4580-BF38-9DFBB0CBD6A9.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-AD382823-88C9-48E5-A3EB-45744119ADEF.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIASA.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-612EA409-1244-4EBD-B8C8-F40B256FBBFE"></a> <span id="PAGE" style="display:none;">32/34</span> <!-- End Header -->
+<h1 id="BIASA-GUID-612EA409-1244-4EBD-B8C8-F40B256FBBFE" class="sect1">Patching</h1>
+<div>
+<p>After releasing <span>Oracle BI Applications</span>, Oracle may release patches. This section discusses patches that impact SDS related content and considerations when deploying those patches.</p>
+<div class="section">
+<p class="subhead1" id="GUID-612EA409-1244-4EBD-B8C8-F40B256FBBFE__GUID-A9DE7499-5219-4390-9B4E-8D0DEC0FB994">Patch Applied to ODI Datastores or Interfaces</p>
+<p>ODI datastores and interfaces are the only <span>Oracle BI Applications</span> content that impacts SDS related content. Applied patches that impact OLTP-specific datastores are relevant to the SDS.</p>
+<p>It is possible that an applied patch could change the definition of an OLTP-specific datastore, for example adding a column or changing a column's size or datatype. A patch could also introduce a new table. In these cases, run the SDS DDL generator in incremental mode, providing the list of datastores that are patched. Execute the generated DDL against the SDS schema. In case of a new column or table being introduced, run the initial load, specifying just the new or changed table in the table list in the provided procedure.</p>
+<p>A patch could impact an interface by adding a new OLTP table from which data must be extracted. In the previous step, you would have generated the DDL and DML to create and populate this table. Run the <span>Oracle GoldenGate</span> parameter generator procedure to recreate the required parameter files and redeploy to the source and target systems. To create and recreate parameter files, see <a href="GUID-053B68C7-4D41-4E93-B98A-398E746F80FD.htm#GUID-D5FE7DDB-E9DB-43A6-9D53-C2C7D8C1BCFF" title="Parameter files are used to control how Oracle GoldenGate operates. These files are deployed to the source system, where the Extract and Data Pump processes are executed, and the target system, where the Replicat process is executed.">Setup Step: Generate and Deploy Oracle GoldenGate Parameter Files to Source and Target Machines</a>.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1" id="GUID-612EA409-1244-4EBD-B8C8-F40B256FBBFE__GUID-9CB3BC2D-85DC-41B8-A636-30A6CB5F6311">Patch Applied to SDS-Related Procedure</p>
+<p>In the case an SDS-related procedure is replaced by a patch, depending on the nature of the reason for the patch, it may be necessary to re-execute the procedure and re-deploy its output. If the patch is related to the SDS DDL or SDS Copy procedures, the procedure can be run in incremental mode to make some changes to the SDS or in full mode to completely replace the SDS. The patch notes will describe exactly what must be done to implement the patched procedure.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment237">
+<tr>
+<td class="cellalignment251">
+<table class="cellalignment242">
+<tr>
+<td class="cellalignment241"><a href="GUID-1A0EA88B-88FF-4580-BF38-9DFBB0CBD6A9.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment241"><a href="GUID-AD382823-88C9-48E5-A3EB-45744119ADEF.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2014, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment253">
+<table class="cellalignment240">
+<tr>
+<td class="cellalignment241"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment241"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment241"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

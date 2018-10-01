@@ -1,0 +1,2118 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Setting Up Applications Security (Chapter 6) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Securing Oracle HCM Cloud" name="doctitle">
+      <meta content="E73303-09" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="OCHUS" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Feb 16 01:08:36 PST 2018" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM security;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="OCHUS1667102.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="OCHUS1210204.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="OCHUS.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="OCHUS.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="During implementation the TechAdmin user, who has the IT Security Manager job role, performs the tasks in the Define Security
+      Synchronization Processes and Preferences task list. This topic introduces the tasks in this task list. They're described
+      in more detail in this chapter. This task opens the Administration tab of the Security Console. This task runs a process that
+      initializes and maintains the Oracle Fusion Applications Security tables. You're recommended to schedule this process to run
+      daily. This task runs a process that imports the history of user access to Oracle Fusion Applications. This information is
+      required by the Inactive Users Report."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">9/25</span><a name="BEGIN" id="BEGIN"></a><div id="OCHUS2150631" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">6</span>Setting Up Applications Security
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2150494">Defining Security Synchronization Processes and Preferences: Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2146826">Defining the Default User-Name Format: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2146711">Setting Password Policy: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2147116">Setting Role Preferences: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2148870">Managing User-Name and Password Notifications: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2148943">Creating a Custom Notification Template: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1855829">Scheduling the Import User and Role Application Security Data Process: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2150368">Importing User Login History: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1207809">Send Pending LDAP Requests: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1208831">Scheduling the Send Pending LDAP Requests Process: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1267303">Running Retrieve Latest LDAP Changes: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2268349">Bridge for Active Directory: Explained</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="OCHUS2150494">
+                  <h2>Defining Security Synchronization Processes and Preferences: Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>During implementation the TechAdmin user,
+                     who has the IT Security Manager job role, performs the tasks in the
+                     Define Security Synchronization Processes and Preferences task list.
+                     This topic introduces the tasks in this task list. They're described
+                     in more detail in this chapter.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS2150460">
+                     <h3 class="topictitle">Manage Application Security Preferences</h3>
+                     
+                     <p>This task opens the Administration tab of
+                        the Security Console.
+                     </p>
+                     
+                     <p>On the General subtab of the Security Console Administration
+                        tab, you:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Define the default format of user
+                              names for the enterprise.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Set the enterprise password policy.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Specify for how long certificates
+                              remain valid by default. Certificates establish keys for the encryption
+                              and decryption of data that Oracle HCM Cloud exchanges with other
+                              applications.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Specify how often a warning appears
+                              to remind Security Console users to import latest user and role information.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>On the Roles subtab of the Security Console Administration
+                        tab, you:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Specify default prefix and suffix
+                              values for copied roles.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Specify a limit to the number of
+                              nodes that can appear in graphical representations of roles on the
+                              Roles tab of the Security Console.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Specify whether hierarchies on
+                              the Roles tab appear in graphical or tabular format by default.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Manage editing of user-role memberships.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Manage editing of data security
+                              policies.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>On the Notifications subtab of the Security Console
+                        Administration tab, you:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Manage the notification of user
+                              and password events to affected users.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Define custom notification templates.
+                              
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2150600">
+                     <h3 class="topictitle">Import Users and Roles into Application Security</h3>
+                     
+                     <p>This task runs a process that initializes
+                        and maintains the Oracle Fusion Applications Security tables. You're
+                        recommended to schedule this process to run daily.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2150601">
+                     <h3 class="topictitle">Import User Login History</h3>
+                     
+                     <p>This task runs a process that imports the
+                        history of user access to Oracle Fusion Applications. This information
+                        is required by the Inactive Users Report.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS2146826">
+                  <h2>Defining the Default User-Name Format: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>During implementation, you specify the default
+                     format of user names for the enterprise. This topic describes the
+                     available formats. To select a format, you perform the Manage Applications
+                     Security Preferences task, which opens the General subtab of the Security
+                     Console Administration tab. In the User Preferences section of this
+                     subtab, you select a user-name format. You can also change the enterprise
+                     format at any time on the Security Console. Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">Security Console</span></span>.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS2146825">
+                     <h3 class="topictitle">User-Name Formats</h3>
+                     
+                     <p>This table describes the available user-name formats.</p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 User-Name Format
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">E-mail</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The work e-mail (or party e-mail, for party users)
+                                    is the user name. For example, the user name for john.smith@example.com
+                                    is john.smith@example.com. To make duplicate names unique, a number
+                                    is added. For example, john.smith2@example.com may be used if john.smith@example.com
+                                    and john.smith1@example.com already exist.
+                                 </p>
+                                 
+                                 <p><span class="uicontrol">E-mail</span> is the
+                                    default format.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">FirstName.LastName</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The user name is the worker's first and last names
+                                    separated by a single period. For example, the user name for John
+                                    Frank Smith is john.smith. To make duplicate names unique, either
+                                    the user's middle name or a random character is used. For example,
+                                    John Smith's user name could be john.frank.smith or john.x.smith.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">FLastName</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The user name is the worker's last name prefixed
+                                    with the initial of the worker's first name. For example, the user
+                                    name for John Smith is jsmith. 
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Person or party number</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The party number or person number is the user name.
+                                    If your enterprise uses manual person numbering, then any number that's
+                                    entered during the hiring process becomes the user name. Otherwise,
+                                    the number is generated automatically and can't be edited. The automatically
+                                    generated number becomes the user name. For example, if John Smith's
+                                    person number is 987654, then the user name is 987654.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>If you select a different user-name rule, then click <span class="uicontrol">Save</span>. The change takes effect immediately.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2146879">
+                     <h3 class="topictitle">System User Names</h3>
+                     
+                     <p>The selected user-name rule may fail. For example,
+                        a person's party number, person number, or e-mail may not be available
+                        when the user account is requested. In this case, a system user name
+                        is generated by applying these options in the following order until
+                        a unique user name is defined:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>E-Mail</p>
+                        </li>
+                        
+                        <li>
+                           <p>FirstName.LastName</p>
+                        </li>
+                        
+                        <li>
+                           <p>If only the last name is available,
+                              then a random character is prefixed to the last name.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>The Security Console option <span class="uicontrol">Generate system user name when generation rule fails</span> controls
+                        whether a system user name is generated. You can disable this option.
+                        In this case, an error is raised if the user name can't be generated
+                        in the selected format.
+                     </p>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        If a system user name is generated, then it can be
+                        edited later to specify a preferred value.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2146883">
+                     <h3 class="topictitle">Editing User Names</h3>
+                     
+                     <p>Human resource (HR) specialists and line managers
+                        can enter user names in any format to override default user names
+                        when hiring workers. HR specialists can also edit user names for individual
+                        users on the Edit User and Manage User Account pages. The maximum
+                        length of the user name is 80 characters.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2146884">
+                     <h3 class="topictitle">Work E-Mail</h3>
+                     
+                     <p>The line manager or HR specialist may omit the work
+                        e-mail when hiring the worker. In this case, the e-mail can't be added
+                        later by editing the worker details. However, you can edit the user
+                        on the Security Console and enter the e-mail there. To use work e-mail
+                        as the user name after a different user name has been generated, edit
+                        the existing user name. 
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS2146711">
+                  <h2>Setting Password Policy: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>During implementation, you set the password
+                     policy for the enterprise. This topic describes the available options.
+                     To set the password policy, you perform the Manage Applications Security
+                     Preferences task, which opens the General subtab of the Security Console
+                     Administration tab. In the Password Policy section of this subtab,
+                     you select appropriate values. You can also change the enterprise
+                     policy at any time on the Security Console. Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">Security Console</span></span>.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS2146709">
+                     <h3 class="topictitle">Password Policy Options</h3>
+                     
+                     <p>This table describes the available options for setting
+                        password policy.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Password-Policy Option
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Default Value
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Days Before Password Expiration</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Specifies the number of days for which a password
+                                    remains valid. After this period, users must reset their passwords.
+                                    By default, users whose passwords expire must follow the Forgot Password
+                                    process. 
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>90</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Days Before Password Expiry
+                                       Warning</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Specifies when a user is notified that a password
+                                    is about to expire. By default, users are prompted to sign in and
+                                    change their passwords. This value must be equal to or less than the
+                                    value of the <span class="uicontrol">Days Before Password Expiration</span> option.
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>80</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Hours Before Password Reset
+                                       Token Expiration</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>When users request a password reset, they're sent
+                                    a password-reset link. This option specifies how long a reset-password
+                                    link remains active. If the link expires before the password is reset,
+                                    then reset must be requested again. You can enter any value between
+                                    1 and 9999.
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>4</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Password Complexity</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Specifies whether passwords must be simple, complex,
+                                    or very complex. Password validation rules identify passwords that
+                                    fail the selected complexity test. 
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Simple</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Disallow last password</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Select to ensure that the new password is different
+                                    from the last password.
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>No</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Administrator can manually
+                                       reset password</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Passwords can be either generated automatically or
+                                    reset manually by the IT Security Manager or IT Auditor. Select this
+                                    option to allow user passwords to be reset manually. All passwords,
+                                    whether reset manually or generated automatically, must satisfy the
+                                    current complexity rule.
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Users are notified when passwords are about to expire,
+                        have already expired, or have been reset only if appropriate notification
+                        templates are enabled. The predefined notification templates for these
+                        events are Password Expiry Warning Template, Password Expiration Template,
+                        and Password Reset Template.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2146798">
+                     <h3 class="topictitle">Password Expiry Report</h3>
+                     
+                     <p>The Password Expiry Report sends the password-expiration-warning
+                        and password-expired notifications. You must schedule the Password
+                        Expiry Report to run daily. To schedule the report:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">Scheduled Processes</span></span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Schedule New Process</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Schedule Process</span> dialog box, search for and select the
+                              Password Expiry Report process.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Process Details</span> dialog box, click <span class="uicontrol">Advanced</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Schedule tab, set <span class="uicontrol">Run</span> to <span class="uicontrol">Using a
+                                 schedule</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select a <span class="uicontrol">Frequency</span> value. For example, select <span class="uicontrol">Daily</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select a start date and time.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Submit</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS2147116">
+                  <h2>Setting Role Preferences: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>During implementation, you set default role
+                     preferences for the enterprise. This topic describes the role preferences
+                     and their effects. To set role preferences, you perform the Manage
+                     Applications Security Preferences task, which opens the General subtab
+                     of the Security Console Administration tab. From there, click the
+                     Roles subtab. You can also set role preferences at any time on the
+                     Security Console. Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">Security Console</span></span>.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS2147115">
+                     <h3 class="topictitle">Copied-Role Names</h3>
+                     
+                     <p>To create custom roles, you're recommended to copy
+                        predefined roles and edit the copied roles. When you copy a predefined
+                        role:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The <span class="uicontrol">ORA_</span> prefix, which identifies predefined roles, is removed automatically
+                              from the role code of the copied role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The enterprise prefix and suffix
+                              values are added automatically to the role name and code of the copied
+                              role.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You specify enterprise prefix and suffix values on
+                        the Roles subtab of the Security Console Administration tab. By default:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Prefix values are blank.</p>
+                        </li>
+                        
+                        <li>
+                           <p>The role-name suffix is <span class="uicontrol">Custom</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The role-code suffix is <span class="uicontrol">_CUSTOM</span>.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For example, if you copy the Benefits Administrator
+                        job role (ORA_BEN_BENEFITS_ADMINISTRATOR_JOB), then the default name
+                        and code of the copied role are:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Benefits Administrator Custom</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>BEN_BENEFITS_ADMINISTRATOR_JOB_CUSTOM</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You can supply prefix values and change the suffix
+                        values, as required. If you change these values, then click <span class="uicontrol">Save</span>. The changes take effect immediately.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2147154">
+                     <h3 class="topictitle">Graph Nodes and Default Views</h3>
+                     
+                     <p>On the Roles tab of the Security Console, you can
+                        display role hierarchies. By default, these hierarchies appear in
+                        tabular format. To use graphical format by default, deselect the <span class="uicontrol">Enable default table view</span> option on the
+                        Roles subtab of the Security Console Administration tab.
+                     </p>
+                     
+                     
+                     <p>When role hierarchies appear on the Roles tab, the
+                        number of nodes can be very high. You can limit the number of nodes
+                        by setting the <span class="uicontrol">Graph Node Limit</span> option on the Roles subtab of the Security Console Administration
+                        tab. When you display a role hierarchy with more nodes than the specified
+                        limit, gray arrows indicate additional nodes. You can set such a node
+                        as the focus node to see the rest of its hierarchy.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2147155">
+                     <h3 class="topictitle">Data Security Policies and User Role Membership </h3>
+                     
+                     <p>By default, when creating or editing roles on the
+                        Security Console, you can manage their data security policies and
+                        assign the roles directly to users. These actions are controlled by
+                        the following options on the Roles subtab of the Security Console
+                        Administration tab:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p><span class="uicontrol">Enable
+                                 edit of data security policies</span></p>
+                        </li>
+                        
+                        <li>
+                           <p><span class="uicontrol">Enable
+                                 edit of user role membership</span></p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Oracle HCM Cloud customers are recommended to disable
+                        these options. You're unlikely to have to edit data security policies
+                        directly, as they're generated automatically when you include security profiles in HCM data roles. If necessary, you can regenerate HCM data roles and abstract roles to
+                        which security profiles are assigned. For example, if you edit the
+                        security profiles in an HCM data role, then you regenerate the role
+                        to regenerate its data security policies.
+                     </p>
+                     
+                     <p>To manage the automatic provisioning of roles to
+                        users, you create role
+                        mappings. Manual provisioning of roles to application users
+                        on the Security Console isn't recommended.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="OCHUS1210220.htm#OCHUS1654288">Copying HCM Roles: Points to Consider</a></p>
+                     </li>
+                     <li>
+                        <p><a href="OCHUS1210217.htm#OCHUS204788">Role Provisioning and Deprovisioning: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="OCHUS2406120.htm#OCHUS1218173">Regenerating Roles: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS2148870">
+                  <h2>Managing User-Name and Password Notifications: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>By default, users are notified automatically
+                     of changes to their user accounts and passwords. These notifications
+                     are based on notification templates. Many templates are predefined,
+                     and you can create custom templates. During implementation, you identify
+                     the notifications that you plan to use and disable any that aren't
+                     needed. This topic introduces the predefined notification templates
+                     and explains how to enable and disable notifications.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS2148869">
+                     <h3 class="topictitle">Predefined Notification Templates</h3>
+                     
+                     <p>This table describes the predefined notification
+                        templates. Each template is associated with a predefined event. For
+                        example, the Password Reset Template is associated with the password-reset
+                        event. You can see the notification templates and their associated
+                        events on the Notifications subtab of the Security Console Administration
+                        tab.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Notification Template
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Password Expiry Warning Template</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Warns the user that a password is expiring soon and
+                                    provides instructions for resetting the password.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Password Expiration Template</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Notifies the user that a password has expired and
+                                    provides instructions for resetting the password.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Forgot User Name Template</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Sends the user name to a user who requested the reminder.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Password Generated Template</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Notifies the user that a password has been generated
+                                    automatically and provides instructions for resetting the password.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Password Reset Template</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Sends a reset-password link to a user who performed
+                                    the Reset Password action on the My Account page.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Password Reset Confirmation Template</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Notifies the user when a password has been reset.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>New Account Template </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Notifies a user when a user account is created and
+                                    provides a reset-password link.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>New Account Manager Template</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Notifies the user's manager when a user account is
+                                    created. 
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>You're recommended not to edit the predefined templates,
+                        as your changes are lost on upgrade. However, you can create custom
+                        templates and disable the predefined versions. Each predefined event
+                        can be associated with only one enabled notification template at a
+                        time.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2148933">
+                     <h3 class="topictitle">Enabling and Disabling Notifications</h3>
+                     
+                     <p>For any notification to be sent, notifications in
+                        general must be enabled. Ensure that the <span class="uicontrol">Enable notifications</span> option on the Notifications subtab
+                        of the Security Console Administration tab is selected. When notifications
+                        are enabled, you can disable specific templates. For example, if you
+                        disable the New Account Template, then users aren't notified when
+                        their accounts are created. Other notifications continue to be sent.
+                     </p>
+                     
+                     
+                     <p>To disable a template:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select the template name on the
+                              Notifications subtab.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Edit Notification page,
+                              deselect the <span class="uicontrol">Enabled</span> option.
+                           </p>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS2148943">
+                  <h2>Creating a Custom Notification Template: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Predefined notification templates exist for
+                     events related to the user-account life cycle, such as user-account
+                     creation and password reset. When templates are enabled, users are
+                     notified automatically of events that affect them. To provide custom
+                     notifications, you create custom notification templates. This topic
+                     explains how to create a custom notification template.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS2148942">
+                     <h3 class="topictitle">Creating a Notification Template</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">Security Console</span></span> to open the Security Console, and click the Administration tab.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click the Notifications subtab
+                              on the Administration tab.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p> Click <span class="uicontrol">Add Template</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Add Notification Template
+                              page, enter the template name.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Event</span> field, select a value. The predefined content for
+                              the selected event appears automatically in the <span class="uicontrol">Message Subject</span> and <span class="uicontrol">Message
+                                 Text</span> fields. Tokens in the message text are replaced automatically
+                              in generated notifications with values specific to the user.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Update the <span class="uicontrol">Message Subject</span> field, as required. The text that you
+                              enter here appears in the subject line of the notification e-mail.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Update the message text, as required.
+                              These tokens are supported in the message text.
+                           </p>
+                           
+                           <div class="simpletable-margin">
+                              <table class="customlayout" summary="">
+                                 
+                                 
+                                 <tr class="header">
+                                    
+                                    <th scope="col">
+                                       Token
+                                       
+                                    </th>
+                                    
+                                    <th scope="col">
+                                       Meaning
+                                       
+                                    </th>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>notificationUserName</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>User name to which notifications are sent</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>userEmailAddress</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Address to which e-mail notifications are sent</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>userLoginId</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>User name</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>firstName</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>User's first name</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>lastName</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>User's last name</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>managerFirstName</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Manager's first name</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>managerLastName</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Manager's last name</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>loginURL</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>URL where the user can sign in</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>resetURL</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>URL where the user can reset his or her password</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>CRLFX</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>New line</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 <tr>
+                                    
+                                    <th scope="row" class="row">
+                                       
+                                       <p>SP4</p>
+                                       
+                                    </th>
+                                    
+                                    <td>
+                                       
+                                       <p>Four spaces</p>
+                                       
+                                    </td>
+                                    
+                                 </tr>
+                                 
+                                 
+                                 
+                              </table>
+                           </div>
+                           <p></p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>To enable the template, select
+                              the <span class="uicontrol">Enabled</span> option.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Save and Close</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        When you enable a custom template for a predefined
+                        event, the predefined template for the same event is automatically
+                        disabled.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1855829">
+                  <h2>Scheduling the Import User and Role Application Security Data Process: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You must run the Import User and Role Application
+                     Security Data process to set up and maintain the Security Console.
+                     During implementation, you perform the Import Users and Roles into
+                     Application Security task to run this process. It copies users, roles,
+                     privileges, and data security policies from the LDAP directory, policy store, and Applications
+                     Core Grants schema to Oracle Fusion Applications Security tables.
+                     Having this information in the Oracle Fusion Applications Security
+                     tables makes the assisted search feature of the Security Console fast
+                     and reliable. After the process runs to completion for the first time,
+                     you're recommended to schedule Import User and Role Application Security
+                     Data to run daily. This topic describes how to schedule the process.
+                  </p>
+                  
+                  
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     Whenever you run the process, it copies only those
+                     changes that were made since it last ran.
+                     
+                  </div>
+                  
+                  
+                  <div class="sect2" id="OCHUS1855828">
+                     <h3 class="topictitle">Scheduling the Process</h3>
+                     
+                     <p>Follow these steps to schedule the Import User and
+                        Role Application Security Data process:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">Scheduled Processes</span></span> to open the Scheduled Processes work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the Search Results section of
+                              the Overview page, click <span class="uicontrol">Schedule New Process</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Schedule New Process</span> dialog box, search for and select
+                              the Import User and Role Application Security Data process.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Process Details</span> dialog box, click <span class="uicontrol">Advanced</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Schedule tab, set <span class="uicontrol">Run</span> to <span class="uicontrol">Using a
+                                 schedule</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Set <span class="uicontrol">Frequency</span> to <span class="uicontrol">Daily</span> and <span class="uicontrol">Every</span> to <span class="uicontrol">1</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Enter start and end dates and times.
+                              The start time should be after any daily run of the Send Pending LDAP
+                              Requests process completes.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Submit</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the confirmation message.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2148983">
+                     <h3 class="topictitle">Synchronization Process Preferences</h3>
+                     
+                     <p>On the General subtab of the Security Console Administration
+                        tab, you can set the <span class="uicontrol">Synchronization Process
+                           Preferences</span> option. This option controls how frequently
+                        you're reminded to run the Import User and Role Application Security
+                        Data process. By default, the warning appears if the process hasn't
+                        run successfully in the last 6 hours. If you schedule the process
+                        to run daily, then you may want to increment this option to a value
+                        greater than 24.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS2150368">
+                  <h2>Importing User Login History: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>During implementation, you perform the Import
+                     User Login History task in the Setup and Maintenance work area. This
+                     task runs a process that imports information about user access to
+                     Oracle Fusion Applications to the Oracle Fusion Applications Security
+                     tables. This information is required by the Inactive Users Report,
+                     which reports on users who have been inactive for a specified period.
+                     After you perform Import User Login History for the first time, you're
+                     recommended to schedule it to run daily. In this way, you can ensure
+                     that the Inactive Users Report is up to date.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS2173686">
+                     <h3 class="topictitle">Scheduling the Import User Login History Process</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">Scheduled Processes</span></span> to open the Scheduled Processes work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the Search Results section of
+                              the Overview page, click <span class="uicontrol">Schedule New Process</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Schedule New Process</span> dialog box, search for and select
+                              the Import User Login History process.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Process Details</span> dialog box, click <span class="uicontrol">Advanced</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Schedule tab, set <span class="uicontrol">Run</span> to <span class="uicontrol">Using a
+                                 schedule</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Set <span class="uicontrol">Frequency</span> to <span class="uicontrol">Daily</span> and <span class="uicontrol">Every</span> to <span class="uicontrol">1</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Enter start and end dates and times.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Submit</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the <span class="uicontrol">Confirmation</span> message.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="OCHUS2155404.htm#OCHUS1882211">Inactive Users Report</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1207809">
+                  <h2>Send Pending LDAP Requests: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You're recommended to run the Send Pending
+                     LDAP Requests process daily to send future-dated and bulk requests
+                     to your LDAP directory
+                     server. Schedule the process in the Scheduled Processes work area.
+                     This topic describes the purpose of Send Pending LDAP Requests.
+                  </p>
+                  
+                  
+                  
+                  <p>Send Pending LDAP Requests sends the following items
+                     to the LDAP directory:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Requests to create, suspend, and
+                           reactivate user accounts.
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>When you create a person record
+                                 for a worker, a user-account request is generated automatically.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>When a person has no roles and
+                                 no current work
+                                 relationships, a request to suspend the user account is generated
+                                 automatically.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>A request to reactivate a suspended
+                                 user account is generated automatically if you rehire a terminated
+                                 worker.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>The process sends these requests to the LDAP directory
+                           unless the automatic creation and management of user accounts are
+                           disabled for the enterprise.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Work e-mails.</p>
+                        <p>If you include work e-mails when you create person records, then
+                           the process sends those e-mails to the LDAP directory.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Role provisioning and deprovisioning
+                           requests.
+                        </p>
+                        <p>The process sends these requests to
+                           the LDAP directory unless automatic role provisioning is disabled
+                           for the enterprise.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Changes to person attributes for
+                           individual users.
+                        </p>
+                        <p>The process sends this information
+                           to the LDAP directory unless the automatic management of user accounts
+                           is disabled for the enterprise.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Information about HCM data roles, which originate
+                           in Oracle HCM Cloud.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     All of these items are sent to the LDAP directory
+                     automatically unless they're either future-dated or generated by bulk
+                     data upload. You run the process Send Pending LDAP Requests to send
+                     future-dated and bulk requests to the LDAP directory.
+                     
+                  </div>
+                  
+                  <p>Only one instance of Send Pending LDAP Requests can
+                     run at a time.
+                  </p>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1208831">
+                  <h2>Scheduling the Send Pending LDAP Requests Process: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The Send Pending LDAP Requests process sends
+                     bulk requests and future-dated requests that are now active to your LDAP directory. You're recommended
+                     to schedule the Send Pending LDAP Requests process to run daily. This
+                     procedure explains how to schedule the process.
+                  </p>
+                  
+                  
+                  
+                  <div class="infobox-note"><span class="notep1">Note: </span>
+                     Schedule the process only when your implementation
+                     is complete. Once you schedule the process you can't run it on an
+                     as-needed basis, which may be necessary during implementation.
+                     
+                  </div>
+                  
+                  
+                  <div class="sect2" id="OCHUS1208880">
+                     <h3 class="topictitle">Scheduling the Send Pending LDAP Requests Process</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">Scheduled Processes</span></span> to open the Scheduled Processes work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Schedule New Process</span> in the Search Results section of
+                              the Scheduled Processes work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Schedule New Process</span> dialog box, search for and select
+                              the Send Pending LDAP Requests process.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Process Details</span> dialog box, set <span class="uicontrol">User Type</span> to identify the types of users to be processed.
+                              Values are <span class="uicontrol">Person</span>, <span class="uicontrol">Party</span>, and <span class="uicontrol">All</span>. You're recommended to leave <span class="uicontrol">User Type</span> set to <span class="uicontrol">All</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The <span class="uicontrol">Batch
+                                 Size</span> field specifies the number of requests in a single
+                              batch. For example, if 400 requests exist and you set <span class="uicontrol">Batch Size</span> to <span class="uicontrol">25</span>, then the process creates 16 batches of requests to process in parallel.
+                           </p>
+                           
+                           <p>The value <span class="uicontrol">A</span>,
+                              which means that the batch size is calculated automatically, is recommended.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Advanced</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Schedule tab, set <span class="uicontrol">Run</span> to <span class="uicontrol">Using a
+                                 schedule</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Frequency</span> field, select <span class="uicontrol">Daily</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Enter the start and end dates and
+                              times.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Submit</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1267303">
+                  <h2>Running Retrieve Latest LDAP Changes: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Information about users and roles in your LDAP directory is available
+                     automatically to Oracle Cloud Applications. However, in specific circumstances
+                     you're recommended to run the Retrieve Latest LDAP Changes process.
+                     This topic describes when and how to run Retrieve Latest LDAP Changes.
+                  </p>
+                  
+                  
+                  
+                  <p>You run Retrieve Latest LDAP Changes if you believe
+                     data-integrity or synchronization issues may have occurred between
+                     Oracle Cloud Applications and your LDAP directory server. For example,
+                     you may notice differences between roles on the Security Console and
+                     roles on the Create Role Mapping page. On-premises customers should
+                     also run this process after applying monthly updates.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1267302">
+                     <h3 class="topictitle">Running Retrieve Latest LDAP Changes</h3>
+                     
+                     <p>Sign in with the IT Security Manager job role and
+                        follow these steps:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Tools</span> - <span class="uicontrol">Scheduled Processes</span></span> to open the Scheduled Processes work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Schedule New Process</span>.
+                           </p>
+                           <p>The <span class="uicontrol">Schedule New Process</span> dialog box opens.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Name</span> field, search for and select the Retrieve Latest
+                              LDAP Changes process.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span> to close the <span class="uicontrol">Schedule New
+                                 Process</span> dialog box.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the <span class="uicontrol">Process Details</span> dialog box, click <span class="uicontrol">Submit</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">OK</span>, then <span class="uicontrol">Close</span>.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>On the Scheduled Processes page,
+                              click the <span class="uicontrol">Refresh</span> icon.
+                           </p>
+                           <p>Repeat this step periodically until the process completes.</p>
+                           
+                        </li>
+                        
+                     </ol>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Only one instance of Retrieve Latest LDAP Changes
+                        can run at a time.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS2268349">
+                  <h2>Bridge for Active Directory: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The bridge for Microsoft Active Directory
+                     synchronizes user account information between Oracle Applications
+                     Cloud and Microsoft Active Directory.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS2268487">
+                     <h3 class="topictitle">Using the Bridge for Microsoft Active Directory</h3>
+                     
+                     <p>To use the bridge for Active Directory and synchronize
+                        information between Oracle Applications Cloud and Active Directory,
+                        perform the following steps:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Configure the bridge for Active
+                              Directory. Set the configuration options on the Administration tab
+                              in the Security Console.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Map attributes between source and
+                              target applications for synchronization.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Download and install the bridge
+                              for Active Directory.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Perform initial synchronization
+                              of users.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Perform manual or automatic synchronization
+                              regularly to maintain consistency of data on the source and target
+                              applications.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2379989">
+                     <h3 class="topictitle">Prerequisites</h3>
+                     
+                     <p>Before setting up the bridge between Active Directory
+                        and Oracle Applications Cloud, you must:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Install Java Runtime environment
+                              (JRE). The bridge is compatible with JRE versions 6, 7, and 8.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Install the bridge on a computer
+                              that can connect to your Active Directory server.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Enable Single Sign-On (SSO) between
+                              Oracle Applications Cloud and your Active Directory instance.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2379990">
+                     <h3 class="topictitle">Source and Target</h3>
+                     
+                     <p>The bridge synchronizes information between the source
+                        and target:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Source: Is the application that
+                              contains the user and role information that is copied to the target.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Target: Is the application that
+                              is updated to contain the same user and role information as the source.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You can select either Oracle Applications Cloud or
+                        Active Directory as the source.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://support.oracle.com/epmos/faces/DocumentDisplay?id=2309139.1">Getting Started with Oracle Applications Cloud
+                              Bridge for Active Directory</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

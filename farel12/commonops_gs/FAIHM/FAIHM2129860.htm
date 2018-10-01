@@ -1,0 +1,3095 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Loading Date-Effective Data (Chapter 6) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:16 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM Data Loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM2127585.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM2137992.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="Many Oracle HCM Cloud objects are date-effective. That is, they retain a history of changes, each of which has effective start
+      and end dates. Professional users can retrieve and edit the version of an object as of a specified date. You can load date-effective
+      objects and their date-effective history using HCM Data Loader. This topic provides some general rules about loading date-effective
+      objects. This table introduces the attributes that occur in date-effective records. You can decide how much history to load
+      for new objects, but the history that you provide must be complete and valid. Although you can supply date-effective records
+      in any order in the .dat file, no break in the dates can occur. When you create a date-effective object, only the first date-effective
+      record is processed as a new record. Later-dated records are updates to the first record. To retain values from the previous
+      date-effective record, you can either leave those attribute values blank or repeat the value that's to continue. HCM Data
+      Loader groups records into logical objects, where a logical object is one occurrence of the business object, such as a worker.
+      The records belonging to a logical object are identified by the unique key for the component. Therefore, the key value must
+      be the same throughout the date-effective history. You can use any of the four key types. When you create business objects
+      containing date-effective components using HCM Data Loader: When you load updates to objects that contain date-effective components:"><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">9/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM2129860" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">6</span>Loading Date-Effective Data
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2241223">Loading Date-Effective Objects: Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2241070">Loading Objects with Multiple Changes Per Day: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1961184">Updating Date-Effective Objects That Have Future-Dated Records: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1961481">Retaining Attribute Values in Future-Dated Records: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1962838">Carrying Forward Changed Attribute Values in Retain Mode: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM1963483">Using Replace Mode to Update an Assignment: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2241787">Changing First Effective Start Date and Last Effective End Date: Examples</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM2241223">
+                  <h2>Loading Date-Effective Objects: Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Many Oracle HCM Cloud objects are date-effective.
+                     That is, they retain a history of changes, each of which has effective
+                     start and end dates. Professional users can retrieve and edit the
+                     version of an object as of a specified date. You can load date-effective
+                     objects and their date-effective history using HCM Data Loader. This
+                     topic provides some general rules about loading date-effective objects.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2241192">
+                     <h3 class="topictitle">Attributes of Date-Effective Records</h3>
+                     
+                     <p>This table introduces the attributes that
+                        occur in date-effective records.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Attribute
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">EffectiveStartDate</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The start date for the attribute values. This value
+                                    is required for all date-effective records.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">EffectiveEndDate</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The end date for the attribute values. If you leave
+                                    this value blank, then the date-effective record continues by default
+                                    to the end of time.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">EffectiveSequence</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>When multiple changes per day occur, this attribute
+                                    identifies their order.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">EffectiveLatestChange</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>For objects with multiple changes per day, this attribute
+                                    identifies the latest record for the effective start date.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2241228">
+                     <h3 class="topictitle">Supplying Date-Effective History</h3>
+                     
+                     <p>You can decide how much history to load for
+                        new objects, but the history that you provide must be complete and
+                        valid. Although you can supply date-effective records in any order
+                        in the .dat file, no break in the dates can occur. When you create
+                        a date-effective object, only the first date-effective record is processed
+                        as a new record. Later-dated records are updates to the first record.
+                        To retain values from the previous date-effective record, you can
+                        either leave those attribute values blank or repeat the value that's
+                        to continue.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Leaving an attribute value blank doesn't set the
+                        attribute to null. To change a value to null, you must supply the
+                        #NULL token as the attribute value.
+                        
+                     </div>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2241233">
+                     <h3 class="topictitle">Key Values</h3>
+                     
+                     <p>HCM Data Loader groups records into logical
+                        objects, where a logical object is one occurrence of the business
+                        object, such as a worker. The records belonging to a logical object
+                        are identified by the unique key for the component. Therefore, the
+                        key value must be the same throughout the date-effective history.
+                        You can use any of the four key types. 
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2241237">
+                     <h3 class="topictitle">Creating Date-Effective Objects</h3>
+                     
+                     <p>When you create business objects containing
+                        date-effective components using HCM Data Loader: 
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Include the <code>SET PURGE_FUTURE_CHANGES Y</code> instruction at the top of the
+                              data file. This instruction sets the HCM Data Loader date-effective
+                              maintenance mode to Replace. In this mode, which is the default, the
+                              contents of the data file replace any existing data.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If you're including object history,
+                              then supply the #NULL token for all attributes that must have null
+                              values.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2241298">
+                     <h3 class="topictitle">Updating Date-Effective Objects</h3>
+                     
+                     <p>When you load updates to objects that contain
+                        date-effective components: 
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Include the <code>SET PURGE_FUTURE_CHANGES N</code> instruction at the top of the
+                              data file. This instruction sets the HCM Data Loader date-effective
+                              maintenance mode to Retain. In this mode, existing future-dated changes
+                              are retained. If you don't include this instruction, then any existing
+                              future-dated changes for the date range of your updates are purged.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Always supply the effective start date of each
+                              change. The effective
+                              end date is optional. However, you must set the effective end
+                              date to #RETAIN if you don't want to correct any future-dated records.
+                              Leave the effective end date null if you want a change to apply until
+                              the end of time. 
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        When you update date-effective objects, the values
+                        that you supply are applied to every record in the specified date-range.
+                        However, some attributes, such as <span class="uicontrol">ActionCode</span>, are protected from update. 
+                        
+                     </div>
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2241070">
+                  <h2>Loading Objects with Multiple Changes Per Day: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>For most date-effective objects,
+                     only one record exists for a specific date. Therefore, the object
+                     history shows only the last update to each attribute on any day. However,
+                     for some objects, such as assignment, a record exists for each update in a day. Such
+                     objects include an effective sequence number to show the update order. Changes are cumulative, and the record
+                     with the highest effective sequence number is available to transactions
+                     for that date. This topic describes how to load and maintain objects
+                     that support multiple changes per day.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2241069">
+                     <h3 class="topictitle">Effective Sequence Number</h3>
+                     
+                     <p>When you load date-effective history for an object
+                        with multiple changes on a single date, the <span class="uicontrol">EffectiveSequence</span> value must start at 1 and increase
+                        sequentially. You can't repeat an <span class="uicontrol">EffectiveSequence</span> value for the same logical object on the same date, nor can gaps
+                        exist in the sequence. If only one change exists for an effective start date, then <span class="uicontrol">EffectiveSequence</span> must
+                        be <span class="uicontrol">1</span>.
+                     </p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Don't leave <span class="uicontrol">EffectiveSequence</span> blank when you're loading multiple changes for a single day. Without
+                        this information, the order in which records with the same effective
+                        start date are processed is undefined.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2241084">
+                     <h3 class="topictitle">Effective Latest Change </h3>
+                     
+                     <p>When you report multiple changes on the same effective
+                        start date, the <span class="uicontrol">EffectiveLatestChange</span> attribute of the last record in the sequence must be <span class="uicontrol">Y</span>. For all earlier records, the attribute
+                        must be <span class="uicontrol">N</span>. <span class="uicontrol">EffectiveLatestChange</span> is a required attribute for records
+                        that support multiple changes per day. If only one change exists on
+                        an effective start date, then <span class="uicontrol">EffectiveLatestChange</span> must be <span class="uicontrol">Y</span>.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2241089">
+                     <h3 class="topictitle">Effective Start and End Dates</h3>
+                     
+                     <p>The effective end date of any
+                        record with <span class="uicontrol">EffectiveLatestChange</span> set to <span class="uicontrol">N</span> must be the same as
+                        its effective start date.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2241093">
+                     <h3 class="topictitle">Loading Date-Effective History with Multiple Changes
+                     Per Day: Example</h3>
+                     
+                     <p>This example loads date-effective history for an
+                        assignment.
+                     </p>
+                     
+                     <pre><code>METADATA|Assignment|SourceSystemId|EffectiveStartDate|EffectiveSequence|EffectiveLatestChange|EffectiveEndDate|...
+MERGE|Assignment|2724|2010/06/08|1|Y|2012/03/03|...
+MERGE|Assignment|2724|2012/03/04|1|N|2012/03/04|...
+MERGE|Assignment|2724|2012/03/04|2|N|2012/03/04|...
+MERGE|Assignment|2724|2012/03/04|3|Y|2012/06/01|...
+MERGE|Assignment|2724|2012/06/02|1|Y||...<br></code></pre>
+                     <p>This example observes these rules:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>No gaps exist in the dates.</p>
+                        </li>
+                        
+                        <li>
+                           <p>The unique key is identical for
+                              all date-effective records.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p><span class="uicontrol">EffectiveSequence</span> starts at <span class="uicontrol">1</span> for all new effective
+                              start dates and is sequential for matching effective start dates.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p><span class="uicontrol">EffectiveLatestChange</span> is <span class="uicontrol">Y</span> when the record is the
+                              last change on an effective start date. Otherwise, <span class="uicontrol">EffectiveLatestChange</span> is <span class="uicontrol">N</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The <span class="uicontrol">EffectiveEndDate</span> matches the <span class="uicontrol">EffectiveStartDate</span> when <span class="uicontrol">EffectiveLatestChange</span> is <span class="uicontrol">N</span>.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2241172">
+                     <h3 class="topictitle">Updating Objects with Multiple Changes Per Day</h3>
+                     
+                     <p>When updating an existing object with multiple changes
+                        per day, you may not know the next available sequence number. In this
+                        case, leave the <span class="uicontrol">EffectiveSequence</span> attribute blank. The next number in the existing sequence is generated
+                        automatically.
+                     </p>
+                     
+                     
+                     <p>To correct an existing record, you must supply the
+                        existing values for these attributes to identify the record correctly: 
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Effective Start Date</p>
+                        </li>
+                        
+                        <li>
+                           <p>Effective End Date</p>
+                        </li>
+                        
+                        <li>
+                           <p>Effective Sequence</p>
+                        </li>
+                        
+                        <li>
+                           <p>Effective Latest Change</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For example:</p>
+                     <pre><code>METADATA|Assignment|SourceSystemId|EffectiveStartDate|EffectiveSequence|EffectiveLatestChange|EffectiveEndDate|...
+MERGE|Assignment|2724|2010/06/08|3|N|4712/12/31|...<br></code></pre>
+                     
+                     </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1961184">
+                  <h2>Updating Date-Effective Objects That Have Future-Dated Records: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>When you update a date-effective object,
+                     your changes may affect more than one of its existing date-effective
+                     records. Also, some of the affected records may have effective start dates that
+                     are later than the effective start date of the update. Such records
+                     are known as future-dated records. This topic describes how updates
+                     to future-dated records are processed in each of the maintenance modes.
+                     It also shows how to set the maintenance mode.
+                  </p>
+                  
+                  
+                  
+                  <p>This table shows the date-effective history of a
+                     job object.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Effective Start Date
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Effective End Date
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Job Code
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Job Name
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Regular Temporary
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Full Part Time
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Active Status
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>2010/06/08</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>2012/01/09</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>ACC1</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Accounts Clerk</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>T</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>PART_TIME</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>A</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>2012/01/10</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>2012/03/03</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>ACC1</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Accounts Clerk</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>T</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>FULL_TIME</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>A</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>2012/03/04</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>4712/12/31</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>ACC1</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>Accounts Administrator</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>T</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>FULL_TIME</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>A</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  <p>If you update the object specifying an effective
+                     start date of 2011/01/01, then a new date-effective record is generated
+                     for 2011/01/01. This update changes the effective end date of the
+                     2010/06/08 record. It also affects both the 2012/01/10 and 2012/03/04
+                     records. The exact effect on these existing future-dated records depends
+                     on:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>The maintenance mode, which can
+                           be either Retain or Replace
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>The effective end date value, if
+                           any, that you supply
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="FAIHM1961180">
+                     <h3 class="topictitle">Retain Mode or Replace Mode</h3>
+                     
+                     <p>This table summarizes the combined effects of the
+                        maintenance mode and effective end date on existing future-dated records.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Mode
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Effective End Date Value
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Retain</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>#RETAIN</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Existing attribute values in future-dated records
+                                    are retained. Your updates don't affect these values. All existing
+                                    records are retained. 
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Retain</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>#ALL</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Changed attribute values are carried forward to all
+                                    future-dated records until the end of time. All existing records are
+                                    retained. 
+                                 </p>
+                                 
+                                 <div class="infobox-tip"><span class="notep1">Tip: </span>
+                                    Leaving the effective end date blank or setting it
+                                    to 4712/12/31 has the same effect as specifying the #ALL token. However,
+                                    you must use the #ALL token to carry forward changes for objects that
+                                    have a specific end date.
+                                    
+                                 </div>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Retain</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Specific date other than 4712/12/31</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Changed attribute values are carried forward to future-dated
+                                    records until the specified end date. All existing records are retained. 
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Replace</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Specific date or blank</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>A single record replaces existing date-effective
+                                    records for the date range specified on the update. 
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>Retain mode is recommended when you're applying an
+                        incremental update to an existing record. Replace mode, which is the
+                        default mode, is useful during data migration, when you're uploading
+                        the complete data for a record.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Replace mode may have unexpected consequences if
+                        you upload less than the complete data for a record.
+                        
+                     </div>
+                     
+                     <p>In both modes:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>A new date-effective record is
+                              generated for the object if you specify an effective start or end
+                              date for which no date-effective record currently exists.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Only the attributes for which you
+                              supply values are updated.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1961181">
+                     <h3 class="topictitle">Setting the Maintenance Mode</h3>
+                     
+                     <p>Use the SET command to set the maintenance mode for
+                        a date-effective object. This table shows the set command to include
+                        in the data file. 
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Mode
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 SET Command
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Retain</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p><code>SET PURGE_FUTURE_CHANGES N</code></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Replace</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p><code>SET PURGE_FUTURE_CHANGES Y</code></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>If you include neither of these SET commands in a
+                        data file, then the default mode is Replace.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1961481">
+                  <h2>Retaining Attribute Values in Future-Dated Records: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>When you update a date-effective object,
+                     you can leave attribute values in future-dated records unchanged.
+                     To retain these values, you set the maintenance mode to Retain and
+                     specify the #RETAIN token instead of an effective end date. This token
+                     ensures that your changes take effect from the supplied effective start date to the start of the next record. If no future-dated records exist,
+                     then your changes apply until the end date of the record. This topic
+                     provides an example showing the effects of Retain mode.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM1961258"><h3 class="OracleScenario">Retaining Future-Dated Attribute Values in an
+                     Assignment Object</h3>
+                     <p>Consider the date-effective history of this assignment:</p>
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Effective Start Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Effective Sequence
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Effective End Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Action Code
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Job Code
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Grade
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Location
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Hours
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2010/06/08</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>2012/03/03</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>HIRE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC2</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>HQ</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>PROMOTION</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC4</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>HQ</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>2</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>TRANSFER</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC4</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>LVP</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>3</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>2012/06/01</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>JOB_CHANGE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC3</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC4</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>LVP</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/06/02</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>4712/12/31</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>JOB_CHANGE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC2</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC4</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>LVP</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     <p>To change the working hours to 37.5 from 2012/01/10
+                        without affecting future-dated records, you use this data file:
+                     </p><pre><code>SET PURGE_FUTURE_CHANGES N
+METADATA|Assignment|SourceSystemId|EffectiveStartDate|EffectiveSequence|EffectiveLatestChange|EffectiveEndDate|ActionCode|NormalHours
+MERGE|Assignment|2724|2012/01/10||Y|#RETAIN|ASG_CHANGE|37.5<br></code></pre><p>After update, the assignment object is as follows:</p>
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Effective Start Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Effective Sequence
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Effective End Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Action Code
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Job Code
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Grade
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Location
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Hours
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2010/06/08</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>2012/01/09</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>HIRE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC2</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>HQ</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/01/10</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>2012/03/03</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ASG_CHANGE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC2</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>HQ</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>37.5</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>PROMOTION</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC4</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>HQ</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>2</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>TRANSFER</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC4</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>LVP</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>3</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>2012/06/01</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>JOB_CHANGE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC3</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC4</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>LVP</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/06/02</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>4712/12/31</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>JOB_CHANGE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC2</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC4</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>LVP</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     <p>Attributes in records with effective start dates
+                        after 2012/01/10 retain their current values.
+                     </p>
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        As recommended, the data file includes no effective sequence
+                        number. Therefore, the next available number in the sequence
+                        is allocated automatically.
+                        
+                     </div>
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1962838">
+                  <h2>Carrying Forward Changed Attribute Values in Retain Mode: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>When you update a date-effective object in
+                     Retain mode, you may want to carry changes forward to future-dated
+                     records. In this case, you can either specify an effective end date or carry
+                     the changes forward to all existing future-dated records. This topic
+                     describes how to achieve each outcome and what to consider when deciding
+                     how to proceed.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM1962830">
+                     <h3 class="topictitle">Specifying an Effective End Date</h3>
+                     
+                     
+                     
+                     <p>This table shows the date-effective history
+                        of a job object.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Effective Start Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Effective End Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Job Code
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Job Name
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Regular Temporary
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Full Part Time
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Active Status
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2010/06/08</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>2012/01/09</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Accounts Clerk</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>T</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>PART_TIME</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>A</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/01/10</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>2012/03/03</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Accounts Clerk</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>T</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>FULL_TIME</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>A</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>4712/12/31</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Accounts Administrator</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>T</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>FULL_TIME</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>A</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>To change the <span class="uicontrol">Regular Temporary</span> value from <span class="uicontrol">T</span> to <span class="uicontrol">R</span> for the period from 2011/03/04 to 2014/04/04,
+                        you include these instructions in the .dat file:
+                     </p>
+                     <pre><code>SET PURGE_FUTURE_CHANGES N
+METADATA|Job|SourceSystemId|EffectiveStartDate|EffectiveEndDate|ReqularTemporary
+MERGE|Job|45346|2011/03/04|2014/04/04|R<br></code></pre>
+                     <p>After update, the job object is as follows:</p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Effective Start Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Effective End Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Job Code
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Job Name
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Regular Temporary
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Full Part Time
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Active Status
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2010/06/08</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>2011/03/03</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Accounts Clerk</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>T</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>PART_TIME</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>A</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2011/03/04</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>2012/01/09</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Accounts Clerk</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>R</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>PART_TIME</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>A</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/01/10</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>2012/03/03</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Accounts Clerk</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>R</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>FULL_TIME</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>A</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>2014/04/04</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Accounts Administrator</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>R</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>FULL_TIME</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>A</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2014/04/05</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>4712/12/31</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Accounts Administrator</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>T</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>FULL_TIME</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>A</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>A new date-effective record is created for both the
+                        start and end dates of the change. The <span class="uicontrol">Regular
+                           Temporary</span> attribute is updated for the specified period.
+                        All other attributes keep their existing values.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM1962831">
+                     <h3 class="topictitle">Applying Changes to All Future-Dated Records</h3>
+                     
+                     
+                     
+                     <p>You can use the #ALL token in place of an
+                        effective end date. This token specifies explicitly that your changes
+                        apply to all future-dated records, regardless of the object's end
+                        date.
+                     </p>
+                     
+                     
+                     <p>For example, you want to make these changes to the
+                        job object:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Change the <span class="uicontrol">Regular Temporary</span> value from <span class="uicontrol">T</span> to <span class="uicontrol">R</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Set the effective start date of
+                              the change to 2011/03/05.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Apply the changes to all future-dated
+                              records.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You include these instructions in the data file:</p>
+                     <pre><code>SET PURGE_FUTURE_CHANGES N
+METADATA|Job|SourceSystemId|EffectiveStartDate|EffectiveEndDate|ReqularTemporary
+MERGE|Job|45346|2011/03/04|#ALL|R<br></code></pre>
+                     <p>After update, the job object is as follows:</p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Effective Start Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Effective End Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Job Code
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Job Name
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Regular Temporary
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Full Part Time
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Active Status
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2010/06/08</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>2011/03/03</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Accounts Clerk</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>T</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>PART_TIME</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>A</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2011/03/04</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>2012/01/09</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Accounts Clerk</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>R</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>PART_TIME</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>A</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/01/10</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>2012/03/03</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Accounts Clerk</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>R</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>FULL_TIME</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>A</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>4712/12/31</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Accounts Administrator</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>R</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>FULL_TIME</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>A</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>You can achieve the same result by leaving the effective
+                        end date in the .dat file blank or setting it explicitly to 4712/12/31.
+                        However, you must use the #ALL tag for any object that has an explicit
+                        end-date.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM1963483">
+                  <h2>Using Replace Mode to Update an Assignment: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>When you update a date-effective object in
+                     Replace mode, you replace all existing, future-dated records with
+                     the uploaded data. You're recommended to use Replace mode only when
+                     the contents of the .dat file must replace the existing data rather
+                     than update it.
+                  </p>
+                  
+                  <p>Replace mode is the default maintenance mode. However,
+                     you can use this SET command to select Replace mode explicitly and
+                     record the setting in the .dat file:
+                  </p>
+                  <pre><code>SET PURGE_FUTURE_CHANGES Y<br></code></pre>
+                  
+                  
+                  <div class="sect2" id="FAIHM1963378"><h3 class="OracleScenario">Updating Only Selected Attributes of an Object
+                     in Replace Mode</h3>
+                     <p>This table shows the date-effective history of an assignment.</p>
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Effective Start Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Effective Sequence
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Effective End Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Action Code
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Job
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Grade
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Location
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Normal Hours
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2010/06/08</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>2012/03/03</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>HIRE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC2</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>HQ</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>PROMOTION</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC4</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>HQ</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>2</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>TRANSFER</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC4</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>LVP</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/03/04</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>3</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>2012/06/01</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>JOB_CHANGE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC3</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC4</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>LVP</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/06/02</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>4712/12/31</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>JOB_CHANGE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC2</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC4</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>LVP</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     <p>To update the working hours to 37.5 from 2012/01/10
+                        in Replace mode, you create the following data file:
+                     </p><pre><code>SET PURGE_FUTURE_CHANGES Y
+METADATA|Assignment|SourceSystemId|EffectiveStartDate|EffectiveSequence|EffectiveLatestChange|EffectiveEndDate|ActionCode|NormalHours
+MERGE|Assignment|2724|2012/01/10||Y||ASG_CHANGE|37.5<br></code></pre><p>After update, the assignment is as follows:</p>
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Effective Start Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Effective Sequence
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Effective End Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Action Code
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Job
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Grade
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Location
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Normal Hours
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2010/06/08</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>2012/01/09</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>HIRE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC2</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>HQ</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>40</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2012/01/10</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>4712/12/31</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ASG_CHANGE</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>ACC1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>IC2</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>HQ</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>37.5</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     <p>In Replace mode, records with effective start dates that
+                        are later than the effective start date of the update are purged.
+                        Attribute values that predate the change and for which you supply
+                        no values in the data file appear in the new record. This update isn't
+                        reversible.
+                     </p>
+                     <div class="infobox-caution"><span class="notep1">Caution: </span>
+                        You're recommended to supply values for all attributes
+                        that currently exist on the object when updating in Replace mode.
+                        In this example, you could have provided values for job, grade, and location. As you
+                        didn't supply those values, the values that are current on the effective
+                        start date of the update remain in effect.
+                        
+                     </div>
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2241787">
+                  <h2>Changing First Effective Start Date and Last Effective End Date: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>For some objects, you can change the first effective start date or last effective
+                     end date. This topic provides examples showing how to make
+                     these changes.
+                  </p>
+                  
+                  <p>To change an object's first effective start date,
+                     you include the <span class="uicontrol">ReplaceFirstEffectiveStartDate</span> attribute in the .dat file and set it to <span class="uicontrol">Y</span>. To change an object's last effective end date, you
+                     include the <span class="uicontrol">ReplaceLastEffectiveEndDate</span> attribute in the .dat file and set it to <span class="uicontrol">Y</span>. You supply the revised dates on the <span class="uicontrol">EffectiveStartDate</span> or <span class="uicontrol">EffectiveEndDate</span> attribute, as appropriate. You can make
+                     these changes at the same time as other changes. For example, you
+                     can change both the start date of an object and its name.
+                  </p>
+                  
+                  <p>These restrictions apply to changing first effective
+                     start date and last effective end date:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>For some objects, the last effective
+                           end date must be 4712/12/31. Any attempt to change this date causes
+                           an error.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>You can't change the first effective
+                           start date of the worker object in this way. Instead, you must use
+                           the <span class="uicontrol">NewStartDate</span> attribute. 
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>When you include the <span class="uicontrol">ReplaceLastEffectiveEndDate</span> attribute in
+                           a .dat file, you must specify a date value for the <span class="uicontrol">EffectiveEndDate</span> attribute. You must not
+                           supply a #RETAIN, #ALL, or #NULL token in place of the effective end
+                           date.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <div class="infobox-tip"><span class="notep1">Tip: </span>
+                     Review the details of an object component on the
+                     Initiate Data Load page. On the Component Details tab, identify whether
+                     you can change a component's first effective start date or last effective
+                     end date.
+                     
+                  </div>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2241778"><h3 class="OracleScenario">Changing the First Effective Start Date of a
+                     Job Object</h3>
+                     <p>This example shows how to include the <span class="uicontrol">ReplaceFirstEffectiveStartDate</span> attribute
+                        in a .dat file.
+                     </p><pre><code>METADATA|Job|JobId|EffectiveStartDate|EffectiveEndDate|ReplaceFirstEffectiveStartDate
+MERGE|Job|23452|1950/01/01|4712/12/31|Y<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2241794"><h3 class="OracleScenario">Changing the Last Effective End Date of a Recurring
+                     Element Entry</h3>
+                     <p>This example shows how to include the <span class="uicontrol">ReplaceLastEffectiveEndDate</span> attribute in
+                        a .dat file.
+                     </p><pre><code>METADATA|ElementEntry|ElementEntryId|EffectiveStartDate|EffectiveEndDate|ReplaceLastEffectiveEndDate
+MERGE|ElementEntry|4634|2014/01/01|2014/04/05|Y<br></code></pre></div>
+                  
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

@@ -1,0 +1,1175 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Loading Compensation Objects (Chapter 11) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:16 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM Data Loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM2344145.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM2235867.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content=""><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">14/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM2356686" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">11</span>Loading Compensation Objects
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2548313">Loading Salary Basis Records: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2539011">Loading Salary Records: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2533907">Loading Salary Records: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2574162">Loading Salary Range Differential Profiles and Values: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2578462">Making Date-Effective Changes to Salary Range Differentials: Explained</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM2548313">
+                  <h2>Loading Salary Basis Records: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>A salary basis is required for all
+                     salary records. It identifies the currency and frequency of the base
+                     pay amount and specifies whether the salary includes salary components. The payroll
+                     element that you link to the salary basis is used to create element
+                     entries to pay the salary amount. If you link a grade rate to a salary basis, then
+                     the worker's salary range is derived automatically based on the worker's grade. This topic describes
+                     aspects of the Salary Basis object that you must understand to load
+                     salaries and salary bases successfully using HCM Data Loader.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2548311">
+                     <h3 class="topictitle">Payroll Elements</h3>
+                     
+                     <p>The payroll element and input value that you link
+                        to a salary basis are used to pay worker salaries. The currency value
+                        of the payroll element determines the salary basis currency. Elements
+                        that you link to salary bases must exist in the target environment
+                        before you load salary bases. In addition, you must create those elements
+                        as recurring elements:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>In the same legislative data group as the salary basis</p>
+                        </li>
+                        
+                        <li>
+                           <p>With a primary classification of
+                              either <span class="uicontrol">Standard Earnings</span> or <span class="uicontrol">Information</span></p>
+                        </li>
+                        
+                        <li>
+                           <p>With open eligibility, meaning
+                              that no eligibility criteria are defined at the element level
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>To link the same payroll element to multiple salary
+                        bases, you must configure the element to support multiple entries
+                        in the same period. 
+                     </p>
+                     
+                     <p>For each legal employer, you specify the
+                        level at which salary is held.
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>If salary is held at the employment-terms
+                              level, then payroll elements must also be configured at the employment-terms
+                              level. In addition, you must define the payroll assigned to workers
+                              at the payroll-terms level. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>If salary is held at the assignment
+                              level, then you must configure payroll at the assignment level. You
+                              can define the payroll assigned to workers at either the payroll-terms
+                              or assignment level.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>If any of these conditions for payroll elements isn't
+                        met, then your salary bases are likely to load incorrectly. For example,
+                        they may not be associated with a legislative data group or linked
+                        with a payroll element. In this case, you must correct these incorrect
+                        salary bases manually in the application. For more information about
+                        creating payroll elements, see Configuring Payroll Elements for Use
+                        in Oracle Fusion Compensation (1589502.1) on My Oracle Support at
+                        https://support.oracle.com.
+                     </p>
+                     
+                  </div>
+                  <div class="sect2" id="FAIHM2548488">
+                     <h3 class="topictitle">Grade Rates</h3>
+                     
+                     <p>You can link a grade rate to a salary basis to validate
+                        worker salaries against the salary ranges defined for the grade. The
+                        ranges defined on the grade rate are used to calculate salary metrics
+                        such as compa-ratio, quartile, and quintile. These rules
+                        apply:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The worker's grade must be included
+                              in the grade rate linked to the worker's salary basis.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The frequency of the grade rate
+                              doesn't have to match the frequency of the salary basis. For example,
+                              you can link a grade rate where <span class="uicontrol">Frequency</span> is <span class="uicontrol">Annually</span> with a salary basis
+                              where <span class="uicontrol">Frequency</span> is <span class="uicontrol">Monthly</span>. However, the grade rate currency
+                              must match the currency of the payroll element linked to the salary
+                              basis.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The grade rate must be defined
+                              in the same legislative data group as the salary basis.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  <div class="sect2" id="FAIHM2550467">
+                     <h3 class="topictitle">Salary Basis Code</h3>
+                     
+                     <p>The <span class="uicontrol">SalaryBasisCode</span> attribute records the frequency at which base pay is stored and
+                        displayed. Valid values, which are defined in the CMP_SALARY_BASIS
+                        lookup type, are:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>ANNUAL</p>
+                        </li>
+                        
+                        <li>
+                           <p>HOURLY</p>
+                        </li>
+                        
+                        <li>
+                           <p>MONTHLY</p>
+                        </li>
+                        
+                        <li>
+                           <p>PERIOD</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>PERIOD (payroll period) retrieves the salary frequency
+                        from the payroll defined at the payroll terms level for workers. Use
+                        this value only when payroll is defined at the payroll terms level.
+                        When Salary Basis Code is PERIOD, leave the <span class="uicontrol">SalaryAnnualizationFactor</span> attribute blank.
+                     </p>
+                     
+                  </div>
+                  <div class="sect2" id="FAIHM2550529">
+                     <h3 class="topictitle">Salary Basis Components</h3>
+                     
+                     <p>Salary basis components itemize salary adjustments.
+                        Use the <span class="uicontrol">ComponentUsage</span> attribute
+                        of the Salary Basis object to specify whether you're loading salary
+                        basis components. Valid values are defined in the CMP_COMPONENT_USAGE
+                        lookup type and shown in this table.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Meaning
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">NO_COMPONENT</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Components aren't used and aren't loaded with the
+                                    Salary Basis object. 
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">SELECTED_COMPONENTS</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Components are used and are loaded with the Salary
+                                    Basis object.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">USER_DECIDES_USAGE</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Managers select the components to use when adjusting
+                                    salary. Components aren't loaded with the Salary Basis object.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>If you set the <span class="uicontrol">ComponentUsage</span> attribute to <span class="uicontrol">SELECTED_COMPONENTS</span>, then you load the components using the SalaryBasisComponent discriminator.
+                        If you omit the <span class="uicontrol">ComponentUsage</span> attribute, then <span class="uicontrol">NO_COMPONENT</span> is assumed.
+                     </p>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        If you're unsure about component usage, then specify <span class="uicontrol">USER_DECIDES_USAGE</span>. This value is the least
+                        restrictive.
+                        
+                     </div>
+                     
+                     <p>Provide one Salary Basis Component record for each
+                        component type. The <span class="uicontrol">AttributeValue</span> attribute of the Salary Basis Component record identifies the component
+                        type, such as PROMOTIONAL, COST_OF_LIVING, or ADJUSTMENT. This value
+                        is validated against the CMP_SALARY_COMPONENTS lookup type.
+                     </p>
+                     
+                  </div>
+                  <div class="sect2" id="FAIHM2550659">
+                     <h3 class="topictitle">Deletion of Salary Basis Records</h3>
+                     
+                     <p>You can delete a Salary Basis object using HCM Data
+                        Loader only if it's not assigned to workers and hasn't been used to
+                        create salary records. Unless many salary bases were created in error
+                        and not assigned, you're unlikely to delete salary bases using HCM
+                        Data Loader. You can delete individual Salary Basis objects more easily
+                        in the application.
+                     </p>
+                     
+                  </div>
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="http://support.oracle.com/epmos/faces/DocumentDisplay?id=1589502.1">Configuring Payroll Elements for Use in Oracle
+                              Fusion Compensation</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2539011">
+                  <h2>Loading Salary Records: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>A salary record holds a worker's base pay
+                     amount for a specified period and currency. It also displays the salary
+                     range used to validate base pay and calculate metrics such as compa-ratio and quartile. Depending on
+                     how the associated salary basis is configured, salary can include zero or more
+                     components. This topic describes aspects of the Salary object that
+                     you must understand to load salary records successfully using HCM
+                     Data Loader.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2539010">
+                     <h3 class="topictitle">Preparing to Load Salary Records</h3>
+                     
+                     <p>Before you can load Salary objects:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Employment records must exist in
+                              the target environment.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Worker assignments must include a grade, and the grade must
+                              be included in the grade
+                              rate that is linked to each worker's salary basis. These requirements
+                              must be met for salary range to appear and salary metrics to be calculated
+                              correctly on the salary record.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Workers whose salary basis has a frequency of <span class="uicontrol">PERIOD</span> must be assigned to a payroll defined
+                        at the payroll terms level. This payroll assignment, which you can
+                        perform using the payroll batch loader, must be complete before you
+                        load salary records.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2539156">
+                     <h3 class="topictitle">Loading Salary</h3>
+                     
+                     <p>Supply salary data in the Salary.dat file for processing
+                        by HCM Data Loader. If you're loading salary components: 
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Set the <span class="uicontrol">MultipleComponents</span> attribute of the Salary object to <span class="uicontrol">Y</span>. Otherwise, set it to <span class="uicontrol">N</span>. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Set the <span class="uicontrol">SalaryAmount</span> attribute of the Salary object to the base
+                              salary amount plus the sum of any salary components.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Set the <span class="uicontrol">ActionCode</span> attribute of the Salary object to the action associated with the
+                        salary record. This table shows valid values for the <span class="uicontrol">ActionCode</span> attribute.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Action Code
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Action Name
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>ALLOCATE_GRP_CMP</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Allocate Workforce Compensation</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CHANGE_SALARY</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Change Salary</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>GLB_TRANSFER</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Global Transfer</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HIRE</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Hire an Employee</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HIRE_ADD_WORK_RELATION</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Add Employee Work Relationship</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>PROMOTION</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Promotion</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>REHIRE</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Rehire of Worker</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>TRANSFER</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Transfer</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>You can create the salary at either the employment
+                        terms or the assignment level.  To create the salary:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>At the employment terms level,
+                              supply a unique reference to the employment terms. Grade and full-time
+                              equivalent (FTE) are obtained from the employment terms.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>At the assignment level, supply
+                              a unique reference to the assignment. Grade and FTE are obtained from
+                              each assignment.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>FTE is determined by comparing the standard working
+                        hours of the worker's legal employer with the working hours on the worker's employment
+                        terms or assignment. When the payroll element attached to the worker's
+                        salary basis has a primary classification of Standard Earnings, the
+                        annual amount sent in the element entry is adjusted for FTE.
+                        Otherwise, the amount sent in the element entry isn't adjusted for
+                        FTE.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2539170">
+                     <h3 class="topictitle">Loading Salary Components</h3>
+                     
+                     <p>Set the <span class="uicontrol">ComponentReasonCode</span> attribute. Valid values are defined in the CMP_SALARY_COMPONENTS
+                        lookup type. Use the Manage Base Pay Lookups task in the Setup and
+                        Maintenance work area to manage the lookup type. Each component reason
+                        code can be used once only for each salary record.
+                     </p>
+                     
+                     
+                     <p>Specify either a <span class="uicontrol">ChangeAmount</span> or a <span class="uicontrol">ChangePercentage</span> for each
+                        component record. Don't specify both. You add the <span class="uicontrol">ChangeAmount</span> to the base pay amount to derive
+                        the new salary amount for the salary record. The <span class="uicontrol">ChangePercentage</span> value is a percentage of
+                        the base pay amount. The corresponding percentage value is calculated
+                        automatically.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2539171">
+                     <h3 class="topictitle">Updating Existing Salary Records</h3>
+                     
+                     <p>When you update an open-ended salary, the existing
+                        salary is automatically end-dated on the day prior to the <span class="uicontrol">DateFrom</span> attribute supplied for the new
+                        salary.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2533907">
+                  <h2>Loading Salary Records: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic shows how to load and manage salary
+                     records for a worker assignment using HCM Data Loader.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2533899"><h3 class="OracleScenario">Creating a Salary Using Source Keys</h3>
+                     <p>This example Salary.dat file creates a Salary object
+                        with components against an existing assignment. Source keys are used
+                        to identify both the Salary object and the associated assignment.
+                     </p><pre><code>METADATA|Salary|SourceSystemOwner|SourceSystemId|AssignmentId(SourceSystemId)|DateFrom|SalaryAmount|SalaryBasisName|ActionCode|SalaryApproved|MultipleComponents
+MERGE|Salary|VISION|1012SAL15|1012_EMP_ASG|2015/01/01|65000|SalBasis_1007|CHANGE_SALARY|Y|N
+METADATA|SalaryComponent|SourceSystemOwner|SourceSystemId|SalaryId(SourceSystemId)|DateFrom|ComponentReasonCode|ChangeAmount|ComponentApproved
+MERGE|SalaryComponent|VISION|1012SAL15_COL|1012SAL15|2015/01/01|COST_OF_LIVING|60000|Y
+MERGE|SalaryComponent|VISION|1012SAL15_ADJ|1012SAL15|2015/01/01|ADJUSTMENT|5000|Y<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2533912"><h3 class="OracleScenario">Updating a Salary Using Source Keys</h3>
+                     <p>This example Salary.dat file updates an existing,
+                        open-ended salary record by supplying changes to the Salary object
+                        and its components. Source keys are used to identify all components
+                        of the Salary object.
+                     </p><pre><code>METADATA|Salary|SourceSystemOwner|SourceSystemId|AssignmentId(SourceSystemId)|DateFrom|DateTo|SalaryAmount|SalaryBasisName|ActionCode|SalaryApproved|MultipleComponents
+MERGE|Salary|VISION|1012SAL16|1012_EMP_ASG|2016/01/01||70000|SalBasis_1007|CHANGE_SALARY|Y|N
+METADATA|SalaryComponent|SourceSystemOwner|SourceSystemId|SalaryId(SourceSystemId)|DateFrom|ComponentReasonCode|ChangeAmount|ComponentApproved
+MERGE|SalaryComponent|VISION|1012SAL16_COL|1012SAL16|2016/01/01|COST_OF_LIVING|5000|Y
+MERGE|SalaryComponent|VISION|1012SAL16_ADJ|1012SAL16|2016/01/01|ADJUSTMENT|0|Y<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2533920"><h3 class="OracleScenario">Creating a Salary Using User Keys</h3>
+                     <p>This example Salary.dat file creates a Salary object
+                        with components against an assignment. User keys are used to identify
+                        both the Salary object and the associated assignment.
+                     </p><pre><code>METADATA|Salary|AssignmentNumber|DateFrom|SalaryAmount|SalaryBasisName|ActionCode|SalaryApproved|MultipleComponents
+MERGE|Salary|1014|2015/01/01|53500|SalBasis_1007|CHANGE_SALARY|Y|N
+METADATA|SalaryComponent|AssignmentNumber|DateFrom|ComponentReasonCode|ChangeAmount|ComponentApproved
+MERGE|SalaryComponent|1014|2015/01/01|COST_OF_LIVING|52000|Y
+MERGE|SalaryComponent|1014|2015/01/01|ADJUSTMENT|1500|Y <br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2533923"><h3 class="OracleScenario">Updating a Salary Using User Keys</h3>
+                     <p>This example Salary.dat file updates an existing,
+                        open-ended salary record by supplying changes to the Salary object
+                        and its components. User keys are used to identify all components
+                        of the Salary object. 
+                     </p><pre><code>METADATA|Salary|AssignmentNumber|DateFrom|DateTo|SalaryAmount|SalaryBasisName|ActionCode|SalaryApproved|MultipleComponents
+MERGE|Salary|1014|2016/01/01||53900|SalBasis_1007|CHANGE_SALARY|Y|N
+METADATA|SalaryComponent|AssignmentNumber|DateFrom|ComponentReasonCode|ChangeAmount|ComponentApproved
+MERGE|SalaryComponent|1014|2016/01/01|COST_OF_LIVING|300|Y
+MERGE|SalaryComponent|1014|2016/01/01|ADJUSTMENT|100|Y<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2533927"><h3 class="OracleScenario">Deleting a Salary</h3>
+                     <p>Use HCM Data Loader to delete salary records only
+                        if many records were created or loaded incorrectly and must be deleted
+                        in bulk. Unless you're deleting all salary records for an assignment,
+                        only the salary record with the latest salary start date can be deleted.
+                        For example, if a salary record has salary start dates of January
+                        1, March 1, and September 1 then you can delete just the September
+                        1 record. Alternatively, you can delete all three records.
+                     </p>
+                     <p>This example Salary.dat file deletes an existing
+                        salary record. The Salary object is identified by its source key.
+                     </p><pre><code>METADATA|Salary|SourceSystemOwner|SourceSystemId|AssignmentId(SourceSystemId)|DateFrom
+DELETE|Salary|VISION|1012SAL16|EJ1012_EMP_ASG|2016/01/01<br></code></pre><p>This example Salary.dat file deletes an existing
+                        salary. The Salary object is identified by its user key.
+                     </p><pre><code>METADATA|Salary|AssignmentNumber|DateFrom
+DELETE|Salary|1014|2016/01/01<br></code></pre></div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2574162">
+                  <h2>Loading Salary Range Differential Profiles and Values: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>Salary range differential values are multipliers
+                     applied to grade rates to adjust them on the basis of worker location. For example, a differential
+                     value of 1.2 could be applied in one location while a differential
+                     value of 0.80 could be applied in another. These values vary to reflect
+                     the cost of living in these locations or the relative ease of hiring,
+                     for example. Salary range differential values are associated with
+                     a salary range differential profile, which you link to the salary basis. This
+                     topic provides examples showing how to load differential profiles
+                     and their differential values using HCM Data Loader.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2574154"><h3 class="OracleScenario">Creating Salary Range Differential Profiles and
+                     Values</h3>
+                     <p>To create a differential profile, you load the Salary
+                        Range Differential object and one or more Salary Range Differential
+                        Value components. Each Salary Range Differential Value component is
+                        for a single location. Differential profiles reference legislative data
+                        groups, and their differential values reference locations.
+                        Referenced legislative data groups and locations must exist in the
+                        target environment before you load Salary Range Differential objects.
+                     </p>
+                     <p>This example SalaryRangeDifferential.dat file creates
+                        a differential profile with a single differential value. Both components
+                        are identified using source keys.
+                     </p><pre><code>METADATA|SalaryRangeDifferential|EffectiveEndDate|EffectiveStartDate|Name|Code|Status|Criteria|SourceSystemId|SourceSystemOwner|LegislativeDataGroupName
+MERGE|SalaryRangeDifferential||2000/01/01|SalRangeDiffName333|SalRangeDiffCode333|ACTIVE|LOCATION|SalRangeDiffSSID_333|VISION|PM DE LDG
+METADATA|SalaryRangeDifferentialValue|EffectiveEndDate|EffectiveStartDate|SourceSystemId|SourceSystemOwner|RangeDiffId(SourceSystemId)|LocationCode|LocationSetCode|Differential
+MERGE|SalaryRangeDifferentialValue||2000/01/01|SalRangeDiffVal_SSID_333|VISION|SalRangeDiffSSID_333|Atlanta|Vision Corporation 202|0.2<br></code></pre><p>This example SalaryRangeDifferential.dat file creates
+                        a differential profile with a single differential value. Both components
+                        are identified using user keys.
+                     </p><pre><code>METADATA|SalaryRangeDifferential|EffectiveEndDate|EffectiveStartDate|Name|Code|Status|Criteria|LegislativeDataGroupName
+MERGE|SalaryRangeDifferential||2000/01/01|SalRangeDiffName444|SalRangeDiffCode444|ACTIVE|LOCATION|PM DE LDG
+METADATA|SalaryRangeDifferentialValue|EffectiveEndDate|EffectiveStartDate|RangeDiffCode|LocationCode|LocationSetCode|Differential
+MERGE|SalaryRangeDifferentialValue||2000/01/01|SalRangeDiffCode444|Atlanta|Vision Corporation 202|0.2<br></code></pre></div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2578462">
+                  <h2>Making Date-Effective Changes to Salary Range Differentials: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The Salary Range Differential object is date-effective.
+                     That is, a history of changes to the Salary Range Differential object
+                     and its child components is maintained and can be viewed. For example,
+                     users can see the date-effective history of a differential profile
+                     in the Compensation work area. This topic describes how date-effective
+                     records are managed for Salary Range Differential objects when you
+                     use HCM Data Loader.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2578460">
+                     <h3 class="topictitle">Creating Date-Effective Records</h3>
+                     
+                     <p>When you create or update a differential value, a
+                        date-effective record is added to the differential value. A date-effective
+                        record must also be added to the parent differential profile if it
+                        has no date-effective record for that effective start date. In
+                        this case, you must include the parent Salary Range Differential component
+                        in the .dat file. It must have the same effective start date as the
+                        child differential value.
+                     </p>
+                     
+                     
+                     <p>This table shows a history of changes to a differential
+                        profile.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 RangeDiffId
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 EffectiveStartDate
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 EffectiveEndDate
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Status
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Criteria
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 LegislativeDataGroupId
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Code
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Name
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>123</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>01-01-1951</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>01-05-2016</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Active</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Location</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>US1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>US SRD</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>US Range</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>123</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>02-05-2016</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>31-12-4712</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Active</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Location</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>US1</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>US SRD</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>US Range</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>This table shows the related changes to its differential
+                        values.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 RangeDiffValueId
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 EffectiveStartDate 
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 EffectiveEndDate
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Differential
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 LocationId
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>234</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>01-01-1951</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>31-12-4712</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>1.3</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>A</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>345</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>02-05-2016</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>31-12-4712</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>0.8</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>B</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>456</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>02-05-2016</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>31-12-4712</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>0.9</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>C</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>When the location B value was created, a date-effective
+                        record with the location B effective start date was also added to
+                        the differential profile. However, when the location C value was created,
+                        no date-effective record was added to the differential profile. A
+                        record for that effective start date already existed in the differential
+                        profile, so no additional record was needed. If you create or update
+                        multiple differential values on the same date, then only one date-effective
+                        record is added to the parent differential profile.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        You don't have to include the parent Salary Range
+                        Differential component in the .dat file if it already has a date-effective
+                        record with the required effective start date.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2578516">
+                     <h3 class="topictitle">Editing the Salary Range Differential Component</h3>
+                     
+                     <p>If you correct or update the parent Salary Range
+                        Differential object, then no date-effective record is added to its
+                        child components. For example, if you make the differential profile
+                        inactive, then a new date-effective record is added to the parent
+                        component. However, no date-effective record is added to the differential
+                        values.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

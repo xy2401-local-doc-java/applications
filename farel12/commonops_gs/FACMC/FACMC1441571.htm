@@ -1,0 +1,1390 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Run Batch Processes (Chapter 11) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Using Workforce Compensation" name="dcterms.title">
+      <meta content="Using Workforce Compensation" name="doctitle">
+      <meta content="E73301-02" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FACMC" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Tue Mar 07 13:34:02 PST 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="refresh data process;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FACMC1471410.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FACMC1473458.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FACMC.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FACMC.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="The Transfer Data to HR process itemizes each worker's salary adjustment into salary components. For example, you allocate
+      the salary adjustment for a worker as follows:"><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">14/36</span><a name="BEGIN" id="BEGIN"></a><div id="FACMC1441571" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">11</span>Run Batch Processes
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FACMC785580">Refresh Data Process: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FACMC582934">Person Selection Formula Type</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FACMC1655589">Workers Approved at Least N Managers Up Level: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FACMC834235">Terminated Worker Processing: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FACMC1441566">FAQs</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FACMC785580">
+                  <h2>Refresh Data Process: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>The <span class="uicontrol">Refresh Data </span>process synchronizes workforce compensation data with HR data, updates the plan design,
+                     updates the currency conversion rates, and recalculates the summary
+                     data. Decisions you make when you run the refresh data process are:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Refresh date</p>
+                     </li>
+                     
+                     <li>
+                        <p>Refresh options</p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  
+                  <div class="sect2" id="FACMC785575">
+                     <h3 class="topictitle">Refresh Date</h3>
+                     
+                     
+                     
+                     <p>The refresh date determines the date used
+                        to refresh the data for the selected refresh options. Run the process
+                        as often as needed depending on your business needs. Refresh frequency
+                        examples:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Refresh nightly to ensure that
+                              line managers see the most current data including terminated workers,
+                              transfers, and other employment changes.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Refresh only after you make a change
+                              to the plan configuration.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>The following table shows the refresh date options
+                        and the corresponding date used to refresh the data:
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Table shows the what date the&#xA;process uses for the refresh date.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Refresh Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Date Used
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Actual Process Run Date</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Date the process runs for all processing, including
+                                    eligibility.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Plan Cycle Dates</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Following two dates configured on the <span class="uicontrol">Plan Cycle</span> dialog box:
+                                 </p>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p><span class="uicontrol">Eligibility
+                                             Determination Date</span> for eligibility processing
+                                       </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p><span class="uicontrol">HR Data
+                                             Extraction Date</span> for all other processing
+                                       </p>
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Specific Date</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Date you enter for all processing, including eligibility.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>If you use HCM coexistence, consider refreshing data
+                        after you run the coexistence refresh process. Predefined alerts use
+                        the most appropriate date for the type of alert and are exempt from
+                        the <span class="uicontrol">Refresh Data</span> processing.
+                        In addition, new salary ranges, new compa-ratio, and other metrics
+                        associated with a promotion to a new grade use the Promotion Effective
+                        Date.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FACMC785576">
+                     <h3 class="topictitle">Refresh Options</h3>
+                     
+                     
+                     
+                     <p>You can select one or more refresh options
+                        to process. Manual primary worksheet manager and worker eligibility
+                        changes revert to their original values unless you identify the changes
+                        you don't want overridden in the Administer Workers pages.
+                     </p>
+                     
+                     <p>The following table shows the refresh options and
+                        what is processed:
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Table shows the refresh options&#xA;and what is processed.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Refresh Option
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Processing Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Refresh HR Data</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Refreshes the following:</p>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>All person and HR-related data,
+                                          except the primary worksheet manager
+                                       </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Dynamic columns that include the <span class="uicontrol">Refresh Data </span>triggering event
+                                       </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Worksheet summary region totals</p>
+                                       
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Refresh Base and Eligible Salary</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Refreshes the following:</p>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>Base salary, salary basis, and
+                                          salary range columns, and anything stored related to these fields,
+                                          such as base salary frequency, adjusted salary, FTE salary, compa-ratio,
+                                          and more
+                                       </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Local currency, if input currency
+                                          was used
+                                       </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Default values for eligible salary</p>
+                                       
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Dynamic columns that include the <span class="uicontrol">Refresh Data</span> triggering event
+                                       </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Worksheet summary region totals</p>
+                                       
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Refresh Primary Manager Hierarchy</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Refreshes the following:</p>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>Primary worksheet manager and rebuilds
+                                          the hierarchy
+                                       </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Worksheet summary section totals</p>
+                                       
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Refresh Secondary Manager Hierarchy</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Refreshes the following:</p>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>Secondary manager and rebuilds
+                                          the hierarchy
+                                       </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Worksheet summary section totals</p>
+                                       
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Refresh Other Reviewer Hierarchy</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Refreshes the following:</p>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>Manager listed as other reviewer,
+                                          unless a primary manager selects the  reviewer manually on the worksheet
+                                       </p>
+                                       
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Worksheet summary section totals</p>
+                                       
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Reevaluate Eligibility</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Reprocesses a worker's eligibility at the plan and
+                                    the component levels. This may establish new eligibility if you track
+                                    ineligible workers. If you don't track ineligible workers, you use
+                                    the Start Workforce Compensation process to add workers into a started
+                                    plan. Refreshes the following:
+                                 </p>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>Dynamic columns that include the <span class="uicontrol">Refresh Data</span> triggering event
+                                       </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Worksheet summary section totals</p>
+                                       
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Refresh Column Defaults</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Refreshes the column defaults by running the following
+                                    refresh options:
+                                 </p>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>Refresh HR Data </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Reevaluate Eligibility</p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Refresh Manager Hierarchy</p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Refresh Dynamic Columns</p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Refresh Summary Totals</p>
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Refresh Dynamic Columns</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Refreshes the following:</p>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>Dynamic columns that include the <span class="uicontrol">Refresh Data</span> triggering event
+                                       </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Worksheet summary section totals</p>
+                                       
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Refresh Alerts</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Refreshes the custom alerts that include the Refresh
+                                    Data triggering event.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>For the Refresh Column Defaults option the process
+                        does not override existing column values that are not from HR and
+                        don't have a column default or dynamic calculation defined. The process
+                        does include recalculating an eligible salary that is derived using
+                        a formula or determined using a dynamic calculation.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FACMC1477595.htm#FACMC936325">Promotion Effective Date in Workforce Compensation: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FACMC1477591.htm#FACMC1594850">Ineligible Workers: Points to Consider</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FACMC582934">
+                  <h2>Person Selection Formula Type</h2>
+                  
+                  
+                  
+                  
+                  <p>The Compensation Person Selection formula
+                     determines the person selected for an associated workforce compensation
+                     plan. You select the formula when you run the Start Workforce Compensation
+                     Cycle process.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="F582890"><h3 class="contexts">Contexts</h3>
+                     
+                     <p>The following contexts are available to formulas of
+                        this type:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>DATE_EARNED</p>
+                        </li>
+                        
+                        <li>
+                           <p>EFFECTIVE_DATE</p>
+                        </li>
+                        
+                        <li>
+                           <p>END_DATE</p>
+                        </li>
+                        
+                        <li>
+                           <p>START_DATE</p>
+                        </li>
+                        
+                        <li>
+                           <p>HR_ASSIGNMENT_ID</p>
+                        </li>
+                        
+                        <li>
+                           <p>HR_TERM_ID</p>
+                        </li>
+                        
+                        <li>
+                           <p>JOB_ID</p>
+                        </li>
+                        
+                        <li>
+                           <p>LEGISLATIVE_DATA_GROUP_ID</p>
+                        </li>
+                        
+                        <li>
+                           <p>COMPENSATION_RECORD_TYPE</p>
+                        </li>
+                        
+                        <li>
+                           <p>ORGANIZATION_ID</p>
+                        </li>
+                        
+                        <li>
+                           <p>PAYROLL_ASSIGNMENT_ID</p>
+                        </li>
+                        
+                        <li>
+                           <p>PAYROLL_RELATIONSHIP_ID</p>
+                        </li>
+                        
+                        <li>
+                           <p>PAYROLL_TERM_ID</p>
+                        </li>
+                        
+                        <li>
+                           <p>PERSON_ID</p>
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="F582894"><h3 class="databaseItems">Database Items</h3>
+                     
+                     <p>Database items related to Person, Assignment, Salary,
+                        Element Entries, Compensation Record, and From and End Dates  are
+                        available to formulas of this type.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="F582895"><h3 class="inputs">Input Variables</h3>
+                     
+                     <p>The following input variables are available to formulas
+                        of this type.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="The table lists the input variables&#xA;for the Compensation Person Selection formula type.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Input
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Data Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Required
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CMP_IV_PLAN_ID</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Number</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Y</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Plan ID</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CMP_IV_PERIOD_ID</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Number</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Y</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Period ID</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CMP_IV_PLAN_START_DATE</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Date</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Y</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Plan Start Date</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CMP_IV_PLAN_END_DATE</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Date</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Y</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Plan End Date</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CMP_IV_PLAN_ELIG_DATE</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Date</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Y</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Plan Eligibility Date</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CMP_IV_PERFORMANCE_EFF_DATE</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Date</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Y</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Performance Effective Date</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CMP_IV_PROMOTION_EFF_DATE</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Date</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Y</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Promotion Effective Date</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CMP_IV_XCHG_RATE_DATE</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Date</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Y</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Currency Conversion Date</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CMP_IV_ASSIGNMENT_ID</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Number</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Y</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Assignment ID</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>CMP_IV_PERSON_ID</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Number</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Y</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Worker ID</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="F582909"><h3 class="returnValues">Return Values</h3>
+                     
+                     <p>The following return variables are available to formulas
+                        of this type.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="The table lists the return variables&#xA;for the Compensation Person Selection formula type.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Return Value
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Data Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Required
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>L_SELECTED</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Char</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>N</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Y or N</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="F582919"><h3 class="sampleFormula">Sample Formula</h3>
+                     
+                     <p>This sample formula determines if a person is selected
+                        for a workforce compensation plan based on their assignment_id.
+                     </p>
+                     <pre><code>/******************************************************************
+FORMULA NAME : Compensation Selection Formula 
+FORMULA TYPE : Compensation Person Selection 
+DESCRIPTION: Assignment_id based selection fast formula
+*******************************************************************/<br></code></pre>
+                     <pre><code>/*=========== INPUT VALUES DEFAULTS BEGIN =====================*/
+INPUTS ARE CMP_IV_ASSIGNMENT_ID (number), CMP_IV_PLAN_ID (number)
+/*=========== INPUT VALUES DEFAULTS ENDS======================*/<br></code></pre>
+                     <pre><code>/*================ FORMULA SECTION BEGIN =======================*/
+DEFAULT FOR CMP_IV_ASSIGNMENT_ID IS 0 
+l_selected = 'Y'
+/* 100000008154095 - Ariel.Aimar@oracle.com - GBI data*/
+if (CMP_IV_ASSIGNMENT_ID = 100000008154095) THEN 
+(
+l_selected = 'N'
+) 
+else 
+(
+l_selected = 'Y'
+) 
+RETURN l_selected
+/*================ FORMULA SECTION END =======================*/<br></code></pre>
+                     </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FACMC1655589">
+                  <h2>Workers Approved at Least N Managers Up Level: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>When you run the Transfer Data to HR process,
+                     you can limit processing to only those workers whose manager's worksheet
+                     is at a specific level of the approval process. You select a <span class="uicontrol">Workers Approved at Least N Managers Up</span> level
+                     on the Other Details process page. This option enables you to process
+                     workers whose allocation is approved at the specified level, even
+                     if worksheets at higher levels of the hierarchy are still pending
+                     approval.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FACMC1655588">
+                     <h3 class="topictitle">Worksheet Approval Status</h3>
+                     
+                     <p>A primary worksheet manager submits his worksheet
+                        for approval. The manager's worksheet has a status of "In Approvals"
+                        when both of the following occur:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The manager one level up approves
+                              the worksheet, either by explicit approval or submitting his own worksheet
+                              for approval.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The worksheet is pending approval
+                              by any manager higher in the approval hierarchy.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Workers whose manager's worksheet has the status
+                        of "In Approvals" at the level you selected are not processed.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FACMC1655611">
+                     <h3 class="topictitle">Examples</h3>
+                     
+                     <p>The following diagram shows a partial management
+                        hierarchy, with the worker's worksheet manager at level 0, the director,
+                        vice president (VP), and chief executive officer (CEO) at levels 1,
+                        2, and 3 respectively in the approval chain.
+                     </p>
+                     
+                     <img src="img/CMP_worker_approver_level_20050874.png" alt="Manager approval levels for workers." class="fusappimg">
+                     
+                     
+                     <p>You select a <span class="uicontrol">Workers Approved
+                           at Least N Managers U</span>p level of "<span class="uicontrol">1</span>". The worksheet has to be approved by the approver
+                        only one level above the worker's primary worksheet manager for the
+                        workers to be processed. In the diagram, the director must have approved
+                        the manager's worksheet. The manager's worksheet must be Approved
+                        or In Approvals for the worker to be processed.
+                     </p>
+                     
+                     <p>You select a <span class="uicontrol">Workers Approved
+                           at Least N Managers Up</span> level of "<span class="uicontrol">3</span>". The worksheet must be approved by the approver three
+                        levels above the worker's primary worksheet manager for the workers
+                        to process. In the diagram, the CEO has to approve the VP's worksheet
+                        for the worker to be processed. The VP's worksheet must be Approved
+                        or In Approvals for the worker to be processed.
+                     </p>
+                     
+                     <p>To process the Director and VP and the workers that
+                        report directly to them, their worksheets must be fully approved since
+                        there are not three levels above them
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FACMC834235">
+                  <h2>Terminated Worker Processing: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Workers with a termination date between the
+                     cycle evaluation start date and HR data extraction date are included
+                     in the cycle as long as they meet all eligibility criteria. The Start
+                     Compensation Cycle process uses the worker's termination date to extract
+                     HR data rather than the HR Data Extraction date.
+                  </p>
+                  
+                  
+                  
+                  <p>When the cycle is over, the Transfer Data to HR process
+                     creates element entries and salary records to process lump sum awards
+                     and salary adjustments. The effective date of the award must be earlier
+                     than or equal to the worker's termination date. The Transfer Data
+                     to HR process fails if a salary adjustment or lump sum effective date
+                     is later than the worker's payroll last standard process date.
+                  </p>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FACMC1441566">
+                  <h2>FAQs</h2>
+                  
+                  <div class="sect2" id="FACMC785145">
+                     <h3>What happens if I post single entries as components?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>The Transfer Data to HR process itemizes each
+                        worker's salary adjustment into salary components. For example, you
+                        allocate the salary adjustment for a worker as follows:
+                     </p>
+                     
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Merit component = 5,000 USD </p>
+                        </li>
+                        
+                        <li>
+                           <p>Promotion component = 2,000 USD</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Adjustment component = 1,000 USD</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>When you post single entries as components, the Transfer
+                        Data to HR process posts an 8,000 USD base salary increase to the
+                        worker's salary record itemized into:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Merit = 5,000 USD</p>
+                        </li>
+                        
+                        <li>
+                           <p>Promotion = 2,000 USD</p>
+                        </li>
+                        
+                        <li>
+                           <p>Adjustment = 1,000 USD</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>If you don't post single entries as components, the
+                        Transfer Data to HR process posts an 8,000 USD increase to the worker's
+                        salary record without any record of the component division.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FACMC925622">
+                     <h3>How can I process stock during a cycle?</h3>
+                     <p>Follow these steps when you run the Transfer
+                        Data to HR process:
+                     </p>
+                     <ol>
+                        <li>
+                           <p>Enter stock grants at the <span class="uicontrol">Stock Grant Details</span> step
+                           </p>
+                        </li>
+                        <li>
+                           <p>Select the worker population by
+                              defining the worker inclusion criteria at the <span class="uicontrol">Other Details</span> step
+                           </p>
+                        </li>
+                     </ol>
+                     <p>The process posts the information to the stock history
+                        table and it's available in compensation history. You don't have to
+                        set up payroll elements.
+                     </p>
+                  </div>
+                  
+                  <div class="sect2" id="FACMC1483408">
+                     <h3>Why are the worker inclusion counts shown in the Statistics dialog box not what I expected?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>The statistics include workers using the
+                        manager hierarchy and worker inclusion criteria. The statistics don't
+                        include workers using the person selection formula.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FACMC832472">
+                     <h3>Why do I not see my plan in the list of values for the Start Compensation Cycle process?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Your user role does not have access to view
+                        the plan. Verify the following:
+                     </p>
+                     
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The Configure Plan Access task
+                              for the plan doesn't restrict  access for the compensation administrator
+                              role
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Your user has the compensation
+                              administrator role or the proper security to run the compensation
+                              batch processes
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

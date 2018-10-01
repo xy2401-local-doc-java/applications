@@ -1,0 +1,607 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Managing Certificates and Keys (Chapter 10) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle ERP Cloud" name="dcterms.title">
+      <meta content="Securing Oracle ERP Cloud" name="doctitle">
+      <meta content="E74113-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FASER" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:25:31 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="Security Console; certificates; manage certificates;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FASER1662673.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FASER1349302.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FASER.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FASER.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="Certificates establish keys for the encryption and decryption of data that Oracle Cloud applications exchange with other applications.
+      Use the Certificates page in the Security Console functional area to work with certificates in either of two formats, PGP
+      and X.509."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">13/17</span><a name="BEGIN" id="BEGIN"></a><div id="FASER1662694" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">10</span>Managing Certificates and Keys
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1497977">Managing Certificates: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1636128">Generating Certificates: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1636152">Generating a Signing Request: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1636214">Importing and Exporting X.509 Certificates: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1636393">Importing and Exporting PGP Certificates: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1636404">Deleting Certificates: Procedure</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FASER1497977">
+                  <h2>Managing Certificates: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Certificates establish keys for the encryption
+                     and decryption of data that Oracle Cloud applications exchange with
+                     other applications. Use the Certificates page in the Security Console
+                     functional area to work with certificates in either of two formats,
+                     PGP and X.509. 
+                  </p>
+                  
+                  
+                  
+                  <p>For each format, a certificate consists of a public
+                     key and a private key. The Certificates page displays one record for
+                     each certificate. Each record reports these values:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Type: For a PGP certificate, "Public
+                           Key" is the only type. For an X.509 certificate, the type is either
+                           "Self-Signed Certificate" or "Trusted Certificate" (one signed by
+                           a certificate authority). 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Private Key: A check mark indicates
+                           that the certificate's private key is present. For either certificate
+                           format, the private key is present for your own certificates (those
+                           you generate in the Security Console). The private key is absent when
+                           a certificate belongs to an external source and you import it through
+                           the Security Console. 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Status: For a PGP certificate,
+                           the only value is "Not Applicable." (A PGP certificate has no status.)
+                           For an X.509 certificate, the status is derived from the certificate.
+                        </p>
+                        
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>To the right in the row for each certificate, click
+                     a button to display a menu of actions appropriate for the certificate.
+                     Or, to view details for a certificate, select its name ("alias").
+                     Actions include:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Generate PGP or X.509 certificates.</p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Generate signing requests to transform
+                           X.509 certificates from self-signed to trusted.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Export or import PGP or X.509 certificates.</p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Delete certificates. </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1636128">
+                  <h2>Generating Certificates: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>For a PGP or X.509 certificate, one operation
+                     creates both the public and private keys. From the Certificates page,
+                     select the Generate option. In a Generate page, select the certificate
+                     format, then enter values appropriate for the format.
+                  </p>
+                  
+                  
+                  
+                  <p>For a PGP certificate, these values include:</p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>An alias (name) and passphrase
+                           to identify the certificate uniquely.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>The algorithm by which keys are
+                           generated, DSA or RSA.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>A key length.</p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>For an X.509 certificate, these values include:</p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>An alias (name) and private key
+                           password to identify the certificate uniquely.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>A common name, which is an element
+                           of the "distinguished name" for the certificate. The common name identifies
+                           the entity for which the certificate is being created, in its communications
+                           with other web entities. It must match the name of the entity presenting
+                           the certificate. The maximum length is 64 characters.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Optionally, other identifying values:
+                           Organization, Organization Unit, Locality, State/Province, and Country.
+                           These are also elements of the distinguished name for the certificate,
+                           although the Security Console does not perform any validation on these
+                           values. 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>An algorithm by which keys are
+                           generated, MD5 or SHA1.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>A key length.</p>
+                     </li>
+                     
+                     <li>
+                        <p>A validity period, in days. This
+                           period is preset to a value established on the General Administration
+                           page. You can enter a new value to override the preset value. 
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1636152">
+                  <h2>Generating a Signing Request: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can generate a request for a certificate
+                     authority (CA) to sign a self-signed X.509 certificate, to make it
+                     a trusted certificate. (This process does not apply to PGP certificates.)
+                  </p>
+                  
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>Select <span class="uicontrol">Generate Certificate Signing Request</span>. This option is
+                           available in either of two menus: 
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>One menu opens in the Certificates
+                                 page, from the row for a self-signed X.509 certificate. 
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>The other menu is the Actions menu
+                                 in the details page for that certificate.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Provide the private key password
+                           for the certificate, then select a file location.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Save the request file. Its default
+                           name is [alias]_CSR.csr.
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  <p>You are expected to follow a process established
+                     by your organization to forward the file to a CA. You would import
+                     the trusted certificate returned in response.
+                  </p>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1636214">
+                  <h2>Importing and Exporting X.509 Certificates: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>For an X.509 certificate, you import or export
+                     a complete certificate in a single operation. 
+                  </p>
+                  
+                  
+                  
+                  <p>To export:</p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>From the Certificates page, select
+                           the menu available in the row for the certificate you want to export.
+                           Or open the details page for that certificate and select its Actions
+                           menu. 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In either menu, select Export,
+                           then Certificate. 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Select a location for the export
+                           file. By default, this file is called [alias].cer.
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  <p>To import, use either of two procedures. Select the
+                     one appropriate for what you want to do:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>The first procedure replaces a
+                           self-signed certificate with a trusted version (one signed by a CA)
+                           of the same certificate. (A prerequisite is that you have received
+                           a response to a signing request.)
+                        </p>
+                        
+                        <ol>
+                           
+                           <li>
+                              <p>In the Certificates page, locate
+                                 the row for the self-signed certificate, and open its menu. Or, open
+                                 the details page for the certificate, and select its Actions menu.
+                                 In either menu, select Import.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Enter the private key password
+                                 for the certificate.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Browse for and select the file
+                                 returned by a CA in response to a signing request, and click the Import
+                                 button.
+                              </p>
+                           </li>
+                           
+                        </ol>
+                        
+                        <p>In the Certificates page, the type value for the
+                           certificate changes from self-signed to trusted.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>The second procedure imports a
+                           new X.509 certificate. You can import a .cer file, or you can import
+                           a keystore that contains one or more certificates.
+                        </p>
+                        
+                        <ol>
+                           
+                           <li>
+                              <p>In the Certificates page, click
+                                 the Import button. An Import page opens.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Select X.509, then choose whether
+                                 you are importing a certificate or a keystore.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Enter identifying values, which
+                                 depend on what you have chosen to import. In either case, enter an
+                                 alias (which, if you are importing a .cer file, need not match its
+                                 alias). For a keystore, you must also provide a keystore password
+                                 and a private key password.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Browse for and select the import
+                                 file.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Select Import and Close.</p>
+                           </li>
+                           
+                        </ol>
+                        
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1636393">
+                  <h2>Importing and Exporting PGP Certificates: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>For a PGP certificate, you export the public
+                     and private keys for a certificate in separate operations. You can
+                     import only public keys. (The assumption is that you will import keys
+                     from external sources, who will not provide their private keys to
+                     you.) 
+                  </p>
+                  
+                  
+                  
+                  <p>To export: </p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>From the Certificates page, select
+                           the menu available in the row for the certificate you want to export.
+                           Or open the details page for that certificate and select its Actions
+                           menu. 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In either menu, select Export,
+                           then Public Key or Private Key. 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>If you selected Private Key, provide
+                           its passphrase. (The public key does not require one.)
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Select a location for the export
+                           file. By default, this file is called [alias]_pub.asc or [alias]_priv.asc.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  <p>To import a new PGP public key:</p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>On the Certificates page, select
+                           the Import button.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>In the Import page, select PGP
+                           and specify an alias (which need not match the alias of the file you
+                           are importing).
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Browse for the public-key file,
+                           then select Import and Close. 
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  <p>The Certificates page displays a record for the imported
+                     certificate, with the Private Key cell unchecked.
+                  </p>
+                  
+                  <p>Use a distinct import procedure if you need to replace
+                     the public key for a certificate you have already imported, and do
+                     not want to change the name of the certificate:
+                  </p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>In the Certificates page, locate
+                           the row for the certificate whose public key you have imported, and
+                           open its menu. Or, open the details page for the certificate, and
+                           select its Actions menu. In either menu, select Import. 
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Browse for the public-key file,
+                           then select Import.
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1636404">
+                  <h2>Deleting Certificates: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can delete both PGP and X.509 certificates: </p>
+                  
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>In the Certificates page, select
+                           the menu available in the row for the certificate you want to delete.
+                           Or, in the details page for that certificate, select the Actions menu. 
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>In either menu, select Delete.</p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Respond to a warning message. If
+                           the certificate's private key is present, you must enter the passphrase
+                           (for a PGP certificate) or private key password (for an X.509 certificate)
+                           as you respond to the warning. Either value would have been created
+                           as your organization generated the certificate.
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

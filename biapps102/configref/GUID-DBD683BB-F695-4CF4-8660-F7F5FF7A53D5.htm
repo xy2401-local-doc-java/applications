@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Configuring the Asset Category Dimension for E-Business Suite</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="Asset Category is defined in E-Business Suite Fixed Asset Application using the Key Flex Field (KFF) feature. You can setup KFF using different segments based on your business needs." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-D2EF599C-9C57-448A-B333-BF4608872779.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-2959D1B1-AC19-430B-97BA-003136F47121.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-DBD683BB-F695-4CF4-8660-F7F5FF7A53D5"></a> <span id="PAGE" style="display:none;">31/336</span> <!-- End Header -->
+<a id="BIACF24565"></a><a id="IT_340"></a>
+<h1 id="BIAFC-GUID-DBD683BB-F695-4CF4-8660-F7F5FF7A53D5" class="sect1">Configuring the Asset Category Dimension for E-Business Suite</h1>
+<div>
+<p>Asset Category is defined in E-Business Suite Fixed Asset Application using the Key Flex Field (KFF) feature. You can setup KFF using different segments based on your business needs.</p>
+<div class="section">
+<p>The configuration file <code>file_fa_category_segment_config_ora.csv</code> is used to configure the segment mapping between the Category KFF in your E-Business Suite Fixed Asset application and the Asset Category dimension in <span>Oracle Business Analytics Warehouse</span>. This configuration needs to be done before the ETL load. During ETL, the configuration csv file determines which KFF segment should be loaded into which segment column in the Asset Category dimension table in <span>Oracle Business Analytics Warehouse</span>.</p>
+<p>For example, assuming in <span>Oracle Business Analytics Warehouse</span>, the segment columns store the following conformed values:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>W_ASSET_CATEGORY_D.major_category stores Major category (such as COMPUTER)</p>
+</li>
+<li>
+<p>W_ASSET_CATEGORY_D.minor_category stores Minor category (such as LAPTOP, or DESKTOP)</p>
+</li>
+<li>
+<p>W_ASSET_CATEGORY_D.segment1 stores Major category</p>
+</li>
+<li>
+<p>W_ASSET_CATEGORY_D.segment2 stores Minor category</p>
+</li>
+</ul>
+<p>Assuming in your E-Business Suite instance, you use segment 2 and segment 3 to store the major and minor category:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>FA_CATEGORIES_B.segment1 not used</p>
+</li>
+<li>
+<p>FA_CATEGORIES_B.segment2 stores Major category</p>
+</li>
+<li>
+<p>FA_CATEGORIES_B.segment3 stores Minor category</p>
+</li>
+</ul>
+<p>With this example, the configure csv file should be configured as the follows:</p>
+<div class="tblformal" id="GUID-DBD683BB-F695-4CF4-8660-F7F5FF7A53D5__GUID-69FCEBC7-FA7C-400E-B7D9-FEE607F535BB">
+<table class="cellalignment137" summary="Asset Category Dimension configuration">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment205" id="d18720e83">MAJOR_CATEGORY</th>
+<th class="cellalignment205" id="d18720e85">MINOR_CATEGORY</th>
+<th class="cellalignment205" id="d18720e87">SEG1</th>
+<th class="cellalignment205" id="d18720e89">SEG2</th>
+<th class="cellalignment192" id="d18720e91">SEG3</th>
+<th class="cellalignment192" id="d18720e93">SEG4</th>
+<th class="cellalignment192" id="d18720e95">SEG5</th>
+<th class="cellalignment192" id="d18720e97">Etc</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment206" id="d18720e101" headers="d18720e83">
+<p>SEGMENT2</p>
+</td>
+<td class="cellalignment206" headers="d18720e101 d18720e85">
+<p>SEGMENT3</p>
+</td>
+<td class="cellalignment206" headers="d18720e101 d18720e87">
+<p>SEGMENT2</p>
+</td>
+<td class="cellalignment206" headers="d18720e101 d18720e89">
+<p>SEGMENT3</p>
+</td>
+<td class="cellalignment193" headers="d18720e101 d18720e91">&nbsp;</td>
+<td class="cellalignment193" headers="d18720e101 d18720e93">&nbsp;</td>
+<td class="cellalignment193" headers="d18720e101 d18720e95">&nbsp;</td>
+<td class="cellalignment193" headers="d18720e101 d18720e97">&nbsp;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="infobox-note" id="GUID-DBD683BB-F695-4CF4-8660-F7F5FF7A53D5__GUID-DB698431-3C23-4D96-BADD-6F776048FBB2">
+<p class="notep1">Note:</p>
+The major_category and minor_category columns contain the segment numbers that represents the major and minor category respectively.</div>
+<p>How to configure the Asset Category Dimension using <code>file_fa_category_segment_config_ora.csv</code>:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Edit the file <code>file_fa_category_segment_config_ora.csv</code>.</span>
+<div>
+<p>The <code>file_fa_category_segment_config_ora.csv</code> is used to match the segment fields in E-Business Suite to the segment fields in the <span>Oracle Business Analytics Warehouse</span> table W_ASSET_CATEGORY_D.</p>
+<p>The configuration file or files for this task are provided on installation of <span>Oracle BI Applications</span> at one of the following locations:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Source-independent files: <code><span class="variable">&lt;Oracle Home for BI&gt;</span>\biapps\etl\data_files\src_files\</code>.</p>
+</li>
+<li>
+<p>Source-specific files: <code><span class="variable">&lt;Oracle Home for BI&gt;</span>\biapps\etl\data_files\src_files\<span class="variable">&lt;source adaptor&gt;</span></code>.</p>
+</li>
+</ul>
+<div class="infobox-note" id="GUID-DBD683BB-F695-4CF4-8660-F7F5FF7A53D5__GUID-3C358513-2B43-453C-A4C1-F8E786BEE747">
+<p class="notep1">Note:</p>
+If you are deploying OTBI-Enterprise, then you must download the CSV files from Configuration Manager, as follows: 1. From the Tasks bar, click <span class="bold">Define Business Intelligence Applications</span>. 2. Click <span class="bold">Actions</span>, then <span class="bold">Manage Source Configuration Data Files</span>. 3. Click the <span class="bold">Export Source Configuration Data Files</span> option on the tool bar. 4. Move the required files to the right hand list, then click Export.</div>
+<p>Your system administrator will have copied these files to another location and configured ODI connections to read from this location. Work with your system administrator to obtain the files. When configuration is complete, your system administrator will need to copy the configured files to the location from which ODI reads these files.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Enter the segment mapping information into the fields.</span>
+<div>
+<p>The column SEG1 to SEG7 represent <span>Oracle Business Analytics Warehouse</span> segment columns in the asset category dimension table. For each of these segments, you fill in the corresponding mapped KFF segment. Fill the MAJOR_CATEGORY and MINOR_CATEGORY column with the segment number that represents the major and minor category respectively.</p>
+<p>Leave the field empty if there is no mapping.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Save the file.</span></li>
+</ol>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-D2EF599C-9C57-448A-B333-BF4608872779.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-2959D1B1-AC19-430B-97BA-003136F47121.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

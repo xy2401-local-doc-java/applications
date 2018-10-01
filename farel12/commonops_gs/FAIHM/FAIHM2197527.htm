@@ -1,0 +1,2955 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Loading Workers (Chapter 9) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:16 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM Data Loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM2261419.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM2344145.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="The worker business object includes all information related to a person and his or her work relationships. This topic describes
+      some general considerations that apply when you load workers. Select the worker object on the Initiate Data Load page to review
+      its component hierarchy: You can't update most components of the worker hierarchy if you supply only a user key. This restriction
+      exists because the attribute that you want to change is the attribute that's used to identify the record. For example, in
+      the Person Address component, the AddressLine1 attribute is used both to identify the address to update and to supply the
+      new value. Therefore, you're recommended always to supply source keys when creating workers and use them when updating worker
+      records. A person can have multiple instances of some components, such as addresses, phones, and e-mails. When you load multiple
+      instances of a component for a person, you must: You must understand the employment model in the legal employer to which you're
+      loading work relationships and assignments. In general, the employment model can be three-tier, which supports employment
+      terms, or two-tier, which doesn't. In any legal employer, the Employment Model option can be set to one of these values: Many
+      components of the worker object include values, such as person type and assignment status, that must exist in the target environment.
+      Perform the tasks shown in this table to define relevant values before you load data: You terminate work relationships, not
+      workers. When you terminate a work relationship using HCM Data Loader, its child components, such as assignments, are terminated
+      automatically. Don't try to terminate other child components of the worker object, such as person name. The person record
+      must continue to exist and be returned in search results, for example. For examples of .dat files showing how to load workers,
+      see HCM Data Loader: Loading Workers (document ID 2022624.1) on My Oracle Support at https://support.oracle.com. You must
+      include any formatting characters in the value that you specify on the NationalIdentifierNumber attribute of the Person National
+      Identifier component. For example, to load the US social security number 987-65-4322, you must include the hyphens. Don't
+      specify the number as 987654322. If you omit the formatting, which is country-specific, then duplicate person records aren't
+      found when the checking is based on national identifier."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">12/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM2197527" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">9</span>Loading Workers
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2197091">Loading Workers: Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2197386">Loading New Workers: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2217084">Effective Start and End Dates for Worker Components: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2216629">Deleting Worker Components: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2225178">Checking for Duplicate Person Records: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2217281">Person Numbers in Worker Objects: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2228107">Loading External Identifiers: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2228152">Loading Person Names: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2228198">Loading Person Images: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2197469">Work Relationship Changes: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2217424">Performing a Global Transfer: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2217548">Loading Person Legislative Data: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2228791">Loading Employment Terms: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2611125">Automatic Calculation of FTE Values for Workers: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2357881">FAQs for Loading Workers</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM2197091">
+                  <h2>Loading Workers: Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The worker business object includes all information
+                     related to a person and his or her work relationships. This topic
+                     describes some general considerations that apply when you load workers.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2197076">
+                     <h3 class="topictitle">The Worker Hierarchy</h3>
+                     
+                     <p>Select the worker object on the Initiate
+                        Data Load page to review its component hierarchy:
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2197107">
+                     <h3 class="topictitle">Using Source Keys</h3>
+                     
+                     <p>You can't update most components of the worker
+                        hierarchy if you supply only a user key. This restriction exists because
+                        the attribute that you want to change is the attribute that's used
+                        to identify the record. For example, in the Person Address component,
+                        the <span class="uicontrol">AddressLine1</span> attribute is
+                        used both to identify the address to update and to supply the new
+                        value. Therefore, you're recommended always to supply source keys
+                        when creating workers and use them when updating worker records.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2197108">
+                     <h3 class="topictitle">Multiple Instances of a Component</h3>
+                     
+                     <p>A person can have multiple instances of some
+                        components, such as addresses, phones, and e-mails. When you load
+                        multiple instances of a component for a person, you must:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Identify one of the records as
+                              primary using the <span class="uicontrol">PrimaryFlag</span> attribute of the component.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Process the occurrences together
+                              and include the parent worker record in the file. If the worker already
+                              exists in Oracle HCM Cloud, then you can include just the primary-key
+                              attributes of the worker.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2197109">
+                     <h3 class="topictitle">The Employment Model</h3>
+                     
+                     <p>You must understand the employment model
+                        in the legal employer to which you're loading work relationships and assignments. In general, the employment
+                        model can be three-tier, which supports employment terms, or two-tier,
+                        which doesn't. In any legal employer, the <span class="uicontrol">Employment Model</span> option can be set to one of these values:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>2 Tier - Single Assignment</p>
+                        </li>
+                        
+                        <li>
+                           <p>2 Tier - Multiple Assignment</p>
+                        </li>
+                        
+                        <li>
+                           <p>2 Tier - Single Contract - Single
+                              Assignment
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>3 Tier - Single Employment Terms
+                              - Single Assignment
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>3 Tier - Single Employment Terms
+                              - Multiple Assignment
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>3 Tier - Multiple Employment Terms
+                              - Single Assignment
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>3 Tier - Multiple Employment Terms
+                              - Multiple Assignment
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For example, any attempt to load employment terms
+                        to a legal employer where a two-tier employment model is implemented
+                        fails. Also, when loading multiple work relationships or assignments
+                        for a person, you must identify which is primary using the <span class="uicontrol">PrimaryFlag</span> attribute. A person must have
+                        only one primary work relationship at a time and only one primary
+                        assignment in each work relationship.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2197268">
+                     <h3 class="topictitle">Defining Referenced Values</h3>
+                     
+                     <p>Many components of the worker object include
+                        values, such as person type and assignment status, that must exist
+                        in the target environment. Perform the tasks shown in this table to
+                        define relevant values before you load data:
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Task
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Manage Actions</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Defines the actions used to classify changes to employment
+                                    data
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Manage Person Types</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Defines subcategories of the predefined person types,
+                                    such as employee and nonworker
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Manage Assignment Status</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Defines status values, such as active, inactive,
+                                    or suspended, for assignments
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>In addition, you must have reviewed and updated lists
+                        of values, such as address types, phone types, ethnicity, and marital
+                        status, before loading workers. You may have performed this step during
+                        implementation. If you're synchronizing assignments from positions,
+                        then you must enable position synchronization before you load assignments.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2197269">
+                     <h3 class="topictitle">Worker Termination</h3>
+                     
+                     <p>You terminate work relationships, not workers.
+                        When you terminate a work relationship using HCM Data Loader, its
+                        child components, such as assignments, are terminated automatically.
+                        Don't try to terminate other child components of the worker object,
+                        such as person name. The person record must continue to exist and
+                        be returned in search results, for example.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2228824">
+                     <h3 class="topictitle">Finding Example .dat Files</h3>
+                     
+                     <p>For examples of .dat files showing how to
+                        load workers, see HCM Data Loader: Loading Workers (document ID 2022624.1)
+                        on My Oracle Support at https://support.oracle.com.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=9643AF7224ABF359E040D30A6881273A">Employment Model: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM1672963.htm#FAIHM2012584">Source Keys: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM2126423.htm#FAIHM2034977">Reviewing Lists of Values: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM2126423.htm#FAIHM2176353">Finding Business-Object Information: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=0F6BA0147E4A4AE3E05362C3F00AE5CE">Position Synchronization: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2197386">
+                  <h2>Loading New Workers: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>The worker object hierarchy is complex, with
+                     many components and hierarchy levels. When you create workers, especially
+                     in large volumes, you're recommended to load only the required components
+                     initially. Once the worker objects exist, you can load related objects,
+                     such as salary and element entries. This topic identifies the components that
+                     you must load when you create workers and those that you must load
+                     in some circumstances. You can load optional worker components once
+                     the worker objects exist.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2197384">
+                     <h3 class="topictitle">Loading Required Components of the Worker Object</h3>
+                     
+                     <p>Supply these components of the worker object when
+                        you create workers using HCM Data Loader:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Worker</p>
+                        </li>
+                        
+                        <li>
+                           <p>Person legislative data</p>
+                        </li>
+                        
+                        <li>
+                           <p>Person name</p>
+                        </li>
+                        
+                        <li>
+                           <p>Work relationship</p>
+                        </li>
+                        
+                        <li>
+                           <p>Employment terms, when the legal employer supports
+                              a three-tier employment model
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Assignment</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Include date-effective history, as appropriate, for
+                        each worker.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        The worker <span class="uicontrol">StartDate</span> and <span class="uicontrol">EffectiveStartDate</span> attribute
+                        values must both be equal to the start date of the worker's earliest work relationship.
+                        
+                     </div>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2197411">
+                     <h3 class="topictitle">Loading Person Legislative Data</h3>
+                     
+                     <p>Person legislative data isn't a required component
+                        for creating workers. However, you're recommended to include it and
+                        provide a source-key value. Otherwise, the component is created automatically
+                        with a default source-key value.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2314484">
+                     <h3 class="topictitle">Loading Assignment Managers</h3>
+                     
+                     <p>Load assignment manager components to create manager
+                        relationships only after you have loaded workers successfully. This
+                        approach ensures that the worker records of referenced managers exist
+                        before you refer to them in assignment manager components.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2197412">
+                     <h3 class="topictitle">Loading Contracts</h3>
+                     
+                     <p>You can supply contract details when using either
+                        of these employment models: 
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Three-tier</p>
+                        </li>
+                        
+                        <li>
+                           <p>Two-tier, with single contract
+                              and assignment
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You must supply the contract component when creating
+                        workers, if appropriate. You can't load contract components later.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2197413">
+                     <h3 class="topictitle">Loading Users and Roles</h3>
+                     
+                     <p>The enterprise option <span class="uicontrol">User
+                           Account Creation</span> controls whether user accounts are created
+                        automatically for workers loaded in bulk. However, you can prevent
+                        user accounts being created for individual workers by including the <span class="uicontrol">GeneratedUserAccountFlag</span> attribute of the
+                        user information component and setting it to <span class="uicontrol">N</span>. You can also specify a user name on the <span class="uicontrol">UserName</span> attribute of the user information
+                        component. Otherwise, the user name is generated automatically in
+                        the enterprise default format. If you set one of the following attributes
+                        or attribute pairs, then an attempt is made to link an existing user
+                        account to the worker:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p><span class="uicontrol">UserGUID</span></p>
+                        </li>
+                        
+                        <li>
+                           <p><span class="uicontrol">UserName</span> and <span class="uicontrol">UsernameMatchingFlag</span></p>
+                        </li>
+                        
+                        <li>
+                           <p><span class="uicontrol">EmailAddress</span> and <span class="uicontrol">EmailMatchingFlag</span></p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Roles are provisioned to new users automatically,
+                        as specified by current role-provisioning rules. To
+                        assign roles manually to a new worker, include the person user manual
+                        roles component with the worker object.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        You can supply the user information and person user
+                        manual roles components only for new workers and only at the time
+                        you create them. Once a worker exists, you use the user object and
+                        its user role component to manage users and roles.
+                        
+                     </div>
+                     
+                     <p>If user accounts are created by default in your environment,
+                        then you can prevent user accounts being created for terminated workers.
+                        Set the enterprise option <span class="uicontrol">User Account Creation
+                           for Terminated Workers</span> to <span class="uicontrol">No</span>. When you load terminated workers in bulk, this setting prevents
+                        the generated user-account requests from being processed. To set this
+                        option, perform the Manage Enterprise HCM Information task in the
+                        Setup and Maintenance work area.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2217084">
+                  <h2>Effective Start and End Dates for Worker Components: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Many components of the worker object are
+                     date effective. When creating workers, you must ensure that the effective
+                     dates of individual worker components don't conflict. This topic suggests
+                     an approach to setting the earliest effective start date and
+                     last effective
+                     end date for each date-effective component. You don't have
+                     to follow this guidance. However, you must ensure that effective dates
+                     are aligned for the complete worker object.
+                  </p>
+                  
+                  
+                  
+                  <p>This table suggests how to set earliest effective
+                     start dates and last effective end dates for date-effective worker
+                     components.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Component
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Earliest Effective Start Date
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Last Effective End Date
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Worker</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Earliest start date of the worker.</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The end of time.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person Address</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>On or after the earliest start date of the worker.</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The end of time.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person Legislative Data</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Earliest start date of the worker.</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The end of time.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person Name</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Earliest start date of the worker.</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The end of time.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person Visa</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>On or after the earliest start date of the worker.</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The end of time.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person Contact Relationship</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>On or after the earliest start date of the worker.</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The effective end date of the contact relationship.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Employment Terms</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>The first employment terms must have an effective
+                                 start date equal to the start date of the corresponding work relationship. Subsequent employment terms can have an effective start date on
+                                 or after the start date of the corresponding work relationship.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The end of time.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Assignment</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>The first assignment must have an effective start date equal to the
+                                 earliest effective start date of any corresponding employment terms.
+                                 Subsequent assignments can have an effective start date on or after
+                                 the earliest effective start date of the corresponding employment
+                                 terms. Further restrictions on the earliest effective start date may
+                                 exist, depending on the employment model being used.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The end of time.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Assignment Extra Information</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>On or after the earliest effective start date of
+                                 the corresponding assignment.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The end of time.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Assignment Grade Steps</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>On or after the earliest effective start date of
+                                 the corresponding assignment.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The effective end date of the grade steps.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Assignment Manager</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>On or after the earliest effective start date of
+                                 the corresponding assignment.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The effective end date of the manager relationship.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Assignment Work Measure</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>On or after the earliest effective start date of
+                                 the corresponding assignment.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The end of time.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Contract</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>The earliest effective start date of the corresponding
+                                 employment terms.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The end of time.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Employment Terms Grade Steps</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>On or after earliest effective start date of the
+                                 corresponding employment terms.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The effective end date of the grade steps.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Employment Terms Manager</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>On or after earliest effective start date of the
+                                 corresponding employment terms.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The effective end date of the manager relationship.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Employment Terms Work Measure</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>On or after earliest effective start date of the
+                                 corresponding employment terms.
+                              </p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The end of time.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Worker Extra Information</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>On or after the earliest start date of the worker.</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The end of time.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2216629">
+                  <h2>Deleting Worker Components: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can delete some components of the worker
+                     object but not the entire worker. This topic identifies which components
+                     of the worker hierarchy you can delete using HCM Data Loader and describes
+                     any limitations on deletion support.
+                  </p>
+                  
+                  
+                  
+                  <p>This table summarizes deletion support for the components
+                     of the worker object.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Component
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Deletion Supported
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Notes
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Worker</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>No</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>External identifier</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person address</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>You can delete nonprimary addresses but not the primary
+                                 address. Identify a new primary address before you delete the current
+                                 primary address.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person citizenship</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person delivery method</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person drivers license</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person e-mail</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>When only one e-mail exists, you can delete it. When
+                                 multiple e-mails exist, you must delete all nonprimary e-mails before
+                                 you can delete the primary e-mail. Alternatively, identify a new primary
+                                 e-mail before you delete the current primary e-mail.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person ethnicity</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person image</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person legislative data</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>One legislative data record must exist for a worker.
+                                 You can't delete the only record. You can delete additional records.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person name</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>No</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person national identifier</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person passport</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person phone</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>When only one phone exists, you can delete it. When
+                                 multiple phones exist, you must delete all nonprimary phones before
+                                 you can delete the primary phone. Alternatively, identify a new primary
+                                 phone before you delete the current primary phone.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person religion</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person visa</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>User information</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>No</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The user information component is available only
+                                 when you create workers. This component isn't available when you update
+                                 workers.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Person user manual roles</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>No</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>The person user manual roles component is available
+                                 only when you create workers. This component isn't available when
+                                 you update workers.
+                              </p>
+                              
+                              <p>To remove a single role from a worker, you use the
+                                 user object rather than the worker object. To remove multiple roles
+                                 from a user, you use the user role component of the user object.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Work relationship</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p>When deleting a work relationship, you must
+                                 include the <span class="uicontrol">CancelWorkRelationshipFlag</span> attribute with a value of <span class="uicontrol">Y</span>.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Employment terms</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>No</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Assignment</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>No</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Assignment extra information</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Assignment grade steps</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Assignment manager</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Assignment work measure</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Contract</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>No</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Employment terms extra information</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Employment terms grade steps</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Employment terms manager</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Employment terms work measure</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Worker extra information</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Yes</p>
+                              
+                           </td>
+                           
+                           <td>
+                              
+                              <p></p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2225178">
+                  <h2>Checking for Duplicate Person Records: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>When you load person records using HCM Data
+                     Loader, you can request a check for duplicate records. In this case,
+                     an error message is raised if you try to load a duplicate record.
+                     This topic describes how to request duplicate checking for individual
+                     person records. It also describes how this option works in conjunction
+                     with the enterprise setting for duplicate checking.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2225176">
+                     <h3 class="topictitle">Duplicate Checking for Individual Person Records</h3>
+                     
+                     <p>To request duplicate checking for a person record,
+                        you include the <span class="uicontrol">PersonDuplicateCheck</span> attribute of the worker object. This attribute can have one of the
+                        values shown in this table. The Description column identifies the
+                        attributes that the application uses in each case to identify duplicate
+                        records.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>ORA_NONE or a blank value</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>No duplicate checking occurs</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>ORA_LN_FI_DOB_GEN_NID</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Either the last name, first-name initial, date of
+                                    birth, and gender or the national ID
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>ORA_LN_FI_DOB_NID</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Either the last name, first-name initial, and date
+                                    of birth or the national ID
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>ORA_LN_FN_DOB_GEN_NID</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Either the last name, first name, date of birth,
+                                    and gender or the national ID
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>ORA_NID_ONLY</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The national ID</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>For example, if you set <span class="uicontrol">PersonDuplicateCheck</span> to <span class="uicontrol">ORA_LN_FI_DOB_NID</span>, then a duplicate record is identified if one of these situations
+                        occurs:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The last name, first-name initial,
+                              and date of birth all match those of an existing person record.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The national ID matches that of
+                              an existing person record.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        National ID values must be formatted. For example,
+                        to load the US social security number <span class="uicontrol">987-65-4322</span>, you must include the hyphens. Don't specify the number as <span class="uicontrol">987654322</span>. If you omit the formatting, which
+                        is country-specific, then duplicate person records aren't found when
+                        the checking is based on national identifier.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2225205">
+                     <h3 class="topictitle">Enterprise Duplicate Checking</h3>
+                     
+                     <p>The enterprise option <span class="uicontrol">Person
+                           Creation Service Duplicate Check</span> controls whether checks
+                        for duplicate person records occur by default when you load person
+                        records in bulk. If you exclude the <span class="uicontrol">PersonDuplicateCheck</span> attribute of the worker object, then the current setting of <span class="uicontrol">Person Creation Service Duplicate Check</span> applies.
+                        If you include the <span class="uicontrol">PersonDuplicateCheck</span> attribute, then the current setting of <span class="uicontrol">Person Creation Service Duplicate Check</span> is ignored for
+                        the relevant person record.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=3D8F936BFBCA3518E05362C3F00A7A06">Duplicate Checks When Importing Person Records: Points to Consider</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2217281">
+                  <h2>Person Numbers in Worker Objects: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Each person record, regardless of person type or number
+                     of work relationships, has a unique person
+                     number. Person numbers can be either generated automatically
+                     or entered manually, depending on the setting of the enterprise <span class="uicontrol">Person Number Generation Method</span> option.
+                     This topic describes ways of providing person numbers for uploaded
+                     worker objects.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2217279">
+                     <h3 class="topictitle">Automatically Generated Person Numbers</h3>
+                     
+                     <p>To generate person numbers automatically, you set
+                        the <span class="uicontrol">Person Number Generation Method</span> option to either <span class="uicontrol">Automatic Prior to Submission</span> or <span class="uicontrol">Automatic Upon Final Save</span>. When you load person records to environments where person numbers
+                        are generated automatically, you supply no person number. A number
+                        is generated automatically on upload.
+                     </p>
+                     
+                     
+                     <p>When you load a person record without a person number,
+                        you must supply a source key to identify the person record uniquely.
+                        You must use the same key for all child components of the worker object
+                        using the <span class="uicontrol">PersonId(SourceSystemId)</span> attribute and hint.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2217280">
+                     <h3 class="topictitle">Manually Entered Person Numbers</h3>
+                     
+                     <p>When the <span class="uicontrol">Person Number Generation
+                           Method</span> option is set to <span class="uicontrol">Manual</span>, you must supply a person number in the worker object.
+                     </p>
+                     
+                     
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2310138">
+                     <h3 class="topictitle">Loading Legacy Numbers</h3>
+                     
+                     <p>You can load legacy numbers to environments where
+                        person numbers are generated automatically. Set the <span class="uicontrol">Initial Person Number</span> enterprise option
+                        to the highest legacy person number plus one so that the legacy sequence
+                        continues.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2310139">
+                     <h3 class="topictitle">Correcting Person Numbers</h3>
+                     
+                     <p>You can correct a person number, provided that <span class="uicontrol">Person Number Generation Method</span> is set to <span class="uicontrol">Manual</span>.
+                     </p>
+                     
+                     
+                     <p>To correct a person number when the enterprise method
+                        is automatic generation, you can: 
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Note which of the two automatic
+                              methods, <span class="uicontrol">Automatic Prior to Submission</span> and <span class="uicontrol">Automatic Upon Final Save</span>, is being used.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Change the number-generation method
+                              temporarily to <span class="uicontrol">Manual</span>.
+                           </p>
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              You're recommended not hire workers while the correction
+                              is being made.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>Correct the person number.</p>
+                        </li>
+                        
+                        <li>
+                           <p>Reinstate the original automatic
+                              number-generation method. Consider also whether the value of the <span class="uicontrol">Initial Person Number</span> option must be updated
+                              to avoid conflict with the correction you made.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Run the Update Person Search Keywords
+                              process to ensure that person searches with person number as a keyword
+                              value are successful.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>When you correct a person number, the correction
+                        applies to every date-effective update for the lifetime of the person
+                        record. This rule ensures that a person isn't identified using different
+                        person numbers at different times.
+                     </p>
+                     
+                     <p>To identify the person record to correct, supply
+                        the source key, Oracle Fusion GUID, or Oracle Fusion surrogate ID.
+                        You can't supply the user key alone, as the person number is the user
+                        key.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2228107">
+                  <h2>Loading External Identifiers: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The external identifier component of the
+                     worker object holds an identifier used by a third-party application,
+                     such as a time device or payroll application. This topic describes
+                     how to set some attributes of the external identifier component. 
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2228116">
+                     <h3 class="topictitle">External Identifiers at Person or Assignment Level</h3>
+                     
+                     <p>The external identifier can be captured:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>At the person level, by supplying
+                              only the person number
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>At the assignment level, by supplying both
+                              the person number and the assignment number
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2228117">
+                     <h3 class="topictitle">External Identifier Types</h3>
+                     
+                     <p>The external identifier type is defined in lookup type ORA_PER_EXT_IDENTIFIER_TYPES,
+                        which you can extend to include additional lookup codes.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2228118">
+                     <h3 class="topictitle">Date Values</h3>
+                     
+                     <p>The <span class="uicontrol">DateFrom</span> and <span class="uicontrol">DateTo</span> attributes include
+                        a time stamp. The time stamp ensures that you can assign an external
+                        identifier of a single type to a worker more than once on any day.
+                        For example, a person may be assigned a time-device badge identifier
+                        that he or she loses the same day. If you replace the badge identifier
+                        on the same day, then the time stamps differentiate the external identifiers.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2255481">
+                     <h3 class="topictitle">External Identifier Example</h3>
+                     
+                     <p>This example Worker.dat file loads an external identifier
+                        for a person.
+                     </p>
+                     
+                     <pre><code>SET PURGE_FUTURE_CHANGES N
+METADATA|ExternalIdentifier|ExternalIdentifierNumber|PersonNumber|ExternalIdentifierType|ExternalIdentifierSequence
+MERGE|ExternalIdentifier|rtyui45678|TestPer0TALTEST_9|Third-Party Payroll ID|1<br></code></pre>
+                     
+                     </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2228152">
+                  <h2>Loading Person Names: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>The person name component holds both common
+                     and legislation-specific components of a person's name. This topic
+                     describes some decisions you must make when loading person names using
+                     HCM Data Loader.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2228150">
+                     <h3 class="topictitle">Local and Global Names</h3>
+                     
+                     <p>Person names are always created with both a global
+                        and a local version. The name is created based on the name type that
+                        you supply, and the other name is derived automatically. For example,
+                        if you set the <span class="uicontrol">NameType</span> attribute
+                        to <span class="uicontrol">GLOBAL</span>, then the local name is derived.
+                        Alternatively, if you set <span class="uicontrol">NameType</span> to <span class="uicontrol">FR</span>, for example, then the global name is derived.
+                        Typically, only the global name is required and the application copies
+                        it to the local name automatically. However, if the person's name
+                        must be held in two different character sets, then supply the local
+                        name.
+                     </p>
+                     
+                     <p>A core name field may not be available for a legislation.
+                        For example, Last Name Kanji isn't available for the Japanese legislation.
+                        In this case, the data is stored in one of the <span class="uicontrol">NameInformation1</span> through <span class="uicontrol">NameInformation14</span> attributes. <span class="uicontrol">NameInformation1</span> through <span class="uicontrol">NameInformation14</span> are
+                        reserved for this purpose. The person name styles table stores the
+                        mapping of the name style to the name attributes. The name style is
+                        the same for both the global and local-name records. 
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2228172">
+                     <h3 class="topictitle">Name Attributes for Specific Legislations</h3>
+                     
+                     <p>To supply a name attribute for a specific legislation,
+                        use one of the <span class="uicontrol">NameInformation15</span> through <span class="uicontrol">NameInformation30</span> attributes.
+                        For example, to define the name attribute <span class="uicontrol">Doing Business As</span> for the United States, you could use
+                        the <span class="uicontrol">NameInformation15</span> attribute.
+                        You don't have to define flexfields for this requirement.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2228173">
+                     <h3 class="topictitle">Supplying Data-Effective History</h3>
+                     
+                     <p>If you're loading date-effective history for a person
+                        name, then you must use source keys to identify the component. Otherwise,
+                        you can use the <span class="uicontrol">PersonNumber</span>, <span class="uicontrol">EffectiveStartDate</span>, and <span class="uicontrol">NameType</span> user-key components.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="http://support.oracle.com/epmos/faces/DocumentDisplay?id=2146270.1">Oracle Fusion HCM: Person Name Validation
+                              (2146270.1)</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2228198">
+                  <h2>Loading Person Images: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The person image appears on various Oracle
+                     HCM Cloud application pages to help identify a person's record. This
+                     topic describes aspects of loading the person-image component of the
+                     worker object using HCM Data Loader.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2228196">
+                     <h3 class="topictitle">Image Type</h3>
+                     
+                     <p>You can set the <span class="uicontrol">ImageType</span> attribute only to <span class="uicontrol">PROFILE</span>.
+                        If you omit the <span class="uicontrol">ImageType</span> attribute,
+                        then the type is <span class="uicontrol">PROFILE</span> by default.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2228197">
+                     <h3 class="topictitle">Image Size</h3>
+                     
+                     <p>The recommended size of the image is 90 pixels by
+                        120 pixels. Images of different sizes are supported, but you're recommended
+                        to maintain an aspect ratio of 3 by 4 to reduce any distortion. No
+                        recommendation exists for the image resolution. The maximum size of
+                        the image file is 2 GB. However, you're recommended to store images
+                        at the smallest possible size, taking into account the suggested dimensions.
+                        The smaller the image, the better the performance of the image display
+                        in the application. Typically, the file size of an image of the recommended
+                        dimensions would be only 2 or 3 MB, even at high resolution.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2197469">
+                  <h2>Work Relationship Changes: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>The worker object provides several indicator
+                     attributes that simplify maintenance of work relationships. Use these
+                     indicators to request actions such as termination or a change of primary assignment. This topic
+                     provides examples of work-relationship changes that you request using
+                     these indicators.
+                  </p>
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     These indicators aren't supported when you're supplying
+                     full date-effective history. They're provided solely for independent
+                     actions. Also, you can't provide multiple indicators on the same work
+                     relationship record. For example, you can't both terminate a work
+                     relationship (<span class="uicontrol">TerminateWorkRelationshipFlag</span>) and perform a global transfer (<span class="uicontrol">GlobalTransferFlag</span>) on the same work relationship at the same time.
+                     
+                  </div>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2197458"><h3 class="OracleScenario">Changing the Hire Date</h3>
+                     <p>The hire date is the start date of a work relationship.
+                        To change the hire date, provide the new date on the <span class="uicontrol">NewStartDate</span> attribute of the work relationship
+                        component. You can load just the work relationship record. The employment
+                        terms and assignment records are maintained automatically.
+                     </p>
+                     <p>This example changes the hire date for an existing
+                        worker.
+                     </p><pre><code>SET PURGE_FUTURE_CHANGES N
+METADATA|WorkRelationship|SourceSystemOwner|SourceSystemId|PersonId(SourceSystemId)|LegalEmployerName|NewStartDate
+MERGE|WorkRelationship|VISION|1009_POS|1009|Cox-6-CWB|2002/02/10<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2197474"><h3 class="OracleScenario">Terminating a Work Relationship</h3>
+                     <p>To terminate a work relationship, load the work relationship
+                        record with the <span class="uicontrol">TerminateWorkRelationshipFlag</span> attribute set to <span class="uicontrol">Y</span>. Specify
+                        the termination date on the <span class="uicontrol">ActualTerminationDate</span> attribute. All associated assignments are automatically made inactive
+                        after the termination date.
+                     </p>
+                     <p>This example terminates a work relationship.</p><pre><code>SET PURGE_FUTURE_CHANGES N
+METADATA|WorkRelationship|SourceSystemOwner|SourceSystemId|PersonId(SourceSystemId)|LegalEmployerName|TerminateWorkRelationshipFlag|ActualTerminationDate|ActionCode|ReasonCode
+MERGE|WorkRelationship|VISION|1009_POS|1009|Cox-6-CWB|Y|2015/10/02|RESIGNATION|RESIGN_PERSONAL<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2197509"><h3 class="OracleScenario">Correcting the Termination Date of a Work Relationship</h3>
+                     <p>To correct a work relationship termination date,
+                        supply a new <span class="uicontrol">ActualTerminationDate</span> and set the <span class="uicontrol">CorrectTerminationFlag</span> attribute to <span class="uicontrol">Y</span>.
+                     </p>
+                     <p>This example corrects the termination date for a
+                        terminated work relationship.
+                     </p><pre><code>SET PURGE_FUTURE_CHANGES N
+METADATA|WorkRelationship|SourceSystemOwner|SourceSystemId|PersonId(SourceSystemId)|LegalEmployerName|CorrectTerminationFlag|ActualTerminationDate
+MERGE|WorkRelationship|VISION|1009_POS|1009|Cox-6-CWB|Y|2015/10/08<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2197478"><h3 class="OracleScenario">Reversing a Termination</h3>
+                     <p>To reverse a termination, load the work relationship
+                        record with the <span class="uicontrol">ReverseTerminationFlag</span> attribute set to <span class="uicontrol">Y</span>.
+                     </p>
+                     <p>This example reverses the termination of a work relationship.</p><pre><code>SET PURGE_FUTURE_CHANGES N
+METADATA|WorkRelationship|SourceSystemOwner|SourceSystemId|PersonId(SourceSystemId)|LegalEmployerName|ReverseTerminationFlag
+MERGE|WorkRelationship|VISION|1009_POS|1009|Cox-6-CWB|Y<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2197479"><h3 class="OracleScenario">Canceling a Work Relationship</h3>
+                     <p>To cancel a work relationship, use a DELETE instruction
+                        for the work relationship and set the <span class="uicontrol">CancelWorkRelationshipFlag</span> attribute to <span class="uicontrol">Y</span>. 
+                     </p>
+                     <p>This example deletes the specified work relationship
+                        and all its child records.
+                     </p><pre><code>SET PURGE_FUTURE_CHANGES N
+METADATA|WorkRelationship|SourceSystemOwner|SourceSystemId|PersonId(SourceSystemId)|CancelWorkRelationshipFlag
+DELETE|WorkRelationship|VISION|1008_POS|1008|Y<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2197486"><h3 class="OracleScenario">Changing the Primary Assignment or Work Relationship</h3>
+                     <p>When you load a primary work relationship, the existing
+                        primary work relationship automatically becomes nonprimary on the
+                        date that you supply on the <span class="uicontrol">DateForPrimaryFlagChange</span> attribute.
+                     </p>
+                     <p>To make a nonprimary work relationship primary, you
+                        load the work relationship that is to be made primary with the <span class="uicontrol">PrimaryFlag</span> attribute set to <span class="uicontrol">Y</span>. Specify the date when the work relationship
+                        becomes primary on the<span class="uicontrol"> DateForPrimaryFlagChange</span> attribute. The corresponding changes to employment terms and assignments
+                        occur automatically. The primary indicator for the existing primary
+                        work relationship is set to <span class="uicontrol">N</span> automatically.
+                     </p>
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2217424">
+                  <h2>Performing a Global Transfer: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic explains how to perform global
+                     transfers for both primary and nonprimary work relationships using
+                     HCM Data Loader. A global transfer is a permanent transfer from one legal employer to
+                     another. It results in the termination of an existing work relationship and the creation of a new one. The termination date of the existing
+                     work relationship is one day prior to the start date of the new work
+                     relationship. 
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2217423">
+                     <h3 class="topictitle">Performing a Global Transfer on a Primary Work
+                     Relationship</h3>
+                     
+                     <p>By default, the global transfer is applied to the
+                        primary work relationship. To perform a global transfer, you simply
+                        load the new work relationship with all its child components. The
+                        new work relationship must have:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>A <span class="uicontrol">GlobalTransferFlag</span> attribute set to <span class="uicontrol">Y</span></p>
+                        </li>
+                        
+                        <li>
+                           <p>An action code from the EMPL_GLB_TRANSFER
+                              action type
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>A start date value that is the
+                              date of the global transfer
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Don't include the work relationship that you're terminating.
+                        That work relationship is terminated automatically.
+                     </p>
+                     
+                     <p>The termination and creation of the work relationships
+                        are validated to ensure data consistency. In particular, a worker
+                        can't be left with only an active, nonprimary work relationship. Therefore,
+                        if the worker has two active work relationships, you can't perform
+                        the global transfer on the primary one. You must make the primary
+                        work relationship nonprimary before you attempt the global transfer.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2217444">
+                     <h3 class="topictitle">Performing a Global Transfer on a Nonprimary Work
+                     Relationship</h3>
+                     
+                     <p>A worker can have multiple nonprimary work relationships.
+                        Therefore, when you perform a global transfer of a nonprimary work
+                        relationship, you must supply additional information so that the correct
+                        work relationship is terminated. To perform the global transfer on
+                        a nonprimary work relationship, you must also supply:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The parent worker record.</p>
+                        </li>
+                        
+                        <li>
+                           <p>The nonprimary work relationship
+                              that you're terminating. However, don't include:
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Any child records for the terminated
+                                    work relationship 
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>The <span class="uicontrol">GlobalTransferFlag</span> attribute
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>These records are in addition to those that you supply
+                        for a global transfer of a primary work relationship.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2242502">
+                     <h3 class="topictitle">Updating Person-Name Legislation Codes</h3>
+                     
+                     <p>When you perform a global transfer, the new work
+                        relationship may have a legislation code that's new for the person.
+                        In this case, you may want to update the legislation code for the
+                        person name. The person-name legislation code is validated against
+                        all available work-relationship legislation codes. Therefore, the
+                        change to the work relationship must occur before the change to the
+                        person name. You can update the legislation code in the person name
+                        in one of these ways:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Include the worker object with
+                              no change in the same .dat file as the changes to the person name
+                              and work relationship. In this case, changes to the work relationship
+                              are processed before changes to the person name.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Process updates to the work relationship
+                              before those to the person name.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2217548">
+                  <h2>Loading Person Legislative Data: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic explains how to specify start
+                     dates for person legislative data that you load using HCM Data Loader.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2217546">
+                     <h3 class="topictitle">Person Legislative Data Start Dates</h3>
+                     
+                     <p>Person legislative data must start on the person's
+                        earliest effective
+                        start date. A person may have multiple work relationships in different
+                        legislations. In this case, all person legislative data must start
+                        on the person's earliest effective start date, not the start date
+                        of the work relationship. When a person starts a work relationship
+                        that's in a new legislation, the application:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Creates a person legislative data
+                              record as of the person's earliest effective start date with no data.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Performs an update of the person
+                              legislative data record as of the date of the creation of the new
+                              work relationship with the user-provided data. This approach ensures
+                              that the data is chronologically correct.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For example, consider the work relationships of the
+                        worker in this table:
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Date
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Action
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2000</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Hired by Vision Corporation in the UK</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2005</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Left Vision Corporation in the UK</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2006</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Joined US military</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2009</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Left US military and became a US veteran</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>2010</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Hired by Vision Corporation in the US</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>In this example, in 2010 a US person legislative
+                        record is created as of 2000, the person's earliest effective start
+                        date. The US legislative record is updated as of 2010, the start date
+                        of the person's US work relationship. The update includes the descriptive
+                        flexfield details for US veteran status, as provided by the user.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2228791">
+                  <h2>Loading Employment Terms: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can load employment terms to environments
+                     where a 3-tier employment model is implemented. This topic describes
+                     how to set attribute values on employment terms and their associated assignments when you
+                     load them using HCM Data Loader.
+                  </p>
+                  
+                  
+                  
+                  <p>The enterprise option <span class="uicontrol">Allow
+                        Employment Terms Override at Assignment</span> controls whether
+                     assignment attributes inherited from employment terms can be overridden
+                     on the assignment. However, when you load employment terms, the associated
+                     assignments don't inherit attribute values from the employment terms.
+                     This table summarizes how to set attribute values on employment terms
+                     to avoid conflicting with the current setting of <span class="uicontrol">Allow Employment Terms Override at Assignment</span>.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Allow Employment Terms Override at Assignment
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Attribute Values on Employment Terms
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>No</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Must match values on associated assignments</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Yes</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>Can differ from values on associated assignments</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2611125">
+                  <h2>Automatic Calculation of FTE Values for Workers: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The full-time equivalent (FTE) value is the
+                     result of dividing assignment working hours by standard working hours, which are typically those
+                     of a full-time worker. For example, if the assignment working hours
+                     are 10 and the standard working hours are 40, then the FTE value is
+                     0.25. When you edit assignment working hours in the user interface,
+                     FTE is calculated automatically. When you load assignment records
+                     using HCM Data Loader, you can specify FTE values on the Assignment
+                     Work Measure component. Alternatively, you can request that FTE values
+                     be calculated automatically. This topic describes how to request automatic
+                     calculation of FTE values.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2611124">
+                     <h3 class="topictitle">Calculating FTE Values Automatically</h3>
+                     
+                     <p>To request automatic calculation of FTE values for
+                        all assignments in a Worker.dat file, include the following SET instruction
+                        in the file:
+                     </p>
+                     
+                     <pre><code>SET CALCULATE_FTE Y <br></code></pre>
+                     <p>When you include this instruction, the following
+                        rules apply:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>You must not include an Assignment
+                              Work Measure component for the assignment in the Worker.dat file.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>No more than one assignment work
+                              measure record can exist for the assignment in Oracle HCM Cloud.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Both assignment working hours and
+                              standard working hours must exist for the assignment throughout the
+                              relevant time period. Otherwise, no calculation of FTE values occurs
+                              for the assignment.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You may find automatic calculation of FTE values
+                        helpful if: 
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>You're loading many assignment
+                              records that include assignment working hours.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You aren't loading FTE values using
+                              the Assignment Work Measure component. 
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>By including the <code>SET CALCULATE_FTE
+                           Y</code> instruction in the .dat file, you can generate FTE values
+                        for all of the assignments.
+                     </p>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        You can perform a data load with the sole purpose
+                        of calculating FTE values. Simply include the user keys of the assignments
+                        in a Worker.dat file that includes the <code>SET CALCULATE_FTE
+                           Y</code> instruction.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM2121438.htm#FAIHM2028389">File Line Instructions and File Discriminators: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="FAIHM2121438.htm#FAIHM2028326">The SET and COMMENT Instructions: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2357881">
+                  <h2>FAQs for Loading Workers</h2>
+                  
+                  <div class="sect2" id="FAIHM1149908">
+                     <h3>How do I load person national identifiers?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>You must include any formatting characters
+                        in the value that you specify on the <span class="uicontrol">NationalIdentifierNumber</span> attribute of the Person National Identifier component. For example,
+                        to load the US social security number <span class="uicontrol">987-65-4322</span>, you must include the hyphens. Don't specify the number as <span class="uicontrol">987654322</span>. If you omit the formatting, which
+                        is country-specific, then duplicate person records aren't found when
+                        the checking is based on national identifier.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM996899">
+                     <h3>How do I load person phones?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>You must include any formatting characters
+                        in the value that you specify on the <span class="uicontrol">PhoneNumber</span> attribute of the Person Phone component. For example, to enter the
+                        US phone <span class="uicontrol">650.555.0185</span> in the
+                        user interface, you enter <span class="uicontrol">650</span> in the <span class="uicontrol">Area Code</span> field and <span class="uicontrol">555-0185</span> in the <span class="uicontrol">Number</span> field. When loading this number using HCM Data
+                        Loader, you must specify the value <span class="uicontrol">555-0185</span> on the <span class="uicontrol">PhoneNumber</span> attribute.
+                     </p>
+                     
+                     
+                     
+                     <p>Formatting requirements vary by legislation. Always
+                        include the formatting characters, such as hyphen or period, specified
+                        for your legislation when loading person phones using HCM Data Loader.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

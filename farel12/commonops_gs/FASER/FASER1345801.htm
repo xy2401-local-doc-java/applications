@@ -1,0 +1,782 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Customizing Security (Chapter 7) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle ERP Cloud" name="dcterms.title">
+      <meta content="Securing Oracle ERP Cloud" name="doctitle">
+      <meta content="E74113-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FASER" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:25:30 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="data security; data security policies; duty roles; HCM setup; HCM security profiles; securing data; security; creating data
+      roles; data roles;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FASER1345798.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FASER1662494.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FASER.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FASER.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="By default, users are denied access to all data."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">10/17</span><a name="BEGIN" id="BEGIN"></a><div id="FASER1345801" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">7</span>Customizing Security
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1354768">Managing Data Security Policies</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1486149">FAQs for Customizing Security</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FASER1354768">
+                  <h2>Managing Data Security Policies</h2>
+                  
+                  <div class="sect2" id="FASER43143">
+                     <h3>Data Security: Explained</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>By default, users are denied access to all
+                        data. 
+                     </p>
+                     
+                     
+                     
+                     <p>Data
+                        security makes data available to users by the following means. 
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Policies that define grants
+                              available through provisioned roles
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Policies defined in application code</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You secure data by provisioning roles that provide
+                        the necessary access.
+                     </p>
+                     
+                     <p>Data roles also can be generated based on HCM security profiles. Data roles and HCM security profiles enable defining the instance sets specified
+                        in data security policies. 
+                     </p>
+                     
+                     
+                     
+                     <p>When you provision a job role to a user, the job role
+                        limits data access based on the data security policies of the inherited
+                        duty roles. When you provision a data role to a user, the data role
+                        limits the data access of the inherited job role to a dimension of data. 
+                     </p>
+                     
+                     <p>Data security consists of privileges conditionally granted to
+                        a role and used to control access to the data. A privilege is a single,
+                        real world action on a single business object. A data security
+                        policy is a grant of a set of privileges to a principal on an object
+                        or attribute group for a given condition. A grant authorizes a role,
+                        the grantee, to actions on a set of database resources. A database
+                        resource is an object, object instance, or object instance set. An
+                        entitlement is one or more allowable actions applied to a set of database
+                        resources.
+                     </p>
+                     
+                     
+                     
+                     <p>Data is secured by the following means. </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Table with two columns for data&#xA;security feature and purpose. Data security policies are data security&#xA;grants to roles by means of entitlement. Data roles apply data security&#xA;policies with conditions to users through role provisioning. HCM security&#xA;profiles are definitions in HCM that define data access restrictions&#xA;based on user attributes. Data masking is a means of hiding private&#xA;data. Data encryption scrambles data to prevent users without decryption&#xA;authorization from reading secured data.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Data security feature
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Does what?
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Data security policy</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Defines the conditions under which access to data
+                                    is granted to a role.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Role</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Applies data security policies with conditions to
+                                    users through role provisioning.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HCM security profile</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Defines data security conditions on instances of object
+                                    types such as person records, positions, and document types without
+                                    requiring users to enter SQL code
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The sets of data that a user can access are defined
+                        by creating and provisioning data roles. Oracle data security integrates
+                        with Oracle Platform Security Services (OPSS) to entitle users or
+                        roles (which are stored externally) with access to data. Users are
+                        granted access through the privilege assigned to the roles or role
+                        hierarchy with which the user is provisioned. Conditions are WHERE
+                        clauses that specify access within a particular dimension, such as
+                        by business unit to which the user is authorized.
+                     </p>
+                     
+                     
+                     <div class="sect3" id="FASER43140">
+                        <h4 class="topictitle">Data Security Policies</h4>
+                        
+                        
+                        <p>Data security policies articulate the security
+                           requirement "Who can do what on which set of data."
+                        </p>
+                        
+                        
+                        
+                        <p>For example, accounts payable managers can view AP
+                           disbursements for their business unit.
+                        </p>
+                        
+                        <div class="simpletable-margin">
+                           <table class="customlayout" summary="Table contains four columns for&#xA;Who, can do, what, and on which set of data. The example is Accounts&#xA;payable managers view AP disbursements for their business units.">
+                              
+                              
+                              <tr class="header">
+                                 
+                                 <th scope="col">
+                                    Who
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    can do
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    what
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    on which set of data
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Accounts payable managers</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>view</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>AP disbursements</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>for their business unit</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        <p></p>
+                        
+                        <p>A data security policy is a statement in a natural
+                           language, such as English, that typically defines the grant by which
+                           a role secures business objects. The grant records the following.
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Table or view </p>
+                           </li>
+                           
+                           <li>
+                              <p>Entitlement (actions expressed by
+                                 privileges)
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Instance set (data identified by
+                                 the condition)
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>For example, disbursement is a business object that
+                           an accounts payable manager can manage by payment function for any
+                           employee expenses in the payment process. 
+                        </p>
+                        
+                        <div class="infobox-"><span class="notep1">Note: </span>
+                           Some data security policies are not defined as grants
+                           but directly in applications code. The security reference manuals
+                           for Oracle Fusion Applications offerings differentiate between data
+                           security policies that define a grant and data security policies defined
+                           in Oracle Fusion applications code.
+                           
+                        </div>
+                        
+                        <p>A data security policy identifies the entitlement (the
+                           actions that can be made on logical business objects or dashboards),
+                           the roles that can perform those actions, and the conditions that
+                           limit access. Conditions are readable WHERE clauses. The WHERE clause
+                           is defined in the data as an instance set and this is then referenced
+                           on a grant that also records the table name and required entitlement.
+                        </p>
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER43142">
+                        <h4 class="topictitle">HCM Security Profiles</h4>
+                        
+                        
+                        <p> HCM security profiles are used to secure HCM
+                           data, such as people and departments. Data authorization for some
+                           roles, such as the Manager role, is managed in HCM, even in ERP and
+                           SCM applications. You can use HCM security profiles to generate grants
+                           for a job role such as Manager. The resulting data role with its role
+                           hierarchy and grants operates in the same way as any other data role. 
+                        </p>
+                        
+                        
+                        
+                        <p>For example, an HCM security profile identifies all
+                           employees in the Finance division.
+                        </p>
+                        
+                        <p>Applications outside of HCM can use the HCM Data Roles
+                           UI pages to give roles access to HR people.
+                        </p>
+                        
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1515746">
+                     <h3>Advanced Data Security: Explained</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Advanced Data Security offers two types of
+                        extended data protections. Database Vault protects data from access
+                        by highly privileged users and Transparent Data Encryption encrypts
+                        data at rest. Advanced Data Security is available for Oracle Applications
+                        Cloud by subscription to Break-Glass service.
+                     </p>
+                     
+                     
+                     <div class="sect3" id="FASER1515744">
+                        <h4 class="topictitle">Oracle Database Vault</h4>
+                        
+                        <p>Database Vault reduces the risk of highly privileged
+                           users such as database and system administrators accessing and viewing
+                           your application data. This feature restricts access to specific database
+                           objects, such as the application tables and SOA objects.
+                        </p>
+                        
+                        
+                        <p>Administrators can perform regular database maintenance
+                           activities, but cannot select from the application tables. If a DBA
+                           requires access to the application tables, she can request temporary
+                           access to the Fusion schema at which point keystroke auditing is enabled.
+                        </p>
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER1515745">
+                        <h4 class="topictitle">Transparent Data Encryption</h4>
+                        
+                        <p>Transparent Data Encryption (TDE) protects Fusion
+                           Applications data which is at rest on the file system from being read
+                           or used. Data in the database files (DBF) is protected because DBF
+                           files are encrypted. Data in backups and in temporary files is protected.
+                           All data from an encrypted tablespace is automatically encrypted when
+                           written to the undo tablespace, to the redo logs, and to any temporary
+                           tablespace.
+                        </p>
+                        
+                        
+                        <p>Advanced security enables encryption at the tablespace
+                           level on all tablespaces which contain applications data. This includes
+                           SOA tablespaces which might contain dehydrated payloads with applications
+                           data.
+                        </p>
+                        
+                        
+                        
+                        <p>Encryption keys are stored in the Oracle Wallet.
+                           The Oracle Wallet is an encrypted container outside the database that
+                           stores authentication and signing credentials, including passwords,
+                           the TDE master key, PKI private keys, certificates, and trusted certificates
+                           needed by secure sockets layer (SSL). Tablespace keys are stored in
+                           the header of the tablespace and in the header of each operating system
+                           (OS) file that makes up the tablespace. These keys are encrypted with
+                           the master key which is stored in the Oracle Wallet. Tablespace keys
+                           are AES128-bit encryption while the TDE master key is always an AES256-bit
+                           encryption.
+                        </p>
+                        
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER119899">
+                     <h3>Database Resources and Data Security Policies: How They Work Together</h3>
+                     
+                     
+                     
+                     
+                     
+                     
+                     <p>A data security policy applies a condition and allowable
+                        actions to a database
+                        resource for a role. When that role is provisioned to a user, the user has access to data defined
+                        by the policy.  In the case of the predefined security reference
+                        implementation, this role is always a duty role. 
+                     </p>
+                     
+                     
+                     <p>The database resource defines and instance of a data
+                        object. The data object is a table, view, or flexfield.
+                     </p>
+                     
+                     
+                     
+                     
+                     <p>
+                        <p>The following figure shows the
+                           database resource definition as the means by which a data security
+                           policy secures a data object. The database resource names the data
+                           object. The data security policy grants to a role access to that database
+                           resource based on the policy's action and condition.
+                        </p>
+                     </p>
+                     <img src="img/arch_fusappsec_dbrdsp_05_20037792.png" alt="The database resource is a table or view in the database,&#xA;on which a policy is defined that consists of a condition, an action,&#xA;and a role." class="fusappimg">
+                     
+                     
+                     <div class="sect3" id="FASER119894">
+                        <h4 class="topictitle">Database Resources</h4>
+                        
+                        <p>A database resource specifies access to a table, view,
+                           or flexfield that is secured by a data security policy.
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Name providing a means of identifying
+                                 the database resource 
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Data object to which the database
+                                 resource points
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER119895">
+                        <h4 class="topictitle">Data Security Policies</h4>
+                        
+                        <p>Data security policies consist of actions and conditions
+                           for accessing  all, some, or a single row of a database resource.
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Condition identifying the instance
+                                 set of values in the data object 
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Action specifying the type of access
+                                 allowed on the available values
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <div class="infobox-"><span class="notep1">Note: </span>
+                           If the data security policy needs to be less restrictive
+                           than any available database resource for a data object, define a new
+                           data security policy.
+                           
+                        </div>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER146262">
+                        <h4 class="topictitle">Actions</h4>
+                        
+                        <p>Actions correspond to privileges that entitle kinds of access
+                           to objects, such as view, edit, or delete. The actions allowed by
+                           a data security policy include all or a subset of the actions that
+                           exist for the database resource.
+                        </p>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER146263">
+                        <h4 class="topictitle">Conditions</h4>
+                        
+                        <p>A condition is either a SQL predicate or an XML filter. A condition
+                           expresses the values in the data object by a search operator or a
+                           relationship in a tree hierarchy. A SQL predicate, unlike an XML filter,
+                           is entered in a text field in the data security user interface pages
+                           and supports more complex filtering than an XML filter, such as nesting
+                           of conditions or sub queries. An XML filter, unlike a SQL predicate,
+                           is assembled from choices in the UI pages as an AND statement.
+                        </p>
+                        
+                        <div class="infobox-tip"><span class="notep1">Tip: </span>
+                           An XML filter can be effective in downstream processes
+                           such as business intelligence metrics. A SQL predicate cannot be used
+                           in downstream metrics.
+                           
+                        </div>
+                        
+                        <p></p>
+                        
+                        <p></p>
+                        
+                     </div>
+                     
+                     
+                     <p class="relatedlinks">Related Topics</p>
+                     <ul>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=7C59FD513F03E696E040D30A68810F09">Securing Data Access: Points to Consider</a></p>
+                        </li>
+                     </ul>
+                     
+                  </div>
+               </div>
+               
+               <div class="sect1" id="FASER1486149">
+                  <h2>FAQs for Customizing Security</h2>
+                  
+                  <div class="sect2" id="FASER42769">
+                     <h3>What's the difference between function security and data security?</h3>
+                     
+                     
+                     
+                     
+                     
+                     
+                     <p>Function security is a statement of what actions you can perform
+                        in which user interface pages.
+                     </p>
+                     
+                     
+                     
+                     <p>Data security is a statement of what action can be taken against
+                        which data. 
+                     </p>
+                     
+                     
+                     
+                     
+                     
+                     <p>Function security controls access to user interfaces
+                        and actions needed to perform the tasks of a job. For example, an
+                        accounts payable manager can view invoices. The Accounts Payable Manager
+                        role provisioned to the accounts payable manager authorizes access
+                        the functions required to view invoices. 
+                     </p>
+                     
+                     
+                     
+                     <p>Data security controls access to data. In this example,
+                        the accounts payable manager for the North American Commercial Operation
+                        can view invoices in the North American Business Unit. Since invoices
+                        are secured objects, and a data role template exists for limiting
+                        the Accounts Payable Manager role to the business unit for which the
+                        provisioned user is authorized, a data role inherits the job role to limit access to those invoices
+                        that are in the North American Business Unit. Objects not secured
+                        explicitly with a data role are secured implicitly by the data security
+                        policies of the job role.
+                     </p>
+                     
+                     
+                     
+                     
+                     <p>Both function and data are secured through role-based
+                        access control.
+                     </p>
+                     
+                     
+                     
+                     <p class="relatedlinks">Related Topics</p>
+                     <ul>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=8F11F2798617141DE040D30A688166D7">Function Security: Explained</a></p>
+                        </li>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=7BE3070335F7749CE040D30A68811D3E">Role-Based Access Control: Explained</a></p>
+                        </li>
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1409207">
+                     <h3>How can I design roles?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>You can simulate menus that existing roles
+                        present to users to determine how the access they provide may be expanded.
+                        Create a visualization, or populate the Search Results column with
+                        a selection of roles or users. Either in the visualization or the
+                        Search Results column, right-click on a role or user. A menu appears;
+                        select Preview Navigator Simulation.
+                     </p>
+                     
+                     
+                     
+                     <p>A simulated Navigator menu appears, listing menu
+                        and task entries. If the menu item appears without a lock to the right
+                        of it, the menu is not authorized for the role or user. If the menu
+                        item appears with a lock to the right of it, the menu is authorized
+                        for the role or user. Click any menu item and select either of two
+                        options. One lists roles that grant access to the menu item. The other
+                        lists privileges required for access to the menu item.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1581923">
+                     <h3>How can I have data masking applied to my non production environments in Oracle Applications Cloud services?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>To have an environment created with the data
+                        masked, create a service request using the Production to Test (P2T)
+                        template. Before you submit the request, be sure you select the <span class="uicontrol">Data Mask</span> check box.
+                     </p>
+                     
+                     
+                     
+                     <p>To have the data in an existing nonproduction environment
+                        masked, create a standard service request. Enter the following as
+                        the service request title: Data Mask for Environment: <code>Name_of_The_Environment_To_Mask</code></p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER366030">
+                     <h3>How do I create a role hierarchy?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>The most efficient way to create role hierarchies
+                        is to use the Security Console. You use the Edit Role action to navigate
+                        through the steps and add roles and privileges in the visualizer or
+                        table view.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER363597">
+                     <h3>Why would I need to remove duty roles from a role hierarchy?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>If your custom duty roles enable actions
+                        and user interface features that your enterprise does not want users
+                        to perform in your application.
+                     </p>
+                     
+                     
+                     
+                     <div class="infobox-warn"><span class="notep1">Warning: </span>
+                        Don't remove duty roles from predefined job or abstract
+                        roles in the reference implementation. (In the Security Console, you
+                        can identify predefined application roles by the <code>ORA_</code> prefix in the Role Code field.) You must copy any role
+                        that doesn't match your needs, and then customize the copy.
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER363628">
+                     <h3>How do I create a new job role?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Click the <span class="uicontrol">Create
+                           Role</span> button in the Security Console to create job roles. Enter a job
+                        role category in the Create Roles page and then navigate to each subsequent
+                        page that you see in the page header. You can add functional and data
+                        security policies, roles, and privileges to create the job role.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Customizing and Extending SOA Components</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This chapter describes how to customize (edit) a service-oriented architecture (SOA) component during runtime in a deployed SOA composite application with a runtime tool such as Oracle Business Process Management Worklist (Oracle BPM Worklist), Oracle SOA Composer, or Oracle Enterprise Manager Fusion Applications Control or customize and extend (create) a SOA component during design time in Oracle JDeveloper. It also provides recommendations for merging runtime customizations from a previously deployed revision into a new revision and instructions for synchronizing a customized flexfield in Oracle Metadata Services (MDS) Repository." />
+<meta name="dcterms.created" content="2017-01-11T15:33:34Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Fusion Applications Extensibility Guide for Developers" />
+<meta name="dcterms.identifier" content="E70528-01" />
+<meta name="dcterms.isVersionOf" content="OADTC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2011, 2016, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-D799CA7B-365F-411E-8027-9F7413B66787.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm" title="Next" type="text/html" />
+<link rel="alternate" href="OADTC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A"></a> <span id="PAGE" style="display:none;">11/20</span> <!-- End Header -->
+<a id="OADTC1223"></a><a id="OADTC407"></a>
+<h1 id="OADTC-GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A" class="sect1"><span class="enumeration_chapter">5</span> Customizing and Extending SOA Components</h1>
+<div>
+<div><span>This chapter describes how to customize (edit) a service-oriented architecture (SOA) component during runtime in a deployed SOA composite application with a runtime tool such as <span id="BPM">Oracle Business Process Management</span> Worklist (<span id="BPEL_WORKLIST">Oracle BPM Worklist</span>), <span id="SOACOMP">Oracle SOA Composer</span>, or <span id="FAOEMFRAME">Oracle Enterprise Manager Fusion Applications Control</span> or customize and extend (create) a SOA component during design time in <span id="JDEV">Oracle JDeveloper</span>. It also provides recommendations for merging runtime customizations from a previously deployed revision into a new revision and instructions for synchronizing a customized flexfield in <span id="METASVC">Oracle Metadata Services</span> (MDS) Repository.</span></div>
+<p>This chapter includes the following sections:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071">About Customizing and Extending SOA Components</a></p>
+</li>
+<li>
+<p><a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-B30D1303-5DC8-4117-A2BB-166C12014D45">About Customizing SOA Composite Applications</a></p>
+</li>
+<li>
+<p><a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-3784E391-5A1D-4C6F-9B32-973DA4011C9A">About Merging Runtime Customizations from a Previously Deployed Revision into a New Revision</a></p>
+</li>
+<li>
+<p><a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-18086128-4304-4388-BE2B-B59EB22299FC">About Extending or Customizing Custom SOA Composite Applications</a></p>
+</li>
+<li>
+<p><a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-077445B3-B757-418A-A320-42CB230BE1E5">About Deploying SOA Composite Application Customizations and Extensions</a></p>
+</li>
+<li>
+<p><a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-C2C9C8C9-B1E6-4100-9EA9-14EA48B94A40">About Extending a New Service</a></p>
+</li>
+</ul>
+<p>For information about troubleshooting SOA issues, see the "<a class="olink OATRB2703" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OATRB2703">Troubleshooting <span id="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A__SOA">Oracle SOA Suite</span></a>" chapter in the <span class="italic"><span id="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A__OATRB"><cite>Oracle Fusion Applications Administration Guide</cite></span></span>.</p>
+<div class="infobox-note" id="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A__GUID-06D755FD-32C7-41C3-B9E1-EBF12279EE14">
+<p class="notep1">Note:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>This chapter does not describe customizing and extending <span id="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A__BPMSUITE">Oracle Business Process Management Suite</span> (<span id="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A__BPMSUITE_SHORT">Oracle BPM Suite</span>). <span>Oracle BPM Suite</span> is installed on top of <span>Oracle SOA Suite</span>, and provides the ability to run Business Process Modeling and Notation (BPMN) processes. To accomplish this task, there are extensions to <span id="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A__JDEVSHORT">JDeveloper</span> for working with BPMN (<span id="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A__BPMSTUDIO_SHORT">Oracle BPM Studio</span>) and a web-based application for working with BPMN processes (<span id="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A__BPMCOMPOSER">Oracle Business Process Composer</span>). For information about BPMN process flows, see the <a class="olink OACEX327384" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OACEX327384">"Object Workflows and Business Processes: How They Work Together"</a> section in the <span class="italic"><span id="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A__OACEX"><cite>Oracle Cloud Extending Sales</cite></span></span>.</p>
+</li>
+<li>
+<p><span>Oracle SOA Suite</span> extensions cannot be used with <span>JDeveloper</span> Integrated WebLogic Server. If an application has references to <span>Oracle SOA Suite</span> shared libraries, then customizations on the application cannot be tested with Integrated WebLogic Server.</p>
+</li>
+</ul>
+</div>
+</div>
+<a id="OADTC704"></a><a id="OADTC408"></a>
+<div class="sect2"><a id="GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071"></a>
+<h2 id="OADTC-GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071" class="sect2"><span class="enumeration_section">5.1</span> About Customizing and Extending SOA Components</h2>
+<div>
+<p>SOA provides an enterprise architecture that supports building connected enterprise applications to provide solutions to business problems. SOA enables you to develop enterprise applications as modular business web services that can be integrated and reused, resulting in a flexible, adaptable IT infrastructure. SOA separates business functions into distinct units, or services.</p>
+<p><span id="GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071__SOA">Oracle SOA Suite</span> provides a complete set of service infrastructure components for designing, deploying, and managing SOA composite applications. A SOA composite application is a service, service component, and reference assembly designed and deployed in a single application. Wiring between the services, service components, and references enables message communication.</p>
+<p><span>Oracle SOA Suite</span> consists of SOA components that comprise the business logic and processing rules in a SOA composite application. You can include components such as the following in a SOA composite application:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Business rules:</p>
+<p>The following business rule categories are available:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Approval configuration (expirations, escalations, and notifications) and assignment rules:</p>
+<p>Define complex task routing slips for approval management by taking into account business documents and associated rules to identify the approval hierarchy for a work item. Additionally, approval management lets you define multistage approvals with associated list builders based on supervisor or position hierarchies. You can also define expiration, escalation, and notification configurations. For example, an expense approval task may use rules to define its approvers.</p>
+<p>Approval configuration and assignment rules are within the context of a human workflow.</p>
+</li>
+<li>
+<p>Nonapproval business rules:</p>
+<p>Define a business decision based on rules that enables dynamic decisions to be made at runtime that automate policies, computations, and reasoning while separating rule logic from underlying application code. For example, you can define a business rule to select a supplier with the lowest shipping price to fulfill a shipping order.</p>
+<p>Nonapproval business rules are in the context of <span>Oracle SOA Suite</span>, but outside of human workflow.</p>
+</li>
+<li>
+<p>Rules in non-<span>Oracle SOA Suite</span> applications</p>
+<p>Use of standalone rules in non-<span>Oracle SOA Suite</span> applications is supported. You can completely control how the rule dictionaries are structured and how these applications are patched. You may structure the rules as recommended for <span>Oracle SOA Suite</span> rules, as described in this chapter.</p>
+<p>A rule dictionary is a business rules container for facts, functions, globals, bucketsets, links, decision functions, and rulesets. A dictionary is an XML file that stores the application's rulesets and the data model. Dictionaries can link to other dictionaries. A bucketset enables you to define a list of values or a range of values of a specified type. After you create a bucketset, you can associate the bucketset with a fact property of a matching type. Business rules use the bucketsets that you define to specify constraints on the values associated with fact properties in rules or in a decision table. A ruleset is a business rules container for rules and decision tables. A ruleset provides a namespace, similar to a Java package, for rules and decision tables.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Domain value maps:</p>
+<p>Operate on actual data values that move through the infrastructure at runtime. A domain value map enables you to map from one vocabulary used in a given domain to another vocabulary used in a different domain. For example, one domain can represent a city with a long name (Boston), while another domain can represent a city with a short name (BO). In such cases, you can directly map the values by using domain value maps.</p>
+</li>
+<li>
+<p>Human tasks:</p>
+<p>Extend a workflow that describes the tasks for users or groups to perform as part of an end-to-end business process flow. For example, a vacation request workflow is assigned to a manager. The manager must act on the request task three days before the vacation starts. If the manager formally approves or rejects the request, the employee is notified with the decision. If the manager does not act on the task, the request is treated as rejected. Notification actions similar to the formal rejection are taken.</p>
+</li>
+<li>
+<p>Business Process Execution Language (BPEL) processes:</p>
+<p>Integrate a series of business activities and services into an end-to-end process flow. For example, a BPEL process flow calls a credit rating service. When you run this process, you enter a social security number into a user interface. The credit rating service takes the number and returns a credit rating.</p>
+</li>
+<li>
+<p><span id="GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071__MEDIATOR">Oracle Mediator</span>:</p>
+<p>Defines services that perform message and event routing, filtering, and transformations. For example, <span>Oracle Mediator</span> can accept data contained in a text file from an application or service, transform it into a format appropriate for updating a database that serves as a customer repository, and then route and deliver the data to that database.</p>
+</li>
+</ul>
+<p>For more information about these components, see the <a class="olink SOASE" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE"><span class="italic"><span id="GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span></a>.</p>
+<p><span>Oracle SOA Suite</span> supports the following types of customizations and extensions of these components:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Customizing several components during runtime</p>
+</li>
+<li>
+<p>Customizing and extending several components during design time</p>
+</li>
+</ul>
+<p>The tool to use depends on the component you are customizing or extending and whether you are performing these tasks during runtime or design time. The following table provides details.</p>
+<div class="infobox-note" id="GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071__GUID-E70F9A03-24B8-4A73-95DA-2EA5A8C38C80">
+<p class="notep1">Note:</p>
+<p>If you are customizing approval configuration and assignment rules or nonapproval business rules for a <span class="italic">deployed</span> project (either for <span>Oracle SOA Suite</span> or <span id="GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071__BPMSUITE_SHORT">Oracle BPM Suite</span>), always use <span id="GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071__BPEL_WORKLIST">Oracle BPM Worklist</span> or <span id="GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071__SOACOMP">Oracle SOA Composer</span>. If you are customizing approval configuration and assignment rules or nonapproval business rules as part of a <span class="italic">new</span> <span>Oracle BPM Suite</span> project being extended in <span id="GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071__BPMCOMPOSER">Oracle Business Process Composer</span>, then use <span>Oracle Business Process Composer</span>.</p>
+</div>
+<div class="tblformalwide" id="GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071__BABCIICH">
+<p class="titleintable">Table 5-1 Customization and Extension Tools for <span>Oracle SOA Suite</span></p>
+<table class="cellalignment462" title="Customization and Extension Tools for Oracle SOA Suite" summary="Lists the tools to use for performing runtime and design-time customizations">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment465" id="d22147e294">To Perform These Tasks...</th>
+<th class="cellalignment471" id="d22147e297">Use This Tool...</th>
+<th class="cellalignment472" id="d22147e300">Use This Tool At...</th>
+<th class="cellalignment473" id="d22147e303">Tool User</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment469" id="d22147e308" headers="d22147e294">
+<p>Customize approval configuration and assignment rules</p>
+</td>
+<td class="cellalignment474" headers="d22147e308 d22147e297">
+<p><span>Oracle BPM Worklist</span> (recommended) or <span>Oracle SOA Composer</span></p>
+<p><span class="bold">Note</span>: If you use <span>Oracle SOA Composer</span> to customize approval configuration and assignment rules during runtime, changes in subsequent revision patches are <span class="italic">not</span> applied successfully.</p>
+</td>
+<td class="cellalignment475" headers="d22147e308 d22147e300">
+<p>Runtime in a deployed SOA composite application</p>
+</td>
+<td class="cellalignment476" headers="d22147e308 d22147e303">
+<p>Technical analyst</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment469" id="d22147e335" headers="d22147e294">
+<p>Customize nonapproval business rules</p>
+</td>
+<td class="cellalignment474" headers="d22147e335 d22147e297">
+<p><span>Oracle SOA Composer</span></p>
+</td>
+<td class="cellalignment475" headers="d22147e335 d22147e300">
+<p>Runtime in a deployed SOA composite application</p>
+</td>
+<td class="cellalignment476" headers="d22147e335 d22147e303">
+<p>Business analyst</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment469" id="d22147e349" headers="d22147e294">
+<p>Customize domain value maps</p>
+</td>
+<td class="cellalignment474" headers="d22147e349 d22147e297">
+<p><span>Oracle SOA Composer</span></p>
+</td>
+<td class="cellalignment475" headers="d22147e349 d22147e300">
+<p>Runtime in a deployed SOA composite application</p>
+</td>
+<td class="cellalignment476" headers="d22147e349 d22147e303">
+<p>Business analyst</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment469" id="d22147e363" headers="d22147e294">
+<p>Customize SOA composite application endpoint properties such as the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Attached <span id="GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071__WSM">Oracle Web Services Manager</span> (<span id="GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071__WSMSHORT">Oracle WSM</span>) security policies</p>
+</li>
+<li>
+<p>Service and reference binding component properties</p>
+</li>
+</ul>
+</td>
+<td class="cellalignment474" headers="d22147e363 d22147e297">
+<p><span id="GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071__FAOEMFRAMESHORT">Fusion Applications Control</span></p>
+</td>
+<td class="cellalignment475" headers="d22147e363 d22147e300">
+<p>Runtime in a deployed SOA composite application</p>
+</td>
+<td class="cellalignment476" headers="d22147e363 d22147e303">
+<p>System administrator</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment469" id="d22147e390" headers="d22147e294">
+<ul style="list-style-type: disc;">
+<li>
+<p>Customize or extend business rules</p>
+</li>
+<li>
+<p>Customize or extend BPEL processes</p>
+</li>
+<li>
+<p>Customize or extend human tasks</p>
+</li>
+<li>
+<p>Customize or extend <span>Oracle Mediator</span></p>
+</li>
+<li>
+<p>Customize SOA composite application components such as a binding component and wire</p>
+</li>
+<li>
+<p>Customize or extend transformations</p>
+</li>
+<li>
+<p>Extend Web Services Description Language (WSDL) or Extensible Markup Language (XML) schema definition (XSD) files</p>
+</li>
+<li>
+<p>Extend business rules</p>
+</li>
+<li>
+<p>Extend Java EE connector architecture (JCA) adapters</p>
+</li>
+</ul>
+</td>
+<td class="cellalignment474" headers="d22147e390 d22147e297">
+<p><span id="GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071__JDEVSHORT">JDeveloper</span> (when logged in with the Customization Developer role)</p>
+</td>
+<td class="cellalignment475" headers="d22147e390 d22147e300">
+<p>Design time (when complete, you must deploy the SOA composite application)</p>
+</td>
+<td class="cellalignment476" headers="d22147e390 d22147e303">
+<p>System integrator</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="infobox-note" id="GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071__GUID-B8D5AD7F-B3DC-4155-917B-BDECBA7D86FF">
+<p class="notep1">Note:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>You <span class="italic">cannot</span> customize human tasks, BPEL processes, and <span>Oracle Mediator</span>s during runtime in a deployed SOA composite application.</p>
+</li>
+<li>
+<p>When using <span>Oracle SOA Composer</span>, you can save your customizations in a sandbox environment without applying them to a running instance. You can later return to the sandbox to make additional customizations. These customizations are applied to the running instance only when you click <span class="bold">Commit</span>.</p>
+</li>
+<li>
+<p>When you click <span class="bold">Save</span> or <span class="bold">Commit</span> in <span>Oracle SOA Composer</span>, a dialog is displayed in which you can optionally enter comments. When complete, you click <span class="bold">OK</span>, which performs the save or commit action, along with saving the comments.</p>
+</li>
+</ul>
+</div>
+</div>
+<a id="OADTC1062"></a>
+<div class="sect3"><a id="GUID-7A630944-B8B8-4BAA-A978-DDF98D4E49A1"></a>
+<h3 id="OADTC-GUID-7A630944-B8B8-4BAA-A978-DDF98D4E49A1" class="sect3"><span class="enumeration_section">5.1.1</span> Before You Start Customizing SOA Composite Applications</h3>
+<div>
+<p>Before you customize SOA components, become familiar with the <span id="GUID-7A630944-B8B8-4BAA-A978-DDF98D4E49A1__FAAPP">Oracle Fusion application</span> architecture that enables customizations, as described in <a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A" title="This chapter provides an overview of how to customize and extend on-premises installations of Oracle Fusion applications and introduces the design time and runtime tools that are used in the process. The remainder of this book describes how to use the following tools to customize and extend on-premises installations.">Customizing and Extending</a> . Also understand the typical workflows for working with runtime customizations, as described in <a href="GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8.htm#GUID-472DF8A4-74B9-4B6D-AD19-D6F91FFE70C8" title="This chapter discusses the typical workflow for customizing and extending Oracle Fusion applications. It describes how to use sandboxes to perform customizations in an environment that is separate from the full test environment, publish the changes to a full test environment, and move the changes to other environments.">Understanding the Customization Development Life Cycle</a>.</p>
+<p>In addition, you need to perform the following tasks before you can begin customizing your application:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Install <span id="GUID-7A630944-B8B8-4BAA-A978-DDF98D4E49A1__JDEVSHORT">JDeveloper</span> and set up your development environment. Before you can implement customizations using <span>JDeveloper</span>, you must create an application workspace that imports the necessary parts of the application you want to customize. For more information, see <a href="GUID-7A38E4EA-551C-407D-8E7C-A07AD3887D7A.htm#GUID-FBD75249-534E-4857-AD58-F0D4D9822319">About Installing Customization Tools</a> and the "<a class="olink OADEE64925" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OADEE64925">Setting Up Your Development Environment</a>" chapter in the <span class="italic"><span id="GUID-7A630944-B8B8-4BAA-A978-DDF98D4E49A1__OADEE"><cite>Developer's Guide</cite></span></span>.</p>
+</li>
+<li>
+<p>Create a customization application workspace. For more information, see <a href="GUID-BD1AACE2-8148-4EB8-BD0B-9EEB1D6B4A46.htm#GUID-BD1AACE2-8148-4EB8-BD0B-9EEB1D6B4A46" title="This chapter describes how to configure Oracle JDeveloper for implementing customizations in Oracle Fusion applications. It also describes how to customize Service-Oriented Architecture (SOA) composite applications with JDeveloper, including setting up the JDeveloper application workspace and SOA composite application project for Oracle Metadata Services (MDS) Repository customization, customizing the SOA composite application, and customizing the SOA resource bundle.">Using for Customizations</a> .</p>
+</li>
+<li>
+<p>Start <span>JDeveloper</span> in the appropriate role.</p>
+<p>For more information, see <a href="GUID-BD1AACE2-8148-4EB8-BD0B-9EEB1D6B4A46.htm#GUID-BD1AACE2-8148-4EB8-BD0B-9EEB1D6B4A46" title="This chapter describes how to configure Oracle JDeveloper for implementing customizations in Oracle Fusion applications. It also describes how to customize Service-Oriented Architecture (SOA) composite applications with JDeveloper, including setting up the JDeveloper application workspace and SOA composite application project for Oracle Metadata Services (MDS) Repository customization, customizing the SOA composite application, and customizing the SOA resource bundle.">Using for Customizations</a> .</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<a id="OADTC409"></a>
+<div class="sect2"><a id="GUID-B30D1303-5DC8-4117-A2BB-166C12014D45"></a>
+<h2 id="OADTC-GUID-B30D1303-5DC8-4117-A2BB-166C12014D45" class="sect2"><span class="enumeration_section">5.2</span> About Customizing SOA Composite Applications</h2>
+<div>
+<p>As described in <a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-90221F3B-3046-4F1C-A962-68E4EC5E4071__BABCIICH" title="Lists the tools to use for performing runtime and design-time customizations">Table 5-1</a>, you can customize SOA components during runtime in a deployed SOA composite application with a runtime tool. This section provides an overview of these tasks and provides references to additional documentation for more specific instructions.</p>
+<div class="infobox-note" id="GUID-B30D1303-5DC8-4117-A2BB-166C12014D45__GUID-96EC49E8-8853-42D8-AAB2-EFA06C70A741">
+<p class="notep1">Note:</p>
+<p>You cannot customize SOA components in <span id="GUID-B30D1303-5DC8-4117-A2BB-166C12014D45__APPCOMPOSER">Oracle Fusion CRM Application Composer</span> (<span id="GUID-B30D1303-5DC8-4117-A2BB-166C12014D45__APPCOMPOSER_SHORT">Application Composer</span>). However, you can extend a business event in <span>Application Composer</span> and use the <span class="bold">Event notification</span> action to notify a SOA composite application by email of the occurrence of the event.</p>
+</div>
+</div>
+<a id="OADTC991"></a>
+<div class="sect3"><a id="GUID-F0417906-EB70-4F81-9F76-AD6A40C487E8"></a>
+<h3 id="OADTC-GUID-F0417906-EB70-4F81-9F76-AD6A40C487E8" class="sect3"><span class="enumeration_section">5.2.1</span> About Starting the Runtime Customization Tool</h3>
+<div>
+<p>Use a web browser to start the tools shown in the following table for customizing approval configuration and assignment rules, nonapproval business rules, domain value maps, and SOA composite application endpoint properties at runtime.</p>
+<div class="tblformal" id="GUID-F0417906-EB70-4F81-9F76-AD6A40C487E8__GUID-4124FC4F-46E7-463E-BACD-0E58842AE8EE">
+<p class="titleintable">Table 5-2 Starting the Customization Tool</p>
+<table class="cellalignment450" title="Starting the Customization Tool" summary="Describes how to start the customization tools">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment477" id="d22147e671">For Customizing...</th>
+<th class="cellalignment478" id="d22147e674">Start...</th>
+<th class="cellalignment479" id="d22147e677">By Entering...</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e682" headers="d22147e671">
+<p>Business rules</p>
+</td>
+<td class="cellalignment481" headers="d22147e682 d22147e674">&nbsp;</td>
+<td class="cellalignment482" headers="d22147e682 d22147e677">&nbsp;</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e690" headers="d22147e671">
+<ul style="list-style-type: disc;">
+<li>
+<p>Approval configuration and assignment rules</p>
+</li>
+</ul>
+</td>
+<td class="cellalignment481" headers="d22147e690 d22147e674">
+<p><span id="GUID-F0417906-EB70-4F81-9F76-AD6A40C487E8__BPEL_WORKLIST">Oracle BPM Worklist</span> (recommended)</p>
+<p><span class="bold">Note</span>: You can alternatively use <span id="GUID-F0417906-EB70-4F81-9F76-AD6A40C487E8__SOACOMP">Oracle SOA Composer</span> to customize approval configuration and assignment rules during runtime. However if you do so, changes in subsequent revision patches are <span class="italic">not</span> applied successfully.</p>
+</td>
+<td class="cellalignment482" headers="d22147e690 d22147e677">
+<pre dir="ltr">
+http://<span class="italic">host</span>:<span class="italic">port</span>/integration/worklistapp
+</pre></td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e720" headers="d22147e671">
+<ul style="list-style-type: disc;">
+<li>
+<p>Nonapproval business rules</p>
+</li>
+</ul>
+</td>
+<td class="cellalignment481" headers="d22147e720 d22147e674">
+<p><span>Oracle SOA Composer</span></p>
+</td>
+<td class="cellalignment482" headers="d22147e720 d22147e677">
+<pre dir="ltr">
+http://<span class="italic">host</span>:<span class="italic">port</span>/soa/composer
+</pre></td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e739" headers="d22147e671">
+<p>Domain value maps</p>
+</td>
+<td class="cellalignment481" headers="d22147e739 d22147e674">
+<p><span>Oracle SOA Composer</span></p>
+</td>
+<td class="cellalignment482" headers="d22147e739 d22147e677">
+<pre dir="ltr">
+http://<span class="italic">host</span>:<span class="italic">port</span>/soa/composer
+</pre></td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e756" headers="d22147e671">
+<p>SOA composite application endpoint properties such as <span id="GUID-F0417906-EB70-4F81-9F76-AD6A40C487E8__WSMSHORT">Oracle WSM</span> security policies and binding component properties</p>
+</td>
+<td class="cellalignment481" headers="d22147e756 d22147e674">
+<p><span id="GUID-F0417906-EB70-4F81-9F76-AD6A40C487E8__FAOEMFRAMESHORT">Fusion Applications Control</span></p>
+</td>
+<td class="cellalignment482" headers="d22147e756 d22147e677">
+<pre dir="ltr">
+http://<span class="italic">host</span>:<span class="italic">port</span>/em
+</pre></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+</div>
+<a id="OADTC994"></a><a id="OADTC993"></a>
+<div class="sect3"><a id="GUID-C55041A7-4264-4BAA-BCE4-6AEA833D2B18"></a>
+<h3 id="OADTC-GUID-C55041A7-4264-4BAA-BCE4-6AEA833D2B18" class="sect3"><span class="enumeration_section">5.2.2</span> Selecting the Data to Customize</h3>
+<div>
+<p>After accessing the runtime customization tool to use, select the data to customize:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span id="GUID-C55041A7-4264-4BAA-BCE4-6AEA833D2B18__SOACOMP">Oracle SOA Composer</span>:</p>
+<ol>
+<li>
+<p>From the <span class="bold">Open</span> list in <span>Oracle SOA Composer</span>, select the data to customize, as shown in the following figure.</p>
+<div class="figure" id="GUID-C55041A7-4264-4BAA-BCE4-6AEA833D2B18__GUID-53D46194-07ED-4EC8-97A8-1B71F1E7A275">
+<p class="titleinfigure">Figure 5-1 Open Menu of <span>Oracle SOA Composer</span></p>
+<img width="459" height="174" src="img/GUID-2E3A4712-2BEE-49A4-9113-7C99A6B212D2-default.png" alt="Description of Figure 5-1 follows" title="Description of Figure 5-1 follows" /><br />
+<a href="img_text/GUID-2E3A4712-2BEE-49A4-9113-7C99A6B212D2-default.htm">Description of "Figure 5-1 Open Menu of Oracle SOA Composer"</a></div>
+<!-- class="figure" -->
+<p>The following table describes the options available for selection.</p>
+<div class="tblformal" id="GUID-C55041A7-4264-4BAA-BCE4-6AEA833D2B18__GUID-582969E7-CEC5-4293-8A75-E760793AE0AA">
+<p class="titleintable">Table 5-3 Selecting the Data to Customize</p>
+<table class="cellalignment483" title="Selecting the Data to Customize" summary="Lists the data you can select to customize in Oracle SOA Composer">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment484" id="d22147e831">For Customizing...</th>
+<th class="cellalignment485" id="d22147e834">Select...</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment486" id="d22147e839" headers="d22147e831">
+<p>Nonapproval business rules</p>
+</td>
+<td class="cellalignment487" headers="d22147e839 d22147e834">
+<p><span class="bold">Open Rules</span></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment486" id="d22147e847" headers="d22147e831">
+<p>Domain value maps</p>
+</td>
+<td class="cellalignment487" headers="d22147e847 d22147e834">
+<p><span class="bold">Open DVM</span></p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment486" id="d22147e855" headers="d22147e831">
+<p>Approval configuration and assignment rules</p>
+</td>
+<td class="cellalignment487" headers="d22147e855 d22147e834">
+<p><span class="bold">Open Task</span></p>
+<p><span class="bold">Note</span>: If you use <span>Oracle SOA Composer</span> to customize approval configuration and assignment rules during runtime, changes in subsequent revision patches are <span class="italic">not</span> applied successfully.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></li>
+</ol>
+</li>
+<li>
+<p><span id="GUID-C55041A7-4264-4BAA-BCE4-6AEA833D2B18__BPEL_WORKLIST">Oracle BPM Worklist</span>:</p>
+<ol>
+<li>
+<p>In the <span class="bold">Administration</span> section, click the <span class="bold">Task Configuration</span> tab.</p>
+</li>
+<li>
+<p>Select a specific approval configuration and assignment rule task to customize.</p>
+</li>
+<li>
+<p>Select a task to view or customize from the list of task types.</p>
+</li>
+</ol>
+</li>
+<li>
+<p><span id="GUID-C55041A7-4264-4BAA-BCE4-6AEA833D2B18__FAOEMFRAMESHORT">Fusion Applications Control</span>:</p>
+<ol>
+<li>
+<p>In the navigation pane in <span>Fusion Applications Control</span>, expand the <span class="bold">SOA</span> folder.</p>
+</li>
+<li>
+<p>Expand <span class="bold">soa-infra</span>.</p>
+</li>
+<li>
+<p>Expand the partition in which the SOA composite applications are deployed (for example, <span class="bold">default</span>).</p>
+</li>
+<li>
+<p>Select the SOA composite application to customize.</p>
+</li>
+</ol>
+</li>
+</ul>
+</div>
+</div>
+<a id="OADTC998"></a><a id="OADTC995"></a><a id="OADTC997"></a>
+<div class="sect3"><a id="GUID-4589258F-D821-413F-9F01-AF26E27A1F8A"></a>
+<h3 id="OADTC-GUID-4589258F-D821-413F-9F01-AF26E27A1F8A" class="sect3"><span class="enumeration_section">5.2.3</span> About Customizing Business Rules</h3>
+<div>
+<p>Two categories of rules are available:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Approval configuration and assignment rules:</p>
+<p>You can customize approval configuration and assignment rules included in a deployed SOA composite application using <span id="GUID-4589258F-D821-413F-9F01-AF26E27A1F8A__BPEL_WORKLIST">Oracle BPM Worklist</span> (recommended), as shown in the following figure, or in <span id="GUID-4589258F-D821-413F-9F01-AF26E27A1F8A__SOACOMP">Oracle SOA Composer</span>, as shown in <a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-4589258F-D821-413F-9F01-AF26E27A1F8A__BABEAFJH">Figure 5-3</a>.</p>
+<p>For more information, see the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>The "<a class="olink BPMPD1073" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=BPMPD1073">Using Approval Management</a>" chapter in the <span class="italic"><span id="GUID-4589258F-D821-413F-9F01-AF26E27A1F8A__BPMPD"><cite>Developing Business Processes with Oracle Business Process Management Studio</cite></span></span> (for <span>Oracle BPM Worklist</span>)</p>
+</li>
+<li>
+<p>The "<a class="olink ASRUG1091" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ASRUG1091">Working with Tasks at Run Time</a>" section in the <span class="italic"><span id="GUID-4589258F-D821-413F-9F01-AF26E27A1F8A__ASRUG"><cite>Designing Business Rules with Oracle Business Process Management</cite></span></span> (for <span>Oracle SOA Composer</span>)</p>
+</li>
+</ul>
+<div class="figure" id="GUID-4589258F-D821-413F-9F01-AF26E27A1F8A__GUID-C44BB8BE-519F-4AF4-BB17-E6594744B1A5">
+<p class="titleinfigure">Figure 5-2 Approval Configuration and Assignment Rule Customizations in <span>Oracle BPM Worklist</span></p>
+<img width="934" height="485" src="img/GUID-52886E3B-7E81-45F2-B9DA-4DE9BDD4CE92-default.png" alt="Description of Figure 5-2 follows" title="Description of Figure 5-2 follows" /><br />
+<a href="img_text/GUID-52886E3B-7E81-45F2-B9DA-4DE9BDD4CE92-default.htm">Description of "Figure 5-2 Approval Configuration and Assignment Rule Customizations in Oracle BPM Worklist"</a></div>
+<!-- class="figure" -->
+<div class="figure" id="GUID-4589258F-D821-413F-9F01-AF26E27A1F8A__BABEAFJH">
+<p class="titleinfigure">Figure 5-3 Approval Configuration and Assignment Rule Customizations in <span>Oracle SOA Composer</span></p>
+<img width="769" height="461" src="img/GUID-D2A106FE-FB06-437A-9BED-5AC23B2A0B7A-default.png" alt="Description of Figure 5-3 follows" title="Description of Figure 5-3 follows" /><br />
+<a href="img_text/GUID-D2A106FE-FB06-437A-9BED-5AC23B2A0B7A-default.htm">Description of "Figure 5-3 Approval Configuration and Assignment Rule Customizations in Oracle SOA Composer"</a></div>
+<!-- class="figure" -->
+<p>How to customize the text in notifications in <span>Oracle BPM Worklist</span> is decided by what you want to customize in the task detail page (the page rendered when you click the task in <span>Oracle BPM Worklist</span>):</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Some strings are part of <span id="GUID-4589258F-D821-413F-9F01-AF26E27A1F8A__SOA">Oracle SOA Suite</span>, other strings are part of the <span id="GUID-4589258F-D821-413F-9F01-AF26E27A1F8A__FA">Oracle Fusion Applications</span>-owned <span id="GUID-4589258F-D821-413F-9F01-AF26E27A1F8A__ADF">Oracle Application Development Framework</span> (<span id="GUID-4589258F-D821-413F-9F01-AF26E27A1F8A__ADFSHORT">Oracle ADF</span>) resource bundle, and other strings are part of the <span>Oracle Fusion Applications</span>-owned SOA resource bundle.</p>
+</li>
+<li>
+<p>The task title, task outcome, approval reason, stage name, and participant type strings are stored in the <span>Oracle Fusion Applications</span>-owned SOA resource bundles. You <span class="italic">cannot</span> customize these because there is no support for that functionality in <span>Oracle SOA Suite</span>.</p>
+</li>
+<li>
+<p>The business object-specific text and sections are implemented in <span>Oracle ADF</span> and resource bundles are owned by <span>Oracle Fusion Applications</span>. These strings can be customized only in <span id="GUID-4589258F-D821-413F-9F01-AF26E27A1F8A__JDEVSHORT">JDeveloper</span>.</p>
+</li>
+<li>
+<p>The <span>Oracle SOA Suite</span>-owned strings correspond to those in the <span class="bold">Comments</span>, <span class="bold">Attachment</span>, and <span class="bold">History</span> sections in <span>Oracle BPM Worklist</span>. The actions along the top of the page (excluding the custom actions defined in the <code>.task</code> file) are also part of <span>Oracle SOA Suite</span>. These strings in the <span>Oracle SOA Suite</span>-owned resource bundles can be customized by following the instructions in the "<a class="olink SOASE10490" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE10490">Resource Bundles in Workflow Services</a>" section in the <span class="italic"><span id="GUID-4589258F-D821-413F-9F01-AF26E27A1F8A__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</li>
+</ul>
+<p>How text appears in email notifications for human tasks is also decided by what you want to customize:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>The subject (derived from the task title) and custom outcomes are defined in the <span>Oracle Fusion Applications</span>-owned SOA resource bundle. You cannot customize these because there is no support for that functionality in <span>Oracle SOA Suite</span>.</p>
+</li>
+<li>
+<p>You can customize the notification message (the first line of instructions in the email) during runtime in <span>Oracle BPM Worklist</span>.</p>
+</li>
+<li>
+<p>The remaining email content is the same as customizing the text in notifications in <span>Oracle BPM Worklist</span>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Nonapproval business rules:</p>
+<p>You can view, customize, and commit changes to a rule dictionary included in a deployed SOA composite application using <span>Oracle SOA Composer</span>, as shown in the following figure. Supported customizations consist of the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Customizing dictionary bucketsets</p>
+</li>
+<li>
+<p>Customizing rules in a ruleset</p>
+</li>
+<li>
+<p>Customizing advanced rule settings</p>
+</li>
+<li>
+<p>Customizing conditions and actions</p>
+</li>
+<li>
+<p>Customizing advanced mode rules</p>
+</li>
+<li>
+<p>Customizing a decision table</p>
+</li>
+<li>
+<p>Validating rule dictionaries</p>
+</li>
+</ul>
+<div class="figure" id="GUID-4589258F-D821-413F-9F01-AF26E27A1F8A__GUID-78916534-6EB3-47AC-83E4-28A178CE10DF">
+<p class="titleinfigure">Figure 5-4 Nonapproval Business Rule Customizations in <span>Oracle SOA Composer</span></p>
+<img width="771" height="402" src="img/GUID-94E89D66-E31C-4B05-8000-84E09B236CE2-default.png" alt="Description of Figure 5-4 follows" title="Description of Figure 5-4 follows" /><br />
+<a href="img_text/GUID-94E89D66-E31C-4B05-8000-84E09B236CE2-default.htm">Description of "Figure 5-4 Nonapproval Business Rule Customizations in Oracle SOA Composer"</a></div>
+<!-- class="figure" -->
+<p>For more information about customizing business rules in <span>Oracle SOA Composer</span>, see the "<a class="olink ASRUG888" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ASRUG888">Using <span>Oracle SOA Composer</span> with <span id="GUID-4589258F-D821-413F-9F01-AF26E27A1F8A__RULES">Oracle Business Rules</span>"</a> chapter in the <span class="italic"><span><cite>Designing Business Rules with Oracle Business Process Management</cite></span></span>.</p>
+</li>
+</ul>
+</div>
+</div>
+<a id="OADTC996"></a>
+<div class="sect3"><a id="GUID-D4C978B1-C93F-4785-AFAC-3CC016EA3102"></a>
+<h3 id="OADTC-GUID-D4C978B1-C93F-4785-AFAC-3CC016EA3102" class="sect3"><span class="enumeration_section">5.2.4</span> About Customizing Domain Value Maps</h3>
+<div>
+<p>You can customize domain value map rows included in a deployed SOA composite application using <span id="GUID-D4C978B1-C93F-4785-AFAC-3CC016EA3102__SOACOMP">Oracle SOA Composer</span>, as shown in the following figure. For more information, see the <a class="olink SOASE85959" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE85959">"Using <span>Oracle SOA Composer</span> with Domain Value Maps"</a> chapter in the <span class="italic"><span id="GUID-D4C978B1-C93F-4785-AFAC-3CC016EA3102__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+<div class="figure" id="GUID-D4C978B1-C93F-4785-AFAC-3CC016EA3102__GUID-2F88E698-D700-4D6B-9558-83F46A72D46E">
+<p class="titleinfigure">Figure 5-5 Domain Value Map Customizations in <span>Oracle SOA Composer</span></p>
+<img width="762" height="515" src="img/GUID-5A722F08-AAEB-445C-AB5E-14BAAAB6B4F2-default.png" alt="Description of Figure 5-5 follows" title="Description of Figure 5-5 follows" /><br />
+<a href="img_text/GUID-5A722F08-AAEB-445C-AB5E-14BAAAB6B4F2-default.htm">Description of "Figure 5-5 Domain Value Map Customizations in Oracle SOA Composer"</a></div>
+<!-- class="figure" --></div>
+</div>
+<a id="OADTC1000"></a><a id="OADTC999"></a>
+<div class="sect3"><a id="GUID-B4A75CA1-D6C2-4A10-98CE-AA10944D0A9B"></a>
+<h3 id="OADTC-GUID-B4A75CA1-D6C2-4A10-98CE-AA10944D0A9B" class="sect3"><span class="enumeration_section">5.2.5</span> About Customizing SOA Composite Application Endpoint Properties</h3>
+<div>
+<p>You can customize endpoint address properties for an external reference such as <span id="GUID-B4A75CA1-D6C2-4A10-98CE-AA10944D0A9B__WSMSHORT">Oracle WSM</span> security policies and binding components included in a deployed SOA composite application using <span id="GUID-B4A75CA1-D6C2-4A10-98CE-AA10944D0A9B__FAOEMFRAMESHORT">Fusion Applications Control</span>.</p>
+<p>The following figure provides details about customizing <span>Oracle WSM</span> security policies. For more information, see the "<a class="olink SOAAG3582" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOAAG3582">Managing SOA Composite Application Policies</a>" section in the <span class="italic"><span id="GUID-B4A75CA1-D6C2-4A10-98CE-AA10944D0A9B__SOAAG"><cite>Administering Oracle SOA Suite and Oracle Business Process Management Suite</cite></span></span>.</p>
+<div class="figure" id="GUID-B4A75CA1-D6C2-4A10-98CE-AA10944D0A9B__GUID-9380C6C4-BA4F-46B8-812E-63175EB6BFE0">
+<p class="titleinfigure">Figure 5-6 Security Policy Customizations in <span>Fusion Applications Control</span></p>
+<img width="913" height="463" src="img/GUID-54B36F67-E9E2-477C-A7AD-A1FB59842B9B-default.png" alt="Description of Figure 5-6 follows" title="Description of Figure 5-6 follows" /><br />
+<a href="img_text/GUID-54B36F67-E9E2-477C-A7AD-A1FB59842B9B-default.htm">Description of "Figure 5-6 Security Policy Customizations in Fusion Applications Control"</a></div>
+<!-- class="figure" -->
+<p>The following figure provides details about customizing binding component properties for services and references. For more information, see the "<a class="olink SOAAG3685" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOAAG3685">Configuring Service and Reference Binding Component Properties</a>" chapter in the <span class="italic"><span><cite>Administering Oracle SOA Suite and Oracle Business Process Management Suite</cite></span></span>.</p>
+<div class="figure" id="GUID-B4A75CA1-D6C2-4A10-98CE-AA10944D0A9B__GUID-90793F78-243D-4126-9331-639C0AB0F85C">
+<p class="titleinfigure">Figure 5-7 Binding Component Property Customizations in <span>Fusion Applications Control</span></p>
+<img width="928" height="530" src="img/GUID-10FFDF8C-C45D-42DE-B50A-B45EE65B044D-default.png" alt="Description of Figure 5-7 follows" title="Description of Figure 5-7 follows" /><br />
+<a href="img_text/GUID-10FFDF8C-C45D-42DE-B50A-B45EE65B044D-default.htm">Description of "Figure 5-7 Binding Component Property Customizations in Fusion Applications Control"</a></div>
+<!-- class="figure" --></div>
+</div>
+<a id="OADTC1678"></a><a id="OADTC1679"></a><a id="OADTC1680"></a><a id="OADTC1677"></a>
+<div class="sect3"><a id="GUID-AE959D75-BC77-4CB9-AA4D-90BBBF4C8C64"></a>
+<h3 id="OADTC-GUID-AE959D75-BC77-4CB9-AA4D-90BBBF4C8C64" class="sect3"><span class="enumeration_section">5.2.6</span> Synchronizing Customized Flexfields in the <span id="METAREPSHORT">MDS Repository</span> for SOA</h3>
+<div>
+<p>SOA composite applications in <span id="GUID-AE959D75-BC77-4CB9-AA4D-90BBBF4C8C64__FA">Oracle Fusion Applications</span> reference copies of the original XSD schema files included in the <span id="GUID-AE959D75-BC77-4CB9-AA4D-90BBBF4C8C64__MDSSHORT">MDS</span> repository for SOA. When you customize and deploy <span>Oracle Fusion Applications</span> flexfields (or upgrade the base table, after which the flexfields are automatically reapplied), which result in a new XSD file being generated in the <span>MDS</span> repository for <span>Oracle Fusion Applications</span>, the updated XSD files must be synchronized in the <span>MDS</span> repository for SOA for use in the fact models in business rules.</p>
+<p>To perform this synchronization, a special SOA composite application named UpdateSOAMDS is included with <span>Oracle Fusion Applications</span>. By default, UpdateSOAMDS is automatically deployed. When a synchronization is required, you manually invoke an instance of this SOA composite application to synchronize the updated XSD files in the <span>MDS</span> repository for SOA. You can view the results of this synchronization in the audit trail in <span id="GUID-AE959D75-BC77-4CB9-AA4D-90BBBF4C8C64__FAOEMFRAMESHORT">Fusion Applications Control</span>.</p>
+<ol>
+<li>
+<p>Invoke UpdateSOAMDS.</p>
+<ol>
+<li>
+<p>Log in to <span>Fusion Applications Control</span>.</p>
+</li>
+<li>
+<p>In the navigation pane, expand <span class="bold">soa-infra</span> and the domain.</p>
+</li>
+<li>
+<p>Select <span class="bold">UpdateSOAMDS</span>.</p>
+</li>
+<li>
+<p>At the top of the Dashboard page for <span class="bold">UpdateSOAMDS</span>, click <span class="bold">Test</span>.</p>
+</li>
+<li>
+<p>In the <span class="bold">Operation</span> list, note that the <span class="bold">updateDuring</span> operation is selected, as shown in the following figure.</p>
+<div class="figure" id="GUID-AE959D75-BC77-4CB9-AA4D-90BBBF4C8C64__GUID-9D782702-0FD6-449D-8407-FFA0DD412B8F">
+<p class="titleinfigure">Figure 5-8 Operations to Perform</p>
+<img width="767" height="274" src="img/GUID-F23C1D77-BEC1-4CF1-A1A6-04FB347DCBDC-default.png" alt="Description of Figure 5-8 follows" title="Description of Figure 5-8 follows" /><br />
+<a href="img_text/GUID-F23C1D77-BEC1-4CF1-A1A6-04FB347DCBDC-default.htm">Description of "Figure 5-8 Operations to Perform"</a></div>
+<!-- class="figure" -->
+<p>The <span class="bold">updateDuring</span> operation specifies how far back in time to go to get flexfield updates for synchronizing in the <span>MDS</span> repository for SOA.</p>
+</li>
+<li>
+<p>In the <span class="bold">Value</span> field of the <span class="bold">Input Arguments</span> section, enter a value, as shown in the following figure.</p>
+<div class="figure" id="GUID-AE959D75-BC77-4CB9-AA4D-90BBBF4C8C64__GUID-D84098B5-62B1-42BC-93FA-E488A34C7442">
+<p class="titleinfigure">Figure 5-9 Value Field</p>
+<img width="430" height="95" src="img/GUID-E9877860-BB52-4A11-A622-5B6AEA7D44BD-default.png" alt="Description of Figure 5-9 follows" title="Description of Figure 5-9 follows" /><br />
+<a href="img_text/GUID-E9877860-BB52-4A11-A622-5B6AEA7D44BD-default.htm">Description of "Figure 5-9 Value Field"</a></div>
+<!-- class="figure" -->
+<p>The following table provides examples of how to specify a value. The <span class="bold">updateDuring</span> operation uses the <code>xsd:duration</code> type as input to obtain the data.</p>
+<div class="tblformal" id="GUID-AE959D75-BC77-4CB9-AA4D-90BBBF4C8C64__GUID-388AF53E-8258-45FA-AE3F-11C72514FE11">
+<p class="titleintable">Table 5-4 Operation Value Examples</p>
+<table class="cellalignment483" title="Operation Value Examples" summary="Provides examples of how to specify an operation value">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment488" id="d22147e1427">If You Enter...</th>
+<th class="cellalignment489" id="d22147e1430">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment490" id="d22147e1435" headers="d22147e1427">
+<p><code>P50D</code></p>
+</td>
+<td class="cellalignment491" headers="d22147e1435 d22147e1430">
+<p>The operation goes back 50 days to get flexfield updates that occurred.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment490" id="d22147e1443" headers="d22147e1427">
+<p><code>P1M2DT3H</code></p>
+</td>
+<td class="cellalignment491" headers="d22147e1443 d22147e1430">
+<p>The operation goes back one month, two days, and three hours to get flexfield updates that occurred.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></li>
+<li>
+<p>Click <span class="bold">Test Web Service</span>.</p>
+<p>All rule dictionaries in the <span>MDS</span> repository for SOA that use the affected XSD schemas are altered. The data model of the rule dictionaries is modified and the fact types are reimported. After reimporting the XSD schemas, the rule dictionaries are saved in the <span>MDS</span> repository for SOA.</p>
+<p>The Java Architecture for XML Binding (JAXB) 2.0 classes for the fact type model of the rule dictionaries that have been altered are regenerated and compiled into the appropriate SOA composite application <code>SCA-INF/gen-classes</code> directories.</p>
+<p>Other SOA instances in the cluster are notified of the flexfield customizations.</p>
+<p>The class loader for the SOA composite applications in which the rule dictionaries were altered is invalidated and a new class loader is extended with the next request for the SOA composite application.</p>
+<p>The SOA instances not involved in updating the rule dictionaries in the <span>MDS</span> repository for SOA regenerate the JAXB 2.0 classes for the SOA composite applications that comprise rule dictionaries in which the fact type model was altered.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>View the results in the audit trail:</p>
+<ol>
+<li>
+<p>In the navigator, click <span class="bold">soa-infra</span>.</p>
+</li>
+<li>
+<p>In the <span class="bold">Recent Instances</span> section of the Dashboard page of the SOA Infrastructure, click the instance ID.</p>
+</li>
+<li>
+<p>In the <span class="bold">Trace</span> section of the Flow Trace page, click the <span class="bold">UpdateSOAMDS</span> BPEL service component.</p>
+</li>
+<li>
+<p>Click <span class="bold">View XML Document</span> to expand the activities in the audit trail, as needed.</p>
+</li>
+<li>
+<p>View the list of XSD schema files synchronized in the <span>MDS</span> repository for SOA in the audit trail, as shown in the following figure.</p>
+<div class="figure" id="GUID-AE959D75-BC77-4CB9-AA4D-90BBBF4C8C64__GUID-B368D9AA-10D0-4BEE-B437-10BC7D1DC6B9">
+<p class="titleinfigure">Figure 5-10 Audit Trail Results</p>
+<img width="632" height="404" src="img/GUID-A73E1955-9C07-4869-95C4-202A9012FCC1-default.png" alt="Description of Figure 5-10 follows" title="Description of Figure 5-10 follows" /><br />
+<a href="img_text/GUID-A73E1955-9C07-4869-95C4-202A9012FCC1-default.htm">Description of "Figure 5-10 Audit Trail Results"</a></div>
+<!-- class="figure" --></li>
+</ol>
+</li>
+</ol>
+<div class="infobox-note" id="GUID-AE959D75-BC77-4CB9-AA4D-90BBBF4C8C64__GUID-AA210AA6-9CE7-4754-ADF4-6AC096D432EB">
+<p class="notep1">Note:</p>
+<p>Flex fields are now known as mapped attributes. Do <span class="italic">not</span> confuse <span id="GUID-AE959D75-BC77-4CB9-AA4D-90BBBF4C8C64__BPEL_WORKLIST">Oracle BPM Worklist</span> flex fields with <span>Oracle Fusion Applications</span> flexfields; they are completely different features.</p>
+</div>
+</div>
+</div>
+<a id="OADTC1681"></a>
+<div class="sect3"><a id="GUID-05C1FD0A-357C-4989-A663-6A1647B619B1"></a>
+<h3 id="OADTC-GUID-05C1FD0A-357C-4989-A663-6A1647B619B1" class="sect3"><span class="enumeration_section">5.2.7</span> About Customizing Task Flows in <span>Oracle BPM Worklist</span></h3>
+<div>
+<div class="infobox-note" id="GUID-05C1FD0A-357C-4989-A663-6A1647B619B1__GUID-4FFC1E0E-8FA5-473A-8478-56DC54E26E38">
+<p class="notep1">Note:</p>
+<p>Only use <span id="GUID-05C1FD0A-357C-4989-A663-6A1647B619B1__BPEL_WORKLIST">Oracle BPM Worklist</span> for customizing task flows. Do not use <span id="GUID-05C1FD0A-357C-4989-A663-6A1647B619B1__BPM">Oracle Business Process Management</span> Workspace. (For more information, see "Understanding Process Workspace" in <span class="italic">Oracle Fusion Middleware User's Guide for Oracle Business Process Management</span>.)</p>
+</div>
+<p>You can view the same Human Task Editor tabs of <span id="GUID-05C1FD0A-357C-4989-A663-6A1647B619B1__JDEV">Oracle JDeveloper</span> in <span>Oracle BPM Worklist</span>. The pages in both tools are synchronized. You can customize some fields of these tabs.</p>
+</div>
+</div>
+<a id="OADTC1684"></a><a id="OADTC1685"></a><a id="OADTC1686"></a><a id="OADTC1688"></a><a id="OADTC1689"></a><a id="OADTC1690"></a><a id="OADTC1691"></a><a id="OADTC1692"></a><a id="OADTC1693"></a><a id="OADTC1683"></a>
+<div class="sect3"><a id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4"></a>
+<h3 id="OADTC-GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4" class="sect3"><span class="enumeration_section">5.2.8</span> Viewing the Tabs of the Human Task Editor in Oracle BPM Worklist</h3>
+<div>
+<p>The tabs that are displayed for editing in the Human Task Editor in <span id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__JDEV">Oracle JDeveloper</span> are also displayed during runtime in <span id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__BPEL_WORKLIST">Oracle BPM Worklist</span>.</p>
+<p>(As an example, the figures in this procedure show <span id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__FAPROC">Oracle Fusion Procurement</span> information.)</p>
+<div class="infobox-note" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-5F8DE42A-2C6C-44F7-89BC-023F0AE9515B">
+<p class="notep1">Note:</p>
+<p>You cannot generate a new task form in <span>Oracle BPM Worklist</span>. That action is only possible in <span>Oracle JDeveloper</span>.</p>
+</div>
+<p>To view the tabs of the Human Task Editor in <span>Oracle BPM Worklist</span>:</p>
+<ol>
+<li>
+<p>In the <span class="bold">Administration</span> section, click the <span class="bold">Task Configuration</span> link, as shown in the following figure.</p>
+<div class="figure" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-E667D528-C552-4A0D-B201-4331EC51CAF8">
+<p class="titleinfigure">Figure 5-11 Task Configuration Link</p>
+<img width="481" height="46" src="img/GUID-56D598C4-7209-4D7D-A28C-FF8E4AC415C7-default.png" alt="Description of Figure 5-11 follows" title="Description of Figure 5-11 follows" /><br />
+<a href="img_text/GUID-56D598C4-7209-4D7D-A28C-FF8E4AC415C7-default.htm">Description of "Figure 5-11 Task Configuration Link"</a></div>
+<!-- class="figure" --></li>
+<li>
+<p>In the Navigator, click a task flow.</p>
+<p>The page is refreshed to show a set of tabs that are displayed vertically, as shown in the following figure. The data that you configured in the Human Task Editor in <span>Oracle JDeveloper</span> can also be viewed in <span>Oracle BPM Worklist</span>.</p>
+<div class="figure" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-7343787B-F617-4F7D-B82D-4E71A6B58369">
+<p class="titleinfigure">Figure 5-12 Tabs in <span>Oracle BPM Worklist</span></p>
+<img width="1004" height="517" src="img/GUID-D07A880A-A365-4E4F-A0C7-ACF99A80181F-default.png" alt="Description of Figure 5-12 follows" title="Description of Figure 5-12 follows" /><br />
+<a href="img_text/GUID-D07A880A-A365-4E4F-A0C7-ACF99A80181F-default.htm">Description of "Figure 5-12 Tabs in Oracle BPM Worklist "</a></div>
+<!-- class="figure" --></li>
+<li>
+<p>In the upper left corner, click the <span class="bold">Edit</span> icon, as shown in the following figure.</p>
+<div class="figure" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__CIHGIHJJ">
+<p class="titleinfigure">Figure 5-13 Edit Icon</p>
+<img width="309" height="128" src="img/GUID-DFAE00B2-15E8-462A-8DEB-059D0D12BB16-default.png" alt="Description of Figure 5-13 follows" title="Description of Figure 5-13 follows" /><br />
+<a href="img_text/GUID-DFAE00B2-15E8-462A-8DEB-059D0D12BB16-default.htm">Description of "Figure 5-13 Edit Icon"</a></div>
+<!-- class="figure" -->
+<p>By default, the <span class="bold">General</span> tab is displayed.</p>
+<div class="infobox-note" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-5C615666-BEB0-46CF-895C-99C8EBDD40F7">
+<p class="notep1">Note:</p>
+<p>The <span class="bold">Priority</span> and <span class="bold">Category</span> fields are not editable.</p>
+</div>
+<div class="figure" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-F325056C-4869-4CA0-AEDC-C691CCCC9087">
+<p class="titleinfigure">Figure 5-14 General Tab</p>
+<img width="428" height="471" src="img/GUID-D877CF55-98D5-432B-A1DE-232911EF7C04-default.png" alt="Description of Figure 5-14 follows" title="Description of Figure 5-14 follows" /><br />
+<a href="img_text/GUID-D877CF55-98D5-432B-A1DE-232911EF7C04-default.htm">Description of "Figure 5-14 General Tab"</a></div>
+<!-- class="figure" --></li>
+<li>
+<p>Click the <span class="bold">Assignees</span> tab to view the stages and participants in the task flow, as shown in the following figure.</p>
+<div class="figure" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-A0E06934-E7D2-4BFF-8F4A-7F5FABA4B3AF">
+<p class="titleinfigure">Figure 5-15 Assignees Tab</p>
+<img width="683" height="507" src="img/GUID-7BAA7003-91EB-41BB-A050-59E106EB5066-default.png" alt="Description of Figure 5-15 follows" title="Description of Figure 5-15 follows" /><br />
+<a href="img_text/GUID-7BAA7003-91EB-41BB-A050-59E106EB5066-default.htm">Description of "Figure 5-15 Assignees Tab"</a></div>
+<!-- class="figure" -->
+<p>For information about the fields of the <span class="bold">Assignees</span> tab, see the "<a class="olink SOASE87318" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE87318">Assigning Task Participants</a>" section of <span class="italic"><span id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</li>
+<li>
+<p>Click the <span class="bold">Data</span> tab, as shown in the following figure. You can view, but not customize, the task payload.</p>
+<div class="infobox-note" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-C3241129-4899-4FEF-B309-563307448FB8">
+<p class="notep1">Note:</p>
+<p>You cannot edit any fields of the <span class="bold">Data</span> tab.</p>
+</div>
+<div class="figure" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-BCBBBA7D-F35A-4067-BA30-B48A3A2AEB12">
+<p class="titleinfigure">Figure 5-16 Data Tab</p>
+<img width="656" height="463" src="img/GUID-1789DD40-6132-4322-AA6E-A30F5AE13AB8-default.png" alt="Description of Figure 5-16 follows" title="Description of Figure 5-16 follows" /><br />
+<a href="img_text/GUID-1789DD40-6132-4322-AA6E-A30F5AE13AB8-default.htm">Description of "Figure 5-16 Data Tab"</a></div>
+<!-- class="figure" -->
+<p>For information about the fields of the <span class="bold">Data</span> tab, see the "<a class="olink SOASE87316" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE87316">Specifying the Task Payload Data Structure</a>" section of <span class="italic"><span><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</li>
+<li>
+<p>Click the <span class="bold">Deadlines</span> tab to view information about task deadlines, as shown in the following figure. You can customize escalations by clicking the <span class="bold">Do</span> <span class="bold">Nothing</span>, <span class="bold">Escalate</span>, <span class="bold">Expire</span>, and <span class="bold">Renew</span> tabs to display configurable fields.</p>
+<div class="infobox-note" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-8192166D-6ECE-41D8-B51E-E658D2536A2E">
+<p class="notep1">Note:</p>
+<p>The <span class="bold">Custom Escalation Class</span> fields of the <span class="bold">Escalate</span>, <span class="bold">Expire</span>, and <span class="bold">Renew</span> tabs are not editable.</p>
+</div>
+<div class="figure" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-96EA1447-5D2C-400D-9003-0726618743C6">
+<p class="titleinfigure">Figure 5-17 Deadlines Tab</p>
+<img width="654" height="479" src="img/GUID-99040C51-F00B-41B4-B75C-D4E23822056E-default.png" alt="Description of Figure 5-17 follows" title="Description of Figure 5-17 follows" /><br />
+<a href="img_text/GUID-99040C51-F00B-41B4-B75C-D4E23822056E-default.htm">Description of "Figure 5-17 Deadlines Tab"</a></div>
+<!-- class="figure" -->
+<p>For information about the fields of the <span class="bold">Deadlines</span> tab, see the "<a class="olink SOASE87348" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE87348">Escalating, Renewing, or Ending the Task</a>" section of <span class="italic"><span><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</li>
+<li>
+<p>Click the <span class="bold">Notifications</span> tab, as shown in the following figure. Notifications indicate when a user or group is assigned a task or informed that the status of the task has changed.</p>
+<div class="infobox-note" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-95B4F716-7D5A-41C4-B7BF-51D7EB6D8A17">
+<p class="notep1">Note:</p>
+<p>The <span class="bold">Hide End User Web URL in notification</span> checkbox is not editable.</p>
+</div>
+<div class="figure" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-0E37BF92-496F-44D8-AF3B-CEE381DF1408">
+<p class="titleinfigure">Figure 5-18 Notifications Tab</p>
+<img width="725" height="469" src="img/GUID-AAF5C3A5-E789-4F32-8F92-C065189B94B6-default.png" alt="Description of Figure 5-18 follows" title="Description of Figure 5-18 follows" /><br />
+<a href="img_text/GUID-AAF5C3A5-E789-4F32-8F92-C065189B94B6-default.htm">Description of "Figure 5-18 Notifications Tab"</a></div>
+<!-- class="figure" -->
+<p>For information about the fields of the <span class="bold">Notifications</span> tab, see the "<a class="olink SOASE87356" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE87356">Specifying Participant Notification Preferences</a>" section of <span class="italic"><span><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</li>
+<li>
+<p>Click the <span class="bold">Access</span> tab for customizing access rules that determine the parts of a task that participants can view and customize, as shown in the following figure.</p>
+<div class="infobox-note" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-20CA481E-1BE0-45C1-80B0-ADBECFB852E7">
+<p class="notep1">Note:</p>
+<p>The <span class="bold">Signature Policy</span> field is not editable.</p>
+</div>
+<div class="figure" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-BCDC75B2-558D-40DA-BFA3-CCAA81A81E70">
+<p class="titleinfigure">Figure 5-19 Access Tab</p>
+<img width="714" height="527" src="img/GUID-B4D36BB5-82C5-4B2E-AF91-2DE5994D30D6-default.png" alt="Description of Figure 5-19 follows" title="Description of Figure 5-19 follows" /><br />
+<a href="img_text/GUID-B4D36BB5-82C5-4B2E-AF91-2DE5994D30D6-default.htm">Description of "Figure 5-19 Access Tab"</a></div>
+<!-- class="figure" -->
+<p>For information about the fields of the <span class="bold">Access</span> tab, see the "<a class="olink SOASE87370" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE87370">Specifying User Privileges for Acting on Task Content</a>" section of <span class="italic"><span><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</li>
+<li>
+<p>Click the <span class="bold">Configuration</span> tab, as shown in the following figure.</p>
+<div class="infobox-note" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-85A1ADD8-1337-4CC0-9B24-CB1F7A8CF553">
+<p class="notep1">Note:</p>
+<p>The <span class="bold">Task Aggregation</span> field is editable.</p>
+</div>
+<div class="figure" id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__GUID-CC0824D8-69FF-46EC-8CFE-D297CD8BDE2F">
+<p class="titleinfigure">Figure 5-20 Configuration Tab</p>
+<img width="719" height="489" src="img/GUID-52DAAB9B-3383-45B4-A88A-8DE97C1C75CB-default.png" alt="Description of Figure 5-20 follows" title="Description of Figure 5-20 follows" /><br />
+<a href="img_text/GUID-52DAAB9B-3383-45B4-A88A-8DE97C1C75CB-default.htm">Description of "Figure 5-20 Configuration Tab"</a></div>
+<!-- class="figure" --></li>
+<li>
+<p>When you have completed all customizations, click <span class="bold">Commit</span> to save your changes in <span id="GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__METAREPSHORT">MDS Repository</span>.</p>
+</li>
+</ol>
+</div>
+</div>
+<a id="OADTC1701"></a><a id="OADTC1695"></a>
+<div class="sect3"><a id="GUID-C2040378-C893-465B-8BB1-D387DD4A0658"></a>
+<h3 id="OADTC-GUID-C2040378-C893-465B-8BB1-D387DD4A0658" class="sect3"><span class="enumeration_section">5.2.9</span> Viewing Stage and Participant Properties</h3>
+<div>
+<p>You can view stage and participant properties at the bottom of the task flow diagram of the <span class="bold">Assignees</span> tab. The properties available are the same as those displayed in the Human Task Editor in <span id="GUID-C2040378-C893-465B-8BB1-D387DD4A0658__JDEV">Oracle JDeveloper</span>.</p>
+<div class="infobox-note" id="GUID-C2040378-C893-465B-8BB1-D387DD4A0658__GUID-15A636C4-E4DC-4577-8C27-BE6E92F2BEDF">
+<p class="notep1">Note:</p>
+<p>You can modify the <span class="bold">Ignore Participants</span> checkbox and navigate to the Rules Editor.</p>
+</div>
+<p>To view stage and participant properties:</p>
+<ol>
+<li>
+<p>In the Navigator, click a task flow.</p>
+<p>The page is refreshed to display the tabs available for editing.</p>
+</li>
+<li>
+<p>In the upper left corner, click the <span class="bold">Edit</span> icon, as shown in <a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-C0C09E63-855F-4ACC-84E4-BB6B140F02D4__CIHGIHJJ">Figure 5-13</a>.</p>
+</li>
+<li>
+<p>Click the <span class="bold">Assignees</span> tab.</p>
+<p>The diagram of the stages and participants included in the task flow is displayed horizontally.</p>
+</li>
+<li>
+<p>Select the participant type, as shown in the following figure (for this example, a parallel participant type is selected).</p>
+<div class="figure" id="GUID-C2040378-C893-465B-8BB1-D387DD4A0658__GUID-ECC43D02-4BE9-4725-B0B3-7B5473D61186">
+<p class="titleinfigure">Figure 5-21 Parallel Participant Type Selected</p>
+<img width="442" height="253" src="img/GUID-8288D8EB-9276-4E5F-AAAC-EB69159FE9D2-default.png" alt="Description of Figure 5-21 follows" title="Description of Figure 5-21 follows" /><br />
+<a href="img_text/GUID-8288D8EB-9276-4E5F-AAAC-EB69159FE9D2-default.htm">Description of "Figure 5-21 Parallel Participant Type Selected"</a></div>
+<!-- class="figure" -->
+<p>Tabs with configuration properties for the selected participant type are displayed at the bottom of the diagram. The <span class="bold">Basic</span> tab is displayed by default. The properties are the same as in the Human Task Editor in <span>Oracle JDeveloper</span>.</p>
+</li>
+<li>
+<p>Select the tabs of additional participants. For this example, <span class="bold">Voting</span> is selected, as shown in the following figure.</p>
+<div class="figure" id="GUID-C2040378-C893-465B-8BB1-D387DD4A0658__GUID-6CBC5A48-C376-4ADA-BE62-90F70261D015">
+<p class="titleinfigure">Figure 5-22 Voting Tab Selected at the Bottom of the Diagram</p>
+<img width="697" height="552" src="img/GUID-EA27B425-9918-4E2A-BD28-CFA67FB21123-default.png" alt="Description of Figure 5-22 follows" title="Description of Figure 5-22 follows" /><br />
+<a href="img_text/GUID-EA27B425-9918-4E2A-BD28-CFA67FB21123-default.htm">Description of "Figure 5-22 Voting Tab Selected at the Bottom of the Diagram"</a></div>
+<!-- class="figure" --></li>
+<li>
+<p>When you have completed all customizations, click <span class="bold">Commit</span> to save your changes in <span id="GUID-C2040378-C893-465B-8BB1-D387DD4A0658__METAREPSHORT">MDS Repository</span>.</p>
+</li>
+</ol>
+<div class="infobox-note" id="GUID-C2040378-C893-465B-8BB1-D387DD4A0658__GUID-C851A22F-7199-4695-B882-27F3DF612E98">
+<p class="notep1">Note:</p>
+<p>The <span class="bold">Ignore</span> <span class="bold">Participant</span> checkbox that previously appeared in the task flow diagram is now available under the <span class="bold">Advanced</span> tab.</p>
+</div>
+</div>
+</div>
+</div>
+<a id="OADTC1007"></a><a id="OADTC831"></a>
+<div class="sect2"><a id="GUID-3784E391-5A1D-4C6F-9B32-973DA4011C9A"></a>
+<h2 id="OADTC-GUID-3784E391-5A1D-4C6F-9B32-973DA4011C9A" class="sect2"><span class="enumeration_section">5.3</span> About Merging Runtime Customizations from a Previously Deployed Revision into a New Revision</h2>
+<div>
+<p>After using a SOA composite application customized at runtime for a while, a new patch revision of the SOA composite application may become available. Repeating the process of customizing the new revision of the SOA composite application at runtime can be cumbersome and time-consuming. To avoid these challenges, use OPatch. OPatch is an Oracle-supplied, Java-based utility that enables you to merge customizations made during runtime in a previously deployed SOA composite application into a new patch revision of the SOA composite application. OPatch preserves your runtime customizations and prevents you from having to reenter the customizations again for the next patch revision.</p>
+<p>OPatch merges a new patch revision into a SOA composite application that was previously customized during design time in <span id="GUID-3784E391-5A1D-4C6F-9B32-973DA4011C9A__JDEVSHORT">JDeveloper</span> and runtime in <span id="GUID-3784E391-5A1D-4C6F-9B32-973DA4011C9A__SOACOMP">Oracle SOA Composer</span>, <span id="GUID-3784E391-5A1D-4C6F-9B32-973DA4011C9A__BPEL_WORKLIST">Oracle BPM Worklist</span>, or <span id="GUID-3784E391-5A1D-4C6F-9B32-973DA4011C9A__FAOEMFRAMESHORT">Fusion Applications Control</span>. For specific procedures on patching SOA composite applications with OPatch, see the "<a class="olink OAPAT645" target="_blank" href="../OAPAT/GUID-EB1763ED-50E3-4489-835E-3290A33836FA.htm#OAPAT645">Patching Service-Oriented Architecture (SOA) Composites</a>" section in the <span class="italic"><span id="GUID-3784E391-5A1D-4C6F-9B32-973DA4011C9A__OAPAT"><cite>Patching Guide</cite></span></span>.</p>
+<p>Before using OPatch to merge runtime customizations from a previously deployed revision into a new revision, review the recommendations in the following table to ensure that you merge customizations successfully.</p>
+<div class="tblformal" id="GUID-3784E391-5A1D-4C6F-9B32-973DA4011C9A__GUID-80FA47AA-D70E-4154-B642-2FD4156A91A4">
+<p class="titleintable">Table 5-5 Recommendations on Merging Patch Revision Customizations and Extensions</p>
+<table class="cellalignment450" title="Recommendations on Merging Patch Revision Customizations and Extensions" summary="Provides recommendations on merging patch revision changes">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment492" id="d22147e2054">Component</th>
+<th class="cellalignment493" id="d22147e2057">Recommendation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d22147e2062" headers="d22147e2054">
+<p>Deletion of base components</p>
+</td>
+<td class="cellalignment495" headers="d22147e2062 d22147e2057">
+<p>Delete only components that you added as part of the customization, and not components that are part of the base revision. This is because the deletion of base components does not survive the move to the new revision, but the deletion of the wiring does. If you delete an existing base component, it comes back again when you get the new revision, which still has the component. However, the wire deletion survives the upgrade because the <code>composite.xml</code> file is customizable.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d22147e2072" headers="d22147e2054">
+<p>Business rules</p>
+</td>
+<td class="cellalignment495" headers="d22147e2072 d22147e2057">
+<p>If business rules are customized at runtime, and those runtime customizations must be preserved in subsequent revisions of the base version of the SOA composite application, it is recommended that the rules dictionaries be split into two dictionaries and linked using the dictionary linking functionality.</p>
+<p>The base rule, linked dictionary contains the data model of the dictionary and the custom rules dictionary contains all the rules customized at runtime. The OPatch process preserves the customized dictionary when it merges the customized application with subsequent versions of the application. Business rules are used in different scenarios and the following information identifies how to handle each situation:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Approval configuration and assignment rules</p>
+<p>These rules are used within human tasks to identify approvers and the routing of human tasks. Approval rules are always generated as base and custom dictionaries at design time. No further configuration is necessary at design time. Runtime customizations:</p>
+<p>If you must customize approval configuration and assignment rules during runtime, use only <span>Oracle BPM Worklist</span> to perform this task. Using <span>Oracle BPM Worklist</span> enables:</p>
+<p>-) Approval assignment and configuration rules to automatically be stored in a custom rules dictionary (<code>Rule.rules</code>). The custom rules dictionary is initially shipped with only sample, pre-seeded rules. The custom rules dictionary is separate from the base rule, linked dictionary (<code>RuleBase.rules</code>). The base rule, linked dictionary contains <span id="GUID-3784E391-5A1D-4C6F-9B32-973DA4011C9A__FA">Oracle Fusion Applications</span> fact definitions. Revision patches are applied to the base rule, linked dictionary.</p>
+<p>-) Changes in subsequent revision patches to be applied successfully to the base rule, linked dictionary.</p>
+<p>If you use <span>Oracle SOA Composer</span> to customize approval configuration and assignment rules during runtime, changes in subsequent revision patches are <span class="italic">not</span> applied successfully.</p>
+<p>Design time customizations:</p>
+<p>You cannot customize existing rules that are part of the base version of the SOA composite application at design time in <span>JDeveloper</span>. However, you can extend new rules that you later customize.</p>
+</li>
+<li>
+<p>Nonapproval business rules</p>
+<p>These rules are used directly in processes like BPEL and BPMN outside of the context of a human task. These dictionaries are not generated as linked dictionaries in <span>JDeveloper</span> and must be manually split as linked dictionaries.</p>
+<p>Runtime customizations:</p>
+<p>If the dictionaries are split as linked dictionaries, ensure that only the linked dictionaries are customized from <span>Oracle SOA Composer</span>. Identification of the base rule and linked rule dictionary is up to you to develop.</p>
+<p>Design time customizations:</p>
+<p>You cannot customize existing rules that are part of the base version of the SOA composite application at design time in <span>JDeveloper</span>. However, you can extend new rules that you later customize.</p>
+</li>
+</ul>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d22147e2145" headers="d22147e2054">
+<p>Default uniform resource locators (URLs) for service binding components</p>
+</td>
+<td class="cellalignment495" headers="d22147e2145 d22147e2057">
+<p>Use default URLs for service binding components. If the revision is used in the URL for service binding components, when the SOA composite application is patched using OPatch, the revision of the SOA composite application is customized. In this case, the reference to URLs for service binding components fails to work. In this scenario, you must manually update all the URL references for service binding components.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d22147e2152" headers="d22147e2054">
+<p><span id="GUID-3784E391-5A1D-4C6F-9B32-973DA4011C9A__BPEL">Oracle BPEL Process Manager</span> scope activity</p>
+</td>
+<td class="cellalignment495" headers="d22147e2152 d22147e2057">
+<p>If a base SOA composite application team removes the scope activity in the next revision of the SOA composite application, when a vertical SOA composite application team or customer runs OPatch to apply the new revision of the SOA composite application to their customized version, all customizations they performed on that scope activity in the first revision are lost.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d22147e2161" headers="d22147e2054">
+<p>Renaming of a SOA composite application whose SOA archive (SAR) file is imported in <span>JDeveloper</span></p>
+</td>
+<td class="cellalignment495" headers="d22147e2161 d22147e2057">
+<p>When importing a SAR file for customization in <span>JDeveloper</span>, the SOA composite application must <span class="italic">not</span> be renamed. In addition, if you rename a SOA composite application, OPatch cannot detect runtime customizations made in <span>Oracle SOA Composer</span>, <span>Oracle BPM Worklist</span>, and <span>Fusion Applications Control</span>. You must manually re-apply those customizations.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment494" id="d22147e2185" headers="d22147e2054">
+<p>Base revision of a SOA composite application with <span>JDeveloper</span> customizations</p>
+</td>
+<td class="cellalignment495" headers="d22147e2185 d22147e2057">
+<p>Assume you customize the base revision of a SOA composite application with the Customization Developer role in <span>JDeveloper</span>, and then deploy the SOA composite application. When the base revision is updated and a newer revision is made available, the customer uses OPatch to apply the patch revision. OPatch may then fail because there are <span>JDeveloper</span> customizations in the deployed SOA composite application.</p>
+<p>To resolve this issue, perform the following steps:</p>
+<ol>
+<li>
+<p>Open the customized SOA composite application with the <span class="bold">Default Role</span> in <span>JDeveloper</span>.</p>
+</li>
+<li>
+<p>Import the patched base version 2 SAR file into this SOA composite application project extended in <a href="GUID-BD1AACE2-8148-4EB8-BD0B-9EEB1D6B4A46.htm#GUID-9F681276-FB06-40EE-8EC9-2CDBF87A2D6E">About Customizing SOA Composite Applications with</a> .</p>
+</li>
+<li>
+<p>Restart <span>JDeveloper</span> with the <span class="bold">Customization Developer</span> role.</p>
+</li>
+<li>
+<p>Open the preceding customized SOA composite application. Error messages are shown in case of conflicts.</p>
+</li>
+<li>
+<p>Resolve the conflicts in the SOA composite application.</p>
+</li>
+<li>
+<p>Deploy the SOA composite application to the SAR file. The new SAR file should be replaced by the patched base version 2 SAR file.</p>
+</li>
+<li>
+<p>Proceed with the OPatch process.</p>
+</li>
+</ol>
+<p><span class="bold">Note:</span> Ensure that the backup of the SAR files is taken properly.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<div class="infobox-note" id="GUID-3784E391-5A1D-4C6F-9B32-973DA4011C9A__GUID-120FB2AA-7A12-467B-9BA0-6075ED1B4FF4">
+<p class="notep1">Note:</p>
+<p>If a task rule in a SOA composite application with a human task and rule-based participants is customized at runtime and a new rule action is added in revision 2 for the same task rule, the new rule action is not merged into the runtime changes in the SOA composite application. The patched composite includes only the runtime changes for the task rule, and not the rule action changes.</p>
+<p>This is the expected behavior. Both the customization change at runtime and the version 2 rule action change in <span id="GUID-3784E391-5A1D-4C6F-9B32-973DA4011C9A__JDEV">Oracle JDeveloper</span> are modifying the linked dictionary. In that case, the customization change at runtime take precedence. Artifacts are not merged into the dictionary.</p>
+</div>
+</div>
+</div>
+<a id="OADTC1063"></a><a id="OADTC1064"></a><a id="OADTC419"></a>
+<div class="sect2"><a id="GUID-18086128-4304-4388-BE2B-B59EB22299FC"></a>
+<h2 id="OADTC-GUID-18086128-4304-4388-BE2B-B59EB22299FC" class="sect2"><span class="enumeration_section">5.4</span> About Extending or Customizing Custom SOA Composite Applications</h2>
+<div>
+<p>You can customize or extend some SOA components during design time in <span id="GUID-18086128-4304-4388-BE2B-B59EB22299FC__JDEVSHORT">JDeveloper</span> when logged in with the Customization Developer role. Components that are extended in <span>JDeveloper</span> can be further customized in <span>JDeveloper</span> when again logged in with the Customization Developer role. Customization changes are maintained in separate <code>.xml</code> files from the base component files. Note that you cannot make customizations in Source view in <span>JDeveloper</span>; only customizations made in Design view are supported.</p>
+<div class="infobox-note" id="GUID-18086128-4304-4388-BE2B-B59EB22299FC__GUID-D2688894-6024-4168-9E5A-35CA893587EC">
+<p class="notep1">Note:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>A new SOA artifact (SAR file) extended in the SOA composite application survives patching.</p>
+</li>
+<li>
+<p>Ensure that you provide unique names for any new components and SOA artifacts that you extend. For example, add a prefix to each component and SOA artifact name that is a unique identifier.</p>
+</li>
+</ul>
+</div>
+<p>The following table describes which existing base SOA artifacts in a SOA composite application can be customized and which new SOA artifacts can be extended when logged in to <span>JDeveloper</span> with the Customization Developer role.</p>
+<div class="tblformal" id="GUID-18086128-4304-4388-BE2B-B59EB22299FC__GUID-F375BCAF-3FB0-47D6-B94A-AB1B5210CF3E">
+<p class="titleintable">Table 5-6 Customizable and Extendable SOA Artifacts in Customization Developer Role</p>
+<table class="cellalignment450" title="Customizable and Extendable SOA Artifacts in Customization Developer Role" summary="Identifies which SOA artifacts are customizable or extendable with the Customization Developer role">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment488" id="d22147e2314">SOA Artifacts</th>
+<th class="cellalignment496" id="d22147e2317">Existing Artifact in Base SOA Composite Application Is Customizable with Customization Developer Role?</th>
+<th class="cellalignment497" id="d22147e2320">SOA Artifact Is Extendable with Customization Developer Role?</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment490" id="d22147e2325" headers="d22147e2314">
+<p>SOA composite application components</p>
+</td>
+<td class="cellalignment498" headers="d22147e2325 d22147e2317">
+<p>Yes</p>
+</td>
+<td class="cellalignment499" headers="d22147e2325 d22147e2320">
+<p>Yes</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment490" id="d22147e2335" headers="d22147e2314">
+<p>BPEL process</p>
+</td>
+<td class="cellalignment498" headers="d22147e2335 d22147e2317">
+<p>Yes</p>
+</td>
+<td class="cellalignment499" headers="d22147e2335 d22147e2320">
+<p>Yes</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment490" id="d22147e2345" headers="d22147e2314">
+<p><span id="GUID-18086128-4304-4388-BE2B-B59EB22299FC__MEDIATOR">Oracle Mediator</span></p>
+</td>
+<td class="cellalignment498" headers="d22147e2345 d22147e2317">
+<p>Yes</p>
+</td>
+<td class="cellalignment499" headers="d22147e2345 d22147e2320">
+<p>Yes</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment490" id="d22147e2356" headers="d22147e2314">
+<p>Human task</p>
+</td>
+<td class="cellalignment498" headers="d22147e2356 d22147e2317">
+<p>No</p>
+</td>
+<td class="cellalignment499" headers="d22147e2356 d22147e2320">
+<p>Yes</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment490" id="d22147e2366" headers="d22147e2314">
+<p>Business rule</p>
+</td>
+<td class="cellalignment498" headers="d22147e2366 d22147e2317">
+<p>No</p>
+</td>
+<td class="cellalignment499" headers="d22147e2366 d22147e2320">
+<p>Yes</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment490" id="d22147e2376" headers="d22147e2314">
+<p>Extensible style sheet language transformations (XSLT) map</p>
+</td>
+<td class="cellalignment498" headers="d22147e2376 d22147e2317">
+<p>No</p>
+</td>
+<td class="cellalignment499" headers="d22147e2376 d22147e2320">
+<p>Yes</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment490" id="d22147e2386" headers="d22147e2314">
+<p>Cross references (XREFs)</p>
+</td>
+<td class="cellalignment498" headers="d22147e2386 d22147e2317">
+<p>No</p>
+</td>
+<td class="cellalignment499" headers="d22147e2386 d22147e2320">
+<p>No</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment490" id="d22147e2396" headers="d22147e2314">
+<p>Domain value maps</p>
+</td>
+<td class="cellalignment498" headers="d22147e2396 d22147e2317">
+<p>No</p>
+</td>
+<td class="cellalignment499" headers="d22147e2396 d22147e2320">
+<p>No</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment490" id="d22147e2406" headers="d22147e2314">
+<p>XSD</p>
+</td>
+<td class="cellalignment498" headers="d22147e2406 d22147e2317">
+<p>No</p>
+</td>
+<td class="cellalignment499" headers="d22147e2406 d22147e2320">
+<p>Yes</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment490" id="d22147e2416" headers="d22147e2314">
+<p>WSDL</p>
+</td>
+<td class="cellalignment498" headers="d22147e2416 d22147e2317">
+<p>No</p>
+</td>
+<td class="cellalignment499" headers="d22147e2416 d22147e2320">
+<p>Yes</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment490" id="d22147e2426" headers="d22147e2314">
+<p>Business events</p>
+</td>
+<td class="cellalignment498" headers="d22147e2426 d22147e2317">
+<p>No</p>
+</td>
+<td class="cellalignment499" headers="d22147e2426 d22147e2320">
+<p>Yes</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment490" id="d22147e2437" headers="d22147e2314">
+<p>JCA Adapters</p>
+</td>
+<td class="cellalignment498" headers="d22147e2437 d22147e2317">
+<p>No</p>
+</td>
+<td class="cellalignment499" headers="d22147e2437 d22147e2320">
+<p>Yes</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>The following table provides more specific details about which SOA artifacts can be extended when logged in to <span>JDeveloper</span> with the Customization Developer role.</p>
+<div class="tblformal" id="GUID-18086128-4304-4388-BE2B-B59EB22299FC__GUID-1E8474F6-60EE-4C9B-ADDC-117F4F1A9949">
+<p class="titleintable">Table 5-7 SOA Artifact Extensibility in <span>JDeveloper</span> with Customization Developer Role</p>
+<table class="cellalignment450" title="SOA Artifact Extensibility in JDeveloper with Customization Developer Role" summary="SOA artifacts that can be extended with the Customization Developer role">
+<thead>
+<tr class="cellalignment440">
+<th class="cellalignment477" id="d22147e2465">SOA Artifact</th>
+<th class="cellalignment500" id="d22147e2468">Extendable?</th>
+<th class="cellalignment501" id="d22147e2471">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e2476" headers="d22147e2465">
+<p>SOA composite application</p>
+</td>
+<td class="cellalignment502" headers="d22147e2476 d22147e2468">
+<p>No</p>
+</td>
+<td class="cellalignment503" headers="d22147e2476 d22147e2471">
+<p>Only one SOA composite application per <span id="GUID-18086128-4304-4388-BE2B-B59EB22299FC__SOA">Oracle SOA Suite</span> project is permitted.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e2489" headers="d22147e2465">
+<p>BPEL process</p>
+</td>
+<td class="cellalignment502" headers="d22147e2489 d22147e2468">
+<p>Yes</p>
+</td>
+<td class="cellalignment503" headers="d22147e2489 d22147e2471">
+<p>Can drag a BPEL process from the Component Palette into SOA Composite Editor or Oracle BPEL Designer.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e2499" headers="d22147e2465">
+<p><span>Oracle Mediator</span></p>
+</td>
+<td class="cellalignment502" headers="d22147e2499 d22147e2468">
+<p>Yes</p>
+</td>
+<td class="cellalignment503" headers="d22147e2499 d22147e2471">
+<p>Can drag an <span>Oracle Mediator</span> from the Component Palette into SOA Composite Editor or Oracle BPEL Designer.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e2513" headers="d22147e2465">
+<p>Human task</p>
+</td>
+<td class="cellalignment502" headers="d22147e2513 d22147e2468">
+<p>Yes</p>
+</td>
+<td class="cellalignment503" headers="d22147e2513 d22147e2471">
+<p>Can drag a human task from the Component Palette into SOA Composite Editor or Oracle BPEL Designer.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e2523" headers="d22147e2465">
+<p>Business rule</p>
+</td>
+<td class="cellalignment502" headers="d22147e2523 d22147e2468">
+<p>Yes</p>
+</td>
+<td class="cellalignment503" headers="d22147e2523 d22147e2471">
+<p>Can drag a business rule from the Component Palette into SOA Composite Editor or Oracle BPEL Designer.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e2533" headers="d22147e2465">
+<p>XSLT map</p>
+</td>
+<td class="cellalignment502" headers="d22147e2533 d22147e2468">
+<p>Yes</p>
+</td>
+<td class="cellalignment503" headers="d22147e2533 d22147e2471">
+<p>Can extend a transformation in a transform activity in Oracle BPEL Designer or Mediator Editor.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e2543" headers="d22147e2465">
+<p>Domain value maps</p>
+</td>
+<td class="cellalignment502" headers="d22147e2543 d22147e2468">
+<p>No</p>
+</td>
+<td class="cellalignment503" headers="d22147e2543 d22147e2471">
+<p>The New Gallery dialog is disabled with the Customization Developer role.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e2553" headers="d22147e2465">
+<p>XREFs</p>
+</td>
+<td class="cellalignment502" headers="d22147e2553 d22147e2468">
+<p>No</p>
+</td>
+<td class="cellalignment503" headers="d22147e2553 d22147e2471">
+<p>The New Gallery dialog is disabled with the Customization Developer role.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e2563" headers="d22147e2465">
+<p>XSD</p>
+</td>
+<td class="cellalignment502" headers="d22147e2563 d22147e2468">
+<p>Yes</p>
+</td>
+<td class="cellalignment503" headers="d22147e2563 d22147e2471">
+<p>Right-click an <span>Oracle SOA Suite</span> project and select <span class="bold">SOA</span>, or as the result of extending other SOA artifacts.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e2579" headers="d22147e2465">
+<p>WSDL</p>
+</td>
+<td class="cellalignment502" headers="d22147e2579 d22147e2468">
+<p>Yes</p>
+</td>
+<td class="cellalignment503" headers="d22147e2579 d22147e2471">
+<p>Right-click an <span>Oracle SOA Suite</span> project and select <span class="bold">SOA</span>, or as the result of extending other SOA artifacts.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e2595" headers="d22147e2465">
+<p>Business events</p>
+</td>
+<td class="cellalignment502" headers="d22147e2595 d22147e2468">
+<p>Yes</p>
+</td>
+<td class="cellalignment503" headers="d22147e2595 d22147e2471">
+<p>Subscribe to or publish events for a BPEL process or <span>Oracle Mediator</span> component in SOA Composite Editor, Oracle BPEL Designer, or Mediator Editor.</p>
+</td>
+</tr>
+<tr class="cellalignment440">
+<td class="cellalignment480" id="d22147e2609" headers="d22147e2465">
+<p>JCA adapters</p>
+</td>
+<td class="cellalignment502" headers="d22147e2609 d22147e2468">
+<p>Yes</p>
+</td>
+<td class="cellalignment503" headers="d22147e2609 d22147e2471">
+<p>Drag adapters from the Component Palette into SOA Composite Editor or Oracle BPEL Designer.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+<div class="sect3"><a id="GUID-6F51B150-885D-4BE9-92B3-033994D0C5D6"></a>
+<h3 id="OADTC-GUID-6F51B150-885D-4BE9-92B3-033994D0C5D6" class="sect3"><span class="enumeration_section">5.4.1</span> Customizing a Base SOA Composite Application in <span id="JDEVSHORT">JDeveloper</span></h3>
+<div>
+<p>You can customize a base SOA composite application of <span id="GUID-6F51B150-885D-4BE9-92B3-033994D0C5D6__FA">Oracle Fusion Applications</span> in <span id="GUID-6F51B150-885D-4BE9-92B3-033994D0C5D6__JDEVSHORT">JDeveloper</span>. These steps provide an overview of SOA composite application customization and assume that you know the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>How to set up the customization layer through the <code>adf-config.xml</code> editor</p>
+</li>
+<li>
+<p>The customization classes defined by <span>Oracle Fusion Applications</span></p>
+</li>
+</ul>
+<p>For more information, see the "<a class="olink SOASE85062" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE85062">Customizing SOA Composite Applications</a>" chapter in the <span class="italic"><span id="GUID-6F51B150-885D-4BE9-92B3-033994D0C5D6__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+<div class="infobox-note" id="GUID-6F51B150-885D-4BE9-92B3-033994D0C5D6__GUID-03AA3395-8A58-45EA-B981-81EC6FEB1067">
+<p class="notep1">Note:</p>
+<p>See <a href="GUID-BD1AACE2-8148-4EB8-BD0B-9EEB1D6B4A46.htm#GUID-3A170086-9A8C-4A9C-A3C3-5ECFF377201A">Setting Up the SOA Shared Repository in</a> for instructions on setting up the <span>JDeveloper</span> workspace (JWS) and SOA composite application project when customizing <span>Oracle Fusion Applications</span> SOA composite applications.</p>
+</div>
+<p>After installing <span>Oracle Fusion Applications</span> with a SOA composite application that you want to customize in <span>JDeveloper</span>, do the following:</p>
+<ol>
+<li>
+<p>In <span id="GUID-6F51B150-885D-4BE9-92B3-033994D0C5D6__FAOEMFRAMESHORT">Fusion Applications Control</span>, go to the home page of the SOA composite application to export.</p>
+<p>From the <span class="bold">SOA Composite</span> menu at the top of the page, select <span class="bold">Export</span>.</p>
+</li>
+<li>
+<p>Obtain the base SAR file for initially customizing from other locations, including:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Checking out the base SOA composite application project from the source control system where the base SOA composite application project was checked in by the base development team. This way, no SAR file deployment, export command, or import command is involved.</p>
+</li>
+<li>
+<p>Importing the base SOA composite application SAR file that was deployed from the base SOA composite application project.</p>
+</li>
+<li>
+<p>Importing the base SOA composite application SAR file that was exported (without runtime changes) from the Export Composite page of the <span>Fusion Applications Control</span> installation from which the SOA server is managed.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Extend layer values for customization to the <code>CustomizationLayerValues.xml</code> file (can perform this task in <span>JDeveloper</span> or from the directory structure).</p>
+</li>
+<li>
+<p>Start <span>JDeveloper</span> in the <span class="bold">Default Role</span>.</p>
+</li>
+<li>
+<p>Extend a new SOA composite application.</p>
+</li>
+<li>
+<p>From the <span class="bold">File</span> main menu, choose <span class="bold">Import</span>, then <span class="bold">SOA Archive</span> <span class="bold">Into SOA Project</span> to import the exported SAR file into the new SOA composite application in <span>JDeveloper</span>.</p>
+</li>
+<li>
+<p>In the Import Composite Archive wizard, select the <span class="bold">Import For Customization</span> checkbox.</p>
+</li>
+<li>
+<p>From the <span class="bold">Tools</span> main menu, choose <span class="bold">Preferences</span>, then <span class="bold">Roles</span>, and then <span class="bold">Customization</span> <span class="bold">Developer</span>.</p>
+</li>
+<li>
+<p>Restart <span>JDeveloper</span>, and customize the layers of the SOA composite application.</p>
+</li>
+<li>
+<p>Right-click the project and choose <span class="bold">Deploy</span> to extend a customized SAR file of the SOA composite application in <span>Oracle Fusion Applications</span>.</p>
+</li>
+</ol>
+<div class="infobox-note" id="GUID-6F51B150-885D-4BE9-92B3-033994D0C5D6__GUID-9C864C47-BC63-4A25-877D-766DAA9382F5">
+<p class="notep1">Note:</p>
+<p>After performing the initial customizations described in these procedures, you can no longer export the SOA composite application from the runtime. This is because the SOA composite application is a merged SOA composite application, and no longer the original base SOA composite application.</p>
+</div>
+<p>For more information about exporting SAR files, see the "<a class="olink SOAAG37210" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOAAG37210">Exporting a Deployed SOA Composite Application</a>" section in the <span class="italic"><span id="GUID-6F51B150-885D-4BE9-92B3-033994D0C5D6__SOAAG"><cite>Administering Oracle SOA Suite and Oracle Business Process Management Suite</cite></span></span>.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-17B3C228-B0CB-406B-BE14-AF2C401A15FF"></a>
+<h3 id="OADTC-GUID-17B3C228-B0CB-406B-BE14-AF2C401A15FF" class="sect3"><span class="enumeration_section">5.4.2</span> About Extending or Customizing Custom Business Rules</h3>
+<div>
+<p>You can extend business rules in a SOA composite application during design time in <span id="GUID-17B3C228-B0CB-406B-BE14-AF2C401A15FF__JDEVSHORT">JDeveloper</span> when logged in with the Customization Developer role. After extending these business rules, you can further customize them in <span>JDeveloper</span> when again logged in with the Customization Developer role. You cannot customize existing business rules that are part of the base version of the SOA composite application.</p>
+<p>For information about customizing business rules during runtime, see <a href="GUID-B243DEA1-B67C-4A42-BB46-419C3EBB955A.htm#GUID-B30D1303-5DC8-4117-A2BB-166C12014D45">About Customizing SOA Composite Applications</a>.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-6037819F-BD36-49E8-995C-823F0ED3B67A"></a>
+<h3 id="OADTC-GUID-6037819F-BD36-49E8-995C-823F0ED3B67A" class="sect3"><span class="enumeration_section">5.4.3</span> About Extending or Customizing Custom BPEL Processes</h3>
+<div>
+<p>You can extend or customize BPEL processes in a SOA composite application during design time in <span id="GUID-6037819F-BD36-49E8-995C-823F0ED3B67A__JDEVSHORT">JDeveloper</span> when logged in with the Customization Developer role. For example, you can perform the following tasks:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Extend or delete a new scope or other activity</p>
+</li>
+<li>
+<p>Customize an activity</p>
+</li>
+<li>
+<p>Extend a partner link</p>
+</li>
+<li>
+<p>Extend a transformation</p>
+</li>
+</ul>
+<p>For more information about extending or customizing BPEL processes, see the "<a class="olink SOASE9674" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE9674">Using the BPEL Process Service Component</a>" part in the <span class="italic"><span id="GUID-6037819F-BD36-49E8-995C-823F0ED3B67A__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-1C82F6DC-2601-49A2-A4AA-2D12ED02BE61"></a>
+<h3 id="OADTC-GUID-1C82F6DC-2601-49A2-A4AA-2D12ED02BE61" class="sect3"><span class="enumeration_section">5.4.4</span> About Extending or Customizing Custom Human Tasks</h3>
+<div>
+<p>You can extend human tasks in a SOA composite application during design time in <span id="GUID-1C82F6DC-2601-49A2-A4AA-2D12ED02BE61__JDEVSHORT">JDeveloper</span> when logged in with the Customization Developer role. After extending these human tasks, you can further customize them in <span>JDeveloper</span> when again logged in with the Customization Developer role. You cannot customize existing human tasks that are part of the base version of the SOA composite application.</p>
+<p>For more information about extending human tasks, see the "<a class="olink SOASE10080" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE10080">Using the Human Workflow Service Component</a>" part in the <span class="italic"><span id="GUID-1C82F6DC-2601-49A2-A4AA-2D12ED02BE61__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-C52D740D-A5FF-46ED-9F79-4D644FF2A8F1"></a>
+<h3 id="OADTC-GUID-C52D740D-A5FF-46ED-9F79-4D644FF2A8F1" class="sect3"><span class="enumeration_section">5.4.5</span> About Extending Business Events</h3>
+<div>
+<p>You cannot directly extend business events in <span id="GUID-C52D740D-A5FF-46ED-9F79-4D644FF2A8F1__JDEVSHORT">JDeveloper</span> when logged in with the Customization Developer role. The New Gallery dialog that is displayed when you select <span class="bold">New</span> from the <span class="bold">File</span> main menu is disabled with the Customization Developer role. However, you can create business events as part of other <span id="GUID-C52D740D-A5FF-46ED-9F79-4D644FF2A8F1__SOA">Oracle SOA Suite</span> customizations such as when allowing <span id="GUID-C52D740D-A5FF-46ED-9F79-4D644FF2A8F1__MEDIATOR">Oracle Mediator</span> to subscribe to an event.</p>
+<p>For more information, see the "<a class="olink SOASE004" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE004">Using Business Events and the Event Delivery Network</a>" chapter in the <span class="italic"><span id="GUID-C52D740D-A5FF-46ED-9F79-4D644FF2A8F1__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-0BB4038E-2DC9-4858-ABFC-33F590A76DBC"></a>
+<h3 id="OADTC-GUID-0BB4038E-2DC9-4858-ABFC-33F590A76DBC" class="sect3"><span class="enumeration_section">5.4.6</span> About Extending or Customizing Custom Oracle Mediators</h3>
+<div>
+<p>You can extend or customize an <span id="GUID-0BB4038E-2DC9-4858-ABFC-33F590A76DBC__MEDIATOR">Oracle Mediator</span> in a SOA composite application during design time in <span id="GUID-0BB4038E-2DC9-4858-ABFC-33F590A76DBC__JDEVSHORT">JDeveloper</span> when logged in with the Customization Developer role. For example, you can perform the following tasks:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Extend a routing rule</p>
+</li>
+<li>
+<p>Customize an XPath condition</p>
+</li>
+<li>
+<p>Make any other changes, except those that affect files such as extensible style sheet languages (XSLs) (for transformations), WSDLs, event definition languages (EDLs) (for business events), or XSDs. Note that <span class="italic">new</span> SOA artifacts can be extended or customized.</p>
+</li>
+</ul>
+<p>For more information, see the "<a class="olink SOASE9143" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE9143">Using the <span>Oracle Mediator</span> Service Component</a>" part in the <span class="italic"><span id="GUID-0BB4038E-2DC9-4858-ABFC-33F590A76DBC__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-6CD31BD1-1581-41F6-BE0F-446B67B021DB"></a>
+<h3 id="OADTC-GUID-6CD31BD1-1581-41F6-BE0F-446B67B021DB" class="sect3"><span class="enumeration_section">5.4.7</span> About Customizing SOA Composite Application Components</h3>
+<div>
+<p>You can customize SOA composite application endpoint properties in a SOA composite application during design time in <span id="GUID-6CD31BD1-1581-41F6-BE0F-446B67B021DB__JDEVSHORT">JDeveloper</span> when logged in with the Customization Developer role. For example, you can perform the following tasks:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Extend and delete a reference binding component</p>
+</li>
+<li>
+<p>Extend and delete a service binding component (entry point)</p>
+</li>
+<li>
+<p>Extend, customize, and delete a wire between components</p>
+</li>
+</ul>
+<p>For more information, see the "<a class="olink SOASE20762" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE20762">Developing SOA Composite Applications with <span id="GUID-6CD31BD1-1581-41F6-BE0F-446B67B021DB__SOA">Oracle SOA Suite</span></a>" chapter in the <span class="italic"><span id="GUID-6CD31BD1-1581-41F6-BE0F-446B67B021DB__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-2D708A05-7532-409C-A07A-91D5079D6E0B"></a>
+<h3 id="OADTC-GUID-2D708A05-7532-409C-A07A-91D5079D6E0B" class="sect3"><span class="enumeration_section">5.4.8</span> About Extending or Customizing Transformations (in a Transform Activity)</h3>
+<div>
+<p>You cannot customize existing transformations that are part of the base SOA composite application in <span id="GUID-2D708A05-7532-409C-A07A-91D5079D6E0B__JDEVSHORT">JDeveloper</span>. However, you can extend a new transform activity in a BPEL process or in the Transformation Map dialog of <span id="GUID-2D708A05-7532-409C-A07A-91D5079D6E0B__MEDIATOR">Oracle Mediator</span> during design time in <span>JDeveloper</span> when logged in with the Customization Developer role. After extending the transformation, you can further customize it in <span>JDeveloper</span> when again logged in with the Customization Developer role. For example, you can perform the following tasks:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Specify the mapper file (<code>.xsl</code>) to which the transform activity points from the <span class="bold">Mapper File</span> field of a transform activity in a BPEL process or the Transformation Map dialog of <span>Oracle Mediator</span>. However, you cannot extend or customize mappings. The mappings are defined in the XSL file (not in the transform activity), which is not customizable.</p>
+</li>
+<li>
+<p>Copy an out-of-the-box XSL file into a custom XSL artifact, add the custom logic to the custom XSL, and customize the transform activity to reference the custom XSL. Additionally, you must copy the contents of the XSL file in the base SOA composite application into the custom XSL file.</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect3"><a id="GUID-9AA57D6C-B603-4365-A41F-0571D1C2CE6A"></a>
+<h3 id="OADTC-GUID-9AA57D6C-B603-4365-A41F-0571D1C2CE6A" class="sect3"><span class="enumeration_section">5.4.9</span> Extending XSD or WSDL Files</h3>
+<div>
+<p>You can extend an XSD schema or WSDL document in <span id="GUID-9AA57D6C-B603-4365-A41F-0571D1C2CE6A__JDEVSHORT">JDeveloper</span> when logged in with the Customization Developer role.</p>
+<ol>
+<li>
+<p>Right-click the <span id="GUID-9AA57D6C-B603-4365-A41F-0571D1C2CE6A__SOA">Oracle SOA Suite</span> project in the Application Navigator.</p>
+</li>
+<li>
+<p>Select <span class="bold">SOA</span>.</p>
+</li>
+<li>
+<p>Select the SOA artifact to extend:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Create XML Schema</span></p>
+<p>Invokes the Create XML Schema dialog for extending a new XML schema file in the project. When complete, the new schema file automatically opens.</p>
+</li>
+<li>
+<p><span class="bold">Create WSDL Document</span></p>
+<p>Invokes the Create WSDL dialog to extend a new WSDL file in the project.</p>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3"><a id="GUID-B42CB044-54AE-499F-99F5-D07189A01683"></a>
+<h3 id="OADTC-GUID-B42CB044-54AE-499F-99F5-D07189A01683" class="sect3"><span class="enumeration_section">5.4.10</span> About Extending JCA Adapters</h3>
+<div>
+<p>You can extend JCA adapters in <span id="GUID-B42CB044-54AE-499F-99F5-D07189A01683__JDEVSHORT">JDeveloper</span> when logged in with the Customization Developer role.</p>
+<p>For more information, see the <a class="olink TKADP" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=TKADP"><span class="italic"><span id="GUID-B42CB044-54AE-499F-99F5-D07189A01683__TKADP"><cite>Understanding Technology Adapters</cite></span></span></a>.</p>
+</div>
+</div>
+</div>
+<a id="OADTC425"></a>
+<div class="sect2"><a id="GUID-077445B3-B757-418A-A320-42CB230BE1E5"></a>
+<h2 id="OADTC-GUID-077445B3-B757-418A-A320-42CB230BE1E5" class="sect2"><span class="enumeration_section">5.5</span> About Deploying SOA Composite Application Customizations and Extensions</h2>
+<div>
+<p>You must redeploy a customized or extended SOA composite application after making changes in <span id="GUID-077445B3-B757-418A-A320-42CB230BE1E5__JDEVSHORT">JDeveloper</span>. The development and deployment phase is as follows:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>During base SOA composite application development, you create a customizable SOA project from the Default role in <span>JDeveloper</span>, set up customization layers, and deploy the SOA composite application to a base SAR file.</p>
+</li>
+<li>
+<p>During customization, you import (for customization) the base SOA composite application SAR file to extend a new SOA project, change from the Default role to the Customization Developer role, perform customizations, and deploy the SOA composite application to create a customized SAR file.</p>
+</li>
+</ul>
+<p>For more information, see the "<a class="olink SOASE85062" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE85062">Customizing SOA Composite Applications</a>" chapter in the <span class="italic"><span id="GUID-077445B3-B757-418A-A320-42CB230BE1E5__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</div>
+</div>
+<a id="OADTC1194"></a>
+<div class="sect2"><a id="GUID-C2C9C8C9-B1E6-4100-9EA9-14EA48B94A40"></a>
+<h2 id="OADTC-GUID-C2C9C8C9-B1E6-4100-9EA9-14EA48B94A40" class="sect2"><span class="enumeration_section">5.6</span> About Extending a New <span id="SOA">Oracle SOA Suite</span> Service</h2>
+<div>
+<p>You can extend new SOA composite application services to integrate with <span id="GUID-C2C9C8C9-B1E6-4100-9EA9-14EA48B94A40__FA">Oracle Fusion Applications</span>. This section provides an overview of tasks for extending and consuming new services and provides references to documentation that more specifically describes these tasks.</p>
+</div>
+<div class="sect3"><a id="GUID-D9E55748-0893-42DF-8331-E6CEB4B4D675"></a>
+<h3 id="OADTC-GUID-D9E55748-0893-42DF-8331-E6CEB4B4D675" class="sect3"><span class="enumeration_section">5.6.1</span> About Setting Up a Development Environment</h3>
+<div>
+<p>You must set up and configure a development environment in <span id="GUID-D9E55748-0893-42DF-8331-E6CEB4B4D675__JDEVSHORT">JDeveloper</span> to create new <span id="GUID-D9E55748-0893-42DF-8331-E6CEB4B4D675__SOA">Oracle SOA Suite</span> services. For more information, see the "<a class="olink OADEE55564" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OADEE55564">Getting Started Building Your Oracle Fusion Applications</a>" part in the <span class="italic"><span id="GUID-D9E55748-0893-42DF-8331-E6CEB4B4D675__OADEE"><cite>Developer's Guide</cite></span></span>.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-35DE40E5-843F-4D62-9713-FB1880864B57"></a>
+<h3 id="OADTC-GUID-35DE40E5-843F-4D62-9713-FB1880864B57" class="sect3"><span class="enumeration_section">5.6.2</span> About Using <span>JDeveloper</span> to Create Applications, Projects, and Services</h3>
+<div>
+<p>Whenever you create new projects, you must first create an application using templates provided by <span id="GUID-35DE40E5-843F-4D62-9713-FB1880864B57__JDEVSHORT">JDeveloper</span>. For more information, see the "<a class="olink OADEE59486" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OADEE59486">Setting Up Your <span>JDeveloper</span> Application Workspace and Projects</a>" chapter in the <span class="italic"><span id="GUID-35DE40E5-843F-4D62-9713-FB1880864B57__OADEE"><cite>Developer's Guide</cite></span></span>.</p>
+<p>You can select an <span id="GUID-35DE40E5-843F-4D62-9713-FB1880864B57__SOA">Oracle SOA Suite</span> project template when creating a <span>JDeveloper</span> application. For more information about creating <span>Oracle SOA Suite</span> projects, see the "<a class="olink SOASE20762" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE20762">Developing SOA Composite Applications with <span>Oracle SOA Suite</span></a>" chapter in the <span class="italic"><span id="GUID-35DE40E5-843F-4D62-9713-FB1880864B57__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+<p>You can extend an ADF Business Components service to be consumed by the SOA composite application. The ADF Business Components service is used for connecting <span id="GUID-35DE40E5-843F-4D62-9713-FB1880864B57__ADFSHORT">Oracle ADF</span> applications using service data object (SDO) data formats with the SOA composite application. For more information, see the "<a class="olink SOASE85663" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE85663">Getting Started with Binding Components</a>" chapter in the <span class="italic"><span><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-147296E5-B00E-422F-A091-BADE297107ED"></a>
+<h3 id="OADTC-GUID-147296E5-B00E-422F-A091-BADE297107ED" class="sect3"><span class="enumeration_section">5.6.3</span> Understanding Common Service Use Cases and Design Patterns</h3>
+<div>
+<p>There are fundamental patterns for <span id="GUID-147296E5-B00E-422F-A091-BADE297107ED__FA">Oracle Fusion Applications</span> developers to follow when building applications involving <span id="GUID-147296E5-B00E-422F-A091-BADE297107ED__ADFSHORT">Oracle ADF</span> and <span id="GUID-147296E5-B00E-422F-A091-BADE297107ED__SOA">Oracle SOA Suite</span>. These patterns fall into three main categories:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Using business events to initiate business processes</p>
+</li>
+<li>
+<p>Orchestrating over business logic implemented with <span>Oracle ADF</span>, Java, procedural language/structured query language (PL/SQL), and SOA composite applications</p>
+</li>
+<li>
+<p>Modeling human task flows in <span>Oracle ADF</span> applications</p>
+</li>
+</ul>
+<p>For more information about these and other design categories, see the "<a class="olink OADEE57886" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OADEE57886">Common Service Use Cases and Design Patterns</a>" part in the <span class="italic"><span id="GUID-147296E5-B00E-422F-A091-BADE297107ED__OADEE"><cite>Developer's Guide</cite></span></span>.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-50DD0B87-51B6-4F03-A991-87153A2FB0A9"></a>
+<h3 id="OADTC-GUID-50DD0B87-51B6-4F03-A991-87153A2FB0A9" class="sect3"><span class="enumeration_section">5.6.4</span> About Using <span>Oracle SOA Suite</span> with <span>MDS Repository</span></h3>
+<div>
+<p><span id="GUID-50DD0B87-51B6-4F03-A991-87153A2FB0A9__METAREPSHORT">MDS Repository</span> contains metadata for certain types of deployed applications, such as SOA composite applications. You can store <span id="GUID-50DD0B87-51B6-4F03-A991-87153A2FB0A9__FA">Oracle Fusion Applications</span> artifacts and custom artifacts in <span>MDS Repository</span>. You connect to the repository to consume these artifacts.</p>
+<p>For more information about <span>MDS Repository</span>, see the "<a class="olink ASADM260" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=ASADM260">Managing the Metadata Repository</a>" chapter in the <span class="italic"><span id="GUID-50DD0B87-51B6-4F03-A991-87153A2FB0A9__ASADM"><cite>Administering Oracle Fusion Middleware</cite></span></span>.</p>
+<p>For more information about creating a connection from <span id="GUID-50DD0B87-51B6-4F03-A991-87153A2FB0A9__SOA">Oracle SOA Suite</span> to <span>MDS Repository</span>, using the <span id="GUID-50DD0B87-51B6-4F03-A991-87153A2FB0A9__MDSSHORT">MDS</span> repository for SOA to store custom SOA artifacts, and connecting to and consuming SOA artifacts from the <span>MDS</span> repository for SOA, see the "<a class="olink SOASE85487" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE85487">Creating a SOA-MDS Connection</a>" section in the <span class="italic"><span id="GUID-50DD0B87-51B6-4F03-A991-87153A2FB0A9__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-C2D28C9B-6D4F-4B1E-A9FD-8F35B66B402E"></a>
+<h3 id="OADTC-GUID-C2D28C9B-6D4F-4B1E-A9FD-8F35B66B402E" class="sect3"><span class="enumeration_section">5.6.5</span> About Using <span id="OER">Oracle Enterprise Repository</span> to Discover <span id="FA">Oracle Fusion Applications</span> Services</h3>
+<div>
+<p><span id="GUID-C2D28C9B-6D4F-4B1E-A9FD-8F35B66B402E__FA">Oracle Fusion Applications</span> includes web services that are available for public consumption. These web services are defined in <span id="GUID-C2D28C9B-6D4F-4B1E-A9FD-8F35B66B402E__OER">Oracle Enterprise Repository</span> and available for discovery. When extending <span>Oracle Fusion Applications</span> and building SOA composite applications to invoke services built by <span>Oracle Fusion Applications</span>, you can use <span>Oracle Enterprise Repository</span> to perform the following tasks:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Use <span>Oracle Enterprise Repository</span> to discover the service.</p>
+</li>
+<li>
+<p>Follow the link provided by <span>Oracle Enterprise Repository</span> to access the WSDL file.</p>
+</li>
+<li>
+<p>When building the client, have <span id="GUID-C2D28C9B-6D4F-4B1E-A9FD-8F35B66B402E__JDEVSHORT">JDeveloper</span> download the WSDL file locally so that the client is not accessing the runtime WSDL file.</p>
+</li>
+</ul>
+<p>For more information about <span>Oracle Enterprise Repository</span>, see the <a class="olink OERUS109" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OERUS109"><span class="italic"><span id="GUID-C2D28C9B-6D4F-4B1E-A9FD-8F35B66B402E__OERUS"><cite>Oracle Fusion Middleware User&rsquo;s Guide for Oracle Enterprise Repository</cite></span></span></a>.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-8A6DA41A-5CD4-4F25-BDE3-DAF9E620D658"></a>
+<h3 id="OADTC-GUID-8A6DA41A-5CD4-4F25-BDE3-DAF9E620D658" class="sect3"><span class="enumeration_section">5.6.6</span> About Securing <span>Oracle Fusion Applications</span> and Services</h3>
+<div>
+<p>You must secure <span id="GUID-8A6DA41A-5CD4-4F25-BDE3-DAF9E620D658__FA">Oracle Fusion Applications</span> and services to be consumed by SOA composite applications.</p>
+<p>For more information about <span>Oracle Fusion Applications</span> security, see the <span>Oracle Fusion Applications</span> security guides.</p>
+<p>For more information about <span id="GUID-8A6DA41A-5CD4-4F25-BDE3-DAF9E620D658__ADFSHORT">Oracle ADF</span> Application Artifacts security, see <a href="GUID-858B8C4D-4379-45B3-9B4A-D845707244B8.htm#GUID-858B8C4D-4379-45B3-9B4A-D845707244B8" title="This chapter describes how to customize security for custom and extended business objects and related custom and extended application artifacts defined by Oracle Application Development Framework (Oracle ADF) in Oracle Fusion applications. Developers customize security using Oracle Authorization Policy Manager and Oracle JDeveloper.">Customizing Security for Application Artifacts</a> .</p>
+<p>For more information about web services security, see the "<a class="olink OADEE60486" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=OADEE60486">Securing Web Services Use Cases</a>" chapter in the <span class="italic"><span id="GUID-8A6DA41A-5CD4-4F25-BDE3-DAF9E620D658__OADEE"><cite>Developer's Guide</cite></span></span>.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-75D9A846-91AC-4EC4-859F-87EB2FA19FAE"></a>
+<h3 id="OADTC-GUID-75D9A846-91AC-4EC4-859F-87EB2FA19FAE" class="sect3"><span class="enumeration_section">5.6.7</span> About Deploying SOA Composite Applications and Services</h3>
+<div>
+<p>You must deploy SOA composite applications and the services to be consumed.</p>
+<p>For more information about deploying SOA composite applications, see the "<a class="olink SOASE002" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=SOASE002">Deploying SOA Composite Applications</a>" chapter in the <span class="italic"><span id="GUID-75D9A846-91AC-4EC4-859F-87EB2FA19FAE__SOASE"><cite>Developing SOA Applications with Oracle SOA Suite</cite></span></span>.</p>
+<p>For more information about deploying external references such as web services, see the "<a class="olink WSSEC1209" target="_blank" href="http://www.oracle.com/pls/topic/lookup?ctx=E71295-01&amp;id=WSSEC1209">Deploying Web Services Applications</a>" chapter in the <span class="italic"><span id="GUID-75D9A846-91AC-4EC4-859F-87EB2FA19FAE__WSSEC"><cite>Administering Web Services</cite></span></span>.</p>
+</div>
+</div>
+<div class="sect3"><a id="GUID-F20B686C-FDFF-414A-8B11-1EE7C1A7F087"></a>
+<h3 id="OADTC-GUID-F20B686C-FDFF-414A-8B11-1EE7C1A7F087" class="sect3"><span class="enumeration_section">5.6.8</span> Understanding Fusion Applications Deployment Topology</h3>
+<div>
+<p>An enterprise deployment is an Oracle guidelines blueprint based on proven Oracle high-availability and security technologies and recommendations for <span id="GUID-F20B686C-FDFF-414A-8B11-1EE7C1A7F087__FA">Oracle Fusion Applications</span>.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment439">
+<tr>
+<td class="cellalignment446">
+<table class="cellalignment444">
+<tr>
+<td class="cellalignment443"><a href="GUID-D799CA7B-365F-411E-8027-9F7413B66787.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment443"><a href="GUID-354772F3-6367-4CCD-8363-90E5B078E0A0.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2011, 2016, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment448">
+<table class="cellalignment442">
+<tr>
+<td class="cellalignment443"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment443"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

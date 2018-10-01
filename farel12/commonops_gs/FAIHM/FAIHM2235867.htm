@@ -1,0 +1,1222 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Loading Work Structures (Chapter 12) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Integrating with Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Integrating with Oracle HCM Cloud" name="doctitle">
+      <meta content="E73304-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FAIHM" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:29:17 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM Data Loader;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FAIHM2356686.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FAIHM2306740.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FAIHM.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FAIHM.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="The work structures that you can load using HCM Data Loader are grades, grade ladders, grade rates, jobs, job families, locations,
+      organizations, positions, and HCM position hierarchies. This topic describes some general considerations that apply to most
+      or all work structures. Select a work structure on the Initiate Data Load page to review its component hierarchy. For examples
+      of .dat files showing how to load work structures, see HCM Data Loader: Loading Work Structures (2021212.1) on My Oracle Support
+      at https://support.oracle.com. These work structures are set enabled: You can associate action reasons with these work structures:"><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">15/34</span><a name="BEGIN" id="BEGIN"></a><div id="FAIHM2235867" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">12</span>Loading Work Structures
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2237355">Loading Work Structures: Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2236269">Loading Grades: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2239182">Loading Grade Ladders: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2238387">Loading Grade Rates: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2233885">Loading Jobs: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2235091">Loading Job Families: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2235600">Loading Locations: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2236142">Loading Organizations: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2235694">Loading Positions: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FAIHM2484233">Loading HCM Position Hierarchies: Examples</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FAIHM2237355">
+                  <h2>Loading Work Structures: Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The work structures that you can load using
+                     HCM Data Loader are grades, grade ladders, grade rates, jobs, job families, locations,
+                     organizations, positions, and HCM position hierarchies. This topic describes some general
+                     considerations that apply to most or all work structures.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2237338">
+                     <h3 class="topictitle">Reviewing Component Hierarchies</h3>
+                     
+                     <p>Select a work structure on the Initiate Data
+                        Load page to review its component hierarchy.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2237339">
+                     <h3 class="topictitle">Finding Example .dat Files</h3>
+                     
+                     <p>For examples of .dat files showing how to
+                        load work structures, see HCM Data Loader: Loading Work Structures
+                        (2021212.1) on My Oracle Support at https://support.oracle.com.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2237340">
+                     <h3 class="topictitle">Loading Set-Enabled Work Structures</h3>
+                     
+                     <p>These work structures are set enabled:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Departments</p>
+                        </li>
+                        
+                        <li>
+                           <p>Grades</p>
+                        </li>
+                        
+                        <li>
+                           <p>Jobs</p>
+                        </li>
+                        
+                        <li>
+                           <p>Locations</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You can create them in a specific reference data set, which
+                        restricts their use to an individual business unit. Alternatively, you
+                        can create them in the common set, where they're generally available.
+                        You must ensure that referenced sets exist and are associated with
+                        relevant business units, if appropriate.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2237364">
+                     <h3 class="topictitle">Using Action Reasons</h3>
+                     
+                     <p>You can associate action reasons with these work
+                        structures:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Grades</p>
+                        </li>
+                        
+                        <li>
+                           <p>Grade rates</p>
+                        </li>
+                        
+                        <li>
+                           <p>Grade ladders</p>
+                        </li>
+                        
+                        <li>
+                           <p>Jobs</p>
+                        </li>
+                        
+                        <li>
+                           <p>Locations</p>
+                        </li>
+                        
+                        <li>
+                           <p>Organizations</p>
+                        </li>
+                        
+                        <li>
+                           <p>Positions</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>If you plan to use action reasons, then you must
+                        create them before you load work structures. Use the Manage Action
+                        Reasons task in the Setup and Maintenance work area.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="FAIHM2126423.htm#FAIHM2176353">Finding Business-Object Information: Explained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2236269">
+                  <h2>Loading Grades: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>A grade identifies a worker's rank or level
+                     of compensation. You can create grades either with or without grade steps. This topic
+                     describes aspects of the grade object that you must understand to
+                     load grades successfully.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2236268">
+                     <h3 class="topictitle">Grade Steps</h3>
+                     
+                     <p>If you're using grade steps, then load one grade-step
+                        component for each grade step.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2236285">
+                     <h3 class="topictitle">Changing Logical Start and End Dates for Grades</h3>
+                     
+                     <p>You can't change either the first effective start date or
+                        last effective
+                        end date for an existing grade. Create grade records with effective
+                        start dates on or before the start dates of other objects that refer
+                        to your grades.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2236299">
+                     <h3 class="topictitle">Loading Translated Grade and Grade-Step Names</h3>
+                     
+                     <p>Supply grade and grade-step names in the language
+                        of the user who's loading them. You supply a GradeTranslation.dat
+                        file to translate grade names into other enabled languages once the
+                        grades exist. You supply a GradeStepTranslation.dat file to translate
+                        grade-step names.
+                     </p>
+                     
+                     
+                     <p> This example GradeTranslation.dat file translates
+                        the names of existing grades. It identifies the grades by their source
+                        keys. 
+                     </p>
+                     <pre><code>METADATA|GradeTranslation|SourceSystemOwner|SourceSystemId|EffectiveStartDate|Language|GradeName
+MERGE|GradeTranslation|VISION|ADMIN|1951/01/01|FR|Administrateur
+MERGE|GradeTranslation|VISION|IC1|1951/01/01|FR|Contributeur individuel 
+MERGE|GradeTranslation|VISION|M1|1951/01/01|FR|Superviseur
+MERGE|GradeTranslation|VISION|D1|1951/01/01|FR|Directeur <br></code></pre>
+                     <p>This example GradeStepTranslation.dat file translates
+                        the names of existing grade steps. It identifies the grade steps by
+                        their source keys.
+                     </p>
+                     <pre><code>METADATA|GradeStepTranslation|SourceSystemOwner|SourceSystemId|EffectiveStartDate|Language|GradeStepName
+MERGE|GradeStepTranslation|VISION|LT_CDR1|1951/01/01|FR|Niveau 1
+MERGE|GradeStepTranslation|VISION|LT_CDR2|1951/01/01|FR|Niveau 2
+MERGE|GradeStepTranslation|VISION|LT_CDR3|1951/01/01|FR|Niveau 3<br></code></pre>
+                     
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM2239233">
+                     <h3 class="topictitle">Deleting Grades</h3>
+                     
+                     <p>You can delete a grade using HCM Data Loader, provided
+                        that it's not referred to by other objects, such as assignments, jobs, or grade rates. This example Grade.dat
+                        file deletes existing grades and any associated grade steps. It identifies
+                        grades by their source keys.
+                     </p>
+                     
+                     <pre><code>METADATA|Grade|SourceSystemOwner|SourceSystemId|EffectiveStartDate
+DELETE|Grade|VISION|CADET|1951/01/01
+DELETE|Grade|VISION|LT_CDR|1951/01/01<br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2239182">
+                  <h2>Loading Grade Ladders: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>A grade ladder is a sequence of grades, where the grade order
+                     represents a worker's progression. This topic describes aspects of
+                     the grade-ladder object that you must understand to load grade ladders
+                     successfully.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2239181">
+                     <h3 class="topictitle">The Grade-Ladder Component Hierarchy</h3>
+                     
+                     <p>The grade ladder is made up of these components:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Grade ladder.</p>
+                        </li>
+                        
+                        <li>
+                           <p>Grades in ladder. Include one component
+                              of this type for each grade, regardless of the grade ladder type.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Step rate. Include at least one
+                              component of this type for grade ladders of type STEP.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Step rate value. Include one component
+                              of this type for each step in a grade ladder of type STEP.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2239224">
+                     <h3 class="topictitle">Loading Translated Grade-Ladder and Step-Rate
+                     Names </h3>
+                     
+                     <p>Supply grade-ladder and step-rate names in the language
+                        of the user who's loading them. You supply a GradeLadderTranslation.dat
+                        file to translate grade-ladder names into other enabled languages
+                        once the grade ladders exist. You supply a StepRateTranslation.dat
+                        file to translate step-rate names. This example GradeLadderTranslation.dat
+                        file translates the name of an existing grade ladder. It identifies
+                        the grade ladder by its source key.
+                     </p>
+                     
+                     <pre><code>METADATA|GradeLadderTranslation|SourceSystemOwner|SourceSystemId|EffectiveStartDate|Language|GradeLadderName
+MERGE|GradeLadderTranslation|VISION|GRD_LDR_OFF|1951/01/01|FR|Officier<br></code></pre>
+                     
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM2240291">
+                     <h3 class="topictitle">Deleting Grade Ladders</h3>
+                     
+                     <p>You can delete a grade ladder using HCM Data Loader,
+                        provided that it's not referred to by another object, such as an assignment. Deleting
+                        a grade ladder doesn't delete the associated grades. However, if you
+                        delete a grade ladder with steps, then the associated step rates and
+                        step-rate values are deleted automatically. This example GradeLadder.dat
+                        file deletes an existing grade ladder. It identifies the grade ladder
+                        by its source key. 
+                     </p>
+                     
+                     <pre><code>METADATA|GradeLadder|SourceSystemOwner|SourceSystemId|EffectiveStartDate
+DELETE|GradeLadder|VISION|GRD_LDR_OFF|1951/01/01<br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2238387">
+                  <h2>Loading Grade Rates: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>A grade rate is a collection of general information
+                     about a payment type, such as salary, bonus, or overtime payments.
+                     It includes details such as the currency, frequency of the payment,
+                     and annualization
+                     factor. For example, the Overtime Rate Analysts grade rate
+                     could provide this information for the overtime payments made to analysts.
+                     Grade rates are associated with grade-rate values. Each associated
+                     grade-rate value identifies a grade and either a fixed payment or
+                     a payment range for the grade. For a payment range, you must supply
+                     both the minimum and maximum values. This topic describes aspects
+                     of the grade-rate object that you must understand to load grade rates
+                     successfully. 
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2238386">
+                     <h3 class="topictitle">Loading Referenced Objects</h3>
+                     
+                     <p>Grade rates and grade-rate values are created for
+                        a legislative
+                        data group. Therefore, you must load legislative data groups
+                        before loading grade rates.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2238402">
+                     <h3 class="topictitle">Loading Translated Grade-Rate Names</h3>
+                     
+                     <p>Supply grade-rate names in the language of the user
+                        who's loading them. You supply a GradeRateTranslation.dat file to
+                        translate grade-rate names into other enabled languages once the grade
+                        rates exist. This example translates the name of an existing grade
+                        rate. It identifies the grade rate by its source key. 
+                     </p>
+                     
+                     <pre><code>METADATA|GradeRateTranslation|SourceSystemOwner|SourceSystemId|EffectiveStartDate|Language|GradeRateName
+MERGE|GradeRateTranslation|VISION|GR_CIV_SAL|2000/01/01|FR|Salaire civile<br></code></pre>
+                     
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM2238403">
+                     <h3 class="topictitle">Deleting Grade Rates</h3>
+                     
+                     <p>You can delete a grade rate using HCM Data Loader,
+                        provided that it's not referred to by another object, such as a salary basis. If you
+                        delete a grade rate, then its associated grade-rate values are deleted
+                        automatically. This example GradeRate.dat file deletes an existing
+                        grade rate and its grade-rate values. It identifies the grade rate
+                        by its source key.
+                     </p>
+                     
+                     <pre><code>METADATA|GradeRate|SourceSystemOwner|SourceSystemId|EffectiveStartDate
+DELETE|GradeRate|VISION|GR_CIV_SAL|2000/01/01<br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2233885">
+                  <h2>Loading Jobs: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>A job defines the worker's role in an organization
+                     in general terms. For example, a worker's job could be payroll manager,
+                     sales consultant, or administrator. This topic describes aspects of
+                     the job object that you must understand to load jobs successfully.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2233900">
+                     <h3 class="topictitle">Loading Referenced Objects</h3>
+                     
+                     <p>If you're associating either job families or valid grades with your jobs, then
+                        you must load those objects before you load the jobs.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2233915">
+                     <h3 class="topictitle">Benchmark Jobs</h3>
+                     
+                     <p>To use benchmark jobs:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Load any benchmark jobs with the <span class="uicontrol">BenchmarkJobFlag</span> attribute set to <span class="uicontrol">Yes</span>. Benchmark jobs can't refer to other
+                              benchmark jobs. Therefore, you can't load benchmark jobs with either
+                              a <span class="uicontrol">BenchmarkJobId</span> or <span class="uicontrol">BenchmarkJobCode</span> value.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Load the remaining jobs. For those
+                              jobs that refer to a benchmark job, use the <span class="uicontrol">BenchmarkJobId</span> or <span class="uicontrol">BenchmarkJobCode</span> attribute to identify the relevant benchmark job. A job can't be
+                              its own benchmark job. Therefore, these values must not identify the
+                              job that you're loading.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2233921">
+                     <h3 class="topictitle">Loading Translated Job Names</h3>
+                     
+                     <p>Supply job names in the language of the user who's
+                        loading them. You supply a JobTranslation.dat file to translate job
+                        names into other enabled languages once the jobs exist. This example
+                        translates the names of existing jobs. It identifies those jobs by
+                        their source keys.
+                     </p>
+                     
+                     <pre><code>METADATA|JobTranslation|SourceSystemOwner|SourceSystemId|EffectiveStartDate|Language|Name
+MERGE|JobTranslation|VISION|SALES_CONS|2000/01/01|FR|Consultant en Ventes
+MERGE|JobTranslation|VISION|SALES_MGR|2000/01/01|FR|Superviseur des Ventes
+MERGE|JobTranslation|VISION|SALES_DIR|2000/01/01|FR|Directeur des Ventes<br></code></pre>
+                     
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM2233928">
+                     <h3 class="topictitle">Deleting Jobs</h3>
+                     
+                     <p>You can't delete jobs using HCM Data Loader. However,
+                        you can make jobs inactive. This example Job.dat file inactivates
+                        an existing job. It identifies the job by its source key.
+                     </p>
+                     
+                     <pre><code>METADATA|Job|SourceSystemOwner|SourceSystemId|EffectiveStartDate|ActiveStatus
+MERGE|Job|VISION|MRKT_CONS|2015/01/01|I<br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2235091">
+                  <h2>Loading Job Families: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>A job family groups similar or related jobs
+                     for ease of reporting. For example, you could add the Trust Analyst
+                     and Operations Analyst jobs to the Analyst job family. This topic
+                     provides some examples showing how to load and manage job families. 
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="FAIHM2235083"><h3 class="OracleScenario">Creating Job Families Using Source Keys</h3>
+                     <p>This example JobFamily.dat file creates several job
+                        families that are identified using source keys.
+                     </p><pre><code>METADATA|JobFamily|SourceSystemOwner|SourceSystemId|EffectiveStartDate|JobFamilyCode|JobFamilyName|ActiveStatus
+MERGE|JobFamily|VISION|ANALYST|2000/01/01|ANALYST|Analyst|A
+MERGE|JobFamily|VISION|TECHNICIAN|2000/01/01|TECHNICIAN|Technician|A
+MERGE|JobFamily|VISION|CONSULT|2000/01/01|CONSULTANT|Consultant|A
+MERGE|JobFamily|VISION|MANAGEMENT|2000/01/01|MANAGEMENT|Management|A<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2235100"><h3 class="OracleScenario">Loading Translated Job-Family Names</h3>
+                     <p>Job family names must be unique in the enterprise.
+                        Supply job family names in the language of the user who's loading
+                        them. You supply a JobFamilyTranslation.dat file to translate job-family
+                        names into other enabled languages once the job families exist. This
+                        example translates the names of existing job families. The job families
+                        are identified by their source keys.
+                     </p><pre><code>METADATA|JobFamilyTranslation|SourceSystemOwner|SourceSystemId|EffectiveStartDate|Language|JobFamilyName
+MERGE|JobFamilyTranslation|VISION|ANALYST|2000/01/01|FR|Analyste
+MERGE|JobFamilyTranslation|VISION|TECHNICIAN|2000/01/01|FR|Technicien<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2237463"><h3 class="OracleScenario">Deleting Job Families</h3>
+                     <p>You can delete a job family using HCM Data Loader,
+                        provided that the job family isn't referred to by any job. This example
+                        deletes a job family. It identifies the job family by its source key.
+                     </p><pre><code>METADATA|JobFamily|SourceSystemOwner|SourceSystemId|EffectiveStartDate
+DELETE|JobFamily|VISION|TECHNICIAN|2000/01/01<br></code></pre></div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2235600">
+                  <h2>Loading Locations: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>A location is the physical address of a place
+                     where you conduct business or that's of interest to your business.
+                     The location object records the address and other details, such as
+                     the location name, description, phones, and billing and shipping information.
+                     This topic describes aspects of the location object that you must
+                     understand to load locations successfully.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2235617">
+                     <h3 class="topictitle">Changing Logical Start and End Dates for Locations</h3>
+                     
+                     <p>You can't change either the first effective start date or
+                        last effective
+                        end date for an existing location. Create location records
+                        with effective start dates on or before the start dates of other objects,
+                        such as organizations, that refer to your locations.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2235618">
+                     <h3 class="topictitle">Loading Translated Location Names</h3>
+                     
+                     <p>Supply location names and descriptions in the language
+                        of the user who's loading them. You supply a LocationTranslation.dat
+                        file to translate location names and descriptions into other enabled
+                        languages once the locations exist. This example translates the name
+                        and description of an existing location. It identifies the location
+                        by its source key.
+                     </p>
+                     
+                     <pre><code>METADATA|LocationTranslation|SourceSystemOwner|SourceSystemId|EffectiveStartDate|Language|LocationName|Description
+MERGE|LocationTranslation|VISION|LOC_RD_UK|1951/01/01|FR|Vision Corporation Recherche et Developpement|Centre de recherche et de developpement<br></code></pre>
+                     
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM2235628">
+                     <h3 class="topictitle">Deleting Locations</h3>
+                     
+                     <p>You can't delete locations using HCM Data Loader.
+                        However, you can make locations inactive. This example Location.dat
+                        file makes a location inactive as of 01/01/15. The location is identified
+                        by its source key.
+                     </p>
+                     
+                     <pre><code>METADATA|Location|SourceSystemOwner|SourceSystemId|EffectiveStartDate|ActiveStatus
+MERGE|Location|VISION|LOC_UK_100|2015/01/01|I<br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2236142">
+                  <h2>Loading Organizations: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>An organization can be any organizational
+                     unit, such as a department or division, in your enterprise. Organizations provide the framework
+                     for performing legal reporting, financial control, and management
+                     reporting. This topic describes aspects of the organization object
+                     that you must understand to load organizations successfully.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2236141">
+                     <h3 class="topictitle">Organization Components </h3>
+                     
+                     <p>A single organization can have multiple classifications.
+                        For example, a division can also be a department. Therefore, you can
+                        load multiple classification components for a single organization
+                        object.
+                     </p>
+                     
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        You must load any organization extra information
+                        component with the parent organization record in the same Organization.dat
+                        file. You can't load organization extra information independently
+                        of the parent organization record. You can load other child components
+                        either when creating the organization or once the organization exists.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2236158">
+                     <h3 class="topictitle">Loading Referenced Objects</h3>
+                     
+                     <p>Before you load organizations, referenced objects
+                        must exist in the target environment. In particular:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>If you plan to associate locations
+                              with your organizations, then you must load the locations before you
+                              load the organizations.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>To associate a reporting manager
+                              with your organization, you must:
+                           </p>
+                           
+                           <ol>
+                              
+                              <li>
+                                 <p>Load the organization without identifying
+                                    the reporting manager.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Load the worker information for
+                                    the reporting manager.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Update your organization to add
+                                    the reporting manager.
+                                 </p>
+                              </li>
+                              
+                           </ol>
+                           
+                           <div class="infobox-tip"><span class="notep1">Tip: </span>
+                              As a worker is hired into a legal employer, business unit, and department,
+                              you can't load workers before you load organizations.
+                              
+                           </div>
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Departments are set enabled. You must ensure that
+                        relevant reference
+                        data sets exist before you load departments. Other types of
+                        organizations aren't set enabled.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2236222">
+                     <h3 class="topictitle">Organization Classification Codes</h3>
+                     
+                     <p>An organization can have one or more classifications.
+                        You can supply either the code or its name. Valid classifications
+                        are: 
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Classification Name
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Classification Code
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Bargaining Association</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>HCM_BARGAINING_ASSOCIATION</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Department</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>DEPARTMENT</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Disability Organization</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>HCM_DISABILITY_ORGANIZATION</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Division</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>HCM_DIVISION</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Enterprise</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>ENTERPRISE</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Legal Employer</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>HCM_LEMP</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Legal Reporting Unit</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>HCM_LRU</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Payroll Statutory Unit</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>HCM_PSU</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Reporting Establishment</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>HCM_REPORTING_ESTABLISHMENT</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>You load an organization classification component
+                        for each of the organization's classifications, including the one
+                        identified on the organization component. 
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2236229">
+                     <h3 class="topictitle">Loading Translated Organization Names</h3>
+                     
+                     <p>Supply organization names in the language of the
+                        user who's loading them. You supply an OrganizationTranslation.dat
+                        file to translate organization names into other enabled languages
+                        once the organizations exist. This example OrganizationTranslation.dat
+                        file translates the name of an existing organization. It identifies
+                        the organization by its source key.
+                     </p>
+                     
+                     <pre><code>METADATA|OrganizationTranslation|SourceSystemOwner|SourceSystemId|EffectiveStartDate|Language|Name
+MERGE|OrganizationTranslation|VISION|MRKT|2000/01/01|FR|Marketing<br></code></pre>
+                     
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM2236244">
+                     <h3 class="topictitle">Deleting Organizations</h3>
+                     
+                     <p>You can't delete organizations using HCM Data Loader,
+                        nor can you make them inactive. However, you can make an organization
+                        classification inactive, provided that it's no longer used. For example,
+                        for an organization that's classified as both a department and a division,
+                        you could:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Make the division inactive but
+                              leave the department active, so that you can still continue to use
+                              the department.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Deactivate the whole organization
+                              by making both classifications inactive.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>This example Organization.dat file inactivates an
+                        existing organization classification. The organization is identified
+                        by its source key. 
+                     </p>
+                     <pre><code>METADATA|Organization|SourceSystemOwner|SourceSystemId|EffectiveStartDate
+MERGE|Organization|VISION|CLARITY|2015/01/01
+METADATA|OrgUnitClassification|SourceSystemOwner|SourceSystemId|EffectiveStartDate|OrganizationId(SourceSystemId)|Status
+MERGE|OrgUnitClassification|VISION|CLARITY_DIS|2015/01/01|CLARITY|I<br></code></pre>
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        The file must include an organization record with
+                        an effective start date equal to the date on which the classification
+                        becomes inactive.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2235694">
+                  <h2>Loading Positions: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>A position is a single occurrence of a job in a specified department.
+                     Positions may also be restricted by location. For example, you could
+                     create the HR Manager Sales France position for the HR Manager job
+                     in the Sales department in France. This topic describes aspects of
+                     the position object that you must understand to load positions successfully. 
+                  </p>
+                  
+                  
+                  <div class="sect2" id="FAIHM2235692">
+                     <h3 class="topictitle">Effective Start Dates</h3>
+                     
+                     <p>A position and its child components must have the
+                        same effective
+                        start date.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2235693">
+                     <h3 class="topictitle">Loading Referenced Objects</h3>
+                     
+                     <p>Before you load positions, referenced objects must
+                        exist in the target environment. In particular:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Positions exist in business units. Ensure
+                              that referenced business units exist.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Both <span class="uicontrol">Job</span> and <span class="uicontrol">Department</span> are required
+                              attributes of a position. Ensure that referenced jobs and departments
+                              exist.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You can associate a location and
+                              valid grades with a
+                              position. Ensure that any referenced locations and grades exist.
+                           </p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2235714">
+                     <h3 class="topictitle">Position Type</h3>
+                     
+                     <p>When the position type is <span class="uicontrol">Single incumbent</span>, you must supply:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>An FTE value. The value must be less than or
+                              equal to 1. For example, if the position incumbent works half the
+                              standard working hours, then the full-time equivalent value is 0.5.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>A headcount of 1.</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>When the position type is <span class="uicontrol">Shared</span>, you must supply:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>An FTE value</p>
+                        </li>
+                        
+                        <li>
+                           <p>A headcount that's equal to or
+                              greater than 1
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FAIHM2235739">
+                     <h3 class="topictitle">Loading Translated Position Names</h3>
+                     
+                     <p>Supply position names in the language of the user
+                        who's loading them. You supply a PositionTranslation.dat file to translate
+                        position names into other enabled languages once the positions exist.
+                        This example PositionTranslation.dat file translates the name of an
+                        existing position. It identifies the position by its source key.
+                     </p>
+                     
+                     <pre><code>METADATA|PositionTranslation|SourceSystemOwner|SourceSystemId|EffectiveStartDate|Language|Name
+MERGE|PositionTranslation|VISION|APP_SALES|2015/01/01|FR|Sales Consultant d'application<br></code></pre>
+                     
+                     </div>
+                  
+                  <div class="sect2" id="FAIHM2237478">
+                     <h3 class="topictitle">Deleting Positions</h3>
+                     
+                     <p>You can delete a position using HCM Data Loader,
+                        provided that it has never had an incumbent. When you delete a position,
+                        its child components are deleted automatically. This example Position.dat
+                        file deletes an existing position. The position is identified by its
+                        source key.
+                     </p>
+                     
+                     <pre><code>METADATA|Position|SourceSystemOwner|SourceSystemId|EffectiveStartDate
+DELETE|Position|VISION|APP_SALES|2015/01/01<br></code></pre>
+                     
+                     </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FAIHM2484233">
+                  <h2>Loading HCM Position Hierarchies: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>An HCM position hierarchy is derived from
+                     the relationships between positions and their parent positions. You can identify a position's
+                     parent position on the Manage Positions page if the <span class="uicontrol">Use HCM Position Hierarchy</span> option is enabled
+                     for the enterprise. This topic provides examples of how to load HCM
+                     position hierarchy objects using HCM Data Loader. Each position hierarchy
+                     object identifies a position and its parent. All positions must exist
+                     in the target environment.
+                  </p>
+                  
+                  
+                  
+                  <p>
+                     <p>This figure shows the position
+                        hierarchy that these examples load.
+                     </p>
+                  </p>
+                  <img src="img/HRC_HDL_POS_HIER_01_20061199.png" alt="This figure shows a hierarchy of positions. Position&#xA;EVP at the top is the parent of position VP, which is the parent of&#xA;position PM_DIR. Position PM_DIR is the parent of two positions, PM_MGR_SALES&#xA;and PM_MGR_ACCESS. PM_MGR_SALES is the parent of two positions, SNR_PM_SALES&#xA;and PM_SALES. PM_MGR_ACCESS is the parent of two positions, SNR_PM_ACCESS&#xA;and PM_ACCESS." class="fusappimg">
+                  
+                  
+                  <div class="sect2" id="FAIHM2484225"><h3 class="OracleScenario">Loading HCM Position Hierarchies Using Source
+                     Keys</h3>
+                     <p>This example PositionHierarchy.dat file loads HCM
+                        position hierarchy objects using source keys.
+                     </p><pre><code>METADATA|PositionHierarchy|SourceSystemOwner|SourceSystemId|EffectiveStartDate|EffectiveEndDate|ParentPositionId(SourceSystemId)|PositionId(SourceSystemId)
+MERGE|PositionHierarchy|Vision|1|2015/01/01|4712/12/31|PM_MGR_ACCESS|PM_ACCESS
+MERGE|PositionHierarchy|Vision|2|2015/01/01|4712/12/31|PM_MGR_ACCESS|SNR_PM_ACCESS
+MERGE|PositionHierarchy|Vision|3|2015/01/01|4712/12/31|PM_MGR_SALES|PM_SALES
+MERGE|PositionHierarchy|Vision|4|2015/01/01|4712/12/31|PM_MGR_SALES|SNR_PM_SALES
+MERGE|PositionHierarchy|Vision|5|2015/01/01|4712/12/31|PM_DIR|PM_MGR_ACCESS
+MERGE|PositionHierarchy|Vision|6|2015/01/01|4712/12/31|PM_DIR|PM_MGR_SALES
+MERGE|PositionHierarchy|Vision|7|2015/01/01|4712/12/31|VP|PM_DIR
+MERGE|PositionHierarchy|Vision|8|2015/01/01|4712/12/31|EVP|VP<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2484239"><h3 class="OracleScenario">Loading HCM Position Hierarchies Using User Keys</h3>
+                     <p>This example PositionHierarchy.dat file loads HCM
+                        position hierarchy objects using user keys.
+                     </p><pre><code>METADATA|PositionHierarchy|EffectiveStartDate|EffectiveEndDate|ParentBusinessUnitName|ParentPositionCode|BusinessUnitName|PositionCode
+MERGE|PositionHierarchy|2015/01/01|4712/12/31|VisionBU|PM_MGR_ACCESS|VisionBU|PM_ACCESS
+MERGE|PositionHierarchy|2015/01/01|4712/12/31|VisionBU|PM_MGR_ACCESS|VisionBU|SNR_PM_ACCESS
+MERGE|PositionHierarchy|2015/01/01|4712/12/31|VisionBU|PM_MGR_SALES|VisionBU|PM_SALES
+MERGE|PositionHierarchy|2015/01/01|4712/12/31|VisionBU|PM_MGR_SALES|VisionBU|SNR_PM_SALES
+MERGE|PositionHierarchy|2015/01/01|4712/12/31|VisionBU|PM_DIR|VisionBU|PM_MGR_ACCESS
+MERGE|PositionHierarchy|2015/01/01|4712/12/31|VisionBU|PM_DIR|VisionBU|PM_MGR_SALES
+MERGE|PositionHierarchy|2015/01/01|4712/12/31|VisionBU|VP|VisionBU|PM_DIR
+MERGE|PositionHierarchy|2015/01/01|4712/12/31|VisionBU|EVP|VisionBU|VP<br></code></pre></div>
+                  
+                  <div class="sect2" id="FAIHM2484242"><h3 class="OracleScenario">Running the Flatten HCM Position Hierarchy Process</h3>
+                     <p>Changes to the parent position on the Manage Positions
+                        page automatically trigger a process to update the position hierarchy.
+                        However, this process isn't triggered when you load position hierarchies
+                        using HCM Data Loader. You must run the Flatten HCM Position Hierarchy
+                        process explicitly after loading position hierarchy objects using
+                        HCM Data Loader.
+                     </p>
+                  </div>
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

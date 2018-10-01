@@ -1,0 +1,2270 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Customization Life Cycle (Chapter 2) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Customizing the Applications for Functional Administrators" name="dcterms.title">
+      <meta content="Customizing the Applications for Functional Administrators" name="doctitle">
+      <meta content="E73426-02" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="OAEXT" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Sun Mar 05 21:35:05 PST 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="customization life cycle;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="OAEXT1184585.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="OAEXT1184587.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="OAEXT.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="OAEXT.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="All customizations and extensions to your application must be done in a full test environment. Typically, this environment
+      contains one or more applications that will be moved to a production environment after you complete and test all customizations
+      and extensions. While using Application Composer and Page Composer to make run time customizations to your application, use
+      sandboxes to save your changes in a segregated environment. For example, before making customizations, suppose you create
+      a sandbox named MySandbox, and then make your customizations in that sandbox. Now, if others want to see your customizations,
+      they can use MySandbox."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">5/10</span><a name="BEGIN" id="BEGIN"></a><div id="OAEXT1184586" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">2</span>Customization Life Cycle
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OAEXT1029145">Customization Life Cycle: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OAEXT1184568">Run Time Customizations</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OAEXT1189604">Sandbox Manager</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OAEXT1184569">Moving Customizations</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OAEXT1030579">Viewing and Deleting Customizations: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OAEXT1029402">Advanced Customization Life Cycle Tasks: Highlights</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="OAEXT1029145">
+                  <h2>Customization Life Cycle: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>All customizations and extensions to your
+                     application must be done in a full test environment. Typically, this
+                     environment contains one or more applications that will be moved to
+                     a production environment after you complete and test all customizations
+                     and extensions.
+                  </p>
+                  
+                  
+                  
+                  <p>While using tools such as Page Composer, you can
+                     make application customizations in a sandbox. Sandboxes store customizations
+                     in Extensible Markup Language  files in a separate Oracle Metadata
+                     Services repository that's available only when you work in that particular
+                     sandbox. You can make the changes in either of the following:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>A test-only sandbox (that is, the
+                           code in the sandbox is for testing only, and is never deployed)
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>A sandbox that's then published
+                           to the full test environment
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  
+                  <p>Developers using design time tools, such as Oracle
+                     JDeveloper, can deploy their customizations directly to that environment,
+                     or they can publish to a sandbox. For more information on design time
+                     customization workflow, see the Oracle Fusion Applications Extensibility
+                     Guide for Developers.
+                  </p>
+                  
+                  <div class="infobox-note"><span class="notep1">Note: </span>
+                     Design time customizations aren't available in Oracle
+                     Cloud implementations.
+                     
+                  </div>
+                  
+                  
+                  
+                  <p>Project managers can monitor, import, and export
+                     customizations. Then, users can test the entire environment with all
+                     customizations, as shown in the figure below.
+                  </p>
+                  <img src="img/com_ext_customwrkflw_02_20043799.png" alt="Customization workflow in a full test environment" class="fusappimg">
+                  
+                  <div class="infobox-tip"><span class="notep1">Tip: </span>
+                     For on-premise implementations, developers
+                     may allow users, having access to the Setup and Maintenance work area,
+                     to configure the customizations and extensions made to the application.
+                     
+                  </div>
+                  
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OAEXT1184568">
+                  <h2>Run Time Customizations</h2>
+                  
+                  <div class="sect2" id="OAEXT1030794">
+                     <h3>Run Time Customization Workflow: Explained</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>While using Application Composer and Page
+                        Composer to make run time customizations to your application, use sandboxes to save your
+                        changes in a segregated environment. For example, before making customizations,
+                        suppose you create a sandbox named <code>MySandbox</code>, and then make your customizations in that sandbox. Now, if others
+                        want to see your customizations, they can use <code>MySandbox</code>.
+                     </p>
+                     
+                     
+                     
+                     <div class="infobox-note"><span class="notep1">Note: </span>
+                        If you have multiple users working on the same sandbox,
+                        then conflicts may arise within a sandbox. Hence, users must adhere
+                        to the prescribed guidelines to avoid such conflicts.
+                        
+                     </div>
+                     
+                     <p>You can also use a sandbox while defining security
+                        policies for custom objects that you have created using Application
+                        Composer. A security sandbox stores the security information in new
+                        database tables that are available only when you choose to work in
+                        that sandbox.
+                     </p>
+                     
+                     <p>After you complete your customizations, others can
+                        review and approve your customizations, and then publish to the full
+                        test environment.
+                     </p>
+                     
+                     <p> Note that a flexfield sandbox is for testing only
+                        and can't be published. Instead, you can deploy a flexfield to the
+                        full test environment using the flexfield UI. To test a flexfield
+                        configuration before deploying it to the full test environment, deploy
+                        it to a flexfield sandbox. The changes that you deploy to a sandbox
+                        are isolated from the full test environment. Users who make the flexfield
+                        sandbox active in their session can only see these changes. After
+                        you're satisfied with the changes in the sandbox, you can deploy the
+                        changes to the full test environment.
+                     </p>
+                     
+                     <p>You can also use the Manage Customizations dialog
+                        box to:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>View others' customization metadata
+                              files
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Download others' customization
+                              metadata files for manually moving them to another environment or
+                              diagnosing any issues
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You can also upload others' customization metadata
+                        files to your environment.
+                     </p>
+                     
+                     <p>This figure illustrates the use of sandboxes while:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Customizing pages, objects, and
+                              security using Page Composer and Application Composer
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Configuring flexfields</p>
+                        </li>
+                        
+                     </ul>
+                     <img src="img/com_ext_runtimewrkflw_04_20043804.png" alt="The run time customization workflow" class="fusappimg">
+                     
+                     
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OAEXT1030636">
+                     <h3>Viewing and Diagnosing Run Time Customizations: Points to Consider</h3>
+                     
+                     
+                     
+                     
+                     
+                     
+                     <p>Use the Manage Customizations dialog box
+                        to view and diagnose run time customizations made to application pages.
+                        Customizations are role-dependent and by default, the Manage Customizations
+                        dialog box displays the customizations that the signed-in user had
+                        performed.
+                     </p>
+                     
+                     <p>Before you begin viewing customizations, ensure that
+                        you have administrative privileges to access the Manage Customizations dialog box.
+                        If you're unable to display the page that contains the customizations:
+                     </p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click your user name in the global area, and select <span class="uicontrol">Manage Customizations</span> from the <span class="uicontrol">Administration</span> menu.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Use the Search text field on the
+                              Manage Customizations dialog box to search for the page, page fragment,
+                              or task flow.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>You can view the customizations for a user under
+                        the Current Context column on the Manage Customizations dialog box.
+                        On this dialog box, you can change the page, page fragment, or task
+                        flow for which you're viewing customizations using the <span class="uicontrol">Search</span> field.
+                     </p>
+                     
+                     <p>Developers too may be assigned to specific roles
+                        and can view only those customizations that are permitted for the
+                        specific roles. However, administrators can view all customizations
+                        made at the site level, and for any user, under the All Layers column
+                        on the Manage Customizations page. To view customizations made by
+                        more than one user, administrators can select multiple users.
+                     </p>
+                     
+                     <p>Sometimes, an administrator may need to view a personalization
+                        that was made by another end user. For example, suppose a user made
+                        an error while personalizing a page and that page is no longer displayed
+                        for the user. Because the user can't open the page, the user can't
+                        correct the error. In this case, the administrator can access the
+                        page, request to see the user's changes, and delete those changes
+                        to restore the page to its original settings.
+                     </p>
+                     
+                     
+                     
+                     <div class="sect3" id="OAEXT1030633">
+                        <h4 class="topictitle">Page-Level Customizations</h4>
+                        
+                        
+                        
+                        <p>To diagnose customization issues, determine
+                           whether customizations have been applied to a page. Use the Manage
+                           Customizations dialog box to determine if page-level customizations
+                           exist. If a page customization causes problems, such as a user interface
+                           component disappears from a page, you can export the customizations
+                           and examine the document file.
+                        </p>
+                        
+                        
+                        
+                     </div>
+                     
+                     
+                     <p class="relatedlinks">Related Topics</p>
+                     <ul>
+                        <li>
+                           <p><a href="OAEXT1184585.htm#OAEXT1164392">Customization Layers: Explained</a></p>
+                        </li>
+                     </ul>
+                     
+                  </div>
+               </div>
+               
+               <div class="sect1" id="OAEXT1189604">
+                  <h2>Sandbox Manager</h2>
+                  
+                  <div class="sect2" id="OAEXT1189040">
+                     <h3>Managing Customizations Using Sandboxes: Explained</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>You can apply different types of customizations
+                        to an application. For example, you can apply changes to an application's
+                        metadata stored in the metadata services repository or changes related
+                        to data security of the application. All such customizations are stored in sandboxes and are validated
+                        before applying them to an application.
+                     </p>
+                     
+                     
+                     <div class="sect3" id="OAEXT1643866">
+                        <h4 class="topictitle">Types of Customizations in Sandboxes</h4>
+                        
+                        <p>Sandboxes can contain the following types of customizations:</p>
+                        
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Metadata changes - These changes
+                                 (such as non-flexfield user interface (UI) page customizations) are
+                                 captured in a metadata sandbox.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Data security changes - These changes
+                                 are additionally captured in a data security enabled sandbox.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Changes in the generated flexfields
+                                 business components - These changes are captured in a flexfield that's
+                                 deployed as a single flexfield sandbox.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>Once you're ready to make sandbox changes available
+                           in the mainline metadata, either publish the metadata or data security sandbox, or deploy
+                           the flexfield. You can download only metadata and data security sandboxes
+                           as a sandbox file for import to another application instance.
+                        </p>
+                        
+                        <p>The following table lists the differences among the
+                           types of sandboxes.
+                        </p>
+                        
+                        <div class="simpletable-margin">
+                           <table class="customlayout" summary="The table presents how to make&#xA;changes available in the mainline metadata and whether the sandbox&#xA;is downloadable for each of type of sandbox: a sandbox enabled for&#xA;metadata changes, a sandbox enabled for data security changes, and&#xA;a flexfield-enabled sandbox.">
+                              
+                              
+                              <tr class="header">
+                                 
+                                 <th scope="col">
+                                    Type of Changes
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Type of Sandbox
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Method for Making Changes Available in Mainline Metadata
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Downloadable?
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Metadata</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Sandbox</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Publish sandbox</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Data security</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Sandbox enabled for data security changes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Publish sandbox</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Flexfield</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Flexfield deployed as a flexfield-enabled sandbox</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Deploy flexfield</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        <p></p>
+                        
+                        
+                        
+                        <p>Only one sandbox can be active at a time. All changes
+                           made in an active sandbox are captured in that sandbox.
+                        </p>
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="OAEXT1189038">
+                        <h4 class="topictitle">Environment</h4>
+                        
+                        <p>To customize your application
+                           in run time, you must first create a sandbox and then use tools, such
+                           as Page Composer to make the customizations. These changes remain
+                           within the sandbox and don't affect the mainline metadata. You can
+                           test and validate the changes by publishing the sandbox to a full
+                           test environment. After testing the application, you can move to the
+                           production environment. The customizations created in the sandbox
+                           will be migrated to the production environment and will be available
+                           to the users.
+                        </p>
+                        
+                        
+                        <p>Don't make customizations directly in the mainline
+                           metadata. Make all customizations first in the sandbox. When you make
+                           changes to an application at run time in a sandbox, you isolate the
+                           changes from the mainline metadata. After completing the changes in
+                           the sandbox, verify them. When you're ready to save the changes, publish
+                           the metadata or security-enabled sandbox to the mainline metadata.
+                        </p>
+                        
+                        <p>When you create a sandbox, you can only see the customization
+                           information of the existing customizations in the current mainline
+                           metadata. For example, suppose you do customization in a sandbox and
+                           publish it. Then, on creating another sandbox for the next customization,
+                           you will see customization1 in the new sandbox because customization1
+                           exists in the current mainline metadata.
+                        </p>
+                        
+                        <p>Flexfield sandboxes are for testing only and can't
+                           be published. Make flexfield configurations that are stored in a database.
+                           Then, deploy those configurations to a sandbox to see the resulting
+                           deployment artifacts in a sandbox environment. Flexfields are deployed
+                           directly to the mainline metadata using the flexfield user interface.
+                        </p>
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="OAEXT1189039">
+                        <h4 class="topictitle">Tools</h4>
+                        
+                        <p>You can use several run time tools to customize the
+                           application. For example, you can customize objects and pages using
+                           Page Composer, which uses sandbox manager. Oracle Business Process
+                           Composer and Oracle SOA Composer are also run time customization tools,
+                           but they don't use sandbox manager. They have their own mechanisms
+                           for handling customization changes.
+                        </p>
+                        
+                        
+                        <p>Metadata sandboxes that you create using sandbox
+                           manager are available in Oracle JDeveloper while creating and deploying
+                           customizations for a deployed application in Oracle WebLogic Server.
+                           During deployment, the available sandboxes (except security sandboxes)
+                           appear in a selection list in Oracle JDeveloper. Oracle JDeveloper
+                           is not available in Oracle Cloud implementations. You can save, download,
+                           and import the metadata sandbox sessions as files into other applications.
+                        </p>
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="OAEXT1643867">
+                        <h4 class="topictitle">Managing a Flexfield Sandbox</h4>
+                        
+                        <p>To create a flexfield-enabled sandbox, deploy one
+                           flexfield to a sandbox using the Manage Flexfield task flow. The flexfield
+                           sandbox gets its name from the flexfield you deploy. You can't test
+                           two flexfields in the same sandbox. After deploying a flexfield as
+                           a sandbox, sign out and sign in again to view how the sandbox run
+                           time reflects the flexfield changes, such as new segments. You can
+                           redeploy the same flexfield to the same sandbox repeatedly as you
+                           make incremental changes to the flexfield setup. A flexfield sandbox
+                           can't be published. So, when the flexfield is deployed to the mainline
+                           metadata, any page customizations or data security in the flexfield
+                           sandbox can't reach the mainline metadata. If you're entitled to do
+                           so, manage flexfield-enabled sandboxes in the Sandbox Manager.
+                        </p>
+                        
+                     </div>
+                     
+                     
+                     <p class="relatedlinks">Related Topics</p>
+                     <ul>
+                        <li>
+                           <p><a href="OAEXT1184588.htm#OAEXT208188">Deploying a Flexfield to a Sandbox: Points to Consider</a></p>
+                        </li>
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OAEXT1189117">
+                     <h3>Using Sandboxes: Points to Consider</h3>
+                     
+                     
+                     
+                     
+                     
+                     
+                     <p>In the customization run time workflow, use sandboxes to isolate the
+                        changes from the mainline
+                        metadata for testing and validating. After you're satisfied
+                        with the changes, you can publish the changes back to the mainline
+                        metadata.
+                     </p>
+                     
+                     <p>You can create two types of sandboxes:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Sandboxes that are intended for
+                              testing purposes only
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Sandboxes that are intended to
+                              be published
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>The testing sandboxes are never published and therefore
+                        produce no concurrency conflicts between sandboxes. You can have several
+                        testing sandboxes at the same time. But if you have multiple users
+                        working on the same testing sandbox, then they must adhere to the
+                        prescribed guidelines.
+                     </p>
+                     
+                     <p>Customizations in the sandboxes that are published
+                        are merged back to the mainline metadata. The following figure illustrates
+                        the two types of sandboxes and their relationship to the mainline
+                        metadata.
+                     </p>
+                     <img src="img/com_ext_sandboxtype_01_20043867.png" alt="Types of sandboxes" class="fusappimg">
+                     
+                     
+                     
+                     <div class="sect3" id="OAEXT1189112">
+                        <h4 class="topictitle">Working with a Single Sandbox</h4>
+                        
+                        
+                        
+                        <p>When multiple users are customizing an application
+                           using the same sandbox at the same time, conflicts within a sandbox
+                           may arise. This conflict may arise because multiple users attempt
+                           to customize the same artifact or perform customization tasks that
+                           indirectly affect other shared files. For example:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>A direct conflict arises when different
+                                 users attempt to customize the same page, fragment, or metadata file
+                                 within the same layer.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>An indirect conflict arises when
+                                 two users, each creating a different object, save their changes at
+                                 the same time. This conflict occurs in the metadata file that tracks
+                                 which new objects both users created while saving their changes.
+                              </p>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>Conflicts may also arise when users edit a shared
+                           artifact, such as when a user performs an operation that adds or edits
+                           a translatable string. For example, say:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>One user edits a field's display
+                                 label or help text, or a validation rule's error message. Whereas,
+                                 another user performs an operation at the same time that similarly
+                                 affects translatable strings.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Two or more users are working in
+                                 navigator menus that are shared across applications. Whenever a customization
+                                 conflict arises among users, the application displays concurrency
+                                 warning messages.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        
+                        <p>Whether the sandbox is meant for testing or production,
+                           if multiple users work with a single sandbox, follow these guidelines
+                           to avoid conflicts:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Multiple concurrent users in the
+                                 same sandbox must operate only on different and unrelated objects.
+                                 For example, if user1 updates object1, then user2 can update object2,
+                                 but must not update object1. Suppose both modifications involve changes
+                                 to translatable strings, and the users save changes to separate objects
+                                 at the same time. Even then, a conflict can occur in the resource
+                                 bundle that stores the translatable strings.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>If multiple users update the same
+                                 artifact (same object or same underlying frequently modified file)
+                                 concurrently, then they'll get a concurrent update error. The second
+                                 user's updates won't be saved (the Save button will be disabled),
+                                 and one of the users will have to cancel and try again.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>All users using the same sandbox
+                                 should have the same application role. Users with different roles
+                                 might not be able to see all content created by other users within
+                                 the sandbox.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="OAEXT1189113">
+                        <h4 class="topictitle">Working with Multiple Sandboxes</h4>
+                        
+                        
+                        
+                        <p>Multiple sandboxes are used when customizations
+                           are stored in testing as well as production sandboxes. Say, after
+                           you create a sandbox, a concurrent change is made in the mainline
+                           metadata. Now, when you attempt to publish that sandbox, the application
+                           detects such conflicts at publication time, and you get error messages.
+                        </p>
+                        
+                        <div class="infobox-note"><span class="notep1">Note: </span>
+                           When you publish your sandbox, you may get a message
+                           showing a conflict on oracle/apps/menu/fnd/applcore/dataSecurity/dataSecurityService/mds/DSMO.xml. This message indicates that the security changes that you made
+                           in your sandbox conflict with other security changes in the mainline
+                           metadata. Delete the sandbox and recreate your changes in a new sandbox.
+                           
+                        </div>
+                        
+                        <p>If multiple users are permitted to work in multiple
+                           sandboxes at the same time, follow these guidelines to avoid conflicts:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Any number of test-only sandboxes
+                                 can operate concurrently. That is, multiple users can use multiple
+                                 sandboxes concurrently for testing if these sandboxes will never be
+                                 published. Sandboxes that are used for testing only, and that aren't
+                                 published, cause no conflicts with each other. Be aware, however,
+                                 that all modifications will be lost when the sandboxes are destroyed.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>For sandboxes that aren't for test-only
+                                 and will be published, users can use multiple concurrent sandboxes
+                                 only if they operate on mutually exclusive artifacts. For example,
+                                 you can have:
+                              </p>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>One sandbox that contains a page
+                                       that a user is customizing to add a task flow
+                                    </p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Another sandbox that contains a
+                                       different page from a different application
+                                    </p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                              <p>However, some objects might still share underlying
+                                 artifacts, and thus it's not always obvious if two objects are truly
+                                 mutually exclusive. Thus, proceed with caution when using multiple
+                                 concurrent sandboxes that will be published. It's still possible that
+                                 a conflict could occur, which would require the deletion of one or
+                                 more sandboxes.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Suppose the users update an artifact
+                                 in both, the mainline metadata and in one sandbox, or in two different
+                                 sandboxes. Now, when you publish the sandbox, the application detects
+                                 such conflicts and you get an error message. At this point, cancel
+                                 publishing the sandbox to avoid overwriting previous changes.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <div class="infobox-note"><span class="notep1">Note: </span>
+                           For a sandbox that contains ADF Business Components
+                           customizations, sign out and sign in again after switching in or out
+                           of this sandbox. This process ensures avoiding any inconsistencies
+                           between the run time caches and the ADF Business Components definitions.
+                           
+                        </div>
+                        
+                        <p></p>
+                        
+                        
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OAEXT1189226">
+                     <h3>Setting Up Sandboxes: Procedure</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>To make customizations to the application
+                        artifacts, you need to first store them in an active sandbox. You can either create a sandbox
+                        or select an existing sandbox, and designate it as an active sandbox.
+                        The active sandbox holds the context for all the changes. The sandbox
+                        uses a database to store the actual changes. After testing your changes,
+                        you can publish the sandbox, or deploy the flexfield, and the changes
+                        are merged into the mainline
+                        metadata. Eventually, the sandbox is archived.
+                     </p>
+                     
+                     
+                     
+                     <p>The following procedure is for setting up non-flexfield
+                        sandboxes. For flexfields, use the Manage Descriptive Flexfields task
+                        or the Manage Extensible Flexfields task.
+                     </p>
+                     
+                     <div class="infobox-caution"><span class="notep1">Caution: </span>
+                        Do not import or delete metadata files. These operations
+                        modify sandbox contents and could cause issues with the sandbox functionality.
+                        
+                     </div>
+                     
+                     <p>To create a sandbox and set it up:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Click your user name in the global area, and select <span class="uicontrol">Manage Sandboxes</span> from the <span class="uicontrol">Administration</span> menu.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Use the Manage Sandboxes dialog
+                              box to create a sandbox.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Save and Close</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Manage Sandboxes dialog
+                              box, select the new sandbox or an existing one, and click <span class="uicontrol">Set as Active</span>. The sandbox is designated
+                              as the active sandbox.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Close the Manage Sandboxes dialog
+                              box.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                     
+                     <p class="relatedlinks">Related Topics</p>
+                     <ul>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=95FA21E236672BB3E040D30A6881061E">Hierarchy in Profile Levels: Explained</a></p>
+                        </li>
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OAEXT1189276">
+                     <h3>Publishing Sandboxes: Procedure</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>After completing the customizations in the sandbox, publish them to
+                        make them available in the application.
+                     </p>
+                     
+                     
+                     <div class="sect3" id="OAEXT1550528">
+                        <h4 class="topictitle">Prerequisites</h4>
+                        
+                        
+                        <p>Before publishing the customizations, test
+                           or validate the changes at run time using test systems and any combination
+                           of the validation setups.
+                        </p>
+                        
+                        
+                        
+                        <p>If there are changes to the mainline metadata from another source
+                           and you publish your sandbox data, then the mainline metadata isn't
+                           overwritten. However, if you get error messages notifying about conflicts,
+                           then you must fix the conflicts before publishing.
+                        </p>
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="OAEXT1550529">
+                        <h4 class="topictitle">Publishing Sandboxes</h4>
+                        
+                        
+                        <p>To publish a sandbox:</p>
+                        
+                        
+                        
+                        <ol>
+                           
+                           <li>
+                              <p>Click your user name in the global area, and select <span class="uicontrol">Manage Sandboxes</span> from the <span class="uicontrol">Administration</span> menu.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>On the Manage Sandboxes dialog
+                                 box, select the sandbox and click <span class="uicontrol">Publish</span>. The Publish confirmation message box appears.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Click <span class="uicontrol">Yes</span>. The sandbox is published to the mainline metadata.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Close the Manage Sandboxes dialog
+                                 box.
+                              </p>
+                           </li>
+                           
+                        </ol>
+                        
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+               </div>
+               
+               <div class="sect1" id="OAEXT1184569">
+                  <h2>Moving Customizations</h2>
+                  
+                  <div class="sect2" id="OAEXT1030758">
+                     <h3>Using Customization Migration to Move Customizations: Points to Consider</h3>
+                     
+                     
+                     
+                     
+                     
+                     
+                     <p>Use the Customization Migration page to create
+                        a set of all customizations and extensions made to an application
+                        environment. Then, download the customization set and upload it into
+                        another environment. The customization set includes customizations
+                        across all product families. To open the Customization Migration page,
+                        select <span><span class="uicontrol">Tools </span> - <span class="uicontrol">Migration</span></span> from
+                        the Navigator menu.
+                     </p>
+                     
+                     
+                     
+                     <div class="sect3" id="OAEXT1030755">
+                        <h4 class="topictitle">Contents of the Customization Set</h4>
+                        
+                        
+                        
+                        <p>The customization set includes:</p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Customizations done using Application
+                                 Composer, except the following customizations:
+                              </p>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>Object artifacts that were generated
+                                       from the Import and Export page in Application Composer to make extensions
+                                       available for importing and exporting
+                                    </p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>User names and passwords for secured
+                                       SOAP web service connections
+                                    </p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>The enabled attachment feature
+                                       for custom objects
+                                    </p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Customizations done using:</p>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>Page Composer</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Appearance page</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Structure page</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>User Interface Text page</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Page Integration Wizard page</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Changes in the following artifacts
+                                 of the Applications Core Setup application:
+                              </p>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>Messages</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Lookups</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Data security</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Descriptive, extensible, and key
+                                       flexfields, and value sets
+                                    </p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Attachment categories and entities</p>
+                                    
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Changes in scheduled processes</p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Customizations done using the Manage
+                                 Oracle Social Network Objects task
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Changes in security settings made
+                                 in Application Composer
+                              </p>
+                              <div class="infobox-"><span class="notep1">Note: </span>
+                                 Enterprise roles, new duty roles, and role hierarchy
+                                 changes, which are made directly in Security Console aren't migrated.
+                                 
+                              </div>
+                           </li>
+                           
+                           <li>
+                              <p>Customizations done using Oracle
+                                 Business Intelligence Enterprise Edition, including but not limited
+                                 to:
+                              </p>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>Oracle Business Intelligence Answers</p>
+                                    
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Oracle Business Intelligence Delivers</p>
+                                    
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Business Intelligence Composer</p>
+                                    
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Dashboard Builder</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Oracle Business Intelligence Publisher</p>
+                                    
+                                 </li>
+                                 
+                              </ul>
+                              
+                              <div class="infobox-note"><span class="notep1">Note: </span>
+                                 You can move the customizations done using the business
+                                 intelligence tools only if the Disable BI for Customization Set Migration
+                                 profile option is set to <span class="uicontrol">No</span>.
+                                 
+                              </div>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>The customization set doesn't include personalizations.</p>
+                        
+                        <p>While an upload or restore activity processes Presentation
+                           Services customizations, the following can occur:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Reports that were submitted by
+                                 Oracle Enterprise Scheduler to Oracle Business Intelligence Publisher
+                                 and were scheduled to execute during the process, will fail.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>The Reports and Analytics pane
+                                 doesn't display.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Oracle Business Intelligence Publisher
+                                 reports may not display on Oracle Business Intelligence Presentation
+                                 Services analyses or dashboard pages.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Users may not be able to access
+                                 Oracle Business Intelligence Enterprise Edition features, such as:
+                              </p>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>Oracle Business Intelligence Answers</p>
+                                    
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Oracle Business Intelligence Delivers</p>
+                                    
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Business Intelligence Composer</p>
+                                    
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Oracle Business Intelligence Interactive
+                                       Dashboards
+                                    </p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>Some important points to consider are:</p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>The customization migration doesn't
+                                 include code extensions, such as managed beans, that you implement
+                                 in Oracle JDeveloper using the applications developer role. These
+                                 code extensions are stored in the <code>app-inf/lib</code> and <code>web-inf/lib</code> directories and you
+                                 must manually move the extensions.
+                              </p>
+                              <div class="infobox-"><span class="notep1">Note: </span>
+                                 Oracle JDeveloper isn't available in Oracle Cloud
+                                 implementations.
+                                 
+                              </div>
+                           </li>
+                           
+                           <li>
+                              <p>The type of customizations across
+                                 all applications that will be added to the customization set are selected
+                                 by default on the Customization Migration page. You can't change this
+                                 selection.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>To prevent including in-progress
+                                 customizations in the customization set, make your customizations
+                                 in a sandbox. The customization set doesn't include customizations
+                                 from a sandbox until the sandbox is published.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>You can use the Customization Migration page to move
+                           customizations and extensions from any source environment to any target
+                           environment. However, you must always perform your customizations
+                           and extensions in a full test environment. Then use the Customization
+                           Migration page to move these changes to a production environment.
+                           As customization set migration doesn't provide a merge capability,
+                           never customize or extend a production environment. When you import
+                           a customization set, the rows in the database that are not preconfigured
+                           are updated if a matching record exists. Otherwise a record is inserted.
+                        </p>
+                        
+                        <p>The customization set doesn't include all deletions.
+                           For example, the set does not include the removal of a customization
+                           document using the Manage Customizations dialog box. After you import
+                           a customization set into the target environment, you must examine
+                           the environment for any deletions that you must make manually. Similarly,
+                           the customization set does not include roles or role hierarchy changes.
+                           Changes made to Security Console have to be manually updated in the
+                           target environment.
+                        </p>
+                        
+                        
+                        
+                     </div>
+                     
+                     
+                     <p class="relatedlinks">Related Topics</p>
+                     <ul>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=A2A6C6C9B0156780E040D30A688178F5">Importing and Exporting Custom Objects: Explained</a></p>
+                        </li>
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OAEXT1029054">
+                     <h3>Creating and Applying Customizations Using a Customization Set: Procedure</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Create a customization set to move
+                        customizations across all the product families of the application
+                        from one environment to another. You can export all customizations,
+                        such as those stored in Oracle Metadata Services repository, JEDI,
+                        CRM, and BI using the Outgoing tab of the Customization Migration
+                        page. You can then import them to the target environment using the
+                        Incoming tab. You can use a customization set to move customizations
+                        in a batch instead of moving them one by one.
+                     </p>
+                     
+                     
+                     <div class="sect3" id="OAEXT1586474">
+                        <h4 class="topictitle">Prerequisites</h4>
+                        
+                        <p>Before creating a customization set, ensure that:</p>
+                        
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>The source and target application
+                                 environments are of the same release and the same standard and one-off
+                                 patches are applied to both environments.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>All Page Composer and Oracle JDeveloper
+                                 (not available in Oracle Cloud implementations) customizations made
+                                 in sandboxes are complete before they're published. Before starting
+                                 the export process, you must publish all complete customizations.
+                                 All customizations and extensions made using the Structure page, the
+                                 Manage Standard Lookups task, and Security Console, are complete.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>To move content created using Oracle
+                                 Business Intelligence Enterprise Edition features, the Disable BI
+                                 for Customization Set Migration profile option is set to No in source
+                                 and target environments. To view this profile option, open the Manage
+                                 Profile Options task in the Setup and Maintenance work area.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>You have been granted the following
+                                 privileges, which enable you to access the Customization Migration
+                                 page:
+                              </p>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>FND_MANAGE_OUTGOING_CUSTOMIZATION_SET_PRIV</p>
+                                    
+                                 </li>
+                                 
+                                 <li>
+                                    <p>FND_MANAGE_INCOMING_CUSTOMIZATION_SET_PRIV</p>
+                                    
+                                 </li>
+                                 
+                              </ul>
+                              
+                              <p>Contact your security administrator for details.</p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>You never make customizations in
+                                 the target or production environment while applying customizations.
+                              </p>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                        <div class="infobox-note"><span class="notep1">Note: </span>
+                           If you make customizations to the production environment
+                           in emergency circumstances, you must make the same customizations
+                           to the test environment. Making the customizations to the test environment
+                           ensures that the customizations are included in the next customization
+                           migration.
+                           
+                        </div>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>You don't perform customizations
+                                 in the source environment during the export process. 
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="OAEXT1586475">
+                        <h4 class="topictitle">Creating Customizations</h4>
+                        
+                        <p>To create customizations:</p>
+                        
+                        
+                        <ol>
+                           
+                           <li>
+                              <p>In the source environment, select <span><span class="uicontrol">Tools</span> - <span class="uicontrol">Migration</span></span> from the Navigator menu.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>From the Outgoing tab of the Customization
+                                 Migration page, click <span class="uicontrol">Create Customization
+                                    Set</span>.
+                              </p>
+                              <div class="infobox-tip"><span class="notep1">Tip: </span>
+                                 If the <span class="uicontrol">Delete</span> button appears for an existing customization set, click the button.
+                                 This action removes the temporary files that are on the server from
+                                 the previous customization set creation. You can't create a customization
+                                 set until the previous set has been deleted.
+                                 
+                              </div>
+                           </li>
+                           
+                           <li>
+                              <p>Provide a name for the customization
+                                 set.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Optionally, type a description
+                                 of the set.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Click <span class="uicontrol">Save and Close</span>.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Periodically, click <span class="uicontrol">Refresh</span> to view the current status of the
+                                 set creation. Eventually, the status changes to Ready for Download.
+                              </p>
+                              
+                              <p>To see the detailed status of each customization
+                                 type, expand Customization Details.
+                              </p>
+                              
+                              <p>The process runs asynchronously. You can close the
+                                 dialog box and return to it later.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Click <span class="uicontrol">Download</span>, and specify the name and location for the file,
+                                 and click <span class="uicontrol">Save</span>. Ensure that the
+                                 downloaded file is a JAR file.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>After you download the file on
+                                 your local file system, click <span class="uicontrol">Delete</span> to remove the temporary files that were created on the server.
+                              </p>
+                              
+                           </li>
+                           
+                        </ol>
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="OAEXT1586476">
+                        <h4 class="topictitle">Applying Customizations</h4>
+                        
+                        <p>After you apply customizations, end users must sign
+                           out and sign in again to see the changes. Hence, apply customizations
+                           when a few people are signed into the environment. To apply customization
+                           to the target environment, follow these steps:
+                        </p>
+                        
+                        
+                        <ol>
+                           
+                           <li>
+                              <p>Open the Customization Migration
+                                 page in the target environment.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>From the Incoming tab, click <span class="uicontrol">Browse</span>, specify the name and location of
+                                 the customization set file, and click <span class="uicontrol">Open</span>.
+                              </p>
+                              <p>If the Browse button appears disabled, click <span class="uicontrol">Delete</span> to remove the previously uploaded
+                                 customization set from the environment and enable the Browse button.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>When the status for the customization
+                                 set is Ready to Apply Customizations, click <span class="uicontrol">Apply</span>.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Periodically, click <span class="uicontrol">Refresh</span> to view the current status of the
+                                 Apply action.
+                              </p>
+                              <p>The process runs asynchronously.
+                                 You can close the dialog box and return to it later.
+                              </p>
+                              
+                              <p>For Oracle Cloud implementations, if problems occur
+                                 during an Apply action, log a service request using My Oracle Support
+                                 at https://support.oracle.com.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Access the target environment and
+                                 examine the environment for any deletions that you must manually make.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Deploy all flexfields that display
+                                 a Patched status.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Perform the following steps to
+                                 send the new and updated social network definitions to the social
+                                 network server:
+                              </p>
+                              
+                              <ol>
+                                 
+                                 <li>
+                                    <p>In the Setup and Maintenance work
+                                       area, open the Manage Oracle Social Network Objects task.
+                                    </p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>As part of the applying customizations
+                                       process, some objects are created or updated. If the Enabled value
+                                       of such an object is anything other than No, trigger the process of
+                                       sending its definition to the social network server. You can do it
+                                       by disabling the object and enabling it again with its original status.
+                                       For example, if the Enabled value is Manual, then:
+                                    </p>
+                                    
+                                    <ol>
+                                       
+                                       <li>
+                                          <p>Disable the object.</p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Enable the object, and select the
+                                             value, Manual.
+                                          </p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>Click <span class="uicontrol">OK</span> and save the changes.
+                                          </p>
+                                       </li>
+                                       
+                                    </ol>
+                                    
+                                 </li>
+                                 
+                              </ol>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Manually migrate all business processes
+                                 created in the source environment to the target environment.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>After applying customizations,
+                                 perform functional testing to verify the changes. Suppose testing
+                                 exposes problems with the customizations, such as importing more than
+                                 you intended, or the changes weren't what you expected. In such cases:
+                              </p>
+                              
+                              <ol>
+                                 
+                                 <li>
+                                    <p>Open the customization set in the
+                                       Incoming tab of the Customization Migration page.
+                                    </p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Click <span class="uicontrol">Restore</span> to revert to the state before the customization
+                                       set was applied.
+                                    </p>
+                                    <p>Skip the next step in such cases.</p>
+                                    
+                                 </li>
+                                 
+                              </ol>
+                              
+                              <p>You can view the process log to monitor the progress
+                                 of the download or the applying process. This process takes approximately
+                                 15 minutes. If it takes any longer and you don't see any progress,
+                                 click <span class="uicontrol">Refresh</span>. You can either
+                                 let the server take its time and click <span class="uicontrol">Continue</span>, or click <span class="uicontrol">Restart</span> to restart
+                                 the export process.
+                              </p>
+                              
+                              <p>Following are some important points regarding customization
+                                 import and export:
+                              </p>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>After an environment upgrade, any
+                                       previous imports which were performed in an earlier release can't
+                                       be reverted. However if a new import is submitted in the upgraded
+                                       instance, then the most recent import can be reversed.
+                                    </p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Lookup values for lookup fields
+                                       that exist in both source and target aren't overwritten during the
+                                       customization import. The lookup values from source are added to the
+                                       target and all the lookup values coexist for the same field. For example,
+                                       the Status field in its source environment has values, Open and Closed.
+                                       In the target environment this field has values, Yes and No. After
+                                       the import, the Status field in the target environment has values,
+                                       Open, Closed, Yes, and No.
+                                    </p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>After importing, perform the following
+                                       steps in the target environment to send the new and updated social
+                                       network definitions to the social network server.
+                                    </p>
+                                    
+                                    <ol>
+                                       
+                                       <li>
+                                          <p>In the Setup and Maintenance work
+                                             area, open the Oracle Social Network Objects task.
+                                          </p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>On the Oracle Social Network Objects
+                                             page, click <span class="uicontrol">Synchronize</span> to synchronize
+                                             a selected object, or click <span class="uicontrol">Synchronize All</span> to synchronize all objects together.
+                                          </p>
+                                       </li>
+                                       
+                                    </ol>
+                                    
+                                 </li>
+                                 
+                                 <li>
+                                    <p>During customization import, the
+                                       data security privileges aren't automatically revoked in the target
+                                       environment. For example, say a specific privilege is granted in the
+                                       target environment, but the corresponding privilege doesn't exist
+                                       in the source environment. During import, the privilege in the target
+                                       environment won't be automatically revoked. To address this issue
+                                       manually, add such a privilege to the source environment and revoke
+                                       it. The revoke action is picked up as a customization instance during
+                                       the customization import process and applied to the target environment.
+                                    </p>
+                                    
+                                 </li>
+                                 
+                                 <li>
+                                    <p>You can create custom reports directly
+                                       in the target environment. However, ensure that you create the custom
+                                       reports and reference them to the existing custom subject areas. Don't
+                                       create the custom subject areas directly in the target environment.
+                                    </p>
+                                    
+                                 </li>
+                                 
+                                 <li>
+                                    <p>You can initiate customization
+                                       export and import tasks only from the mainline metadata. If you initiate customization
+                                       from a sandbox, the process doesn't execute.
+                                    </p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                              <div class="infobox-caution"><span class="notep1">Caution: </span>
+                                 All user personalizations that are performed after
+                                 a customization set is applied are lost when you perform a restore
+                                 action on that customization set.
+                                 
+                              </div>
+                           </li>
+                           
+                           <li>
+                              <p>Broadcast information to the users
+                                 that they must sign out and sign in to view the most recent changes.
+                              </p>
+                              
+                           </li>
+                           
+                        </ol>
+                        
+                        
+                     </div>
+                     
+                     
+                     <p class="relatedlinks">Related Topics</p>
+                     <ul>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=A2A6C6C9B0156780E040D30A688178F5">Importing and Exporting Custom Objects: Explained</a></p>
+                        </li>
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OAEXT1030549">
+                     <h3>Exporting and Moving Customizations: Points to Consider</h3>
+                     
+                     
+                     
+                     
+                     
+                     
+                     <p>Customizations are stored
+                        in XML files. You can use these XML files to export customizations
+                        for the following reasons:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>To move customizations and extensions
+                              to another environment, such as the production environment.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>To diagnose issues noticed in the
+                              test environment.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>To send files to your help desk
+                              for further diagnosing.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>To import a customization into
+                              another environment. For example, a customization developer using
+                              Oracle JDeveloper may see customizations that other users do.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>The following table lists the tools to use to export
+                        and move customizations and extensions.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Tools for exporting and moving&#xA;customizations">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Tasks
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Tools to Use
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Move all customizations to another application environment.</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Customization Migration.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p> Move only Oracle Metadata Services customizations
+                                    made to pages and the user interface to another application environment.
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Enterprise Manager Cloud Control.</p>
+                                 
+                                 <p>You can also use Enterprise Manager Cloud Control
+                                    to download and upload a set of customizations.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p> Move only descriptive flexfield configurations to
+                                    another application environment.
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Setup and Maintenance work area. Moves configurations for
+                                    a specified module.
+                                 </p>
+                                 
+                                 <p>To move configurations for all modules, use Customization
+                                    Migration.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Move only extensible flexfield configurations to
+                                    another application environment.
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Setup and Maintenance work area. Moves configurations
+                                    for a specified module.
+                                 </p>
+                                 
+                                 <p>To move configurations for all modules, use Customization
+                                    Migration.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Move only value set configurations to another application
+                                    environment.
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Setup and Maintenance work area. Moves configurations
+                                    for a specified module.
+                                 </p>
+                                 
+                                 <p>To move configurations for all modules, use Customization
+                                    Migration.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Move only lookups to application environment.</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Setup and Maintenance work area. Move application
+                                    standard lookups, application common lookups, or both.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Move only data security policies to another application
+                                    environment.
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Setup and Maintenance work area.</p>
+                                 
+                                 <p>It doesn't move Oracle Fusion Human Capital Management
+                                    roles.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Export customizations to a file to help diagnose
+                                    an issue.
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Customizations dialog box.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Export customizations to import them into an application
+                                    workspace in Oracle JDeveloper.
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Manage Customizations dialog box.</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        Enterprise Manager Cloud Control isn't available
+                        in Oracle Cloud implementations. Therefore, in Oracle Cloud implementations,
+                        to perform tasks that require use of Enterprise Manager Cloud Control,
+                        log a service request using your help desk at https://support.oracle.com.
+                        
+                     </div>
+                     
+                     
+                     
+                     <div class="sect3" id="OAEXT1030545">
+                        <h4 class="topictitle">Downloading Customizations</h4>
+                        
+                        
+                        
+                        <p>Use the Manage Customizations dialog box
+                           to download customization files for a given page. You can also upload
+                           the files into the Oracle Metadata Services repository using the same
+                           dialog box. To open Manage Customizations dialog box, click your user
+                           name in the global area, and select <span class="uicontrol">Manage Customizations</span> from the Administration menu. You can use these files for diagnosing
+                           customization issues. 
+                        </p>
+                        
+                        <p>You can also download all customizations of a page
+                           for all layers (<code>AllCustomization.zip</code>) using the <span class="uicontrol">Download Customizations for
+                              All Layers</span> link. This link is located at the bottom of
+                           the Manage Customizations dialog box. The <code>AllCustomization.zip</code> file contains all the customization XML files for the page. However,
+                           you can't upload this file anywhere.
+                        </p>
+                        
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="OAEXT1702595">
+                        <h4 class="topictitle">Downloading Customization Set Reports</h4>
+                        
+                        
+                        
+                        <p>After exporting customizations, you can view
+                           and download a customization set report that contains a list of all
+                           customizations available in a customization set. To do so, click <span class="uicontrol">Content Read Me</span> from the Outgoing tab of
+                           the Customization Migration page. To open the Customization Migration
+                           page, select <span><span class="uicontrol">Tools </span> - <span class="uicontrol">Migration</span></span> from
+                           the Navigator menu.
+                        </p>
+                        
+                        <p>The customizations in this report include all:</p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Custom objects</p>
+                           </li>
+                           
+                           <li>
+                              <p>Custom fields</p>
+                           </li>
+                           
+                           <li>
+                              <p>Custom pages</p>
+                           </li>
+                           
+                           <li>
+                              <p>Business intelligence (BI) changes</p>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>Business logic changes such as Groovy scripts and
+                           triggers aren't included in the customization set report.
+                        </p>
+                        
+                        
+                        
+                     </div>
+                     
+                     
+                     <p class="relatedlinks">Related Topics</p>
+                     <ul>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=A48BC766452FB084E040D30A6881408B">Implementation Project Based Export and Import: Explained</a></p>
+                        </li>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=9B5F0DDB3CD146B6E040D30A688163AC">Moving Related Common Reference Objects: Points to Consider</a></p>
+                        </li>
+                        <li>
+                           <p><a href="OAEXT1184585.htm#OAEXT1164392">Customization Layers: Explained</a></p>
+                        </li>
+                     </ul>
+                     
+                  </div>
+               </div>
+               
+               <div class="sect1" id="OAEXT1030579">
+                  <h2>Viewing and Deleting Customizations: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>Use the Manage Customizations dialog box
+                     to view the customizations made to the application pages and to delete
+                     unwanted customizations. Click your user name in the global area, and select <span class="uicontrol">Manage Customizations</span> from the <span class="uicontrol">Administration</span> menu.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="OAEXT1030595">
+                     <h3 class="topictitle">Deleting Customizations</h3>
+                     
+                     
+                     
+                     <p></p>
+                     
+                     <p>To delete customizations:</p>
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>On the page that contains the customizations,
+                              select the page fragment or task flow, and then select <span class="uicontrol">Manage Customizations</span> from the <span class="uicontrol">Administration</span> menu. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the Name list, select the correct
+                              layer, and find the page, task flow, or fragment that contains the
+                              customizations. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Delete</span> for the customization document that you want to
+                              delete.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OAEXT1029402">
+                  <h2>Advanced Customization Life Cycle Tasks: Highlights</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can perform design time tasks as part of the
+                     customization life cycle.
+                  </p>
+                  
+                  <div class="infobox-note"><span class="notep1">Note: </span>
+                     These customization tasks aren't available in Oracle
+                     Cloud implementations. 
+                     
+                  </div>
+                  
+                  
+                  <div class="sect2" id="OAEXT1029710">
+                     <h3 class="topictitle">Customization Tasks</h3>
+                     
+                     <ul>
+                        
+                        <li class="link">
+                           <p>The logging functionality for customization set
+                              migration is different from the standard logging functionality for
+                              your application. You can adjust the amount of detail to log customization
+                              migration without requiring a server restart. For more information,
+                              refer to the Oracle Fusion Applications Administrator's Guide.
+                           </p>
+                           
+                           <p class="seelink">See: <a href="http://www.oracle.com/pls/topic/lookup?ctx=cloud&amp;id=OASAD5942">Configuring ApplSession Log Levels</a></p>
+                           
+                           
+                           
+                        </li>
+                        
+                        <li class="link">
+                           <p>Developers can create customization metadata using
+                              Oracle JDeveloper, and package and deploy customizations to the source
+                              application environment. For more information, refer to the Oracle
+                              Fusion Applications Extensibility Guide for Developers.
+                           </p>
+                           
+                           <p class="seelink">See: <a href="http://www.oracle.com/pls/topic/lookup?ctx=cloud&amp;id=OADTC855">Design Time Customization Workflow</a></p>
+                           
+                           
+                           
+                           <p class="seelink">See: <a href="http://www.oracle.com/pls/topic/lookup?ctx=cloud&amp;id=OADTC373">Using Oracle JDeveloper for Customizations</a></p>
+                           
+                           
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

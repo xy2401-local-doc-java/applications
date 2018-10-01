@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>About Configuring Budgets for Oracle General Ledger Analytics</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="If you are using E-Business Suite or PeopleSoft and you would like to extract the budget data from these sources and import it into Oracle Business Analytics Warehouse, you can use the pre-configured adapter mappings. However, if you want to use budget data from other external systems, you can import the data into Oracle Business Analytics Warehouse using the Universal adapter." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-2959D1B1-AC19-430B-97BA-003136F47121.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-6F19C695-5720-4E01-B8AC-1EEBB0C18E95.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-9DB522AB-1AF4-4697-B52B-D88C291E6CCA"></a> <span id="PAGE" style="display:none;">33/336</span> <!-- End Header -->
+<a id="BIACF24569"></a><a id="BIACF24570"></a><a id="BIACF24571"></a><a id="BIACF24572"></a><a id="IT_277"></a>
+<h1 id="BIAFC-GUID-9DB522AB-1AF4-4697-B52B-D88C291E6CCA" class="sect1">About Configuring Budgets for Oracle General Ledger Analytics</h1>
+<div>
+<p>If you are using E-Business Suite or PeopleSoft and you would like to extract the budget data from these sources and import it into <span>Oracle Business Analytics Warehouse</span>, you can use the pre-configured adapter mappings. However, if you want to use budget data from other external systems, you can import the data into <span>Oracle Business Analytics Warehouse</span> using the Universal adapter.</p>
+<div class="section">
+<p class="subhead1">About Configuring Universal Source Files</p>
+<div class="p">The tables describe the columns in the universal source CSV files <code>file_budget.csv</code> and <code>file_acct_budget.csv</code>, their data types, and how to populate them where applicable. The records in <code>file_budget.csv</code> are loaded into W_BUDGET_D.
+<div class="infobox-note" id="GUID-9DB522AB-1AF4-4697-B52B-D88C291E6CCA__GUID-C7874F1C-009C-485D-9507-448B567686D8">
+<p class="notep1">Note:</p>
+If you are deploying OTBI-Enterprise, then you must download the CSV files from Configuration Manager, as follows: 1. From the Tasks bar, click <span class="bold">Define Business Intelligence Applications</span>. 2. Click <span class="bold">Actions</span>, then <span class="bold">Manage Source Configuration Data Files</span>. 3. Click the <span class="bold">Export Source Configuration Data Files</span> option on the tool bar. 4. Move the required files to the right hand list, then click Export.</div>
+</div>
+<div class="tblformal" id="GUID-9DB522AB-1AF4-4697-B52B-D88C291E6CCA__CHDDDBCB">
+<table class="cellalignment137" summary="Universal Source for Budget Dimension (file_budget.csv)">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment142" id="d19570e70">Column Name</th>
+<th class="cellalignment205" id="d19570e72">Datatype</th>
+<th class="cellalignment192" id="d19570e74">Size</th>
+<th class="cellalignment143" id="d19570e76">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e80" headers="d19570e70">
+<p>BUDGET_NAME</p>
+</td>
+<td class="cellalignment206" headers="d19570e80 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e80 d19570e74">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e80 d19570e76">
+<p>Budget name.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e93" headers="d19570e70">
+<p>BUDGET_VERSION</p>
+</td>
+<td class="cellalignment206" headers="d19570e93 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e93 d19570e74">
+<p>30</p>
+</td>
+<td class="cellalignment145" headers="d19570e93 d19570e76">
+<p>Budget version.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e106" headers="d19570e70">
+<p>BUDGET_STATUS</p>
+</td>
+<td class="cellalignment206" headers="d19570e106 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e106 d19570e74">
+<p>30</p>
+</td>
+<td class="cellalignment145" headers="d19570e106 d19570e76">
+<p>Budget status.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e119" headers="d19570e70">
+<p>BUDGET_TYPE</p>
+</td>
+<td class="cellalignment206" headers="d19570e119 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e119 d19570e74">
+<p>30</p>
+</td>
+<td class="cellalignment145" headers="d19570e119 d19570e76">
+<p>Budget type.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e132" headers="d19570e70">
+<p>CREATED_BY_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e132 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e132 d19570e74">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e132 d19570e76">
+<p>ID of created by user. Populate with Integration_ID from w_user_d.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e145" headers="d19570e70">
+<p>CHANGED_BY_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e145 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e145 d19570e74">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e145 d19570e76">
+<p>ID of changed by user. Populate with Integration_ID from w_user_d.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e158" headers="d19570e70">
+<p>CREATED_ON_DT</p>
+</td>
+<td class="cellalignment206" headers="d19570e158 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e158 d19570e74">
+<p>14</p>
+</td>
+<td class="cellalignment145" headers="d19570e158 d19570e76">
+<p>Created date.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e171" headers="d19570e70">
+<p>CHANGED_ON_DT</p>
+</td>
+<td class="cellalignment206" headers="d19570e171 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e171 d19570e74">
+<p>14</p>
+</td>
+<td class="cellalignment145" headers="d19570e171 d19570e76">
+<p>Changed date. Used for updating an existing record in the warehouse. Increase the date if you want to update the record. If a record with the same integration_ID already exists in the target table W_BUDGET_D, then the load process will compare the CHANGED_ON_DT values between this record and the record in W_BUDGET_D. If this record's CHANGED_ON_DT is later than the record in W_BUDGET_D, then the load process will perform an update against the record in W_BUDGET_D; otherwise the load process will ignore this record, and no update or insertion will occur. If there is no matching record in W_BUDGET_D with the same integration_ID, then the load process will insert this record into W_BUDGET_D.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e184" headers="d19570e70">
+<p>AUX1_CHANGED_ON_DT</p>
+</td>
+<td class="cellalignment206" headers="d19570e184 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e184 d19570e74">
+<p>14</p>
+</td>
+<td class="cellalignment145" headers="d19570e184 d19570e76">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e197" headers="d19570e70">
+<p>AUX2_CHANGED_ON_DT</p>
+</td>
+<td class="cellalignment206" headers="d19570e197 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e197 d19570e74">
+<p>14</p>
+</td>
+<td class="cellalignment145" headers="d19570e197 d19570e76">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e210" headers="d19570e70">
+<p>AUX3_CHANGED_ON_DT</p>
+</td>
+<td class="cellalignment206" headers="d19570e210 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e210 d19570e74">
+<p>14</p>
+</td>
+<td class="cellalignment145" headers="d19570e210 d19570e76">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e224" headers="d19570e70">
+<p>AUX4_CHANGED_ON_DT</p>
+</td>
+<td class="cellalignment206" headers="d19570e224 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e224 d19570e74">
+<p>14</p>
+</td>
+<td class="cellalignment145" headers="d19570e224 d19570e76">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e237" headers="d19570e70">
+<p>DELETE_FLG</p>
+</td>
+<td class="cellalignment206" headers="d19570e237 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e237 d19570e74">
+<p>1</p>
+</td>
+<td class="cellalignment145" headers="d19570e237 d19570e76">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e250" headers="d19570e70">
+<p>DATASOURCE_NUM_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e250 d19570e72">
+<p>number</p>
+</td>
+<td class="cellalignment193" headers="d19570e250 d19570e74">
+<p>10</p>
+</td>
+<td class="cellalignment145" headers="d19570e250 d19570e76">
+<p>A number for your data source. Populate the same datasource_num_id as your main source application.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e263" headers="d19570e70">
+<p>INTEGRATION_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e263 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e263 d19570e74">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e263 d19570e76">
+<p>A unique identifier for the record.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e276" headers="d19570e70">
+<p>TENANT_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e276 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e276 d19570e74">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e276 d19570e76">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e289" headers="d19570e70">
+<p>X_CUSTOM</p>
+</td>
+<td class="cellalignment206" headers="d19570e289 d19570e72">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e289 d19570e74">
+<p>10</p>
+</td>
+<td class="cellalignment145" headers="d19570e289 d19570e76">
+<p>-</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>This table shows the structure of the <code>file_acct_budget.csv</code> file. The records in the <code>file_acct_budget.csv</code> will be loaded into W__ACCT_BUDGET_F.</p>
+<div class="tblformal" id="GUID-9DB522AB-1AF4-4697-B52B-D88C291E6CCA__CHDCDGDG">
+<table class="cellalignment137" summary="Universal Source for Budget Fact (file_acct_budget.csv)">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment142" id="d19570e321">Column Name</th>
+<th class="cellalignment205" id="d19570e323">Datatype</th>
+<th class="cellalignment192" id="d19570e325">Size</th>
+<th class="cellalignment143" id="d19570e327">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e331" headers="d19570e321">
+<p>ADJUSTMENT_FLG</p>
+</td>
+<td class="cellalignment206" headers="d19570e331 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e331 d19570e325">
+<p>1</p>
+</td>
+<td class="cellalignment145" headers="d19570e331 d19570e327">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e344" headers="d19570e321">
+<p>AUX1_CHANGED_ON_DT</p>
+</td>
+<td class="cellalignment206" headers="d19570e344 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e344 d19570e325">
+<p>14</p>
+</td>
+<td class="cellalignment145" headers="d19570e344 d19570e327">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e357" headers="d19570e321">
+<p>AUX2_CHANGED_ON_DT</p>
+</td>
+<td class="cellalignment206" headers="d19570e357 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e357 d19570e325">
+<p>14</p>
+</td>
+<td class="cellalignment145" headers="d19570e357 d19570e327">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e370" headers="d19570e321">
+<p>AUX3_CHANGED_ON_DT</p>
+</td>
+<td class="cellalignment206" headers="d19570e370 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e370 d19570e325">
+<p>14</p>
+</td>
+<td class="cellalignment145" headers="d19570e370 d19570e327">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e383" headers="d19570e321">
+<p>AUX4_CHANGED_ON_DT</p>
+</td>
+<td class="cellalignment206" headers="d19570e383 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e383 d19570e325">
+<p>14</p>
+</td>
+<td class="cellalignment145" headers="d19570e383 d19570e327">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e396" headers="d19570e321">
+<p>BUDG_BUSN_AREA_ORG_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e396 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e396 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e396 d19570e327">
+<p>Company Org identifier. Populate with integration_id from w_int_org_d where business_area_flg = Y.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e409" headers="d19570e321">
+<p>BUDG_CTRL_AREA_ORG_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e409 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e409 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e409 d19570e327">
+<p>Company Org identifier. Populate with integration_id from w_int_org_d where ctrl_area_flg = Y.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e422" headers="d19570e321">
+<p>BUDG_FIN_AREA_ORG_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e422 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e422 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e422 d19570e327">
+<p>Company Org identifier. Populate with integration_id from w_int_org_d where fin_area_flg = Y.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e435" headers="d19570e321">
+<p>BUDGET_CALENDAR_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e435 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e435 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e435 d19570e327">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e448" headers="d19570e321">
+<p>BUDGET_DOC_AMT</p>
+</td>
+<td class="cellalignment206" headers="d19570e448 d19570e323">
+<p>number</p>
+</td>
+<td class="cellalignment193" headers="d19570e448 d19570e325">
+<p>22</p>
+</td>
+<td class="cellalignment145" headers="d19570e448 d19570e327">
+<p>Budget amount in document currency.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e461" headers="d19570e321">
+<p>BUDGET_GRP_AMT</p>
+</td>
+<td class="cellalignment206" headers="d19570e461 d19570e323">
+<p>number</p>
+</td>
+<td class="cellalignment193" headers="d19570e461 d19570e325">
+<p>22</p>
+</td>
+<td class="cellalignment145" headers="d19570e461 d19570e327">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e475" headers="d19570e321">
+<p>BUDGET_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e475 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e475 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e475 d19570e327">
+<p>Populate with the value from integration_id in file_budget.csv</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e488" headers="d19570e321">
+<p>BUDGET_LEDGER_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e488 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e488 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e488 d19570e327">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e501" headers="d19570e321">
+<p>BUDGET_LOC_AMT</p>
+</td>
+<td class="cellalignment206" headers="d19570e501 d19570e323">
+<p>number</p>
+</td>
+<td class="cellalignment193" headers="d19570e501 d19570e325">
+<p>22</p>
+</td>
+<td class="cellalignment145" headers="d19570e501 d19570e327">
+<p>Budget amount in local currency.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e514" headers="d19570e321">
+<p>CHANGED_BY_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e514 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e514 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e514 d19570e327">
+<p>ID of changed by user. Populate with Integration_ID from w_user_d.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e527" headers="d19570e321">
+<p>CHANGED_ON_DT</p>
+</td>
+<td class="cellalignment206" headers="d19570e527 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e527 d19570e325">
+<p>14</p>
+</td>
+<td class="cellalignment145" headers="d19570e527 d19570e327">
+<p>Changed date. Used for updating an existing record in the warehouse. Increase the date if you want to update the record. If a record with the same integration_ID exists in the target table W_ACCT_BUDGET_F already, then the load process will compare the CHANGED_ON_DT values between this record and the record in W_ACCT_BUDGET_F. If this record's CHANGED_ON_DT is later than the record in W_ACCT_BUDGET_F, then the load process will perform an update against the record in W_ACCT_BUDGET_F; otherwise it'll ignore this record, no update or insertion will occur. If there's no matching record in W_ACCT_BUDGET_F with the same integration_ID, then the load process will insert this record into W_ACCT_BUDGET_F.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e540" headers="d19570e321">
+<p>COMPANY_ORG_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e540 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e540 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e540 d19570e327">
+<p>Company Org identifier. Populate with integration_id from w_int_org_d where company_flg = Y.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e553" headers="d19570e321">
+<p>COST_CENTER_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e553 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e553 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e553 d19570e327">
+<p>Cost Center identifier. Populate with integration_id from w_cost_center_d.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e566" headers="d19570e321">
+<p>CREATED_BY_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e566 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e566 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e566 d19570e327">
+<p>ID of created by user. Populate with Integration_ID from w_user_d.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e579" headers="d19570e321">
+<p>CREATED_ON_DT</p>
+</td>
+<td class="cellalignment206" headers="d19570e579 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e579 d19570e325">
+<p>14</p>
+</td>
+<td class="cellalignment145" headers="d19570e579 d19570e327">
+<p>Created date.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e592" headers="d19570e321">
+<p>DATASOURCE_NUM_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e592 d19570e323">
+<p>number</p>
+</td>
+<td class="cellalignment193" headers="d19570e592 d19570e325">
+<p>10</p>
+</td>
+<td class="cellalignment145" headers="d19570e592 d19570e327">
+<p>A number for your data source. Populate the same datasource_num_id as your main source application.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e605" headers="d19570e321">
+<p>DELETE_FLG</p>
+</td>
+<td class="cellalignment206" headers="d19570e605 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e605 d19570e325">
+<p>1</p>
+</td>
+<td class="cellalignment145" headers="d19570e605 d19570e327">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e619" headers="d19570e321">
+<p>DOC_CURR_CODE</p>
+</td>
+<td class="cellalignment206" headers="d19570e619 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e619 d19570e325">
+<p>30</p>
+</td>
+<td class="cellalignment145" headers="d19570e619 d19570e327">
+<p>Document currency code.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e632" headers="d19570e321">
+<p>GL_ACCOUNT_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e632 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e632 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e632 d19570e327">
+<p>GL Account identifier. Populate with integration_id from w_gl_account_d.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e645" headers="d19570e321">
+<p>GRP_CURR_CODE</p>
+</td>
+<td class="cellalignment206" headers="d19570e645 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e645 d19570e325">
+<p>30</p>
+</td>
+<td class="cellalignment145" headers="d19570e645 d19570e327">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e658" headers="d19570e321">
+<p>INTEGRATION_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e658 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e658 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e658 d19570e327">
+<p>A unique identifier for the record.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e671" headers="d19570e321">
+<p>LOC_CURR_CODE</p>
+</td>
+<td class="cellalignment206" headers="d19570e671 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e671 d19570e325">
+<p>30</p>
+</td>
+<td class="cellalignment145" headers="d19570e671 d19570e327">
+<p>Local currency code.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e684" headers="d19570e321">
+<p>PERIOD_BEGIN_DT</p>
+</td>
+<td class="cellalignment206" headers="d19570e684 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e684 d19570e325">
+<p>14</p>
+</td>
+<td class="cellalignment145" headers="d19570e684 d19570e327">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e697" headers="d19570e321">
+<p>PERIOD_END_DT</p>
+</td>
+<td class="cellalignment206" headers="d19570e697 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e697 d19570e325">
+<p>14</p>
+</td>
+<td class="cellalignment145" headers="d19570e697 d19570e327">
+<p>Populate with your budget period's end date. If your budget is monthly, populate with the month end date.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e710" headers="d19570e321">
+<p>POSTED_ON_DT</p>
+</td>
+<td class="cellalignment206" headers="d19570e710 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e710 d19570e325">
+<p>14</p>
+</td>
+<td class="cellalignment145" headers="d19570e710 d19570e327">
+<p>A date on which this transaction can be reported.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e723" headers="d19570e321">
+<p>PRODUCT_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e723 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e723 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e723 d19570e327">
+<p>Product identifier. Populate with integration_id from w_product_d.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e736" headers="d19570e321">
+<p>PROFIT_CENTER_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e736 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e736 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e736 d19570e327">
+<p>Profit Center identifier. Populate with integration_id from w_profit_center_d.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e749" headers="d19570e321">
+<p>PROJECT_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e749 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e749 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e749 d19570e327">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e763" headers="d19570e321">
+<p>TENANT_ID</p>
+</td>
+<td class="cellalignment206" headers="d19570e763 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e763 d19570e325">
+<p>80</p>
+</td>
+<td class="cellalignment145" headers="d19570e763 d19570e327">
+<p>-</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d19570e776" headers="d19570e321">
+<p>X_CUSTOM</p>
+</td>
+<td class="cellalignment206" headers="d19570e776 d19570e323">
+<p>string</p>
+</td>
+<td class="cellalignment193" headers="d19570e776 d19570e325">
+<p>10</p>
+</td>
+<td class="cellalignment145" headers="d19570e776 d19570e327">
+<p>-</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+<!-- class="section" -->
+<div class="section">
+<div class="infobox-note" id="GUID-9DB522AB-1AF4-4697-B52B-D88C291E6CCA__GUID-C040AD2F-CE2D-467F-8865-761EB173C47F">
+<p class="notep1">Note:</p>
+Date columns should be populated in the CSV file as a number in the format <code class="codeph">YYYYMMDDHH24MISS</code>.</div>
+<p>Use this table to understand how the integration_id (key) of some of the key dimensions are constructed for the E-Business Suite source system. You can use this information to populate the dimension foreign key identifiers in the above universal source CSV file for budget fact, if you have to use budget fact in conjunction with dimensions populated from E-Business Suite.</p>
+<div class="tblformal" id="GUID-9DB522AB-1AF4-4697-B52B-D88C291E6CCA__CHDEIBCJ">
+<table class="cellalignment137" summary="Populating the integration_id fields in Oracle EBS Source Systems">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment152" id="d19570e804">Field</th>
+<th class="cellalignment153" id="d19570e806">How to populate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e810" headers="d19570e804">
+<p>GL_ACCOUNT_ID (w_gl_account_d)</p>
+</td>
+<td class="cellalignment155" headers="d19570e810 d19570e806">
+<p>.GL code combination ID.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e817" headers="d19570e804">
+<p>COMPANY_ORG_ID (w_int_org_d)</p>
+</td>
+<td class="cellalignment155" headers="d19570e817 d19570e806">
+<p>No need to populate; will be calculated based on GL Account ID.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e824" headers="d19570e804">
+<p>COST_CENTER_ID (w_cost_center_d)</p>
+</td>
+<td class="cellalignment155" headers="d19570e824 d19570e806">
+<p>No need to populate; will be calculated based on GL Account ID.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e831" headers="d19570e804">
+<p>PROFIT_CENTER_ID (w_profit_center_d)</p>
+</td>
+<td class="cellalignment155" headers="d19570e831 d19570e806">
+<p>No need to populate; will be calculated based on GL Account ID.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e838" headers="d19570e804">
+<p>LEDGER_ID (w_ledger_d)</p>
+</td>
+<td class="cellalignment155" headers="d19570e838 d19570e806">
+<p>For Oracle 11i, populate as set of book ID. For Oracle R12, populate as ledger ID.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>Use this table to understand how the integration_id (key) of some of the key dimensions are constructed for Oracle's JD Edwards EnterpriseOne source systems. You can use this information to populate the dimension foreign key identifiers in the above universal source CSV file for budget fact, if you have to use budget fact in conjunction with dimensions populated from Oracle's JD Edwards EnterpriseOne.</p>
+<div class="tblformal" id="GUID-9DB522AB-1AF4-4697-B52B-D88C291E6CCA__CHDBEEIC">
+<table class="cellalignment137" summary="Populating the integration_id fields in Oracle&rsquo;s JD Edwards EnterpriseOne and JD Edwards World Source Systems">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment152" id="d19570e854">Field</th>
+<th class="cellalignment153" id="d19570e856">How to populate</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e860" headers="d19570e854">
+<p>GL_ACCOUNT_ID (w_gl_account_d_)</p>
+</td>
+<td class="cellalignment155" headers="d19570e860 d19570e856">
+<p>GBAID||'~'||GBSBL||'~'||GBSBLT</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e867" headers="d19570e854">
+<p>COMPANY_ORG_ID (w_int_org_d)</p>
+</td>
+<td class="cellalignment155" headers="d19570e867 d19570e856">
+<p>GBCO</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e874" headers="d19570e854">
+<p>COST_CENTER_ID (w_cost_center_d)</p>
+</td>
+<td class="cellalignment155" headers="d19570e874 d19570e856">
+<p>GBMCU</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e881" headers="d19570e854">
+<p>PROFIT_CENTER_ID (w_profit_center_d)</p>
+</td>
+<td class="cellalignment155" headers="d19570e881 d19570e856">
+<p>GBCO</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e888" headers="d19570e854">
+<p>LEDGER_ID (w_ledger_d)</p>
+</td>
+<td class="cellalignment155" headers="d19570e888 d19570e856">
+<p>GBCO</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e895" headers="d19570e854">
+<p>PRODUCT_ID (w_product_d)</p>
+</td>
+<td class="cellalignment155" headers="d19570e895 d19570e856">
+<p>If GBSBLT points to item, then update product ID with that GBSBL.</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e902" headers="d19570e854">
+<p>PROJECT_ID (w_product_d)</p>
+</td>
+<td class="cellalignment155" headers="d19570e902 d19570e856">
+<p>Not applicable</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e909" headers="d19570e854">
+<p>BUDG_BUSN_AREA_ORG_ID (w_int_org_d)</p>
+</td>
+<td class="cellalignment155" headers="d19570e909 d19570e856">
+<p>GBMCU</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e916" headers="d19570e854">
+<p>BUDG_FIN_AREA_ORG_ID (w_int_org_d)</p>
+</td>
+<td class="cellalignment155" headers="d19570e916 d19570e856">
+<p>GBMCU</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e923" headers="d19570e854">
+<p>BUDG_CTRL_AREA_ORG_ID (w_int_org_d)</p>
+</td>
+<td class="cellalignment155" headers="d19570e923 d19570e856">
+<p>GBMCU</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment154" id="d19570e930" headers="d19570e854">
+<p>BUDGET_ID (w_budget_d)</p>
+</td>
+<td class="cellalignment155" headers="d19570e930 d19570e856">
+<p>Not applicable</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Task</p>
+<p><a href="GUID-9DB522AB-1AF4-4697-B52B-D88C291E6CCA.htm#GUID-1F821476-00E4-439C-A26F-7C6216CF0400" title="Import budget data into Oracle Business Analytics Warehouse through the Universal adapter.">Importing Budget Data into the Oracle Business Analytics Warehouse Through the Universal Adapter</a></p>
+</div>
+<!-- class="section" --></div>
+<div class="props_rev_3"><a id="GUID-1F821476-00E4-439C-A26F-7C6216CF0400"></a>
+<h2 id="BIAFC-GUID-1F821476-00E4-439C-A26F-7C6216CF0400" class="sect2">Importing Budget Data into Oracle Business Analytics Warehouse Through the Universal Adapter</h2>
+<div>
+<p>Import budget data into <span>Oracle Business Analytics Warehouse</span> through the Universal adapter.</p>
+<ol>
+<li class="stepexpand"><span>Populate the <code>file_budget.csv</code> and <code>file_acct_budget.csv</code> files with your budget data.</span>
+<div>
+<p>Refer the tables above for details of how to populate these files.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Build a Load Plan with one fact group: '900: Universal Adaptor Instance'.'GL Budget'.</span></li>
+<li class="stepexpand"><span>Run the Load Plan that you created in the previous step.</span>
+<div>
+<p>This Load Plan must be run after the regular Load Plan to populate <span>Oracle Business Analytics Warehouse</span> for the other Subject Areas has completed.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Load the budget data or changes to existing budget data.</span>
+<div>
+<p>Repeat Step 1 and Step 3 as needed to load new budget for the next fiscal period or make corrections to already loaded budget data.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-2959D1B1-AC19-430B-97BA-003136F47121.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-6F19C695-5720-4E01-B8AC-1EEBB0C18E95.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

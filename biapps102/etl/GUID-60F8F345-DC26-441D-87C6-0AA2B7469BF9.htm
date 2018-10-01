@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>About Changed Data Capture</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="Oracle BI Applications has two ETL modes for loading data into the Oracle Business Analytics Warehouse: full and incremental." />
+<meta name="dcterms.created" content="2017-05-25T23:49:13Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications ETL Guide" />
+<meta name="dcterms.identifier" content="E72285-04" />
+<meta name="dcterms.isVersionOf" content="BIAET" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2014, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-3E31F913-F672-4EDC-B282-8EB01C64F38D.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-B2FBEC6B-8BB3-45B0-9023-84272A526AE0.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAET.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-60F8F345-DC26-441D-87C6-0AA2B7469BF9"></a> <span id="PAGE" style="display:none;">10/47</span> <!-- End Header -->
+<a id="BIAET24439"></a>
+<h1 id="BIAET-GUID-60F8F345-DC26-441D-87C6-0AA2B7469BF9" class="sect1">About Changed Data Capture</h1>
+<div>
+<p><span>Oracle BI Applications</span> has two ETL modes for loading data into the Oracle Business Analytics Warehouse: full and incremental.</p>
+<div class="p">During a full load, <span>Oracle BI Applications</span> extracts:
+<ul style="list-style-type: disc;">
+<li>
+<p>All records from tables that are sources for dimension tables.</p>
+</li>
+<li>
+<p>Records created after an Initial Extract Date from tables that are sources for fact tables. The Initial Extract Date defines a cut-off so that not all records are loaded into the data warehouse. You set the Initial Extract Date value for each data source in <span>Configuration Manager</span>.</p>
+</li>
+</ul>
+</div>
+<p>An ETL process can extract a record from a single table or from multiple tables. When a record is the result of joining multiple tables, one of these tables is identified as the <span class="italic">base</span> table, which defines the granularity of the record. When extracting fact records, <span>Oracle BI Applications</span> only compares the Created Date of the base table to the Initial Extract Date.</p>
+<p>During an incremental load, <span>Oracle BI Applications</span> extracts records that have changed or were created after a Last Extract Date. This is done by comparing the Last Extract Date value to a Last Updated Date (LUD) type column in the source table. If the source table does not have such a column, <span>Oracle BI Applications</span> extracts all records from that table. The Last Extract Date is a value that is calculated based on the last time data was extracted from that table less a Prune Days value. The Prune Days parameter is used to extend the window of the ETL extract beyond the last time the ETL actually ran. This is to ensure records that might have somehow been missed in a prior ETL are picked up in the next ETL. Records can be missed in an ETL process when a record is being updated while the ETL process is running and was not committed until after the ETL completed.</p>
+<p>You set the Prune Days parameter value in <span>Configuration Manager</span> before the first full load ETL and the value automatically takes effect in any subsequent incremental ETL. Bear the following in mind:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Setting a small value means the ETL extracts fewer records, thus improving performance. However, this setting increases the chances that records are not detected.</p>
+</li>
+<li>
+<p>Setting a large number is useful if ETL runs are infrequent, but this increases the number of records that are extracted and updated in the data warehouse. Therefore, you should not set the Prune Days value to a very large number. You can also use large Prune Days number to trigger re-extracting records that are processed, but have not changed.</p>
+</li>
+<li>
+<p>Setting a value to 0 means the ETL should not extract any record. Hence, you should never set the Prune Days to 0.</p>
+</li>
+</ul>
+<p>If you have not set the Prune Days parameter prior to running a full ETL, but want to use one for a current incremental load, you can do so using the RESET_LAST_EXTRACT_DATE scenario in the RESET_LAST_EXTRACT_DATE procedure. For the scenario, in ODI Designer, set the BIAPPS.DATASOURCE_NUM_ID parameter to the source system&rsquo;s ID and set the BIAPPS.PRUNE_DAYS parameter to the desired prune days. Execute the RESET_LAST_EXTRACT_DATE procedure from the ODI Console to set the Prune Days.</p>
+<p>An ETL process can extract a record from a single table but more commonly extracts records that are the result of joining multiple tables. When extracting from multiple tables, one table is identified as the base table, which defines the granularity of the record. When there is a change in the base table, an extract is triggered for the record. However, there can be cases where a change occurs in a non-base table but not in the base table itself. If a change occurs in a non-base table and this should trigger an extract of the record, these tables are referred to as auxiliary tables. Thus, when determining if a record should be extracted, <span>Oracle BI Applications</span> compares not only the LUD column in the base table but the LUD columns in all auxiliary tables. If the LUD column changed in any of these tables, the record is extracted. If changes can occur in a table that is not relevant to triggering an extract, this table's LUD column is not compared in the incremental filtering logic.</p>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment43">
+<tr>
+<td class="cellalignment50">
+<table class="cellalignment48">
+<tr>
+<td class="cellalignment47"><a href="GUID-3E31F913-F672-4EDC-B282-8EB01C64F38D.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment47"><a href="GUID-B2FBEC6B-8BB3-45B0-9023-84272A526AE0.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2014, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment52">
+<table class="cellalignment46">
+<tr>
+<td class="cellalignment47"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment47"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment47"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Performance and Memory Usage Considerations for Smart View with Excel</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="dcterms.created" content="2017-07-20T20:58:45Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Oracle&reg; Smart View for Office Installation and Configuration Guide" />
+<meta name="dcterms.identifier" content="E88791-01" />
+<meta name="dcterms.isVersionOf" content="SVIGA" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2004, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="slowness_with_extension_options_dialog_box.htm" title="Previous" type="text/html" />
+<link rel="Next" href="smart_view_http_session_timeout.htm" title="Next" type="text/html" />
+<link rel="alternate" href="SVIGA.pdf" title="PDF version" type="application/pdf" />
+<link rel="alternate" href="SVIGA.epub" title="ePub version" type="application/epub+zip" />
+<link rel="alternate" href="SVIGA.mobi" title="Mobipocket version" type="application/x-mobipocket-ebook" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="troubleshooting_28"></a> <span id="PAGE" style="display:none;">63/76</span> <!-- End Header -->
+<h1 id="SVIGA-troubleshooting_28" class="sect1">Performance and Memory Usage Considerations for Smart View with Excel</h1>
+<div>
+<div class="section">
+<p><span>Oracle Smart View for Office</span> is a Microsoft Office add-in. As an add-in, it is loaded in to the Microsoft Excel process. When a report is imported into Excel through <span>Smart View</span>, the Excel process consumes memory and this can negatively impact performance.</p>
+<p>For example, instances of grids and forms, objects in the Undo buffer, XML parsing, etc., will cause the Excel process to consume memory. Because of this, the Excel or machine memory limit becomes the <span>Smart View</span> memory limit as well. This can severely impact performance.</p>
+<p>There is no memory configuration parameter in <span>Smart View</span> to manage this.</p>
+<p>Excel 32-bit and 64-bit have different memory limits:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>For Excel 32-bit, the maximum memory limit, or RAM, is 2GB.</p>
+<p>Oracle testing showed that when Excel 32-bit memory usage reaches beyond 700 MB, Excel can behave abnormally and can terminate unexpectedly.</p>
+</li>
+<li>
+<p>The 64-bit versions of Excel are not constrained to 2 GB of RAM, as are the 32-bit Office applications.</p>
+<p>For large reports, Oracle recommends using 64-bit Excel. Or consider reducing the data being sent to <span>Smart View</span> by reducing the number of rows, columns, and POVs in the reports.</p>
+</li>
+</ul>
+<p>Oracle suggests that you consider taking some or all of the actions listed below in an effort to limit memory usage and improve performance.</p>
+<p>The following actions can help to limit memory usage:</p>
+<ol>
+<li>
+<p>Ensure that these options are enabled in the <span>Smart View</span> <span class="bold">Options</span> dialog box, <span class="bold">Advanced</span> tab:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Reduce Excel File Size</span></p>
+</li>
+<li>
+<p><span class="bold">Improve Metadata Options</span></p>
+</li>
+</ul>
+</li>
+<li>
+<p>In the <span class="bold">Options</span> dialog box, <span class="bold">Advanced</span> tab, set <span class="bold">Number of Undo Actions</span> to '<code class="codeph">0</code>' (zero), if possible, or to a low number such as <code class="codeph">1</code> or <code class="codeph">2</code>.</p>
+</li>
+<li>
+<p>Change Excel calculation from Automatic to Manual. Go to the Excel <span class="bold">Formulas</span> ribbon, then select <span class="bold">Calculation Options</span>, and then select <span class="bold">Manual</span>.</p>
+</li>
+<li>
+<p>In the <span class="bold">Options</span> dialog box, <span class="bold">Formatting</span> tab, if you have selected the <span class="bold">Use Excel Formatting</span> option, then you should clear the <span class="bold">Move Formatting on Operations</span> option.</p>
+</li>
+<li>
+<p>In the <span class="bold">Formatting</span> tab, clear the <span class="bold">Adjust Column Width</span> option.</p>
+</li>
+<li>
+<p>In the <span class="bold">Options</span> dialog box, <span class="bold">Extensions</span> tab, disable any unneeded extensions.</p>
+</li>
+<li>
+<p>In Excel, to improve performance and stability, disable or uninstall any unused add-ins. For example, disable or uninstall the <span>Oracle Essbase Spreadsheet Add-in</span>. Other possible add-ins to disable or uninstall are, for example, Adobe PDF, WebEx, or Send to Bluetooth</p>
+</li>
+<li>
+<p>Reduce the workbook size.</p>
+</li>
+<li>
+<p>Limit the data imported to Excel:</p>
+<ol>
+<li>
+<p>Use prompts, filters, POVs, or other ways to reduce the data returned back to <span>Smart View</span>.</p>
+</li>
+<li>
+<p>Enable the <span class="bold">Suppress Rows</span> and <span class="bold">Suppress Columns</span> options in the <span class="bold">Data Options</span> tab of the <span>Smart View</span> <span class="bold">Options</span> dialog box.</p>
+</li>
+</ol>
+</li>
+</ol>
+<p>The following actions can help to improve performance, as well as limit memory usage:</p>
+<ol id="troubleshooting_28__ol-1319-319286FC">
+<li>
+<p>In the <span class="bold">Options</span> dialog box, <span class="bold">Advanced</span> tab, set <span class="bold">Number of Undo Actions</span> to '<code class="codeph">0</code>' (zero), if possible.</p>
+</li>
+<li>
+<p>In the <span class="bold">Options</span> dialog box, <span class="bold">Member Options</span> tab, ensure that these options are cleared:</p>
+<ul style="list-style-type: disc;" id="troubleshooting_28__PreserveFormulasAndCommentsInAdHocO-3192AEE6">
+<li>
+<p><span class="bold">Preserve Formulas and Comments in ad hoc options</span></p>
+</li>
+<li>
+<p><span class="bold">Formula Fill</span></p>
+</li>
+</ul>
+<p>Clear these options only if you do not need to preserve formulas or comments during ad hoc operations.</p>
+</li>
+</ol>
+<p>Also, refer to the following documentation from Microsoft, <span class="q">"Excel 2010 Performance: Performance and Limit Improvements"</span>:</p>
+<p><a href="http://msdn.microsoft.com/en-us/library/ff700514(v=office.14).aspx" target="_blank">http://msdn.microsoft.com/en-us/library/ff700514(v=office.14).aspx</a></p>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment21">
+<tr>
+<td class="cellalignment28">
+<table class="cellalignment26">
+<tr>
+<td class="cellalignment25"><a href="slowness_with_extension_options_dialog_box.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment25"><a href="smart_view_http_session_timeout.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2004, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment30">
+<table class="cellalignment24">
+<tr>
+<td class="cellalignment25"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment25"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

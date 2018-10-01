@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Including Non-booked Orders in Order Line and Schedule Line Tables</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This task applies to E-Business Suite source systems, such as SDE_ORA11510_Adaptor, and SDE_ORAR12Version_Adaptor. By default, only booked orders are extracted from the E-Business Suite." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-DF1A1CB1-F418-4130-823C-3A89F57B28A5.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-1A81DAC7-F7A5-4195-85A2-A396DFF6D1C7.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-7B43F4C5-3E90-48DE-B1D3-C7346B25BD29"></a> <span id="PAGE" style="display:none;">13/336</span> <!-- End Header -->
+<a id="BIACF24460"></a><a id="IT_224"></a>
+<h1 id="BIAFC-GUID-7B43F4C5-3E90-48DE-B1D3-C7346B25BD29" class="sect1">Including Non-booked Orders in Order Line and Schedule Line Tables</h1>
+<div>
+<p>This task applies to E-Business Suite source systems, such as SDE_ORA11510_Adaptor, and SDE_ORAR12Version_Adaptor. By default, only booked orders are extracted from the E-Business Suite.</p>
+<div class="section">
+<div class="figure" id="GUID-7B43F4C5-3E90-48DE-B1D3-C7346B25BD29__GUID-1DF9E503-0BD9-49DB-9306-2EEC8899077E"><img width="592" height="404" src="img/GUID-0491AB66-E2AA-4AE3-8E71-2CB69A470AD4-default.gif" alt="Description of GUID-0491AB66-E2AA-4AE3-8E71-2CB69A470AD4-default.gif follows" title="Description of GUID-0491AB66-E2AA-4AE3-8E71-2CB69A470AD4-default.gif follows" /><br />
+<a href="img_text/GUID-0491AB66-E2AA-4AE3-8E71-2CB69A470AD4-default.htm">Description of the illustration GUID-0491AB66-E2AA-4AE3-8E71-2CB69A470AD4-default.gif</a></div>
+<!-- class="figure" -->
+<p>Therefore, all orders loaded into the Sales Order Lines, Sales Schedule Lines, and Sales Booking Lines tables are booked.</p>
+<p>However, you can also load non-booked orders in Sales Order Lines (W_SALES_ORDERS_LINES_F) and Sales Schedule Lines (W_SALES_SCHEDULE_LINE_F), while loading only booked orders in Sales Booking Lines (W_SALES_BOOKING_LINE_F).</p>
+<p>If you want to load non-booked orders into the Sales Order Lines and Sales Schedule Lines tables, you have to configure the extract so that it does not filter out non-booked orders. The OE_ORDER_LINES_ALL.BOOKED_FLAG = 'Y' condition indicates that an order is booked; therefore, this statement is used to filter out non-booked orders. So, to load all orders, including non-booked orders, remove the filter condition from the temp interfaces of the following mappings:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>SDE_ORA_SalesOrderLinesFact</p>
+</li>
+<li>
+<p>SDE_ORA_SalesOrderLinesFact_Primary</p>
+</li>
+</ul>
+<p>Also, if you include non-booked orders in the Sales Order Lines and Sales Schedule Lines tables, you have to exclude non-booked orders when you populate the Sales Booking Lines table from the Sales Order Lines or from the Sales Schedule Lines. You can do this by adding the W_SALES_ORDER_LINE_F.BOOKING_FLG = 'Y' or W_SALES_SCHEDULE_LINE_F.BOOKING_FLG = 'Y' condition to the interfaces of the following mappings:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>SIL_SalesBookingLinesFact_Load_OrderLine_Credit</p>
+</li>
+<li>
+<p>SIL_SalesBookingLinesFact_Load_OrderLine_Debit</p>
+</li>
+<li>
+<p>SIL_SalesBookingLinesFact_Load_ScheduleLine_Credit</p>
+</li>
+<li>
+<p>SIL_SalesBookingLinesFact_Load_ScheduleLine_Debit</p>
+</li>
+</ul>
+<p>To include non-booked orders in the Sales Order Lines and Sales Schedule Lines tables (for both full and Incremental load):</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In ODI Designer Navigator, open the SDE_ORA11510_Adaptor, or SDE_ORAR12Version _Adaptor.</span></li>
+<li class="stepexpand"><span>Find SDE_ORA_SalesOrderLinesFact and SDE_ORA_SalesOrderLinesFact_Primary.</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>SDE_ORA_SalesOrderLinesFact.W_SALES_ORDER_LINE_FS_SQ_BCI_SALES_ORDLNS</p>
+</li>
+<li>
+<p>SDE_ORA_SalesOrderLinesFact_Primary.W_SALES_ORDER_LINE_F_PE_SQ_BCI_SALES_ORDLS</p>
+</li>
+</ul>
+<p>Then open these temp interfaces.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Find and delete the filter condition OE_ORDER_LINES_ALL.BOOKED_FLAG='Y' from the temp interfaces mentioned above.</span></li>
+<li class="stepexpand"><span>Save your changes to the repository.</span></li>
+</ol>
+<div class="section">
+<p>Follow the steps below to make changes for Booking Lines table.</p>
+</div>
+<!-- class="section" --></div>
+<div class="sect2"><a id="ONLY_BOOKED_ORDERS"></a>
+<h2 id="BIAFC-ONLY_BOOKED_ORDERS" class="sect2">Including Only Booked Orders in the Sales Booking Lines Table</h2>
+<div>
+<p>You can include only booked orders in the Sales Booking Lines table.</p>
+<ol>
+<li class="stepexpand"><span>In ODI Designer Navigator, open the SILOS folder.</span></li>
+<li class="stepexpand"><span>Open the following interfaces then add the filter to Filters section.</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>SIL_SalesBookingLinesFact_Load_OrderLine_Credit folder: Open Quick-Edit tab of the SIL_SalesBookingLinesFact_Load_OrderLine_Credit.W_SALES_BOOKING_LINE_F_SQ_W_SALES_ORDER_LINE_F interface, and add W_SALES_ORDER_LINE_F.BOOKING_FLG = 'Y' to the Filters section.</p>
+</li>
+<li>
+<p>SIL_SalesBookingLinesFact_Load_OrderLine_Debt folder : Open Quick-Edit tab of the SIL_SalesBookingLinesFact_Load_OrderLine_Debt.W_SALES_BOOKING_LINE_F interface, and add SQ_W_SALES_ORDER_LINE_F.BOOKING_FLG = 'Y' to the Filters section.</p>
+</li>
+<li>
+<p>SIL_SalesBookingLinesFact_Load_ScheduleLine_Credit folder : Open Quick-Edit tab of the SIL_SalesBookingLinesFact_Load_ScheduleLine_Credit.W_SALES_BOOKING_LINE_F_SQ_W_SALES_SCHEDULE_LINE_F interface, and add W_SALES_SCHEDULE_LINE_F.BOOKING_FLG = 'Y' to the Filters section.</p>
+</li>
+<li>
+<p>SIL_SalesBookingLinesFact_Load_ScheduleLine_Debt folder : Open Quick-Edit tab of the SIL_SalesBookingLinesFact_Load_ScheduleLine_Debt.W_SALES_BOOKING_LINE_F interface, and add SQ_W_SALES_SCHEDULE_LINE_F.BOOKING_FLG = 'Y' to the Filters section.</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>Save your changes to the repository.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-DF1A1CB1-F418-4130-823C-3A89F57B28A5.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-1A81DAC7-F7A5-4195-85A2-A396DFF6D1C7.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

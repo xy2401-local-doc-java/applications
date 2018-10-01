@@ -1,0 +1,446 @@
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+
+<meta name="DC.Type" content="topic">
+<meta name="description" content="Use the various parameters of the find request payload to specify complex search criteria and retrieve attributes from parent and child objects."><meta content="all" name="robots">
+<meta content="yes" name="mos_crawl">
+<meta content="SOAP Web Services for Oracle Project Portfolio Management Cloud" name="dcterms.title">
+<meta content="SOAP Web Services for Oracle Project Portfolio Management Cloud" name="doctitle">
+<meta content="E74441-03" name="dcterms.identifier">
+<meta content="E67968-01" name="partno">
+<meta content="OESPP" name="dcterms.isVersionOf">
+<meta content="Fusion Publishing Server, UAE Print Staging" name="generator">
+<meta content="Tue Jul 18 16:32:29 MDT 2017" name="dcterms.created">
+<meta name="relnum" content="Release 12">
+<meta name="rel_num" content="Release 12"><link type="text/html" title="Previous" href="Request_Payload_Element.htm" rel="Prev">
+<link type="text/html" title="Next" href="Lookup_Type_Explained.htm" rel="Next">
+<link type="text/html" title="Home" href="../../index.html" rel="Start">
+<link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+<script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+<script src="../nav/js/doccd.js" type="application/javascript"></script>
+<link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+<link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+<link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+<script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+<script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+<script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+<script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+<script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+<script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+<meta class="foundation-mq-topbar">
+<link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/oer.css" rel="stylesheet">
+FindOperationExamples-D7426855<meta name="DC.Language" content="en">
+<title>find Operation Examples</title>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header><div class="row" id="CONTENT"><div class="IND large-9 medium-8 columns"><div id="EXTRATOC"></div><span id="PAGE" style="display:none;">40/297</span><a name="BEGIN" id="BEGIN"></a><div class="fusiondoc" id="FindOperationExamples-D7426855">
+
+   <h1 class="title topictitle1" id="FindOperationExamples-D7426855__topic-268-D748DEC1">find Operation Examples</h1>
+
+   
+   
+   <div class="body" id="topic-280-D748DEC2"><p class="shortdesc">Use the various parameters of the
+find request payload to specify complex search criteria and retrieve
+attributes from parent and child objects.</p>
+
+      <section class="section" id="topic-282-D748DEC4"><h2 class="title sectiontitle">Return
+a Subset of Attributes in the Child Service Data Object</h2>
+         
+         <p class="p" id="topic-286-D748DEC4">To include the entire <samp class="ph codeph" id="topic-288-D74B59CC">LocationProfile</samp> child object in the
+response, add a new <samp class="ph codeph" id="topic-290-D74B59CC">findAttribute</samp> element containing <samp class="ph codeph" id="topic-292-D74B59CE">LocationProfile</samp> as the value in the request payload. This example selects the location
+for which the internal identifier is set to <span class="keyword" id="topic-102-E51F5259">958</span>. The response returns <samp class="ph codeph" id="topic-294-D74B59CE">City</samp>, <samp class="ph codeph" id="topic-296-D74B596C">State</samp>, <samp class="ph codeph" id="topic-298-D74B596C">Province</samp>, <samp class="ph codeph" id="topic-300-D74B596C">Country</samp>, <samp class="ph codeph" id="topic-302-D74B596D">LocationId</samp>, and all the attributes
+in the <samp class="ph codeph" id="topic-304-D74B596D">LocationProfile</samp> child
+object.</p>
+
+         <pre class="pre codeblock" id="topic-306-D74B69CC">&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+    &lt;soap:Body&gt;
+        &lt;ns1:findLocation 
+        xmlns:ns1="http://xmlns.oracle.com/apps/cdm/foundation/parties/
+        locationService/applicationModule/types/"&gt;
+            &lt;ns1:findCriteria xmlns:ns2="http://xmlns.oracle.com/adf/svc/types/"&gt;
+                &lt;ns2:filter&gt;
+                    &lt;ns2:group&gt;
+                        &lt;ns2:item&gt;
+                            &lt;ns2:attribute&gt;LocationId&lt;/ns2:attribute&gt;
+                            &lt;ns2:operator&gt;=&lt;/ns2:operator&gt;
+                            &lt;ns2:value&gt;958&lt;/ns2:value&gt;
+                        &lt;/ns2:item&gt;
+                    &lt;/ns2:group&gt;
+                &lt;/ns2:filter&gt;
+                &lt;ns2:findAttribute&gt;City&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;State&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;Province&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;Country&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;LocationId&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;LocationProfile&lt;/ns2:findAttribute&gt;
+            &lt;/ns1:findCriteria&gt;
+        &lt;/ns1:findLocation&gt;
+    &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</pre>
+
+         <p class="p" id="topic-150-D76A0B88">To include
+only a subset of the elements from the <samp class="ph codeph" id="topic-152-D76A0B88">LocationProfile</samp> child object, use the <samp class="ph codeph" id="topic-154-D76A0B88">childFindCriteria</samp> element and specify
+the elements to be included using the <samp class="ph codeph" id="topic-196-E4AC90F6">findAttribute</samp> element.</p>
+
+         <pre class="pre codeblock" id="topic-166-D76A0B88">&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+    &lt;soap:Body&gt;
+        &lt;ns1:findLocation 
+        xmlns:ns1="http://xmlns.oracle.com/apps/cdm/foundation/parties/locationService/
+        applicationModule/types/"&gt;
+            &lt;ns1:findCriteria xmlns:ns2="http://xmlns.oracle.com/adf/svc/types/"&gt;
+                &lt;ns2:filter&gt;
+                    &lt;ns2:group&gt;
+                        &lt;ns2:item&gt;
+                            &lt;ns2:attribute&gt;LocationId&lt;/ns2:attribute&gt;
+                            &lt;ns2:operator&gt;=&lt;/ns2:operator&gt;
+                            &lt;ns2:value&gt;958&lt;/ns2:value&gt;
+                        &lt;/ns2:item&gt;
+                    &lt;/ns2:group&gt;
+                &lt;/ns2:filter&gt;
+                &lt;ns2:findAttribute&gt;City&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;State&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;Province&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;Country&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;LocationId&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;LocationProfile&lt;/ns2:findAttribute&gt;
+                &lt;ns2:childFindCriteria&gt;
+                    &lt;ns2:findAttribute&gt;LocationProfileId&lt;/ns2:findAttribute&gt;
+                    &lt;ns2:findAttribute&gt;EffectiveStartDate&lt;/ns2:findAttribute&gt;
+                    &lt;ns2:findAttribute&gt;EffectiveEndDate&lt;/ns2:findAttribute&gt;
+                    &lt;ns2:childAttrName&gt;LocationProfile&lt;/ns2:childAttrName&gt;
+                &lt;/ns2:childFindCriteria&gt;
+            &lt;/ns1:findCriteria&gt;
+        &lt;/ns1:findLocation&gt;
+    &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</pre>
+
+         <p class="p" id="topic-168-D76A0B8B">The response
+payload returns only the <samp class="ph codeph" id="topic-156-D76A0B88">LocationProfileId</samp>, <samp class="ph codeph" id="topic-158-D76A0B88">EffectiveStartDate</samp>, and <samp class="ph codeph" id="topic-160-D76A0B88">EffectiveEndDate</samp> of the <samp class="ph codeph" id="topic-162-D76A0B88">LocationProfile</samp> object, along with
+the attributes corresponding to the <samp class="ph codeph" id="topic-164-D76A0B88">findAttributes</samp> element.</p>
+
+         <pre class="pre codeblock" id="topic-170-D76A51E6">&lt;ns0:findLocationResponse xmlns="" 
+xmlns:env="http://schemas.xmlsoap.org/soap/envelope/" 
+xmlns:ns0="http://xmlns.oracle.com/apps/cdm/foundation/parties/locationService/
+applicationModule/types/" xmlns:wsa="http://www.w3.org/2005/08/addressing" 
+xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"&gt;
+    &lt;ns2:result xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" 
+    xmlns:ns1="http://xmlns.oracle.com/apps/cdm/foundation/parties/locationService/" 
+    xmlns:ns2="http://xmlns.oracle.com/apps/cdm/foundation/parties/locationService/
+    applicationModule/types/" 
+    xmlns:ns3="http://xmlns.oracle.com/apps/cdm/foundation/parties/partyService/" 
+    xmlns:ns4="http://xmlns.oracle.com/apps/cdm/foundation/parties/flex/location/" 
+    xmlns:tns="http://xmlns.oracle.com/adf/svc/errors/" 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    xsi:type="ns1:LocationResult"&gt;
+        &lt;ns1:Value&gt;
+            &lt;ns1:LocationId&gt;958&lt;/ns1:LocationId&gt;
+            &lt;ns1:Country&gt;US&lt;/ns1:Country&gt;
+            &lt;ns1:City&gt;St. Charles&lt;/ns1:City&gt;
+            &lt;ns1:State&gt;AR&lt;/ns1:State&gt;
+            &lt;ns1:Province xsi:nil="true"/&gt;
+            &lt;ns1:LocationProfile&gt;
+                &lt;ns1:LocationProfileId&gt;10035&lt;/ns1:LocationProfileId&gt;
+                &lt;ns1:EffectiveStartDate&gt;2004-02-23&lt;/ns1:EffectiveStartDate&gt;
+                &lt;ns1:EffectiveEndDate&gt;4712-12-31&lt;/ns1:EffectiveEndDate&gt;
+            &lt;/ns1:LocationProfile&gt;
+        &lt;/ns1:Value&gt;
+    &lt;/ns2:result&gt;
+&lt;/ns0:findLocationResponse&gt;</pre>
+
+      </section>
+
+      <section class="section" id="topic-172-D76A7085"><h2 class="title sectiontitle">Complex
+Search Criteria at Parent Level</h2>
+         
+         <p class="p" id="topic-176-D76A7087">This request payload example searches for locations that have <samp class="ph codeph" id="topic-178-D76ABBE1">Country</samp> set to <span class="keyword" id="topic-180-D76ABBE1">US</span> and <samp class="ph codeph" id="topic-182-D76ABBE3">State</samp> set to <span class="keyword" id="topic-184-D76ABBE3">AK</span> in the <samp class="ph codeph" id="topic-186-D76ABBE3">Location</samp> object.</p>
+
+         <pre class="pre codeblock" id="topic-200-D76AD23A">&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+    &lt;soap:Body&gt;
+        &lt;ns1:findLocation 
+        xmlns:ns1="http://xmlns.oracle.com/apps/cdm/foundation/parties/
+        locationService/applicationModule/types/"&gt;
+            &lt;ns1:findCriteria xmlns:ns2="http://xmlns.oracle.com/adf/svc/types/"&gt;
+                &lt;ns2:fetchStart&gt;0&lt;/ns2:fetchStart&gt;
+                &lt;ns2:fetchSize&gt;500&lt;/ns2:fetchSize&gt;
+                &lt;ns2:filter&gt;
+                    &lt;ns2:group&gt;
+                        &lt;ns2:item&gt;
+                            &lt;ns2:conjunction&gt;And&lt;/ns2:conjunction&gt;
+                            &lt;ns2:attribute&gt;Country&lt;/ns2:attribute&gt;
+                            &lt;ns2:operator&gt;=&lt;/ns2:operator&gt;
+                            &lt;ns2:value&gt;US&lt;/ns2:value&gt;
+                        &lt;/ns2:item&gt;
+                        &lt;ns2:item&gt;
+                            &lt;ns2:conjunction&gt;And&lt;/ns2:conjunction&gt;
+                            &lt;ns2:attribute&gt;State&lt;/ns2:attribute&gt;
+                            &lt;ns2:operator&gt;=&lt;/ns2:operator&gt;
+                            &lt;ns2:value&gt;AK&lt;/ns2:value&gt;
+                        &lt;/ns2:item&gt;
+                    &lt;/ns2:group&gt;
+                &lt;/ns2:filter&gt;
+                &lt;ns2:findAttribute&gt;PostalCode&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;City&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;State&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;Province&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;Country&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;LocationId&lt;/ns2:findAttribute&gt;
+            &lt;/ns1:findCriteria&gt;
+        &lt;/ns1:findLocation&gt;
+    &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</pre>
+
+         <p class="p" id="topic-202-D76AD23D">The response
+payload contains <samp class="ph codeph" id="topic-204-D76B381E">PostalCode</samp>, <samp class="ph codeph" id="topic-206-D76B3821">City</samp>, <samp class="ph codeph" id="topic-208-D76B3824">State</samp>, <samp class="ph codeph" id="topic-210-D76B3828">Province</samp>, <samp class="ph codeph" id="topic-212-D76B3829">Country</samp>, and <samp class="ph codeph" id="topic-214-D76B382C">LocationId</samp> of the <samp class="ph codeph" id="topic-216-D76B382F">Location</samp> object.</p>
+
+         <pre class="pre codeblock" id="topic-218-D76B44EE">&lt;ns0:findLocationResponse xmlns="" xmlns:env="http://schemas.xmlsoap.org/soap/envelope/"
+xmlns:ns0="http://xmlns.oracle.com/apps/cdm/foundation/parties/locationService/applicationModule/types/"
+xmlns:wsa="http://www.w3.org/2005/08/addressing"
+xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"&gt;
+    &lt;ns2:result xmlns:ns0="http://xmlns.oracle.com/adf/svc/types/" 
+    xmlns:ns1="http://xmlns.oracle.com/apps/cdm/foundation/parties/locationService/" 
+    xmlns:ns2="http://xmlns.oracle.com/apps/cdm/foundation/parties/locationService/
+    applicationModule/types/"
+    xmlns:ns3="http://xmlns.oracle.com/apps/cdm/foundation/parties/partyService/"
+    xmlns:ns4="http://xmlns.oracle.com/apps/cdm/foundation/parties/flex/location/"
+    xmlns:tns="http://xmlns.oracle.com/adf/svc/errors/"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns1:LocationResult"&gt;
+        &lt;ns1:Value&gt;
+            &lt;ns1:LocationId&gt;999997516465004&lt;/ns1:LocationId&gt;
+            &lt;ns1:Country&gt;US&lt;/ns1:Country&gt;
+            &lt;ns1:City&gt;JUNEAU&lt;/ns1:City&gt;
+            &lt;ns1:PostalCode&gt;99801-7814&lt;/ns1:PostalCode&gt;
+            &lt;ns1:State&gt;AK&lt;/ns1:State&gt;
+            &lt;ns1:Province xsi:nil="true"/&gt;
+        &lt;/ns1:Value&gt;
+        &lt;ns1:Value&gt;
+            &lt;ns1:LocationId&gt;999997516000512&lt;/ns1:LocationId&gt;
+            &lt;ns1:Country&gt;US&lt;/ns1:Country&gt;
+            &lt;ns1:City&gt;KOTZEBUE&lt;/ns1:City&gt;
+            &lt;ns1:PostalCode&gt;99752&lt;/ns1:PostalCode&gt;
+            &lt;ns1:State&gt;AK&lt;/ns1:State&gt;
+            &lt;ns1:Province xsi:nil="true"/&gt;
+        &lt;/ns1:Value&gt;
+        &lt;ns1:Value&gt;
+            &lt;ns1:LocationId&gt;999997518214847&lt;/ns1:LocationId&gt;
+            &lt;ns1:Country&gt;US&lt;/ns1:Country&gt;
+            &lt;ns1:City&gt;ANCHORAGE&lt;/ns1:City&gt;
+            &lt;ns1:PostalCode&gt;99518-1074&lt;/ns1:PostalCode&gt;
+            &lt;ns1:State&gt;AK&lt;/ns1:State&gt;
+            &lt;ns1:Province xsi:nil="true"/&gt;
+        &lt;/ns1:Value&gt;
+        ...
+</pre>
+
+      </section>
+
+      <section class="section" id="topic-220-D76B57C7"><h2 class="title sectiontitle">Search
+Criteria with Dependency on Child Data</h2>
+         
+         <p class="p" id="topic-224-D76B57CA">This example shows how to select parent objects based on search criteria
+applied to the child objects. The request payload finds all the locations
+that are in the state of Alaska in the United States, and have an
+effective date of 1950-04-12 or later in the <samp class="ph codeph" id="topic-100-D8C29C0A">LocationProfile</samp> child object entity.
+The response payload returns the <samp class="ph codeph" id="topic-102-D8C9654F">LocationId</samp> and <samp class="ph codeph" id="topic-104-D8C9654F">Country</samp> attributes
+in the <samp class="ph codeph" id="topic-106-D8C96550">Location</samp> object, and
+the <samp class="ph codeph" id="topic-108-D8C96550">EffectiveStartDate</samp> and <samp class="ph codeph" id="topic-110-D8C96550">LocationId</samp> attributes in the <samp class="ph codeph" id="topic-112-D8C96552">LocationProfile</samp> child object.</p>
+
+         <pre class="pre codeblock" id="topic-114-D8C97C05">&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+    &lt;soap:Body&gt;
+    &lt;ns1:findLocation
+        xmlns:ns1="http://xmlns.oracle.com/apps/cdm/foundation/parties/
+        locationService/applicationModule/types/"&gt;
+        &lt;ns1:findCriteria xmlns:ns2="http://xmlns.oracle.com/adf/svc/types/"&gt;
+            &lt;ns2:fetchStart&gt;0&lt;/ns2:fetchStart&gt;
+            &lt;ns2:fetchSize&gt;500&lt;/ns2:fetchSize&gt;
+                &lt;ns2:filter&gt;
+                    &lt;ns2:group&gt;
+                        &lt;ns2:item&gt;
+                            &lt;ns2:attribute&gt;Country&lt;/ns2:attribute&gt;
+                            &lt;ns2:operator&gt;=&lt;/ns2:operator&gt;
+                            &lt;ns2:value&gt;US&lt;/ns2:value&gt;
+                        &lt;/ns2:item&gt;
+                        &lt;ns2:item&gt;
+                            &lt;ns2:conjunction&gt;And&lt;/ns2:conjunction&gt;
+                            &lt;ns2:attribute&gt;State&lt;/ns2:attribute&gt;
+                            &lt;ns2:operator&gt;=&lt;/ns2:operator&gt;
+                            &lt;ns2:value&gt;AK&lt;/ns2:value&gt;
+                        &lt;/ns2:item&gt;
+                        &lt;ns2:item&gt;
+                            &lt;ns2:conjunction&gt;And&lt;/ns2:conjunction&gt;
+                            &lt;ns2:attribute&gt;LocationProfile&lt;/ns2:attribute&gt;
+                            &lt;ns2:nested&gt;
+                                &lt;ns2:group&gt;
+                                    &lt;ns2:item&gt;
+                                        &lt;ns2:attribute&gt;EffectiveStartDate&lt;/ns2:attribute&gt;
+                                        &lt;ns2:operator&gt;ONORAFTER&lt;/ns2:operator&gt;
+                                        &lt;ns2:value&gt;1950-04-12&lt;/ns2:value&gt;
+                                    &lt;/ns2:item&gt;
+                                &lt;/ns2:group&gt;
+                            &lt;/ns2:nested&gt;
+                        &lt;/ns2:item&gt;
+                    &lt;/ns2:group&gt;
+                &lt;/ns2:filter&gt;
+                &lt;ns2:findAttribute&gt;LocationId&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;Country&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;State&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;LocationProfile&lt;/ns2:findAttribute&gt;
+                &lt;ns2:childFindCriteria&gt;
+                    &lt;ns2:findAttribute&gt;EffectiveStartDate&lt;/ns2:findAttribute&gt;
+                    &lt;ns2:findAttribute&gt;LocationProfileId&lt;/ns2:findAttribute&gt;
+                    &lt;ns2:childAttrName&gt;LocationProfile&lt;/ns2:childAttrName&gt;
+                &lt;/ns2:childFindCriteria&gt;
+            &lt;/ns1:findCriteria&gt;
+        &lt;/ns1:findLocation&gt;
+    &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</pre>
+
+      </section>
+
+      <section class="section" id="topic-116-D8C99056"><h2 class="title sectiontitle">Search
+Criteria at Child Level</h2>
+         
+         <p class="p" id="topic-120-D8C99056">This example
+shows how to apply search criteria at parent and child levels. The
+request payload selects the first 500 locations in the state of Alaska
+in the United States. The response payload returns <samp class="ph codeph" id="topic-122-D8C9EACF">PostalCode</samp>, <samp class="ph codeph" id="topic-124-D8C9EACF">City</samp>, <samp class="ph codeph" id="topic-126-D8C9EAD1">State</samp>, <samp class="ph codeph" id="topic-128-D8C9EAD1">Province</samp>, <samp class="ph codeph" id="topic-130-D8C9EAD3">Country</samp>, and <samp class="ph codeph" id="topic-132-D8C9EAD4">LocationId</samp> attributes for the <samp class="ph codeph" id="topic-134-D8C9EAD4">Location</samp> object. It also returns <samp class="ph codeph" id="topic-136-D8C9EAD4">Country</samp>, <samp class="ph codeph" id="topic-138-D8C9EAD6">FloorNumber</samp>, <samp class="ph codeph" id="topic-140-D8C9EAD6">City</samp>, <samp class="ph codeph" id="topic-142-D8C9EB3B">State</samp>, <samp class="ph codeph" id="topic-144-D8C9EB3B">Province</samp>, and <samp class="ph codeph" id="topic-146-D8C9EB3B">EffectiveStartDate</samp> attributes for the <samp class="ph codeph" id="topic-148-D8C9EB3D">LocationProfile</samp>, if the <samp class="ph codeph" id="topic-150-D8C9EB3D">EffectiveStartDate</samp> is equal to or later than <span class="keyword" id="topic-202-E4DCA771">1950-04-12</span>.</p>
+
+         <pre class="pre codeblock" id="topic-154-D8CA031A">&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+    &lt;soap:Body&gt;
+        &lt;ns1:findLocation 
+        xmlns:ns1="http://xmlns.oracle.com/apps/cdm/foundation/parties/
+        locationService/applicationModule/types/"&gt;
+            &lt;ns1:findCriteria xmlns:ns2="http://xmlns.oracle.com/adf/svc/types/"&gt;
+                &lt;ns2:fetchStart&gt;0&lt;/ns2:fetchStart&gt;
+                &lt;ns2:fetchSize&gt;500&lt;/ns2:fetchSize&gt;
+                &lt;ns2:filter&gt;
+                    &lt;ns2:group&gt;
+                        &lt;ns2:item&gt;
+                            &lt;ns2:attribute&gt;Country&lt;/ns2:attribute&gt;
+                            &lt;ns2:operator&gt;=&lt;/ns2:operator&gt;
+                            &lt;ns2:value&gt;US&lt;/ns2:value&gt;
+                        &lt;/ns2:item&gt;
+                        &lt;ns2:item&gt;
+                            &lt;ns2:conjunction&gt;And&lt;/ns2:conjunction&gt;
+                            &lt;ns2:attribute&gt;State&lt;/ns2:attribute&gt; 
+                            &lt;ns2:operator&gt;=&lt;/ns2:operator&gt;
+                            &lt;ns2:value&gt;AK&lt;/ns2:value&gt; 
+                        &lt;/ns2:item&gt;
+                    &lt;/ns2:group&gt;
+                &lt;/ns2:filter&gt;
+                &lt;ns2:findAttribute&gt;PostalCode&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;City&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;State&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;Province&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;Country&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;LocationId&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;LocationProfile&lt;/ns2:findAttribute&gt;
+                &lt;ns2:childFindCriteria&gt;
+                    &lt;ns2:filter&gt;
+                        &lt;ns2:group&gt;
+                            &lt;ns2:item&gt;
+                                &lt;ns2:attribute&gt;EffectiveStartDate&lt;/ns2:attribute&gt;
+                                &lt;ns2:operator&gt;ONORAFTER&lt;/ns2:operator&gt;
+                                &lt;ns2:value&gt;1950-04-12&lt;/ns2:value&gt;
+                            &lt;/ns2:item&gt;
+                        &lt;/ns2:group&gt;
+                    &lt;/ns2:filter&gt;
+                    &lt;ns2:findAttribute&gt;Country&lt;/ns2:findAttribute&gt;
+                    &lt;ns2:findAttribute&gt;FloorNumber&lt;/ns2:findAttribute&gt;
+                    &lt;ns2:findAttribute&gt;City&lt;/ns2:findAttribute&gt;
+                    &lt;ns2:findAttribute&gt;State&lt;/ns2:findAttribute&gt;
+                    &lt;ns2:findAttribute&gt;Province&lt;/ns2:findAttribute&gt;
+                    &lt;ns2:findAttribute&gt;EffectiveStartDate&lt;/ns2:findAttribute&gt;
+                    &lt;ns2:childAttrName&gt;LocationProfile&lt;/ns2:childAttrName&gt;
+                &lt;/ns2:childFindCriteria&gt;
+            &lt;/ns1:findCriteria&gt;
+        &lt;/ns1:findLocation&gt;
+    &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;</pre>
+
+      </section>
+
+      <section class="section" id="topic-156-D8CA393C"><h2 class="title sectiontitle">Sort
+the Search Results</h2>
+         
+         <p class="p" id="topic-160-D8CA393E">This example
+shows how to sort the search results. The request payload finds the <samp class="ph codeph" id="topic-162-D8CA4B7A">Location</samp> objects in the state of
+Alaska in the United States, and sorts them by <samp class="ph codeph" id="topic-164-D8CA4B7A">PostalCode</samp> in ascending order and
+then by <samp class="ph codeph" id="topic-166-D8CA4B7C">City</samp> in descending
+order. The response payload returns <samp class="ph codeph" id="topic-168-D8CA4B7C">PostalCode</samp>, <samp class="ph codeph" id="topic-170-D8CA4B7D">City</samp>, <samp class="ph codeph" id="topic-172-D8CA4B7D">State</samp>, <samp class="ph codeph" id="topic-174-D8CA4B7F">Province</samp>, <samp class="ph codeph" id="topic-176-D8CA4B7F">Country</samp>, and <samp class="ph codeph" id="topic-178-D8CA4B7F">LocationId</samp> attributes in the <samp class="ph codeph" id="topic-180-D8CA4B7F">Location</samp> object.</p>
+
+         <pre class="pre codeblock" id="topic-182-D8CA5713">&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+    &lt;soap:Body&gt;
+        &lt;ns1:findLocation 
+        xmlns:ns1="http://xmlns.oracle.com/apps/cdm/foundation/parties/
+        locationService/applicationModule/types/"&gt;
+            &lt;ns1:findCriteria xmlns:ns2="http://xmlns.oracle.com/adf/svc/types/"&gt;
+                &lt;ns2:fetchStart&gt;0&lt;/ns2:fetchStart&gt;
+                &lt;ns2:fetchSize&gt;500&lt;/ns2:fetchSize&gt;
+                &lt;ns2:filter&gt;
+                    &lt;ns2:group&gt;
+                        &lt;ns2:item&gt;
+                            &lt;ns2:conjunction&gt;And&lt;/ns2:conjunction&gt;
+                            &lt;ns2:attribute&gt;Country&lt;/ns2:attribute&gt;
+                            &lt;ns2:operator&gt;=&lt;/ns2:operator&gt;
+                            &lt;ns2:value&gt;US&lt;/ns2:value&gt;
+                        &lt;/ns2:item&gt;
+                        &lt;ns2:item&gt;
+                            &lt;ns2:conjunction&gt;And&lt;/ns2:conjunction&gt;
+                            &lt;ns2:attribute&gt;State&lt;/ns2:attribute&gt;
+                            &lt;ns2:operator&gt;=&lt;/ns2:operator&gt;
+                            &lt;ns2:value&gt;AK&lt;/ns2:value&gt;
+                        &lt;/ns2:item&gt;
+                    &lt;/ns2:group&gt;
+                &lt;/ns2:filter&gt;
+                &lt;ns2:sortOrder&gt;
+                    &lt;ns2:sortAttribute&gt;
+                        &lt;ns2:name&gt;PostalCode&lt;/ns2:name&gt;
+                    &lt;/ns2:sortAttribute&gt;
+                    &lt;ns2:sortAttribute&gt;
+                        &lt;ns2:name&gt;City&lt;/ns2:name&gt;
+                        &lt;ns2:descending&gt;true&lt;/ns2:descending&gt;
+                    &lt;/ns2:sortAttribute&gt;
+                &lt;/ns2:sortOrder&gt;  
+                &lt;ns2:findAttribute&gt;PostalCode&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;City&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;State&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;Province&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;Country&lt;/ns2:findAttribute&gt;
+                &lt;ns2:findAttribute&gt;LocationId&lt;/ns2:findAttribute&gt;
+            &lt;/ns1:findCriteria&gt;
+        &lt;/ns1:findLocation&gt;
+    &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</pre>
+
+      </section>
+
+   </div>
+
+   <nav role="navigation" class="related-links">
+<div class="linklist linklist"><h5 class="relatedlinks">Related Topics</h5>
+<ul>
+<li><p><a class="link" href="find_Operation.htm">find
+Operation</a></p></li>
+<li><p><a class="link" href="Services_with_Warnings_Enabled.htm">Service with Warnings Enabled Examples</a></p></li>
+<li><p><a class="link" href="Request_Payload_Element.htm">Request Payload Element Behavior</a></p></li></ul></div>
+</nav>
+</div></div></div><footer></footer><noscript><p>Scripting on this page enhances content navigation, but does not change the content in any way.</p></noscript>
+<!-- Start SiteCatalyst code -->
+<script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+<!-- End SiteCatalyst code -->
+</body>
+</html>

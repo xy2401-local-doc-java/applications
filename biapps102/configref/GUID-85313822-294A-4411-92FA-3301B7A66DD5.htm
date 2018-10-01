@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>About Adding Payroll Balances to BI Payroll Balance Group</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="To extract payroll balances into Oracle Business Analytics Warehouse, the balances must be assigned to the BI Balance Group in the Fusion Applications system and Elements to Element Group in PeopleSoft Global Payroll." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-96462356-A5A0-4E1C-B4ED-B2C5B1D0FC45.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-98464E6E-F167-4980-A464-8CE15BECA94F.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-85313822-294A-4411-92FA-3301B7A66DD5"></a> <span id="PAGE" style="display:none;">37/336</span> <!-- End Header -->
+<a id="BIACF24600"></a><a id="BIACF24601"></a><a id="BIACF24602"></a><a id="IT_216"></a>
+<h1 id="BIAFC-GUID-85313822-294A-4411-92FA-3301B7A66DD5" class="sect1">About Adding Payroll Balances to BI Payroll Balance Group</h1>
+<div>
+<p>To extract payroll balances into <span>Oracle Business Analytics Warehouse</span>, the balances must be assigned to the BI Balance Group in the Fusion Applications system and Elements to Element Group in PeopleSoft Global Payroll.</p>
+<p>For PeopleSoft North American Payroll and E-Business Suite Payroll, it is strongly recommended to create a custom table in the OLTP environment with all the balances/earnings/deductions/taxes that needs to be extracted into <span>Oracle Business Analytics Warehouse</span>.</p>
+<p>By limiting the balances extracted, the performance of ETL and reports will be improved. In addition, only certain types of balance are suitable for including in the warehouse. You should only extract run balances, as other types of balances might not be fully additive (for example year-to-date balances cannot be added together).</p>
+<p>To ensure addivity of measures we will only support run balances. For each payroll run the actual run balances processed will be stored. Because we are not breaking these down by context we can combine run balances across time to form higher level balances for example, PTD, MTD, YTD.</p>
+<div class="section">
+<p class="subhead1">Optional or Mandatory</p>
+<p>Mandatory for Fusion Payroll and PeopleSoft Global Payroll. Optional, but highly recommended for E-Business Suite Payroll and PeopleSoft North American Payroll.</p>
+<p>For Fusion and Global Payroll, the ETL is configured to extract only the balances that are assigned to the 'BI Balance Group' and 'GLOBAL BI BALGRP' Element Group respectively.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Applies to</p>
+<p>Fusion Payroll, PeopleSoft Global Payroll, PeopleSoft North American Payroll and E-Business Suite Payroll.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Tasks</p>
+<p>Refer to the appropriate section for your source system:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-85313822-294A-4411-92FA-3301B7A66DD5.htm#GUID-420899DA-5AF6-4D4E-A972-E944ABBE2AA5" title="You can add balances to the BI Balance Group for inclusion in Oracle Business Analytics Warehouse. More details are provided in the Payroll Administration documentation, which covers exceptions and verification reports to validate any setup.">Adding Payroll Balances to Balance Groups for Fusion Applications</a></p>
+</li>
+<li>
+<p><a href="GUID-85313822-294A-4411-92FA-3301B7A66DD5.htm#GUID-0CB0CF35-36BF-42D6-82F1-FC5B1AEBC276" title="You can add payroll balances to Payroll balance groups for PeopleSoft Global Payroll.">Adding Payroll Balances to Balance Groups for PeopleSoft Global Payroll</a></p>
+</li>
+<li>
+<p><a href="GUID-85313822-294A-4411-92FA-3301B7A66DD5.htm#GUID-9B2FF585-A36C-4B27-9EA9-5649B64D7FA9" title="For PeopleSoft North American Payroll and E-Business Suite Payroll, it is strongly recommended to create a custom table in the OLTP environment with all balances/earnings/deductions/taxes that need to be extracted into Oracle Business Analytics Warehouse. You can use the PeopleSoft North American Payroll Custom Table script.">Script for Adding Payroll Balances to Balance Groups for PeopleSoft North America Payroll</a></p>
+</li>
+<li>
+<p><a href="GUID-85313822-294A-4411-92FA-3301B7A66DD5.htm#GUID-A8E5731A-21CE-4E94-AEE9-48D6997EA0B3" title="Use the E-Business Suite Payroll Custom Table script to add payroll balances to balance groups.">Script for Adding Payroll Balances to Balance Groups for E-Business Suite</a></p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+<a id="BIACF24604"></a>
+<div class="props_rev_3"><a id="GUID-420899DA-5AF6-4D4E-A972-E944ABBE2AA5"></a>
+<h2 id="BIAFC-GUID-420899DA-5AF6-4D4E-A972-E944ABBE2AA5" class="sect2">Adding Payroll Balances to Balance Groups for Oracle Fusion Applications</h2>
+<div>
+<p>You can add balances to the BI Balance Group for inclusion in <span>Oracle Business Analytics Warehouse</span>. More details are provided in the Payroll Administration documentation, which covers exceptions and verification reports to validate any setup.</p>
+<div class="p">
+<p>Prerequisites:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Access to <span>Oracle Fusion Applications</span> Payroll Administration area.</p>
+</li>
+<li>
+<p>Office 2007 with Oracle ADF 11g Plug In.</p>
+</li>
+<li>
+<p>List of defined balances required to add to BI Balance Group.</p>
+</li>
+<li>
+<p>Listed by Balance Dimension (which must be Run) and Balance Type.</p>
+</li>
+<li>
+<p>Listed by Legislative Data Group.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">To create the batch:</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Log into <span>Oracle Fusion Applications</span> and navigate to the Payroll Administration area (<span class="bold">Navigator</span>, then <span class="bold">Payroll</span>, then <span class="bold">Payroll Administration</span>).</span></li>
+<li class="stepexpand"><span>In the <span class="wintitle">Task</span> pane select <span class="bold">Batch Processing</span>, then <span class="bold">Batch Loader</span>.</span></li>
+<li class="stepexpand"><span>Click the <span class="bold">Download</span> button to open the Batch Loader Spreadsheet, re-entering your login details as requested.</span></li>
+<li class="stepexpand"><span>In the <span class="wintitle">Batch Header Sheet</span> tab, enter a name for the batch and the Legislative Data Group, then click <span class="bold">Save</span>.</span></li>
+<li class="stepexpand"><span>Double-click the batch name to select the batch and open the <span class="wintitle">Batch Content Sheet</span> tab.</span></li>
+<li class="stepexpand"><span>Click the <span class="bold">Add</span> button and select the <span class="bold">Add a Defined Balance</span> action.</span></li>
+<li class="stepexpand"><span>Enter the details for each defined balance to be added to the BI Balance Group:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>Line Sequence.</p>
+</li>
+<li>
+<p>Attribute Definition &ndash; 'Global BI Attribute'.</p>
+</li>
+<li>
+<p>Legislative Data Group &ndash; as entered in step 4.</p>
+</li>
+<li>
+<p>Balance Dimension &ndash; balance dimension name; this should be a simple run balance without any contexts.</p>
+</li>
+<li>
+<p>Balance Type &ndash; balance type name for the defined balance</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>Click <span class="bold">Save</span>.</span></li>
+</ol>
+</div>
+<div class="sect3"><a id="TRANSFER_BATCH"></a>
+<h3 id="BIAFC-TRANSFER_BATCH" class="sect3">Transferring the Batch</h3>
+<div>
+<p>Once you create a batch, you can transfer it.</p>
+<ol>
+<li class="stepexpand"><span>In <span>Oracle Fusion Applications</span>, navigate to the Checklists page (<span class="bold">Navigator</span>, then <span class="bold">Payroll</span>, then <span class="bold">Checklists</span>).</span></li>
+<li class="stepexpand"><span>In the <span class="wintitle">Task</span> pane select <span class="bold">Payroll Flows</span>, then <span class="bold">Submit a Process or Report</span>.</span></li>
+<li class="stepexpand"><span>Select the Legislative Data Group for the batch.</span></li>
+<li class="stepexpand"><span>Select the Transfer Batch process and click <span class="bold">Next</span>.</span></li>
+<li class="stepexpand"><span>Give a name for the Payroll Flow.</span>
+<div>
+<p>For the batch parameter, select the batch name you indicated.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Submit the process.</span></li>
+</ol>
+</div>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-0CB0CF35-36BF-42D6-82F1-FC5B1AEBC276"></a>
+<h2 id="BIAFC-GUID-0CB0CF35-36BF-42D6-82F1-FC5B1AEBC276" class="sect2">Adding Payroll Balances to Balance Groups for PeopleSoft Global Payroll</h2>
+<div>
+<p>You can add payroll balances to Payroll balance groups for PeopleSoft Global Payroll.</p>
+<ol>
+<li class="stepexpand"><span>Navigate to <span class="bold">Setup HRMS</span>, then <span class="bold">Product Related</span>, then <span class="bold">Global Payroll &amp; Absence Mgmt</span>, then <span class="bold">Elements</span>, then <span class="bold">Element Groups</span>, then <span class="bold">Add a New Value</span>.</span>
+<div>
+<div class="figure" id="GUID-0CB0CF35-36BF-42D6-82F1-FC5B1AEBC276__GUID-2A6AB900-04DC-4F24-98AA-E32425E564AF"><img width="791" height="574" src="img/GUID-D76437B2-FCE8-4323-8192-B139794C97A7-default.gif" alt="Description of GUID-D76437B2-FCE8-4323-8192-B139794C97A7-default.gif follows" title="Description of GUID-D76437B2-FCE8-4323-8192-B139794C97A7-default.gif follows" /><br />
+<a href="img_text/GUID-D76437B2-FCE8-4323-8192-B139794C97A7-default.htm">Description of the illustration GUID-D76437B2-FCE8-4323-8192-B139794C97A7-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Provide the Name of the Element Group as 'GLOBAL BI BALGRP' and provide any meaningful description.</span>
+<div>
+<div class="figure" id="GUID-0CB0CF35-36BF-42D6-82F1-FC5B1AEBC276__GUID-7B433C0F-9302-43C6-BBF1-AD202370C038"><img width="800" height="583" src="img/GUID-76B90DF7-8EFC-476A-93FB-A8B726E8AC1B-default.gif" alt="Description of GUID-76B90DF7-8EFC-476A-93FB-A8B726E8AC1B-default.gif follows" title="Description of GUID-76B90DF7-8EFC-476A-93FB-A8B726E8AC1B-default.gif follows" /><br />
+<a href="img_text/GUID-76B90DF7-8EFC-476A-93FB-A8B726E8AC1B-default.htm">Description of the illustration GUID-76B90DF7-8EFC-476A-93FB-A8B726E8AC1B-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Click on <span class="wintitle">Element Group Members</span> tab.</span></li>
+<li class="stepexpand"><span>Add the Earnings/Deductions that need to be extracted into <span>Oracle Business Analytics Warehouse</span>, to the Element Group created.</span>
+<div>
+<p>The Global Payroll ETL is configured to extract only the Earnings/Deductions that are assigned to the Element Group GLOBAL BI BALGRP. The screenshot shows how to assign Earnings/Deductions to an Element Group.</p>
+<div class="figure" id="GUID-0CB0CF35-36BF-42D6-82F1-FC5B1AEBC276__GUID-900E8610-CA52-4069-991F-8140725CD875"><img width="775" height="527" src="img/GUID-5CE353D1-3131-4977-92BC-5BCA9A3556F1-default.gif" alt="Description of GUID-5CE353D1-3131-4977-92BC-5BCA9A3556F1-default.gif follows" title="Description of GUID-5CE353D1-3131-4977-92BC-5BCA9A3556F1-default.gif follows" /><br />
+<a href="img_text/GUID-5CE353D1-3131-4977-92BC-5BCA9A3556F1-default.htm">Description of the illustration GUID-5CE353D1-3131-4977-92BC-5BCA9A3556F1-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+</ol>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-9B2FF585-A36C-4B27-9EA9-5649B64D7FA9"></a>
+<h2 id="BIAFC-GUID-9B2FF585-A36C-4B27-9EA9-5649B64D7FA9" class="sect2">Script for Adding Payroll Balances to Balance Groups for PeopleSoft North America Payroll</h2>
+<div>
+<p>For PeopleSoft North American Payroll and E-Business Suite Payroll, it is strongly recommended to create a custom table in the OLTP environment with all balances/earnings/deductions/taxes that need to be extracted into <span>Oracle Business Analytics Warehouse</span>. You can use the PeopleSoft North American Payroll Custom Table script.</p>
+<pre dir="ltr">
+CREATE TABLE OBIA_PAY_BAL_FILTER (BALANCE_ID VARCHAR2 (50));
+INSERT INTO OBIA_PAY_BAL_FILTER(BALANCE_ID) 
+SELECT DISTINCT A.BALANCE_CODE FROM 
+(
+SELECT D.DEDCD AS BALANCE_CODE FROM 
+PS_DEDUCTION_TBL D
+WHERE 
+D.DEDCD IN ('401','B00-23','B10-02','B10-15','B10-16')
+UNION
+SELECT E.ERNCD AS BALANCE_CODE 
+FROM 
+PS_EARNINGS_TBL E
+WHERE 
+E.ERNCD IN ('001','007','B14','B30')
+UNION
+SELECT S.ERNCD_SPCL AS BALANCE_CODE
+FROM 
+PS_SPCL_EARNS_TBL S
+WHERE 
+S.ERNCD_SPCL IN ('100','142','143','145') 
+UNION
+SELECT ST.STATE AS BALANCE_CODE
+FROM
+PS_STATE_TAX_TBL ST
+WHERE ST.STATE IN ('AK','AL','AR','AS')
+UNION
+SELECT CT.PROVINCE AS BALANCE_CODE
+FROM
+PS_CAN_TAX_PROV CT
+WHERE CT.PROVINCE IN ('AB','BC','MB','NB')
+) A;
+CREATE UNIQUE INDEX OBIA_PAY_BAL_FILTER_U1 ON OBIA_PAY_BAL_FILTER (BALANCE_ID);
+</pre>
+<p>Add all the Earnings/Deductions/Taxes in the IN clause of the above query respectively.</p>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-A8E5731A-21CE-4E94-AEE9-48D6997EA0B3"></a>
+<h2 id="BIAFC-GUID-A8E5731A-21CE-4E94-AEE9-48D6997EA0B3" class="sect2">Script for Adding Payroll Balances to Balance Groups for E-Business Suite</h2>
+<div>
+<p>Use the E-Business Suite Payroll Custom Table script to add payroll balances to balance groups.</p>
+<pre dir="ltr">
+CREATE TABLE OBIA_PAY_BAL_FILTER (BALANCE_ID VARCHAR2 (50));
+INSERT INTO OBIA_PAY_BAL_FILTER (BALANCE_ID) 
+SELECT DISTINCT DB.DEFINED_BALANCE_ID 
+FROM 
+PAY_BALANCE_TYPES BT,
+PAY_DEFINED_BALANCES DB,
+PAY_BALANCE_DIMENSIONS BD 
+WHERE 
+BT.BALANCE_TYPE_ID = DB.BALANCE_TYPE_ID AND 
+DB.BALANCE_DIMENSION_ID = BD.BALANCE_DIMENSION_ID AND 
+BT.BALANCE_NAME IN ('Payments','Overtime','Regular Earnings','Regular Salary');
+CREATE UNIQUE INDEX OBIA_PAY_BAL_FILTER_U1 ON OBIA_PAY_BAL_FILTER (BALANCE_ID);
+</pre>
+<p><code class="codeph">BT.BALANCE_NAME IN ('Payments','Overtime','Regular Earnings','Regular Salary')</code> &ndash; List of All balances that need to be extracted into <span>Oracle Business Analytics Warehouse</span>).</p>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-96462356-A5A0-4E1C-B4ED-B2C5B1D0FC45.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-98464E6E-F167-4980-A464-8CE15BECA94F.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

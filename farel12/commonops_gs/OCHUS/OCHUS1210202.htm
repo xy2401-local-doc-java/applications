@@ -1,0 +1,1822 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>An Introduction to HCM Security in the Cloud (Chapter 1) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Securing Oracle HCM Cloud" name="doctitle">
+      <meta content="E73303-09" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="OCHUS" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Feb 16 01:08:35 PST 2018" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="HCM Security;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="preface.htm" rel="Prev">
+      <link type="text/html" title="Next" href="OCHUS1667099.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="OCHUS.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="OCHUS.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="Oracle Human Capital Management Cloud is secure as delivered. This guide explains how to enable user access to HCM functions
+      and data. You perform many of the tasks in this guide during implementation. You can also perform most of them later and as
+      requirements change. This topic summarizes the scope of this guide and identifies the contents of each chapter. This table
+      describes the contents of each chapter in this guide."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">4/25</span><a name="BEGIN" id="BEGIN"></a><div id="OCHUS1210202" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">1</span>An Introduction to HCM Security in the Cloud
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1674417">Securing Oracle HCM Cloud: Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1210996">Role-Based Security: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1211020">Predefined HCM Roles: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1211108">Role Types: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1211896">Role Inheritance: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1218011">Duty Role Components: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1595447">Aggregate Privileges: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1213906">Security Customization: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1212311">Reviewing Predefined Roles: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2168195">Oracle Fusion Applications Security Console: Explained</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="OCHUS1674417">
+                  <h2>Securing Oracle HCM Cloud: Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Oracle Human Capital Management Cloud is
+                     secure as delivered. This guide explains how to enable user access
+                     to HCM functions and data. You perform many of the tasks in this guide
+                     during implementation. You can also perform most of them later and
+                     as requirements change. This topic summarizes the scope of this guide
+                     and identifies the contents of each chapter.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1674293">
+                     <h3 class="topictitle">Guide Structure</h3>
+                     
+                     <p>This table describes the contents of each
+                        chapter in this guide.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with 20&#xA;data rows shows the chapter title (left column) and its description&#xA;(right column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Chapter
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Contents
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>An Introduction to HCM Security in the Cloud</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>A brief overview of the concepts of role-based security
+                                    and an introduction to the Oracle Fusion Applications Security Console
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Creating Implementation Users</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The role of implementation users and instructions
+                                    for creating them
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Creating HCM Data Roles for Implementation Users</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>How to provide the data access that enables implementation
+                                    users to complete the functional implementation
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Enabling Basic Data Access for Abstract Roles</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>How to provide basic data access for all employees,
+                                    contingent workers, and line managers
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Assigning Roles to Implementation Users</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>How to assign data and abstract roles to implementation
+                                    users
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Setting Up Applications Security</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Setting enterprise options on the Security Console
+                                    and maintaining the Oracle Fusion Applications Security tables.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Preparing for Application Users</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Enterprise-wide options and related decisions that
+                                    affect application users
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Creating Application Users</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The ways in which you can create application users,
+                                    with instructions for some methods
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Managing Application Users</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>How to maintain user accounts throughout the workforce
+                                    life cycle
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Provisioning Roles to Application Users</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The ways in which application users can acquire roles,
+                                    with instructions for creating some standard role mappings
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Reporting on Application Users and Roles</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Reporting on user accounts, inactive users, roles
+                                    provisioned to users, and password changes
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HCM Data Roles and Security Profiles</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>How to create and manage HCM data roles and use HCM
+                                    security profiles to identify the data that users can access
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Person Security Profiles</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>How to secure access to person records</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Organization and Other Security Profiles</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>How to secure access to organizations, positions,
+                                    document types, legislative data groups, payrolls, and payroll flows
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Using the Security Console</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>How to use the Security Console to review role hierarchies
+                                    and role analytics
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Customizing Security</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>How to copy predefined roles to create custom roles
+                                    and how to create custom roles from scratch
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Regenerating Roles</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>How to regenerate the data security policies of data
+                                    and abstract roles when the role hierarchy changes
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Security and Reporting</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>How to enable users to run Oracle Transactional Business
+                                    Intelligence and Oracle Business Intelligence Publisher reports
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Certificate Management</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>How to generate, import, export, and delete PGP and
+                                    X.509 certificates for data encryption and decryption
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Role Optimization</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>How to use the optional Role Optimization Report
+                                    to analyze the role hierarchy for redundancies and other inefficiencies
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Advanced Data Security</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>An introduction to these optional cloud services:</p>
+                                 
+                                 <ul>
+                                    
+                                    <li>
+                                       <p>Database Vault for Oracle Fusion
+                                          Human Capital Management Security Cloud Service
+                                       </p>
+                                    </li>
+                                    
+                                    <li>
+                                       <p>Transparent Data Encryption for
+                                          Oracle Fusion Human Capital Management Security Cloud Service
+                                       </p>
+                                    </li>
+                                    
+                                 </ul>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>During implementation, you can perform security-related
+                        tasks:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>From a functional area task list
+                              or an implementation project
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>By selecting <span class="uicontrol">Setup and Maintenance</span> from the Navigator and searching
+                              for the task in the Setup and Maintenance work area
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Once the implementation is complete, you can perform
+                        most security-related tasks on the Security Console. Any exceptions
+                        are identified in relevant topics. For example, you hire workers in
+                        the New Person work area, not on the Security Console.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1210996">
+                  <h2>Role-Based Security: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>In Oracle Fusion Applications, users have
+                     roles through which they gain access to functions and data. Users
+                     can have any number of roles.
+                  </p>
+                  
+                  
+                  
+                  
+                  <p>
+                     <p>In this figure, user Lynda Jones
+                        has three roles.
+                     </p>
+                  </p>
+                  <img src="img/hcm_defsec_rbac_03_20057470.png" alt="A user with three roles" class="fusappimg">
+                  
+                  <p>When Lynda signs in to Oracle Human Capital Management
+                     Cloud (Oracle HCM Cloud), she doesn't have to select a role. All of
+                     these roles are active concurrently.
+                  </p>
+                  
+                  <p>The functions and data that Lynda can access are
+                     determined by this combination of roles.
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>As an employee, Lynda can access
+                           employee functions and data.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>As a line manager, Lynda can access
+                           line-manager functions and data.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>As a human resource specialist
+                           (HR specialist), Lynda can access HR specialist functions and data
+                           for Vision Operations.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="OCHUS1210993">
+                     <h3 class="topictitle">Role-Based Access Control</h3>
+                     
+                     <p>Role-based security in Oracle Fusion Applications
+                        controls who can do what on which data.
+                     </p>
+                     
+                     
+                     <p>In role-based access:</p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with three&#xA;data rows shows the security component (left column) and its description&#xA;(right column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Component
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Who</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Is a role assigned to a user</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>What</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Is a function that users with the role can perform</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Which Data</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Is the set of data that users with the role can access
+                                    when performing the function
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>For example:</p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This three-column table with&#xA;four data rows shows, from left to right, who, what, and for which&#xA;data.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Who
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 What
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Which Data
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Line managers</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Can create performance documents</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>For workers in their reporting hierarchies</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Employees</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Can view payslips</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>For themselves</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Payroll managers</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Can report payroll balances</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>For specified payrolls</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HR specialists</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Can transfer workers</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>For workers in specified organizations</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1211020">
+                  <h2>Predefined HCM Roles: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Many job and abstract
+                     roles are predefined in Oracle Human Capital Management Cloud
+                     (Oracle HCM Cloud). This list shows the main predefined HCM roles:
+                  </p>
+                  
+                  
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Benefits Administrator</p>
+                     </li>
+                     
+                     <li>
+                        <p>Benefits Manager</p>
+                     </li>
+                     
+                     <li>
+                        <p>Benefits Specialist</p>
+                     </li>
+                     
+                     <li>
+                        <p>Compensation Administrator</p>
+                     </li>
+                     
+                     <li>
+                        <p>Compensation Analyst</p>
+                     </li>
+                     
+                     <li>
+                        <p>Compensation Manager</p>
+                     </li>
+                     
+                     <li>
+                        <p>Compensation Specialist</p>
+                     </li>
+                     
+                     <li>
+                        <p>Contingent Worker</p>
+                     </li>
+                     
+                     <li>
+                        <p>Employee</p>
+                     </li>
+                     
+                     <li>
+                        <p>Human Capital Management Application
+                           Administrator
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Human Capital Management Integration
+                           Specialist
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Human Resource Analyst</p>
+                     </li>
+                     
+                     <li>
+                        <p>Human Resource Manager</p>
+                     </li>
+                     
+                     <li>
+                        <p>Human Resource Specialist</p>
+                     </li>
+                     
+                     <li>
+                        <p>Line Manager</p>
+                     </li>
+                     
+                     <li>
+                        <p>Payroll Administrator</p>
+                     </li>
+                     
+                     <li>
+                        <p>Payroll Manager</p>
+                     </li>
+                     
+                     <li>
+                        <p>Power Recruiter</p>
+                     </li>
+                     
+                     <li>
+                        <p>Recruiting Administrator</p>
+                     </li>
+                     
+                     <li>
+                        <p>Time and Labor Administrator</p>
+                     </li>
+                     
+                     <li>
+                        <p>Time and Labor Manager</p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>These predefined roles are part of the Oracle HCM
+                     Cloud security reference implementation. The security reference implementation
+                     is a predefined set of security definitions that you can use as supplied.
+                  </p>
+                  
+                  <p>Also included in the security reference implementation
+                     are roles that are common to all Oracle Fusion applications, such
+                     as:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Application Implementation Consultant</p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>IT Security Manager</p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>You can include the predefined roles in HCM data roles, for
+                     example. Typically, you assign the Employee, Contingent Worker, and
+                     Line Manager abstract roles directly to users.
+                  </p>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1211108">
+                  <h2>Role Types: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Oracle Human Capital Management Cloud (Oracle
+                     HCM Cloud) defines five types of roles:
+                  </p>
+                  
+                  
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Data roles</p>
+                     </li>
+                     
+                     <li>
+                        <p>Abstract roles</p>
+                     </li>
+                     
+                     <li>
+                        <p>Job roles</p>
+                     </li>
+                     
+                     <li>
+                        <p>Aggregate privileges</p>
+                     </li>
+                     
+                     <li>
+                        <p>Duty roles</p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>This topic introduces the role types.</p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1211141">
+                     <h3 class="topictitle">Data Roles</h3>
+                     
+                     <p>Data roles combine a worker's job and the data that
+                        users with the job must access. For example, the HCM data role Country
+                        Human Resource Specialist combines a job (human resource specialist)
+                        with a data scope (country). You define the data scope of a data role
+                        in one or more HCM security profiles. HCM data roles aren't part of the security
+                        reference implementation. You define all HCM data roles locally
+                        and assign them directly to users.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1211142">
+                     <h3 class="topictitle">Abstract Roles</h3>
+                     
+                     <p>Abstract roles represent a worker's role in the enterprise independently
+                        of the job that you hire the worker to do. Three abstract roles are
+                        predefined in Oracle HCM Cloud:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Employee</p>
+                        </li>
+                        
+                        <li>
+                           <p>Contingent Worker</p>
+                        </li>
+                        
+                        <li>
+                           <p>Line Manager</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You can also create custom abstract roles. All workers
+                        are likely to have at least one abstract role. Their abstract roles
+                        enable users to access standard functions, such as managing their
+                        own information and searching the worker directory. You assign abstract
+                        roles directly to users.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1211143">
+                     <h3 class="topictitle">Job Roles</h3>
+                     
+                     <p>Job roles represent the job that you hire a worker
+                        to perform. Human Resource Analyst and Payroll Manager are examples
+                        of predefined job roles. You can also create custom job roles. Typically,
+                        you include job roles in data roles and assign those data roles to
+                        users. The IT Security Manager and Application Implementation Consultant
+                        predefined job roles are exceptions to this general rule because they're
+                        not considered HCM job roles. Also, you don't define their data scope
+                        in HCM security profiles.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1596163">
+                     <h3 class="topictitle">Aggregate Privileges</h3>
+                     
+                     <p>Aggregate privileges combine the functional privilege
+                        for an individual task or duty with the relevant data security policies.
+                        The functional privileges that aggregate privileges provide may grant
+                        access to task flows, application pages, work areas, reports, batch programs,
+                        and so on. Job and abstract roles inherit aggregate privileges directly.
+                        Aggregate privileges don't inherit other roles. All aggregate privileges
+                        are predefined and you can't edit them. Although you can't create
+                        custom aggregate privileges, you can include the predefined aggregate
+                        privileges in custom job and abstract roles. You don't assign aggregate
+                        privileges directly to users.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1211144">
+                     <h3 class="topictitle">Duty Roles</h3>
+                     
+                     <p>Each predefined duty role represents a logical grouping
+                        of privileges that you may want to copy and edit. Duty roles differ
+                        from aggregate privileges as follows:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>They include multiple function
+                              security privileges.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>They can inherit aggregate privileges
+                              and other duty roles.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>You can create custom duty roles.</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Job and abstract roles may inherit duty roles either
+                        directly or indirectly. You can include predefined and custom duty
+                        roles in custom job and abstract roles. You don't assign duty roles
+                        directly to users.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1211896">
+                  <h2>Role Inheritance: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Each role is a hierarchy of other roles:</p>
+                  
+                  
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>HCM data roles inherit job or abstract roles.</p>
+                     </li>
+                     
+                     <li>
+                        <p>Job and abstract roles inherit
+                           many aggregate
+                           privileges. They may also inherit a few duty roles.
+                        </p>
+                        <p>In
+                           addition to aggregate privileges and duty roles, job and abstract
+                           roles are granted many function security privileges and data security
+                           policies directly.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Duty roles can inherit other duty
+                           roles and aggregate privileges.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>You can explore the complete structure of a job or
+                     abstract role on the Security Console.
+                  </p>
+                  
+                  <p>When you assign data and abstract roles to users,
+                     they inherit all of the data and function security associated with
+                     those roles.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1212030">
+                     <h3 class="topictitle">Role Inheritance Example</h3>
+                     
+                     <p>This example shows how roles are inherited.</p>
+                     
+                     
+                     
+                     <p> 
+                        <p>The figure shows a few representative
+                           aggregate privileges and a single duty role. In reality, job and abstract
+                           roles inherit many aggregate privileges. Any duty roles that they
+                           inherit may themselves inherit duty roles and aggregate privileges.
+                        </p> 
+                     </p>
+                     <img src="img/hcm_simpleroleinherit_rbac_02_20057471.png" alt="Inheritance of data and abstract roles and their&#xA;associated aggregate privileges and duty roles" class="fusappimg">
+                     
+                     <p>In this example, user Bob Price has two roles:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>HR Specialist Vision Corporation,
+                              a data role
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Employee, an abstract role</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with two&#xA;data rows shows the role (left column) and its description (right&#xA;column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Role
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>HR Specialist Vision Corporation</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Inherits the job role Human Resource Specialist.
+                                    This role inherits the aggregate privileges and duty roles that provide
+                                    access to the tasks and functions that a human resource specialist
+                                    performs. The security
+                                    profile assigned to the data role provides the data access
+                                    for the role.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Employee</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Inherits the aggregate privileges and duty roles
+                                    that provide access to all tasks and functions, unrelated to a specific
+                                    job, that every employee performs. The security profile assigned to
+                                    the abstract role provides the data access for the role.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1218011">
+                  <h2>Duty Role Components: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic describes the components of a
+                     typical duty role. You must understand how duty roles are constructed if you plan
+                     to create custom duty roles, for example.
+                  </p>
+                  
+                  
+                  
+                  <p>Function security privileges and data security policies
+                     are granted to duty roles. Duty roles may also inherit aggregate privileges and other duty roles. For example, the Workforce Structures Management
+                     duty role has the following structure.
+                  </p>
+                  <img src="img/hcm_dutyrole_rbac_03_20050808.png" alt="The structure of the Workforce Structures Management&#xA;duty role" class="fusappimg">
+                  
+                  
+                  
+                  <p>In addition to its aggregate privileges, the Workforce
+                     Structures Management duty role is granted many function security
+                     privileges and data security policies. 
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1218009">
+                     <h3 class="topictitle">Data Security Policies</h3>
+                     
+                     <p>Many data security policies are granted directly
+                        to the Workforce Structures Management duty role, including Manage
+                        Location, Manage Assignment Grade, and Manage HR Job. It also acquires
+                        data security policies indirectly, from its aggregate privileges.
+                     </p>
+                     
+                     
+                     <p>Each data security policy combines:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The role to which the data security
+                              policy is granted. The role can be a duty role, such as Workforce
+                              Structures Management, job role, abstract role, or aggregate privilege.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>A business object, such as assignment
+                              grade, that's being accessed. The data security policy identifies
+                              this resource by its table name, which is PER_GRADES_F for assignment
+                              grade.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The condition, if any, that controls
+                              access to specific instances of the business object. Conditions are
+                              usually specified for resources that you secure using HCM security profiles. Otherwise, business object instances can be identified by key values.
+                              For example, a user with the Workforce Structures Management duty
+                              role can manage all grades in the enterprise. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>A data security privilege that
+                              defines permitted actions on the data. For example, Manage Assignment
+                              Grade is a data security privilege.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1218010">
+                     <h3 class="topictitle">Function Security Privileges</h3>
+                     
+                     <p>Many function security privileges are granted directly
+                        to the Workforce Structures Management duty role, including Manage
+                        Location, Manage Assignment Grade, and Manage HR Job. It also acquires
+                        function security privileges indirectly, from its aggregate privileges.
+                     </p>
+                     
+                     
+                     <p>Each function security privilege secures the code
+                        resources that make up the relevant pages, such as the Manage Grades
+                        and Manage Locations pages. Some user interfaces aren't subject to
+                        data security, so some function security privileges have no equivalent
+                        data security policy.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1972073">
+                     <h3 class="topictitle">Predefined Duty Roles</h3>
+                     
+                     <p>The predefined duty roles represent logical groupings
+                        of privileges that you may want to manage as a group. They also represent
+                        real-world groups of tasks. For example, the predefined Human Resource
+                        Specialist job role inherits the Workforce Structures Management duty
+                        role. To create a custom Human Resource Specialist job role with no
+                        access to workforce structures, you would:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Copy the predefined job role. </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Remove the Workforce Structures
+                              Management duty role from the copy.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1595447">
+                  <h2>Aggregate Privileges: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Aggregate privileges are a type of role.
+                     Each aggregate privilege combines a single function security privilege
+                     with related data security policies. All aggregate privileges are
+                     predefined. This topic describes how aggregate privileges are named
+                     and used.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1595443">
+                     <h3 class="topictitle">Aggregate Privilege Names</h3>
+                     
+                     <p>An aggregate privilege takes its name from the function
+                        security privilege that it includes. For example, the Promote Worker
+                        aggregate privilege includes the Promote Worker function security
+                        privilege.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1595444">
+                     <h3 class="topictitle">Aggregate Privileges in the Role Hierarchy</h3>
+                     
+                     <p>Job roles and abstract roles inherit aggregate privileges
+                        directly. Duty roles may also inherit aggregate privileges. However,
+                        aggregate privileges can't inherit other roles of any type. As most
+                        function and data security below the level of job and abstract roles
+                        is provided by aggregate privileges, the role hierarchy has few levels.
+                        This flat hierarchy is easy to manage.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1608978">
+                     <h3 class="topictitle">Use of Aggregate Privileges in Custom Roles</h3>
+                     
+                     <p>You can include aggregate privileges in the role
+                        hierarchy of a custom role. Treat aggregate privileges as role building
+                        blocks.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1595445">
+                     <h3 class="topictitle">Customization of Aggregate Privileges</h3>
+                     
+                     <p>You can't create, edit, or copy aggregate privileges,
+                        nor can you grant the privileges from an aggregate privilege to another
+                        role. The purpose of an aggregate privilege is to grant a function
+                        security privilege only in combination with a specific data security
+                        policy. Therefore, you must use the aggregate privilege as a single
+                        entity.
+                     </p>
+                     
+                     
+                     <p> If you copy a job or abstract role, then the source
+                        role's aggregate privileges are never copied. Instead, role membership
+                        is added automatically to the aggregate privilege for the copied role.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1213906">
+                  <h2>Security Customization: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>If the predefined security reference
+                     implementation doesn't fully represent your enterprise, then you can make changes.
+                     For example, the predefined Line Manager abstract role includes compensation
+                     management privileges. If some of your line managers don't handle
+                     compensation, then you can create a custom line manager role without
+                     those privileges. To create a custom role, you can either copy an
+                     existing role or create a role from scratch.
+                  </p>
+                  
+                  <p>During implementation, you evaluate the predefined
+                     roles and decide whether changes are needed. You can identify predefined
+                     application roles easily by their role codes, which all have the prefix <span class="uicontrol">ORA_</span>. For example, the role code of the
+                     Payroll Manager application job role is <span class="uicontrol">ORA_PAY_PAYROLL_MANAGER_JOB</span>. All predefined roles are granted many function security privileges
+                     and data security policies. They also inherit aggregate privileges and  duty roles. To make
+                     minor changes to a role, copying and editing the predefined role is
+                     the more efficient approach. Creating roles from scratch is most successful
+                     when the role has very few privileges and you can identify them easily. 
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="OCHUS1213899">
+                     <h3 class="topictitle">Missing Enterprise Jobs</h3>
+                     
+                     
+                     
+                     <p>If jobs exist in your enterprise that aren't
+                        represented in the security reference implementation, then you create
+                        custom job roles. Add aggregate privileges and duty roles to custom job roles, as
+                        appropriate.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1213900">
+                     <h3 class="topictitle">Predefined Roles with Different Privileges</h3>
+                     
+                     
+                     
+                     <p>If the privileges for a predefined job role
+                        don't match the corresponding job in your enterprise, then you create
+                        a custom version of the role. If you copy the predefined role, then
+                        you can edit the copy. You can add or remove aggregate privileges,
+                        duty roles, function security privileges, and data security policies,
+                        as appropriate.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1213901">
+                     <h3 class="topictitle">Predefined Roles with Missing Privileges</h3>
+                     
+                     
+                     
+                     <p>If the privileges for a job aren't defined
+                        in the security reference implementation, then you create custom duty
+                        roles. You can't create custom aggregate privileges. The typical implementation
+                        doesn't use custom duty roles.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1212311">
+                  <h2>Reviewing Predefined Roles: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic describes some of the ways in
+                     which you can access information about predefined roles. This information
+                     can help you to identify which users need each role and whether to
+                     make any changes before provisioning roles.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1620235">
+                     <h3 class="topictitle">The Security Console</h3>
+                     
+                     <p>On the Security Console, you can:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Review the role hierarchy of any job, abstract, or duty role.</p>
+                        </li>
+                        
+                        <li>
+                           <p>Extract the role hierarchy to a
+                              spreadsheet.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Identify the function security
+                              privileges and data security policies granted to a role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Compare roles to identify differences.</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        The role codes of all predefined roles have the prefix <span class="uicontrol">ORA_</span>.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1620240">
+                     <h3 class="topictitle">Reports</h3>
+                     
+                     <p>You can run the User and Role Access Audit Report.
+                        This XML-format report identifies the function security privileges
+                        and data security policies for a specified role, all roles, a specified
+                        user, or all users.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1212373">
+                     <h3 class="topictitle">The Security Reference Manuals</h3>
+                     
+                     <p>Two manuals describe the security reference implementation
+                        for Oracle HCM Cloud users:
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>The Security Reference for Oracle
+                              Applications Cloud includes descriptions of all predefined security
+                              data that's common to Oracle Fusion Applications.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>The Security Reference for Oracle
+                              HCM Cloud includes descriptions of all predefined security data for
+                              Oracle HCM Cloud.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Both manuals contain a section for each predefined
+                        job and abstract role. For each role, you can review its:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Duty roles and aggregate privileges</p>
+                        </li>
+                        
+                        <li>
+                           <p>Role hierarchy</p>
+                        </li>
+                        
+                        <li>
+                           <p>Function security privileges </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Data security policies</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p> You can access the security reference manuals on docs.oracle.com.</p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS2168195">
+                  <h2>Oracle Fusion Applications Security Console: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The Oracle Fusion Applications Security Console
+                     is an easy-to-use administrative work area where you perform most
+                     security-management tasks. This topic introduces the Security Console
+                     and describes how to access it.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS2168194">
+                     <h3 class="topictitle">Security Console Functions</h3>
+                     
+                     <p>Use the Security Console to:</p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Review role hierarchies and role
+                              analytics.
+                           </p>
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              You can review HCM data roles on the Security
+                              Console. However, you must manage them on the Manage Data Roles and
+                              Security Profiles page.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>Create and manage custom job, abstract, and duty roles. </p>
+                        </li>
+                        
+                        <li>
+                           <p>Review the roles assigned to users.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Create and manage implementation
+                              users and their roles.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Compare roles.</p>
+                        </li>
+                        
+                        <li>
+                           <p>Simulate the Navigator for a user
+                              or role.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Manage the default format of user
+                              names and the enterprise password policy.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Manage notifications for user-lifecycle
+                              events, such as password expiration.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Manage PGP and X.509 certificates
+                              for data encryption and decryption.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Set up federation, and synchronize
+                              user and role information between Oracle Fusion Applications Security
+                              and Microsoft Active Directory, if appropriate.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2168219">
+                     <h3 class="topictitle">Accessing the Security Console</h3>
+                     
+                     <p>You must have the IT Security Manager job role to
+                        access the Security Console. You open the Security Console by selecting <span><span class="uicontrol">Tools</span> - <span class="uicontrol">Security Console</span></span> from the home page or
+                        Navigator. These tasks, performed in the Setup and Maintenance work
+                        area, also open the Security Console: 
+                     </p>
+                     
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Manage Job Roles</p>
+                        </li>
+                        
+                        <li>
+                           <p>Manage Duties</p>
+                        </li>
+                        
+                        <li>
+                           <p>Create Implementation Users</p>
+                        </li>
+                        
+                        <li>
+                           <p>Revoke Data Role from Implementation
+                              Users
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

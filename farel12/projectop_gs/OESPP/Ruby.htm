@@ -1,0 +1,228 @@
+<html lang="en">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+
+<meta name="DC.Type" content="topic">
+<meta name="description" content="Use Ruby to invoke web services using SOAP clients such as Savon."><meta content="all" name="robots">
+<meta content="yes" name="mos_crawl">
+<meta content="SOAP Web Services for Oracle Project Portfolio Management Cloud" name="dcterms.title">
+<meta content="SOAP Web Services for Oracle Project Portfolio Management Cloud" name="doctitle">
+<meta content="E74441-03" name="dcterms.identifier">
+<meta content="E67968-01" name="partno">
+<meta content="OESPP" name="dcterms.isVersionOf">
+<meta content="Fusion Publishing Server, UAE Print Staging" name="generator">
+<meta content="Tue Jul 18 16:32:28 MDT 2017" name="dcterms.created">
+<meta name="relnum" content="Release 12">
+<meta name="rel_num" content="Release 12"><link type="text/html" title="Previous" href="Python.htm" rel="Prev">
+<link type="text/html" title="Next" href="serviceReferenceOverview.htm" rel="Next">
+<link type="text/html" title="Home" href="../../index.html" rel="Start">
+<link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+<script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+<script src="../nav/js/doccd.js" type="application/javascript"></script>
+<link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+<meta content="IE=edge" http-equiv="X-UA-Compatible">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+<link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+<link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+<script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+<script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+<script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+<script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+<script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+<script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+<script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+<meta class="foundation-mq-topbar">
+<link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+<link type="text/css" href="../dcommon/css/oer.css" rel="stylesheet">
+Ruby-5B1C2BD1<meta name="DC.Language" content="en">
+<title>Ruby</title>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header><div class="row" id="CONTENT"><div class="IND large-9 medium-8 columns"><div id="EXTRATOC"></div><span id="PAGE" style="display:none;">52/297</span><a name="BEGIN" id="BEGIN"></a><div class="fusiondoc" id="Ruby-5B1C2BD1">
+
+   <h1 class="title topictitle1" id="Ruby-5B1C2BD1__topic-352-5B1C7318">Ruby</h1>
+
+   
+   
+   <div class="body" id="topic-364-5B1C7319"><p class="shortdesc">Use Ruby to invoke web services
+using SOAP clients such as Savon.</p>
+
+      <div class="p" id="topic-366-5B1C731C">You must install and configure the development
+environment and then create the base application:<ul class="ul" id="topic-368-5B1C731E">
+            <li class="li" id="topic-370-5B1C731E"><p>Create application, for example rails
+new <samp class="ph codeph" id="topic-372-5B1C72BC">WsTest1</samp>
+            </p></li>
+
+            <li class="li" id="topic-374-5B1C72BC"><p>Create controller, for example rails generate <samp class="ph codeph" id="topic-376-5B1C72BC">WsCallSample WsCall</samp> controller</p></li>
+
+            <li class="li" id="topic-378-5B1C72BD"><p>Set the root. In this example, delete <samp class="ph codeph" id="topic-380-5B1C72BD">public/index.html </samp>and modify the
+root property in <samp class="ph codeph" id="topic-382-5B1C72BF">config/routes.rb</samp> to <samp class="ph codeph" id="topic-384-5B1C72BF">WsCallSample#WsCall</samp>
+            </p></li>
+
+            <li class="li" id="topic-386-5B1C72C0"><p>Add Savon to the application, for example
+add <samp class="ph codeph" id="topic-388-5B1C72C0">gem'savon'</samp> to <samp class="ph codeph" id="topic-390-5B1C72C0">app/Gemfile</samp>
+            </p></li>
+
+         </ul>
+ For more information, see <a class="xref" href="http://rubyonrails.org/" target="_blank">Ruby on Rails</a>.</div>
+
+      <p class="p" id="topic-394-5B1C72C2">The following is a sample code to create
+a HTML form to enter the payload to be passed to the service, and
+invoke processing for <a class="xref" href="http://savonrb.com/" target="_blank">Savon</a> and <samp class="ph codeph" id="topic-398-5B1C72C3">net/https</samp> call. In this example application,
+the HTML form is created under <samp class="ph codeph" id="topic-400-5B1C72C3">views/ws_call_sample/WsCall.html.erb.</samp>
+      </p>
+
+      <pre class="pre codeblock" id="topic-402-5B1C72C5">&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;title&gt;WsCallSample#WsCall&lt;/title&gt;
+&lt;/HEAD&gt;
+&lt;BODY &gt;
+ 
+&lt;form name="envelope" method="POST"&gt;
+  &lt;input type="hidden" name="INPUT_PAYLOAD" &gt;
+  &lt;input type="hidden" name="OUTPUT_PAYLOAD" &gt;
+   &lt;%= submit_tag "Invoke Savon", :name =&gt; "invokeSavon" %&gt;
+  &lt;%= submit_tag "Invoke HttpRequest", :name =&gt; "invokeHttpRequest" %&gt;
+  &lt;br&gt;
+  &lt;table style="width:100%; font-size: small;" align=center&gt;
+    &lt;tr&gt;
+      &lt;td  align="left"&gt;&lt;b&gt;Input Payload&lt;/b&gt;&lt;/td&gt;
+      &lt;td  align="left"&gt;&lt;b&gt;Output Payload&lt;/b&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td align="center"&gt;&lt;textarea name="inputpayload" wrap="off" style="width:100%;height:100%" rows=30 &gt;&lt;%= params["inputpayload"] %&gt;&lt;/textarea&gt;&lt;/td&gt;
+      &lt;td align="center"&gt;&lt;textarea name="outputpayload" wrap="off" style="width:100%;height:100%" rows=30  &gt;&lt;%= params["xmlbody"] %&gt;&lt;/textarea&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;br&gt;
+&lt;/form&gt;
+&lt;/BODY&gt;
+&lt;/HTML&gt;</pre>
+
+      <p class="p" id="topic-404-5B1C72C6">The following is a sample code to update
+the controller to handle the submissions from the HTML form. In this
+example application, the controller is under <samp class="ph codeph" id="topic-406-5B1C72C6">controllers/ws_call_sample_controller.rb</samp>. This code processes the envelope in the input, executes using Savon
+and basic <samp class="ph codeph" id="topic-410-5B1CB79B">net/https</samp> call,
+and displays the response in the output field.</p>
+
+      <pre class="pre codeblock" id="topic-408-5B1C72C6">require 'rubygems'
+require 'nokogiri'
+require 'rexml/document'
+require "net/https"
+require 'uri'
+ 
+class WsCallSampleController &lt; ApplicationController
+  def WsCall
+    username ="username";
+    password ="password";
+    input=params["inputpayload"];
+ 
+    if params['invokeSavon']
+      # Process submission when the invokeSavon button was pressed
+      url = "https://host:port/icCnSetupCreditRulesPublicService/CreditRuleService?wsdl";
+      
+      # Create new instance of the Savon client using basic authentication
+      client = Savon.client(wsdl: url, basic_auth: [username, password], ssl_verify_mode: :none )
+ 
+      # Call the service with the envelope provided as input
+      response = client.call(:on_fault, xml: input)
+      
+      # Parse the response to XML
+      doc = Nokogiri::XML(response.to_xml  ,&amp;:noblanks)
+      s = doc.to_xml( indent:2, indent_text:" " )
+      
+      # Populate reponse content to a variable to be displayed on the output area
+      params["xmlbody"] = s
+ 
+    elsif params['invokeHttpRequest']
+      # Process submission when the invokeHttpRequest button was pressed
+      uri = URI.parse("https://host:port/icCnSetupCreditRulesPublicService/CreditRuleService")
+ 
+      # Create new instance of HTTP object
+      http = Net::HTTP.new(uri.host, uri.port)
+ 
+      # The request uses SSL, certificates are NOT verified
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      
+      # Create new instance of HTTP POST request
+      request = Net::HTTP::Post.new(uri.request_uri)
+ 
+      # Configure the request content type to be xml and SOAP action
+      request.basic_auth(username, password)
+      request.add_field("SOAPAction", "http://xmlns.oracle.com/apps/incentiveCompensation/cn/creditSetup/creditRule/creditRuleService/findRule")
+      request.add_field("Content-Type", "text/xml;charset=UTF-8")
+      
+      # Set the envelope content obtained from the input to the request
+      request.body = input
+      
+      # Execute the request and obtain the response
+      response = http.request(request)
+      
+      # Parse the response to XML
+      doc = Nokogiri::XML(response.body ,&amp;:noblanks)
+      s = doc.to_xml( indent:2, indent_text:" " )
+ 
+      # Populate reponse content to a variable to be displayed on the output area
+      params["xmlbody"] = s
+    else
+      # For any other action than invokeSavon / invokeHttpRequest default the input SOAP enveloper
+      params["inputpayload"] = ""+
+        "&lt;soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"&gt; " + "\n"+
+        "  &lt;soap:Body&gt; " + "\n"+
+        "    &lt;findRule xmlns=\"http://xmlns.oracle.com/apps/incentiveCompensation/cn/creditSetup/creditRule/creditRuleService/types/\"&gt; " + "\n"+
+        "      &lt;findCriteria&gt; " + "\n"+
+        "        &lt;fetchStart xmlns=\"http://xmlns.oracle.com/adf/svc/types/\"&gt;0&lt;/fetchStart&gt; " + "\n"+
+        "        &lt;fetchSize xmlns=\"http://xmlns.oracle.com/adf/svc/types/\"&gt;-1&lt;/fetchSize&gt; " + "\n"+
+        "        &lt;filter xmlns=\"http://xmlns.oracle.com/adf/svc/types/\"&gt; " + "\n"+
+        "          &lt;group&gt; " + "\n"+
+        "            &lt;upperCaseCompare&gt;false&lt;/upperCaseCompare&gt; " + "\n"+
+        "            &lt;item&gt; " + "\n"+
+        "              &lt;upperCaseCompare&gt;false&lt;/upperCaseCompare&gt; " + "\n"+
+        "                &lt;attribute&gt;RuleId&lt;/attribute&gt; " + "\n"+
+        "                &lt;operator&gt;=&lt;/operator&gt; " + "\n"+
+        "                &lt;value&gt;300000000851162&lt;/value&gt; " + "\n"+
+        "            &lt;/item&gt; " + "\n"+
+        "          &lt;/group&gt; " + "\n"+
+        "        &lt;/filter&gt; " + "\n"+
+        "        &lt;excludeAttribute xmlns=\"http://xmlns.oracle.com/adf/svc/types/\"&gt;false&lt;/excludeAttribute&gt; " + "\n"+
+        "      &lt;/findCriteria&gt; " + "\n"+
+        "      &lt;findControl&gt; " + "\n"+
+        "        &lt;retrieveAllTranslations xmlns=\"http://xmlns.oracle.com/adf/svc/types/\"&gt;false&lt;/retrieveAllTranslations&gt; " + "\n"+
+        "      &lt;/findControl&gt; " + "\n"+
+        "    &lt;/findRule&gt; " + "\n"+
+        "  &lt;/soap:Body&gt; " + "\n"+
+        "&lt;/soap:Envelope&gt; " ;
+    end
+  end
+end</pre>
+
+   </div>
+
+   <nav role="navigation" class="related-links">
+<div class="linklist linklist"><h5 class="relatedlinks">Related Topics</h5>
+<ul>
+<li><p><a class="link" href="Java_Client.htm">Java
+Client</a></p></li>
+<li><p><a class="link" href="Database.htm">Oracle
+Database</a></p></li>
+<li><p><a class="link" href="_NET_Framework.htm">.NET
+Framework</a></p></li>
+<li><p><a class="link" href="PHP.htm">PHP</a></p></li>
+<li><p><a class="link" href="Perl.htm">Perl</a></p></li>
+<li><p><a class="link" href="Python.htm">Python</a></p></li>
+<li><p><a class="link" href="Invoking_SOAP_Web_Services.htm">Invoking SOAP Web Services</a></p></li></ul></div>
+</nav>
+</div></div></div><footer></footer><noscript><p>Scripting on this page enhances content navigation, but does not change the content in any way.</p></noscript>
+<!-- Start SiteCatalyst code -->
+<script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+<!-- End SiteCatalyst code -->
+</body>
+</html>

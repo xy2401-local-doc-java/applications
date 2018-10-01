@@ -1,0 +1,4290 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Implementing Security in Oracle Fusion Project Portfolio Management (Chapter 12) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle ERP Cloud" name="dcterms.title">
+      <meta content="Securing Oracle ERP Cloud" name="doctitle">
+      <meta content="E74113-07" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="FASER" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Oct 20 01:25:31 PDT 2017" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="security; security; security; provision resources; provision resources; provision resources; ERP security; project security;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="FASER1349302.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="FASER1351439.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="FASER.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="FASER.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="Oracle Project Portfolio Management Cloud predefines common job roles such as Project Manager and Project Accountant. You
+      can use these roles or create new ones if the predefined roles don't fully represent your enterprise. For example, the predefined
+      Project Manager role includes project budget management privileges. If some of your project managers don't manage budgets,
+      you can copy the predefined project manager role and remove the appropriate privileges to create a custom role. A user can
+      have more than one role, so don't define a role that includes all the accesses needed for every user. Common functionality
+      that is not job-specific, such as creating time cards, expense reports, and purchase requisitions, are granted to the Employee
+      abstract role that is automatically provisioned to each employee. Project Financial Management and Grants Management applications
+      require both function and data security privileges. You can secure access to data in one of the following ways: Project Execution
+      Management applications use implicit, product-specific logic to authorize access to data in various business functions. Use
+      the Manage Project User Provisioning page to request user accounts and assign job or abstract roles for project enterprise
+      labor resources. This action enables resources to sign into Project Execution Management applications to plan projects, manage
+      resources, review, track, and collaborate on work. A resource that you provision typically falls into one of these categories:
+      You can provision the following predefined job or abstract roles to resources: You can select project-related predefined and
+      custom roles to provision by default. The application assigns the default roles to project enterprise labor resources that
+      you create using any of the following methods:"><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">15/17</span><a name="BEGIN" id="BEGIN"></a><div id="FASER1349817" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">12</span>Implementing Security in Oracle Fusion Project Portfolio Management
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1722595">Implementing Project Portfolio Management Security: Overview</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1908605">Mapping Job or Abstract Roles to Project Roles: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1722625">Project Execution Management</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER1722626">Project Financial Management</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#FASER2267346">Business Intelligence</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="FASER1722595">
+                  <h2>Implementing Project Portfolio Management Security: Overview</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>Oracle Project Portfolio Management Cloud
+                     predefines common job roles such as <span class="uicontrol">Project
+                        Manager</span> and <span class="uicontrol">Project Accountant</span>. You can use these roles or create new ones if the predefined roles
+                     don't fully represent your enterprise. For example, the predefined <span class="uicontrol">Project Manager</span> role includes project budget
+                     management privileges. If some of your project managers don't manage
+                     budgets, you can copy the predefined project manager role and remove
+                     the appropriate privileges to create a custom role. A user can have
+                     more than one role, so don't define a role that includes all the accesses
+                     needed for every user.
+                  </p>
+                  
+                  <p>Refer to the Security Reference Manual for a description
+                     of predefined roles in Oracle Project Portfolio Management Cloud.
+                  </p>
+                  
+                  <p>The aspects of security that are discussed in this
+                     topic include:
+                  </p>
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Securing common functionality</p>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Securing Project Financial Management
+                           and Grants Management applications
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Securing Project Execution Management
+                           applications
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  
+                  <div class="sect2" id="FASER1908339">
+                     <h3 class="topictitle">Securing Common Functionality</h3>
+                     
+                     <p>Common functionality that is not job-specific,
+                        such as creating time cards, expense reports, and purchase requisitions,
+                        are granted to the <span class="uicontrol">Employee</span> abstract
+                        role that is automatically provisioned to each employee.
+                     </p>
+                     
+                     <p>Oracle Project Portfolio Management Cloud provides
+                        the following roles that are designed for initial implementation and
+                        the ongoing management of setup and reference data:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p><span class="uicontrol">Application
+                                 Implementation Manager</span>: Manages implementation projects
+                              and assigns implementation tasks.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p><span class="uicontrol">Application
+                                 Implementation Consultant</span>: Accesses all setup tasks.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p><span class="uicontrol">Project
+                                 Integration Specialist</span>: Plans, coordinates, and supervises
+                              all activities related to the integration of project management information
+                              systems.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p><span class="uicontrol">Project
+                                 Application Administrator</span>: Accesses all Project Portfolio
+                              Management setup tasks for ongoing management of setup and reference
+                              data.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1722332">
+                     <h3 class="topictitle">Securing Project Financial Management and Grants
+                     Management Applications</h3>
+                     
+                     <p>Project Financial Management and Grants Management
+                        applications require both function and data security privileges. You
+                        can secure access to data in one of the following ways:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p><span class="uicontrol">Manage
+                                 Data Access for Users. Explicit using Data Assignment Model Access</span></p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Data security is explicitly assigned
+                                    to users through the Manage Data Access for Users page. User role
+                                    assignment is done separately using the Security Console.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>For example, the user Abraham Mason
+                                    with Project Accountant job role can be assigned access to costing
+                                    data in the US business unit by selecting the appropriate security
+                                    context of Business Unit and context value of US on Manage Data Access
+                                    for Users page.
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                        <li>
+                           <p><span class="uicontrol">Implicit
+                                 Using Product-Specific Access</span></p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Data security is determined by
+                                    product-specific logic.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>For Project Financial Management
+                                    application, the role on the project determines the access to the
+                                    project.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>For Grants Management application,
+                                    the role on the award determines the access of a principal investigator
+                                    to the award.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>For example, if you are assigned
+                                    the <span class="uicontrol">Project Manager</span> role on a
+                                    project, you can edit budgets for that project.
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You can be assigned data access in one of the following
+                        ways:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>During implementation you can be
+                              assigned roles with appropriate data security assignment.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>During the project life cycle you
+                              can be assigned to one or more projects.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>These assignments authorize you to navigate, access,
+                        and perform business functions in work areas or dashboards.
+                     </p>
+                     
+                     <p>The following table lists predefined job or abstract
+                        roles and the type of security that grants the role access to data
+                        in a work area or dashboard.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Table that lists predefined&#xA;enterprise roles and the type of security that grants the role access&#xA;to data in a work area or dashboard.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Job or Abstract Role
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Work Area or Dashboard
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Data Security Based On
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Accountant</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Asset</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project business unit</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Accountant</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Costs</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project expenditure business unit</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Accountant</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Revenue</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Contract business unit</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Administrator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Financial Management</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project business unit</p>
+                                 
+                                 <p>Project organization</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Billing Specialist</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Invoices</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Contract business unit</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Management Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Management Infolet Dashboard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project assignment</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Management Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Performance Dashboard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project assignment</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Management Infolet Dashboard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project assignment</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Performance Dashboard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project assignment</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Management</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project assignment</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Manager Dashboard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project assignment</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Team Member</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Financial Management</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project assignment</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Grants Accountant</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Invoices</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Contract business unit</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Grants Accountant</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Revenue</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Contract business unit</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Grants Administrator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Awards</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Contract business unit</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Grants Administrator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Contracts</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Contract business unit</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Grants Administrator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Financial Management</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project business unit</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Principal Investigator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Awards</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Award assignment</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Principal Investigator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Contracts</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Award assignment</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Principal Investigator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Financial Management</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project assignment</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1722333">
+                     <h3 class="topictitle">Securing Project Execution Management Applications</h3>
+                     
+                     <p>Project Execution Management applications
+                        use implicit, product-specific logic to authorize access to data in
+                        various business functions.
+                     </p>
+                     
+                     <p>During the project life cycle you can be assigned
+                        to one or more projects or tasks. These assignments authorize you
+                        to navigate, access, and perform business functions in work areas
+                        or dashboards.
+                     </p>
+                     
+                     <p>The following table lists predefined job or abstract
+                        roles and the type of security that grants the access to data in a
+                        work area or dashboard.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="Table that lists predefined&#xA;enterprise roles and the type of security that grants the roles access&#xA;to data in a work area or dashboard.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Job or Abstract Role
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Work Area or Dashboard
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Data Security Based On
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Execution</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Management</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project assignment</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Execution</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Management Infolet Dashboard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project assignment</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Execution</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Manager Dashboard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project assignment</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Execution</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Requirements</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>No data security required</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Execution</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>My Work - Tasks</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Task assignment or task follower</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Execution</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>My Work - Change Orders</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Change order role</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Execution</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>My Work - Deliverables and Issues</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>No data security required</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Team Collaborator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>My Work - Tasks</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Task assignment or task follower</p>
+                                 
+                                 <div class="infobox-"><span class="notep1">Note: </span>
+                                    If you change a to do task to a project task, security
+                                    is based on project assignment.
+                                    
+                                 </div>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Team Collaborator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>My Work - Change Orders</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Change order role</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Team Collaborator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>My Work - Deliverables and Issues</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>No data security required</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Team Collaborator</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Team Member Dashboard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Task assignment</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Executive</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Hierarchy</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Project hierarchy element assignment</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Resource Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Resources</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>No data security required</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Resource Manager</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Resource Manager Dashboard</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>No data security required</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1908605">
+                  <h2>Mapping Job or Abstract Roles to Project Roles: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>When you assign a project role to a project
+                     team member, the associated job or abstract role determines the operations,
+                     such as viewing or managing, that the team member can perform in pages
+                     and task flows. Each project role is associated with an job or abstract
+                     role.
+                  </p>
+                  
+                  
+                  
+                  <p>If the predefined security reference implementation
+                     doesn't fully represent your enterprise, then you can make changes.
+                     For example, your enterprise may require additional roles with specific
+                     constraints on accessing application functions.
+                  </p>
+                  
+                  <p>Rather than create a role from scratch, you can copy
+                     a role, then edit the copy to create a new role.
+                  </p>
+                  
+                  <ol>
+                     
+                     <li>
+                        <p>Use the Security Console to:</p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Copy an existing job or abstract
+                                 role
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Modify the function security policies</p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Modify the data security policies</p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p> Modify the role hierarchy</p>
+                           </li>
+                           
+                        </ul>
+                        
+                     </li>
+                     
+                     <li>
+                        <p>Then use the Manage Project Roles
+                           page to associate the new job or abstract role with a project role.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  <div class="infobox-tip"><span class="notep1">Tip: </span>
+                     Never edit the predefined roles. Instead, either
+                     copy the predefined roles and edit the copies, or create custom roles
+                     from scratch. You can perform both tasks on the Security Console.
+                     
+                  </div>
+                  
+                  
+                  <div class="sect2" id="FASER1908604">
+                     <h3 class="topictitle">Example: Project Manager Role in Project Financial
+                     Management</h3>
+                     
+                     
+                     <p>For example, the predefined Project Manager
+                        role in Project Financial Management includes project budget management
+                        privileges. If some of your project managers don't manage budgets:
+                     </p>
+                     
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>In the Security Console:</p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>Copy the role that is the closest
+                                    to the role that you want to create, such as the Project Management
+                                    Duty role. Give the role a unique name, such as Junior Project Manager.
+                                 </p>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <p>Edit the functional policies to
+                                    remove budget management.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Edit the data security policies
+                                    to remove any policy that refers to budget management.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>Save the role to create the new
+                                    security grants.
+                                 </p>
+                              </li>
+                              
+                           </ul>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>On the Manage Project Roles page,
+                              create a Junior Project Manager project role and map it to the new
+                              Junior Project Manager job or abstract role.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     <p>Now any person who is added to the project as a Junior
+                        Project Manager can perform the functions based on the duties under
+                        the new job or abstract role.
+                     </p>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1722625">
+                  <h2>Project Execution Management</h2>
+                  
+                  <div class="sect2" id="FASER942375">
+                     <h3>Provisioning Access to Project Execution Management Applications: Overview</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Use the Manage Project User Provisioning page
+                        to request user accounts and assign job or abstract roles for project
+                        enterprise labor resources. This action enables resources to sign
+                        into Project Execution Management applications to plan projects, manage
+                        resources, review, track, and collaborate on work.
+                     </p>
+                     
+                     <p>You can also request user accounts and assign job
+                        or abstract roles when you create or edit resources on the Manage
+                        Project Enterprise Resources page.
+                     </p>
+                     
+                     <p>During implementation you can provision a set of
+                        users and assign the Project Application Administrator role so that
+                        these administrators can initiate the provisioning process for the
+                        rest of the project enterprise labor resources.
+                     </p>
+                     
+                     
+                     <div class="sect3" id="FASER942311">
+                        <h4 class="topictitle">Resources to Provision</h4>
+                        
+                        <p>A resource that you provision typically falls
+                           into one of these categories:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Resource is an employee or contingent
+                                 worker in Oracle Fusion HCM and is a project enterprise labor resource
+                                 in Oracle Fusion Project Management.
+                              </p>
+                              <p>User accounts
+                                 for these resources are typically created in Oracle Fusion HCM. You
+                                 can associate the employee or contingent worker with a project enterprise
+                                 labor resource and assign project-related roles when you create the
+                                 resource in Oracle Fusion Project Management.
+                              </p>
+                              
+                              <div class="infobox-note"><span class="notep1">Note: </span>
+                                 You can't create a user account in Oracle Fusion Project
+                                 Management for an existing HCM employee or contingent worker. HCM
+                                 persons are registered in Oracle Fusion HCM.
+                                 
+                              </div>
+                           </li>
+                           
+                           <li>
+                              <p>Resource is a project enterprise
+                                 labor resource in Oracle Fusion Project Management, but isn't an HCM
+                                 employee or contingent worker.
+                              </p>
+                              <p>You can maintain
+                                 resource details and add resources to projects even if the resources
+                                 aren't HCM employees or contingent workers. Create user accounts to
+                                 register the resources in the identity management system, and assign
+                                 project-related  roles to the resources.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Resource is an HCM employee or contingent
+                                 worker, but isn't a project enterprise labor resource in Oracle Fusion
+                                 Project Management.
+                              </p>
+                              <p>You can assign project-related
+                                 roles to resources who have user accounts that were created in Oracle
+                                 Fusion HCM. However, you must create the resources in Oracle Fusion
+                                 Project Management before you can assign them to projects, or before
+                                 the resources can open project or resource management pages in the
+                                 application.
+                              </p>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER942310">
+                        <h4 class="topictitle">Job or Abstract Roles</h4>
+                        
+                        <p>You can provision the following predefined
+                           job or abstract roles to resources:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p><span class="uicontrol">Project
+                                    Application Administrator</span>: Collaborates with project application
+                                 users to maintain consistent project application configuration, rules,
+                                 and access.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p><span class="uicontrol">Project
+                                    Execution</span>: Manages projects in Project Execution Management
+                                 applications. Manages issues, deliverables, changes, and the calendar.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p><span class="uicontrol">Resource
+                                    Manager</span>: Manages a group of project enterprise labor resources.
+                                 Monitors the utilization of resources and manages the assignment of
+                                 resources to work on projects. Collaborates with project managers
+                                 to find suitable resources to fulfill project resources requests.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p><span class="uicontrol">Team Collaborator</span>: Performs, tracks, and reports progress on project and nonproject
+                                 work. Collaborates with other team members or project managers to
+                                 perform project tasks and to-do tasks. Manages issues, deliverables,
+                                 changes, and the calendar.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p><span class="uicontrol">Project
+                                    Executive</span>: Establishes key performance indicators and
+                                 other project performance criteria for a business area or organization.
+                                 Manages business area performance. Owns profit and loss results for
+                                 an organization, service line, or region.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>In addition, you can provision custom job roles for
+                           resources. For example, you can provision a Custom Team Member role
+                           that contains a different set of security permissions than the Project
+                           Team Member role.
+                        </p>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER1326719">
+                        <h4 class="topictitle">Default Role Assignments</h4>
+                        
+                        <p>You can select project-related predefined
+                           and custom roles to provision by default. The application assigns
+                           the default roles to project enterprise labor resources that you create
+                           using any of the following methods:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Import Project Enterprise Resource
+                                 process for Oracle Cloud
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Project Enterprise Resource External
+                                 Service
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Import HCM Persons as Project Enterprise
+                                 Resources process
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Export Resources and Rates process
+                                 that moves resources from the planning resource breakdown structure
+                                 in Project Financial Management applications to Oracle Fusion Project
+                                 Management
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Maintain Project Enterprise Labor
+                                 Resources process in Oracle Fusion Project Resource Management
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        <p>Go to the <span><span class="uicontrol">Manage
+                                 Project User Provisioning page - </span> - <span class="uicontrol">Default Provisioning Attributes tab - </span> - <span class="uicontrol">Default Role Assignments section</span></span> to select the default roles. Then select the option to <span class="uicontrol">Automatically provision roles when mass creating project
+                              enterprise labor resources</span>.
+                        </p>
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1336375">
+                     <h3>Project User Account and Role Provisioning Statuses: Explained</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>This topic describes project user account
+                        and role provisioning statuses in Project Execution Management applications.
+                     </p>
+                     
+                     
+                     <div class="sect3" id="FASER1336373">
+                        <h4 class="topictitle">Project User Account Statuses</h4>
+                        
+                        <p>The user account status indicates whether a project
+                           enterprise labor resource can access Project Execution Management
+                           applications based on assigned roles. The following table lists the
+                           project user account statuses.
+                        </p>
+                        
+                        
+                        <div class="simpletable-margin">
+                           <table class="customlayout" summary="This table lists the project&#xA;user account statuses.">
+                              
+                              
+                              <tr class="header">
+                                 
+                                 <th scope="col">
+                                    User Account Status
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Description
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Active</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>The user is active and can access the application.</p>
+                                    
+                                    <p>A project user account is active for a resource in
+                                       either of these scenarios:
+                                    </p>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>You create a user account for the
+                                             resource in Oracle Fusion Project Management.
+                                          </p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>The resource is an employee or
+                                             contingent worker with an active account in Oracle Fusion Human Capital
+                                             Management (HCM).
+                                          </p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Inactive</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>The user is inactive and cannot access the application.</p>
+                                    
+                                    <p>A project user account is inactive for a resource
+                                       in either of these scenarios:
+                                    </p>
+                                    
+                                    <ul>
+                                       
+                                       <li>
+                                          <p>The resource is an employee or
+                                             contingent worker who is no longer active in HCM, such as when the
+                                             employee is terminated.
+                                          </p>
+                                       </li>
+                                       
+                                       <li>
+                                          <p>The resource isn't an employee
+                                             or contingent worker and you disable the resource in the identity
+                                             management system.
+                                          </p>
+                                       </li>
+                                       
+                                    </ul>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        <p></p>
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER1336374">
+                        <h4 class="topictitle">Role Provisioning Statuses</h4>
+                        
+                        <p>When you create a user account in Oracle Fusion Project
+                           Management and assign project job or abstract roles to the resource,
+                           the application sends a provisioning request to the identity management
+                           system. The role provisioning status indicates the processing status
+                           of the request. The following table lists the role provisioning statuses.
+                        </p>
+                        
+                        
+                        <div class="simpletable-margin">
+                           <table class="customlayout" summary="This table lists the role provisioning&#xA;statuses.">
+                              
+                              
+                              <tr class="header">
+                                 
+                                 <th scope="col">
+                                    Role Provisioning Status
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Description
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Requested</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Role provisioning is requested for a resource.</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Completed</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Role provisioning completed without errors or warnings.</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Failed</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Role provisioning failed because of errors or warnings.</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Partially completed</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Role provisioning is partially complete.</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Pending</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Role provisioning is in progress.</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Provisioned</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>The role is provisioned in the identity management
+                                       system.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Rejected</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>The role provisioning request is rejected by the
+                                       identity management system.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Suppressed</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Status used in HCM for user accounts aren't created
+                                       automatically.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        <p></p>
+                        
+                        
+                        
+                        <p>You can view project user account and role provisioning
+                           statuses on the Manage Project User Provisioning page and Manage Project
+                           Enterprise Resources page.
+                        </p>
+                        
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1333328">
+                     <h3>Provisioning Project Resources on the Manage Project User Provisioning Page: Procedure</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Use the Manage Project User Provisioning
+                        page to create and update project users, request user accounts, and
+                        assign job or abstract roles to resources. This action enables resources
+                        to sign into Project Execution Management applications to plan projects,
+                        manage resources, and review, track, and collaborate on work.
+                     </p>
+                     
+                     
+                     <div class="sect3" id="FASER1343689">
+                        <h4 class="topictitle">Creating and Provisioning a User</h4>
+                        
+                        <p>Perform these steps to create a project user, request
+                           a user account, and provision roles on the Manage Project User Provisioning
+                           page.
+                        </p>
+                        
+                        
+                        <ol>
+                           
+                           <li>
+                              <p>Navigate to the Setup and Maintenance
+                                 work area and search for the Manage Project User Provisioning task.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>On the Search page, click the Manage
+                                 Project User Provisioning link to open the <span><span class="uicontrol">Manage Project User Provisioning page</span> - <span class="uicontrol">User Provisioning tab</span></span>.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Click the <span class="uicontrol">Create</span> icon to open the Create Project User window.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Enter the required fields and click
+                                 the <span class="uicontrol">Request user account</span> option.
+                              </p>
+                              
+                              <p>When you select the <span class="uicontrol">Request
+                                    user account</span> option, the roles that you specified to provision
+                                 by default appear in the Role Details table for the resource.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Select the <span class="uicontrol">Assign administrator role</span> option to assign the Project
+                                 Application Administrator role to the resource.
+                              </p>
+                              <p>This action adds the Project Application Administrator role to the
+                                 Role Details table.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Add predefined or custom roles
+                                 to the Role Details table, as needed. The predefined roles are:
+                              </p>
+                              
+                              <div class="simpletable-margin">
+                                 <table class="customlayout" summary="This table lists predefined&#xA;roles that you can provision to users.">
+                                    
+                                    
+                                    <tr class="header">
+                                       
+                                       <th scope="col">
+                                          Role
+                                          
+                                       </th>
+                                       
+                                       <th scope="col">
+                                          Description
+                                          
+                                       </th>
+                                       
+                                    </tr>
+                                    
+                                    <tr>
+                                       
+                                       <th scope="row" class="row">
+                                          
+                                          <p>Project Application Administrator</p>
+                                          
+                                       </th>
+                                       
+                                       <td>
+                                          
+                                          <p>Collaborates with project application users to maintain
+                                             consistent project application configuration, rules, and access.
+                                          </p>
+                                          
+                                       </td>
+                                       
+                                    </tr>
+                                    
+                                    <tr>
+                                       
+                                       <th scope="row" class="row">
+                                          
+                                          <p>Project Execution</p>
+                                          
+                                       </th>
+                                       
+                                       <td>
+                                          
+                                          <p>Manages projects in project management applications
+                                             and is not assigned the project manager job role. Manages issues,
+                                             deliverables, changes, and the calendar.
+                                          </p>
+                                          
+                                       </td>
+                                       
+                                    </tr>
+                                    
+                                    <tr>
+                                       
+                                       <th scope="row" class="row">
+                                          
+                                          <p>Resource Manager</p>
+                                          
+                                       </th>
+                                       
+                                       <td>
+                                          
+                                          <p>Performs functions in Oracle Fusion Project Resource
+                                             Management.
+                                          </p>
+                                          
+                                       </td>
+                                       
+                                    </tr>
+                                    
+                                    <tr>
+                                       
+                                       <th scope="row" class="row">
+                                          
+                                          <p>Team Collaborator</p>
+                                          
+                                       </th>
+                                       
+                                       <td>
+                                          
+                                          <p>Performs, tracks, and reports progress on project
+                                             and nonproject work. Manages issues, deliverables, changes, and the
+                                             calendar.
+                                          </p>
+                                          
+                                       </td>
+                                       
+                                    </tr>
+                                    
+                                    <tr>
+                                       
+                                       <th scope="row" class="row">
+                                          
+                                          <p>Project Executive</p>
+                                          
+                                       </th>
+                                       
+                                       <td>
+                                          
+                                          <p>Establishes key performance indicators and other
+                                             project performance criteria for a business area or organization.
+                                             Manages business area performance. Owns profit and loss results for
+                                             an organization, service line, or region.
+                                          </p>
+                                          
+                                       </td>
+                                       
+                                    </tr>
+                                    
+                                    
+                                    
+                                 </table>
+                              </div>
+                              <p></p>
+                              
+                              <div class="infobox-tip"><span class="notep1">Tip: </span>
+                                 The Team Collaborator and Project Execution roles
+                                 appear in the Role Details table by default. You can change the default
+                                 roles on the <span><span class="uicontrol">Manage Project
+                                       User Provisioning page</span> - <span class="uicontrol">Default
+                                       Provisioning Attributes tab</span></span>.
+                                 
+                              </div>
+                           </li>
+                           
+                           <li>
+                              <p>Click <span class="uicontrol">Save and Create Another</span> or <span class="uicontrol">Save
+                                    and Close</span>.
+                              </p>
+                              <p>This action:</p>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>Sends a request for a user account
+                                       to the identity management system
+                                    </p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Sends the resource an e-mail notification
+                                       when the provisioning process is successful
+                                    </p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </li>
+                           
+                        </ol>
+                        
+                        <p>Additional points to consider:</p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>You can add or remove roles for
+                                 a resource with an existing user account. Use the <span class="uicontrol">Edit</span> feature to add roles. Use the <span class="uicontrol">Actions</span> menu to remove roles.
+                              </p>
+                              <div class="infobox-"><span class="notep1">Note: </span>
+                                 You must wait until the previous provisioning request
+                                 is complete for a resource before you add or remove roles for the
+                                 resource.
+                                 
+                              </div>
+                           </li>
+                           
+                           <li>
+                              <p>Use the <span class="uicontrol">Assign Resource as Project Manager</span> action in the Search
+                                 Results region to add a resource to a project as a project manager.
+                                 When you add a project manager with the <span class="uicontrol">Assign
+                                    Resource as Project Manager</span> action, the application provisions
+                                 the Project Execution role for the resource.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Click the link in the <span class="uicontrol">Last Request Status</span> column to view the details
+                                 of the most recent provisioning action for a resource.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>On the <span><span class="uicontrol">Manage Project User Provisioning page</span> - <span class="uicontrol">Default Provisioning Attributes tab</span></span>, you can:
+                              </p>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>Select project-related predefined
+                                       and custom roles to provision by default when you create project users.
+                                    </p>
+                                    
+                                 </li>
+                                 
+                                 <li>
+                                    <p>Select the <span class="uicontrol">Automatically provision roles when mass creating project enterprise
+                                          labor resources</span> option to assign the default roles when
+                                       creating users with import processes and services for employees and
+                                       contingent workers.
+                                    </p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </li>
+                           
+                        </ul>
+                        
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1333402">
+                     <h3>Provisioning Project Resources on the Manage Project Enterprise Resources Page: Explained</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>You can provision a resource on the Manage
+                        Project Enterprise Resources page when you create or edit a resource
+                        who is not an employee or contingent worker in Oracle Fusion Human
+                        Capital Management.
+                     </p>
+                     
+                     
+                     <div class="sect3" id="FASER1343772">
+                        <h4 class="topictitle">Provisioning a Resource</h4>
+                        
+                        <p>You can request a user account from the Create Project
+                           Enterprise Resource window or Edit Project Enterprise Resource window.
+                        </p>
+                        
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>On the Create Project Enterprise
+                                 Resource window, select the <span class="uicontrol">Request user
+                                    account</span> option.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>On the Edit Project Enterprise
+                                 Resource window, click <span class="uicontrol">Activate User Account</span>.
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        
+                        
+                        <p>When you request a user account from the Create or
+                           Edit Project Enterprise Resource window, the application:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>Provisions the default role assignments
+                                 for the resource
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Sends a request for a user account
+                                 to the identity management system
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Sends the resource an e-mail notification
+                                 when the provisioning process is successful
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        
+                        
+                        <p>Click the link in the <span class="uicontrol">User
+                              Account Status</span> column to view the role provisioning status
+                           of the most recent provisioning action for a resource.
+                        </p>
+                        
+                        
+                     </div>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER937886">
+                     <h3>Project Roles in Project Execution Management Applications: Explained</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>A project role is a classification of the
+                        relationship that a person has to a project, such as project manager,
+                        functional consultant, or technical lead.
+                     </p>
+                     
+                     
+                     
+                     <p>Following are examples of predefined project roles
+                        that you can't edit or delete:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Project manager</p>
+                        </li>
+                        
+                        <li>
+                           <p>Project team member</p>
+                        </li>
+                        
+                        <li>
+                           <p>Staffing owner</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You can create additional project roles to meet the
+                        needs of your organization. However, you can't delete a project role
+                        that's designated as a resource's primary project role, specified
+                        on a project resource request, or assigned to a resource on a project.
+                     </p>
+                     
+                     
+                     
+                     <p>Use project roles for the following purposes:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>To identify the type of work that
+                              a person performs on project assignments
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>To set up default resource
+                              qualifications
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>As criteria when searching for resources
+                              to fulfill project resource requests
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>As a resource's primary
+                              project role
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>To allow access to project management
+                              information for project managers
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     
+                     <div class="sect3" id="FASER937884">
+                        <h4 class="topictitle">Project Assignments</h4>
+                        
+                        <p>You select a project role when you add a resource
+                           to a project. The primary project role for a project enterprise resource
+                           is the default project role when you add the resource to the Manage
+                           Project Resources page.
+                        </p>
+                        
+                        
+                        <p>When you fulfill a project resource request in the
+                           Project Resources work area and create an assignment for the resource,
+                           the project role specified on the request is the default project role
+                           on the assignment. You can change the project role on the Confirm
+                           Resource for Assignment or Reserve Resource for Assignment page before
+                           you submit the assignment for approval.
+                        </p>
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER937882">
+                        <h4 class="topictitle">Default Resource Qualifications</h4>
+                        
+                        <p> On the Manage Project Roles page, select a set of
+                           default qualifications, proficiencies, and keywords for each project role. Default qualifications, proficiencies, and
+                           keywords that you associate with a project role automatically appear
+                           as requirements on a project resource request when you select the project role for the request.
+                        </p>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER937883">
+                        <h4 class="topictitle">Project Resource Requests</h4>
+                        
+                        <p>When searching for resources to fulfill a project
+                           resource request on the Search and Evaluate Resources page, you can
+                           filter the resource search results by the resource's primary project
+                           role to focus the results. 
+                        </p>
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER937885">
+                        <h4 class="topictitle">Primary Project Roles</h4>
+                        
+                        <p>You can designate a primary project role for a resource
+                           that represents the work that the resource typically performs on project
+                           assignments.
+                        </p>
+                        
+                        
+                        <p>You can use the resource's primary project role in
+                           the following areas in Oracle Fusion Project Resource Management:
+                        </p>
+                        
+                        <ul>
+                           
+                           <li>
+                              <p>As a resource search option filter
+                                 when viewing resources on the Search and Evaluate Resources page
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>When viewing resource information
+                                 on the Resource Details page
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>When comparing the attributes of
+                                 multiple resources against the requirements specified in the project
+                                 resource request on the Compare Resources page
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>As an attribute value to assign to
+                                 new resources that the Maintain Project Enterprise Labor Resources
+                                 process creates
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>As search criteria when searching
+                                 for a project enterprise labor resource to designate as a resource
+                                 pool owner on the Manage Resource Pools page
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>As advanced search criteria when
+                                 searching for resource pool members on the Manage Resource Pools page
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>When sorting open project resource
+                                 requests on the Resource Manager Dashboard
+                              </p>
+                           </li>
+                           
+                        </ul>
+                        
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1349816">
+                     <h3>FAQs for Project Roles</h3>
+                     
+                     <div class="sect3" id="FASER1243311">
+                        <h4>How can I assign project roles by default when I import project enterprise labor resources?</h4>
+                        <p>Go to the Manage Project User Provisioning
+                           page, Default Provisioning Attributes tab, Default Project Role Provisioning
+                           for Project Execution Management Labor Resources section. Select the
+                           option to <span class="uicontrol">Automatically provision roles when
+                              mass creating project enterprise labor resources</span>. The
+                           application automatically assigns the predefined and custom roles
+                           that you selected on the Define Role Assignments table to each resource
+                           when you create project users using any of these methods:
+                        </p>
+                        <ul>
+                           <li>
+                              <p>Import HCM Persons as Project Enterprise
+                                 Resources process
+                              </p>
+                           </li>
+                           <li>
+                              <p>Import Project Enterprise Resource
+                                 process for Oracle Cloud
+                              </p>
+                           </li>
+                           <li>
+                              <p>Project Enterprise Resource External
+                                 Service
+                              </p>
+                           </li>
+                           <li>
+                              <p>Maintain Project Enterprise Labor
+                                 Resources
+                              </p>
+                           </li>
+                           <li>
+                              <p>Export Resources and Rates process
+                                 from the planning resource breakdown structure in Oracle Project Financial
+                                 Management to Oracle Fusion Project Management
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                     
+                     <div class="sect3" id="FASER1243278">
+                        <h4>Why can't I view project management or resource management pages?</h4>
+                        
+                        
+                        
+                        
+                        
+                        <p>To view project management or resource management
+                           pages, you must be a project enterprise labor resource with an active
+                           user account. In addition, you must have a job or abstract role with
+                           the security privilege to access specific pages in Project Execution
+                           Management applications.
+                        </p>
+                        
+                        
+                        
+                        
+                        <p>For more information, refer to the Securing Project
+                           Execution Management Applications section in the Implementing Project
+                           Portfolio Management Security: Overview topic.
+                        </p>
+                        
+                        
+                        
+                     </div>
+                  </div>
+                  
+               </div>
+               
+               <div class="sect1" id="FASER1722626">
+                  <h2>Project Financial Management</h2>
+                  
+                  <div class="sect2" id="FASER87297">
+                     <h3>Budgeting and Forecasting Security: Explained</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Budget and forecast security is determined
+                        by a combination of project role, security roles (job and duty roles)
+                        and privileges, and workflow setup.
+                     </p>
+                     
+                     
+                     
+                     <p>The following sections describe the privileges required
+                        to perform various steps in the budget creation, submission, and approval
+                        process. They also describe the impact of using workflow to manage
+                        status changes.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        The privileges and workflow setup for forecasting mirrors
+                        that for budgeting.
+                        
+                     </div>
+                     
+                     
+                     <div class="sect3" id="FASER87291">
+                        <h4 class="topictitle">Creating and Submitting a Budget Version</h4>
+                        
+                        <p>The following text and table describe the access required
+                           to create and submit a budget version.
+                        </p>
+                        
+                        
+                        <div class="simpletable-margin">
+                           <table class="customlayout" summary="This table describes that steps for&#xA;creating and submitting a budget version for creation of a baseline.&#xA;The table also describes the privileges required to complete each&#xA;step.">
+                              
+                              
+                              <tr class="header">
+                                 
+                                 <th scope="col">
+                                    Step
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Action
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Privilege
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>1</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Access budget versions for a project</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Manage Project Budget</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>2</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Create a budget version</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Create Project Budget</p>
+                                    
+                                    <div class="infobox-"><span class="notep1">Note: </span>
+                                       The privilege required for editing budget versions
+                                       in Excel is Manage Project Budget Excel Integration.
+                                       
+                                    </div>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>3</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Submit working version</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Manage Project Budget Working Version</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>4</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Create baseline directly</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Create Baseline Version Data</p>
+                                    
+                                    <div class="infobox-"><span class="notep1">Note: </span>
+                                       Project managers may select to create a baseline directly
+                                       instead of submitting a version for approval first.
+                                       
+                                    </div>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        <p></p>
+                        <img src="img/pjo_DefPJO_FlowWorkVer_02_20058584.png" alt="This graphic describes the steps for creating and&#xA;submitting a budget version for creation of a baseline. The table&#xA;also describes the privileges required to complete each step." class="fusappimg">
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER87292">
+                        <h4 class="topictitle">Creating a Baseline for a Budget Version</h4>
+                        
+                        <p>The following text and table describe the access required
+                           to create a baseline for a budget version or reject it.
+                        </p>
+                        
+                        
+                        <div class="simpletable-margin">
+                           <table class="customlayout" summary="This table describes that steps for&#xA;creating a baseline for a budget version. The table also describes&#xA;the privileges required to complete each step.">
+                              
+                              
+                              <tr class="header">
+                                 
+                                 <th scope="col">
+                                    Step
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Action
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Privilege
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>1</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>If using workflow, receive notification of budget submission</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>NA (Approver e-mail ID is entered manually by users)</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>2</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Access budget versions for a project</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Manage Project Budget</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>3</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Create baseline or reject budget</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Create Baseline Version Data</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        <p></p>
+                        <img src="img/pjo_DefPJO_FlowSubVer_02_20058585.png" alt="This graphic describes the steps for creating a&#xA;baseline for a budget version. The table also describes the privileges&#xA;required to complete each step." class="fusappimg">
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER87293">
+                        <h4 class="topictitle">Reworking a Rejected Budget Version</h4>
+                        
+                        <p>The following text and table describe the access required
+                           to required to rework a rejected version (set it back to Working status)
+                           or delete it, if it is no longer required.
+                        </p>
+                        
+                        
+                        <div class="simpletable-margin">
+                           <table class="customlayout" summary="This table describes that steps for&#xA;reworking a rejected budget version. The table also describes the&#xA;privileges required to complete each step.">
+                              
+                              
+                              <tr class="header">
+                                 
+                                 <th scope="col">
+                                    Step
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Action
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Privilege
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>1</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Access budget versions for a project</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Manage Project Budget</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>2</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Rework working version</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Manage Project Budget Working Version</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>3</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Delete working version </p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Manage Project Budget Working Version</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        <p></p>
+                        <img src="img/pjo_DefPJO_FlowRejctVer_02_20058586.png" alt="This graphic describes the steps for reworking&#xA;a rejected budget version. The table also describes the privileges&#xA;required to complete each step." class="fusappimg">
+                        
+                        
+                     </div>
+                     
+                     
+                     <p class="relatedlinks">Related Topics</p>
+                     <ul>
+                        <li>
+                           <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=879516C27299FCDDE040D30A68816127">Budget and Forecast Workflow: Explained</a></p>
+                        </li>
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER87167">
+                     <h3>Project Roles in Budgeting and Forecasting: Explained</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Default project roles, including project application
+                        administrator, project manager, and project administrator can perform
+                        specific budgeting and forecasting tasks.
+                     </p>
+                     
+                     
+                     <div class="sect3" id="FASER87165">
+                        <h4 class="topictitle">Default Access for Roles</h4>
+                        
+                        <p>The following table describes the default access for
+                           each role.
+                        </p>
+                        
+                        
+                        <div class="simpletable-margin">
+                           <table class="customlayout" summary="This table describes the various&#xA;privileges that are associated by default with security roles.">
+                              
+                              
+                              <tr class="header">
+                                 
+                                 <th scope="col">
+                                    Privilege Area
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Project Application Administrator
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Project Manager
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Project Administrator
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Notes
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Edit budget and forecast planning options </p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Project application administrators set planning options
+                                       for financial plan types.
+                                    </p>
+                                    
+                                    <p>Project managers and accountants can view planning
+                                       options at the version level.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Create versions</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>None</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Generate versions</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Applies to budgets generated when setting a baseline
+                                       for the project plan.
+                                    </p>
+                                    
+                                    <p>Project administrators can't generate forecasts from
+                                       progress (they don't have access to publish progress.)
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Edit versions in Excel</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>None</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Submit versions</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>None</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Approve versions</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>A team member with project manager security role access
+                                       must be manually designated as the project manager for the project.
+                                    </p>
+                                    
+                                    <p>If workflow is enabled, then approval occurs through
+                                       a notification. Menu actions aren't available on the budgeting and
+                                       forecasting pages.
+                                    </p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr>
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p>Review versions</p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>No</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>Yes</p>
+                                    
+                                 </td>
+                                 
+                                 <td>
+                                    
+                                    <p>None</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        <p></p>
+                        
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1722627">
+                     <h3>FAQs for Project Roles</h3>
+                     
+                     <div class="sect3" id="FASER230400">
+                        <h4>What's a project role?</h4>
+                        
+                        
+                        
+                        
+                        
+                        <p>Project roles represent either a requirement
+                           or an assignment on a project, such as a project manager or project
+                           team member.
+                        </p>
+                        
+                        
+                        
+                        <p>You associate a job or abstract role with each
+                           project role. When you assign a project role to a project team member,
+                           the associated job or abstract role determines the type of access
+                           the team member has to project information. For example, project managers
+                           can manage project progress or create budgets and forecasts. Project
+                           team members may only have access to view progress or financial plans.
+                        </p>
+                        
+                        <p>When you create a project role, you assign it to one
+                           or more reference data sets so that only project roles that are relevant
+                           to the project unit are available to assign to project team members.
+                        </p>
+                        
+                        <p>Persons who are directly assigned job or abstract
+                           roles such as <span class="uicontrol">Project Manager</span> or <span class="uicontrol">Project Application Administrator</span> may have
+                           access to certain project information even if they aren't project
+                           team members or don't have a specific project role assignment.
+                        </p>
+                        
+                        
+                        
+                     </div>
+                     
+                     <div class="sect3" id="FASER226147">
+                        <h4>What's the difference between a job title and a project role?</h4>
+                        
+                        
+                        
+                        
+                        
+                        
+                        <p>A job title represents the function of a person
+                           within an organization and the position within a reporting hierarchy.
+                           For example, your organization may have designations or job titles
+                           such as software developer, sales representative, or accounts manager.
+                        </p>
+                        
+                        
+                        
+                        <p>Project roles represent either a requirement
+                           or an assignment on a particular project, for example,
+                           project manager. Project roles may differ from project to project.
+                        </p>
+                        
+                        
+                        
+                        
+                     </div>
+                  </div>
+                  
+               </div>
+               
+               <div class="sect1" id="FASER2267346">
+                  <h2>Business Intelligence</h2>
+                  
+                  <div class="sect2" id="FASER1840867">
+                     <h3>Securing Oracle Fusion Project Portfolio Management Subject Areas: Explained</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Oracle Fusion Project Portfolio Management
+                        OTBI organizes reporting metadata into functional areas called subject
+                        areas. Subject areas contain folders that include metrics and attributes
+                        which are secured by the Oracle Fusion Business Intelligence Applications
+                        duty roles. Oracle Fusion Application job roles are mapped to these
+                        business intelligence application duty roles. This ensures that Oracle
+                        Fusion Application users see only the subject areas based on their
+                        business functions. For example, a project billing specialist sees
+                        only the Project Billing - Invoices Real Time subject area
+                     </p>
+                     
+                     
+                     
+                     <p>The table below lists the subject area and the corresponding
+                        Business Intelligence Applications duty role that is used to secure
+                        the subject area:
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="List of Subject Area and corresponding&#xA;Business Intelligence Application Role">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Subject Area
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Business Intelligence Applications Duty Role
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Additional Information
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Billing - Funding Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Contract Invoice</p>
+                                 
+                                 <p>Project Contract Revenue</p>
+                                 
+                                 <p>Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Billing - Invoices Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grants Management Transaction Analysis Duty</p>
+                                 
+                                 <p>Project Contract Invoice</p>
+                                 
+                                 <p> Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Billing - Revenue Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grants Management Transaction Analysis Duty</p>
+                                 
+                                 <p>Project Contract Revenue</p>
+                                 
+                                 <p> Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>The folders Award, Primary Sponsor, and Institution
+                                    within this subject area are visible only if the user has the Grants
+                                    Management Transaction Analysis Duty role.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Control - Budgets Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grants Management Transaction Analysis Duty</p>
+                                 
+                                 <p>Project Budget Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>The folders Award, Primary Sponsor, and Institution
+                                    within this subject area are visible only if the user has the Grants
+                                    Management Transaction Analysis Duty role.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Control - Forecasts Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Budget Transaction Analysis Duty </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Control - Progress Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Progress Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Costing - Actual Costs Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grants Management Transaction Analysis Duty</p>
+                                 
+                                 <p>Project Costing Transaction Analysis Duty</p>
+                                 
+                                 <p> Project Journals Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>The folders Award, Primary Sponsor, and Institution
+                                    within this subject area are visible  only if the user has the Grants
+                                    Management Transaction Analysis Duty role.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Costing - Assets Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Costing Transaction Analysis Duty</p>
+                                 
+                                 <p> Project Journals Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Costing - Commitments Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grants Management Transaction Analysis Duty</p>
+                                 
+                                 <p>Project Costing Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>The folders Award, Primary Sponsor, and Institution
+                                    within this subject area are visible only if the user has the Grants
+                                    Management Transaction Analysis Duty role.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Costing - Expenditure Item Performance Real
+                                    Time
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Costing Transaction Analysis Duty</p>
+                                 
+                                 <p> Project Journals Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Management - Change Management Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Change Management Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Management - Opportunity Integration Real
+                                    Time
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Planning Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Data shown is for projects for which the signed in
+                                    user is the project manager.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Management - Project Hierarchy Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Hierarchy Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>No data security. If the user has access to subject
+                                    area, all data is visible to the user.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Management - Project Resources Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Planning Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Data shown is for projects for which the signed in
+                                    user is the project manager.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Management - Project Work Items Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Work Items Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Data shown is for projects for which the signed in
+                                    user is the project manager.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Management - Requirements Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Requirements Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Management - Task Management Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Task Management Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Resource Management - Resource Management
+                                    Real Time
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Resource Management Transaction Analysis
+                                    Duty
+                                 </p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>No data security. If the user has access to subject
+                                    area, all data is visible to the user.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Projects - Cross Subject Area Analysis Real Time</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Budget Transaction Analysis Duty</p>
+                                 
+                                 <p>  Project Contract Invoice Transaction Analysis Duty</p>
+                                 
+                                 <p>  Project Contract Revenue Transaction Analysis Duty</p>
+                                 
+                                 <p>  Project Costing Transaction Analysis Duty</p>
+                                 
+                                 <p>  Project Foundation Transaction Analysis Duty</p>
+                                 
+                                 <p>  Grants Management Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Projects - Grants Management - Award Analysis Real
+                                    Time
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grants Management Transaction Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Projects - Grants Management - Award Funding Real
+                                    Time
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grants Management Funding Analysis Duty</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 <p>
+                                    					&nbsp;
+                                    					
+                                 </p>
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1841193">
+                     <h3>Mapping Business Intelligence and Oracle Fusion Application Roles: Explained</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Oracle Fusion Project Portfolio Management
+                        application job roles inherit Oracle Transactional Business Intelligence
+                        application duty roles so that correct data is visible to relevant
+                        users. For example, project accountants can view project cost data
+                        for the expenditure organization that they're responsible for.
+                     </p>
+                     
+                     
+                     
+                     <p>The following table lists the Oracle Transactional
+                        Business Intelligence application duty roles and corresponding Oracle
+                        Fusion Project Portfolio Management application job roles that inherit
+                        these duties.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="List mapping Business Intelligence&#xA;Application Role to Oracle Fusion Applications Job Role">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Business Intelligence Application Duty Role
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Oracle Fusion Application Job Role
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Grants Management Funding Analysis Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p> Grants Accountant</p>
+                                 
+                                 <p>Principal Investigator</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Grants Management Transaction Analysis Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grants Accountant</p>
+                                 
+                                 <p>Grants Administrator</p>
+                                 
+                                 <p>Principal Investigator </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Budget Transaction Analysis Duty </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grants Accountant</p>
+                                 
+                                 <p>Grants Administrator</p>
+                                 
+                                 <p>Principal Investigator</p>
+                                 
+                                 <p>Project Accountant</p>
+                                 
+                                 <p>Project Administrator</p>
+                                 
+                                 <p>Project Manager</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Change Management Transaction Analysis Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Execution</p>
+                                 
+                                 <p>Team Collaborator</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Contract Invoice Transaction Analysis Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grants Accountant</p>
+                                 
+                                 <p>Grants Administrator</p>
+                                 
+                                 <p>Principal Investigator</p>
+                                 
+                                 <p>Project Accountant</p>
+                                 
+                                 <p>Project Billing Specialist</p>
+                                 
+                                 <p>Project Manager</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Contract Revenue Transaction Analysis Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grants Accountant</p>
+                                 
+                                 <p>Grants Administrator</p>
+                                 
+                                 <p>Principal Investigator</p>
+                                 
+                                 <p>Project Accountant</p>
+                                 
+                                 <p>Project Administrator</p>
+                                 
+                                 <p>Project Manager</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Costing Transaction Analysis Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grants Accountant</p>
+                                 
+                                 <p>Grants Administrator</p>
+                                 
+                                 <p>Principal Investigator</p>
+                                 
+                                 <p>Project Accountant</p>
+                                 
+                                 <p>Project Administrator</p>
+                                 
+                                 <p>Project Manager</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Foundation Transaction Analysis Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grants Accountant</p>
+                                 
+                                 <p>Grants Administrator</p>
+                                 
+                                 <p>Principal Investigator</p>
+                                 
+                                 <p>Project Accountant</p>
+                                 
+                                 <p>Project Administrator</p>
+                                 
+                                 <p>Project Manager</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Hierarchy Transaction Analysis Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Executive</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Journals Transaction Analysis Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grants Accountant</p>
+                                 
+                                 <p>Project Accountant</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Planning Transaction Analysis Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Execution</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Progress Transaction Analysis Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Grants Administrator</p>
+                                 
+                                 <p>Principal Investigator</p>
+                                 
+                                 <p>Project Administrator</p>
+                                 
+                                 <p>Project Manager</p>
+                                 
+                                 <p>Team Collaborator</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Requirements Transaction Analysis Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Manager</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Resource Management Transaction Analysis
+                                    Duty
+                                 </p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Resource Manager</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Project Work Items Transaction Analysis Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Project Execution</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Task Management Transaction Analysis Duty</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Team Collaborator</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="FASER1864807">
+                     <h3>Setting Up Security Profile to View Employee Names in Analyses: Procedure</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Use the Manage Data Role and Security Profiles
+                        task to gain access to employee names in your analysis. Following
+                        steps help you to get the required access.
+                     </p>
+                     
+                     
+                     <div class="sect3" id="FASER1864806">
+                        <h4 class="topictitle">Setting Up Security Profile</h4>
+                        
+                        <p></p>
+                        
+                        
+                        <div class="infobox-"><span class="notep1">Note: </span>
+                           Only an application administrator can access the
+                           Manage Data Role and Security Profiles task.
+                           
+                        </div>
+                        
+                        <ol>
+                           
+                           <li>
+                              <p>Navigate to the Setup and Maintenance
+                                 work area and click <span class="uicontrol">Search</span>.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>On the Search page, search for
+                                 the Manage Data Role and Security Profiles task.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Click the <span class="uicontrol">Manage Data Role and Security Profiles</span> link.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Search for the user role, such
+                                 as project manager or project accountant, to grant the access.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>In the Search Results region, select
+                                 the role and click <span class="uicontrol">Edit</span>.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Select <span class="uicontrol">View All People</span> or <span class="uicontrol">View All
+                                    Workers</span> when prompted for a Public Person security profile.
+                              </p>
+                              
+                           </li>
+                           
+                           <li>
+                              <p>Click <span class="uicontrol">Review</span>.
+                              </p>
+                           </li>
+                           
+                           <li>
+                              <p>Click <span class="uicontrol">Submit</span>.
+                              </p>
+                           </li>
+                           
+                        </ol>
+                        
+                        
+                     </div>
+                     
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

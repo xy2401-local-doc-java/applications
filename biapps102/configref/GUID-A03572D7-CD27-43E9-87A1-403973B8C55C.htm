@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Disabling Projects Invoice Line Fact in the Repository for Oracle Fusion Applications</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="By default, the Billing metrics are mapped to both Invoice Line Fact -W_PROJ_INVOICE_LINE_F and Invoice Line Distribution Fact -W_PROJ_INVOICE_DIST_F. For customers whose only data source is the Fusion database, the Invoice Line fact is an obsolete table and has to be disabled." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-08C8012D-6282-4DEE-AF01-2C8F6706D4B3.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-1E721DB4-ED22-4324-8F3D-EA85AECF146A.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-A03572D7-CD27-43E9-87A1-403973B8C55C"></a> <span id="PAGE" style="display:none;">54/336</span> <!-- End Header -->
+<a id="IT_296"></a>
+<h1 id="BIAFC-GUID-A03572D7-CD27-43E9-87A1-403973B8C55C" class="sect1">Disabling Projects Invoice Line Fact in the Repository for <span>Oracle Fusion Applications</span></h1>
+<div>
+<p>By default, the Billing metrics are mapped to both Invoice Line Fact -W_PROJ_INVOICE_LINE_F and Invoice Line Distribution Fact -W_PROJ_INVOICE_DIST_F. For customers whose only data source is the Fusion database, the Invoice Line fact is an obsolete table and has to be disabled.</p>
+<div class="p">Prerequisites:
+<p>Oracle recommends that before you start this process you make a back up of the BI metadata repository (that is, the RPD file).</p>
+<p>To Disable Projects Invoice Line Fact, first disable metrics that are defined only in the line fact, then disable the invoice line fact. These metrics are around the Retention area and are not supported in the <span>Oracle Fusion Applications</span> currently.</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li><span>To delete unnecessary metrics, see <a href="GUID-A03572D7-CD27-43E9-87A1-403973B8C55C.htm#GUID-4065ECC9-4BC9-4ABA-8A40-DE05D973BEBE" title="Before disabling the logical table source, the metrics defined using these Logical Table Sources have to be unmapped / deleted so as to have a consistent repository.">Deleting Unnecessary Metrics</a>.</span></li>
+<li><span>To disable Invoice Line Fact, see <a href="GUID-A03572D7-CD27-43E9-87A1-403973B8C55C.htm#GUID-6ACBFF03-D80D-4578-95F4-2FE7B50DB8F5" title="Once you delete the unsupported metrics, you can disable the invoice line fact.">Disabling the Invoice Line Fact</a>.</span></li>
+</ol>
+</div>
+<div class="props_rev_3"><a id="GUID-4065ECC9-4BC9-4ABA-8A40-DE05D973BEBE"></a>
+<h2 id="BIAFC-GUID-4065ECC9-4BC9-4ABA-8A40-DE05D973BEBE" class="sect2">Deleting Unnecessary Metrics</h2>
+<div>
+<p>Before disabling the logical table source, the metrics defined using these Logical Table Sources have to be unmapped / deleted so as to have a consistent repository.</p>
+<ol>
+<li class="stepexpand"><span>In <span>Oracle BI Administration Tool</span>, edit the BI metadata repository (for example, <code>OracleBIAnalyticsApps.rpd</code>).</span></li>
+<li class="stepexpand"><span>In the Business Modelling and Mapping layer, navigate to Fact &ndash; Project Billing.</span></li>
+<li class="stepexpand"><span>Delete the listed metrics.</span>
+<div>
+<div class="figure" id="GUID-4065ECC9-4BC9-4ABA-8A40-DE05D973BEBE__GUID-6FB7F7D4-9051-4C75-A14D-E834B6A6FDC6"><img width="356" height="582" src="img/GUID-D2ABC1AC-71C2-4B35-9CDF-A88C81BEA347-default.gif" alt="Description of GUID-D2ABC1AC-71C2-4B35-9CDF-A88C81BEA347-default.gif follows" title="Description of GUID-D2ABC1AC-71C2-4B35-9CDF-A88C81BEA347-default.gif follows" /><br />
+<a href="img_text/GUID-D2ABC1AC-71C2-4B35-9CDF-A88C81BEA347-default.htm">Description of the illustration GUID-D2ABC1AC-71C2-4B35-9CDF-A88C81BEA347-default.gif</a></div>
+<!-- class="figure" -->
+<p>List of 71 metrics that must be deleted:</p>
+<pre dir="ltr">
+1.     Fact - Project Billing.--------------- Retention Amount ---------------
+2.     Fact - Project Billing.Current Withheld Amount
+3.     Fact - Project Billing.Current Withheld Amount - ITD
+4.     Fact - Project Billing.Current Withheld Amount - MTD
+5.     Fact - Project Billing.Current Withheld Amount - QTD
+6.     Fact - Project Billing.Current Withheld Amount - YTD
+7.     Fact - Project Billing.---------- Retention Billed -------------
+8.     Fact - Project Billing.Retention Billed
+9.     Fact - Project Billing.Retention Billed - ITD
+10.     Fact - Project Billing.Retention Billed - MTD
+11.     Fact - Project Billing.Retention Billed - QTD
+12.     Fact - Project Billing.Retention Billed - YTD
+13.     Fact - Project Billing.----------- Retention Withheld -------------
+14.     Fact - Project Billing.Total Retained Amount
+15.     Fact - Project Billing.Total Retained Amount - ITD
+16.     Fact - Project Billing.Total Retained Amount - MTD
+17.     Fact - Project Billing.Total Retained Amount - QTD
+18.     Fact - Project Billing.Total Retained Amount - YTD
+19.     Fact - Project Billing.----------- Retention Write-off -----------
+20.     Fact - Project Billing.Retention Write-off
+21.     Fact - Project Billing.Retention Write-off - ITD
+22.     Fact - Project Billing.Retention Write-off - MTD
+23.     Fact - Project Billing.Retention Write-off - QTD
+24.     Fact - Project Billing.Retention Write-off - YTD
+25.     Fact - Project Billing.-------------- Unearned Revenue ----------------
+26.     Fact - Project Billing.Unearned Revenue
+27.     Fact - Project Billing.Unearned Revenue - ITD
+28.     Fact - Project Billing.Unearned Revenue - MTD
+29.     Fact - Project Billing.Unearned Revenue - QTD
+30.     Fact - Project Billing.Unearned Revenue - YTD
+31.     Fact - Project Billing.-------------- Unbilled Receivables ------------
+32.     Fact - Project Billing.Unbilled Receivables
+33.     Fact - Project Billing.Unbilled Receivables - ITD
+34.     Fact - Project Billing.Unbilled Receivables - MTD
+35.     Fact - Project Billing.Unbilled Receivables - QTD
+36.     Fact - Project Billing.Unbilled Receivables - YTD
+37.     Fact - Project Billing.# of Unapproved Invoices
+38.     Fact - Project Billing.Retention Amount - MTD - Enterprise Calendar
+39.     Fact - Project Billing.Retention Amount - QTD - Enterprise Calendar
+40.     Fact - Project Billing.Retention Amount - YTD - Enterprise Calendar
+41.     Fact - Project Billing.Retention Billed - MTD - Enterprise Calendar
+42.     Fact - Project Billing.Retention Billed - QTD - Enterprise Calendar
+43.     Fact - Project Billing.Retention Billed - YTD - Enterprise Calendar
+44.     Fact - Project Billing.Retention Withheld - MTD - Enterprise Calendar
+45.     Fact - Project Billing.Retention Withheld - QTD - Enterprise Calendar
+46.     Fact - Project Billing.Retention Withheld - YTD - Enterprise Calendar
+47.     Fact - Project Billing.Retention Write-off - MTD - Enterprise Calendar
+48.     Fact - Project Billing.Retention Write-off - QTD - Enterprise Calendar
+49.     Fact - Project Billing.Retention Write-off - YTD - Enterprise Calendar
+50.     Fact - Project Billing.Unearned Revenue - MTD - Enterprise Calendar
+51.     Fact - Project Billing.Unearned Revenue - QTD - Enterprise Calendar
+52.     Fact - Project Billing.Unearned Revenue - YTD - Enterprise Calendar
+53.     Fact - Project Billing.Unbilled Receivables - MTD - Enterprise Calendar
+54.     Fact - Project Billing.Unbilled Receivables - QTD - Enterprise Calendar
+55.     Fact - Project Billing.Unbilled Receivables - YTD - Enterprise Calendar
+56.     Fact - Project Billing.Internal UBR UER Metric (Invoice Fact)
+57.     Fact - Project Billing.Internal Unearned Revenue - ITD
+58.     Fact - Project Billing.Internal Unbilled Receivable - ITD
+59.     Fact - Project Revenue.------------- Unearned Revenue --------------
+60.     Fact - Project Revenue.Unearned Revenue
+61.     Fact - Project Revenue.Unearned Revenue - ITD
+62.     Fact - Project Revenue.Unearned Revenue - QTD
+63.     Fact - Project Revenue.Unearned Revenue - MTD
+64.     Fact - Project Revenue.Unearned Revenue - YTD
+65.     Fact - Project Revenue.------------ Unbilled Receivable -------------
+66.     Fact - Project Revenue.Unbilled Receivable
+67.     Fact - Project Revenue.Unbilled Receivable - ITD
+68.     Fact - Project Revenue.Unbilled Receivable - MTD
+69.     Fact - Project Revenue.Unbilled Receivable - QTD
+70.     Fact - Project Revenue.Unbilled Receivable - YTD
+71.     Fact - Project Revenue.Internal UBR UER Metric (Invoice Fact)
+</pre></div>
+</li>
+</ol>
+</div>
+</div>
+<div class="props_rev_3"><a id="GUID-6ACBFF03-D80D-4578-95F4-2FE7B50DB8F5"></a>
+<h2 id="BIAFC-GUID-6ACBFF03-D80D-4578-95F4-2FE7B50DB8F5" class="sect2">Disabling the Invoice Line Fact</h2>
+<div>
+<p>Once you delete the unsupported metrics, you can disable the invoice line fact.</p>
+<ol>
+<li class="stepexpand"><span>In <span>Oracle BI Administration Tool</span>, edit the BI metadata repository (for example, <code>OracleBIAnalyticsApps.rpd</code>).</span></li>
+<li class="stepexpand"><span>In the Business Modelling and Mapping layer, navigate to <span class="bold">Fact &ndash; Project Billing</span>.</span></li>
+<li class="stepexpand"><span>Select the 'Fact_W_PROJ_INVOICE_LINE_F_Invoice_Line' Logical Table Source, then right-click, and choose <span class="bold">Edit</span>.</span></li>
+<li class="stepexpand"><span>Display the <span class="wintitle">General</span> tab, and select the <span class="bold">Disabled</span> check box, then click <span class="bold">OK</span>.</span>
+<div>
+<div class="figure" id="GUID-6ACBFF03-D80D-4578-95F4-2FE7B50DB8F5__GUID-D1CD3C79-2DEB-4051-9DF9-A1A77F01C31D"><img width="525" height="596" src="img/GUID-84DA0740-0480-459A-A529-4FF34F0CD899-default.gif" alt="Description of GUID-84DA0740-0480-459A-A529-4FF34F0CD899-default.gif follows" title="Description of GUID-84DA0740-0480-459A-A529-4FF34F0CD899-default.gif follows" /><br />
+<a href="img_text/GUID-84DA0740-0480-459A-A529-4FF34F0CD899-default.htm">Description of the illustration GUID-84DA0740-0480-459A-A529-4FF34F0CD899-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Select the 'Fact_W_PROJ_INVOICE_LINE_F_Invoice_Line_ITD' Logical Table Source, then right-click, and choose <span class="bold">Edit</span>.</span></li>
+<li class="stepexpand"><span>Display the <span class="wintitle">General</span> tab, and select the <span class="bold">Disabled</span> check box, then click <span class="bold">OK</span>.</span>
+<div>
+<div class="figure" id="GUID-6ACBFF03-D80D-4578-95F4-2FE7B50DB8F5__GUID-813E021B-4F8C-4E63-8EF1-6B548F23295E"><img width="534" height="599" src="img/GUID-4FB1346F-18AD-41AA-9915-A44E31D7B02B-default.gif" alt="Description of GUID-4FB1346F-18AD-41AA-9915-A44E31D7B02B-default.gif follows" title="Description of GUID-4FB1346F-18AD-41AA-9915-A44E31D7B02B-default.gif follows" /><br />
+<a href="img_text/GUID-4FB1346F-18AD-41AA-9915-A44E31D7B02B-default.htm">Description of the illustration GUID-4FB1346F-18AD-41AA-9915-A44E31D7B02B-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Save the changes.</span></li>
+<li class="stepexpand"><span>Run the Consistency Check and ensure that there are no errors, save the repository file, and clear <span>Oracle BI Enterprise Edition</span> Cache.</span>
+<div>
+<p>If you are making the changes in offline mode, then restart the <span>Oracle BI Server</span> and <span>Oracle BI Presentation Services</span>.</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-08C8012D-6282-4DEE-AF01-2C8F6706D4B3.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-1E721DB4-ED22-4324-8F3D-EA85AECF146A.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>How to Define New Groups and Mappings for Users and BI Roles</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="Oracle BI Applications implements data and object security using a set of BI Duty Roles. BI Users are provisioned with BI Duty Roles via Enterprise Roles in LDAP." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-73868DF1-22F2-4F00-8A13-92EBF8900D6F.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-886015C0-7945-439E-B147-4074C8D1F3D9.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-224DF03B-A971-4B42-A6CE-012E4D2FFFA7"></a> <span id="PAGE" style="display:none;">253/336</span> <!-- End Header -->
+<a id="BIASC24527"></a><a id="BIASC25639"></a><a id="BIASC25641"></a><a id="BIASC25642"></a><a id="IT_367"></a>
+<h1 id="BIAFC-GUID-224DF03B-A971-4B42-A6CE-012E4D2FFFA7" class="sect1">How to Define New Groups and Mappings for Users and BI Roles</h1>
+<div>
+<p><span>Oracle BI Applications</span> implements data and object security using a set of BI Duty Roles. BI Users are provisioned with BI Duty Roles via Enterprise Roles in LDAP.</p>
+<div class="p">The following terms are synonymous:
+<ul style="list-style-type: disc;">
+<li>
+<p>Enterprise Role</p>
+</li>
+<li>
+<p>Job Role</p>
+</li>
+<li>
+<p>Group</p>
+</li>
+</ul>
+</div>
+<div class="figure" id="GUID-224DF03B-A971-4B42-A6CE-012E4D2FFFA7__GUID-506DF3B2-F018-488D-A2B5-ACB11468DB96"><img width="647" height="245" src="img/GUID-8529107B-B402-4E4B-B94F-098C9E5A4C74-default.gif" alt="Description of GUID-8529107B-B402-4E4B-B94F-098C9E5A4C74-default.gif follows" title="Description of GUID-8529107B-B402-4E4B-B94F-098C9E5A4C74-default.gif follows" /><br />
+<a href="img_text/GUID-8529107B-B402-4E4B-B94F-098C9E5A4C74-default.htm">Description of the illustration GUID-8529107B-B402-4E4B-B94F-098C9E5A4C74-default.gif</a></div>
+<!-- class="figure" -->
+<p>To simplify security provisioning, each BI Duty Role encapsulates all object and data security access required for a particular BI application area. Therefore, you typically only need to provision a BI User with a single Duty Role in order to enable them to access a specific application area. For example, the BI Duty Role 'Fixed Asset Accounting Manager EBS' provides the encapsulation for EBS Fixed Asset Accounting security.</p>
+<p>You can provision a BI User with a Duty Role by using <span>Oracle Fusion Middleware</span> (FMW), or by using a repository init block.</p>
+<div class="section">
+<p class="subhead1">How to Use FMW to Provision a BI User</p>
+<p>To use the FMW provisioning for BI Duty Roles, the BI Users and Enterprise Roles must be present in an LDAP and that LDAP should have been configured as the source for authentication for BI. If your installation has existing Enterprise Roles that you wish to use for BI security, then you might consider using this approach.</p>
+<p>In this approach, you can use your own Enterprise Roles to associate BI Duty Roles to BI Users, or you can use the default Enterprise Roles provided with Oracle WebLogic Server LDAP. A BI User with one of the default Enterprise Roles automatically inherits the associated default Duty Roles.</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Using Your Own Enterprise Roles with the Default Duty Roles</p>
+<p>For example, assume the following scenario:</p>
+<p>- Your LDAP has Enterprise Role 'ABC Corp Americas Account Manager'.</p>
+<p>- BI Users and Enterprise Roles are present in this LDAP.</p>
+<p>- This LDAP is used as source for authentication for the BI installation.</p>
+<p>Use <span>Oracle Enterprise Manager Fusion Middleware Control</span> Control in the BI instance and make the Enterprise Role 'ABC Corp Americas Account Manager' a member of BI Duty Role 'Fixed Asset Accounting Manager EBS'.</p>
+<p>BI Users (for example, Fred) with Enterprise Role 'ABC Corp Americas Account Manager' inherit BI Duty Role 'Fixed Asset Accounting Manager EBS', and have security access for Fixed Assets Accounting reporting for EBS, as illustrated in the diagram below.</p>
+<div class="figure" id="GUID-224DF03B-A971-4B42-A6CE-012E4D2FFFA7__GUID-08186E3A-37EF-43AA-81A3-54FEA2E788F9"><img width="691" height="262" src="img/GUID-E3F73462-F8F6-4051-AE70-3D72337B90F5-default.gif" alt="Description of GUID-E3F73462-F8F6-4051-AE70-3D72337B90F5-default.gif follows" title="Description of GUID-E3F73462-F8F6-4051-AE70-3D72337B90F5-default.gif follows" /><br />
+<a href="img_text/GUID-E3F73462-F8F6-4051-AE70-3D72337B90F5-default.htm">Description of the illustration GUID-E3F73462-F8F6-4051-AE70-3D72337B90F5-default.gif</a></div>
+<!-- class="figure" --></div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Using the Default Enterprise Roles with the Default Duty Roles</p>
+<p><span>Oracle BI Applications</span> provides a sample set of Enterprise Roles (also known as Groups) that inherit the BI Duty Role hierarchy. For example, the default Enterprise Role 'Fixed Asset Accounting Manager EBS' is a member of BI Duty Role 'Fixed Asset Accounting Manager EBS'.</p>
+<p>BI Users (for example Fred) with Enterprise Role 'Fixed Asset Accounting Manager EBS' automatically inherit BI Duty Role 'Fixed Asset Accounting Manager EBS', and have security access for Fixed Assets Accounting reporting for EBS, as illustrated in the diagram below.</p>
+<div class="figure" id="GUID-224DF03B-A971-4B42-A6CE-012E4D2FFFA7__GUID-A3E9F801-4850-4F4A-9D07-81BBF5FAE9D9"><img width="690" height="269" src="img/GUID-9621CD15-016B-45A1-9C35-DD28574A1596-default.gif" alt="Description of GUID-9621CD15-016B-45A1-9C35-DD28574A1596-default.gif follows" title="Description of GUID-9621CD15-016B-45A1-9C35-DD28574A1596-default.gif follows" /><br />
+<a href="img_text/GUID-9621CD15-016B-45A1-9C35-DD28574A1596-default.htm">Description of the illustration GUID-9621CD15-016B-45A1-9C35-DD28574A1596-default.gif</a></div>
+<!-- class="figure" --></div>
+<!-- class="section" -->
+<div class="section" id="GUID-224DF03B-A971-4B42-A6CE-012E4D2FFFA7__BABCDAFI">
+<p class="subhead1">Provisioning BI Users in the Installed Oracle WebLogic Server LDAP</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>Use the default installed Oracle WebLogic Server LDAP and default Enterprise Roles.</p>
+<ol>
+<li>
+<p>Use the security FSM Tasks for your Offerings to determine the Init Blocks and Duty Roles required by BI Users.</p>
+<p>In addition to the information in the FSM Tasks for security, use the Content guides for Oracle BI Applications available on My Oracle Support for a definitive list of default Duty Roles and Enterprise Roles required by BI Users.</p>
+</li>
+<li>
+<p>Use <span>Oracle WebLogic Server Administration Console</span> to assign each BI User to the appropriate Enterprise Role/Group for the Duty Role that the User requires.</p>
+<div class="figure" id="GUID-224DF03B-A971-4B42-A6CE-012E4D2FFFA7__GUID-89DC8949-C536-457B-9791-5D8157C4BDBB"><img width="851" height="418" src="img/GUID-EFFF7292-1222-4E1C-AE9A-1B3235B528E4-default.gif" alt="Description of GUID-EFFF7292-1222-4E1C-AE9A-1B3235B528E4-default.gif follows" title="Description of GUID-EFFF7292-1222-4E1C-AE9A-1B3235B528E4-default.gif follows" /><br />
+<a href="img_text/GUID-EFFF7292-1222-4E1C-AE9A-1B3235B528E4-default.htm">Description of the illustration GUID-EFFF7292-1222-4E1C-AE9A-1B3235B528E4-default.gif</a></div>
+<!-- class="figure" -->
+<p>For example, if you assign BI User Fred to the Enterprise Role 'Fixed Asset Accounting Manager EBS', then Fred automatically inherits the BI Duty Role 'Fixed Asset Accounting Manager EBS'.</p>
+<p>To assign a BI User to an Enterprise Role/Group, select <span class="bold">Security Realms</span>, <span class="bold">Users</span>, <span class="bold">Groups</span>, <span class="bold">Users</span>, then <span class="bold">BI User</span>, and use the <span class="wintitle">Groups</span> tab to specify one or more Enterprise Roles/Groups.</p>
+<div class="figure" id="GUID-224DF03B-A971-4B42-A6CE-012E4D2FFFA7__GUID-B5D5A98F-7BDE-44B4-8406-826C6534A4FD"><img width="426" height="371" src="img/GUID-21AAB328-9902-44DE-A99F-6C5DAA2B8F54-default.gif" alt="Description of GUID-21AAB328-9902-44DE-A99F-6C5DAA2B8F54-default.gif follows" title="Description of GUID-21AAB328-9902-44DE-A99F-6C5DAA2B8F54-default.gif follows" /><br />
+<a href="img_text/GUID-21AAB328-9902-44DE-A99F-6C5DAA2B8F54-default.htm">Description of the illustration GUID-21AAB328-9902-44DE-A99F-6C5DAA2B8F54-default.gif</a></div>
+<!-- class="figure" --></li>
+</ol>
+</div>
+<!-- class="section" -->
+<div class="section" id="GUID-224DF03B-A971-4B42-A6CE-012E4D2FFFA7__BABJAJIA">
+<p class="subhead1">Provisioning BI Users Using Your Own LDAP</p>
+<p>If your installation has an existing LDAP (and you do not wish to use the default Oracle WebLogic Server LDAP) that is being used for authentication, then you can create your own Enterprise Roles, or copy/migrate the Enterprise Roles from the installed Oracle WebLogic Server LDAP to your LDAP.</p>
+<ol>
+<li>
+<p>Use the security FSM Tasks for your Offerings to determine the Init Blocks and Duty Roles required by BI Users.</p>
+</li>
+<li>
+<p>If you want to deploy the default Enterprise Roles/Groups from Oracle WebLogic Server LDAP, then copy or migrate the Enterprise Roles/Groups to your LDAP.</p>
+</li>
+<li>
+<p>Use native LDAP tools to assign each BI User to an appropriate Enterprise Role/Group for the Duty Role that the BI User requires.</p>
+<p>For example, if you assign BI User Fred to the Enterprise Role 'Fixed Asset Accounting Manager EBS', then Fred automatically inherits the BI Duty Role 'Fixed Asset Accounting Manager EBS'.</p>
+</li>
+<li>
+<p>Make sure that each Enterprise Role is associated with the correct Duty Role.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" -->
+<div class="section" id="GUID-224DF03B-A971-4B42-A6CE-012E4D2FFFA7__BABJDBEI">
+<p class="subhead1">How to Use a Repository Init Block to Provision a BI User</p>
+<p>For each Offering and Functional Area, FSM Tasks for security typically specify:</p>
+<p>- Init Blocks that you need to enable.</p>
+<p>- Duty Roles that BI Users require.</p>
+<p><span>Oracle BI Applications</span> provides an Init block named 'Authorization' that queries the roles/responsibilities associated to users in the source system and populates a <span>Oracle BI Enterprise Edition</span> (<span>Oracle BI EE</span>) variable called GROUP. <span>Oracle BI EE</span> associates BI Duty Roles to users that are populated in the GROUP variable.</p>
+<p>For example, to associate BI Duty Role 'Fixed Asset Accounting Manager EBS' to a user using Init block approach, do the following:</p>
+<ol>
+<li>
+<p>In <span>Oracle BI Administration Tool</span>, if the 'Authorization' Init block if disabled, then you must enable it, as follows:</p>
+<ol>
+<li>
+<p>Edit the BI metadata repository (for example, OracleBIAnalyticsApps.rpd).</p>
+</li>
+<li>
+<p>Navigate to <span class="bold">Manage</span>, <span class="bold">Variables</span>, then <span class="bold">Session &ndash; Initialization Blocks (Inventory Organizations EBS)</span>.</p>
+</li>
+<li>
+<p>Open the initialization block (Inventory Organizations EBS).</p>
+</li>
+<li>
+<p>Clear the <span class="bold">Disabled</span> check box.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Update the Init block SQL to use the EBS SQL used to populate users' EBS responsibilities.</p>
+<p><span>Oracle BI Applications</span> provides different SQL statements for E-Business Suite, Siebel, and PeopleSoft for this Init block.</p>
+</li>
+<li>
+<p>Create responsibility 'Fixed Asset Accounting Manager EBS' in the E-Business Suite source system and assign it to the user.</p>
+</li>
+<li>
+<p>When the init block is run for the user, the GROUP variable will be populated with value 'Fixed Asset Accounting Manager EBS'.</p>
+<p>The BI server will then assign BI Duty Role 'Fixed Asset Accounting Manager EBS' to the user (that is, the BI Duty Role of the same name).</p>
+</li>
+<li>
+<p>If the user has multiple responsibilities in the source system, then the GROUP variable will contain the names of all of the responsibilities.</p>
+<p><span>Oracle BI EE</span> will assign BI Duty Roles that match any names contained in the GROUP variable. If one of the names within the GROUP variable does not matches any BI Duty Role, then <span>Oracle BI EE</span> will ignore that name. For example, if the GROUP variable contains the value (A, B, C, D) and if BI Duty Roles of names A, B and C exist, then the user will be assigned BI Duty Roles (A, B, C). The value D will be ignored.</p>
+</li>
+</ol>
+</div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-73868DF1-22F2-4F00-8A13-92EBF8900D6F.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-886015C0-7945-439E-B147-4074C8D1F3D9.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>SOA Suite Database Growth Management</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="dcterms.created" content="2018-02-21T10:06:12Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Fusion Applications Administrator's Guide" />
+<meta name="dcterms.identifier" content="E66226-03" />
+<meta name="dcterms.isVersionOf" content="OASAD" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2011, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-686AB785-BA34-4982-A09D-BCF834C6C78A.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-790639B0-1002-4E84-A037-A82495F9AFB6.htm" title="Next" type="text/html" />
+<link rel="alternate" href="OASAD.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-CE786B77-B086-4F02-A18C-AE37D4850D61"></a> <span id="PAGE" style="display:none;">13/27</span> <!-- End Header -->
+<h1 id="OASAD-GUID-CE786B77-B086-4F02-A18C-AE37D4850D61" class="sect1"><span class="enumeration_chapter">9</span> SOA Suite Database Growth Management</h1>
+<div>
+<p>As the amount of data in the Oracle SOA Suite database tables grows over time it is recommended to maintain the database growth proactively. Maintaining the SOA Suite databases includes purging for the SOA database tables. This can be done by using one of the various available purging strategies depending mainly on database growth.</p>
+<p>If purging is not done using the best fitting strategy it will cause a growth in the SOA database tables which will then lead to performance problems. It is also known that this can cause a situation where it will be hard to clean up the tables by purging based on the pure amount of data that needs to be purged.</p>
+<p>Keep in mind that for any implemented solution, not to run purging in parallel with online activities on the system as it dramatically reduces the performance of the online operations. Keep in mind that any purging solution needs to run in maintenance mode where no online activity is allowed.</p>
+<p>The SOA Suite environment for Oracle Fusion Applications (FA) is configured across multiple Weblogic Domains for FA. Diverse purging strategies may be used for different FA Domains such as Human Capital Management (HCM), Finance, Supply Chain Management (SCM) among others but in all cases, it is important to run purging for any SOA installation in FA to avoid the problems discussed above.</p>
+<p>The standard purging scripts are located under<code class="codeph">$SOA_HOME/rcu/integration/soainfra/sql/soa_purge</code> where <code class="codeph">$SOA_HOME</code> refers to the SOA ORACLE_HOME of the installation. For FA this would be located under the following path: <code class="codeph">/u01/app/fa/fusionapps/soa</code>.</p>
+<p>For additional information about the methods for managing and troubleshooting database growth issues, see the Managing Database Growth in the <a href="https://docs.oracle.com/en/middleware/middleware.html" target="_blank">Oracle Fusion Middleware Documentation</a> that corresponds to the FMW release for which the FA environment is currently working with.</p>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment10">
+<tr>
+<td class="cellalignment17">
+<table class="cellalignment15">
+<tr>
+<td class="cellalignment14"><a href="GUID-686AB785-BA34-4982-A09D-BCF834C6C78A.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment14"><a href="GUID-790639B0-1002-4E84-A037-A82495F9AFB6.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2011, 2018, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment19">
+<table class="cellalignment13">
+<tr>
+<td class="cellalignment14"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment14"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

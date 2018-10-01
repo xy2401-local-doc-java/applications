@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Troubleshooting Load Plans</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="A load plan must be restarted when it has stopped with an error. An alternate case where restart might be required is when a load plan is not doing anything at all, for example, when a load plan is executed and nothing has changed after 30 minutes." />
+<meta name="dcterms.created" content="2017-05-25T23:49:13Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications ETL Guide" />
+<meta name="dcterms.identifier" content="E72285-04" />
+<meta name="dcterms.isVersionOf" content="BIAET" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2014, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-FAE02FBB-E7A7-4D44-A624-D830B2878AED.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-9DFA2EFB-58A3-4F39-800D-B3437834E733.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAET.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-7592DAD0-048B-4224-BE0F-6E743572BF75"></a> <span id="PAGE" style="display:none;">31/47</span> <!-- End Header -->
+<a id="BIAET24467"></a>
+<h1 id="BIAET-GUID-7592DAD0-048B-4224-BE0F-6E743572BF75" class="sect1">Troubleshooting Load Plans</h1>
+<div>
+<p>A load plan must be restarted when it has stopped with an error. An alternate case where restart might be required is when a load plan is not doing anything at all, for example, when a load plan is executed and nothing has changed after 30 minutes.</p>
+<div class="section">
+<p>To troubleshoot a non-responsive load plan:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Check the maximum number of sessions set to run against the agent.</span>
+<div>
+<p>In ODI Operator, verify that the number of sessions running is equal to the maximum. If so, then the other sessions are waiting for the running sessions to complete. Proceed to the next step.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Clean out stale sessions.</span>
+<div>
+<p>The stale sessions are sessions that are incorrectly left in a running state after an agent or repository crash. If an agent crashes or loses its connection to the repository after it has started a session, the agent can&rsquo;t update the status of the session in the repository, and such a session becomes stale. Until the stale session is cleaned, it displays as running in the repository, but actually is not.</p>
+<p>The stale sessions are cleaned in multiple ways. The following are some examples:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>You can manually request specific agents to clean stale sessions in Operator Navigator or Topology Navigator.</p>
+</li>
+<li>
+<p>Stale sessions are cleaned when you restart an agent.</p>
+</li>
+<li>
+<p>When an agent starts any new session, it checks for and resolves stale sessions. However, if the agent has lost connection to the repository, then it cannot clean stale sessions.</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>Check if the agent is alive.</span>
+<div>
+<p>To test the agent to see if it is running and still has a connection to the repository, open it in the Topology Navigator in ODI Studio and select the <span class="wintitle">Test</span> tab. If the agent test fails, then restart the agent after fixing the issue.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Verify that the ODI Repository and the server hosting it are running and have not experienced a failure.</span></li>
+<li class="stepexpand"><span>If your load plan is in error and you have verified all of the above, then restart the load plan.</span>
+<div>
+<div class="infobox-note" id="GUID-7592DAD0-048B-4224-BE0F-6E743572BF75__GUID-A2165FD6-DDAA-44F3-8F69-FDDD7A6D13A5">
+<p class="notep1">Note:</p>
+When you restart the load plan, set the Log Level to 6. Log Level 6 enables you to see variable values resolved in session logs.</div>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment43">
+<tr>
+<td class="cellalignment50">
+<table class="cellalignment48">
+<tr>
+<td class="cellalignment47"><a href="GUID-FAE02FBB-E7A7-4D44-A624-D830B2878AED.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment47"><a href="GUID-9DFA2EFB-58A3-4F39-800D-B3437834E733.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2014, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment52">
+<table class="cellalignment46">
+<tr>
+<td class="cellalignment47"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment47"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment47"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

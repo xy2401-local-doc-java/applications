@@ -1,0 +1,972 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Enabling Basic Data Access for Abstract Roles (Chapter 4) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Securing Oracle HCM Cloud" name="doctitle">
+      <meta content="E73303-09" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="OCHUS" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Feb 16 01:08:36 PST 2018" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="abstract roles; security profiles; data access for workers; HCM security;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="OCHUS1667100.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="OCHUS1667102.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="OCHUS.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="OCHUS.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="These abstract roles are predefined in Oracle HCM Cloud:"><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">7/25</span><a name="BEGIN" id="BEGIN"></a><div id="OCHUS1667101" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">4</span>Enabling Basic Data Access for Abstract Roles
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS772702">Assigning Security Profiles to Abstract Roles: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS772864">Assigning Security Profiles to Abstract Roles: Worked Example</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="OCHUS772702">
+                  <h2>Assigning Security Profiles to Abstract Roles: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>These abstract roles are predefined in
+                     Oracle HCM Cloud:
+                  </p>
+                  
+                  
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Employee</p>
+                     </li>
+                     
+                     <li>
+                        <p>Contingent Worker</p>
+                     </li>
+                     
+                     <li>
+                        <p>Line Manager</p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>Users with these roles can sign in and open application pages. However, they
+                     have no automatic access to data. For example, employees can open
+                     the Directory but their searches return no results. Line managers
+                     can open the Directory but can't see data for their organizations.
+                     To enable basic HCM data access for users with abstract roles, you
+                     assign security
+                     profiles directly to those roles.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS772699">
+                     <h3 class="topictitle">Predefined Security Profiles to Assign to Abstract
+                     Roles</h3>
+                     
+                     <p>This table identifies the predefined security profiles
+                        that you can assign directly to the Employee, Line Manager, and Contingent
+                        Worker abstract roles.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This four-column table with nine&#xA;data rows shows (from left to right) the security profile type and&#xA;the profile for employees, contingent workers, and line managers.">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Security Profile Type
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Employee
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Contingent Worker
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Line Manager
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Person</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>View Own Record</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View Own Record</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View Manager Hierarchy</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Public person</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>View All Workers</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View All Workers</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View All Workers</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Organization</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>View All Organizations</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View All Organizations</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View All Organizations</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Position</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>View All Positions</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View All Positions</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View All Positions</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Legislative data group</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>View All Legislative Data Groups</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View All Legislative Data Groups</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View All Legislative Data Groups</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Country</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>View All Countries</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View All Countries</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View All Countries</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Document type</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>View All Document Types</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View All Document Types</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View All Document Types</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Payroll</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Not applicable</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Not applicable</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View All Payrolls</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Payroll flow</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Not applicable</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Not applicable</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>View All Flows</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>After implementation, you may want to change aspects
+                        of this data access. For example, you may want to create your own
+                        security profiles and assign those directly to abstract roles.
+                     </p>
+                     
+                     <div class="infobox-note"><span class="notep1">Note: </span>
+                        Such changes apply to all users
+                        who have the abstract role.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS772700">
+                     <h3 class="topictitle">HCM Data Roles</h3>
+                     
+                     <p>Users who have abstract roles are likely to gain additional
+                        data access from the HCM data roles that you define for their job roles. For example, you may create
+                        an HCM data role for benefits representatives to access person records
+                        in a legal employer. Such data access is in addition to any access provided by abstract
+                        roles.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS772864">
+                  <h2>Assigning Security Profiles to Abstract Roles: Worked Example</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>To enable basic data access for the predefined
+                     Employee, Contingent Worker, and Line Manager abstract roles, you assign predefined security profiles to them during implementation. This example shows how to assign
+                     security profiles to abstract roles using the Assign Security Profiles
+                     to Role task.
+                  </p>
+                  
+                  
+                  
+                  <h3 class="topictitle">Searching for the Employee Abstract Role</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>Sign in as the TechAdmin user. On-premises users
+                           must sign in with a role that has the IT Security Manager job role.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Setup and Maintenance</span></span> to open the Setup and Maintenance work area.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Search for and select the Assign Security Profiles
+                           to Role task.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Manage Data Roles and Security Profiles page,
+                           enter Employee in the <span class="uicontrol">Role</span> field.
+                           Click <span class="uicontrol">Search</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Search Results section, select the predefined
+                           Employee role and click <span class="uicontrol">Edit</span>.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Assigning Security Profiles to the Employee Abstract
+                  Role</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>On the Edit Data Role: Role Details page, click <span class="uicontrol">Next</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Edit Data Role: Security Criteria page, select
+                           the security profiles shown in the following table. You may see a
+                           subset of these security profiles, depending on the combination of
+                           cloud services that you're implementing.
+                        </p>
+                        
+                        <p></p>
+                        <div class="simpletable-margin">
+                           <table summary="This table lists field names (left column) and their respective values.">
+                              
+                              
+                              <tr>
+                                 
+                                 <th scope="col">
+                                    Field
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Organization Security Profile</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View All Organizations</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Position Security Profile</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View All Positions</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Country Security Profile</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View All Countries</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">LDG Security Profile</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View All Legislative Data Groups</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Person Security Profile</span> (Person section)
+                                    </p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View Own Record</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Person Security Profile</span> (Public Person section)
+                                    </p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View All Workers</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Document Type Security Profile</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View All Document Types</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Review</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Edit Data Role: Review page, click <span class="uicontrol">Submit</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Manage Data Roles and Security Profiles page,
+                           search again for the predefined Employee role.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Search Results region, confirm that a green
+                           check mark appears in the <span class="uicontrol">Security Profiles</span> column for the Employee role. 
+                        </p>
+                        
+                        <p> 
+                           <p>The check mark confirms that security profiles
+                              are assigned to the role.
+                           </p> 
+                        </p>
+                        <p> 
+                           <p>Repeat
+                              the steps in Searching for the Employee Abstract Role and Assigning
+                              Security Profiles to the Employee Abstract Role for the predefined
+                              Contingent Worker role.
+                           </p> 
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Searching for the Line Manager Abstract Role</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>On the Manage Data Roles and Security Profiles page,
+                           enter Line Manager in the <span class="uicontrol">Role</span> field. Click <span class="uicontrol">Search</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the Search Results section, select the predefined
+                           Line Manager role and click <span class="uicontrol">Edit</span>.
+                        </p>
+                        
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+                  <h3 class="topictitle">Assigning Security Profiles to the Line Manager
+                  Abstract Role</h3>
+                  
+                  
+                  <ol>
+                     
+                     <li>
+                        
+                        <p>On the Edit Data Role: Role Details page, click <span class="uicontrol">Next</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Edit Data Role: Security Criteria page, select
+                           the security profiles shown in the following table. You may see a
+                           subset of these security profiles, depending on the combination of
+                           cloud services that you're implementing.
+                        </p>
+                        
+                        <p></p>
+                        <div class="simpletable-margin">
+                           <table summary="This table lists field names (left column) and their respective values.">
+                              
+                              
+                              <tr>
+                                 
+                                 <th scope="col">
+                                    Field
+                                    
+                                 </th>
+                                 
+                                 <th scope="col">
+                                    Value
+                                    
+                                 </th>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Organization Security Profile</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View All Organizations</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Position Security Profile</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View All Positions</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Country Security Profile</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View All Countries</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">LDG Security Profile</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View All Legislative Data Groups</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Person Security Profile</span> (Person section)
+                                    </p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View Manager Hierarchy</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Person Security Profile</span> (Public Person section)
+                                    </p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View All Workers</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Document Type Security Profile</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View All Document Types</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Payroll</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View All Payrolls</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              <tr align="left" valign="top">
+                                 
+                                 <th scope="row" class="row">
+                                    
+                                    <p><span class="uicontrol">Payroll Flow</span></p>
+                                    
+                                 </th>
+                                 
+                                 <td>
+                                    
+                                    <p>View All Flows</p>
+                                    
+                                 </td>
+                                 
+                              </tr>
+                              
+                              
+                              
+                           </table>
+                        </div>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>Click <span class="uicontrol">Review</span>.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Edit Data Role: Review page, click <span class="uicontrol">Submit</span></p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>On the Manage Data Roles and Security Profiles page,
+                           search again for the predefined Line Manager role.
+                        </p>
+                        
+                     </li>
+                     
+                     <li>
+                        
+                        <p>In the search results, confirm that a green check
+                           mark appears in the <span class="uicontrol">Security Profiles</span> column for the Line Manager role.
+                        </p>
+                        
+                        <p> 
+                           <p> The check mark confirms that security profiles
+                              are assigned to the role.
+                           </p> 
+                        </p>
+                     </li>
+                     
+                  </ol>
+                  
+                  
+                  
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

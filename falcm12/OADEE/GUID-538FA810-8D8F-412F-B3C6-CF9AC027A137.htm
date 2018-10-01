@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Implement Audit Reports</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This chapter describes how to implement Audit Reports in Oracle Fusion Applications." />
+<meta name="dcterms.created" content="2017-04-13T08:16:31Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Fusion Applications Developer's Guide" />
+<meta name="dcterms.identifier" content="E70512-02" />
+<meta name="dcterms.isVersionOf" content="OADEE" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2011, 2016, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-9D40DB38-7DDA-44FD-A278-CCA777417F53.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-AAACC1F7-CD9B-4BEA-85E3-85A023073C2E.htm" title="Next" type="text/html" />
+<link rel="alternate" href="OADEE.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137"></a> <span id="PAGE" style="display:none;">23/82</span> <!-- End Header -->
+<a id="OADEV65805"></a><a id="OADEV64888"></a>
+<h1 id="OADEE-GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137" class="sect1"><span class="enumeration_chapter">12</span> Implement Audit Reports</h1>
+<div>
+<div><span>This chapter describes how to implement Audit Reports in <span id="FA">Oracle Fusion Applications</span>.</span></div>
+<p>This chapter contains the following sections:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-489D930C-652F-44D7-B0AE-F75B4A5CBB3C">Introduction to Audit Reports</a></p>
+</li>
+<li>
+<p><a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-D4798569-041C-499C-B628-000BF15BA27A">Implementing Audit Reports in the Framework</a></p>
+</li>
+<li>
+<p><a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-517562C5-662C-454C-A153-7BF963D46F09">Using Audit Reports</a></p>
+</li>
+</ul>
+</div>
+<a id="OADEV64889"></a>
+<div class="props_rev_3"><a id="GUID-489D930C-652F-44D7-B0AE-F75B4A5CBB3C"></a>
+<h2 id="OADEE-GUID-489D930C-652F-44D7-B0AE-F75B4A5CBB3C" class="sect2"><span class="enumeration_section">12.1</span> Introduction to Audit Reports</h2>
+<div>
+<p>Audit Reports creates a history of the changes that have been made to data in <span id="GUID-489D930C-652F-44D7-B0AE-F75B4A5CBB3C__FA">Oracle Fusion Applications</span>. Audit Reports includes information such as what operation was performed on an item, when it was performed, and how the value was changed. The audit information is logged without any interaction from the end user.</p>
+<p>The auditing solution brings together multiple underlying auditing frameworks, such as Oracle Fusion Middleware auditing that is based on an Oracle Platform Security Services (OPSS) framework, and Oracle Fusion Applications auditing that is based on an <span id="GUID-489D930C-652F-44D7-B0AE-F75B4A5CBB3C__APPLCORE">Oracle Fusion Middleware Extensions for Applications</span> framework. The OPSS framework captures audit information through events that applications raise during their processing. The <span id="GUID-489D930C-652F-44D7-B0AE-F75B4A5CBB3C__APPLCORESHORT">Applications Core</span> framework creates a "shadow" table to record all operations on the base table.</p>
+</div>
+</div>
+<a id="OADEV65095"></a><a id="OADEV65023"></a>
+<div class="props_rev_3"><a id="GUID-D4798569-041C-499C-B628-000BF15BA27A"></a>
+<h2 id="OADEE-GUID-D4798569-041C-499C-B628-000BF15BA27A" class="sect2"><span class="enumeration_section">12.2</span> Implement Audit Reports in the <span>Oracle Fusion Applications</span> Framework</h2>
+<div>
+<p>Database auditing involves observing a database to be aware of the actions of database users. Audit setup provides a user interface mechanism for administrators to choose and select the objects and the specific attributes that need to be audited. When an object has been set to be audited using the audit setup user interface, any Data Manipulation Language (DML) actions on this object, that is, its underlying database schema objects, are captured and stored for reporting purposes.</p>
+<p>The Audit Setup UI page is a task flow that is made available through the <span id="GUID-D4798569-041C-499C-B628-000BF15BA27A__APPLCORE">Oracle Fusion Middleware Extensions for Applications</span> library. This task flow is available in <span id="GUID-D4798569-041C-499C-B628-000BF15BA27A__FSMSHORT">Functional Setup Manager</span> and can be included in an application that is accessible by the administrator. The UI consists of an Applications Tree Table that holds the structure of the auditable application modules, the children application modules, if present, and all the auditable view objects and their children. The administrator selects the view object on which to start auditing and in the applications table components below the tree table, the administrator chooses to add the attributes that need to be audited.</p>
+<p>You also can set up the Fusion Middleware auditing as described in <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-747A4155-9AB1-4336-8570-8954B0EE14D1">How to Set Up Auditing</a>.</p>
+<div class="section">
+<p class="subhead2">Metadata</p>
+</div>
+<!-- class="section" -->
+<p>Two database schema tables, FND_AUDIT_WEBAPP_AM and FND_AUDIT_ATTRIBUTES, hold metadata information that is required for Auditing.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>FND_AUDIT_WEBAPP_AM captures the list of application modules for an application.</p>
+<div class="tblformal" id="GUID-D4798569-041C-499C-B628-000BF15BA27A__GUID-83630C65-E227-42E8-B59E-C65118486CEF">
+<table class="cellalignment583" summary="FND_AUDIT_WEBAPP_AM table">
+<thead>
+<tr class="cellalignment534">
+<th class="cellalignment575" id="d56513e128">WEBAPP</th>
+<th class="cellalignment652" id="d56513e131">APPLICATION_MODULE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment534">
+<td class="cellalignment577" id="d56513e136" headers="d56513e128">
+<p>VARCHAR2(80)</p>
+</td>
+<td class="cellalignment653" headers="d56513e136 d56513e131">
+<p>VARCHAR2(240)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></li>
+<li>
+<p>FND_AUDIT_ATTRIBUTES table data is populated during runtime when view objects are configured using the Audit Setup UI. This is an internal table and should not be changed.</p>
+<div class="tblformal" id="GUID-D4798569-041C-499C-B628-000BF15BA27A__GUID-A5F9F108-F37C-484C-950E-B289CE652F20">
+<table class="cellalignment583" summary="FND_AUDIT_ATTRIBUTES table">
+<thead>
+<tr class="cellalignment534">
+<th class="cellalignment587" id="d56513e157">WEBAPP</th>
+<th class="cellalignment587" id="d56513e160">VIEW_OBJECT</th>
+<th class="cellalignment587" id="d56513e163">VIEW_ATTRIBUTE</th>
+<th class="cellalignment630" id="d56513e166">ENABLED_FLAG</th>
+<th class="cellalignment587" id="d56513e169">TABLE_NAME</th>
+<th class="cellalignment587" id="d56513e172">COLUMN_NAME</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment534">
+<td class="cellalignment590" id="d56513e177" headers="d56513e157">
+<p>VARCHAR2(80)</p>
+</td>
+<td class="cellalignment590" headers="d56513e177 d56513e160">
+<p>VARCHAR2(240)</p>
+</td>
+<td class="cellalignment590" headers="d56513e177 d56513e163">
+<p>VARCHAR2(80)</p>
+</td>
+<td class="cellalignment631" headers="d56513e177 d56513e166">
+<p>VARCHAR2(1)</p>
+</td>
+<td class="cellalignment590" headers="d56513e177 d56513e169">
+<p>VARCHAR2(30)</p>
+</td>
+<td class="cellalignment590" headers="d56513e177 d56513e172">
+<p>VARCHAR2(30)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></li>
+</ul>
+</div>
+<a id="OADEV66521"></a><a id="OADEV65097"></a>
+<div class="props_rev_3"><a id="GUID-1098E7A3-C0B2-476B-A152-406135C8837C"></a>
+<h3 id="OADEE-GUID-1098E7A3-C0B2-476B-A152-406135C8837C" class="sect3"><span class="enumeration_section">12.2.1</span> How to Set Metadata</h3>
+<div>
+<div class="section">
+<p>This section covers the steps needed to populate and define metadata needed to run the Audit task flows.</p>
+<p>To populate and define metadata:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>Make sure every application has the <code class="codeph">webApp</code> defined and set. This is done by populating the <span id="GUID-1098E7A3-C0B2-476B-A152-406135C8837C__FA">Oracle Fusion Applications</span> Functional Core (ASK) deployment tables. These tables are populated at deployment time through <span id="GUID-1098E7A3-C0B2-476B-A152-406135C8837C__FSM">Oracle Fusion Functional Setup Manager</span> tasks.</span>
+<div>
+<p>The <code class="codeph">webApp</code> value is your <code class="codeph">MODULE_SHORT_NAME</code> from the <code class="codeph">ASK_MODULES</code> table.</p>
+</div>
+</li>
+<li class="stepexpand"><span>Determine, for a given module, what are the applications modules that are to be registered in the metadata table (<code class="codeph">fnd_audit_webapp_am</code>) for audit purposes. You can use the <code class="codeph">AuditServiceAM</code> to register these applications modules. This service allows data to be extracted and uploaded.</span>
+<div>
+<p>To use the <code class="codeph">AuditServiceAM</code>, follow these steps:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Right-click your Model project.</p>
+</li>
+<li>
+<p>Select <span class="bold">Seed Date &gt; Import/Export</span>.</p>
+</li>
+<li>
+<p>Select <code class="codeph">AuditServiceAM</code> in the wizard that is displayed. If it is not available, make sure to import it to your project.</p>
+</li>
+<li>
+<p>Click <span class="bold">OK</span>.</p>
+</li>
+</ul>
+<p>If you do not have access to, or know how to use the <code class="codeph">AuditServiceAM</code>, you can run this SQL example (using appropriate values).</p>
+<pre dir="ltr">
+describe fnd_audit_webapp_am;
+insert into fnd_audit_webapp_am values ('ApplCoreCRMDemo', 'oracle.apps.fnd.applcore.crmdemo.model.CrmDemoAM', sysdate, 'pjl', sysdate, 'pjl', 'pjl',1);
+commit;
+select * from fnd_audit_webapp_am;
+</pre></div>
+</li>
+<li class="stepexpand"><span>Enable Audit on the Base Table.</span>
+<div>
+<p>You need to create a shadow table for each base table that is being audited. To create the shadow table:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Open the <span class="bold">.table</span> file in JDeveloper.</p>
+</li>
+<li>
+<p>Right-click this object and select <span class="bold">Properties</span>.</p>
+</li>
+<li>
+<p>In the wizard that is displayed, select <span class="bold">User Properties</span>.</p>
+</li>
+<li>
+<p>In the list that is displayed on the right, scroll down to select the property <code class="codeph">Enable Audit</code> and set its value to <code class="codeph">Y</code>, as shown in <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-1098E7A3-C0B2-476B-A152-406135C8837C__BABIADAA">Figure 12-1</a>.</p>
+<div class="figure" id="GUID-1098E7A3-C0B2-476B-A152-406135C8837C__BABIADAA">
+<p class="titleinfigure">Figure 12-1 Setting Audit on a Table</p>
+<img width="1071" height="557" src="img/GUID-17E9E6AC-E73D-4944-B84D-9D9E8E5D8523-default.png" alt="Setting Audit on A Table" title="Setting Audit on A Table" /></div>
+<!-- class="figure" --></li>
+<li>
+<p>Save your changes.</p>
+</li>
+<li>
+<p>A new <span class="bold">.table</span> file will be created. This table will have an underscore (<span class="bold">_</span>) at the end of the name.</p>
+</li>
+<li>
+<p>Check in this new file.</p>
+</li>
+</ul>
+<p><span class="bold">Note:</span> If your base table is enabled for multi tenant, make the same changes for the shadow table.</p>
+</div>
+</li>
+<li class="stepexpand" id="GUID-1098E7A3-C0B2-476B-A152-406135C8837C__BABJHDFH"><span>Set the Shadow Table Name on the entity object.</span>
+<div>
+<p>When a shadow table has been created, set this name on your base table <code class="codeph">EO.xml</code> file as a schema-based property.</p>
+<pre dir="ltr">
+Property Name - "FND_AUDIT_TABLENAME"
+Property Value - Shadow table name created in step 4.
+ 
+&lt;Properties&gt;
+  &lt;SchemaBasedProperties&gt;
+    &lt;fnd:FND_AUDIT_TABLENAME
+         Value="FND_SERVICE_REQUESTS_"/&gt;
+  &lt;/SchemaBasedProperties&gt;
+&lt;/Properties&gt;
+</pre></div>
+</li>
+<li class="stepexpand" id="GUID-1098E7A3-C0B2-476B-A152-406135C8837C__BABJEJAD"><span>Determine which business objects of each application module may be audited. When the business objects are identified, set a non-translatable schema-based property, named FND_AUDIT_ENABLED, on it with <code class="codeph">Name="Auditable"</code> and <code class="codeph">Value="Y"</code>. Only when this property is set will the business object be shown in the Audit Setup UI for auditing. This follows an opt-in policy.</span>
+<div>
+<pre dir="ltr">
+&lt;Properties&gt;
+  &lt;SchemaBasedProperties&gt;
+  &lt;fnd:FND_AUDIT_ENABLED
+       Value="true"/&gt;
+  &lt;/SchemaBasedProperties&gt;
+&lt;/Properties&gt;
+</pre></div>
+</li>
+<li class="stepexpand"><span>Determine which attributes of each business object you <span class="italic">do</span> want to audit and which ones you <span class="italic">do not</span> want to audit. By default:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>Attributes with a schema-based property called <code class="codeph">FND_AUDIT_ATTR_ENABLED</code> and <code class="codeph">Value="false"</code> will not be shown in the attribute selection dialog (see <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-747A4155-9AB1-4336-8570-8954B0EE14D1__BABCEAGA">Figure 12-4</a>).</p>
+</li>
+<li>
+<p>Attributes that are history columns are not shown (for example: Created By, Creation Date, Last Updated By)</p>
+</li>
+<li>
+<p>Attributes with a schema-based property called <code class="codeph">FND_AUDIT_ATTR_ENABLED</code> and <code class="codeph">Value="true"</code> are on by default if the view object is audited. In the attribute selection dialog (see <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-747A4155-9AB1-4336-8570-8954B0EE14D1__BABCEAGA">Figure 12-4</a>), these attributes will be displayed on the right (selected) side of the shuttle.</p>
+</li>
+<li>
+<p>If no value is set, the attribute will be available for selection in the attribute selection dialog (see <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-747A4155-9AB1-4336-8570-8954B0EE14D1__BABCEAGA">Figure 12-4</a>).</p>
+</li>
+</ul>
+<pre dir="ltr">
+&lt;Entity
+  xmlns="http://xmlns.oracle.com/bc4j"
+  xmlns:fnd="http://xmlns.oracle.com/apps/entityview"
+...
+&lt;ViewAttribute
+  Name="Attribute1"
+  IsUpdateable="false"
+  PrecisionRule="true"
+  EntityAttrName="Attribute1"
+  EntityUsage="AttributeEO"
+  AliasName="ROWID"&gt;
+  &lt;Properties&gt;
+    &lt;SchemaBasedProperties&gt;
+      &lt;fnd:FND_AUDIT_ATTR_ENABLED
+           Value="false"/&gt;
+    &lt;/SchemaBasedProperties&gt;
+  &lt;/Properties&gt;
+&lt;/ViewAttribute&gt;
+&lt;ViewAttribute
+  Name="Attribute2"
+  IsUpdateable="false"
+  PrecisionRule="true"
+  EntityAttrName="Attribute2"
+  EntityUsage="AttributeEO"
+  AliasName="ROWID"&gt;
+  &lt;Properties&gt;
+    &lt;SchemaBasedProperties&gt;
+      &lt;fnd:FND_AUDIT_ATTR_ENABLED
+           Value="true"/&gt;
+    &lt;/SchemaBasedProperties&gt;
+  &lt;/Properties&gt;
+&lt;/ViewAttribute&gt;
+</pre></div>
+</li>
+<li class="stepexpand"><span>Define user-friendly names for application modules, business objects and attributes.</span>
+<div>
+<p>To have a user-friendly display name for all application modules, business objects and attribute names, the <code class="codeph">label</code> property for each must be set. For application modules and business objects, you should add a <code class="codeph">tooltip</code>, since the <code class="codeph">tooltip</code> will be shown in the Audit Setup UI and also will give the administrator further information on the business objects and application module. The <code class="codeph">label</code> and <code class="codeph">tooltip</code> are available as properties.</p>
+<p>The following shows an example for a view object:</p>
+<pre dir="ltr">
+&lt;Properties&gt;
+  &lt;SchemaBasedProperties&gt;
+    &lt;fnd:FND_AUDIT_ENABLED
+         Value="true"/&gt;
+    &lt;LABEL
+      ResId="ViewObjectVO_LABEL"/&gt;
+    &lt;TOOLTIP
+      ResId="ViewObjectVO_TOOLTIP"/&gt;
+  &lt;/SchemaBasedProperties&gt;
+&lt;/Properties&gt;
+&lt;ResourceBundle&gt;
+  &lt;XliffBundle
+    id="oracle.apps.fnd.applcore.audit.test.model.view.common.ViewObjectVOMsgBundle"/&gt;
+&lt;/ResourceBundle&gt;
+</pre>
+<p>The following shows an example for an attribute. Set the <code class="codeph">Label</code> property under the <span class="bold">UI Hints</span> in the property inspector for an attribute.</p>
+<pre dir="ltr">
+&lt;ViewAttribute
+  Name="TableName"
+  PrecisionRule="true"
+  EntityAttrName="TableName"
+  EntityUsage="FndAuditAttributesEO"
+  AliasName="TABLE_NAME"&gt;
+  &lt;Properties&gt;
+    &lt;SchemaBasedProperties&gt;
+      &lt;LABEL
+         ResId="TableName_LABEL"/&gt;
+    &lt;/SchemaBasedProperties&gt;
+  &lt;/Properties&gt;
+&lt;/ViewAttribute&gt;
+</pre></div>
+</li>
+<li class="stepexpand" id="GUID-1098E7A3-C0B2-476B-A152-406135C8837C__BABJJHIF"><span>Enable a User Key.</span>
+<div>
+<p>The User Key is the value that will appear in the Description field in the Audit Reports. See <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-517562C5-662C-454C-A153-7BF963D46F09__CIHDDGIB">Figure 12-5</a>.</p>
+<p>If you need to be able to search based on a key other than the primary key of the view object, then you need to set a schema-based property called <code class="codeph">FND_AUDIT_USER_KEY</code> on this attribute. This attribute must have a unique value and the new property should be set on only one attribute that is not the primary key. If you have a multi-part key, then you should use the one that is the most important as the User Key, and use the context name/value pairs for the others. Although end users may not be able to search down to just one item, they can see the context values to determine the ones in which they are interested.</p>
+<pre dir="ltr">
+&lt;ViewAttribute
+  Name="TableName"
+  IsUnique="true"
+  IsNotNull="true"
+  PrecisionRule="true"
+  EntityAttrName="TableName"
+  EntityUsage="FndTablesEO"
+  AliasName="TABLE_NAME"&gt;
+  &lt;Properties&gt;
+    &lt;SchemaBasedProperties&gt;
+      &lt;fnd:FND_AUDIT_USER_KEY
+           Value="true"/&gt;
+    &lt;/SchemaBasedProperties&gt;
+  &lt;/Properties&gt;
+&lt;/ViewAttribute&gt;
+</pre></div>
+</li>
+<li class="stepexpand"><span>Configure lookups on the User Key attribute.</span>
+<div>
+<p>Foreign Key lookup can be configured on the User Key attribute. To do so, configure the User Key attribute and then configure the Foreign Key lookup. In addition, the annotation listed below needs to be mentioned at View Object level to derive the User Key from the lookup value (while a Description search is performed).</p>
+<p>The user key can be something other than a straight value. This is accomplished by allowing more tags to be used with the <code class="codeph">FND_AUDIT_USER_KEY</code> tag:</p>
+<pre dir="ltr">
+&lt;fnd:FND_AUDIT_USER_KEY Value="true"/&gt;
+&lt;fnd:FND_AUDIT_FK_VIEWOBJECT Value=" "/&gt;
+&lt;fnd:FND_AUDIT_FK_DISPLAYATTR Value=" "/&gt;
+&lt;fnd:FND_AUDIT_FK_WHEREATTR Value=" "/&gt;
+&lt;fnd:FND_AUDIT_FK_WHEREATTR_ADDL Value=""/&gt;
+&lt;fnd:FND_AUDIT_VALUE_ADDL Value=" "/&gt;
+&lt;fnd:FND_AUDIT_USERKEY_LKP_COND Value=" "/&gt; &lt;!-- This attribute <span class="italic">must</span> be used if the FK tags are used. --&gt;
+ 
+</pre>
+<p><span class="bold">Example</span></p>
+<p>Assume the <code class="codeph">PersonId</code> attribute is defined as the User Key and the Foreign Key lookup is defined on the User Key:</p>
+<pre dir="ltr">
+&lt;fnd:FND_AUDIT_USER_KEY Value="true"/&gt;
+&lt;fnd:FND_AUDIT_FK_VIEWOBJECT Value="abc.PersonVO"/&gt;       
+&lt;fnd:FND_AUDIT_FK_DISPLAYATTR Value="PersonName"/&gt;
+&lt;fnd:FND_AUDIT_FK_WHEREATTR Value="PersonId"/&gt;
+&lt;fnd:FND_AUDIT_USERKEY_LKP_COND Value="SELECT PERSON_ID FROM PERSONS WHERE PERSON_NAME LIKE ?"/&gt;
+</pre></div>
+</li>
+<li class="stepexpand"><span>Configure custom objects.</span>
+<div>
+<p>For custom business objects, identify the application module to which the custom business objects belong and add this to the metadata table as defined in step <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-1098E7A3-C0B2-476B-A152-406135C8837C__BABJEJAD">5</a>. Define the <code class="codeph">FND_AUDIT_ENABLED</code> property as shown in step <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-1098E7A3-C0B2-476B-A152-406135C8837C__BABJHDFH">4</a> on the custom business objects. If entity objects also are generated at a customer instance, set the property mentioned in step <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-1098E7A3-C0B2-476B-A152-406135C8837C__BABJHDFH">4</a>.</p>
+</div>
+</li>
+<li class="stepexpand"><span>If needed, configure the attribute lookup based on the <code class="codeph">FND_LOOKUPS</code> table.</span>
+<div>
+<p>For columns that show raw data of lookup codes instead of the meaning (such as "A034" instead of "washing machine"), you can specify annotation across the attribute specifying its lookup type. Audit Report internally queries the <code class="codeph">FND_LOOKUPS</code> table for that <code class="codeph">lookup_type</code> to show the column meaning. The schema-based property to use is <code class="codeph">FND_AUDIT_LOOKUP_TYPE</code> as shown below:</p>
+<pre dir="ltr">
+&lt;ViewAttribute
+Name="ProblemDescription"IsNotNull="true"PrecisionRule="true"EntityAttrName="ProblemDescription"
+  EntityUsage="ServiceRequestsEO"AliasName="PROBLEM_DESCRIPTION"&gt;&amp;#160;&amp;#160;
+  &lt;Properties&gt;
+    &lt;SchemaBasedProperties&gt;
+      &lt;fnd:FND_AUDIT_LOOKUP_TYPE
+           Value="AHL_PLANNING_VISIT_TYPE"/&gt;
+    &lt;/SchemaBasedProperties&gt;
+  &lt;/Properties&gt;
+&lt;/ViewAttribute&gt;
+</pre></div>
+</li>
+<li class="stepexpand"><span>If needed, configure context descriptive attributes to show context attributes that define the context of a changed record.</span>
+<div>
+<p>A maximum of 3 context descriptive attributes can be defined for a given view object. If context attributes were defined for both parent and child view objects, the report will show parent context information for parent records, and child context information for child records.</p>
+<p>Each context attribute must be defined with an annotation similar to that shown in the example but that has <code class="codeph">FND_AUDIT_CONTEXT2</code> and <code class="codeph">FND_AUDIT_CONTEXT3</code> as its prefix.</p>
+<p>If you need an additional WHERE condition to derive the context attribute value, you can use the _ADDL annotations, as shown in the example.</p>
+<pre dir="ltr">
+&lt;ViewObject ...
+  &lt;Properties&gt;
+    &lt;CustomProperties&gt;
+      &lt;Property Name="AUDIT_CONTEXT1_VIEWOBJECT" Value=""/&gt; &lt;!&mdash;fully qualified view object name, optional for same view --&gt;
+      &lt;Property Name="AUDIT_CONTEXT1_DISPLAYATTR" Value=""/&gt; &lt;!-attribute of lookup view to display-&gt;
+      &lt;Property Name="AUDIT_CONTEXT1_WHEREATTR" Value=""/&gt; &lt;!-attribute of lookup view to apply WHERE condition-&gt;
+      &lt;Property Name="AUDIT_CONTEXT1_KEYATTR" Value=""/&gt; &lt;!- attribute of base view for WHERE condition key-&gt;
+        &lt;!- composite key specification - start-&gt;
+        &lt;Property Name="AUDIT_CONTEXT1_WHEREATTR_ADDL" Value=" "/&gt; &lt;!-attribute of lookup view to apply additional WHERE condition -&gt;
+        either &lt;Property Name="AUDIT_CONTEXT1_VALUE_ADDL" Value=" "/&gt;  &lt;!- for hardcoded value -&gt;
+        or       &lt;Property Name="AUDIT_CONTEXT1_KEYATTR_ADDL" Value=""/&gt;  &lt;!- attribute of base view for additional key-&gt;    
+        &lt;!- composite key specification - end-&gt;
+    &lt;/CustomProperties&gt;
+  &lt;/Properties&gt;
+&lt;/ViewObject&gt;
+</pre>
+<p><span class="bold">Example Use Case</span></p>
+<p>You want to specify Product as one of the context attributes for the Revenue view objects. But Product is composed of a composite key: InventoryItemId and InventoryOrgId.</p>
+<p>The specification will appear similar to:</p>
+<pre dir="ltr">
+&lt;ViewObject name="Revenue"...
+  &lt;Properties&gt;
+    &lt;CustomProperties&gt;
+      &lt;Property Name="AUDIT_CONTEXT1_VIEWOBJECT" Value="com.oracle&hellip;EgpSystemItemsVO"/&gt; 
+      &lt;Property Name=" AUDIT_CONTEXT1_DISPLAYATTR" Value="Description"/&gt;
+      &lt;Property Name="AUDIT_CONTEXT1_WHEREATTR" Value="InventoryOrgId"/&gt;
+      &lt;Property Name="AUDIT_CONTEXT1_KEYATTR="InventoryOrgId"/&gt;
+        &lt;!-- composite key specification - start--&gt;
+        &lt;Property Name="AUDIT_CONTEXT1_WHEREATTR_ADDL" Value="InventoryItemId"/&gt;
+        &lt;Property Name="AUDIT_CONTEXT1_KEYATTR_ADDL" Value="InventoryItemId"/&gt;  &lt;!-- for additional key attr --&gt;    
+        &lt;!-- composite key specification - end--&gt;
+    &lt;/CustomProperties&gt;
+  &lt;/Properties&gt;
+&lt;/ViewObject&gt;
+</pre>
+<p>The SQL statement that will be generated will be:</p>
+<pre dir="ltr">
+SELECT Description from &lt;table used by EgpSystemItemsVO&gt; where (InventoryOrgId = Revenue.InventoryOrgId) AND (InventoryItemId = Revenue.InventoryItemId)
+</pre></div>
+</li>
+<li class="stepexpand" id="GUID-1098E7A3-C0B2-476B-A152-406135C8837C__BABEFFJD"><span>If needed, configure attribute lookup based on Foreign Key tables.</span>
+<div>
+<p>This works the same as Configure Attribute Lookup Based on the FND_LOOKUPS table, but is not limited to the FND_LOOKUPS table.</p>
+<pre dir="ltr">
+&lt;ViewObject ...
+&lt;ViewAttribute Name="OWNER"IsNotNull="true"PrecisionRule="true"EntityAttrName="Owner"EntityUsage="ServiceRequestsEO"AliasName="Owner"&gt;
+&lt;Properties&gt;
+  &lt;SchemaBasedProperties&gt;
+    &lt;fnd:FND_AUDIT_FK_VIEWOBJECT Value=" "/&gt;
+    &lt;fnd:FND_AUDIT_FK_DISPLAYATTR Value=" "/&gt;
+    &lt;fnd:FND_AUDIT_FK_WHEREATTR Value=" "/&gt;
+ 
+    &lt;fnd:FND_AUDIT_FK_WHEREATTR_ADDL Value=""/&gt;
+    either &lt;fnd:FND_AUDIT_VALUE_ADDL Value=" "/&gt;
+    or &lt;fnd:FND_AUDIT_KEYATTR_ADDL Value=""/&gt;
+  &lt;/SchemaBasedProperties&gt;
+&lt;/Properties&gt;
+&lt;/ViewAttribute&gt;
+&lt;/ViewObject&gt;
+</pre></div>
+</li>
+<li class="stepexpand"><span>If needed, define View Criteria on Business Objects to filter the display of view objects. For instance, a table might be shared by three applications, and you need to filter based on only one of the applications.</span>
+<div>
+<p>Simple query-based View Criteria:</p>
+<pre dir="ltr">
+&lt;ViewObject ...
+  &lt;Properties&gt;
+    &lt;SchemaBasedProperties&gt;
+      &lt;fnd:FND_AUDIT_VIEWCRITERIA_DBOBJECT Value=""/&gt;
+      &lt;fnd:FND_AUDIT_VIEWCRITERIA_CONDITION Value=""/&gt;
+    &lt;/SchemaBasedProperties&gt;
+ &lt;/Properties&gt;
+&lt;/ViewObject&gt;
+</pre>
+<p>Complex query-based View Criteria:</p>
+<pre dir="ltr">
+&lt;ViewObject ...
+  &lt;Properties&gt;
+    &lt;SchemaBasedProperties&gt;
+      &lt;fnd:FND_AUDIT_VIEWCRITERIA_DBOBJECT Value=""/&gt;
+      &lt;fnd:FND_AUDIT_VIEWCRITERIA_KEYCOL Value=""/&gt;
+      &lt;fnd:FND_AUDIT_VIEWCRITERIA_KEYATTR Value=""/&gt;
+    &lt;/SchemaBasedProperties&gt;
+  &lt;/Properties&gt;
+&lt;/ViewObject&gt;
+</pre></div>
+</li>
+<li class="stepexpand"><span>If needed, force writing attributes to the Shadow Table.</span>
+<div>
+<p>The FND_AUDIT_FORCE_WRITE property co-exists with the normal audit properties.</p>
+<p>Product teams may want to write certain attributes to the shadow table all the time, even if the attribute is not enabled for auditing. This could be because Virtual Private Datasource policy is set up on the attribute, or the attribute participated in a WHERE condition. This sample code shows how to enable force writing of the attributes:</p>
+<pre dir="ltr">
+&lt;ViewAttribute
+  Name="TableName"
+  IsUnique="true"
+  IsNotNull="true"
+  PrecisionRule="true"
+  EntityAttrName="TableName"
+  EntityUsage="FndTablesEO"
+  AliasName="TABLE_NAME"&gt;
+  &lt;Properties&gt;
+    &lt;SchemaBasedProperties&gt;
+      &lt;fnd:FND_AUDIT_FORCE_WRITE
+      Value="true"/&gt;
+    &lt;/SchemaBasedProperties&gt;
+  &lt;/Properties&gt;
+&lt;/ViewAttribute&gt;
+</pre>
+<ul style="list-style-type: disc;">
+<li>
+<p>If the property value is set to "true," and the attribute is not enabled for audit, it will not appear in the audit reports (unless it also is defined as the user key, context attribute, and so on).</p>
+</li>
+<li>
+<p>If the property value is set to "true," and the attribute is enabled for audit, it will only appear when the value changes.</p>
+</li>
+</ul>
+<pre dir="ltr">
+&lt;Properties&gt;
+  &lt;SchemaBasedProperties&gt;
+    &lt;fnd:FND_AUDIT_FORCE_WRITE
+         Value="true"/&gt;
+  &lt;/SchemaBasedProperties&gt;
+&lt;/Properties&gt;
+</pre>
+<p>Note that when a search is conducted on a view object, then the search result will include rows from even the child view objects.</p>
+</div>
+</li>
+<li class="stepexpand"><span>If needed, exclude a view object from a search in the Audit Report.</span>
+<div>
+<p>The Audit Reports UI contains a search query panel in which a user can select a particular Product from the Product LOV and then filter the search further by selecting a view object from the Business Object LOV.</p>
+<p>The fnd:FND_AUDIT_REPORT_EXCLUDE audit annotation provides the ability to exclude a particular view object from the Business Object LOV, even if it may be marked as auditable. This is required for use cases in which a view object without the context of its parent will not make sense, so developers can expose the parent object and hide the children.</p>
+<pre dir="ltr">
+&lt;ViewObject
+xmlns="http://xmlns.oracle.com/bc4j"
+xmlns:fnd="http://xmlns.oracle.com/apps/entityview"
+...
+&lt;Properties&gt;
+   &lt;SchemaBasedProperties&gt;
+      &lt;fnd:FND_AUDIT_ENABLED
+      Value="true"/&gt;
+      &lt;fnd:FND_AUDIT_REPORT_EXCLUDE
+      Value="true"/&gt;
+   &lt;/SchemaBasedProperties&gt;
+&lt;/Properties&gt;
+</pre></div>
+</li>
+<li class="stepexpand"><span>If needed, configure custom display names for Context attribute names.</span>
+<div>
+<p>The custom display name of the Context attribute name in an Audit Report can be configured by using the annotation fnd:FND_AUDIT_CONTEXT1_LABEL_ID. The value provided to this annotation must be a resource ID in the resource bundle of the view object in which these context annotations are defined. If the annotation is not used, then the display name of the context view attribute itself is displayed in the Audit Report.</p>
+<pre dir="ltr">
+&lt;ViewObject ...
+&lt;Properties&gt;
+  &lt;SchemaBasedProperties&gt;
+    &lt;fnd:FND_AUDIT_CONTEXT1_VIEWOBJECT Value=""/&gt;
+    &lt;fnd:FND_AUDIT_CONTEXT1_DISPLAYATTR Value=""/&gt;
+    &lt;fnd:FND_AUDIT_CONTEXT1_WHEREATTR Value=""/&gt;
+    &lt;fnd:FND_AUDIT_CONTEXT1_KEYATTR Value=""/&gt;
+    &lt;fnd:FND_AUDIT_CONTEXT1_LABEL_ID Value=""/&gt;
+  &lt;/SchemaBasedProperties&gt;
+&lt;/Properties&gt;
+&lt;/ViewObject&gt;
+</pre>
+<p>The custom display name can be configured to each Context attribute by using the FND_AUDIT_CONTEXT2_LABEL_ID and FND_AUDIT_CONTEXT3_LABEL_ID annotations.</p>
+</div>
+</li>
+<li class="stepexpand"><span>If needed, configure lookups on the User Key attribute.</span>
+<div>
+<p>A Foreign Key lookup can be configured on a User Key attribute. Configure a User Key attribute as described in step <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-1098E7A3-C0B2-476B-A152-406135C8837C__BABJJHIF">8</a>. Then configure a Foreign Key lookup as described in step <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-1098E7A3-C0B2-476B-A152-406135C8837C__BABEFFJD">13</a>. Include this annotation at the view object level to derive a User Key from the lookup value while a Description search is performed.</p>
+<pre dir="ltr">
+&lt;ViewObject ...
+&lt;Properties&gt;
+  &lt;SchemaBasedProperties&gt;
+    ....
+    &lt;fnd:FND_AUDIT_USERKEY_LKP_COND Value="&lt;condition&gt;"/&gt;
+  &lt;/SchemaBasedProperties&gt;
+&lt;/Properties&gt;
+&lt;/ViewObject&gt;
+</pre>
+<p><span class="bold">Example</span></p>
+<p>Assume that the PersonId attribute is defined as a User Key, and Foreign Key lookup is defined on the User Key, as shown here:</p>
+<pre dir="ltr">
+&lt;fnd:FND_AUDIT_FK_VIEWOBJECT Value="abc.PersonVO"/&gt;
+&lt;fnd:FND_AUDIT_FK_DISPLAYATTR Value="PersonName"/&gt;
+&lt;fnd:FND_AUDIT_FK_WHEREATTR Value="PersonId"/&gt;
+</pre>
+<p>Define the User Key lookup condition as shown here:</p>
+<pre dir="ltr">
+&lt;ViewObject ...
+&lt;Properties&gt;
+   &lt;SchemaBasedProperties&gt;
+   ....
+     &lt;fnd:FND_AUDIT_USERKEY_LKP_COND Value="SELECT PERSON_ID FROM PERSONS WHERE PERSON_NAME LIKE ?"/&gt;
+   &lt;/SchemaBasedProperties&gt;
+&lt;/Properties&gt;
+&lt;/ViewObject&gt;
+</pre></div>
+</li>
+<li class="stepexpand"><span>If needed, you can hide a view object under an application module in the Audit Setup UI</span>
+<div>
+<p>If the view object contains the audit annotation <code class="codeph">&lt;fnd:FND_AUDIT_ENABLED Value="true"/&gt;</code>, it will be displayed in the Setup UI. However, there are cases in which the view object that is owned by a different team is present under the application module and the user is not interested in seeing it under the application module in the Setup UI.</p>
+<p>For example, when Oracle Fusion CRM creates custom objects, it also creates an Attachment object as its child, by default. However, they do not want to see the Attachment object in the Setup UI. Since the Attachment view object is an FND object and is not owned by Oracle Fusion CRM, there is no way for them to remove the <code class="codeph">fnd:FND_AUDIT_ENABLED</code> annotation from it.</p>
+<p>The annotation shown here can be specified in the application module which is registered for audit in the <code class="codeph">fnd_audit_webapp_am</code> table. The user is expected to provide a comma-separated list of all view object names that is present in the Data Model of the application module and needs to be hidden in the Audit Setup UI. With this, in place the listed view objects and their children, if any, will be hidden.</p>
+<pre dir="ltr">
+&lt;AppModule...
+&lt;Properties&gt;
+    ...
+    &lt;CustomProperties&gt;
+      &lt;Property Name="fnd:FND_AUDIT_SETUP_HIDE_VIEWOBJECT_LIST"
+                Value = 'oracle.apps.fnd.applcore.audit.setup.view.FndTablespacesVO'/&gt;
+   &lt;/CustomProperties&gt;
+&lt;Properties&gt;
+&lt;/AppModule&gt;
+</pre></div>
+</li>
+<li class="stepexpand"><span>If needed, support audit-specific Data Security view criteria in a view object</span>
+<div>
+<p>Audit considers the Data Security privilege for Business Object instances when specified in application modules (using view criteria in the format of <code class="codeph">FNDDS_privilegeNameobjectName_objectAlias</code>) or if specified at the Entity level by enabling the "read" privilege in the Security section.</p>
+<p>If, for any reason, this cannot be done, audit supports the annotation shown here that allows the Data Security privilege to be specified in the view object. Audit History will consider this view object-level privilege as first priority.</p>
+<pre dir="ltr">
+&lt;ViewObject ...
+ &lt;Properties&gt;
+    &lt;SchemaBasedProperties&gt;
+        ....
+        &lt;fnd:FND_AUDIT_DS_VIEWCRITERIA
+          Value="FNDDS__read__FND_CRM_CASES__QRSLT,FNDDS__read__FND_CRM_CASES__CasesEO"/&gt;
+    &lt;/SchemaBasedProperties&gt;
+  &lt;/Properties&gt;
+&lt;/ViewObject&gt;
+</pre></div>
+</li>
+<li class="stepexpand"><span>If needed, there is audit support for PL/SQL-based Data Manipulation Language (DML) operations</span>
+<div>
+<p>Audit maintains a history of changes done to business objects in <span>Oracle Fusion Applications</span>.</p>
+<p>During business transaction flows based on ADF Business Components, audited attribute values are stored in shadow tables. Audit automatically extends product transactions without needing to change product team code or business flows. For transaction flows using PL/SQL, data is not automatically saved to the shadow table. The changes shown here must be made in the PL/SQL procedures that write to the base tables.</p>
+<p><span class="bold">API Signature</span></p>
+<pre dir="ltr">
+-------------------------------------------------------------------------------
+-- Type tr_data will contain data for only one of the variables based on the column's data type.
+-- If the column is varchar, varchar2_value needs to be set.
+-------------------------------------------------------------------------------
+ TYPE tr_data IS RECORD(
+    varchar2_value  VARCHAR2(4000),
+    number_value    NUMBER,
+    date_value      DATE,
+    timestamp_value TIMESTAMP);
+ 
+ TYPE tr_column_data IS RECORD(
+       column_name VARCHAR2(30),
+       column_type VARCHAR2(30),
+       old_data    tr_data,
+       new_data    tr_data);
+ 
+ TYPE tt_columns_data is table of tr_column_data INDEX BY BINARY_INTEGER;
+ 
+-------------------------------------------------------------------------------
+-- get_audited_columns function returns the list of columns enabled for auditing for the passed in base table.
+-- Parameters
+--  p_base_table_name - pass the base table name on which the DML Operation occured
+-------------------------------------------------------------------------------
+ FUNCTION get_audited_columns (p_base_table_name IN VARCHAR2) RETURN tt_column_names;
+ 
+-------------------------------------------------------------------------------
+-- Create_Audit_Row method writes to the audit shadow table
+-- Parameters
+-- p_base_table_name- pass the base table name on which the DML Operation occured
+-- p_event_type     - pass "INSERT", "UPDATE", or "DELETE" based on the DML operation on base table
+-- p_audit_data     - pass a table structure with each row(tr_column_data) contain the column,
+--                    its type and old and new value. All the columns returned from  get_audited_columns needs to be passed.
+--                    Additionally all the who columns (created_by, creation_date, last_update_date, last_updated_by,
+--                    last_update_login needs to be passed. In case of INSERT, only new data needs to be passed
+--                    and in case of DELETE, only old data. In case of UPDATE, pass both the old and new
+--                    value even for attributes that are not changed.
+------------------------------------------------------------------------------------------------------------------------
+ PROCEDURE create_audit_row(
+    p_base_table_name IN VARCHAR2,
+    p_event_type IN VARCHAR2,
+    p_audit_data IN tt_columns_data);
+</pre>
+<p><span class="bold">Coding Steps</span></p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Check if the table is enabled for Auditing</p>
+<pre dir="ltr">
+FND_AUDIT_UTIL.is_table_audited(
+p_base_table_name in varchar2(30)  // input parameter - base table name
+) return varchar2(5)               // returns "true" or "false"
+</pre>
+<p>If the API returns <code class="codeph">false</code>, do nothing.</p>
+</li>
+<li>
+<p>If the table is audited and the DML type is <code class="codeph">INSERT</code> for the base table, call the PL/SQL API, passing in all the values as new values.</p>
+<pre dir="ltr">
+declare
+  tt FND_AUDIT_UTIL.tt_columns_data;
+  p_base_table_name varchar2(30);
+ 
+begin
+  p_base_table_name := 'FND_LOOKUP_TYPES';
+ 
+  if (FND_AUDIT_UTIL.is_table_audited(p_base_table_name) = 'false') then
+    return;
+  end if;
+ 
+  tt(1).column_name := 'CUSTOMIZATION_LEVEL';
+  tt(1).column_type := 'VARCHAR2';
+  tt(1).new_data.varchar2_value := 'U';
+ 
+  tt(2).column_name := 'ENTERPRISE_ID';
+  tt(2).column_type := 'NUMBER';
+  tt(2).new_data.NUMBER_value := '0';
+ 
+  tt(3).column_name := 'LOOKUP_TYPE';
+  tt(3).column_type := 'VARCHAR2';
+  tt(3).new_data.varchar2_value := 'TEST11';
+ 
+  tt(4).column_name := 'MODULE_ID';
+  tt(4).column_type := 'VARCHAR2';
+  tt(4).new_data.varchar2_value := '40B3FA7250D19380E040449823C67A1A';
+ 
+  tt(5).column_name := 'VIEW_APPLICATION_ID';
+  tt(5).column_type := 'NUMBER';
+  tt(5).new_data.NUMBER_value := '0';
+ 
+  tt(6).column_name := 'CREATED_BY';
+  tt(6).column_type := 'VARCHAR2';
+  tt(6).new_data.varchar2_value := 'ADMIN';
+ 
+  tt(7).column_name := 'LAST_UPDATED_BY';
+  tt(7).column_type := 'VARCHAR2';
+  tt(7).NEW_data.varchar2_value := 'ADMIN';
+ 
+  tt(8).column_name := 'CREATION_DATE';
+  tt(8).column_type := 'TIMESTAMP';
+  tt(8).new_data.timestamp_value := sysdate-10; 
+ 
+  tt(9).column_name := 'LAST_UPDATE_DATE';
+  tt(9).column_type := 'TIMESTAMP';
+  tt(9).new_data.timestamp_value := sysdate-10; 
+ 
+FND_AUDIT_UTIL.CREATE_AUDIT_ROW(
+    p_base_table_name,
+    'INSERT',
+    tt);
+end; 
+</pre></li>
+<li>
+<p>If the table is audited and the DML type is <code class="codeph">UPDATE</code>, call the PL/SQL API to get a list of audit-enabled attributes.</p>
+<pre dir="ltr">
+TYPE tt_column_names  IS TABLE OF VARCHAR2(30) INDEX BY BINARY_INTEGER;
+ 
+FND_AUDIT_UTIL.get_audited_columns(
+p_base_table_name in varchar2(30)  // input parameter - base table name
+) return tt_column_names
+</pre>
+<p>If any column that is updated in the current transaction is in the list returned from get_audited_columns, get the value for all the other columns in the table and call the PL/SQL API. Note that you need to pass in values (old and new) for all the columns returned from the get_audited_columns() function, and also for all the who columns, even if the values have not changed.</p>
+<pre dir="ltr">
+declare
+  tt FND_AUDIT_UTIL.tt_columns_data;
+  p_base_table_name varchar2(30);
+  col_list  FND_AUDIT_UTIL.tt_column_names;
+  l_col_change_found varchar2(30);
+begin
+  p_base_table_name := 'FND_LOOKUP_TYPES';
+  l_col_change_found := 'false';
+ 
+  if (FND_AUDIT_UTIL.is_table_audited(p_base_table_name) = 'false') then
+    return;
+  end if;
+ 
+  col_list := FND_AUDIT_UTIL.get_audited_columns(p_base_table_name);
+ 
+  -- assuming here that only customization_level has changed
+  FOR i IN 1 .. col_list.count LOOP
+    IF (col_list(i) = 'CUSTOMIZATION_LEVEL') THEN
+      l_col_change_found := 'true';
+    END IF;
+  END LOOP;
+ 
+  --if you dont have all the values, query the rest of the values from your base table
+  --then pass the same value for old and new value.
+  --if the old or new value is blank, audit code will assume that the value has been cleared out.
+ 
+  if (l_col_change_found := 'true') THEN
+        tt(1).column_name := 'CUSTOMIZATION_LEVEL';
+        tt(1).column_type := 'VARCHAR2';
+        tt(1).old_data.varchar2_value := 'U';
+        tt(1).new_data.varchar2_value := 'S';
+ 
+        tt(2).column_name := 'ENTERPRISE_ID';
+        tt(2).column_type := 'NUMBER';
+        tt(2).old_data.NUMBER_value := '0';
+        tt(2).new_data.NUMBER_value := '0';
+ 
+        tt(3).column_name := 'LOOKUP_TYPE';
+        tt(3).column_type := 'VARCHAR2';
+        tt(3).old_data.varchar2_value := 'TEST11';
+        tt(3).new_data.varchar2_value := 'TEST11';
+ 
+        tt(4).column_name := 'MODULE_ID';
+        tt(4).column_type := 'VARCHAR2';
+        tt(4).old_data.varchar2_value := '40B3FA7250D19380E040449823C67A1A';
+        tt(4).new_data.varchar2_value := '40B3FA7250D19380E040449823C67A1A';
+ 
+        tt(5).column_name := 'VIEW_APPLICATION_ID';
+        tt(5).column_type := 'NUMBER';
+        tt(5).old_data.NUMBER_value := '0';
+        tt(5).new_data.NUMBER_value := '0';
+ 
+        tt(6).column_name := 'CREATED_BY';
+        tt(6).column_type := 'VARCHAR2';
+        tt(6).old_data.varchar2_value := 'ADMIN';
+        tt(6).new_data.varchar2_value := 'ADMIN';
+ 
+        tt(7).column_name := 'LAST_UPDATED_BY';
+        tt(7).column_type := 'VARCHAR2';
+        tt(7).old_data.varchar2_value := 'ADMIN';
+        tt(7).new_data.varchar2_value := 'APPLICATION_ADMINISTRATOR';
+ 
+        tt(8).column_name := 'CREATION_DATE';
+        tt(8).column_type := 'TIMESTAMP';
+        tt(8).old_data.timestamp_value := sysdate -10;
+        tt(8).new_data.timestamp_value := sysdate-10;  
+ 
+        tt(9).column_name := 'LAST_UPDATE_DATE';
+        tt(9).column_type := 'TIMESTAMP';
+        tt(9).old_data.timestamp_value := sysdate -10;
+        tt(9).new_data.timestamp_value := sysdate;  
+ 
+    FND_AUDIT_UTIL.CREATE_AUDIT_ROW(
+            p_base_table_name,
+            'UPDATE',
+            tt);
+    END IF;        
+end; 
+</pre></li>
+<li>
+<p>If the table is audited and the DML type is <code class="codeph">DELETE</code> for the base table, call PL/SQL API, passing in all the values (as old values) from the base table.</p>
+<pre dir="ltr">
+declare
+  tt FND_AUDIT_UTIL.tt_columns_data;
+  p_base_table_name varchar2(30);
+ 
+begin
+  p_base_table_name := 'FND_LOOKUP_TYPES';
+ 
+  if (FND_AUDIT_UTIL.is_table_audited(p_base_table_name) = 'false') then
+    return;
+  end if;
+ 
+  tt(1).column_name := 'CUSTOMIZATION_LEVEL';
+  tt(1).column_type := 'VARCHAR2';
+  tt(1).old_data.varchar2_value := 'S';
+ 
+  tt(2).column_name := 'ENTERPRISE_ID';
+  tt(2).column_type := 'NUMBER';
+  tt(2).old_data.NUMBER_value := '0';
+ 
+  tt(3).column_name := 'LOOKUP_TYPE';
+  tt(3).column_type := 'VARCHAR2';
+  tt(3).old_data.varchar2_value := 'TEST11';
+ 
+  tt(4).column_name := 'MODULE_ID';
+  tt(4).column_type := 'VARCHAR2';
+  tt(4).old_data.varchar2_value := '40B3FA7250D19380E040449823C67A1A';
+ 
+  tt(5).column_name := 'VIEW_APPLICATION_ID';
+  tt(5).column_type := 'NUMBER';
+  tt(5).old_data.NUMBER_value := '0';
+ 
+  tt(6).column_name := 'CREATED_BY';
+  tt(6).column_type := 'VARCHAR2';
+  tt(6).old_data.varchar2_value := 'ADMIN';
+ 
+  tt(7).column_name := 'LAST_UPDATED_BY';
+  tt(7).column_type := 'VARCHAR2';
+  tt(7).old_data.varchar2_value := 'APPLICATION_ADMINISTRATOR';
+ 
+  tt(8).column_name := 'CREATION_DATE';
+  tt(8).column_type := 'TIMESTAMP';
+  tt(8).old_data.timestamp_value := sysdate -10;
+ 
+  tt(9).column_name := 'LAST_UPDATE_DATE';
+  tt(9).column_type := 'TIMESTAMP';
+  tt(9).old_data.timestamp_value := sysdate;
+ 
+FND_AUDIT_UTIL.CREATE_AUDIT_ROW(
+    p_base_table_name,
+    'DELETE',
+    tt);
+end; 
+</pre></li>
+</ul>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<a id="OADEV66688"></a><a id="OADEV66689"></a><a id="OADEV66690"></a><a id="OADEV66691"></a><a id="OADEV66692"></a><a id="OADEV66687"></a>
+<div class="props_rev_3"><a id="GUID-747A4155-9AB1-4336-8570-8954B0EE14D1"></a>
+<h3 id="OADEE-GUID-747A4155-9AB1-4336-8570-8954B0EE14D1" class="sect3"><span class="enumeration_section">12.2.2</span> How to Set Up Auditing</h3>
+<div>
+<p>As with most Oracle Fusion applications, Audit setup is done from <span id="GUID-747A4155-9AB1-4336-8570-8954B0EE14D1__FSMSHORT">Functional Setup Manager</span>. When you start the setup, search in <span>Functional Setup Manager</span> for "Audit." When it is located, select Audit Setup.</p>
+<p>A list of <span id="GUID-747A4155-9AB1-4336-8570-8954B0EE14D1__FAAPPS">Oracle Fusion applications</span> is displayed, as shown in <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-747A4155-9AB1-4336-8570-8954B0EE14D1__BABCAHDI">Figure 12-2</a>.</p>
+<div class="figure" id="GUID-747A4155-9AB1-4336-8570-8954B0EE14D1__BABCAHDI">
+<p class="titleinfigure">Figure 12-2 Initial Audit Setup Display</p>
+<img width="730" height="461" src="img/GUID-7088D559-9C34-41D2-B130-1F95DB0C9452-default.png" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" -->
+<p>You will notice that some have only an Audit Level drop-down list that lets you pick Low, Medium or High levels. These are <span id="GUID-747A4155-9AB1-4336-8570-8954B0EE14D1__FMW">Oracle Fusion Middleware</span> products that generate event-based entries in the table that is read by the Audit system, and the user just sets the granularity that is desired. (Refer to the product documentation and to the online help for a description of how the levels work in each particular product.)</p>
+<p>In the example figure, click the <span class="bold">Configure Business Object Attributes</span> button to display the Configure Business Objects Attributes dialog. When it first displays, the fields will be empty.</p>
+<p>To populate the Objects list, open the Application drop-down list and select the name of the application you want to audit. The example shown in <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-747A4155-9AB1-4336-8570-8954B0EE14D1__BABBJACH">Figure 12-3</a> uses the Applications Core Setup application.</p>
+<div class="figure" id="GUID-747A4155-9AB1-4336-8570-8954B0EE14D1__BABBJACH">
+<p class="titleinfigure">Figure 12-3 Selecting an Application to Audit</p>
+<img width="872" height="391" src="img/GUID-C97493B9-6BBB-4C72-91DF-833B60856357-default.png" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" -->
+<p>There are three buttons at the top of the Configure Business Object Attributes dialog:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Click <span class="bold">Save</span> to save your work and remain in the Audit Setup dialog.</p>
+</li>
+<li>
+<p>Click <span class="bold">Save and Close</span> to save your work and exit the Audit Setup dialog.</p>
+</li>
+<li>
+<p>Click <span class="bold">Cancel</span> to cancel any changes you have made since the last Save action and exit the Audit Setup dialog.</p>
+</li>
+</ul>
+<div class="section">
+<p class="subhead3">Objects List</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>The Objects list has three columns:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Audit</span></p>
+<p>There is no limit to the number of levels that can be included in an audit.</p>
+<p>You will notice that items with the same name are displayed and can be selected. The item at the top of the tree is the root item; the other listed items of the same name are reflections of the root item and are not separate. That is, if a view object appears multiple times in the Setup list, there really is only one view object. Selecting or deselecting <span class="italic">any</span> instance of that view object will select or deselect <span class="italic">all</span> instances.</p>
+<p><span class="bold">Example:</span></p>
+<p>You pick a view object and select five of its attributes to audit and save. If you then choose the same view object, but somewhere else in the setup UI, it will have those five attributes already selected. Now select two more, so that there are seven attributes selected. When you return to the first instance of the view object, it also will show seven attributes selected.</p>
+<p>Similarly, if you delete one of the five selected attributes, all instances of the affected view object will show only four selected attributes.</p>
+<p>Another way of saying this is "last edit wins."</p>
+<p>Any item that is checked in the Audit column will have all its selected attributes audited. Unless the view objects' Attributes list has been edited, the attributes that will be audited are default attributes.</p>
+<p>If you edit a view object to select specific attributes, the Audit box must still be checked to audit the selected attributes. (You can edit the attributes, but that, by itself, does not mean they will be included in an audit, unless the Audit box is checked.)</p>
+</li>
+<li>
+<p><span class="bold">Name</span></p>
+<p>The names of the application modules and view objects.</p>
+</li>
+<li>
+<p><span class="bold">Description</span></p>
+<p>A brief description of the associated application module or view object.</p>
+</li>
+</ul>
+<p>The Objects list has two menus.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Actions menu</span></p>
+<p>The Actions menu provides the <span class="bold">Synchronize</span> option.</p>
+<p>Attributes of objects that are being audited are tracked. On a patch or update, or if customized attributes, such as flexfield attributes, have been added, they must be tracked if they are meant to be included in the audit. That is, the attribute was marked as <code class="codeph">&lt;fnd:FND_AUDIT_ATTR_ENABLED Value="true"/&gt;</code>. Synchronize will do this.</p>
+<p><span class="bold">Note:</span> Synchronization is carried out by product. That is, it will synchronize <span class="italic">all</span> objects in the current product shown in the UI, if those objects have been selected for audit at any time previously.</p>
+<p>Flexfield and custom attributes are always included by default (<code class="codeph">&lt;fnd:FND_AUDIT_ATTR_ENABLED Value="true"/&gt;</code>), so with these you want to be sure to do a synchronization.</p>
+</li>
+<li>
+<p><span class="bold">View menu</span></p>
+<p>Use the View menu to select the columns you want to display, and to expand and collapse entries in various combinations.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead3">Audited Attributes List</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>When you click a view object entry in the Objects list, its attributes that will be included in an audit are displayed in the Audited Attributes fields. Note that the name of the selected object is added before the Audited Attributes heading; for example Document Entities: Audited Attributes.</p>
+<div class="infobox-note" id="GUID-747A4155-9AB1-4336-8570-8954B0EE14D1__GUID-2CE7D3A8-E56D-4EF8-AC62-80FDBFE23EEE">
+<p class="notep1">Note:</p>
+<p>The permitted limit on selected attributes is 20,000 bytes (num_attributes x attribute_size) for a given view object in the Audit Setup UI. This limit is checked during setup. Note that custom text attributes are pre-allocated with 1,500 chars per field. Therefore, it would only take 13 Text fields to consume the available character width.</p>
+</div>
+<p>These are not necessarily all the attributes of the selected view object; they either are the default attributes or the attributes selected during a previous edit. To see a list of all a view object's attributes, select <span class="bold">Actions &gt; Create</span>, or click the <span class="bold">Create</span> icon. A dialog, similar to that shown in <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-747A4155-9AB1-4336-8570-8954B0EE14D1__BABCEAGA">Figure 12-4</a>, lists all the attributes and lets you shuttle them between the Available Attributes and the Selected Attributes.</p>
+<div class="figure" id="GUID-747A4155-9AB1-4336-8570-8954B0EE14D1__BABCEAGA">
+<p class="titleinfigure">Figure 12-4 Selecting Attributes to Audit</p>
+<img width="400" height="250" src="img/GUID-00CCA343-2CBE-46A9-94AD-1C9F84C1C2F0-default.png" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" -->
+<p>Click <span class="bold">Save and Close</span> to save your selections. Remember that your selections will not be included in an audit unless the related Audit checkbox also is selected.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+</div>
+<a id="OADEV65094"></a><a id="OADEV65098"></a>
+<div class="props_rev_3"><a id="GUID-517562C5-662C-454C-A153-7BF963D46F09"></a>
+<h2 id="OADEE-GUID-517562C5-662C-454C-A153-7BF963D46F09" class="sect2"><span class="enumeration_section">12.3</span> Using Audit Reports</h2>
+<div>
+<p>Open Audit Reports from the Navigator menu.</p>
+<p>The Audit Reports Search page, shown in <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-517562C5-662C-454C-A153-7BF963D46F09__CIHDDGIB">Figure 12-5</a>, is displayed.</p>
+<div class="figure" id="GUID-517562C5-662C-454C-A153-7BF963D46F09__CIHDDGIB">
+<p class="titleinfigure">Figure 12-5 Default Audit Reports Display</p>
+<img width="756" height="391" src="img/GUID-3D849AF8-7ED2-48B4-BED5-05A10468E7D1-default.png" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" -->
+<p>To perform a search, a Date value and <span class="italic">either</span> a User or Product value are required. Use the Date picker to select the date, and the drop-down lists to select a User or a Product or both. The search results can be further fine-tuned by using the Event Type, Business Object and Description fields, and the Include child objects checkbox.</p>
+<div class="infobox-note" id="GUID-517562C5-662C-454C-A153-7BF963D46F09__GUID-3267591B-6D2B-47B1-80BB-C215A7B7CDB5">
+<p class="notep1">Note:</p>
+<p>These parameters can be saved and recalled by selecting the user-supplied name in the Saved Search drop-down list. See also<span class="q">"<a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-F892AE08-5DE1-40E5-9C87-34E0D3066751__BABJJHHC">If the search parameter set you are using is one that you expect to reuse, click Save to display the Create Saved Search dialog that has these options:</a>"</span></p>
+</div>
+</div>
+<a id="OADEV66694"></a><a id="OADEV66695"></a><a id="OADEV66696"></a><a id="OADEV66850"></a><a id="OADEV66693"></a>
+<div class="props_rev_3"><a id="GUID-F892AE08-5DE1-40E5-9C87-34E0D3066751"></a>
+<h3 id="OADEE-GUID-F892AE08-5DE1-40E5-9C87-34E0D3066751" class="sect3"><span class="enumeration_section">12.3.1</span> How to Search in Audit Reports</h3>
+<div>
+<p>To search for Audit Reports for an <span id="GUID-F892AE08-5DE1-40E5-9C87-34E0D3066751__FAAPP">Oracle Fusion application</span>, you must supply this information:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Date</span>. Select an operator, such as Equals, Before, After or Between, and click the picker to display a calendar from which to choose a date.</p>
+</li>
+<li>
+<p><span class="bold">User</span> or <span class="bold">Product</span> or both.</p>
+<p>When you use the drop-down to select a User, you will notice a <span class="bold">Search</span> link at the bottom of the list. Click it to access all the available Users. The dialog, shown in <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-F892AE08-5DE1-40E5-9C87-34E0D3066751__BABEHDHF">Figure 12-6</a>, is displayed.</p>
+<div class="figure" id="GUID-F892AE08-5DE1-40E5-9C87-34E0D3066751__BABEHDHF">
+<p class="titleinfigure">Figure 12-6 Searching for a User</p>
+<img width="594" height="296" src="img/GUID-45B5B497-6484-481C-8B66-B9494C8B1D71-default.png" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" -->
+<p>You can enter a name or part of a name in the User field and click <span class="bold">Search</span>. You also can click <span class="bold">Advanced</span> to add a search operators drop-down list, as shown in <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-F892AE08-5DE1-40E5-9C87-34E0D3066751__BABBJGIB">Figure 12-7</a>.</p>
+<div class="figure" id="GUID-F892AE08-5DE1-40E5-9C87-34E0D3066751__BABBJGIB">
+<p class="titleinfigure">Figure 12-7 User Name Operators</p>
+<img width="176" height="203" src="img/GUID-12AF1488-E103-4952-B27C-8227349E4543-default.png" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" -->
+<p>To select a user, highlight the name in the search results, shown in <a href="GUID-538FA810-8D8F-412F-B3C6-CF9AC027A137.htm#GUID-F892AE08-5DE1-40E5-9C87-34E0D3066751__BABEBJBE">Figure 12-8</a>, and click <span class="bold">OK</span>.</p>
+<div class="figure" id="GUID-F892AE08-5DE1-40E5-9C87-34E0D3066751__BABEBJBE">
+<p class="titleinfigure">Figure 12-8 Search Results for User</p>
+<img width="570" height="303" src="img/GUID-1DAE1DCC-6221-4FF2-AD8D-B7DE10623455-default.png" alt="Described in the surrounding text." title="Described in the surrounding text." /></div>
+<!-- class="figure" --></li>
+<li>
+<p><span class="bold">Event Type</span>. Note that the first drop-down list always is set to Equals. Use the second drop-down list to select any or a combination of the available types. You also can select All.</p>
+<p>For <span id="GUID-F892AE08-5DE1-40E5-9C87-34E0D3066751__FAAPPS">Oracle Fusion applications</span>, the Types are Object Data Insert, Object Data Update, and Object Data Delete.</p>
+<p>For <span id="GUID-F892AE08-5DE1-40E5-9C87-34E0D3066751__FMW">Oracle Fusion Middleware</span>, the Type selection is dynamic and depends on the selected Product.</p>
+</li>
+<li>
+<p><span class="bold">Business Object Type</span>. Note that this field applies only to <span>Oracle Fusion applications</span> and not to <span>Oracle Fusion Middleware</span>.</p>
+</li>
+<li>
+<p><span class="bold">Description</span>. You can further limit the search results display by entering a string in this field that matches a string in the Description column of the search results.</p>
+</li>
+<li>
+<p><span class="bold">Include child objects</span>. If there is a hierarchy of view objects, such as Opportunity &gt; Revenue Line &gt; Revenue Line Split, and the search is done on Opportunity, it only checks the Opportunity view object for changes. But if this option is checked, it will search all children. So if an Opportunity has five Revenue Lines and each has some Revenue Line Splits, then if anything in any of them changed, they also would be reported.</p>
+</li>
+</ul>
+<p>When the necessary fields are filled-in, click <span class="bold">Search</span> to display the results in the Search Results table.</p>
+<div class="infobox-note" id="GUID-F892AE08-5DE1-40E5-9C87-34E0D3066751__GUID-F24A9298-41A6-44DC-AB1C-90425B0333F4">
+<p class="notep1">Note:</p>
+<p>When a search is performed for broad criteria, such as "Specific Product Before Today" or "All Products Before Today," Audit Report may take a long time to query Audit History.</p>
+<p>To avoid intermittent connection reset errors, <span class="italic">the search time is limited to 5 minutes</span>. If the History search time exceeds 5 minutes, this message is displayed: "Query run time exceeded the permissible time limit and failed to display results. Refine the search criteria and try again."</p>
+</div>
+<div class="section">
+<p class="subhead3">Deleting an Object Referenced by a Foreign Key</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>In some instances, resolving a foreign key may fail when an audit row display name is trying to do a foreign key lookup of an object that has been deleted. It then will display the raw value or just leave it blank.</p>
+<p>One example of this behavior involves trying to get a foreign key resolution from the same base object. If rows were deleted from an object, there will not be a row in the base table and foreign key resolution may fail.</p>
+<p>Another example involves foreign key resolution with a parent table. For instance, given a person object, a person email object may use foreign key resolution to show a person's name instead of a person ID. If the person's name has been deleted in the base table, the foreign key resolution for the person email object may fail because there is no row in the corresponding base table.</p>
+<p>Click <span class="bold">Reset</span> to clear all the fields so you can enter new search parameters.</p>
+<p id="GUID-F892AE08-5DE1-40E5-9C87-34E0D3066751__BABJJHHC">If the search parameter set you are using is one that you expect to reuse, click <span class="bold">Save</span> to display the Create Saved Search dialog that has these options:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Name</span></p>
+<p>This option is mandatory.</p>
+<p>This field defaults to showing the name that is displayed in the Saved Search field. However, if the Saved Search displayed name is "My Recent Changes," the Name field here will show "My Recent Changes copy."</p>
+</li>
+<li>
+<p><span class="bold">Set as Default</span></p>
+<p>Select this option to designate this named set of search parameters as the default instead of My Recent Changes.</p>
+<p>This option can be set and cleared by opening the Saved Search drop-down list and selecting Personalize.</p>
+</li>
+<li>
+<p><span class="bold">Run Automatically</span></p>
+<p>Select this option to run this named set of search parameters automatically.</p>
+<p>This option can be set and cleared by opening the Saved Search drop-down list and selecting Personalize.</p>
+</li>
+<li>
+<p><span class="bold">Show in Search List</span></p>
+<p>This option is available only from the Saved Search Personalize option, and is active only for the My Recent Changes named search.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" --></div>
+<a id="OADEV66698"></a><a id="OADEV66697"></a>
+<div class="props_rev_3"><a id="GUID-336F9952-148A-4947-B38F-5C2DBF9E3881"></a>
+<h4 id="OADEE-GUID-336F9952-148A-4947-B38F-5C2DBF9E3881" class="sect4"><span class="enumeration_section">12.3.1.1</span> Using the Search Results Table</h4>
+<div>
+<p>The Search Results table has these components:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Actions menu</p>
+</li>
+<li>
+<p>Export to Excel icon that duplicates the function of the Actions menu option of the same name</p>
+</li>
+<li>
+<p>Detach icon</p>
+</li>
+<li>
+<p>Show Attribute Details checkbox. This option becomes active when the Business Object Type field is populated <span class="italic">and</span> a search has been performed.</p>
+<p>When this option is selected, a dropdown list lets you select either All Attributes or Select Attribute.</p>
+<div class="figure" id="GUID-336F9952-148A-4947-B38F-5C2DBF9E3881__GUID-6E487766-4D5A-4165-8E79-B21D167116EC">
+<p class="titleinfigure">Figure 12-9 Attribute Scope Selection</p>
+<img width="443" height="172" src="img/GUID-C0190793-740A-4005-9EF0-ED681CEFAE01-default.png" alt="An image of the dropdown list allowing the user to select All Attributes or Select Attribute." title="An image of the dropdown list allowing the user to select All Attributes or Select Attribute." /></div>
+<!-- class="figure" -->
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">All Attributes</span></p>
+<p>When this option is selected, three columns are added to the table: Attribute, Old Value and New Value. Attribute contains the attribute name. An Old Value will be shown if there was an old value. New Value shows the current value. A scroll bar will become available at the bottom of the display so you can view all the columns.</p>
+</li>
+<li>
+<p><span class="bold">Select Attribute</span></p>
+<p>Select this option when you want the information for only one specific attribute. When selected, a popup similar to this example is displayed.</p>
+<div class="figure" id="GUID-336F9952-148A-4947-B38F-5C2DBF9E3881__GUID-96E3BDAD-A01E-4684-B287-0A80578A9C0B">
+<p class="titleinfigure">Figure 12-10 Select a Specific Attribute</p>
+<img width="432" height="285" src="img/GUID-070C4AE6-E0B5-48F0-975B-F8900731FD8E-default.png" alt="An example of the popup window displayed when the Select Attribute option has been chosen." title="An example of the popup window displayed when the Select Attribute option has been chosen." /></div>
+<!-- class="figure" -->
+<p>You must click the Business Object to populate the Select Attribute list.</p>
+<p>Click <span class="bold">OK</span> to apply the change to the table.</p>
+<p>The search results table now shows only results with the selected attribute, plus the Old Value and New Value columns that are shown when the All Attributes option is selected</p>
+</li>
+</ul>
+</li>
+<li>Show Extended Object Identifier Columns checkbox.
+<p>When this option is selected, three new pairs of columns are added to the Search Results table: Context Name1 with Context Value1 through Context Name3 with Context Value3. These are additional information to help identify the object. For instance, if you need a 4-part key to uniquely identify an object, the Description could be 1 and these 3 context values could be the remaining.</p>
+</li>
+</ul>
+<p>Note that when a search is conducted on a view object, the search result also will include rows from the child view objects.</p>
+<div class="section">
+<p class="subhead3">Actions Menu</p>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p>The Actions menu has the Export to Excel option that is duplicated with the Export to Excel icon. Select the menu option or click the icon to export all the entries in the Search Results list to an Excel XLS file. When this option is selected, the standard Save prompts will guide you through the process.</p>
+</div>
+<!-- class="section" --></div>
+</div>
+</div>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment533">
+<tr>
+<td class="cellalignment570">
+<table class="cellalignment538">
+<tr>
+<td class="cellalignment537"><a href="GUID-9D40DB38-7DDA-44FD-A278-CCA777417F53.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment537"><a href="GUID-AAACC1F7-CD9B-4BEA-85E3-85A023073C2E.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2011, 2016, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment572">
+<table class="cellalignment536">
+<tr>
+<td class="cellalignment537"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment537"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

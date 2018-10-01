@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>Configuring Projects GL Reconciliation Solution for E-Business Suite 11.5.10</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="Projects GL Reconciliation solution is supported by default for E-Business Suite V12 and PeopleSoft V90 adaptors. To support this solution for E-Business Suite V11510 adaptor, you must perform the steps below. These steps include adding a join in the PLP GL reconciliation ODI interfaces" />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-AD893D93-9ED6-4CF6-822B-1ED616D2310C.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-FD8E9A6C-8252-434B-AE01-0932244EB8E2.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-66275057-8CA5-4A13-B69D-0D6397752642"></a> <span id="PAGE" style="display:none;">97/336</span> <!-- End Header -->
+<a id="IT_290"></a>
+<h1 id="BIAFC-GUID-66275057-8CA5-4A13-B69D-0D6397752642" class="sect1">Configuring Projects GL Reconciliation Solution for E-Business Suite 11.5.10</h1>
+<div>
+<p>Projects GL Reconciliation solution is supported by default for E-Business Suite V12 and PeopleSoft V90 adaptors. To support this solution for E-Business Suite V11510 adaptor, you must perform the steps below. These steps include adding a join in the PLP GL reconciliation ODI interfaces</p>
+<div class="section">
+<div class="infobox-note" id="GUID-66275057-8CA5-4A13-B69D-0D6397752642__GUID-B50413E7-C6D3-478E-B61E-77BE7B8431C7">
+<p class="notep1">Note:</p>
+The additional join is required for E-Business Suite V11510 adaptor because sub-ledger accounting was introduced from E-Business Suite V12 onwards and the joins between Projects and GL source tables in E-Business Suite V11510 and V12 are different.</div>
+<p>To Configure Projects GL Reconciliation Solution for E-Business Suite 11.5.10:</p>
+</div>
+<!-- class="section" -->
+<ol>
+<li class="stepexpand"><span>In ODI Designer Navigator, connect to your ODI repository.</span></li>
+<li class="stepexpand"><span>Navigate to <span class="bold">BI Apps Project</span>, then <span class="bold">Mappings</span>, then <span class="bold">PLP</span>, then <span class="bold">PLP_Project_GLReconciliationFact</span>.</span>
+<div>
+<div class="figure" id="GUID-66275057-8CA5-4A13-B69D-0D6397752642__GUID-1A027BBF-7D09-49E7-AAE4-192E1B1BB950"><img width="579" height="484" src="img/GUID-C450D72A-C7EA-4B63-BCCD-93C7CE0D2932-default.gif" alt="Description of GUID-C450D72A-C7EA-4B63-BCCD-93C7CE0D2932-default.gif follows" title="Description of GUID-C450D72A-C7EA-4B63-BCCD-93C7CE0D2932-default.gif follows" /><br />
+<a href="img_text/GUID-C450D72A-C7EA-4B63-BCCD-93C7CE0D2932-default.htm">Description of the illustration GUID-C450D72A-C7EA-4B63-BCCD-93C7CE0D2932-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Before making any changes, right-click the PLP_Project_GLReconciliationFact folder and create a version of existing folder.</span>
+<div>
+<div class="figure" id="GUID-66275057-8CA5-4A13-B69D-0D6397752642__GUID-2479795D-ACF8-413A-B656-8E77273893C2"><img width="619" height="423" src="img/GUID-86AE04C6-BCCD-42CF-BFA4-57F094004D42-default.gif" alt="Description of GUID-86AE04C6-BCCD-42CF-BFA4-57F094004D42-default.gif follows" title="Description of GUID-86AE04C6-BCCD-42CF-BFA4-57F094004D42-default.gif follows" /><br />
+<a href="img_text/GUID-86AE04C6-BCCD-42CF-BFA4-57F094004D42-default.htm">Description of the illustration GUID-86AE04C6-BCCD-42CF-BFA4-57F094004D42-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Enter description: <kbd class="userinput">Before adding GL Account join for 11510 source</kbd>, then click <span class="bold">OK</span>.</span>
+<div>
+<div class="figure" id="GUID-66275057-8CA5-4A13-B69D-0D6397752642__GUID-F5A4660E-6C86-4B52-B9F9-B0368971895B"><img width="465" height="429" src="img/GUID-7D8501EF-BD57-4A5B-AC4F-42A709740DE9-default.gif" alt="Description of GUID-7D8501EF-BD57-4A5B-AC4F-42A709740DE9-default.gif follows" title="Description of GUID-7D8501EF-BD57-4A5B-AC4F-42A709740DE9-default.gif follows" /><br />
+<a href="img_text/GUID-7D8501EF-BD57-4A5B-AC4F-42A709740DE9-default.htm">Description of the illustration GUID-7D8501EF-BD57-4A5B-AC4F-42A709740DE9-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="stepexpand"><span>Modify the following three temp interfaces:</span>
+<div>
+<ul style="list-style-type: disc;">
+<li>
+<p>PLP_Project_GLReconciliationFact.SQ_AGG_CDL_AMOUNTS</p>
+</li>
+<li>
+<p>PLP_Project_GLReconciliationFact.SQ_W_PROJ_GL_RECNCLIATION_F_A ("Cost Distributions with mismatch" dataset)</p>
+</li>
+<li>
+<p>PLP_Project_GLReconciliationFact.SQ_W_PROJ_GL_RECNCLIATION_F_U</p>
+</li>
+</ul>
+</div>
+<ol>
+<li class="substepexpand"><span>Navigate to <span class="bold">BI Apps Project</span>, then <span class="bold">Mappings</span>, then <span class="bold">PLP</span>, then <span class="bold">PLP_Project_GLReconciliationFact</span>.</span></li>
+<li class="substepexpand"><span>Open the temp interface, then go to <span class="wintitle">Quick-Edit</span> tab.</span></li>
+<li class="substepexpand"><span>Expand Sources, then click <span class="bold">Add Sources</span>.</span>
+<div>
+<div class="figure" id="GUID-66275057-8CA5-4A13-B69D-0D6397752642__GUID-33C32BAD-D5F8-41C7-933F-12934C5AAE2B"><img width="739" height="151" src="img/GUID-23638AB5-54D7-4FC9-A076-C5A3C3D2414A-default.gif" alt="Description of GUID-23638AB5-54D7-4FC9-A076-C5A3C3D2414A-default.gif follows" title="Description of GUID-23638AB5-54D7-4FC9-A076-C5A3C3D2414A-default.gif follows" /><br />
+<a href="img_text/GUID-23638AB5-54D7-4FC9-A076-C5A3C3D2414A-default.htm">Description of the illustration GUID-23638AB5-54D7-4FC9-A076-C5A3C3D2414A-default.gif</a></div>
+<!-- class="figure" -->
+<p><span class="wintitle">Source Wizard</span> dialog box will open up. Click on Interfaces tab and search for LKP_W_GL_ACCOUNT_D. Select the lookup interface under PLP folder, give it an alias: LKP_W_GL_ACCOUNT_D, check the <span class="bold">Use Temporary Interface as Derived Table (Sub-Select)</span> option and click <span class="bold">OK</span>. Press <span class="bold">NO</span> when ODI prompts <samp class="sysout">"Do you want to perform Automatic Mapping?"</samp></p>
+<div class="figure" id="GUID-66275057-8CA5-4A13-B69D-0D6397752642__GUID-2BAA80C4-F43B-4FCF-BF37-DBE7FC818B95"><img width="278" height="533" src="img/GUID-282EA0F0-CD9F-419E-95D1-9239CB6D1D24-default.gif" alt="Description of GUID-282EA0F0-CD9F-419E-95D1-9239CB6D1D24-default.gif follows" title="Description of GUID-282EA0F0-CD9F-419E-95D1-9239CB6D1D24-default.gif follows" /><br />
+<a href="img_text/GUID-282EA0F0-CD9F-419E-95D1-9239CB6D1D24-default.htm">Description of the illustration GUID-282EA0F0-CD9F-419E-95D1-9239CB6D1D24-default.gif</a></div>
+<!-- class="figure" -->
+<span class="wintitle">Source Wizard</span> dialog box will open up.</div>
+</li>
+<li class="substepexpand"><span>Click on "Interfaces" tab and search for LKP_W_GL_ACCOUNT_D. Select the lookup interface under PLP folder, give it an alias: LKP_W_GL_ACCOUNT_D, check the "Use Temporary Interface as Derived Table (Sub-Select)" option and Click Ok. Press NO when ODI prompts "Do you want to perform Automatic Mapping?"</span></li>
+<li class="substepexpand"><span>Add two joins:</span>
+<div>
+<p>- A join between W_GL_LINKAGE_INFORMATION_G and LKP_W_GL_ACCOUNT_D.</p>
+<p>- A join between W_PROJ_COST_LINE_F and LKP_W_GL_ACCOUNT_D.</p>
+<ol>
+<li>
+<div class="p">Expand Joins section on Quick-Edit tab and click on <span class="bold">Add Joins</span>.
+<div class="figure" id="GUID-66275057-8CA5-4A13-B69D-0D6397752642__GUID-2354DB86-7114-4A1E-A62D-BC5225B7A896"><img width="749" height="103" src="img/GUID-B11EB0A2-E683-4970-A3D9-09EA2FB00A03-default.gif" alt="Description of GUID-B11EB0A2-E683-4970-A3D9-09EA2FB00A03-default.gif follows" title="Description of GUID-B11EB0A2-E683-4970-A3D9-09EA2FB00A03-default.gif follows" /><br />
+<a href="img_text/GUID-B11EB0A2-E683-4970-A3D9-09EA2FB00A03-default.htm">Description of the illustration GUID-B11EB0A2-E683-4970-A3D9-09EA2FB00A03-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li>
+<div class="p">Select <span class="bold">General Ledger Linkage Information</span> as Left Source and <span class="bold">LKP_W_GL_ACCOUNT_D</span> as Right Source. Join on fields:
+<pre dir="ltr">
+W_GL_LINKAGE_INFORMATION_G.GL_ACCOUNT_ID = LKP_W_GL_ACCOUNT_D.INTEGRATION_ID
+AND W_GL_LINKAGE_INFORMATION_G.DATASOURCE_NUM_ID = LKP_W_GL_ACCOUNT_D.DATASOURCE_NUM_ID
+</pre></div>
+</li>
+<li>
+<div class="p">Select Join Type as <span class="bold">Left Outer Join</span> and Click <span class="bold">OK</span>.
+<div class="figure" id="GUID-66275057-8CA5-4A13-B69D-0D6397752642__GUID-5DE06576-BC39-4369-B42C-600CFD27066A"><img width="737" height="477" src="img/GUID-3F6553A9-D98D-4F4C-96B3-7BB7A87C584F-default.gif" alt="Description of GUID-3F6553A9-D98D-4F4C-96B3-7BB7A87C584F-default.gif follows" title="Description of GUID-3F6553A9-D98D-4F4C-96B3-7BB7A87C584F-default.gif follows" /><br />
+<a href="img_text/GUID-3F6553A9-D98D-4F4C-96B3-7BB7A87C584F-default.htm">Description of the illustration GUID-3F6553A9-D98D-4F4C-96B3-7BB7A87C584F-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li>
+<div class="p">Click <span class="bold">Add Joins</span>. Select <span class="bold">W_PROJ_COST_LINE_F</span>as Left Source and <span class="bold">LKP_W_GL_ACCOUNT_D</span> as Right Source. Join on fields:
+<pre dir="ltr">
+W_PROJ_COST_LINE_F.COST_GL_ACCOUNT_WID=LKP_W_GL_ACCOUNT_D.ROW_WID
+AND W_PROJ_COST_LINE_F.CR_GL_ACCOUNT_WID=LKP_W_GL_ACCOUNT_D.ROW_WID
+</pre></div>
+</li>
+<li>
+<div class="p">Select join Type as <span class="bold">Inner Join</span> and Click <span class="bold">OK</span>.
+<div class="figure" id="GUID-66275057-8CA5-4A13-B69D-0D6397752642__GUID-795EA928-CCE6-4D17-9ED6-842140F22BB0"><img width="724" height="469" src="img/GUID-7A973587-8878-413D-BA1F-AC8816F8B0A5-default.gif" alt="Description of GUID-7A973587-8878-413D-BA1F-AC8816F8B0A5-default.gif follows" title="Description of GUID-7A973587-8878-413D-BA1F-AC8816F8B0A5-default.gif follows" /><br />
+<a href="img_text/GUID-7A973587-8878-413D-BA1F-AC8816F8B0A5-default.htm">Description of the illustration GUID-7A973587-8878-413D-BA1F-AC8816F8B0A5-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li>
+<div class="p">In the "Joins" section, scroll to right and "Edit" the newly added join between W_PROJ_COST_LINE_F and LKP_W_GL_ACCOUNT_D.
+<div class="figure" id="GUID-66275057-8CA5-4A13-B69D-0D6397752642__GUID-7E36DD5D-B34D-40B7-95F6-CEB05F337E67"><img width="735" height="120" src="img/GUID-6F9AC7E5-9302-4B33-8234-17E7808B77EC-default.gif" alt="Description of GUID-6F9AC7E5-9302-4B33-8234-17E7808B77EC-default.gif follows" title="Description of GUID-6F9AC7E5-9302-4B33-8234-17E7808B77EC-default.gif follows" /><br />
+<a href="img_text/GUID-6F9AC7E5-9302-4B33-8234-17E7808B77EC-default.htm">Description of the illustration GUID-6F9AC7E5-9302-4B33-8234-17E7808B77EC-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li>
+<div class="p">Edit the join condition to:
+<pre dir="ltr">
+W_PROJ_COST_LINE_F.COST_GL_ACCOUNT_WID = COALESCE(LKP_W_GL_ACCOUNT_D.ROW_WID,#ETL_UNSPEC_NUM)
+OR W_PROJ_COST_LINE_F.CR_GL_ACCOUNT_WID = COALESCE(LKP_W_GL_ACCOUNT_D.ROW_WID,#ETL_UNSPEC_NUM)
+</pre></div>
+</li>
+<li>
+<div class="p">Make sure you modify the join condition to OR apart from adding the COALESCE function. Click <span class="bold">OK</span>.
+<div class="figure" id="GUID-66275057-8CA5-4A13-B69D-0D6397752642__GUID-9C708DA8-EBBE-498D-8F0D-2AA81E89AF97"><img width="791" height="147" src="img/GUID-00985EF3-FE13-4157-9E3F-62BAADD0901B-default.gif" alt="Description of GUID-00985EF3-FE13-4157-9E3F-62BAADD0901B-default.gif follows" title="Description of GUID-00985EF3-FE13-4157-9E3F-62BAADD0901B-default.gif follows" /><br />
+<a href="img_text/GUID-00985EF3-FE13-4157-9E3F-62BAADD0901B-default.htm">Description of the illustration GUID-00985EF3-FE13-4157-9E3F-62BAADD0901B-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li>
+<div class="p">Check the <span class="bold">Ordered</span> check box for the Left Outer join between GL Linkage and GL Account lookup.
+<div class="figure" id="GUID-66275057-8CA5-4A13-B69D-0D6397752642__GUID-F5421A3A-19CA-49A6-B929-023416886FB9"><img width="746" height="109" src="img/GUID-BD5EA9DF-04B9-448C-98CF-B47B0A806B61-default.gif" alt="Description of GUID-BD5EA9DF-04B9-448C-98CF-B47B0A806B61-default.gif follows" title="Description of GUID-BD5EA9DF-04B9-448C-98CF-B47B0A806B61-default.gif follows" /><br />
+<a href="img_text/GUID-BD5EA9DF-04B9-448C-98CF-B47B0A806B61-default.htm">Description of the illustration GUID-BD5EA9DF-04B9-448C-98CF-B47B0A806B61-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+</ol>
+</div>
+</li>
+</ol>
+</li>
+<li class="stepexpand"><span>Save the interface.</span>
+<div>
+<p>Repeat the steps a. to e. for all the following three temp interfaces:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>PLP_Project_GLReconciliationFact.SQ_AGG_CDL_AMOUNTS</p>
+</li>
+<li>
+<p>PLP_Project_GLReconciliationFact.SQ_W_PROJ_GL_RECNCLIATION_F_A ("Cost Distributions with mismatch" dataset only. Do not add joins in "Journal Lines with mismatch" dataset)</p>
+</li>
+<li>
+<p>PLP_Project_GLReconciliationFact.SQ_W_PROJ_GL_RECNCLIATION_F_U</p>
+</li>
+</ul>
+</div>
+</li>
+<li class="stepexpand"><span>Regenerate the scenario.</span>
+<ol>
+<li class="substepexpand"><span>After all three temp interfaces are modified and saved, navigate to <span class="bold">PLP_Project_GLReconciliationFact</span>, then <span class="bold">Packages</span>, then <span class="bold">PLP_Project_GLReconciliationFact</span>, then <span class="bold">Scenarios</span>. Right-click scenario <span class="bold">PLP_PLP_PROJECT_GLRECONCILIATIONFACT</span> and click <span class="bold">Regenerate</span>.</span>
+<div>
+<div class="figure" id="GUID-66275057-8CA5-4A13-B69D-0D6397752642__GUID-1CC62F24-0AE3-43E9-A62C-EDC1BBC851F3"><img width="652" height="466" src="img/GUID-3D75494D-EF79-4A0F-A91D-718764883FAC-default.gif" alt="Description of GUID-3D75494D-EF79-4A0F-A91D-718764883FAC-default.gif follows" title="Description of GUID-3D75494D-EF79-4A0F-A91D-718764883FAC-default.gif follows" /><br />
+<a href="img_text/GUID-3D75494D-EF79-4A0F-A91D-718764883FAC-default.htm">Description of the illustration GUID-3D75494D-EF79-4A0F-A91D-718764883FAC-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="substepexpand"><span>On the <span class="wintitle">Regenerate</span> Scenario dialog box, click <span class="bold">OK</span>.</span>
+<div>
+<div class="figure" id="GUID-66275057-8CA5-4A13-B69D-0D6397752642__GUID-5ACA7F76-3928-4CA7-A7B8-C4A0858E2A38"><img width="369" height="175" src="img/GUID-0B0DA1B9-6724-45B2-A4A2-6D3FFF5A3970-default.gif" alt="Description of GUID-0B0DA1B9-6724-45B2-A4A2-6D3FFF5A3970-default.gif follows" title="Description of GUID-0B0DA1B9-6724-45B2-A4A2-6D3FFF5A3970-default.gif follows" /><br />
+<a href="img_text/GUID-0B0DA1B9-6724-45B2-A4A2-6D3FFF5A3970-default.htm">Description of the illustration GUID-0B0DA1B9-6724-45B2-A4A2-6D3FFF5A3970-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+<li class="substepexpand"><span>On <span class="wintitle">Scenario Variables</span> dialog, select <span class="bold">Use All</span> in the <span class="bold">Startup Parameters</span> drop down list, then click <span class="bold">OK</span>.</span>
+<div>
+<div class="figure" id="GUID-66275057-8CA5-4A13-B69D-0D6397752642__GUID-F97E5599-BC46-481D-8260-866E93154D5E"><img width="531" height="389" src="img/GUID-77C46011-86AB-48E4-B1A9-24982EB7DD15-default.gif" alt="Description of GUID-77C46011-86AB-48E4-B1A9-24982EB7DD15-default.gif follows" title="Description of GUID-77C46011-86AB-48E4-B1A9-24982EB7DD15-default.gif follows" /><br />
+<a href="img_text/GUID-77C46011-86AB-48E4-B1A9-24982EB7DD15-default.htm">Description of the illustration GUID-77C46011-86AB-48E4-B1A9-24982EB7DD15-default.gif</a></div>
+<!-- class="figure" --></div>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-AD893D93-9ED6-4CF6-822B-1ED616D2310C.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-FD8E9A6C-8252-434B-AE01-0932244EB8E2.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>

@@ -1,0 +1,2087 @@
+<!DOCTYPE html ><html lang="en">
+   <head><style> table.customlayout {table-layout:auto;} </style>
+      <meta charset="utf-8">
+      
+      <title>Person Security Profiles (Chapter 13) R12</title>
+      <meta content="all" name="robots" >
+      <meta content="yes" name="mos_crawl" >
+      <meta content="Securing Oracle HCM Cloud" name="dcterms.title">
+      <meta content="Securing Oracle HCM Cloud" name="doctitle">
+      <meta content="E73303-09" name="dcterms.identifier">
+      <meta content="E67730-01" name="partno">
+      <meta content="OCHUS" name="dcterms.isVersionOf" >
+      <meta content="Fusion Publishing Server, UAE Print Staging" name="generator" >
+      <meta content="Fri Feb 16 01:08:36 PST 2018" name="dcterms.created">
+      <meta name="relnum" content="Release 12">
+      <meta name="rel_num" content="Release 12">
+      <meta name="keywords" content="person security profiles;">
+      <link type="text/html" title="Home" href="../../index.html" rel="Start" >
+      <link type="text/html" title="Copyright" href="../dcommon/html/cpyr.htm" rel="Copyright">
+      <script src="../dcommon/js/headfoot.js" type="application/javascript"></script>
+      <script src="../nav/js/doccd.js" type="application/javascript"></script>
+      <link type="text/html" title="Contents" href="toc.htm" rel="Contents">
+      <link type="text/html" title="Previous" href="OCHUS1210218.htm
+      " rel="Prev">
+      <link type="text/html" title="Next" href="OCHUS1410655.htm
+      " rel="Next">
+      <link type="application/pdf" title="PDF version" href="OCHUS.pdf" rel="alternate">
+      <link type="application/epub+zip" title="ePub version" href="OCHUS.epub" rel="alternate">
+      <link rel="schema.dcterms" href="http://purl.org/dc/terms/">
+      <meta content="IE=edge" http-equiv="X-UA-Compatible">
+      <meta content="width=device-width, initial-scale=1.0, maximum-scale=1" name="viewport">
+      <link type="text/css" href="../dcommon/css/header.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/footer.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/fonts.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/foundation.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/codemirror.css" rel="stylesheet">
+      <link type="text/css" href="../nav/css/html5.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-480-tablet.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-768-laptop.css" rel="stylesheet">
+      <link type="text/css" href="../dcommon/css/respond-1140-deskop.css" rel="stylesheet">
+      <script src="../dcommon/js/modernizr.js" type="application/javascript"></script>
+      <script src="../dcommon/js/codemirror.js" type="application/javascript"></script>
+      <script src="../dcommon/js/jquery.js" type="application/javascript"></script>
+      <script src="../dcommon/js/foundation.min.js" type="application/javascript"></script>
+      <script src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-53addf516e0e58a5" type="application/javascript"></script>
+      <script src="../dcommon/js/jqfns.js" type="application/javascript"></script>
+      <script src="../dcommon/js/ohc-inline-videos.js" type="application/javascript"></script>
+      <meta class="foundation-mq-topbar">
+      <link type="text/css" href="../dcommon/css/Fusionapps_022016.css" rel="stylesheet">
+      
+      <meta name="description" content="Users who see the Contacts tab in the Manage Person work area can see a worker's contacts, unless the contacts are workers.
+      If a contact is a worker, then the contact's details are secured by person security profile. Personally identifiable information
+      (PII), such as phones and e-mails, isn't visible unless the user inherits the Manage Contact Person PII aggregate privilege."><script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+   <body><a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header></header>
+      <div class="row" id="CONTENT">
+         <div class="IND large-9 medium-8 columns">
+            <div id="EXTRATOC"><span class="italic">This guide also applies to on-premises implementations</span></div><span id="PAGE" style="display:none;">16/25</span><a name="BEGIN" id="BEGIN"></a><div id="OCHUS1410654" class="fusiondoc">
+               <h1 class="chapter"><span class="chapter-number">13</span>Person Security Profiles
+               </h1>
+               <p class="chapterintro">This chapter contains the following:</p>
+               <ul class="intro">
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2102132">Securing Person Records: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2094622">Securing Person Records by Area of Responsibility: Procedure</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS157089">Securing Person Records by Manager Hierarchy: Points to Consider</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS729518">Specifying the Manager Type: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1206876">Hierarchy Content: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS172748">Securing Person Records Using Custom Criteria: Examples</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS2403192">Tables and Views in Custom Criteria: Explained</a></p>
+                  </li>
+                  <li>
+                     <p class="guidemap_sub_chapter"><a href="#OCHUS1210298">FAQs for Person Security Profiles</a></p>
+                  </li>
+               </ul>
+               
+               <div class="sect1" id="OCHUS2102132">
+                  <h2>Securing Person Records: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>This topic describes ways of securing access
+                     to both public and managed person records. The recommended approaches minimize administration and
+                     improve security performance.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="OCHUS2102127">
+                     <h3 class="topictitle">Securing Public Person Records</h3>
+                     
+                     <p>Public person records are those that all workers
+                        must access in a worker directory, for example. Use the View All Workers
+                        predefined security
+                        profile to provide this access. View All Workers provides access
+                        to: 
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Employees, contingent workers, nonworkers, and pending workers</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>The signed-in user's own record</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Shared person information</p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>View All Workers doesn't provide access to future
+                        person records.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2102128">
+                     <h3 class="topictitle">Securing Person Records by Manager Hierarchy</h3>
+                     
+                     <p>Managers must access the person records of the workers
+                        in their manager hierarchies. To provide this access, you secure person
+                        records by manager hierarchy. Use the predefined View Manager Hierarchy
+                        security profile wherever possible. This table summarizes the View
+                        Manager Hierarchy security profile. The values shown here are also
+                        the default values for these fields.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Field
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Person or Assignment Level</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p><span class="uicontrol">Person</span></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Maximum Levels in Hierarchy</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>No maximum</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Manager Type</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p><span class="uicontrol">Line Manager</span></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Hierarchy Content</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p><span class="uicontrol">Manager Hierarchy</span></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>View Manager Hierarchy includes shared person information
+                        but not future person records.
+                     </p>
+                     
+                     <p>For nonstandard requirements, create custom person
+                        security profiles. For example, if your enterprise has a custom Project Manager job role, then you can
+                        create a security profile for that manager type. Include it in an HCM data role and
+                        provision that role to all users who have the Project Manager job
+                        role.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2102129">
+                     <h3 class="topictitle">Securing Person Records by Area of Responsibility</h3>
+                     
+                     <p>When you secure person records by area of responsibility,
+                        the set of records that a user can access is calculated dynamically.
+                        The calculation is based on the user's assigned areas of responsibility.
+                        This approach has several advantages:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>It reduces the number of person
+                              security profiles and HCM data roles that you must manage.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>It improves security performance.</p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>You don't have to update security
+                              profiles when responsibilities change.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>For example, consider these human resource (HR) specialists,
+                        who perform the same job role but for workers in different business units: 
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 HR Specialist
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Job Role
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Business Unit
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Fen Lee</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Human Resource Specialist</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>USA1 BU</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>John Gorman</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Human Resource Specialist</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>USA2 BU</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Jenna Markum</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Human Resource Specialist</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>USA3 BU</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>To provide access to person records in each business
+                        unit, you:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Define an area of responsibility
+                              for each HR specialist, where the scope of responsibility is the relevant
+                              business unit.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Create a single person security
+                              profile that restricts access by area of responsibility and where <span class="uicontrol">Scope of Responsibility</span> is <span class="uicontrol">Business unit</span>. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Create a single HCM data role to
+                              include the person security profile and assign it to all three HR
+                              specialists.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>This figure summarizes the approach.</p>
+                     <img src="img/hcm_few_dataroles_04_20057509.png" alt="Three users in different business units inherit&#xA;the same data role." class="fusappimg">
+                     
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        Scope of responsibility in a person security profile
+                        can be any one of several values, such as department or payroll. For
+                        users, define areas of responsibility based on a single scope value
+                        that you can also select in a person security profile.
+                        
+                     </div>
+                     
+                     <p>When you secure access to person records by area
+                        of responsibility, the user doesn't see all of the worker's assignments.
+                        Instead:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>For current workers, authorized
+                              users can see current and suspended assignments only. Access to terminated
+                              assignments, such as those that were active before a global transfer,
+                              is prevented.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>For terminated workers, authorized
+                              users can see the most recently terminated assignment only.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2312402">
+                     <h3 class="topictitle">Securing Access to Imported Candidates</h3>
+                     
+                     <p>You can secure access to the records of candidates
+                        imported from Oracle Taleo Recruiting Cloud Service. Set the <span class="uicontrol">Purpose</span> field in the Basic Details section
+                        of the person security profile to one of these values:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Imported Candidate Access</p>
+                        </li>
+                        
+                        <li>
+                           <p>Person and Imported Candidate Access</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>You can secure access to imported candidates by either
+                        area of responsibility or manager hierarchy.
+                     </p>
+                     
+                     <p>The <span class="uicontrol">Purpose</span> field
+                        is available only if the <span class="uicontrol">Recruiting Integration</span> enterprise option is set to one of these values:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Integrated with HCM Connect</p>
+                        </li>
+                        
+                        <li>
+                           <p>Fixed and Integrated with HCM Connect</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>Otherwise, the <span class="uicontrol">Purpose</span> field doesn't appear.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS2094622">
+                  <h2>Securing Person Records by Area of Responsibility: Procedure</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>In most cases, you secure access to person
+                     records by either manager hierarchy or area of responsibility. To
+                     secure by area of responsibility, you must first define areas of responsibility
+                     for relevant workers. This topic describes how to create a person security profile where access is secured by area of responsibility.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS2094661">
+                     <h3 class="topictitle">Defining the Person Security Profile</h3>
+                     
+                     <p>Follow these steps:</p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Setup
+                                    and Maintenance</span></span> to open the Setup and Maintenance
+                              work area.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Search for and select the <span class="uicontrol">Manage Person Security Profile</span> task.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>On the Manage Person Security Profiles
+                              page, click <span class="uicontrol">Create</span>. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>In the Basic Details section of
+                              the Create Person Security Profile page, enter a name for the security
+                              profile. Complete other fields in the Basic Details section, as appropriate.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>In the Area of Responsibility section,
+                              select <span class="uicontrol">Secure by area of responsibility</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select a <span class="uicontrol">Responsibility Type</span> value. For example, select <span class="uicontrol">Benefits representative</span> or <span class="uicontrol">Union representative</span>.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Select a <span class="uicontrol">Scope of Responsibility</span> value. For example, if you select <span class="uicontrol">Legal Employer</span>, then users can access person
+                              records in the legal
+                              employer for which they have the selected <span class="uicontrol">Responsibility Type</span>.
+                           </p>
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              An area of responsibility can be based on multiple
+                              scope values, for example, both legal employer and job. In this case, only one of those values
+                              must be matched by the security profile.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>All worker types are selected by
+                              default. Deselect any that don't apply. 
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Next</span>.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2094686">
+                     <h3 class="topictitle">Previewing the Person Security Profile</h3>
+                     
+                     <p>On the Create Person Security Profile: Preview page,
+                        you can test the access that your security profile provides before
+                        you save it. Follow these steps:
+                     </p>
+                     
+                     
+                     <ol>
+                        
+                        <li>
+                           <p>On the Person Access Preview tab,
+                              select a user and click <span class="uicontrol">Preview</span>. Typically, you select a user who has the area of responsibility
+                              that you identified when defining the security profile.
+                           </p>
+                           
+                           <ul>
+                              
+                              <li>
+                                 <p>The User Summary section of the
+                                    page is updated automatically to show the number of person records
+                                    that this user could access.
+                                 </p>
+                              </li>
+                              
+                              <li>
+                                 <p>The Assigned Areas of Responsibility
+                                    section of the tab shows the selected user's areas of responsibility.
+                                 </p>
+                                 
+                              </li>
+                              
+                           </ul>
+                           
+                           <div class="infobox-"><span class="notep1">Note: </span>
+                              The results from the Person Access Preview are based
+                              on the current person security profile only. Users may have roles
+                              that provide access to other person records.
+                              
+                           </div>
+                        </li>
+                        
+                        <li>
+                           <p>In the Search Person section of
+                              the tab, you can search for specific person records to which the security
+                              profile provides access. The search is within the set of person records
+                              that was identified when you clicked <span class="uicontrol">Preview</span> for the named user. For example, if the preview identified 50 person
+                              records, then the search is of those 50 person records.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>To view the SQL predicate generated by this
+                              security profile, click the SQL Predicate for Person Access tab.
+                           </p>
+                           
+                        </li>
+                        
+                        <li>
+                           <p>Click <span class="uicontrol">Save and Close</span> to save the security profile.
+                           </p>
+                        </li>
+                        
+                     </ol>
+                     
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=997CFD868ECA1C51E040D30A6881626E">Areas of Responsibility: Explained</a></p>
+                     </li>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=98763B00DFFE43AFE040D30A6881599F">Setting Scope of Responsibility: Examples</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS157089">
+                  <h2>Securing Person Records by Manager Hierarchy: Points to Consider</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>The person records that a manager can access
+                     depend on how you specify the manager hierarchy in the person security profile. This topic describes the effect of the <span class="uicontrol">Person or Assignment Level</span> option, which you set to either <span class="uicontrol">Person</span> or <span class="uicontrol">Assignment</span>. 
+                  </p>
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     The <span class="uicontrol">Person or Assignment
+                        Level</span> option, regardless of its setting, controls access
+                     to person records. You can't enable access to particular assignments.
+                     
+                  </div>
+                  
+                  
+                  <p>Consider the following example manager hierarchy.</p>
+                  
+                  
+                  <p> 
+                     <p>Harry is a line manager with two
+                        assignments. In his primary assignment, he manages Sven's primary
+                        assignment. In his assignment 2, Harry manages Jane's primary assignment.
+                        Monica is a line manager with one assignment. She manages Jane's assignment
+                        2 and Amir's primary assignment. In her primary assignment, Jane manages
+                        Franco's primary assignment. In her assignment 2, Jane manages Kyle's
+                        primary assignment.
+                     </p> 
+                  </p>
+                  <img src="img/hrc_security_mgrhier_02_20036259.png" alt="A graphical summary of the people and assignments in&#xA;this line manager hierarchy." class="fusappimg">
+                  
+                  <div class="infobox-"><span class="notep1">Note: </span>
+                     Managers other than line managers can access person
+                     records secured by manager hierarchy only if their roles have the
+                     appropriate access to functions and data. Providing this access is
+                     a security customization task.
+                     
+                  </div>
+                  
+                  
+                  <div class="sect2" id="OCHUS157085">
+                     <h3 class="topictitle">Person-Level Manager Hierarchy</h3>
+                     
+                     <p>When <span class="uicontrol">Person or Assignment
+                           Level</span> is <span class="uicontrol">Person</span>,
+                        the security profile includes any person reporting directly or indirectly
+                        to any of the manager's assignments. 
+                     </p>
+                     
+                     <p>This table shows the person records that each of
+                        the three managers can access in a person-level manager hierarchy.
+                     </p>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Manager
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Sven
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Jane
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Franco
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Kyle
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Amir
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Harry</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Monica</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Jane</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>The signed-in manager accesses the person records
+                        of every person in his or her manager hierarchy, subject to any other
+                        criteria in the security profile. For example, Harry can access Kyle's
+                        person record, even though Kyle doesn't report to an assignment that
+                        Harry's manages.
+                     </p>
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS157087">
+                     <h3 class="topictitle">Assignment-Level Manager Hierarchy</h3>
+                     
+                     <p>When <span class="uicontrol">Person or Assignment
+                           Level</span> is <span class="uicontrol">Assignment</span>, managers see the person records of people who:
+                     </p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Report to them directly from one
+                              or more assignments
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Report to assignments that they manage</p>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Manager
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Sven
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Jane
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Franco
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Kyle
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Amir
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Harry</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Monica</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p>Jane</p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p>Yes</p>
+                                 
+                              </td>
+                              
+                              <td>
+                                 
+                                 <p></p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>In this scenario:</p>
+                     
+                     <ul>
+                        
+                        <li>
+                           <p>Harry accesses person records for
+                              Sven, Jane, and Franco. He can't access Kyle's record, because Kyle
+                              reports to an assignment that Monica manages.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Monica accesses person records for
+                              Jane, Kyle, and Amir. She can't access Franco's record, because Franco
+                              reports to an assignment that Harry manages.
+                           </p>
+                        </li>
+                        
+                        <li>
+                           <p>Jane accesses person records for
+                              Franco and Kyle.
+                           </p>
+                        </li>
+                        
+                     </ul>
+                     
+                     <p>An assignment-level manager hierarchy isn't the same
+                        as assignment-level security, which would secure access to individual
+                        assignments. You can't secure access to individual assignments.
+                     </p>
+                     
+                  </div>
+                  
+                  
+                  <p class="relatedlinks">Related Topics</p>
+                  <ul>
+                     <li>
+                        <p><a href="https://fusionhelp.oracle.com/helpPortal/faces/AtkHelpPortalMain?TopicId=99B8F56334F05BD8E040D30A68815535">The Manager Hierarchy: How It's Maintained</a></p>
+                     </li>
+                  </ul>
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS729518">
+                  <h2>Specifying the Manager Type: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>When you secure person records by manager
+                     hierarchy, the security profile's data instance set includes
+                     person records from manager hierarchies of the specified types. This
+                     topic describes the available type values and explains their effects.
+                     You select a <span class="uicontrol">Manager Type</span> value
+                     when you perform the Manage Person Security Profile task.
+                  </p>
+                  
+                  
+                  
+                  <p>This table describes the <span class="uicontrol">Manager
+                        Type</span> values.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="This two-column table with three&#xA;data rows shows the Manager Type value (left column) and its description&#xA;(right column).">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Manager Type
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Description
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p><span class="uicontrol">All</span></p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>The security profile includes all types of manager hierarchies.</p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p><span class="uicontrol">Line Manager</span></p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>The security profile includes only the line manager
+                                 hierarchy.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p><span class="uicontrol">Selected</span></p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <p>The security profile includes only the specified
+                                 type of manager hierarchy.
+                              </p>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  <p>Typically, you select <span class="uicontrol">Line
+                        Manager</span> for line managers, <span class="uicontrol">Project
+                        Manager</span> for project managers, and so on. If you select <span class="uicontrol">All</span>, then users with the line manager job role, for example,
+                     have line-manager access to all of their manager hierarchies. Avoid
+                     selecting <span class="uicontrol">All</span> if this level of
+                     access isn't required.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS729517">
+                     <h3 class="topictitle">Manager Job Roles</h3>
+                     
+                     <p>Manager job roles other than line manager aren't predefined.
+                        Creating job roles for managers such as project managers and resource
+                        managers is a security customization task. Once those roles exist,
+                        you can assign security profiles to them either directly or by creating
+                        a separate HCM data
+                        role. Users with those roles can then access their manager
+                        hierarchies by selecting <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">My Team</span></span>, for example.
+                     </p>
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1206876">
+                  <h2>Hierarchy Content: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>The <span class="uicontrol">Hierarchy Content</span> attribute controls how access to manager hierarchies is delegated
+                     when you:
+                  </p>
+                  
+                  
+                  
+                  <ul>
+                     
+                     <li>
+                        <p>Secure access to person records
+                           by manager hierarchy.
+                        </p>
+                     </li>
+                     
+                     <li>
+                        <p>Delegate a role that includes the
+                           person security
+                           profile.
+                        </p>
+                     </li>
+                     
+                  </ul>
+                  
+                  <p>Create person security profiles on the Create Person
+                     Security Profile page. Select <span><span class="uicontrol">Navigator</span> - <span class="uicontrol">Setup and Maintenance</span></span> to open the Setup and Maintenance work area and search
+                     for the Manage Person Security Profile task.
+                  </p>
+                  
+                  
+                  <div class="sect2" id="OCHUS1207057">
+                     <h3 class="topictitle">Hierarchy Content Values</h3>
+                     
+                     <p>This table describes the <span class="uicontrol">Hierarchy Content</span> values.
+                     </p>
+                     
+                     
+                     <div class="simpletable-margin">
+                        <table class="customlayout" summary="This two-column table with three&#xA;rows shows the Hierarchy Content value (left column) and its description&#xA;(right column).">
+                           
+                           
+                           <tr class="header">
+                              
+                              <th scope="col">
+                                 Value
+                                 
+                              </th>
+                              
+                              <th scope="col">
+                                 Description
+                                 
+                              </th>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Manager hierarchy</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The manager hierarchy of the signed-in user. This
+                                    value is the default value.
+                                 </p>
+                                 
+                                 <p>Don't use this value if the associated role can be
+                                    delegated.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Delegating manager hierarchy</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The manager hierarchy of the delegating manager.</p>
+                                 
+                                 <p> Select this value if the associated role is always
+                                    delegated to a user who isn't a manager and therefore has no manager
+                                    hierarchy.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           <tr>
+                              
+                              <th scope="row" class="row">
+                                 
+                                 <p><span class="uicontrol">Both</span></p>
+                                 
+                              </th>
+                              
+                              <td>
+                                 
+                                 <p>The proxy user can access both his or her own manager
+                                    hierarchy and the hierarchy of the delegating manager.
+                                 </p>
+                                 
+                                 <p> Select this value for the typical case of one manager
+                                    delegating a line manager role to another manager.
+                                 </p>
+                                 
+                              </td>
+                              
+                           </tr>
+                           
+                           
+                           
+                        </table>
+                     </div>
+                     <p></p>
+                     
+                     <p>When the line manager role is delegated to another
+                        line manager, the proxy can manage the delegator's reports in the
+                        Person Management work area and Directory. However, the proxy's My
+                        Team information doesn't show the delegator's reports, because the
+                        manager hierarchy isn't changed by the role delegation.
+                     </p>
+                     
+                     <div class="infobox-"><span class="notep1">Note: </span>
+                        If the proxy user is in the delegator's manager hierarchy,
+                        then the delegated role gives the proxy user access to his or her
+                        own record.
+                        
+                     </div>
+                     
+                     
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS172748">
+                  <h2>Securing Person Records Using Custom Criteria: Examples</h2>
+                  
+                  
+                  
+                  
+                  
+                  
+                  <p>You can secure person records by either area
+                     of responsibility or manager hierarchy. You can also specify custom
+                     criteria, in the form of SQL statements, in addition to or in place
+                     of the standard criteria. This topic shows how to specify custom criteria
+                     in a person security
+                     profile when you perform the Manage Person Security Profile
+                     task.
+                  </p>
+                  
+                  <p>The custom criteria can include any statement where
+                     the SQL predicate restricts by PERSON_ID or ASSIGNMENT_ID. The custom predicate must
+                     include either <code>&amp;TABLE_ALIAS.PERSON_ID</code> or <code>&amp;TABLE_ALIAS.ASSIGNMENT_ID</code> as
+                     a restricting column in the custom criteria.
+                  </p>
+                  
+                  
+                  
+                  <div class="sect2" id="OCHUS172726"><h3 class="OracleScenario">Identifying Persons Born Before a Specified Date</h3>
+                     <p>This scenario shows how to use custom criteria in
+                        a person security profile. The person security profile data instance set must include persons who were born before 01 January, 1990. 
+                     </p>
+                     <p>You secure person records by custom criteria, and
+                        enter the following statement:
+                     </p><pre><code>&amp;TABLE_ALIAS.PERSON_ID IN (SELECT PERSON_ID FROM PER_PERSONS
+WHERE DATE_OF_BIRTH &lt; TO_DATE('01-JAN-1990', 'DD-MON-YYYY'))<br></code></pre></div>
+                  
+                  <div class="sect2" id="OCHUS2274155"><h3 class="OracleScenario">Defining Exceptions to Areas of Responsibility</h3>
+                     <p>You may want to exclude some worker records from
+                        the data instance set defined by an area of responsibility. For example,
+                        a worker may have access to all workers in an organization, except
+                        those in specific grades or locations. In these cases, you use custom criteria.
+                     </p>
+                     <p>In very simple cases, you can use both the Area of
+                        Responsibility and Custom Criteria sections of the person security
+                        profile. You use the custom criteria to define just the exceptions
+                        in addition to any criteria specified in the Area of Responsibility
+                        section. More typically, especially where the exclusion is based on
+                        assignment values, you are recommended to use only the Custom Criteria
+                        section. This approach is recommended for performance reasons.
+                     </p>
+                     <div class="infobox-tip"><span class="notep1">Tip: </span>
+                        Use the Area of Responsibility section temporarily
+                        to define the basic access. Copy the SQL predicate from the SQL Predicate
+                        for Person Access tab on the Create Person Security Profile: Preview
+                        page to use as the basis of your custom criteria.
+                        
+                     </div>
+                  </div>
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS2403192">
+                  <h2>Tables and Views in Custom Criteria: Explained</h2>
+                  
+                  
+                  
+                  
+                  
+                  <p>You can secure access to person records using
+                     custom criteria in the form of SQL predicates. This topic identifies
+                     tables and views that you can't use in custom SQL statements. The
+                     use of any of these tables or views is likely to cause errors, where
+                     the error message contains the text <code>ORA28113:
+                        POLICY PREDICATE HAS ERROR</code>.
+                  </p>
+                  
+                  
+                  
+                  <p>This table identifies tables and views that you must
+                     not include in custom SQL statements when securing access to person
+                     records.
+                  </p>
+                  
+                  <div class="simpletable-margin">
+                     <table class="customlayout" summary="">
+                        
+                        
+                        <tr class="header">
+                           
+                           <th scope="col">
+                              Product
+                              
+                           </th>
+                           
+                           <th scope="col">
+                              Table or View
+                              
+                           </th>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Contracts</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>OKC_EMPLOYEE_CONTACT_V</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>OKC_SEARCH_EMPLOYEE_V</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>OKC_SEARCH_INT_CONTACTS_V</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>OKC_SIGNER_CONTACTS_V</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Financials for EMEA</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>JE_RU_FA_EMPLOYEE_V</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>General Ledger</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>GL_HIERVIEW_PERSON_INFO_V</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Global Human Resources</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>HR_BU_LOCATIONS_X</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>HR_LOCATIONS</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>HR_LOCATIONS_ALL</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>HR_LOCATIONS_ALL_F</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>HR_LOCATIONS_ALL_F_VL</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>HR_LOCATIONS_ALL_VL</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>HR_LOCATIONS_ALL_X</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_ADDRESSES_F</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_ADDRESSES_FU_SEC</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_ADDRESSES_F_</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_ADDRESSES_F_SEC</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_CONT_WORKERS_CURRENT_X</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_CONT_WORKERS_X</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_DISPLAY_PHONES_V</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_DRIVERS_LICENSES</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_DRIVERS_LICENSESU_SEC</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_DRIVERS_LICENSES_</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_DRIVERS_LICENSES_SEC</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_EMAIL_ADDRESSES</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_EMAIL_ADDRESSESU_SEC</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_EMAIL_ADDRESSES_</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_EMAIL_ADDRESSES_SEC</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_EMAIL_ADDRESSES_V</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_EMPLOYEES_CURRENT_X</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_EMPLOYEES_X</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_LOC_OTHER_ADDRESSES_V</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_NATIONAL_IDENTIFIERS</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_NATIONAL_IDENTIFIERSU_SEC</p>
+                                    
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_NATIONAL_IDENTIFIERS_</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_NATIONAL_IDENTIFIERS_SEC</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_NATIONAL_IDENTIFIERS_V</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_PASSPORTS</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_PASSPORTSU_SEC</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_PASSPORTS_</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_PASSPORTS_SEC</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_PERSON_ADDRESSES_V</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_PHONES</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_PHONESU_SEC</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_PHONES_</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_PHONES_SEC</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_PHONES_V</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_VISAS_PERMITS_F</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_VISAS_PERMITS_FU_SEC</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_VISAS_PERMITS_F_SEC</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_WORKFORCE_CURRENT_X</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PER_WORKFORCE_X</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Global Payroll</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>PAY_AMER_W4_LOC_ADDRESS_V</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PAY_AMER_W4_PERSON_ADDRESS_V</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Grants Management</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>GMS_ALL_CONTACTS_V</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>GMS_INTERNAL_CONTACTS_V</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Payments</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>IBY_EXT_FD_EMP_HOME_ADDR</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Planning Common Components</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>MSC_AP_INTERNAL_LOCATIONS_V</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Profile Management</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>HRT_PERSONS_D</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>HRT_PERSONS_X</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Project Foundation</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>PJF_PROJ_ALL_MEMBERS_V</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PRJ_PROJECT_MANAGER_V</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>PRJ_TEAM_MEMBERS_F_V</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        <tr>
+                           
+                           <th scope="row" class="row">
+                              
+                              <p>Workforce Reputation Management</p>
+                              
+                           </th>
+                           
+                           <td>
+                              
+                              <ul>
+                                 
+                                 <li>
+                                    <p>HWR_VLTR_REGN_RGSTR_VL</p>
+                                 </li>
+                                 
+                                 <li>
+                                    <p>HWR_VLTR_REGN_TOTAL_VL</p>
+                                 </li>
+                                 
+                              </ul>
+                              
+                           </td>
+                           
+                        </tr>
+                        
+                        
+                        
+                     </table>
+                  </div>
+                  <p></p>
+                  
+                  <p>For more information about tables and views, see
+                     the Tables and Views for Oracle HCM Cloud guide.
+                  </p>
+                  
+                  
+                  
+               </div>
+               
+               <div class="sect1" id="OCHUS1210298">
+                  <h2>FAQs for Person Security Profiles</h2>
+                  
+                  <div class="sect2" id="OCHUS154805">
+                     <h3>Can users see the contact records of the people they can access?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Users who see the Contacts tab in the Manage
+                        Person work area can see a worker's contacts, unless the contacts
+                        are workers. If a contact is a worker, then the contact's details
+                        are secured by person security profile. Personally identifiable information (PII),
+                        such as phones and e-mails, isn't visible unless the user inherits
+                        the Manage Contact Person PII aggregate privilege.
+                     </p>
+                     
+                     
+                     
+                     <p>Any user can see the contact records of his or her
+                        own contacts.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS154815">
+                     <h3>What happens if a person has multiple assignments or person types?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>A user who can access a person record can
+                        access all of the person's assignments, regardless of the assignment type. The assignments
+                        can also be with different legal employers.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1589291">
+                     <h3>What happens if I include shared information in a person security profile?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Users can access any person information that's
+                        shared with them. This access is in addition to the person records
+                        identified by the person security profile. If you leave this
+                        option deselected, then users can't access shared person information
+                        unless the shared person record is identified by the person security
+                        profile.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS1589321">
+                     <h3>What happens if I include future objects in a security profile?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Users can access future-dated persons, organizations,
+                        or positions that satisfy the security profile criteria. If you leave
+                        this option deselected, then users can't access future-dated objects.
+                        For example, users couldn't see an organization with a future start
+                        date, even though it satisfied all other criteria in the security
+                        profile.
+                     </p>
+                     
+                     
+                     
+                     <p>Date-effective records in objects aren't affected
+                        by this option.
+                     </p>
+                     
+                     
+                     
+                  </div>
+                  
+                  <div class="sect2" id="OCHUS2530514">
+                     <h3>Can I secure access to person records by workforce structures or global name range?</h3>
+                     
+                     
+                     
+                     
+                     
+                     <p>Yes, but only if you upgraded from Release
+                        11. If your implementation was new in Release 12 or later, then you
+                        can't secure access to person records by workforce structures or global
+                        name range.
+                     </p>
+                     
+                     
+                     
+                  </div>
+               </div>
+               
+            </div>
+         </div>
+      </div>
+      <footer></footer>
+      <noscript>
+         <p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+      </noscript>
+      <!-- Start SiteCatalyst code -->
+      <script type="application/javascript" src="//www.oracleimg.com/us/assets/metrics/ora_docs.js"></script>
+      <!-- End SiteCatalyst code -->
+      </body>
+</html>

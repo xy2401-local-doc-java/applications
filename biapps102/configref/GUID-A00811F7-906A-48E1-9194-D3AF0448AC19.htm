@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en-US" >
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="UTF-8" />
+<title>IKM BIAPPS Oracle Slowly Changing Dimension</title>
+<meta name="generator" content="DITA Open Toolkit version 1.8.5 (Mode = doc)" />
+<meta name="description" content="This option integrates data into an Oracle target table modeled as a Type 2 slowly changing dimension. New records are inserted, and changes to existing records can either trigger an insert or an update depending on the whether there is a change to any of the Type 2 columns." />
+<meta name="dcterms.created" content="2017-05-25T23:17:14Z" />
+<meta name="robots" content="all" />
+<meta name="dcterms.title" content="Business Intelligence Applications Functional Configuration Reference" />
+<meta name="dcterms.identifier" content="E72291-04" />
+<meta name="dcterms.isVersionOf" content="BIAFC" />
+<meta name="dcterms.rights" content="Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved." />
+<link rel="Start" href="../index.html" title="Home" type="text/html" />
+<link rel="Copyright" href="../dcommon/html/cpyr.htm" title="Copyright" type="text/html" />
+
+<script type="application/javascript"  src="../dcommon/js/headfoot.js"></script>
+<script type="application/javascript"  src="../nav/js/doccd.js" charset="UTF-8"></script>
+<link rel="Contents" href="toc.htm" title="Contents" type="text/html" />
+<link rel="Prev" href="GUID-9FFDC0A8-EA6C-4200-A7AE-6569E744F567.htm" title="Previous" type="text/html" />
+<link rel="Next" href="GUID-C303574F-6124-4EE6-BD9A-172233191A53.htm" title="Next" type="text/html" />
+<link rel="alternate" href="BIAFC.pdf" title="PDF version" type="application/pdf" />
+<link rel="schema.dcterms" href="http://purl.org/dc/terms/" />
+<link rel="stylesheet" href="../dcommon/css/fusiondoc.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/header.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/footer.css">
+<link rel="stylesheet" type="text/css"  href="../dcommon/css/fonts.css">
+<link rel="stylesheet" href="../dcommon/css/foundation.css">
+<link rel="stylesheet" href="../dcommon/css/codemirror.css">
+<link rel="stylesheet" type="text/css" title="Default" href="../nav/css/html5.css">
+<link rel="stylesheet" href="../dcommon/css/respond-480-tablet.css">
+<link rel="stylesheet" href="../dcommon/css/respond-768-laptop.css">
+<link rel="stylesheet" href="../dcommon/css/respond-1140-deskop.css">
+<script type="application/javascript" src="../dcommon/js/modernizr.js"></script>
+<script type="application/javascript" src="../dcommon/js/codemirror.js"></script>
+<script type="application/javascript" src="../dcommon/js/jquery.js"></script>
+<script type="application/javascript" src="../dcommon/js/foundation.min.js"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-552992c80ef99c8d" async="async"></script>
+<script type="application/javascript" src="../dcommon/js/jqfns.js"></script>
+<script type="application/javascript" src="../dcommon/js/ohc-inline-videos.js"></script>
+<!-- Add fancyBox -->
+<link rel="stylesheet" href="../dcommon/fancybox/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
+<!-- Optionally add helpers - button, thumbnail and/or media -->
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-buttons.css?v=1.0.5"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+<link rel="stylesheet"  href="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.css?v=1.0.7"  type="text/css" media="screen" />
+<script type="text/javascript" src="../dcommon/fancybox/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+<script>window.ohcglobal || document.write('<script src="/en/dcommon/js/global.js">\x3C/script>')</script></head>
+<body>
+<a href="#BEGIN" class="accessibility-top skipto" tabindex="0">Go to main content</a><header><!--
+<div class="zz-skip-header"><a id="top" href="#BEGIN">Go to main content</a>--></header>
+<div class="row" id="CONTENT">
+<div class="IND large-9 medium-8 columns" dir="ltr">
+<a id="BEGIN" name="BEGIN"></a>
+<a id="GUID-A00811F7-906A-48E1-9194-D3AF0448AC19"></a> <span id="PAGE" style="display:none;">333/336</span> <!-- End Header -->
+<a id="BIAET24562"></a><a id="BIAET24563"></a><a id="BIAET24564"></a><a id="BIAET24565"></a><a id="BIAET24566"></a><a id="BIAET24561"></a>
+<h1 id="BIAFC-GUID-A00811F7-906A-48E1-9194-D3AF0448AC19" class="sect1">IKM BIAPPS Oracle Slowly Changing Dimension</h1>
+<div>
+<p>This option integrates data into an Oracle target table modeled as a Type 2 slowly changing dimension. New records are inserted, and changes to existing records can either trigger an insert or an update depending on the whether there is a change to any of the Type 2 columns.</p>
+<div class="section">
+<p>Data can be controlled by isolating invalid data in the error table and recycling when fixed. This option uses the variables #TYPE2_FLG and #UPDATE_ALL_HISTORY to control behavior.</p>
+<div class="infobox-note" id="GUID-A00811F7-906A-48E1-9194-D3AF0448AC19__GUID-2F943DFF-7C68-42D7-ABA3-C855A35C9759">
+<p class="notep1">Note:</p>
+This IKM now supports ETL diagnostics and automatic corrections. The flow control option is no longer used with this IKM.</div>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Prerequisites</p>
+<div class="p">Prerequisites for using this IKM are:
+<ul style="list-style-type: disc;">
+<li>
+<p>Update key must be defined in the interface and the key columns should be indexed (usually INTEGRATION_ID, DATASOURCE_NUM_ID, SRC_EFF_FROM_DT).Slowly changing dimension behavior must be set for all target table columns (set in model) and must include the following:</p>
+<p>- Surrogate key (usually ROW_WID)</p>
+<p>- Natural key (usually INTEGRATION_ID, DATASOURCE_NUM_ID)</p>
+<p>- Start and end timestamps (usually EFFECTIVE_FROM_DT and EFFECTIVE_TO_DT)</p>
+<p>- Current flag (usually CURRENT_FLG)</p>
+</li>
+<li>
+<p>End timestamp should be mapped to the maximum value (usually #HI_DATE).</p>
+</li>
+<li>
+<p>Current flag should be mapped to Y.</p>
+</li>
+<li>
+<p>Source from and to dates should be Not Null (default to #LOW_DATE or #HI_DATE).</p>
+</li>
+<li>
+<p>ETL_PROC_WID should be indexed.</p>
+</li>
+</ul>
+</div>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Column Classification</p>
+<p>The table describes how dimension columns should be categorized and the different behaviors for each classification. The categorization is done on individual table columns in the model.</p>
+<div class="tblformal" id="GUID-A00811F7-906A-48E1-9194-D3AF0448AC19__GUID-BAEB6EE6-FC49-4064-9A13-F315D8D3227B">
+<table class="cellalignment137" summary="Column classification for the BIApps Slowly Changing Dimension IKM">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment142" id="d195296e78">Column</th>
+<th class="cellalignment142" id="d195296e80">Description</th>
+<th class="cellalignment142" id="d195296e82">SCD Behavior</th>
+<th class="cellalignment142" id="d195296e84">Other Flexfields</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d195296e88" headers="d195296e78">
+<p>Surrogate key</p>
+</td>
+<td class="cellalignment144" headers="d195296e88 d195296e80">
+<p>Warehouse generated primary key for dimension</p>
+</td>
+<td class="cellalignment144" headers="d195296e88 d195296e82">
+<p>Surrogate key</p>
+</td>
+<td class="cellalignment144" headers="d195296e88 d195296e84">&nbsp;</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d195296e100" headers="d195296e78">
+<p>Natural key</p>
+</td>
+<td class="cellalignment144" headers="d195296e100 d195296e80">
+<p>Business or source key, unique in combination with time</p>
+</td>
+<td class="cellalignment144" headers="d195296e100 d195296e82">
+<p>Natural key</p>
+</td>
+<td class="cellalignment144" headers="d195296e100 d195296e84">&nbsp;</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d195296e112" headers="d195296e78">
+<p>Start timestamp</p>
+</td>
+<td class="cellalignment144" headers="d195296e112 d195296e80">
+<p>Time record is effective from</p>
+</td>
+<td class="cellalignment144" headers="d195296e112 d195296e82">
+<p>Start timestamp</p>
+</td>
+<td class="cellalignment144" headers="d195296e112 d195296e84">&nbsp;</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d195296e124" headers="d195296e78">
+<p>End timestamp</p>
+</td>
+<td class="cellalignment144" headers="d195296e124 d195296e80">
+<p>Time record is effective to</p>
+</td>
+<td class="cellalignment144" headers="d195296e124 d195296e82">
+<p>End timestamp</p>
+</td>
+<td class="cellalignment144" headers="d195296e124 d195296e84">&nbsp;</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d195296e136" headers="d195296e78">
+<p>Current flag</p>
+</td>
+<td class="cellalignment144" headers="d195296e136 d195296e80">
+<p>Whether the record is the latest effective</p>
+</td>
+<td class="cellalignment144" headers="d195296e136 d195296e82">
+<p>Current flag</p>
+</td>
+<td class="cellalignment144" headers="d195296e136 d195296e84">&nbsp;</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d195296e148" headers="d195296e78">
+<p>Type 2 columns</p>
+</td>
+<td class="cellalignment144" headers="d195296e148 d195296e80">
+<p>Creates new version of record (insert) if there is a change to any of the Type 2 columns</p>
+</td>
+<td class="cellalignment144" headers="d195296e148 d195296e82">
+<p>Insert on change</p>
+</td>
+<td class="cellalignment144" headers="d195296e148 d195296e84">&nbsp;</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d195296e160" headers="d195296e78">
+<p>Update history columns</p>
+</td>
+<td class="cellalignment144" headers="d195296e160 d195296e80">
+<p>Always set to the value from the current record</p>
+</td>
+<td class="cellalignment144" headers="d195296e160 d195296e82">
+<p>Overwrite on change</p>
+</td>
+<td class="cellalignment144" headers="d195296e160 d195296e84">
+<p>Not a system column</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d195296e173" headers="d195296e78">
+<p>Other system columns</p>
+</td>
+<td class="cellalignment144" headers="d195296e173 d195296e80">
+<p>Maintained as insert/update</p>
+</td>
+<td class="cellalignment144" headers="d195296e173 d195296e82">
+<p>Overwrite on change</p>
+</td>
+<td class="cellalignment144" headers="d195296e173 d195296e84">
+<p>System column</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d195296e186" headers="d195296e78">
+<p>Change columns</p>
+</td>
+<td class="cellalignment144" headers="d195296e186 d195296e80">
+<p>Record is rejected if there is no change to any of these columns</p>
+</td>
+<td class="cellalignment144" headers="d195296e186 d195296e82">
+<p>Overwrite on change</p>
+</td>
+<td class="cellalignment144" headers="d195296e186 d195296e84">
+<p>Change column and system column</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment144" id="d195296e199" headers="d195296e78">
+<p>SCD1 key</p>
+</td>
+<td class="cellalignment144" headers="d195296e199 d195296e80">
+<p>Warehouse generated key corresponding to the natural key</p>
+</td>
+<td class="cellalignment144" headers="d195296e199 d195296e82">
+<p>Overwrite on change</p>
+</td>
+<td class="cellalignment144" headers="d195296e199 d195296e84">
+<p>SCD1 WID (column flexfield)</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" --></div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Slowly Changing Dimension Features</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Type 2 Changes</span> &mdash; If the variable #TYPE2_FLG is turned off (set to 'N') then the dimension behaves as a Type 1 dimension. The natural key must be unique (no history allowed) because no maintenance of the start/end dates is performed. With #TYPE2_FLG on (set to 'Y') new records will be inserted; changes that update at least one Type 2 column will also trigger an insert, subject to some restrictions, and any other change will update the existing record.</p>
+<p>Type 2 changes are triggered as follows:</p>
+<p>- The incoming record must have at least one type 2 column different when compared to the current dimension record.</p>
+<p>- The new Type 2 record start timestamp is calculated as follows: If there is a change column with a non-null date value, then use that (the <span>Oracle BI Applications</span> standard is to use CHANGED_ON_DT as the change column); otherwise, use the current timestamp (sysdate)</p>
+</li>
+<li>
+<p><span class="bold">Update All History</span> &mdash; With #TYPE2_FLG and #UPDATE_ALL_HISTORY both on (set to 'Y'), then any update history columns will be updated with the value from the current version of the record (latest record with the same natural key).</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Options for Functionality</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Unspecified Record</span> &mdash; If the target table is a dimension, set this to TRUE to automatically insert an "Unspecified" record. This is referenced by facts in case no other dimension record matches. The default column values are determined by model naming standards using the user-defined function GET_UNSPEC_VALUE.</p>
+</li>
+<li>
+<p><span class="bold">SCD1 Key</span> &mdash; Set this to TRUE to automatically maintain a surrogate natural key or Type 1 key. This is managed using a Type 1 table named according to a standard pattern. If the dimension table is W_DIMENSION_D, then the Type 1 table will be W_DIMENSION_T1_D. The sequence that generates the Type 1 key is also named according to a standard pattern. Continuing the example, it would be named W_DIMENSION_D_S1W. Additional columns that are at the same grain (also Type 1) can be automatically maintained on the Type 1 table if they are marked with the UD1 flag.</p>
+<p>Prerequisites for W_DIMENSION_D are as follows:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Type 1 key column must be identified by the SCD1 WID flexfield in the model.</p>
+</li>
+<li>
+<p>Type 1 key column should be mapped on source or staging to a constant value, for example, 0.</p>
+</li>
+<li>
+<p>Type 1 key column should be insert only.</p>
+</li>
+<li>
+<p>Type 1 table (W_DIMENSION_T1_D) must have at least the following columns:</p>
+<p>- Type 1 key column</p>
+<p>- Natural key columns</p>
+<p>- System columns W_INSERT_DT, W_UPDATE_DT and ETL_PROC_WID</p>
+<p>- Any columns marked as UD1</p>
+</li>
+<li>
+<p>Type 1 table (W_DIMENSION_T1_D) should have indexes on: Type 1 key columns and natural key columns.</p>
+</li>
+<li>
+<p>Type 1 Key sequence should be created (W_DIMENSION_D_S1W). Type 1 Key sequence should be created (W_DIMENSION_D_S1W) .</p>
+</li>
+</ul>
+</li>
+<li>
+<p><span class="bold">Fill Gaps</span> &mdash; Set this to TRUE to automatically extend the first records to cover any earlier date.</p>
+</li>
+<li>
+<p><span class="bold">Soft Delete</span> &mdash; There are several additional steps that you can perform if the soft delete option is enabled. The variables #SOFT_DELETE_FEATURE_ENABLED (global) and #SOFT_DELETE_PREPROCESS (can be set for each fact or dimension group) control exactly which steps are executed.</p>
+<p>If you are able to implement triggers to efficiently capture deletes on the source system, you can disable the expensive pre-process steps (which extract all source records and compare against all target records) and, instead, directly populate the delete table.</p>
+<div class="tblformal" id="GUID-A00811F7-906A-48E1-9194-D3AF0448AC19__GUID-5ACB5913-D3BA-4615-B48D-A7F2493C73F9">
+<table class="cellalignment156" summary="This table lists additional steps if the soft delete process is enabled.">
+<thead>
+<tr class="cellalignment128">
+<th class="cellalignment157" id="d195296e298">Step</th>
+<th class="cellalignment158" id="d195296e300">Action</th>
+<th class="cellalignment158" id="d195296e302">Control</th>
+</tr>
+</thead>
+<tbody>
+<tr class="cellalignment128">
+<td class="cellalignment159" id="d195296e306" headers="d195296e298">
+<p>Soft delete pre-process</p>
+</td>
+<td class="cellalignment160" headers="d195296e306 d195296e300">
+<p>Runs the "Identify Delete" step which compares the data in the primary extract table against the target table, and records any obsolete target rows in the delete table.</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>Uses #LAST_ARCHIVE_DATE to filter target by CREATED_ON_DT system column (set variable to NULL to disable this).</p>
+</li>
+<li>
+<p>Only data sources that have implemented the primary extract are included. If a data source has no records in the primary extract table then no records will be added to the delete table for that data source.</p>
+</li>
+</ul>
+</td>
+<td class="cellalignment160" headers="d195296e306 d195296e302">
+<p>#SOFT_DELETE_FEATURE_ENABLED</p>
+<p>#SOFT_DELETE_PREPROCESS</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment159" id="d195296e325" headers="d195296e298">
+<p>Soft delete on target</p>
+</td>
+<td class="cellalignment160" headers="d195296e325 d195296e300">
+<p>Runs the "Soft Delete" step which updates the DELETE_FLG column to 'Y' on the target table for records which have been identified for delete.</p>
+</td>
+<td class="cellalignment160" headers="d195296e325 d195296e302">
+<p>#SOFT_DELETE_FEATURE_ENABLED</p>
+</td>
+</tr>
+<tr class="cellalignment128">
+<td class="cellalignment159" id="d195296e335" headers="d195296e298">
+<p>Truncate delete table</p>
+</td>
+<td class="cellalignment160" headers="d195296e335 d195296e300">
+<p>Removes records from the delete table once they have been processed</p>
+</td>
+<td class="cellalignment160" headers="d195296e335 d195296e302">
+<p>#SOFT_DELETE_FEATURE_ENABLED</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- class="inftblhruleinformal" -->
+<p>Note that all these steps are committed together, along with any other inserts and updates to the target table. This keeps the data warehouse consistent.</p>
+<p>Prerequisites for using this option are the following:</p>
+<ul style="list-style-type: disc;">
+<li>
+<p>The target table must have the ETL_PROC_WID and W_UPDATE_DT system columns.</p>
+</li>
+<li>
+<p>Tables &lt;target&gt;_PE and &lt;target&gt;_DEL must be created with the columns in the interface key.</p>
+</li>
+<li>
+<p>#LAST_ARCHIVE_DATE must be NULL if target table does not have the CREATED_ON_DT column.</p>
+</li>
+<li>
+<p>#SOFT_DELETE_PREPROCESS should be refreshed from <span>Configuration Manager</span> by the load plan component.</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section"></div>
+<!-- class="section" -->
+<div class="section">
+<p class="subhead1">Options for Performance Tuning</p>
+<ul style="list-style-type: disc;">
+<li>
+<p><span class="bold">Detection Strategy</span> &mdash; To avoid updating the table if no changes have occurred, the incoming data is compared with the existing record on a set of change columns. These are either defined in the model column flexfield (OBI_CHANGE_COLUMN), or otherwise all columns are compared. To always process the changes, this option can be disabled.</p>
+</li>
+<li>
+<p><span class="bold">Hints</span> and <span class="bold">Full History</span> &mdash; This IKM allows the passing of hints into the generated SQL. See My Oracle Support document (ID 1963225.1) titled <cite>Oracle Business Intelligence Applications Version 11g Performance Recommendations</cite>.</p>
+</li>
+<li><span class="bold">Alter Session List</span> &mdash; Applies a list of alter session commands to the session used by the KM. Commands should be separated by a semi-colon and without the "ALTER SESSION" prefix. Each command should be prefixed SRC or TGT depending on whether it should be executed on the source connection (relevant if using an LKM) or the target connection. For example:
+<pre dir="ltr">
+SRC set TRACEFILE_IDENTIFIER='ODI_TRACE'; SRC set events '10046 TRACE NAME CONTEXT FOREVER, LEVEL 8'; TGT set TRACEFILE_IDENTIFIER='ODI_TRACE_TGT';
+</pre></li>
+<li>
+<p><span class="bold">Analyze Target</span> &mdash; Statistics will be collected on the target table before it is loaded if the KM Option ANALYZE_TARGET is set to True. By default it is set to False.</p>
+</li>
+</ul>
+</div>
+<!-- class="section" -->
+<div class="section"></div>
+<!-- class="section" --></div>
+</div>
+<!-- class="ind" --><!-- Start Footer -->
+</div>
+<!-- add extra wrapper close div-->
+<footer><!--
+<hr />
+<table class="cellalignment127">
+<tr>
+<td class="cellalignment134">
+<table class="cellalignment132">
+<tr>
+<td class="cellalignment131"><a href="GUID-9FFDC0A8-EA6C-4200-A7AE-6569E744F567.htm"><img width="24" height="24" src="../dcommon/gifs/leftnav.gif" alt="Go to previous page" /><br />
+<span class="icon">Previous</span></a></td>
+<td class="cellalignment131"><a href="GUID-C303574F-6124-4EE6-BD9A-172233191A53.htm"><img width="24" height="24" src="../dcommon/gifs/rightnav.gif" alt="Go to next page" /><br />
+<span class="icon">Next</span></a></td>
+</tr>
+</table>
+</td>
+<td class="cellalignment-copyrightlogo"><img width="144" height="18" src="../dcommon/gifs/oracle.gif" alt="Oracle" /><br />
+Copyright&nbsp;&copy;&nbsp;2015, 2017, Oracle&nbsp;and/or&nbsp;its&nbsp;affiliates.&nbsp;All&nbsp;rights&nbsp;reserved.<br />
+<a href="../dcommon/html/cpyr.htm">Legal Notices</a></td>
+<td class="cellalignment136">
+<table class="cellalignment130">
+<tr>
+<td class="cellalignment131"><a href="../index.html"><img width="24" height="24" src="../dcommon/gifs/doclib.gif" alt="Go to Documentation Home" /><br />
+<span class="icon">Home</span></a></td>
+<td class="cellalignment131"><a href="toc.htm"><img width="24" height="24" src="../dcommon/gifs/toc.gif" alt="Go to Table of Contents" /><br />
+<span class="icon">Contents</span></a></td>
+<td class="cellalignment131"><a href="../dcommon/html/feedback.htm"><img width="24" height="24" src="../dcommon/gifs/feedbck2.gif" alt="Go to Feedback page" /><br />
+<span class="icon">Contact Us</span></a></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+--></footer>
+<noscript>
+<p>Scripting on this page enhances content navigation, but does not change the content in any way.</p>
+</noscript>
+</body>
+</html>
